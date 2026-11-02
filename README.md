@@ -2,6 +2,8 @@
 
 给小学高年级和初中生的 Python 课。课件是可以离线双击打开的网页：学生看着能自学，老师照着能讲课，代码能一键带到在线 IDE 里运行。
 
+在线看：<https://lixuanan2.github.io/python-for-youth/>
+
 ## 上课
 
 双击 `dist/index.html`，选一节课。
