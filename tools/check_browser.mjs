@@ -10,14 +10,19 @@ import path from 'node:path';
 const chrome = [process.env.CHROME_PATH, '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   'C:/Program Files/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find(p => p && fs.existsSync(p));
 assert(chrome, 'Chrome not found; set CHROME_PATH');
-const port = 9344, sleep = ms => new Promise(r => setTimeout(r, ms));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'deck-check-'));
-const proc = spawn(chrome, ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, '--no-first-run', '--window-size=1920,1080', 'about:blank'], {stdio: 'ignore'});
+const proc = spawn(chrome, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${profile}`, '--no-first-run', '--window-size=1920,1080', 'about:blank'], {stdio: 'ignore'});
 
+// Port 0 lets Chrome pick a free port, so two checks can run at once without meeting.
 let target;
-for (let i = 0; i < 50 && !target; i++) {
-  try { target = (await (await fetch(`http://127.0.0.1:${port}/json`)).json()).find(t => t.type === 'page'); } catch { await sleep(200); }
+for (let i = 0; i < 75 && !target; i++) {
+  try {
+    const port = fs.readFileSync(path.join(profile, 'DevToolsActivePort'), 'utf8').split('\n')[0];
+    target = (await (await fetch(`http://127.0.0.1:${port}/json`)).json()).find(t => t.type === 'page');
+  } catch { await sleep(200); }
 }
+assert(target, 'Chrome did not start');
 const ws = new WebSocket(target.webSocketDebuggerUrl);
 let id = 0;
 const pending = new Map();
@@ -109,6 +114,7 @@ const INTERACT = `(async () => {
   const rail = document.getElementById('thumbs').getBoundingClientRect(), barBox = document.getElementById('controls').getBoundingClientRect();
   shell.noOverlap = stageBox().left >= rail.right - 1 && stageBox().bottom <= barBox.top + 1;
   shell.coverStaysWide = document.querySelector('.thumb .cover-row b').getBoundingClientRect().height < 40;
+  shell.thanksLast = [...stage.querySelectorAll('.slide')].at(-1).classList.contains('thanks');
   shell.noLigatures = [document.body, ...stage.querySelectorAll('pre.code')].every(e => getComputedStyle(e).fontVariantLigatures === 'none');
   shell.ids = new Set([...document.querySelectorAll('[id]')].map(e => e.id)).size === document.querySelectorAll('[id]').length;
   return {
@@ -125,6 +131,7 @@ try {
   const lessons = JSON.parse(fs.readFileSync('course.json', 'utf8'));
   for (const lesson of lessons.filter(l => l.id)) {
     const dir = path.join('.preview', lesson.id);
+    fs.rmSync(dir, {recursive: true, force: true});
     fs.mkdirSync(dir, {recursive: true});
     await open('file://' + encodeURI(path.resolve('dist', lesson.id, 'index.html')));
     assert.equal(await run('location.protocol'), 'file:');

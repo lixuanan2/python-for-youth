@@ -71,5 +71,8 @@
         ]
       }
     ]
+  },
+  "thanks": {
+    "command": "python {file}"
   }
 }

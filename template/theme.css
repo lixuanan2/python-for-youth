@@ -171,6 +171,14 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .later code{display:block;font:700 46px var(--code);color:var(--clay);margin-bottom:16px}
 .later span{font:400 40px/1.5 var(--text)}
 
+/* === LAST PAGE OF EVERY DECK: the program finishes === */
+.term{position:absolute;left:96px;right:96px;top:270px;padding:34px 44px 40px;border-radius:14px;background:#141413;color:#f4f2ec;font:400 44px/1.75 var(--text)}
+.term span{display:block}.term .dim{color:#9c998f;font-family:var(--code)}
+.term b{color:var(--mint);font-family:var(--code);font-weight:700;white-space:pre}
+.term i{display:inline-block;width:24px;height:44px;margin-top:6px;background:var(--clay-soft);animation:blink 1.1s steps(2,start) infinite}
+@keyframes blink{50%{opacity:0}}
+.go-next{position:absolute;left:96px;top:850px;background:var(--mint);color:#16261a;font:700 34px var(--text);text-decoration:none;padding:14px 30px 16px;border-radius:12px;box-shadow:0 6px 0 #5f8f6a}
+
 /* === WORKSPACE AROUND THE STAGE: rail on the left, timeline below, nothing in fullscreen === */
 :root{--rail:232px}
 .thumbs{position:fixed;left:0;top:0;bottom:0;width:var(--rail);display:none;overflow-y:auto;padding:12px 10px 12px 6px;background:#181716;scrollbar-width:thin;scrollbar-color:#45413b transparent;z-index:900}

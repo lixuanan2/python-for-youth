@@ -59,6 +59,32 @@ def number_slides(slides):
     return re.sub(r'<section class="slide', mark, slides)
 
 
+def thanks_slide(lesson):
+    """Every deck ends the same way: its program finishes, with this lesson's own details."""
+    items = course()
+    following = items[items.index(lesson) + 1] if items.index(lesson) + 1 < len(items) else None
+    if following is None:
+        onward = '<p class="abs say r d3" style="left:96px;top:872px">这门课的路线走完了，了不起！</p>'
+    elif 'id' in following:
+        onward = f'<a class="go-next r d3" href="../{following["id"]}/index.html">下一课：{html.escape(following["title"])}</a>'
+    else:
+        onward = f'<p class="abs say r d3" style="left:96px;top:872px">下一课“{html.escape(following["title"])}”还在准备中。</p>'
+    command = site()['thanks']['command'].format(file=lesson['file'], stem=lesson['file'].rsplit('.', 1)[0])
+    learned = '  '.join(html.escape(item) for item in lesson['learned'])
+    return f'''
+<!-- generated for every lesson by tools/build.py -->
+<section class="slide dark thanks" aria-label="谢谢">
+  <h2 class="abs r" style="left:96px;top:70px;font:800 150px/1.2 var(--text)">谢谢！</h2>
+  <div class="term r d1"><span class="dim">$ {html.escape(command)}</span>
+<span>谢谢你认真学完这一课</span>
+<span>今天解锁：<b>{learned}</b></span>
+<span class="dim">Process finished with exit code 0</span><i></i></div>
+  <p class="abs say r d2" style="left:96px;top:740px">exit code 0 表示程序顺利跑完了，今天的你也是。</p>
+  {onward}
+</section>
+'''
+
+
 def attach_code(slides, lesson):
     """Fill IDE data from files: data-code-file for buttons, data-lines for excerpts of a longer program."""
     def source(file):
@@ -74,7 +100,7 @@ def render(lesson):
     page = read('template/page.html')
     fields = dict(title=html.escape(lesson['title']), file=lesson['file'], css=css,
                   site=html.escape(site()['title']),
-                  slides=attach_code(number_slides(read(f'lessons/{lesson["id"]}/slides.html')), lesson).rstrip(),
+                  slides=attach_code(number_slides(read(f'lessons/{lesson["id"]}/slides.html').rstrip() + '\n' + thanks_slide(lesson)), lesson).rstrip(),
                   script=read('template/deck.js').replace('{{ide}}', json.dumps(site()['ide'], ensure_ascii=False)).rstrip())
     for key, value in fields.items():
         page = page.replace('{{' + key + '}}', value)
@@ -85,7 +111,7 @@ def stop(number, item):
     if 'id' not in item:
         return f'<li class="stop" data-n="{number}">{html.escape(item["title"])}</li>'
     target = item['id']
-    return f'''<li class="ready"><div><h4>{html.escape(item["title"])}</h4><p>{item.get("note") or f'第 {number} 课'}，{read(f"lessons/{target}/slides.html").count("<section")} 页，含小测、动手题和小项目</p></div>
+    return f'''<li class="ready"><div><h4>{html.escape(item["title"])}</h4><p>{item.get("note") or f'第 {number} 课'}，{read(f"lessons/{target}/slides.html").count("<section") + 1} 页，含小测、动手题和小项目</p></div>
 <nav aria-label="{html.escape(item["title"])}"><a href="{target}/index.html">放映课件</a><a href="{target}/slides.pdf" target="_blank" rel="noopener noreferrer">PDF</a><a href="{target}/starter/">起始程序</a></nav></li>'''
 
 

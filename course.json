@@ -4,14 +4,25 @@
     "tag": "LESSON 01",
     "title": "输入输出",
     "file": "lesson_01.py",
-    "stage": "基础"
+    "stage": "基础",
+    "learned": [
+      "print()",
+      "input()",
+      "int()"
+    ]
   },
   {
     "id": "02-variables",
     "tag": "LESSON 02",
     "title": "变量与数据类型",
     "file": "lesson_02.py",
-    "stage": "基础"
+    "stage": "基础",
+    "learned": [
+      "变量",
+      "x = x + 1",
+      "type()",
+      "str()"
+    ]
   },
   {
     "title": "算术运算",
