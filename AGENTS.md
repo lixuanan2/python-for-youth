@@ -49,8 +49,8 @@ node tools/check_browser.mjs    # 真实 Chrome 逐页检查和交互测试
 
 ## 姊妹项目
 
-C++ 课件在私有仓库 `lixuanan2/cpp-for-youth`，用同一套模板。本仓库为主：`template/`、`tools/`、`vendor/` 只在这里改，C++ 有需要时提过来。改动对 C++ 也有用时，把这三个文件夹同步过去，再跑那边的检查。
+C++ 课件在旁边的 `../cpp-for-youth/`（私有仓库 `lixuanan2/cpp-for-youth`），用同一套模板，跨课程规则见上一级的 `AGENTS.md`。本仓库为主：`template/`、`tools/`、`vendor/` 只在这里改，C++ 有需要时提过来。改动对 C++ 也有用时，按上一级 `AGENTS.md` 的命令同步过去，再跑那边的检查。
 
 ## 旧资料
 
-上级旧仓库 `Python教学`（`lixuanan2/python-teaching`）存放旧的 18 个模块、PPT 和历史记录，只作内容参考，不搬进来。[docs/module-baseline.md](docs/module-baseline.md) 是 18 个模块的内容摘要，做课先读它，需要细节再读旧仓库对应的那一个模块，按 PROMPT.md 重写。
+旧仓库 `Python教学`（`lixuanan2/python-teaching`，本地在 `少儿编程/00_教学管理/06_课程仓库/`）存放旧的 18 个模块、PPT 和历史记录，只作内容参考，不搬进来。[docs/module-baseline.md](docs/module-baseline.md) 是 18 个模块的内容摘要，做课先读它，需要细节再读旧仓库对应的那一个模块，按 PROMPT.md 重写。
