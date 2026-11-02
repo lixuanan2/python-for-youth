@@ -35,7 +35,10 @@
     "stage": "判断"
   },
   {
+    "id": "06-for-loop",
+    "tag": "LESSON 06",
     "title": "for 循环",
+    "file": "lesson_06.py",
     "stage": "循环"
   },
   {

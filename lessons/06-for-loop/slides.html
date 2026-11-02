@@ -1,0 +1,357 @@
+<!-- cover -->
+<section class="slide" aria-label="for 循环" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 06</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">一遍</b><div class="wire r d1"><i></i><span style="font-family:var(--code)">for</span></div><b class="r d2" style="font-size:250px">又一遍</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">for 循环：让程序重复做事</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能用两行代码从 1 数到 1000，还能把想要的数挑出来。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="要写一百行吗">
+  <h2 class="t r">从 1 数到 100，要写几行？</h2>
+  <div class="slip r d1" style="left:96px;top:205px;width:760px"><small style="font-size:34px">不用循环，要写 100 行</small><pre>print(1)
+print(2)
+print(3)
+……
+print(100)</pre></div>
+  <div class="slip tilt r d2" style="left:960px;top:270px;width:860px"><small style="font-size:34px">用 for 循环，只要 2 行</small><pre style="font-size:48px">for i in range(1, 101):
+    print(i)</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:760px">人写一百遍又累又容易错，电脑最不怕重复。<br>这节课让程序替你一遍一遍地做。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- smallest for with trace -->
+<section class="slide" aria-label="for 的写法" data-steps="3" data-at="3" data-chapter="for">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">for：一遍一遍地做</h2>
+  <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">cheer.py</div>
+<pre class="code" data-file="solutions/01_cheer.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln l1 l2 l3">    <span class="f">print</span>(<span class="s">"加油"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:530px;width:1040px;color:var(--paper)">i 先拿到 0，运行一遍缩进的那一行。</p>
+  <p class="abs say only2" style="left:96px;top:530px;width:1040px;color:var(--paper)">i 再拿到 1，又运行一遍。</p>
+  <p class="abs say only3" style="left:96px;top:530px;width:1040px;color:var(--paper)">i 拿到 2，再运行一遍。三个数用完，循环结束。</p>
+  <p class="abs say" style="left:96px;top:640px;width:1040px;color:var(--paper)">range(3) 给出 0、1、2，i 依次拿到它们。<br>这一行末尾有冒号，要重复的行缩进 4 个空格。</p>
+  <a class="ide step s3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px;white-space:nowrap">i = 0</i><b style="font-size:76px;line-height:1.5">加油</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:76px;line-height:1.5">加油</b></div>
+    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:76px;line-height:1.5">加油</b></div>
+  </div>
+</section>
+
+<!-- predict: i starts at 0 -->
+<section class="slide dark" aria-label="猜一猜：i 是几" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：print(i) 会输出什么？</h2>
+  <div class="editor" style="left:96px;top:220px;width:880px;--fs:50px"><div class="tab">print_i.py</div>
+<pre class="code" data-file="solutions/02_print_i.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <div class="slip tilt step s2" style="left:1100px;top:220px"><small>屏幕上</small><pre>0
+1
+2</pre></div>
+  <p class="abs say only1" style="left:96px;top:560px">是 1、2、3 吗？先写下你的答案。</p>
+  <p class="abs say step s2" style="left:96px;top:560px;width:960px">从 0 开始，不是从 1。到 2 结束，不包含 3。<br>一共 3 个数，所以重复 3 遍。</p>
+  <a class="ide step s2" style="left:96px;top:760px">▶ 在 IDE 验证</a>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: range(5) -->
+<section class="slide" aria-label="小测：range 最后一个数">
+  <h2 class="t r">小测：range(5) 最后一个数是几？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！从 0 开始数 5 个数：0、1、2、3、4。"><i>1</i>4</button>
+    <button type="button" data-fb="range(5) 不包含 5。它给出 5 个数，但第一个是 0。"><i>2</i>5</button>
+    <button type="button" data-fb="range(5) 连 5 都不包含，更不会到 6。"><i>3</i>6</button>
+    <button type="button" data-fb="0 是第一个数，不是最后一个。"><i>4</i>0</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- range(start, stop) -->
+<section class="slide" aria-label="range 的起点和终点" data-chapter="range">
+  <h2 class="t r">range 可以写起点和终点</h2>
+  <div class="numline r d1" style="top:230px">
+    <i style="left:14.29%"></i><i style="left:28.57%"></i><i style="left:42.86%"></i><i style="left:57.14%"></i><i style="left:71.43%"></i><i class="open" style="left:85.71%"></i>
+    <b style="left:14.29%">1</b><b style="left:28.57%">2</b><b style="left:42.86%">3</b><b style="left:57.14%">4</b><b style="left:71.43%">5</b><b style="left:85.71%">6</b>
+  </div>
+  <div class="editor r d2" style="left:96px;top:390px;width:1080px;--fs:44px"><div class="tab">range_two.py</div>
+<pre class="code" data-file="solutions/03_range_two.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">6</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
+  <p class="abs say r d3" style="left:1240px;right:96px;top:430px">实心点：取得到。<br>空心点：取不到。</p>
+  <p class="abs say r d3" style="left:96px;top:700px">range(起点, 终点) 从起点开始，到终点的前一个数结束。<br>起点算在内，终点不算。想数到 5，终点就写 6。</p>
+  <a class="ide r d3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example -->
+<section class="slide" aria-label="从 1 数到 n" data-steps="4" data-at="4">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：从 1 数到 n</h2>
+  <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">one_to_n.py</div>
+<pre class="code" data-file="solutions/04_one_to_n.py"><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln l2 l3 l4">    <span class="f">print</span>(i)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:1040px;color:var(--paper)">输入 3。终点不算在内，所以要写 n + 1，也就是 range(1, 4)。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:1040px;color:var(--paper)">i 拿到 1，输出 1。</p>
+  <p class="abs say only3" style="left:96px;top:620px;width:1040px;color:var(--paper)">i 拿到 2，输出 2。</p>
+  <p class="abs say only4" style="left:96px;top:620px;width:1040px;color:var(--paper)">i 拿到 3，输出 3。4 取不到，循环结束。</p>
+  <a class="ide step s4" style="left:96px;top:800px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px">n</i><b style="font-size:84px">3</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px;color:var(--clay)">1</b></div>
+    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px;color:var(--clay)">2</b></div>
+    <div class="box step s4"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:84px;color:var(--clay)">3</b></div>
+  </div>
+</section>
+
+<!-- predict: n = 0 -->
+<section class="slide dark" aria-label="猜一猜：输入 0" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：输入 0，输出几行？</h2>
+  <div class="editor" style="left:96px;top:220px;width:1040px;--fs:50px"><div class="tab">one_to_n.py</div>
+<pre class="code" data-file="solutions/04_one_to_n.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
+  <p class="abs only1" style="left:1360px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <div class="slip tilt step s2" style="left:1260px;top:260px;width:520px"><small>屏幕上</small><pre style="color:var(--muted)">一行也没有</pre></div>
+  <p class="abs say only1" style="left:96px;top:620px">会报错吗？还是输出 0？</p>
+  <p class="abs say step s2" style="left:96px;top:620px;width:1600px">这时候是 range(1, 1)，起点就是终点，一个数也没有。<br>循环一遍也不运行，也不会报错。写完循环，试试 0 和 1 这样的小数字。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: how many -->
+<section class="slide" aria-label="小测：有几个数">
+  <h2 class="t r">小测：range(2, 5) 里有几个数？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="再数一遍，起点 2 也算在内。"><i>1</i>2</button>
+    <button type="button" data-fb="答对了！是 2、3、4，一共 3 个。终点减起点，5 - 2 也是 3。"><i>2</i>3</button>
+    <button type="button" data-fb="终点 5 不算在内，只有 2、3、4。"><i>3</i>4</button>
+    <button type="button" data-fb="这里的 5 是终点，不是个数。"><i>4</i>5</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="乘法口诀">
+  <div class="band r"><b>动手<br>改一改</b><span>i 不光能输出，还能拿来算。</span></div>
+  <div class="turn">
+    <h2 class="r d1">输出一列乘法口诀</h2>
+    <p class="say r d1">读入一个 1 到 9 的整数 n，输出 9 行，让 i 从 1 走到 9。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 7，第一行</small><pre>7 x 1 = 7</pre></div><div><small>最后一行</small><pre>7 x 9 = 63</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_times_table.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/05_times_table.py" style="left:610px;top:800px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- step -->
+<section class="slide" aria-label="range 的步长" data-chapter="步长">
+  <h2 class="t r">第三个数：一次跳几步</h2>
+  <div class="numline r d1" style="top:230px">
+    <i style="left:9.09%"></i><i style="left:27.27%"></i><i style="left:45.45%"></i><i style="left:63.64%"></i><i style="left:81.82%"></i><i class="open" style="left:90.91%"></i>
+    <b style="left:9.09%">1</b><b style="left:27.27%">3</b><b style="left:45.45%">5</b><b style="left:63.64%">7</b><b style="left:81.82%">9</b><b style="left:90.91%">10</b>
+  </div>
+  <div class="editor r d2" style="left:96px;top:390px;width:1080px;--fs:44px"><div class="tab">step.py</div>
+<pre class="code" data-file="solutions/06_step.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">10</span>, <span class="m">2</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
+  <p class="abs say r d3" style="left:1240px;right:96px;top:430px">从 1 开始，<br>每次加 2。</p>
+  <p class="abs say r d3" style="left:96px;top:700px">range(起点, 终点, 步长)。步长是每次跳过去的距离，不写就是 1。<br>跳到 11 就过了终点，所以最后一个数是 9。</p>
+  <a class="ide r d3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
+<!-- predict: counting down -->
+<section class="slide dark" aria-label="猜一猜：火箭倒计时" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：火箭倒计时</h2>
+  <div class="editor" style="left:96px;top:220px;width:1000px;--fs:50px"><div class="tab">rocket.py</div>
+<pre class="code" data-file="solutions/07_rocket.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>, <span class="m">0</span>, -<span class="m">1</span>):</span><span class="ln">    <span class="f">print</span>(i)</span><span class="ln"><span class="f">print</span>(<span class="s">"发射！"</span>)</span></pre></div>
+  <p class="abs only1" style="left:1360px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <div class="slip tilt step s2" style="left:1240px;top:220px"><small>屏幕上</small><pre>3
+2
+1
+发射！</pre></div>
+  <p class="abs say only1" style="left:96px;top:640px">步长是 -1，会输出到 0 吗？“发射！”输出几次？</p>
+  <p class="abs say step s2" style="left:96px;top:640px;width:1040px">步长写负数就是倒着数，每次减 1。<br>终点 0 还是不算在内，所以到 1 结束。<br>最后一行没有缩进，循环结束后才运行一次。</p>
+  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: negative step -->
+<section class="slide" aria-label="小测：倒着跳">
+  <h2 class="t r">小测：range(10, 0, -2) 最后一个数是几？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="终点不算在内，到不了 0。"><i>1</i>0</button>
+    <button type="button" data-fb="答对了！10、8、6、4、2，再跳就是 0，终点不算在内。"><i>2</i>2</button>
+    <button type="button" data-fb="每次减 2，从 10 开始全是双数，碰不到 1。"><i>3</i>1</button>
+    <button type="button" data-fb="10 是第一个数，不是最后一个。"><i>4</i>10</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="从 n 开始倒计时">
+  <div class="band r"><b>动手<br>改一改</b><span>起点不再是固定的 3 了。</span></div>
+  <div class="turn">
+    <h2 class="r d1">自己定倒计时</h2>
+    <p class="say r d1">读入一个 1 到 100 的整数 n，从 n 倒数到 1，每个数占一行，最后输出发射！</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 2，输出</small><pre>2
+1
+发射！</pre></div><div><small>输入 1，输出</small><pre>1
+发射！</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/08_countdown.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/08_countdown.py" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- predict: indentation -->
+<section class="slide" aria-label="猜一猜：缩进" data-steps="2" data-at="2" data-chapter="缩进">
+  <h2 class="t">猜一猜：b 输出几次？</h2>
+  <div class="vs">
+    <div><h3>print("b") 不缩进</h3><pre style="font-size:56px">for i in range(2):
+    print("a")
+print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
+    <div><h3>print("b") 缩进</h3><pre style="font-size:56px">for i in range(2):
+    print("a")
+    print("b")</pre><p class="res step s2" style="font-size:80px">a b a b</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:780px">两段只差 4 个空格。输出的每个字母占一行。</p>
+  <p class="abs say step s2" style="left:96px;top:780px;width:1728px">缩进的行归 for 管，每一遍都运行。<br>不缩进的行不归它管，等循环结束后只运行一次。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- filter with trace -->
+<section class="slide" aria-label="循环里放 if" data-steps="4" data-at="4" data-chapter="筛选">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">循环里放 if：一个一个筛</h2>
+  <div class="editor" style="left:96px;top:210px;width:1040px;--fs:44px"><div class="tab">even.py</div>
+<pre class="code" data-file="solutions/09_even.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln l1 l2 l3 l4">    <span class="k">if</span> i % <span class="m">2</span> == <span class="m">0</span>:</span><span class="ln l2 l4">        <span class="f">print</span>(i)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:630px;width:1040px;color:var(--paper)">输入 4。i 是 1，1 % 2 是 1，条件不成立，跳过。</p>
+  <p class="abs say only2" style="left:96px;top:630px;width:1040px;color:var(--paper)">i 是 2，2 % 2 是 0，条件成立，输出 2。</p>
+  <p class="abs say only3" style="left:96px;top:630px;width:1040px;color:var(--paper)">i 是 3，3 % 2 是 1，跳过。</p>
+  <p class="abs say only4" style="left:96px;top:630px;width:1040px;color:var(--paper)">i 是 4，4 % 2 是 0，输出 4。循环结束。</p>
+  <p class="abs say" style="left:96px;top:730px;width:1040px;color:var(--paper)">for 负责一个一个看，if 负责挑出想要的。<br>if 缩进 4 个空格，它下面的 print 要再缩进 4 个。</p>
+  <a class="ide step s4" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">跳过</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:64px;line-height:1.5;color:var(--clay)">输出 2</b></div>
+    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">跳过</b></div>
+    <div class="box step s4"><i style="width:190px;white-space:nowrap">i = 4</i><b style="font-size:64px;line-height:1.5;color:var(--clay)">输出 4</b></div>
+  </div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="筛出 3 的倍数">
+  <div class="band r"><b>动手<br>改一改</b><span>只要改一个地方。想想是哪一个。</span></div>
+  <div class="turn">
+    <h2 class="r d1">挑出 3 的倍数</h2>
+    <p class="say r d1">读入一个 1 到 1000 的整数 n，输出 1 到 n 里所有 3 的倍数，每个数占一行。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 10，输出</small><pre>3
+6
+9</pre></div><div><small>输入 3，输出</small><pre>3</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/10_multiples.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/10_multiples.py" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1"><code>for i in range(3)</code><b>SyntaxError</b><span>末尾要加冒号</span></div>
+    <div class="r d2"><code>for i in 3:</code><b>TypeError</b><span>要写 range(3)</span></div>
+    <div class="r d3"><code class="plain">for 下一行没缩进</code><b style="font-size:42px">IndentationError</b><span>缩进 4 个空格</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">要小心：倒着数忘了写 -1，比如 range(5, 0)，不报错，只是一遍也不运行。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：少了一个数">
+  <h2 class="t r">找错：怎么少了一个数？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="2" data-yes="找到了！终点不算在内，range(1, n) 只到 4。要数到 n，就写 range(1, n + 1)。" data-no="这一行没问题。想一想：range 的终点算不算在内？"><span class="ln">n = <span class="m">5</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n):</span><span class="ln">    <span class="f">print</span>(i)</span><span class="ln"><span class="f">print</span>(<span class="s">"数完了"</span>)</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">想从 1 数到 5，程序却只数到 4，也没有报错。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="top:690px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="拍七" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">拍七</h2>
+  <p class="abs say r d2" style="left:96px;top:480px;width:1728px">读入 n（1 到 1000 的整数），从 1 数到 n，每个数占一行。<br>碰到 7 的倍数，或者个位是 7 的数，不说这个数，改说“过”。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入 8，输出（每个占一行）</small><pre style="font-size:48px">1 2 3 4
+5 6 过 8</pre></div>
+  <a class="ide r d3" data-code-file="starter/11_pass_seven.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>每个数要做的事都一样：先判断，再说话。这件事放在哪里重复？</span></p>
+    <p class="step s2"><i>提示 2</i><span>两种情况都要说“过”，用哪个词把它们连起来？怎么取出个位？</span></p>
+    <p class="step s3"><i>提示 3</i><span>试试输入 17：第 7、14、17 行应该是“过”，第 16 行还是 16。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一首数数儿歌" data-chapter="小项目">
+  <h2 class="t r">造一首会数数的儿歌</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">让程序一遍一遍地唱，每一遍都不太一样。唱什么，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>读入一个次数，用 for 重复一句话，句子里带上 i。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>青蛙儿歌、闯关倒计时、乘法大挑战，什么都行。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>用 if 让某几遍不一样。试试 print("*" * i)，看看能画出什么。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/12_frog.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着运行</b><span>输入大的数，也试试 0 和 1</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪一行最有意思</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>问问同桌：还能让哪一遍变得不一样？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让你的儿歌多一点变化。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>range(1, 5) 里有 5 吗？<em class="step s2" style="font-style:normal;font-weight:400">　没有，终点不算在内。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>怎么知道一行归 for 管？<em class="step s3" style="font-style:normal;font-weight:400">　看它有没有缩进。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>怎么让 range 倒着数？<em class="step s4" style="font-style:normal;font-weight:400">　步长写负数，比如 -1。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1"><code>range(3)</code><span>0、1、2</span></div>
+    <div class="r d1"><code>range(1, 4)</code><span>1、2、3，终点不算在内</span></div>
+    <div class="r d2"><code>range(1, 10, 2)</code><span>1、3、5、7、9，每次加 2</span></div>
+    <div class="r d2"><code>range(3, 0, -1)</code><span>3、2、1，倒着数</span></div>
+    <div class="r d3"><code style="font-size:44px">for i in range(n):</code><span>末尾有冒号，重复的行要缩进</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>while</code><span>不知道要重复几次时的循环</span></div>
+    <div class="r d2"><code>total = total + i</code><span>把一个个数加起来</span></div>
+    <div class="r d3"><code>循环里的循环</code><span>一遍里面再转好几遍</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天程序学会了重复。下节课学另一种循环：while。</p>
+  <div class="foot"></div>
+</section>

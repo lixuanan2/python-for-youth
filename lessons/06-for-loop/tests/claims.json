@@ -1,0 +1,92 @@
+[
+  {
+    "page": 2,
+    "code": "for i in range(1, 101):\n    last = i\nprint(last)",
+    "stdout": "100\n"
+  },
+  {
+    "page": 3,
+    "code": "print(list(range(3)))",
+    "stdout": "[0, 1, 2]\n"
+  },
+  {
+    "page": 5,
+    "code": "print(list(range(5)))",
+    "stdout": "[0, 1, 2, 3, 4]\n"
+  },
+  {
+    "page": 6,
+    "code": "print(list(range(1, 6)))",
+    "stdout": "[1, 2, 3, 4, 5]\n"
+  },
+  {
+    "page": 8,
+    "code": "print(list(range(1, 1)))",
+    "stdout": "[]\n"
+  },
+  {
+    "page": 9,
+    "code": "print(len(range(2, 5)))\nprint(list(range(2, 5)))",
+    "stdout": "3\n[2, 3, 4]\n"
+  },
+  {
+    "page": 11,
+    "code": "print(list(range(1, 10, 2)))",
+    "stdout": "[1, 3, 5, 7, 9]\n"
+  },
+  {
+    "page": 12,
+    "code": "print(list(range(3, 0, -1)))",
+    "stdout": "[3, 2, 1]\n"
+  },
+  {
+    "page": 13,
+    "code": "print(list(range(10, 0, -2)))",
+    "stdout": "[10, 8, 6, 4, 2]\n"
+  },
+  {
+    "page": 15,
+    "code": "for i in range(2):\n    print(\"a\")\nprint(\"b\")",
+    "stdout": "a\na\nb\n"
+  },
+  {
+    "page": 15,
+    "code": "for i in range(2):\n    print(\"a\")\n    print(\"b\")",
+    "stdout": "a\nb\na\nb\n"
+  },
+  {
+    "page": 18,
+    "code": "for i in range(3)\n    print(i)",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 18,
+    "code": "for i in 3:\n    print(i)",
+    "error": "TypeError"
+  },
+  {
+    "page": 18,
+    "code": "for i in range(3):\nprint(i)",
+    "error": "IndentationError"
+  },
+  {
+    "page": 18,
+    "code": "print(list(range(5, 0)))",
+    "stdout": "[]\n"
+  },
+  {
+    "page": 19,
+    "code": "n = 5\nfor i in range(1, n):\n    print(i)\nprint(\"数完了\")",
+    "stdout": "1\n2\n3\n4\n数完了\n"
+  },
+  {
+    "page": 19,
+    "code": "n = 5\nfor i in range(1, n + 1):\n    last = i\nprint(last)",
+    "stdout": "5\n"
+  },
+  {
+    "page": 22,
+    "code": "print(\"*\" * 3)",
+    "stdout": "***\n"
+  }
+]
