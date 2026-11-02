@@ -32,7 +32,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 | 需要 | 写法 |
 | --- | --- |
 | 编辑器 | `.editor` + `.tab` + `pre.code data-file` + `.ln` |
-| 语法高亮 | `.f` 函数，`.s` 字符串，`.m` 数字 |
+| 语法高亮 | `.f` 函数，`.k` 关键字，`.s` 字符串，`.m` 数字 |
 | 分步揭晓 | 页面加 `data-steps="3" data-at="3"`，元素加 `.step .s2`、`.only1`，行加 `.l1` |
 | 选择小测 | `.quiz data-right="序号"`，选项加 `data-fb`，后面放 `.fb` |
 | 点行找错 | `pre.code.pick data-bug data-yes data-no`，后面放 `.fb` |

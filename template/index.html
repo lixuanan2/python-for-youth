@@ -14,7 +14,7 @@
   --text:"JetBrains Mono","Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font:400 18px/1.7 var(--text)}
+body{background:var(--paper);color:var(--ink);font:400 18px/1.7 var(--text);font-variant-ligatures:none}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--clay);outline-offset:3px}
 
@@ -84,7 +84,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 
 <main>
   <h2>学习路线</h2>
-  <p class="intro">一共 {{total}} 节课，已完成 {{ready}} 节，其余还在规划中。</p>
+  <p class="intro">一共 {{total}} 节课，新版已完成 {{ready}} 节，其余还在规划中。</p>
 {{route}}
 </main>
 
