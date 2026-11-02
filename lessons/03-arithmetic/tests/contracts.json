@@ -1,0 +1,87 @@
+[
+  {
+    "source": "solutions/00_ops.py",
+    "input": "tests/case-01.in",
+    "expected": "tests/case-01.out"
+  },
+  {
+    "source": "solutions/01_divide.py",
+    "input": "tests/case-02.in",
+    "expected": "tests/case-02.out"
+  },
+  {
+    "source": "solutions/02_candy.py",
+    "input": "tests/case-03.in",
+    "expected": "tests/case-03.out"
+  },
+  {
+    "source": "solutions/02_candy.py",
+    "input": "tests/case-04.in",
+    "expected": "tests/case-04.out"
+  },
+  {
+    "source": "solutions/02_candy.py",
+    "input": "tests/case-05.in",
+    "expected": "tests/case-05.out"
+  },
+  {
+    "source": "solutions/03_candy_sentence.py",
+    "input": "tests/case-06.in",
+    "expected": "tests/case-06.out"
+  },
+  {
+    "source": "solutions/03_candy_sentence.py",
+    "input": "tests/case-07.in",
+    "expected": "tests/case-07.out"
+  },
+  {
+    "source": "solutions/04_order.py",
+    "input": "tests/case-08.in",
+    "expected": "tests/case-08.out"
+  },
+  {
+    "source": "solutions/05_area.py",
+    "input": "tests/case-09.in",
+    "expected": "tests/case-09.out"
+  },
+  {
+    "source": "solutions/05_area.py",
+    "input": "tests/case-10.in",
+    "expected": "tests/case-10.out"
+  },
+  {
+    "source": "solutions/06_perimeter.py",
+    "input": "tests/case-11.in",
+    "expected": "tests/case-11.out"
+  },
+  {
+    "source": "solutions/06_perimeter.py",
+    "input": "tests/case-12.in",
+    "expected": "tests/case-12.out"
+  },
+  {
+    "source": "solutions/07_temperature.py",
+    "input": "tests/case-13.in",
+    "expected": "tests/case-13.out"
+  },
+  {
+    "source": "solutions/07_temperature.py",
+    "input": "tests/case-14.in",
+    "expected": "tests/case-14.out"
+  },
+  {
+    "source": "solutions/07_temperature.py",
+    "input": "tests/case-15.in",
+    "expected": "tests/case-15.out"
+  },
+  {
+    "source": "solutions/07_temperature.py",
+    "input": "tests/case-16.in",
+    "expected": "tests/case-16.out"
+  },
+  {
+    "source": "solutions/08_calculator_example.py",
+    "input": "tests/case-17.in",
+    "expected": "tests/case-17.out"
+  }
+]

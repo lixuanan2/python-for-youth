@@ -1,0 +1,110 @@
+[
+  {
+    "id": "01",
+    "role": "语法小演示",
+    "page": 4,
+    "starter": "starter/00_ops.py",
+    "solution": "solutions/00_ops.py",
+    "required": false,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "9\n5\n14\n3.5\n",
+    "description": "四则运算。"
+  },
+  {
+    "id": "02",
+    "role": "语法小演示",
+    "page": 5,
+    "starter": "starter/01_divide.py",
+    "solution": "solutions/01_divide.py",
+    "required": false,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "3.0\n",
+    "description": "观察除法结果是小数。"
+  },
+  {
+    "id": "A",
+    "role": "基础例题",
+    "page": 7,
+    "starter": "starter/02_candy.py",
+    "solution": "solutions/02_candy.py",
+    "required": true,
+    "scope": "candy为0到1000的整数，people为1到100的整数，分两行输入",
+    "sample_input": "7\n2\n",
+    "sample_output": "3\n1\n",
+    "description": "用整除和求余分糖果。"
+  },
+  {
+    "id": "03",
+    "role": "学生小改写",
+    "page": 10,
+    "starter": "starter/03_candy_sentence.py",
+    "solution": "solutions/03_candy_sentence.py",
+    "required": true,
+    "scope": "同例题A",
+    "sample_input": "7\n2\n",
+    "sample_output": "每人 3 颗，剩 1 颗\n",
+    "description": "把两个数改成一句话输出。"
+  },
+  {
+    "id": "04",
+    "role": "语法小演示",
+    "page": 11,
+    "starter": "starter/04_order.py",
+    "solution": "solutions/04_order.py",
+    "required": false,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "14\n20\n",
+    "description": "观察运算顺序和括号。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 13,
+    "starter": "starter/05_area.py",
+    "solution": "solutions/05_area.py",
+    "required": true,
+    "scope": "长宽为0.5到1000的数，分两行输入",
+    "sample_input": "2.5\n4\n",
+    "sample_output": "10.0\n",
+    "description": "用float读入并计算面积。"
+  },
+  {
+    "id": "05",
+    "role": "学生小改写",
+    "page": 16,
+    "starter": "starter/06_perimeter.py",
+    "solution": "solutions/06_perimeter.py",
+    "required": true,
+    "scope": "同例题B",
+    "sample_input": "2.5\n4\n",
+    "sample_output": "13.0\n",
+    "description": "把面积改成周长，注意括号。"
+  },
+  {
+    "id": "06",
+    "role": "独立迁移",
+    "page": 19,
+    "starter": "starter/07_temperature.py",
+    "solution": "solutions/07_temperature.py",
+    "required": true,
+    "scope": "摄氏度为-100到100的数，一行输入",
+    "sample_input": "36.5\n",
+    "sample_output": "97.7\n",
+    "description": "按公式把摄氏度换算成华氏度。"
+  },
+  {
+    "id": "07",
+    "role": "创作项目",
+    "page": 21,
+    "starter": "starter/08_calculator.py",
+    "solution": "solutions/08_calculator_example.py",
+    "required": false,
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "170\n",
+    "sample_output": "能换 3 张五十元\n还剩 20 元\n",
+    "description": "做一个自己的计算器。"
+  }
+]

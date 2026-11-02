@@ -14,7 +14,10 @@
     "stage": "基础"
   },
   {
+    "id": "03-arithmetic",
+    "tag": "LESSON 03",
     "title": "算术运算",
+    "file": "lesson_03.py",
     "stage": "基础"
   },
   {

@@ -1,0 +1,312 @@
+<!-- cover -->
+<section class="slide" aria-label="算术运算" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 03</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">算式</b><div class="wire r d1"><i></i><span>计算</span></div><b class="r d2" style="font-size:250px">结果</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">让程序替你算数</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能写面积程序，还能把糖果分清楚。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="铺地毯要算面积">
+  <h2 class="t r">房间要铺地毯，买多少才够？</h2>
+  <div class="verbs" style="top:250px">
+    <div class="r d1"><b>2.5</b><code>长（米）</code></div><em class="r d1">×</em>
+    <div class="r d2"><b>4</b><code>宽（米）</code></div><em class="r d2">=</em>
+    <div class="r d3"><b>?</b><code>面积</code></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">一个房间能心算，一百个房间呢？<br>把算式写进程序，换一组数据，它马上算出来。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- operators -->
+<section class="slide" aria-label="六个运算符" data-chapter="运算符">
+  <h2 class="t r">键盘上的六个运算符</h2>
+  <div class="sheet3" style="top:200px">
+    <div class="r d1"><code>+  -</code><span>加法和减法，和数学一样</span></div>
+    <div class="r d1"><code>*</code><span>乘法。键盘上没有 ×，用星号代替</span></div>
+    <div class="r d2"><code>/</code><span>除法。键盘上没有 ÷，用斜杠代替</span></div>
+    <div class="r d2"><code>//</code><span>整除，只要商的整数部分</span></div>
+    <div class="r d3"><code>%</code><span>求余数，算完还剩多少</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- first example -->
+<section class="slide dark" aria-label="四则运算">
+  <h2 class="t r">先算几道题</h2>
+  <div class="editor r d1" style="left:96px;top:230px;width:900px;--fs:50px"><div class="tab">ops.py</div>
+<pre class="code" data-file="solutions/00_ops.py"><span class="ln"><span class="f">print</span>(<span class="m">7</span> + <span class="m">2</span>)</span><span class="ln"><span class="f">print</span>(<span class="m">7</span> - <span class="m">2</span>)</span><span class="ln"><span class="f">print</span>(<span class="m">7</span> * <span class="m">2</span>)</span><span class="ln"><span class="f">print</span>(<span class="m">7</span> / <span class="m">2</span>)</span></pre></div>
+  <div class="slip tilt r d2" style="left:1110px;top:250px;width:300px"><small>屏幕上</small><pre>9
+5
+14
+3.5</pre></div>
+  <p class="abs say r d2" style="left:96px;top:700px;width:1000px">没有引号，Python 就先算出结果再显示。这和上一课的 print(1 + 1) 是一个道理。</p>
+  <a class="ide r d3" style="left:96px;top:850px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
+<!-- predict 6 / 2 -->
+<section class="slide dark" aria-label="预测 6 除以 2" data-steps="2" data-at="2" data-chapter="除法">
+  <h2 class="t">猜一猜：6 / 2 输出什么？</h2>
+  <div class="editor" style="left:96px;top:230px;width:880px;--fs:58px"><div class="tab">divide.py</div>
+<pre class="code" data-file="solutions/01_divide.py"><span class="ln"><span class="f">print</span>(<span class="m">6</span> / <span class="m">2</span>)</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <p class="abs say only1" style="left:96px;top:520px">先在纸上写下你的答案。</p>
+  <p class="abs step s2" style="left:1160px;top:250px;font:800 220px/1 var(--code);color:var(--clay-soft)">3.0</p>
+  <p class="abs say step s2" style="left:96px;top:520px;width:1560px">不是 3，是 3.0。用 / 除，结果总是小数，也就是 float，哪怕刚好除得尽。</p>
+  <a class="ide step s2" style="left:96px;top:700px">▶ 在 IDE 验证</a>
+  <div class="foot"></div>
+</section>
+
+<!-- three divisions -->
+<section class="slide" aria-label="三种除">
+  <h2 class="t r">同样是 7 和 2，三种算法</h2>
+  <div class="ledger">
+    <div class="r d1"><code class="plain" style="font-family:var(--code);color:var(--ink)">7 / 2</code><b>3.5</b><span>普通除法，结果是小数</span></div>
+    <div class="r d2"><code class="plain" style="font-family:var(--code);color:var(--ink)">7 // 2</code><b>3</b><span>整除，只留商</span></div>
+    <div class="r d3"><code class="plain" style="font-family:var(--code);color:var(--ink)">7 % 2</code><b>1</b><span>求余数，只留剩下的</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">// 和 % 是一对：一个问“每份几个”，一个问“还剩几个”。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: sharing candy -->
+<section class="slide" aria-label="分糖果" data-steps="3" data-at="3" data-chapter="分糖果">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">7 颗糖分给 2 个人</h2>
+  <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">candy.py</div>
+<pre class="code" data-file="solutions/02_candy.py"><span class="ln l1">candy = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">people = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="f">print</span>(candy // people)</span><span class="ln l3"><span class="f">print</span>(candy % people)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:690px;color:var(--paper)">分两行读入：7 颗糖，2 个人。</p>
+  <p class="abs say only2" style="left:96px;top:690px;color:var(--paper)">7 // 2 得 3，每人分到 3 颗。</p>
+  <p class="abs say only3" style="left:96px;top:690px;color:var(--paper)">7 % 2 得 1，还剩 1 颗分不完。</p>
+  <a class="ide step s3" style="left:96px;top:850px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i>糖</i><b>7</b></div>
+    <div class="box out step s2"><i>每人</i><b>3</b></div>
+    <div class="box out step s3"><i>剩下</i><b>1</b></div>
+  </div>
+</section>
+
+<!-- quiz: remainder -->
+<section class="slide" aria-label="小测：17 除以 5 的余数">
+  <h2 class="t r">小测：print(17 % 5) 输出几？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="3 是 17 // 5 的结果，也就是商。"><i>1</i>3</button>
+    <button type="button" data-fb="答对了！5 个一组能分 3 组，用掉 15，还剩 2。"><i>2</i>2</button>
+    <button type="button" data-fb="3.4 是 17 / 5 的结果。"><i>3</i>3.4</button>
+    <button type="button" data-fb="% 在这里是求余数，不是百分号。"><i>4</i>17%</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- what % is for -->
+<section class="slide" aria-label="余数有什么用">
+  <h2 class="t r">余数很有用</h2>
+  <div class="vs">
+    <div class="r d1"><h3>判断奇偶</h3><pre>n % 2</pre><p class="say">余数是 0 就是偶数，是 1 就是奇数。</p></div>
+    <div class="r d2"><h3>取出个位</h3><pre>n % 10</pre><p class="say">123 % 10 得 3，正好是个位。</p></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:640px">这节课先用正整数来练。负数的整除和余数，后面再讲。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="让程序说清楚">
+  <div class="band r"><b>动手<br>改一改</b><span>print 里用逗号隔开，就能把文字和数字放在一起。</span></div>
+  <div class="turn">
+    <h2 class="r d1">让程序说清楚</h2>
+    <p class="say r d1">分糖程序只输出两个数，别人看不懂。改成输出一句话。</p>
+    <div class="sheet r d2"><small>输入 7 和 2，运行后要看到</small><pre>每人 3 颗，剩 1 颗</pre></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/03_candy_sentence.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/03_candy_sentence.py" style="left:610px;top:800px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- order of operations -->
+<section class="slide dark" aria-label="预测运算顺序" data-steps="2" data-at="2" data-chapter="运算顺序">
+  <h2 class="t">猜一猜：这两行结果一样吗？</h2>
+  <div class="editor" style="left:96px;top:230px;width:880px;--fs:58px"><div class="tab">order.py</div>
+<pre class="code" data-file="solutions/04_order.py"><span class="ln"><span class="f">print</span>(<span class="m">2</span> + <span class="m">3</span> * <span class="m">4</span>)</span><span class="ln"><span class="f">print</span>((<span class="m">2</span> + <span class="m">3</span>) * <span class="m">4</span>)</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <div class="slip tilt step s2" style="left:1110px;top:260px;width:320px"><small>屏幕上</small><pre>14
+20</pre></div>
+  <p class="abs say only1" style="left:96px;top:600px">先在纸上写下两个答案。</p>
+  <p class="abs say step s2" style="left:96px;top:600px;width:1500px">和数学一样：先算括号，再算乘除，最后算加减。<br>想先算哪一步，就给它加括号。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: order -->
+<section class="slide" aria-label="小测：先乘后减">
+  <h2 class="t r">小测：print(10 - 2 * 3) 输出几？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！先算 2 * 3 得 6，再算 10 - 6。"><i>1</i>4</button>
+    <button type="button" data-fb="这是先算 10 - 2 的结果。乘法要先算。"><i>2</i>24</button>
+    <button type="button" data-fb="没有除号，结果不会变成小数。"><i>3</i>4.0</button>
+    <button type="button" data-fb="这一行写得没有问题，可以运行。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- float input trace -->
+<section class="slide" aria-label="算面积" data-steps="3" data-at="3" data-chapter="读小数">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">回到地毯：算出面积</h2>
+  <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">area.py</div>
+<pre class="code" data-file="solutions/05_area.py"><span class="ln l1">length = <span class="f">float</span>(<span class="f">input</span>())</span><span class="ln l2">width = <span class="f">float</span>(<span class="f">input</span>())</span><span class="ln l3"><span class="f">print</span>(length * width)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:1040px;color:var(--paper)">长是 2.5，带小数点，所以用 float() 转换。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:1040px;color:var(--paper)">宽是 4，float() 把它变成小数 4.0。</p>
+  <p class="abs say only3" style="left:96px;top:620px;width:1040px;color:var(--paper)">小数相乘，输出 10.0，地毯要买 10 平方米。</p>
+  <a class="ide step s3" style="left:96px;top:850px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:160px">length</i><b style="font-size:96px">2.5</b></div>
+    <div class="box step s2"><i style="width:160px">width</i><b style="font-size:96px">4.0</b></div>
+    <div class="box out step s3"><i style="width:160px">输出</i><b style="font-size:96px">10.0</b></div>
+  </div>
+</section>
+
+<!-- int or float -->
+<section class="slide" aria-label="int 还是 float">
+  <h2 class="t r">int 还是 float？</h2>
+  <div class="vs">
+    <div class="r d1"><h3>只有整数</h3><pre><span style="color:var(--clay)">int</span>(input())</pre><p class="say">人数、个数，用 int。</p></div>
+    <div class="r d2"><h3>可能有小数</h3><pre><span style="color:var(--clay)">float</span>(input())</pre><p class="say">长度、价格，用 float。</p></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:600px">int(input()) 读到 2.5 会报 ValueError，因为 2.5 不是整数的样子。<br>float(input()) 读到 4 没问题，会变成 4.0。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: type of result -->
+<section class="slide" aria-label="小测：8 除以 4">
+  <h2 class="t r">小测：print(8 / 4) 输出什么？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="想得到整数 2，要用 8 // 4。"><i>1</i>2</button>
+    <button type="button" data-fb="答对了！用 / 除，结果总是小数。"><i>2</i>2.0</button>
+    <button type="button" data-fb="那是余数，要用 % 才能算出来。"><i>3</i>0</button>
+    <button type="button" data-fb="8 能被 4 除尽，也可以运行，不会报错。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="面积改周长">
+  <div class="band r"><b>动手<br>改一改</b><span>周长是长加宽，再乘 2。想想哪里要加括号。</span></div>
+  <div class="turn">
+    <h2 class="r d1">把面积改成周长</h2>
+    <p class="say r d1">地毯边上要贴边条，改一行程序，算出长方形的周长。</p>
+    <div class="sheet r d2"><small>输入 2.5 和 4，运行后要看到</small><pre>13.0</pre></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/06_perimeter.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/06_perimeter.py" style="left:610px;top:800px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1"><code>print(3 x 4)</code><b>SyntaxError</b><span>乘号要写成 *</span></div>
+    <div class="r d2"><code>print(5 / 0)</code><b style="font-size:42px">ZeroDivisionError</b><span>除数不能是 0</span></div>
+    <div class="r d3"><code>int("2.5")</code><b>ValueError</b><span>小数要用 float()</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">// 和 % 除以 0 也一样会报错。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：平均分">
+  <h2 class="t r">找错：平均分怎么这么高？</h2>
+  <div class="editor r d1" style="left:96px;top:230px;width:1040px;--fs:58px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="3" data-yes="找到了！除法先算，变成了 80 + 45。要写成 (a + b) / 2。" data-no="这一行没有问题。想一想：程序先算的是哪一步？"><span class="ln">a = <span class="m">80</span></span><span class="ln">b = <span class="m">90</span></span><span class="ln">avg = a + b / <span class="m">2</span></span><span class="ln"><span class="f">print</span>(avg)</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">两门考了 80 和 90，平均分应该是 85.0，程序却输出 125.0。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="top:760px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="温度换算" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">温度<br>换算</h2>
+  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入一个摄氏度（-100 到 100，可能有小数），输出华氏度。公式：华氏度 = 摄氏度 × 9 ÷ 5 + 32。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入一行</small><pre>36.5</pre><small style="margin-top:26px">输出</small><pre>97.7</pre></div>
+  <a class="ide r d3" data-code-file="starter/07_temperature.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>温度可能有小数，读入时用 int 还是 float？</span></p>
+    <p class="step s2"><i>提示 2</i><span>公式里的 × 和 ÷，在 Python 里怎么写？</span></p>
+    <p class="step s3"><i>提示 3</i><span>试试输入 100，答案应该是 212.0。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个小计算器" data-chapter="小项目">
+  <h2 class="t r">造一个你自己的计算器</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">选一件你在意的事，读入数据，算出结果，再用一句话说出来。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>读入两个数，输出它们的和、差、积。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>奶茶账单、游戏伤害、存钱计划、步数换算，什么都行。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>用 // 和 % 算找零：一百元能换几张五十元，还剩多少。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/08_calculator.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着运行</b><span>输入几组数，看同桌的计算器算得对不对</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，你觉得最有用的地方</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>问问同桌：输入 0 的时候会怎样？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让程序的输出更清楚。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>/、// 和 % 有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　小数除法、整除、求余数。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>2 + 3 * 4 先算哪一步？<em class="step s3" style="font-style:normal;font-weight:400">　先算乘法，结果是 14。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>什么时候用 float(input())？<em class="step s4" style="font-style:normal;font-weight:400">　读入的数可能有小数时。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1"><code>3 * 4</code><span>乘法，结果是 12</span></div>
+    <div class="r d1"><code>7 / 2</code><span>除法，结果是小数 3.5</span></div>
+    <div class="r d2"><code>7 // 2</code><span>整除，结果是 3</span></div>
+    <div class="r d2"><code>7 % 2</code><span>求余数，结果是 1</span></div>
+    <div class="r d3"><code>float(input())</code><span>读入一行，变成小数</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>2 ** 3</code><span>乘方，2 的 3 次方</span></div>
+    <div class="r d2"><code>round()</code><span>四舍五入，保留几位小数</span></div>
+    <div class="r d3"><code>-7 // 2</code><span>负数的整除和余数</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天学会了算式，程序就能替你算账了。下节课让它学会做判断。</p>
+  <div class="foot"></div>
+</section>
