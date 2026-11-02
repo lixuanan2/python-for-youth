@@ -1,0 +1,308 @@
+<!-- cover -->
+<section class="slide" aria-label="累加和计数" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 08</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">每遍</b><div class="wire r d1"><i></i><span style="font-family:var(--code)">total += i</span></div><b class="r d2" style="font-size:250px">记账</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">累加和计数：让循环帮你记账</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让程序算总分、算平均分，还能数出有几个人及格。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="全班总分怎么算">
+  <h2 class="t r">全班总分怎么算？</h2>
+  <div class="slip r d1" style="left:96px;top:300px;width:380px"><small style="font-size:34px">第一次</small><pre style="font-size:60px">投 5 元</pre></div>
+  <div class="slip r d2" style="left:510px;top:300px;width:380px"><small style="font-size:34px">第二次</small><pre style="font-size:60px">投 10 元</pre></div>
+  <div class="slip r d2" style="left:924px;top:300px;width:380px"><small style="font-size:34px">第三次</small><pre style="font-size:60px">投 3 元</pre></div>
+  <div class="slip tilt r d3" style="left:1370px;top:300px;width:450px"><small style="font-size:34px">存钱罐里</small><pre style="font-size:72px">18 元</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:620px">循环每一遍读到一个分数，下一遍就换成新的了，前面的数留不住。<br>办法就像存钱罐：放一个变量在循环外面，每一遍往里加一点，到最后再打开看。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- smallest accumulator with trace -->
+<section class="slide" aria-label="累加的写法" data-steps="4" data-at="4" data-chapter="累加">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">累加：一遍加一点</h2>
+  <div class="editor" style="left:96px;top:200px;width:1040px;--fs:44px"><div class="tab">sum_three.py</div>
+<pre class="code" data-file="solutions/01_sum_three.py"><span class="ln">total = <span class="m">0</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">4</span>):</span><span class="ln l1 l2 l3">    total = total + i</span><span class="ln l4"><span class="f">print</span>(total)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:625px;width:1040px;color:var(--paper)">total 从 0 开始。i 是 1，0 + 1 得 1。</p>
+  <p class="abs say only2" style="left:96px;top:625px;width:1040px;color:var(--paper)">i 是 2，1 + 2 得 3，放回 total。</p>
+  <p class="abs say only3" style="left:96px;top:625px;width:1040px;color:var(--paper)">i 是 3，3 + 3 得 6，放回 total。</p>
+  <p class="abs say only4" style="left:96px;top:625px;width:1040px;color:var(--paper)">循环结束，输出 total，也就是 1 + 2 + 3 的和。</p>
+  <a class="ide step s4" style="left:96px;top:760px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px">1</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px">3</b></div>
+    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:84px">6</b></div>
+    <div class="box out step s4"><i style="width:190px">输出</i><b style="font-size:84px">6</b></div>
+  </div>
+</section>
+
+<!-- predict: inside or outside -->
+<section class="slide" aria-label="猜一猜：放错位置" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：放错位置会怎样？</h2>
+  <div class="vs">
+    <div><h3>total = 0 放进循环</h3><pre style="font-size:50px">for i in range(1, 4):
+    total = 0
+    total = total + i
+print(total)</pre><p class="res step s2" style="font-size:80px">3</p></div>
+    <div><h3>print 放进循环</h3><pre style="font-size:50px">total = 0
+for i in range(1, 4):
+    total = total + i
+    print(total)</pre><p class="res step s2" style="font-size:80px">1 3 6</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:790px">和上一页比，都只挪了一行。各输出什么？</p>
+  <p class="abs say step s2" style="left:96px;top:790px;width:1728px">左边每一遍都把存钱罐倒空，只留下最后的 3。<br>右边每加一次就输出一次，一共三行，每个数占一行。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- three places -->
+<section class="slide" aria-label="累加的三个位置">
+  <h2 class="t r">累加要放对三个位置</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>循环前</b><span>total = 0<br>准备好，只做一次</span></div>
+    <div class="r d2"><i>2</i><b>循环里</b><span>total = total + i<br>每一遍加一点</span></div>
+    <div class="r d3"><i>3</i><b>循环后</b><span>print(total)<br>全部加完再输出</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">看代码的缩进，就能看出每一行在哪个位置。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz -->
+<section class="slide" aria-label="小测：累加结果">
+  <h2 class="t r">小测：这段程序输出几？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:44px"><div class="tab">输出几？</div>
+<pre class="code"><span class="ln">total = <span class="m">0</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">5</span>):</span><span class="ln">    total = total + i</span><span class="ln"><span class="f">print</span>(total)</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px" data-right="0">
+    <button type="button" data-fb="答对了！range(1, 5) 是 1、2、3、4，加起来是 10。"><i>1</i>10</button>
+    <button type="button" data-fb="4 是最后一个 i，不是总和。"><i>2</i>4</button>
+    <button type="button" data-fb="1 + 2 + 3 是 6，这里还要加上 4。"><i>3</i>6</button>
+    <button type="button" data-fb="终点 5 不算在内，所以不是 15。"><i>4</i>15</button>
+  </div>
+  <p class="fb" style="top:690px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- += shorthand -->
+<section class="slide" aria-label="更新的简写">
+  <h2 class="t r">更新有个简写：+=</h2>
+  <div class="sheet3">
+    <div class="r d1"><code>total += i</code><span>就是 total = total + i</span></div>
+    <div class="r d2"><code>count += 1</code><span>就是 count = count + 1</span></div>
+    <div class="r d3"><code>i -= 1</code><span>就是 i = i - 1</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:640px">读作“加上”：total 加上 i。两种写法结果一样，后面都用短的这种。<br>注意加号在等号前面。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="从 1 加到 n">
+  <div class="band r"><b>动手<br>改一改</b><span>读入 n，再改 range，用上 +=。</span></div>
+  <div class="turn">
+    <h2 class="r d1">从 1 加到 n</h2>
+    <p class="say r d1">读入一个 0 到 10000 的整数 n，输出 1 + 2 + … + n 的和。相传数学家高斯小时候很快就算出了 1 加到 100。程序比他还快。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 100，输出</small><pre>5050</pre></div><div><small>输入 0，输出</small><pre>0</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/02_gauss.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/02_gauss.py" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- worked example: total score -->
+<section class="slide" aria-label="例题：全班总分" data-steps="4" data-at="4" data-chapter="总分">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：全班总分</h2>
+  <div class="editor" style="left:96px;top:200px;width:1040px;--fs:44px"><div class="tab">total.py</div>
+<pre class="code" data-file="solutions/03_total.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">total = <span class="m">0</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1 l2 l3">    score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1 l2 l3">    total += score</span><span class="ln l4"><span class="f">print</span>(total)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:790px;width:1040px;color:var(--paper)">第一行读入人数 3。第一遍读到 80，total 变成 80。</p>
+  <p class="abs say only2" style="left:96px;top:790px;width:1040px;color:var(--paper)">第二遍读到 90，total 变成 170。</p>
+  <p class="abs say only3" style="left:96px;top:790px;width:1040px;color:var(--paper)">第三遍读到 70，total 变成 240。</p>
+  <p class="abs say only4" style="left:96px;top:790px;width:1040px;color:var(--paper)">这里 i 只管数遍数，不用它的值。输出总分 240。</p>
+  <a class="ide step s4" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px;white-space:nowrap">读到 80</i><b style="font-size:84px">80</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">读到 90</i><b style="font-size:84px">170</b></div>
+    <div class="box step s3"><i style="width:190px;white-space:nowrap">读到 70</i><b style="font-size:84px">240</b></div>
+    <div class="box out step s4"><i style="width:190px">输出</i><b style="font-size:84px">240</b></div>
+  </div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="改成平均分">
+  <div class="band r"><b>动手<br>改一改</b><span>只要改最后一行。</span></div>
+  <div class="turn">
+    <h2 class="r d1">改成输出平均分</h2>
+    <p class="say r d1">第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">3
+80
+90
+70</pre></div><div><small>输出</small><pre style="line-height:1.2">80.0</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/04_average.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/04_average.py" style="left:610px;top:930px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- counter with trace -->
+<section class="slide" aria-label="计数的写法" data-steps="4" data-at="4" data-chapter="计数">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">计数：碰到一个，记一下</h2>
+  <div class="editor" style="left:96px;top:200px;width:1040px;--fs:44px"><div class="tab">count_multiples.py</div>
+<pre class="code" data-file="solutions/05_count_multiples.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="k">if</span> i % <span class="m">3</span> == <span class="m">0</span>:</span><span class="ln l1 l2 l3">        count += <span class="m">1</span></span><span class="ln l4"><span class="f">print</span>(count)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:790px;width:1040px;color:var(--paper)">输入 9。1 和 2 跳过。i 是 3，记一个。</p>
+  <p class="abs say only2" style="left:96px;top:790px;width:1040px;color:var(--paper)">4 和 5 跳过。i 是 6，再记一个。</p>
+  <p class="abs say only3" style="left:96px;top:790px;width:1040px;color:var(--paper)">7 和 8 跳过。i 是 9，再记一个。</p>
+  <p class="abs say only4" style="left:96px;top:790px;width:1040px;color:var(--paper)">循环结束，输出 3。像画“正”字，碰到一个画一笔。</p>
+  <a class="ide step s4" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:84px">1</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 6</i><b style="font-size:84px">2</b></div>
+    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 9</i><b style="font-size:84px">3</b></div>
+    <div class="box out step s4"><i style="width:190px">输出</i><b style="font-size:84px">3</b></div>
+  </div>
+</section>
+
+<!-- total vs count -->
+<section class="slide" aria-label="累加和计数对比" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：3、6、9 算出来各是几？</h2>
+  <div class="vs">
+    <div><h3>累加：加这个数</h3><pre style="font-size:74px">total += i</pre><p class="res step s2" style="font-size:90px">3 + 6 + 9 = 18</p></div>
+    <div><h3>计数：只加 1</h3><pre style="font-size:74px">count += 1</pre><p class="res step s2" style="font-size:90px">1 + 1 + 1 = 3</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:700px">写法几乎一样，只差加号后面是什么。</p>
+  <p class="abs say step s2" style="left:96px;top:700px;width:1728px">问“一共多少”用累加，问“有几个”用计数。<br>两个变量也可以同时用，各记各的。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: no hit -->
+<section class="slide" aria-label="小测：一个也没碰到">
+  <h2 class="t r">小测：上面的计数程序，输入 2 输出什么？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！1 和 2 都不是 3 的倍数，count 一直是开始的 0。"><i>1</i>0</button>
+    <button type="button" data-fb="2 是输入的 n，不是个数。"><i>2</i>2</button>
+    <button type="button" data-fb="print 在循环外面，循环结束后总会运行一次。"><i>3</i>什么也不输出</button>
+    <button type="button" data-fb="count 在循环前就有值了，不会报错。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="统计及格人数">
+  <div class="band r"><b>动手<br>改一改</b><span>把累加换成计数，再加一个判断。</span></div>
+  <div class="turn">
+    <h2 class="r d1">数一数几个人及格</h2>
+    <p class="say r d1">第一行读入人数 n（0 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。60 分及以上算及格，输出及格人数。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 5 行</small><pre style="font-size:44px">4、80、59、60、30</pre></div><div><small>输出</small><pre>2</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/06_count_pass.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/06_count_pass.py" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1"><code class="plain">忘了写 total = 0</code><b>NameError</b><span>循环前先准备</span></div>
+    <div class="r d2"><code>total += "90"</code><b>TypeError</b><span>读入后用 int()</span></div>
+    <div class="r d3"><code>total =+ i</code><b>不报错</b><span>写成 +=</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">要小心：写成 =+ 不报错，total 每次都被换成 i，只留下最后一个数。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：怎么数成 9 个">
+  <h2 class="t r">找错：怎么数成 9 个了？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:44px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="5" data-yes="找到了！这一行的缩进和 if 对齐，不归 if 管，每一遍都加 1。再缩进 4 个空格，才是碰到倍数才加。" data-no="这一行没问题。想一想：哪一行每一遍都运行了？"><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">10</span>):</span><span class="ln">    <span class="k">if</span> i % <span class="m">3</span> == <span class="m">0</span>:</span><span class="ln">        <span class="f">print</span>(i)</span><span class="ln">    count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(count)</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">1 到 9 里只有 3 个 3 的倍数，程序却说有 9 个。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="top:790px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="存钱罐" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">存钱罐</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">每行读入这次存了多少元（1 到 1000 的整数），读到 0 就停，0 不算一次。<br>输出一共存了几次，一共多少元。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>依次输入</small><pre>5
+10
+3
+0</pre><small style="margin-top:20px">输出</small><pre style="font-size:44px">存了 3 次，一共 18 元</pre></div>
+  <a class="ide r d3" data-code-file="starter/07_savings.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>不知道要存几次，用 for 还是 while？上节课猜数字是怎么读的？</span></p>
+    <p class="step s2"><i>提示 2</i><span>要记两件事，就准备两个变量，各记各的。</span></p>
+    <p class="step s3"><i>提示 3</i><span>试试第一行就输入 0，应该输出：存了 0 次，一共 0 元。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个小账本" data-chapter="小项目">
+  <h2 class="t r">造一个你的小账本</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">程序一笔一笔地记，最后告诉你总账。记什么，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>读入几个数，输出它们的总和，再说一句话。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>零花钱、每天步数、游戏得分、读书页数，什么都行。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>同时算总和和次数，再算平均，数一数有几次超过目标。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/08_ledger.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着记账</b><span>帮同桌输入几笔，心算验证对不对</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪一句总结最有意思</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>一笔都没有的时候，程序会说什么？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让账本更好用。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>total = 0 为什么放在循环前？<em class="step s2" style="font-style:normal;font-weight:400">　放在循环里，每一遍都会清零。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>累加和计数有什么不同？<em class="step s3" style="font-style:normal;font-weight:400">　累加加这个数，计数只加 1。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>print 为什么放在循环后？<em class="step s4" style="font-style:normal;font-weight:400">　全部算完，结果才是对的。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1"><code>total = 0</code><span>循环前准备，只做一次</span></div>
+    <div class="r d1"><code>total += i</code><span>累加：每一遍加上这个数</span></div>
+    <div class="r d2"><code>count += 1</code><span>计数：碰到一个加 1</span></div>
+    <div class="r d2"><code>print(total)</code><span>循环后输出，不缩进</span></div>
+    <div class="r d3"><code>total / n</code><span>平均数：总和除以个数</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>最大值 最小值</code><span>下节课：全班谁的分数最高</span></div>
+    <div class="r d2"><code>sum()  len()</code><span>Python 自带的求和和数个数</span></div>
+    <div class="r d3"><code>round()</code><span>把平均分保留几位小数</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天程序学会了一边循环一边记账。下节课让它记住最大的那一个。</p>
+  <div class="foot"></div>
+</section>

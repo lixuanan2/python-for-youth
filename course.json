@@ -49,15 +49,14 @@
     "stage": "循环"
   },
   {
-    "title": "累加器",
+    "id": "08-loop-tally",
+    "tag": "LESSON 08",
+    "title": "累加和计数",
+    "file": "lesson_08.py",
     "stage": "循环"
   },
   {
-    "title": "计数器",
-    "stage": "循环"
-  },
-  {
-    "title": "最大值与最小值",
+    "title": "最大值和最小值",
     "stage": "循环"
   },
   {
