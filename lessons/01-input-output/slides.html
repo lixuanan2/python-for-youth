@@ -1,0 +1,322 @@
+<!-- cover -->
+<section class="slide" aria-label="输入输出">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 01</p>
+  <div class="cover-row"><b class="r">输入</b><div class="wire r d1"><i></i><span>程序</span></div><b class="r d2">输出</b></div>
+  <p class="abs r d3" style="left:96px;top:740px;font:700 60px var(--text)">读入数据，输出结果</p>
+  <p class="abs r d3 say" style="left:96px;top:830px;color:var(--muted)">不需要编程基础，从第一行代码开始。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- three verbs -->
+<section class="slide clay" aria-label="程序只做三件事">
+  <h2 class="t r">程序只做三件事</h2>
+  <div class="verbs">
+    <div class="r d1"><b>读入</b><code>input()</code></div><em class="r d1">→</em>
+    <div class="r d2"><b>处理</b><code>int()&nbsp;&nbsp;+</code></div><em class="r d2">→</em>
+    <div class="r d3"><b>输出</b><code>print()</code></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">计算器就是这样：你按下数字，它算一算，再把结果显示出来。<br>再大的程序，也离不开这三步。今天我们就学会<b>读入</b>和<b>输出</b>。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- run in IDLE -->
+<section class="slide" aria-label="文件编辑与运行">
+  <h2 class="t r">先让代码跑起来</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>新建文件</b><span>文件名以 .py 结尾，比如 hello.py</span></div>
+    <div class="r d2"><i>2</i><b>写代码</b><span>写在编辑窗口里，不要抄 &gt;&gt;&gt; 提示符</span></div>
+    <div class="r d3"><i>3</i><b>保存，运行</b><span>IDLE 里点 Run → Run Module，先保存才能运行</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">程序写在文件里，就能保存下来，下次还能再运行。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- online IDE map -->
+<section class="slide" aria-label="认识在线 IDE">
+  <h2 class="t r">认识在线 IDE</h2>
+  <div class="map r d1"><div class="bar"><span class="run">▶</span></div>
+    <div class="l">print("Hi")</div><div class="rr">Hi</div></div>
+  <span class="dot" style="left:150px;top:254px">1</span><span class="dot" style="left:330px;top:440px">2</span><span class="dot" style="left:900px;top:440px">3</span>
+  <div class="pin r d2" style="left:1190px;top:240px;width:640px"><i>1</i><span>点 ▶ 运行，或按 <span class="kbd">Shift</span>+<span class="kbd">Enter</span></span></div>
+  <div class="pin r d2" style="left:1190px;top:420px;width:640px"><i>2</i><span>左边写代码，可以随便改</span></div>
+  <div class="pin r d3" style="left:1190px;top:560px;width:640px"><i>3</i><span>右边看结果，要输入时在右边打字，再按回车</span></div>
+  <a class="ide r d3" data-code='print("Hello, Python!")' style="left:96px;top:840px">▶ 打开 IDE 试试</a>
+  <p class="abs say r d3" style="left:560px;top:846px;font-size:34px;color:var(--muted)">需要联网，第一次打开要等十几秒。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- print -->
+<section class="slide dark" aria-label="print 输出一行文字">
+  <h2 class="t r">print：让屏幕说话</h2>
+  <div class="editor r d1" style="left:96px;top:230px;width:1240px;--fs:64px"><div class="tab">hello.py</div>
+<pre class="code" data-file="solutions/00_hello.py"><span class="ln"><span class="f">print</span>(<span class="s">"Hello, Python!"</span>)</span></pre></div>
+  <p class="abs say r d2" style="left:96px;top:540px;width:1240px">print 的意思是“打印”。括号里写什么，屏幕上就出现什么。<br>文字要放在<b>英文引号</b>里，print 要<b>全部小写</b>。</p>
+  <div class="slip tilt r d3" style="left:1370px;top:300px"><small>屏幕上</small><pre style="font-size:44px">Hello, Python!</pre></div>
+  <a class="ide r d3" style="left:96px;top:850px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
+<!-- quotes matter -->
+<section class="slide" aria-label="有引号和没引号" data-steps="2" data-at="2">
+  <h2 class="t r">猜一猜：引号有什么用？</h2>
+  <div class="vs">
+    <div><h3>有引号</h3><pre><span class="f">print</span>(<span style="color:var(--olive)">"1 + 1"</span>)</pre><p class="res step s2">1 + 1</p></div>
+    <div><h3>没引号</h3><pre><span class="f">print</span>(1 + 1)</pre><p class="res step s2">2</p></div>
+  </div>
+  <p class="abs say step s2" style="left:96px;top:700px">引号里的是<b>文字</b>，原样显示。<br>没有引号的是<b>算式</b>，Python 先算出结果再显示。</p>
+  <p class="abs say only1" style="left:96px;top:700px">先想一想两边各输出什么，然后再翻到下一步。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz -->
+<section class="slide" aria-label="小测：选对的写法">
+  <h2 class="t r">小测：哪一行能运行？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="Python 分大小写，Print 和 print 是两个不同的名字。"><i>1</i>Print("hi")</button>
+    <button type="button" data-fb="答对了！小写的 print，文字放在英文引号里。"><i>2</i>print("hi")</button>
+    <button type="button" data-fb="没有引号，Python 会把 hi 当成一个还没有的名字。"><i>3</i>print(hi)</button>
+    <button type="button" data-fb="这是中文引号。写代码时要先切换成英文输入法。"><i>4</i>print(“hi”)</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="让程序说两句话">
+  <div class="band r"><b>动手<br>改一改</b><span>每个 print 输出后都会换行。</span></div>
+  <div class="turn">
+    <h2 class="r d1">让程序说两句话</h2>
+    <p class="say r d1">保留第一行，在下面再写一行 print，让屏幕显示这两行字。</p>
+    <div class="sheet r d2"><small>运行后要看到</small><pre>Hello, Python!
+我会写程序了</pre></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/01_two_lines.py</p>
+  </div>
+  <a class="ide r d3" data-code='print("Hello, Python!")' style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- input -->
+<section class="slide" aria-label="input 先读入文字">
+  <div class="night r" style="width:1120px"></div>
+  <h2 class="t r" style="color:var(--paper)">input：等你打字</h2>
+  <div class="editor r d1" style="left:96px;top:230px;width:930px;--fs:50px"><div class="tab">greet.py</div>
+<pre class="code" data-file="solutions/03_text_input.py"><span class="ln">name = <span class="f">input</span>()</span><span class="ln"><span class="f">print</span>(<span class="s">"Hello"</span>, name)</span></pre></div>
+  <p class="abs say r d2" style="left:96px;top:570px;width:930px;color:var(--paper)">运行到 input() 时，程序会<b style="color:var(--clay-soft)">停下来等你</b>。<br>你打字，按回车，程序才继续往下走。</p>
+  <a class="ide r d3" style="left:96px;top:850px">▶ 在 IDE 打开</a>
+  <div class="abs r d2" style="left:1210px;top:210px;right:96px"><p class="say" style="color:var(--muted)">你打字，再按回车</p><p style="font:800 96px/1.4 var(--code)">Ming</p></div>
+  <div class="abs r d3" style="left:1210px;top:520px;right:96px;border-top:5px solid var(--ink);padding-top:22px"><p class="say" style="color:var(--muted)">屏幕回答</p><p style="font:800 76px/1.4 var(--code);color:var(--clay)">Hello Ming</p></div>
+  <p class="abs say r d3" style="left:1210px;top:800px;right:96px;font-size:34px">print 里的逗号，会变成一个空格。</p>
+</section>
+
+<!-- variable -->
+<section class="slide" aria-label="变量像贴了名字的盒子">
+  <h2 class="t r">变量：贴了名字的盒子</h2>
+  <div class="crate r d1" style="left:150px;top:380px;width:560px"><small>name</small>"Ming"</div>
+  <div class="abs r d2" style="left:840px;top:250px;right:96px">
+    <p style="font:700 66px/1.4 var(--code)">name = <span class="f" style="color:var(--clay)">input</span>()</p>
+    <p class="say" style="margin-top:30px">等号在这里不是“相等”，而是<b>把右边的东西放进左边的盒子</b>。</p>
+    <p class="say" style="margin-top:24px">盒子上的名字叫<b>变量名</b>。以后写 name，就是在用盒子里的东西。</p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- predict 34 -->
+<section class="slide dark" aria-label="预测 3 和 4" data-steps="3" data-at="3">
+  <h2 class="t">输入 3 和 4，会输出几？</h2>
+  <div class="editor" style="left:96px;top:230px;width:880px;--fs:58px"><div class="tab">add.py</div>
+<pre class="code" data-file="solutions/05_text_add.py"><span class="ln l1">a = <span class="f">input</span>()</span><span class="ln l2">b = <span class="f">input</span>()</span><span class="ln l3"><span class="f">print</span>(a + b)</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <p class="abs say only1" style="left:96px;top:660px">先在纸上写下你的答案。</p>
+  <div class="abs step s2" style="left:1060px;top:240px;display:flex;gap:36px"><div class="tag"><small>a</small>"3"</div><div class="tag"><small>b</small>"4"</div></div>
+  <div class="abs step s3" style="left:1060px;top:510px"><p style="font:800 200px/1 var(--code);color:var(--clay-soft)">34</p></div>
+  <p class="abs say step s3" style="left:96px;top:660px;width:880px">input() 读到的永远是<b>文字</b>。<br>文字相加，就是把它们<b>拼在一起</b>。</p>
+  <a class="ide step s3" style="left:96px;top:850px">▶ 在 IDE 验证</a>
+  <div class="foot"></div>
+</section>
+
+<!-- text vs number -->
+<section class="slide" aria-label="文字和整数">
+  <h2 class="t r">文字和整数，加法不一样</h2>
+  <div class="vs">
+    <div class="r d1"><h3>文字</h3><pre>"3" + "4"</pre><p class="res">"34"</p><p class="say">像把两张纸条接起来。</p></div>
+    <div class="r d2"><h3>整数</h3><pre>3 + 4</pre><p class="res">7</p><p class="say">真正做数学加法。</p></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:760px">看起来都是 3 和 4，引号让它们成了两种不同的东西。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- int -->
+<section class="slide" aria-label="int 把文字变成整数">
+  <h2 class="t r">int：把文字变成整数</h2>
+  <div class="morph">
+    <div class="r d1"><div class="q">"3"</div><span>文字，只能拼</span></div>
+    <code class="r d2">int()<br>⟶</code>
+    <div class="r d3"><div class="v">3</div><span>整数，可以算</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:690px">int 是 integer（整数）的前三个字母。<br>把 input() 放进 int() 里写成 <b>int(input())</b>：先读入文字，再变成整数。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- sum trace -->
+<section class="slide" aria-label="两数求和" data-steps="3" data-at="3">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">两数求和</h2>
+  <div class="editor" style="left:96px;top:230px;width:1040px;--fs:58px"><div class="tab">sum.py</div>
+<pre class="code" data-file="solutions/04_sum.py"><span class="ln l1">a = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2">b = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l3"><span class="f">print</span>(a + b)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:660px;color:var(--paper)">输入 3，变成整数 3，放进盒子 a。</p>
+  <p class="abs say only2" style="left:96px;top:660px;color:var(--paper)">输入 4，变成整数 4，放进盒子 b。</p>
+  <p class="abs say only3" style="left:96px;top:660px;color:var(--paper)">两个都是整数，相加得到 7，输出。</p>
+  <a class="ide step s3" style="left:96px;top:850px">▶ 在 IDE 打开</a>
+  <p class="abs say step s3" style="left:560px;top:856px;font-size:34px;color:var(--ghost)">每个数单独占一行输入。</p>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i>a</i><b>3</b></div>
+    <div class="box step s2"><i>b</i><b>4</b></div>
+    <div class="box out step s3"><i>输出</i><b>7</b></div>
+  </div>
+</section>
+
+<!-- quiz -->
+<section class="slide" aria-label="小测：什么时候用 int">
+  <h2 class="t r">小测：这段程序会怎样？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:46px"><div class="tab">输入 10</div>
+<pre class="code"><span class="ln">age = <span class="f">input</span>()</span><span class="ln"><span class="f">print</span>(age + 1)</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="2">
+    <button type="button" data-fb="想要 11，得先用 int() 把文字变成整数。"><i>1</i>输出 11</button>
+    <button type="button" data-fb="拼接只能文字和文字拼，1 是整数，不能直接拼。"><i>2</i>输出 101</button>
+    <button type="button" data-fb="答对了！age 是文字，1 是整数，两种东西不能相加，Python 会报 TypeError。"><i>3</i>报错</button>
+  </div>
+  <p class="fb" style="top:690px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="改成三个数求和">
+  <div class="band r"><b>动手<br>改一改</b><span>照着前两行，再读入一个数。</span></div>
+  <div class="turn">
+    <h2 class="r d1">改成三个数求和</h2>
+    <p class="say r d1">再读入一个整数 c，输出三个数的和。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 1、2、3，输出</small><pre style="font-size:100px;line-height:1.2">6</pre></div><div><small>再试 -5、2、0，输出</small><pre style="font-size:100px;line-height:1.2">-3</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/06_sum_three.py</p>
+  </div>
+  <a class="ide r d3" data-code='a = int(input())&#10;b = int(input())&#10;print(a + b)' style="left:610px;top:800px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- read a traceback -->
+<section class="slide" aria-label="怎么读报错">
+  <h2 class="t r">红字不可怕：从最后一行读</h2>
+  <div class="tb r d1"><span class="dim">Traceback (most recent call last):</span><br><span class="dim">&nbsp;&nbsp;File "hello.py", line </span><span class="hot">1</span><span class="dim">, in &lt;module&gt;</span><br><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;Print("hi")</span><br><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;^^^^^</span><br><span class="hot">NameError</span>: name 'Print' is not defined.<br>Did you mean: 'print'?</div>
+  <div class="abs r d2" style="left:1270px;right:96px;top:240px">
+    <p class="say"><b>line 1</b>：错在第 1 行。</p>
+    <p class="say" style="margin-top:26px"><b>NameError</b> 表示 Python 不认识这个名字。</p>
+    <p class="say" style="margin-top:26px"><b>Did you mean</b> 是它在猜：你是想写 print 吗？</p>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:760px">程序报错很正常，程序员每天都会遇到。<br>红字是 Python 在告诉你哪里要改，先看最后一行，再看行号。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误">
+  <h2 class="t r">三种最常见的错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1"><code>Print("hi")</code><b>NameError</b><span>print 全部小写</span></div>
+    <div class="r d2"><code>print(“hi”)</code><b>SyntaxError</b><span>换成英文引号</span></div>
+    <div class="r d3"><code class="plain">一行输入 3 4</code><b>ValueError</b><span>每个数占一行</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错游戏">
+  <h2 class="t r">找错：哪一行有问题？</h2>
+  <div class="editor r d1" style="left:96px;top:230px;width:1040px;--fs:58px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="1" data-yes="找到了！第 1 行少了 int()，a 还是文字，文字和整数不能相加。" data-no="这一行没有问题，再看看 a 和 b 是不是同一种东西。"><span class="ln">a = <span class="f">input</span>()</span><span class="ln">b = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(a + b)</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">这段程序想算两数之和，运行时却报了 TypeError。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="top:690px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="明年几岁">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 180px/1.2 var(--text)">明年<br>几岁？</h2>
+  <p class="abs say r d2" style="left:96px;top:640px;width:900px">写一个程序：第一行读入名字，第二行读入今年的年龄，输出这个人明年几岁。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:720px"><small>输入两行</small><pre>Ming
+10</pre><small style="margin-top:30px">输出一句话</small><pre style="font-size:50px">Ming 明年 11 岁</pre></div>
+  <a class="ide r d3" data-code='# 第一行读入名字，第二行读入今年的年龄&#10;# 输出：Ming 明年 11 岁&#10;' style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>名字是文字，要不要转换？年龄呢？</span></p>
+    <p class="step s2"><i>提示 2</i><span>年龄要先变成整数，才能加 1。</span></p>
+    <p class="step s3"><i>提示 3</i><span>print 可以用逗号隔开放四样东西：名字、“明年”、算好的数、“岁”。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project: low floor, wide walls, high ceiling -->
+<section class="slide" aria-label="造一个你的小程序">
+  <h2 class="t r">造一个你的小程序</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">写一个会聊天的小机器人：它先问你问题，再回答你。主题你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>问一个问题，读入回答，再回一句话。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>宠物档案、游戏角色、自我介绍、奶茶点单，什么都行。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>多问几个问题，再用 int() 算点什么，比如还有几年毕业。</span></div>
+  </div>
+  <a class="ide r d3" data-code='# 我的小机器人&#10;# 先问一个问题，再回一句话&#10;' style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share and reflect, then another turn of the spiral -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着运行</b><span>运行同桌的程序，照着它的问题回答</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，你最喜欢哪一句</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>问问同桌：还可以让它多做什么？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版。想一想、做出来、试一试、分享、再改，程序就是这样越做越好的。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p class="step s2" style="font-weight:700"><i>Q1</i><span>input() 读进来的是什么？<em class="step s2" style="font-style:normal;font-weight:400">　是文字，哪怕你输入的是数字。</em></span></p>
+    <p class="step s3" style="font-weight:700"><i>Q2</i><span>什么时候要用 int()？<em style="font-style:normal;font-weight:400">　读入的数字要拿来计算的时候。</em></span></p>
+    <p class="step s4" style="font-weight:700"><i>Q3</i><span>不看代码，能写出两数求和吗？<em style="font-style:normal;font-weight:400">　合上课件试一试。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1"><code>print("文字")</code><span>在屏幕上显示文字，然后换行</span></div>
+    <div class="r d1"><code>print("Hi", name)</code><span>显示多样东西，中间自动加空格</span></div>
+    <div class="r d2"><code>name = input()</code><span>等你打字，把文字放进 name</span></div>
+    <div class="r d2"><code>a = int(input())</code><span>读入一行，变成整数放进 a</span></div>
+    <div class="r d3"><code>"3" + "4"</code><span>文字相加是拼接，得到 "34"</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>float()</code><span>带小数点的数，比如 3.5</span></div>
+    <div class="r d2"><code>input("提示")</code><span>让程序先说一句话，再等你打字</span></div>
+    <div class="r d3"><code>split()</code><span>在一行里读入好几个数</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天学会用 print、input 和 int，就已经能写出会“对话”的程序了。</p>
+  <div class="foot"></div>
+</section>

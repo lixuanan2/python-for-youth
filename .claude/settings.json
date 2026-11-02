@@ -1,0 +1,14 @@
+{
+  "enabledPlugins": {
+    "frontend-slides@frontend-slides": true,
+    "frontend-design@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "frontend-slides": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/zarazhangrui/frontend-slides.git"
+      }
+    }
+  }
+}
