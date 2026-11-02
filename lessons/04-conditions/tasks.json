@@ -1,0 +1,110 @@
+[
+  {
+    "id": "01",
+    "role": "语法小演示",
+    "page": 6,
+    "starter": "starter/01_if.py",
+    "solution": "solutions/01_if.py",
+    "required": false,
+    "scope": "score为0到100的整数",
+    "sample_input": "50\n",
+    "sample_output": "考完了\n",
+    "description": "观察条件不成立时跳过缩进的行。"
+  },
+  {
+    "id": "A",
+    "role": "基础例题",
+    "page": 7,
+    "starter": "starter/02_pass.py",
+    "solution": "solutions/02_pass.py",
+    "required": true,
+    "scope": "score为0到100的整数",
+    "sample_input": "59\n",
+    "sample_output": "继续加油\n",
+    "description": "用if和else判断是否及格。"
+  },
+  {
+    "id": "02",
+    "role": "学生小改写",
+    "page": 9,
+    "starter": "starter/03_odd_even.py",
+    "solution": "solutions/03_odd_even.py",
+    "required": true,
+    "scope": "n为-1000到1000的整数",
+    "sample_input": "7\n",
+    "sample_output": "奇数\n",
+    "description": "改成判断奇偶。"
+  },
+  {
+    "id": "03",
+    "role": "语法小演示",
+    "page": 10,
+    "starter": "starter/04_secret.py",
+    "solution": "solutions/04_secret.py",
+    "required": false,
+    "scope": "一行文字",
+    "sample_input": "Python\n",
+    "sample_output": "暗号正确\n",
+    "description": "比较文字。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 11,
+    "starter": "starter/05_grade.py",
+    "solution": "solutions/05_grade.py",
+    "required": true,
+    "scope": "score为0到100的整数",
+    "sample_input": "75\n",
+    "sample_output": "及格\n",
+    "description": "用elif分出三档。"
+  },
+  {
+    "id": "04",
+    "role": "语法小演示",
+    "page": 12,
+    "starter": "starter/06_one_way.py",
+    "solution": "solutions/06_one_way.py",
+    "required": false,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "大于 5\n",
+    "description": "观察多分支只走一条路。"
+  },
+  {
+    "id": "05",
+    "role": "学生小改写",
+    "page": 13,
+    "starter": "starter/07_grade_four.py",
+    "solution": "solutions/07_grade_four.py",
+    "required": true,
+    "scope": "score为0到100的整数",
+    "sample_input": "75\n",
+    "sample_output": "良好\n",
+    "description": "再加一档良好。"
+  },
+  {
+    "id": "06",
+    "role": "独立迁移",
+    "page": 16,
+    "starter": "starter/08_shipping.py",
+    "solution": "solutions/08_shipping.py",
+    "required": true,
+    "scope": "重量为1到100的整数",
+    "sample_input": "3\n",
+    "sample_output": "运费 14 元\n",
+    "description": "按重量分段计算运费。"
+  },
+  {
+    "id": "07",
+    "role": "创作项目",
+    "page": 18,
+    "starter": "starter/09_judge.py",
+    "solution": "solutions/09_judge_example.py",
+    "required": false,
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "30\n",
+    "sample_output": "穿短袖\n",
+    "description": "写一个看情况说话的程序。"
+  }
+]

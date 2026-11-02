@@ -21,7 +21,10 @@
     "stage": "基础"
   },
   {
+    "id": "04-conditions",
+    "tag": "LESSON 04",
     "title": "条件判断",
+    "file": "lesson_04.py",
     "stage": "判断"
   },
   {
