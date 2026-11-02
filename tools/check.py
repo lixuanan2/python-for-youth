@@ -109,7 +109,12 @@ def check_deck(lesson, folder):
 
 def check_dist():
     assert not list(builder.DIST.rglob('solutions')) and not list(builder.DIST.rglob('tests')), 'Teacher material in dist'
-    assert (builder.DIST / 'index.html').read_text(encoding='utf-8') == builder.render_index(builder.course()), 'Rebuild dist index'
+    index = builder.DIST / 'index.html'
+    text = index.read_text(encoding='utf-8')
+    assert text == builder.render_index(builder.course()), 'Rebuild dist index'
+    assert not re.search(r'/Users/|/home/', text), 'Absolute path in index'
+    for link in re.findall(r'href="([^"]+)"', text):
+        assert (index.parent / unquote(link)).exists(), f'Broken index link: {link}'
 
 
 def check_docs():
@@ -123,7 +128,7 @@ def check_docs():
 
 def main():
     scripts = cases = claims = pages = 0
-    lessons = builder.course()
+    lessons = builder.lessons()
     for lesson in lessons:
         folder = ROOT / 'lessons' / lesson['id']
         s, c = check_programs(folder)

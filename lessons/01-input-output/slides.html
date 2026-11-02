@@ -1,5 +1,5 @@
 <!-- cover -->
-<section class="slide" aria-label="输入输出">
+<section class="slide" aria-label="输入输出" data-chapter="开始">
   <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 01</p>
   <div class="cover-row"><b class="r">输入</b><div class="wire r d1"><i></i><span>程序</span></div><b class="r d2">输出</b></div>
   <p class="abs r d3" style="left:96px;top:740px;font:700 60px var(--text)">读入数据，输出结果</p>
@@ -46,7 +46,7 @@
 </section>
 
 <!-- print -->
-<section class="slide dark" aria-label="print 输出一行文字">
+<section class="slide dark" aria-label="print 输出一行文字" data-chapter="print">
   <h2 class="t r">print：让屏幕说话</h2>
   <div class="editor r d1" style="left:96px;top:230px;width:1240px;--fs:64px"><div class="tab">hello.py</div>
 <pre class="code" data-file="solutions/00_hello.py"><span class="ln"><span class="f">print</span>(<span class="s">"Hello, Python!"</span>)</span></pre></div>
@@ -95,7 +95,7 @@
 </section>
 
 <!-- input -->
-<section class="slide" aria-label="input 先读入文字">
+<section class="slide" aria-label="input 先读入文字" data-chapter="input">
   <div class="night r" style="width:1120px"></div>
   <h2 class="t r" style="color:var(--paper)">input：等你打字</h2>
   <div class="editor r d1" style="left:96px;top:230px;width:930px;--fs:50px"><div class="tab">greet.py</div>
@@ -120,7 +120,7 @@
 </section>
 
 <!-- predict 34 -->
-<section class="slide dark" aria-label="预测 3 和 4" data-steps="3" data-at="3">
+<section class="slide dark" aria-label="预测 3 和 4" data-chapter="文字和数字" data-steps="3" data-at="3">
   <h2 class="t">输入 3 和 4，会输出几？</h2>
   <div class="editor" style="left:96px;top:230px;width:880px;--fs:58px"><div class="tab">add.py</div>
 <pre class="code" data-file="solutions/05_text_add.py"><span class="ln l1">a = <span class="f">input</span>()</span><span class="ln l2">b = <span class="f">input</span>()</span><span class="ln l3"><span class="f">print</span>(a + b)</span></pre></div>
@@ -145,7 +145,7 @@
 </section>
 
 <!-- int -->
-<section class="slide" aria-label="int 把文字变成整数">
+<section class="slide" aria-label="int 把文字变成整数" data-chapter="int">
   <h2 class="t r">int：把文字变成整数</h2>
   <div class="morph">
     <div class="r d1"><div class="q">"3"</div><span>文字，只能拼</span></div>
@@ -201,7 +201,7 @@
 </section>
 
 <!-- read a traceback -->
-<section class="slide" aria-label="怎么读报错">
+<section class="slide" aria-label="怎么读报错" data-chapter="读报错">
   <h2 class="t r">红字不可怕：从最后一行读</h2>
   <div class="tb r d1"><span class="dim">Traceback (most recent call last):</span><br><span class="dim">&nbsp;&nbsp;File "hello.py", line </span><span class="hot">1</span><span class="dim">, in &lt;module&gt;</span><br><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;Print("hi")</span><br><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;^^^^^</span><br><span class="hot">NameError</span>: name 'Print' is not defined.<br>Did you mean: 'print'?</div>
   <div class="abs r d2" style="left:1270px;right:96px;top:240px">
@@ -236,7 +236,7 @@
 </section>
 
 <!-- challenge -->
-<section class="slide clay" aria-label="明年几岁">
+<section class="slide clay" aria-label="明年几岁" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 180px/1.2 var(--text)">明年<br>几岁？</h2>
   <p class="abs say r d2" style="left:96px;top:640px;width:900px">写一个程序：第一行读入名字，第二行读入今年的年龄，输出这个人明年几岁。</p>
@@ -259,7 +259,7 @@
 </section>
 
 <!-- creative project: low floor, wide walls, high ceiling -->
-<section class="slide" aria-label="造一个你的小程序">
+<section class="slide" aria-label="造一个你的小程序" data-chapter="小项目">
   <h2 class="t r">造一个你的小程序</h2>
   <p class="abs say r d1" style="left:96px;top:200px">写一个会聊天的小机器人：它先问你问题，再回答你。主题你自己定。</p>
   <div class="later" style="top:320px">
@@ -285,7 +285,7 @@
 </section>
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-steps="4" data-at="4">
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p class="step s2" style="font-weight:700"><i>Q1</i><span>input() 读进来的是什么？<em class="step s2" style="font-style:normal;font-weight:400">　是文字，哪怕你输入的是数字。</em></span></p>

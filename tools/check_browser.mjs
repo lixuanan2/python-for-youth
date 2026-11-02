@@ -36,11 +36,12 @@ const next = async () => {
 
 const OVERFLOW = `(() => {
   const out = [];
-  document.querySelector('.slide.active').querySelectorAll('*').forEach(e => {
+  const area = document.getElementById('deckStage').getBoundingClientRect();
+  document.querySelector('#deckStage .slide.active').querySelectorAll('*').forEach(e => {
     if (e.closest('.wire') || e.classList.contains('ln')) return;
     const b = e.getBoundingClientRect();
     if (!b.width) return;
-    if (b.left < -1 || b.top < -1 || b.right > 1921 || b.bottom > 1081) out.push('outside: ' + e.textContent.slice(0, 24));
+    if (b.left < area.left - 1 || b.top < area.top - 1 || b.right > area.right + 1 || b.bottom > area.bottom + 1) out.push('outside: ' + e.textContent.slice(0, 24));
     if (e.scrollWidth > e.clientWidth + 1 && e.clientWidth > 0 && getComputedStyle(e).display !== 'inline') out.push('overflow: ' + e.textContent.slice(0, 24));
   });
   return out;
@@ -48,14 +49,15 @@ const OVERFLOW = `(() => {
 
 const INTERACT = `(async () => {
   await document.fonts.ready;
-  const links = [...document.querySelectorAll('a.ide')];
-  const quizzes = [...document.querySelectorAll('.quiz')].map(q => {
+  const stage = document.getElementById('deckStage');
+  const links = [...stage.querySelectorAll('a.ide')];
+  const quizzes = [...stage.querySelectorAll('.quiz')].map(q => {
     const buttons = q.querySelectorAll('button');
     [...buttons].forEach(b => b.click());
     buttons[Number(q.dataset.right)].click();
     return buttons[Number(q.dataset.right)].className === 'yes';
   });
-  const picks = [...document.querySelectorAll('.pick')].map(c => {
+  const picks = [...stage.querySelectorAll('.pick')].map(c => {
     const lines = c.querySelectorAll('.ln');
     lines[Number(c.dataset.bug) - 1].click();
     return lines[Number(c.dataset.bug) - 1].classList.contains('yes');
@@ -65,7 +67,37 @@ const INTERACT = `(async () => {
   theme.value = 'JupyterLab Light'; theme.onchange();
   const changed = links[0].href !== before;
   theme.value = 'JupyterLab Dark'; theme.onchange();
+  const shell = {};
+  const show = i => document.querySelectorAll('.thumb')[i].click();
+  shell.thumbs = document.querySelectorAll('.thumb').length === document.querySelectorAll('#deckStage .slide').length;
+  show(4);
+  shell.thumbJump = document.getElementById('counter').textContent.startsWith('5 /');
+  shell.thumbOn = document.querySelectorAll('.thumb.on').length === 1;
+  shell.ideHasPageCode = new URL(document.getElementById('ide-quick').href).searchParams.get('code').includes('Hello, Python!');
+  const slider = document.getElementById('slider');
+  slider.value = 13; slider.dispatchEvent(new Event('input'));
+  shell.slider = document.getElementById('counter').textContent.startsWith('13 /');
+  shell.segOn = document.querySelectorAll('.seg.on').length === 1 && document.querySelectorAll('.seg.done').length === 12;
+  const chips = [...document.querySelectorAll('#chips button')];
+  chips.at(-1).click();
+  shell.chip = chips.at(-1).classList.contains('on') && document.querySelector('#deckStage .slide.active').dataset.chapter === chips.at(-1).textContent;
+  const jump = document.getElementById('jump');
+  jump.value = 9; jump.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', bubbles: true}));
+  shell.jump = document.getElementById('counter').textContent.startsWith('9 /');
+  const stageBox = () => document.getElementById('deckStage').getBoundingClientRect();
+  const before2 = stageBox();
+  document.body.classList.contains('thumbs-open') || document.getElementById('toggle-thumbs').click();
+  const open = stageBox();
+  document.getElementById('toggle-thumbs').click();
+  const closed = stageBox();
+  shell.stageGrows = closed.width > open.width && before2.left >= 232;
+  document.getElementById('toggle-thumbs').click();
+  const rail = document.getElementById('thumbs').getBoundingClientRect(), barBox = document.getElementById('controls').getBoundingClientRect();
+  shell.noOverlap = stageBox().left >= rail.right - 1 && stageBox().bottom <= barBox.top + 1;
+  shell.coverStaysWide = document.querySelector('.thumb .cover-row b').getBoundingClientRect().height < 40;
+  shell.ids = new Set([...document.querySelectorAll('[id]')].map(e => e.id)).size === document.querySelectorAll('[id]').length;
   return {
+    shell,
     font: [400, 700, 800].every(w => document.fonts.check(w + ' 40px "JetBrains Mono"')),
     badLinks: links.filter(a => !a.href.startsWith('https://') || a.target !== '_blank' || !new URL(a.href).searchParams.get('code')).length,
     links: links.length, quizzes, picks, changed
@@ -74,15 +106,15 @@ const INTERACT = `(async () => {
 
 try {
   await send('Page.enable');
-  await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.5, mobile: false});
+  await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
   const lessons = JSON.parse(fs.readFileSync('course.json', 'utf8'));
-  for (const lesson of lessons) {
+  for (const lesson of lessons.filter(l => l.id)) {
     const dir = path.join('.preview', lesson.id);
     fs.mkdirSync(dir, {recursive: true});
     await send('Page.navigate', {url: 'file://' + encodeURI(path.resolve('dist', lesson.id, 'index.html'))});
     await sleep(1500);
     assert.equal(await run('location.protocol'), 'file:');
-    const total = await run(`document.querySelectorAll('.slide').length`);
+    const total = await run(`document.querySelectorAll('#deckStage .slide').length`);
     const problems = [];
     let shots = 0;
     for (;;) {
@@ -102,7 +134,23 @@ try {
     assert(result.quizzes.length && result.quizzes.every(Boolean), 'Quiz answer not marked right');
     assert(result.picks.length && result.picks.every(Boolean), 'Bug hunt line not marked right');
     assert(result.changed, 'IDE settings did not change links');
-    console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.links} IDE links.`);
+    assert.deepEqual(Object.entries(result.shell).filter(([, ok]) => !ok), [], 'Workspace control failed');
+    await send('Emulation.setDeviceMetricsOverride', {width: 390, height: 844, deviceScaleFactor: 1, mobile: true});
+    await send('Page.navigate', {url: 'file://' + encodeURI(path.resolve('dist', 'index.html'))});
+    await sleep(800);
+    assert(await run('document.documentElement.scrollWidth <= innerWidth'), 'Home page scrolls sideways on a phone');
+    await send('Input.insertText', {text: ''});
+    assert.equal(await run(`(() => { const i = document.getElementById('name'); i.value = '小红'; i.oninput(); return document.getElementById('say').textContent; })()`), '你好 小红');
+    const homeShot = await send('Page.captureScreenshot', {format: 'png', captureBeyondViewport: true});
+    fs.writeFileSync(path.join('.preview', 'home-phone.png'), Buffer.from(homeShot.data, 'base64'));
+    await send('Page.navigate', {url: 'file://' + encodeURI(path.resolve('dist', lesson.id, 'index.html')) + '#page-5'});
+    await sleep(800);
+    const phone = await run(`(() => { const s = document.getElementById('deckStage').getBoundingClientRect(), b = document.getElementById('controls').getBoundingClientRect(); return {fits: s.left >= -1 && s.right <= innerWidth + 1 && s.bottom <= b.top + 1 && s.width > innerWidth - 2, wide: document.documentElement.scrollWidth <= innerWidth}; })()`);
+    assert(phone.fits && phone.wide, 'Deck does not fit a phone');
+    const deckShot = await send('Page.captureScreenshot', {format: 'png'});
+    fs.writeFileSync(path.join('.preview', 'deck-phone.png'), Buffer.from(deckShot.data, 'base64'));
+    await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
+    console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; thumbnails, timeline, chapters and jump work; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.links} IDE links.`);
   }
 } finally {
   proc.kill();

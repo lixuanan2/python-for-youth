@@ -3,6 +3,75 @@
     "id": "01-input-output",
     "tag": "LESSON 01",
     "title": "输入输出",
-    "file": "lesson_01.py"
+    "file": "lesson_01.py",
+    "stage": "基础"
+  },
+  {
+    "title": "变量与数据类型",
+    "stage": "基础"
+  },
+  {
+    "title": "算术运算",
+    "stage": "基础"
+  },
+  {
+    "title": "条件判断",
+    "stage": "判断"
+  },
+  {
+    "title": "逻辑运算",
+    "stage": "判断"
+  },
+  {
+    "title": "for 循环",
+    "stage": "循环"
+  },
+  {
+    "title": "while 循环",
+    "stage": "循环"
+  },
+  {
+    "title": "累加器",
+    "stage": "循环"
+  },
+  {
+    "title": "计数器",
+    "stage": "循环"
+  },
+  {
+    "title": "最大值与最小值",
+    "stage": "循环"
+  },
+  {
+    "title": "列表基础",
+    "stage": "列表和字符串"
+  },
+  {
+    "title": "列表遍历",
+    "stage": "列表和字符串"
+  },
+  {
+    "title": "字符串基础",
+    "stage": "列表和字符串"
+  },
+  {
+    "title": "字符串常用方法",
+    "stage": "列表和字符串"
+  },
+  {
+    "title": "函数定义与调用",
+    "stage": "函数"
+  },
+  {
+    "title": "参数与返回值",
+    "stage": "函数"
+  },
+  {
+    "title": "常用数学函数",
+    "stage": "函数"
+  },
+  {
+    "title": "字典基础",
+    "stage": "字典"
   }
 ]

@@ -1,4 +1,4 @@
-# Python for Kids
+# Python 青少年编程
 
 给小学高年级和初中生的 Python 课。课件是可以离线双击打开的网页：学生看着能自学，老师照着能讲课，代码能一键带到在线 IDE 里运行。
 
@@ -10,9 +10,16 @@
 | --- | --- |
 | `→` `空格` | 下一步，有分步的页面先走完步骤 |
 | `←` | 上一步 |
-| `F` | 全屏 |
+| `T` | 显示或收起左侧缩略图 |
+| `G` | 输入页码跳转 |
+| `R` | 带着本页代码打开 IDE |
 | `I` | IDE 设置：主题、布局、打开后是否自动运行 |
+| `F` | 全屏，全屏时动一下鼠标显示控制条 |
+| `B` | 黑屏，按任意键回来 |
 | `1`–`4` | 小测选答案 |
+| `?` | 查看快捷键 |
+
+底部时间轴一格一页，颜色表示这页的任务，可以拖动，旁边是章节跳转。
 
 上课时把整个 `dist/` 复制到教室电脑，里面有课件和起始程序，没有答案。IDE 按钮要联网，第一次打开要等十几秒，其余功能离线可用。
 
@@ -50,7 +57,7 @@ AGENTS.md   项目规则
 
 ## 教学设计
 
-每节课按“讲一点、练一点”推进，最后留一个没有标准答案的小项目，再和同桌互相试玩、改一版。做法借鉴了 MIT Media Lab 的[创意学习](https://www.media.mit.edu/groups/lifelong-kindergarten/overview/)和 MIT 6.100L 的[课后小练习](https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/pages/finger-exercises/)，具体要求见 [PROMPT.md](PROMPT.md)。
+每节课按“讲一点、练一点”推进，最后留一个没有标准答案的小项目，再和同桌互相试玩、改一版。课堂结构以 [PROMPT.md](PROMPT.md) 为准；设计时参考过 MIT Media Lab 的[创意学习](https://www.media.mit.edu/groups/lifelong-kindergarten/overview/)。
 
 ## 致谢
 

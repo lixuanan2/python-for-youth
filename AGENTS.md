@@ -1,10 +1,10 @@
-# Python for Kids：项目规则
+# Python 青少年编程：项目规则
 
 默认简体中文。这里写项目规则，教学要求只在 [PROMPT.md](PROMPT.md) 写一次，不要复制第二份。
 
 ## 项目
 
-- 私有仓库 `lixuanan2/python-for-kids`，面向小学高年级和初中生的 Python 课程。
+- 私有仓库 `lixuanan2/python-for-youth`，面向小学高年级和初中生的 Python 课程。
 - 课堂入口是把 `dist/` 复制到 Windows 电脑后双击打开。开发在 macOS。
 - 老师主要通过 AI 做课和改课。
 
@@ -12,8 +12,8 @@
 
 - `lessons/<编号-英文名>/slides.html`：一节课的页面，只写 `<section>`。这是唯一的内容源。
 - `lessons/<…>/tasks.json`、`starter/`、`solutions/`、`tests/`：题目、起始程序、答案和测试。`tests/claims.json` 记录页面说过的输出和报错。
-- `template/`：所有课共用的外壳、样式和脚本。
-- `course.json`：课程清单，顺序就是目录顺序。
+- `template/`：所有课共用的外壳、样式和脚本。缩略图、时间轴、章节跳转都在这里。
+- `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。
 - `dist/`：生成结果，提交进仓库，不要手改。
 
 ## 命令

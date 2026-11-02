@@ -15,7 +15,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 
 ## 2. 写程序和测试
 
-新建 `lessons/<编号-英文名>/`，复制上一节的结构，在 `course.json` 加一行。
+新建 `lessons/<编号-英文名>/`，复制上一节的结构，在 `course.json` 给这节课补上 `id`、`tag` 和 `file`。
 
 - `solutions/`：答案，每个都要有测试。
 - `starter/`：起始程序。小改写放例题代码，挑战只放注释。
@@ -35,6 +35,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 | 选择小测 | `.quiz data-right="序号"`，选项加 `data-fb`，后面放 `.fb` |
 | 点行找错 | `pre.code.pick data-bug data-yes data-no`，后面放 `.fb` |
 | IDE 按钮 | `a.ide`，默认带本页代码；`data-code` 指定其他代码 |
+| 章节跳转 | 该章第一页的 `<section>` 加 `data-chapter="名字"` |
 | 满版颜色 | `.dark` 听讲，`.band` 动手，`.clay` 挑战，`.olive` 复盘 |
 
 页面用绝对定位，以 1920×1080 为准。放不下就拆页，不缩小字号。
