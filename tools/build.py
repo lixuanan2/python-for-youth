@@ -63,7 +63,7 @@ HOME_LINK = '<a class="go-next r d3" href="../index.html">回到课程首页</a>
 
 
 def thanks_slide(lesson):
-    """Every deck ends with the same short thank-you, the teacher's link and the way onward."""
+    """Every deck ends with the same short thank-you, the course links and the way onward."""
     items = course()
     following = items[items.index(lesson) + 1] if items.index(lesson) + 1 < len(items) else None
     if following is None:
@@ -73,14 +73,16 @@ def thanks_slide(lesson):
     else:
         onward = HOME_LINK + f'<p class="abs say r d3 next-note">下一课“{html.escape(following["title"])}”还在准备中</p>'
     thanks = site()['thanks']
-    url = html.escape(thanks['url'], quote=True)
-    label = html.escape(thanks['url'].split('://', 1)[1])
+    links = ''.join(
+        f'<a class="gh-link" href="{html.escape(link["url"], quote=True)}" target="_blank" rel="noopener noreferrer">'
+        f'{read(f"template/icons/{link["icon"]}.svg").strip()}{html.escape(link["label"])}</a>'
+        for link in thanks['links'])
     return f'''
 <!-- generated for every lesson by tools/build.py -->
 <section class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">{html.escape(thanks['message'])}</p>
-  <a class="gh-link r d2" href="{url}" target="_blank" rel="noopener noreferrer">{label}</a>
+  <div class="links r d2">{links}</div>
   {onward}
 </section>
 '''

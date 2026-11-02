@@ -74,6 +74,8 @@
   },
   "thanks": {
     "message": "喜欢这节课？欢迎来 GitHub 和我交流。",
-    "url": "https://github.com/lixuanan2"
+    "links": [
+      {"icon": "github", "label": "python-for-youth", "url": "https://github.com/lixuanan2/python-for-youth"}
+    ]
   }
 }

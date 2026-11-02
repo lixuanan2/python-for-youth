@@ -7,6 +7,7 @@
 | 课件内容 | `lessons/` 里的页面和题目、`docs/`、`PROMPT.md`、`dist/` 里的课件 | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans) |
 | 代码 | `tools/`、`template/`、`lessons/` 里的 `.py` 程序 | MIT，全文见下 |
 | 第三方内容 | `vendor/` | 各自的许可，见 `vendor/` 里的许可文件 |
+| GitHub 图标 | `template/icons/github.svg` | 属于 GitHub，只用来链接到 GitHub，不在上面的许可内 |
 
 ## 课件内容
 

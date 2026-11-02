@@ -4,7 +4,7 @@
 
 ## 项目
 
-- 私有仓库 `lixuanan2/python-for-youth`，面向小学高年级和初中生的 Python 课程。
+- 仓库 `lixuanan2/python-for-youth`，面向小学高年级和初中生的 Python 课程。
 - 课堂入口是把 `dist/` 复制到 Windows 电脑后双击打开。开发在 macOS。
 - 老师主要通过 AI 做课和改课。
 
@@ -14,7 +14,7 @@
 - `lessons/<…>/tasks.json`、`starter/`、`solutions/`、`tests/`：题目、起始程序、答案和测试。`tests/claims.json` 记录页面说过的输出和报错。
 - `template/`：所有课共用的外壳、样式和脚本。缩略图、时间轴、章节跳转都在这里。
 - `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。
-- `site.json`：网站名称、首页文字、语言、IDE 平台和谢谢页的文案、链接。换语言或换 IDE 只改这里。
+- `site.json`：网站名称、首页文字、语言、IDE 平台和谢谢页的文案、链接。换语言或换 IDE 只改这里。谢谢页加链接就在 `thanks.links` 加一项，图标放 `template/icons/`。
 - `dist/`：生成结果，提交进仓库，不要手改。
 
 ## 命令
@@ -50,7 +50,7 @@ node tools/check_browser.mjs    # 真实 Chrome 逐页检查和交互测试
 
 ## 姊妹项目
 
-C++ 课件在旁边的 `../cpp-for-youth/`（私有仓库 `lixuanan2/cpp-for-youth`），用同一套模板，跨课程规则见上一级的 `AGENTS.md`。本仓库为主：`template/`、`tools/`、`vendor/` 只在这里改，C++ 有需要时提过来。改动对 C++ 也有用时，按上一级 `AGENTS.md` 的命令同步过去，再跑那边的检查。
+C++ 课件在旁边的 `../cpp-for-youth/`（仓库 `lixuanan2/cpp-for-youth`），用同一套模板，跨课程规则见上一级的 `AGENTS.md`。本仓库为主：`template/`、`tools/`、`vendor/` 只在这里改，C++ 有需要时提过来。改动对 C++ 也有用时，按上一级 `AGENTS.md` 的命令同步过去，再跑那边的检查。
 
 ## 旧资料
 
