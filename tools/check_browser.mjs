@@ -109,7 +109,7 @@ const INTERACT = `(async () => {
   const rail = document.getElementById('thumbs').getBoundingClientRect(), barBox = document.getElementById('controls').getBoundingClientRect();
   shell.noOverlap = stageBox().left >= rail.right - 1 && stageBox().bottom <= barBox.top + 1;
   shell.coverStaysWide = document.querySelector('.thumb .cover-row b').getBoundingClientRect().height < 40;
-  shell.noLigatures = getComputedStyle(document.body).fontVariantLigatures === 'none';
+  shell.noLigatures = [document.body, ...stage.querySelectorAll('pre.code')].every(e => getComputedStyle(e).fontVariantLigatures === 'none');
   shell.ids = new Set([...document.querySelectorAll('[id]')].map(e => e.id)).size === document.querySelectorAll('[id]').length;
   return {
     shell,
@@ -164,5 +164,6 @@ try {
     console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; thumbnails, timeline, chapters and jump work; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.links} IDE links.`);
   }
 } finally {
+  ws.close();
   proc.kill();
 }

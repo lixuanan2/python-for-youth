@@ -28,12 +28,26 @@ WORK = tempfile.TemporaryDirectory(prefix='lesson-check-')
 BUILT = {}
 
 
+def find_compiler():
+    compiler = os.environ.get('CXX') or shutil.which('clang++') or shutil.which('g++')
+    assert compiler, 'No C++ compiler found'
+    return compiler
+
+
+def error_text(claim):
+    """Compilers word errors differently, so a C++ claim may give the text for each one."""
+    want = claim['error']
+    if isinstance(want, str):
+        return want
+    version = subprocess.run([find_compiler(), '--version'], capture_output=True, text=True).stdout
+    return want['clang' if 'clang' in version else 'gcc']
+
+
 def compile_cpp(source):
     """Compile C++11 once per program; a failed compile comes back as the result."""
     if source in BUILT:
         return BUILT[source]
-    compiler = os.environ.get('CXX') or shutil.which('clang++') or shutil.which('g++')
-    assert compiler, 'No C++ compiler found'
+    compiler = find_compiler()
     exe = Path(WORK.name) / (hashlib.sha256(source.encode()).hexdigest()[:16] + ('.exe' if os.name == 'nt' else ''))
     BUILT[source] = exe, subprocess.run([compiler, '-std=c++11', '-Wall', '-Wextra', '-pedantic', '-x', 'c++', '-', '-o', str(exe)],
                                         input=source.encode(), capture_output=True, timeout=60)
@@ -107,7 +121,9 @@ def check_claims(folder):
     for claim in claims:
         result = run(claim['code'], claim.get('stdin', ''))
         if 'error' in claim:
-            assert result.returncode != 0 and claim['error'] in result.stderr.decode(), f'Claim failed: {claim}'
+            # GCC prints curly quotes in a UTF-8 locale and straight ones elsewhere, such as on Windows.
+            stderr = result.stderr.decode(errors='replace').replace('‘', "'").replace('’', "'")
+            assert result.returncode != 0 and error_text(claim) in stderr, f'Claim failed: {claim}\n{stderr}'
         else:
             assert result.returncode == 0 and result.stdout.decode().replace('\r\n', '\n') == claim['stdout'], f'Claim failed: {claim}'
     return len(claims)

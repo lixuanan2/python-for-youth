@@ -153,8 +153,9 @@ svg {
   --text:"JetBrains Mono","Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-/* Ligatures would turn >= into a symbol students cannot type. */
-body{font-family:var(--text);color:var(--ink);counter-reset:page;font-variant-ligatures:none}
+/* Ligatures would turn >= into a symbol students cannot type. The font shorthand resets this, hence !important. */
+*{font-variant-ligatures:none!important}
+body{font-family:var(--text);color:var(--ink);counter-reset:page}
 .slide{counter-increment:page;background:var(--bg,var(--paper));color:var(--fg,var(--ink))}
 .dark{--bg:var(--night);--fg:var(--paper)}
 .clay{--bg:var(--clay);--fg:#fffaf5}
