@@ -76,6 +76,20 @@ const INTERACT = `(async () => {
     lines[Number(c.dataset.bug) - 1].click();
     return lines[Number(c.dataset.bug) - 1].classList.contains('yes');
   });
+  // Every switch combination must give what Python gives; the page must end as it started.
+  const rule = {and: (a, b) => a && b, or: (a, b) => a || b, not: a => !a};
+  const gates = [...stage.querySelectorAll('.gate')].map(g => {
+    const inputs = [...g.querySelectorAll('button')], out = g.querySelector('b'), read = e => e.textContent === 'True';
+    const start = inputs.map(i => i.textContent);
+    const combos = 2 ** inputs.length;
+    let ok = true;
+    for (let n = 0; n < combos; n++) {
+      inputs.forEach((input, bit) => { if (read(input) !== Boolean(n >> bit & 1)) input.click(); });
+      ok &&= read(out) === rule[g.dataset.op](...inputs.map(read));
+    }
+    inputs.forEach((input, i) => { if (input.textContent !== start[i]) input.click(); });
+    return ok;
+  });
   const before = links[0].href;
   const select = document.querySelector('#ide-fields select');
   let changed = !select;
@@ -122,7 +136,7 @@ const INTERACT = `(async () => {
     shell,
     font: [400, 700, 800].every(w => document.fonts.check(w + ' 40px "JetBrains Mono"')),
     badLinks: links.filter(a => !a.href.startsWith('https://') || a.target !== '_blank' || !new URL(a.href).searchParams.get(IDE.config.codeParam)).length,
-    links: links.length, quizzes, picks, changed
+    links: links.length, quizzes, picks, gates, changed
   };
 })()`;
 
@@ -155,6 +169,7 @@ try {
     assert.equal(result.badLinks, 0, 'Bad IDE link');
     assert(result.quizzes.length && result.quizzes.every(Boolean), 'Quiz answer not marked right');
     assert(result.picks.length && result.picks.every(Boolean), 'Bug hunt line not marked right');
+    assert(result.gates.every(Boolean), 'Logic switch gave a wrong result');
     assert(result.changed, 'IDE settings did not change links');
     assert.deepEqual(Object.entries(result.shell).filter(([, ok]) => !ok), [], 'Workspace control failed');
     await send('Emulation.setDeviceMetricsOverride', {width: 390, height: 844, deviceScaleFactor: 1, mobile: true});
@@ -169,7 +184,7 @@ try {
     const deckShot = await send('Page.captureScreenshot', {format: 'png'});
     fs.writeFileSync(path.join('.preview', 'deck-phone.png'), Buffer.from(deckShot.data, 'base64'));
     await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
-    console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; thumbnails, timeline, chapters and jump work; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.links} IDE links.`);
+    console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; thumbnails, timeline, chapters and jump work; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.gates.length} logic switches, ${result.links} IDE links.`);
   }
 } finally {
   ws.close();

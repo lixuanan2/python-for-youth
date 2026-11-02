@@ -64,6 +64,7 @@ class SlidePresentation {
     this.setupIde();
     this.setupQuizzes();
     this.setupBugHunt();
+    this.setupGates();
     this.toggleThumbs(this.thumbsPreference());
     this.fromHash();
   }
@@ -223,6 +224,24 @@ class SlidePresentation {
         line.classList.add(right ? 'yes' : 'no');
         feedback.textContent = right ? code.dataset.yes : code.dataset.no;
       }));
+    });
+  }
+
+  setupGates() {
+    this.stage.querySelectorAll('.gate').forEach(gate => {
+      const inputs = [...gate.querySelectorAll('button')], result = gate.querySelector('b');
+      const update = () => {
+        const [a, b] = inputs.map(i => i.textContent === 'True');
+        const value = {and: a && b, or: a || b, not: !a}[gate.dataset.op];
+        inputs.forEach(i => i.classList.toggle('on', i.textContent === 'True'));
+        result.textContent = value ? 'True' : 'False';
+        result.classList.toggle('on', value);
+      };
+      inputs.forEach(input => input.addEventListener('click', () => {
+        input.textContent = input.textContent === 'True' ? 'False' : 'True';
+        update();
+      }));
+      update();
     });
   }
 

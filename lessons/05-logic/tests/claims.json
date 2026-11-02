@@ -1,0 +1,97 @@
+[
+  {
+    "page": 3,
+    "code": "print(True and False)",
+    "stdout": "False\n"
+  },
+  {
+    "page": 4,
+    "code": "print(True and True)\nprint(True and False)\nprint(False and True)\nprint(False and False)",
+    "stdout": "True\nFalse\nFalse\nFalse\n"
+  },
+  {
+    "page": 5,
+    "code": "print(5 > 3 and 2 > 4)",
+    "stdout": "False\n"
+  },
+  {
+    "page": 5,
+    "code": "print(5 > 3)\nprint(2 > 4)",
+    "stdout": "True\nFalse\n"
+  },
+  {
+    "page": 7,
+    "code": "score = 59\nprint(score >= 60 and score < 90)\nscore = 60\nprint(score >= 60 and score < 90)\nscore = 89\nprint(score >= 60 and score < 90)\nscore = 90\nprint(score >= 60 and score < 90)",
+    "stdout": "False\nTrue\nTrue\nFalse\n"
+  },
+  {
+    "page": 8,
+    "code": "x = 10\nprint(x >= 1 and x <= 10)\nx = 1\nprint(x >= 1 and x <= 10)\nx = 11\nprint(x >= 1 and x <= 10)",
+    "stdout": "True\nTrue\nFalse\n"
+  },
+  {
+    "page": 8,
+    "code": "x = 100\nprint(x >= 1 or x <= 10)\nx = -5\nprint(x >= 1 or x <= 10)",
+    "stdout": "True\nTrue\n"
+  },
+  {
+    "page": 8,
+    "code": "x = 5\nprint(x >= 1 and <= 10)",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 8,
+    "code": "x = 5\nprint(x <= 1 and x >= 10)",
+    "stdout": "False\n"
+  },
+  {
+    "page": 11,
+    "code": "print(True or True)\nprint(True or False)\nprint(False or True)\nprint(False or False)",
+    "stdout": "True\nTrue\nTrue\nFalse\n"
+  },
+  {
+    "page": 12,
+    "code": "x = 5\nprint(x > 8 or x < 6)\nprint(x > 8)\nprint(x < 6)",
+    "stdout": "True\nFalse\nTrue\n"
+  },
+  {
+    "page": 14,
+    "code": "print(not True)\nprint(not False)",
+    "stdout": "False\nTrue\n"
+  },
+  {
+    "page": 15,
+    "code": "print(not 3 > 2)\nprint(3 > 2)",
+    "stdout": "False\nTrue\n"
+  },
+  {
+    "page": 19,
+    "code": "x = 3\nprint(x > 1 and < 5)",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 19,
+    "code": "x = 3\nprint(x > 1 And x < 5)",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 19,
+    "code": "x = 3\nprint(x > 1 && x < 5)",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 20,
+    "code": "n = 5\nif n == 1 or 2:\n    print(\"中奖了\")\nelse:\n    print(\"没中\")",
+    "stdout": "中奖了\n"
+  },
+  {
+    "page": 20,
+    "code": "n = 5\nif n == 1 or n == 2:\n    print(\"中奖了\")\nelse:\n    print(\"没中\")",
+    "stdout": "没中\n"
+  },
+  {
+    "page": 27,
+    "code": "score = 89\nprint(60 <= score < 90)\nscore = 90\nprint(60 <= score < 90)",
+    "stdout": "True\nFalse\n"
+  }
+]

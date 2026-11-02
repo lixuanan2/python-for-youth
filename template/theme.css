@@ -37,9 +37,9 @@ h2.t::before{content:"# ";color:var(--clay)}
 
 /* === STEPS: data-at on the slide drives everything; the static state is the last step === */
 .step{transition:opacity .3s}
-.slide[data-at="1"] .s2,.slide[data-at="1"] .s3,.slide[data-at="1"] .s4,.slide[data-at="2"] .s3,.slide[data-at="2"] .s4,.slide[data-at="3"] .s4{opacity:0}
-.only1,.only2,.only3{opacity:0;transition:opacity .3s}
-.slide[data-at="1"] .only1,.slide[data-at="2"] .only2,.slide[data-at="3"] .only3{opacity:1}
+.slide[data-at="1"] .s2,.slide[data-at="1"] .s3,.slide[data-at="1"] .s4,.slide[data-at="1"] .s5,.slide[data-at="2"] .s3,.slide[data-at="2"] .s4,.slide[data-at="2"] .s5,.slide[data-at="3"] .s4,.slide[data-at="3"] .s5,.slide[data-at="4"] .s5{opacity:0}
+.only1,.only2,.only3,.only4{opacity:0;transition:opacity .3s}
+.slide[data-at="1"] .only1,.slide[data-at="2"] .only2,.slide[data-at="3"] .only3,.slide[data-at="4"] .only4{opacity:1}
 
 /* === EDITOR: tab, gutter, syntax colours; the code stays selectable text === */
 .editor{position:absolute;background:var(--panel);border-radius:14px;color:#f4f2ec;overflow:hidden}
@@ -48,7 +48,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .ln{display:block;padding-left:120px;position:relative;transition:background .25s}
 .ln::before{counter-increment:ln;content:counter(ln);position:absolute;left:0;width:90px;text-align:right;color:#77746b;font-weight:400}
 .f,.k{color:#e8a58d}.s{color:#a9d4b0}.m{color:#e8b04b}
-.slide[data-at="1"] .l1,.slide[data-at="2"] .l2,.slide[data-at="3"] .l3{background:#45413b}
+.slide[data-at="1"] .l1,.slide[data-at="2"] .l2,.slide[data-at="3"] .l3,.slide[data-at="4"] .l4{background:#45413b}
 .ide{position:absolute;display:inline-flex;align-items:center;gap:14px;background:var(--mint);color:#16261a;font:700 32px var(--code);text-decoration:none;padding:14px 28px 16px;border-radius:12px;box-shadow:0 6px 0 #5f8f6a}
 .ide:hover{filter:brightness(1.06)}.ide:active{transform:translateY(4px);box-shadow:0 2px 0 #5f8f6a}
 
@@ -155,6 +155,24 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .ledger span{font:400 46px var(--text)}
 
 /* === BUG HUNT: click the line === */
+/* === NUMBER LINE: a range drawn to scale; a filled end is included, a hollow end is not === */
+.numline{position:absolute;left:150px;right:150px;height:120px}
+.numline::before{content:"";position:absolute;left:0;right:0;top:23px;height:6px;background:var(--line)}
+.numline u{position:absolute;top:18px;height:16px;background:var(--clay)}
+.numline i{position:absolute;top:0;width:52px;height:52px;margin-left:-26px;border-radius:50%;background:var(--clay);border:8px solid var(--clay)}
+.numline i.open{background:var(--paper)}
+.numline b{position:absolute;top:60px;transform:translateX(-50%);font:700 44px var(--code)}
+
+/* === LOGIC SWITCHES: flip the inputs, the result is worked out by deck.js === */
+.gate{display:grid;grid-template-columns:270px 150px 270px 90px 1fr;align-items:center;border-top:4px solid var(--ink);padding:24px 0}
+.gate code{font:700 56px var(--code);text-align:center;color:var(--clay)}
+.gate em{font:400 56px var(--code);font-style:normal;text-align:center;color:var(--muted)}
+.gate button{font:800 60px var(--code);color:var(--ink);background:var(--sand);border:4px solid var(--line);border-radius:14px;padding:22px 0;cursor:pointer}
+.gate button:hover{border-color:var(--ink)}
+.gate button.on{background:#dcebd9;border-color:var(--olive)}
+.gate b{font:800 76px var(--code);padding-left:20px}
+.gate b.on{color:var(--olive)}
+
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
 .pick .ln.yes{background:#2f4a36}.pick .ln.no{background:#5a3327}
 

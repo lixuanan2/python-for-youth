@@ -31,6 +31,7 @@
 | [02](dist/02-variables/index.html) | 变量与数据类型 | 26 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [03](dist/03-arithmetic/index.html) | 算术运算 | 26 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [04](dist/04-conditions/index.html) | 条件判断 | 23 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [05](dist/05-logic/index.html) | 逻辑运算 | 28 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 

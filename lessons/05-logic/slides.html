@@ -1,0 +1,353 @@
+<!-- cover -->
+<section class="slide" aria-label="逻辑运算" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 05</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">条件</b><div class="wire r d1"><i></i><span style="font-family:var(--code)">and or not</span></div><b class="r d2" style="font-size:250px">条件</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">逻辑运算：把条件连起来</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让程序一次看好几个条件，再做决定。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="过山车的规定">
+  <h2 class="t r">过山车门口的规定</h2>
+  <div class="slip r d1" style="left:96px;top:270px;width:540px"><small style="font-size:34px">身高 130，年龄 10</small><pre style="font-size:72px">可以玩</pre></div>
+  <div class="slip r d2" style="left:690px;top:270px;width:540px"><small style="font-size:34px">身高 130，年龄 6</small><pre style="font-size:72px">下次再来</pre></div>
+  <div class="slip r d3" style="left:1284px;top:270px;width:540px"><small style="font-size:34px">身高 110，年龄 10</small><pre style="font-size:72px">下次再来</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:600px">规定是：身高满 120 厘米，并且年满 8 岁。<br>上节课的条件一次只问一件事。这节课把两个问题连起来问。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- and with trace -->
+<section class="slide" aria-label="and 的写法" data-steps="4" data-at="4" data-chapter="and">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">and：两个都成立才算</h2>
+  <div class="editor" style="left:96px;top:210px;width:1040px;--fs:44px"><div class="tab">ride.py</div>
+<pre class="code" data-file="solutions/01_ride.py"><span class="ln l1">height = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2 l3"><span class="k">if</span> height &gt;= <span class="m">120</span> <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以玩"</span>)</span><span class="ln l4"><span class="k">else</span>:</span><span class="ln l4">    <span class="f">print</span>(<span class="s">"下次再来"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:770px;width:1040px;color:var(--paper)">输入身高 130，年龄 6。这是两行输入。</p>
+  <p class="abs say only2" style="left:96px;top:770px;width:1040px;color:var(--paper)">先看左边：130 &gt;= 120 成立。</p>
+  <p class="abs say only3" style="left:96px;top:770px;width:1040px;color:var(--paper)">再看右边：6 &gt;= 8 不成立。</p>
+  <p class="abs say only4" style="left:96px;top:770px;width:1040px;color:var(--paper)">一个成立、一个不成立，and 的结果是 False。</p>
+  <a class="ide step s4" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step s2"><i style="width:190px">身高够</i><b style="font-size:84px">True</b></div>
+    <div class="box step s3"><i style="width:190px">年龄够</i><b style="font-size:84px">False</b></div>
+    <div class="box step s4"><i style="width:190px">and</i><b style="font-size:84px">False</b></div>
+    <div class="box out step s4"><i style="width:190px">输出</i><b style="font-size:64px;line-height:1.5">下次再来</b></div>
+  </div>
+</section>
+
+<!-- predict: and table -->
+<section class="slide" aria-label="猜一猜 and 的四种组合" data-steps="5" data-at="5">
+  <h2 class="t">猜一猜：and 的四种组合</h2>
+  <div class="sheet3" style="top:190px">
+    <div><code>True and True</code><span class="step s2" style="font:800 60px var(--code);color:var(--olive)">True</span></div>
+    <div><code>True and False</code><span class="step s3" style="font:800 60px var(--code)">False</span></div>
+    <div><code>False and True</code><span class="step s4" style="font:800 60px var(--code)">False</span></div>
+    <div><code>False and False</code><span class="step s5" style="font:800 60px var(--code)">False</span></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:790px">每一行先在心里猜 True 还是 False，再翻下一步。</p>
+  <p class="abs say step s5" style="left:96px;top:790px;width:1728px">and 像连在一起的两道门，两道都开着才走得过去。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: and -->
+<section class="slide" aria-label="小测：and">
+  <h2 class="t r">小测：print(5 &gt; 3 and 2 &gt; 4) 输出什么？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="5 &gt; 3 成立，可是 2 &gt; 4 不成立。and 要两边都成立。"><i>1</i>True</button>
+    <button type="button" data-fb="答对了！左边是 True，右边是 False，两个没有都成立，结果就是 False。"><i>2</i>False</button>
+    <button type="button" data-fb="比较的结果是真或假，用 and 连起来还是真或假。"><i>3</i>5</button>
+    <button type="button" data-fb="这一行可以运行，and 的两边都是写完整的比较。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- range on a number line -->
+<section class="slide" aria-label="范围：两头都要管住" data-chapter="范围">
+  <h2 class="t r">and 能写出一个范围</h2>
+  <div class="numline r d1" style="top:230px">
+    <u style="left:60%;right:10%"></u>
+    <i style="left:60%"></i><i class="open" style="left:90%"></i>
+    <b style="left:0">0</b><b style="left:60%">60</b><b style="left:90%">90</b><b style="left:auto;right:0;transform:none">100</b>
+  </div>
+  <div class="editor r d2" style="left:96px;top:390px;width:1080px;--fs:44px"><div class="tab">range.py</div>
+<pre class="code" data-file="solutions/02_range.py"><span class="ln">score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(score &gt;= <span class="m">60</span> <span class="k">and</span> score &lt; <span class="m">90</span>)</span></pre></div>
+  <p class="abs say r d3" style="left:1240px;right:96px;top:430px">实心点：包含 60。<br>空心点：不包含 90。</p>
+  <p class="abs say r d3" style="left:96px;top:700px">&gt;= 带等号，所以包含 60；&lt; 不带等号，所以不包含 90。<br>一个条件管住左边，一个条件管住右边，中间就是这个范围。</p>
+  <a class="ide r d3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
+<!-- predict: boundary values -->
+<section class="slide" aria-label="猜一猜四个分数" data-steps="5" data-at="5">
+  <h2 class="t">猜一猜：这四个分数输出什么？</h2>
+  <div class="sheet3" style="top:190px">
+    <div><code>输入 59</code><span class="step s2"><b>False</b>　59 没到 60</span></div>
+    <div><code>输入 60</code><span class="step s3"><b>True</b>　60 &gt;= 60 成立</span></div>
+    <div><code>输入 89</code><span class="step s4"><b>True</b>　89 &lt; 90 成立</span></div>
+    <div><code>输入 90</code><span class="step s5"><b>False</b>　90 &lt; 90 不成立</span></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:790px">都是紧贴 60 和 90 的数，先猜一猜。</p>
+  <p class="abs say step s5" style="left:96px;top:790px;width:1728px">写范围时，就拿边界上和边界外的数来试，错误最容易在这里出现。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: writing a range -->
+<section class="slide" aria-label="小测：写范围">
+  <h2 class="t r">小测：x 在 1 到 10 之间，含 1 和 10</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！x 不小于 1，并且不大于 10，两头都管住了。"><i>1</i>x &gt;= 1 and x &lt;= 10</button>
+    <button type="button" data-fb="这样写范围太宽了：换成 or 后，100 和 -5 都成立。"><i>2</i>x &gt;= 1 or x &lt;= 10</button>
+    <button type="button" data-fb="这样写会报 SyntaxError：and 的右边缺了 x，两边都要写完整。"><i>3</i>x &gt;= 1 and &lt;= 10</button>
+    <button type="button" data-fb="不小于 10 又不大于 1，没有这样的数，这个条件总是 False。"><i>4</i>x &lt;= 1 and x &gt;= 10</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="判断两位数">
+  <div class="band r"><b>动手<br>改一改</b><span>先想好范围的两头，再动手改。</span></div>
+  <div class="turn">
+    <h2 class="r d1">判断是不是两位数</h2>
+    <p class="say r d1">读入一个 1 到 1000 的整数。是两位数输出 True，不是输出 False。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 10，输出</small><pre>True</pre></div><div><small>输入 100，输出</small><pre>False</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/03_two_digit.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/03_two_digit.py" style="left:610px;top:800px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- or with trace -->
+<section class="slide" aria-label="or 的写法" data-steps="3" data-at="3" data-chapter="or">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">or：有一个成立就算</h2>
+  <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">weekend.py</div>
+<pre class="code" data-file="solutions/04_weekend.py"><span class="ln l1">day = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">if</span> day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span>:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"周末"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"上学"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:766px;width:1040px;color:var(--paper)">用 1 到 7 表示星期几。输入 7，放进 day。</p>
+  <p class="abs say only2" style="left:96px;top:766px;width:1040px;color:var(--paper)">7 == 6 不成立，但 7 == 7 成立。</p>
+  <p class="abs say only3" style="left:96px;top:766px;width:1040px;color:var(--paper)">有一个成立就够了，走 if 这条路。</p>
+  <a class="ide step s3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px">day</i><b>7</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">== 6</i><b style="font-size:84px">False</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">== 7</i><b style="font-size:84px">True</b></div>
+    <div class="box out step s3"><i style="width:190px">输出</i><b style="font-size:76px;line-height:1.5">周末</b></div>
+  </div>
+</section>
+
+<!-- predict: or table -->
+<section class="slide" aria-label="猜一猜 or 的四种组合" data-steps="5" data-at="5">
+  <h2 class="t">猜一猜：or 的四种组合</h2>
+  <div class="sheet3" style="top:190px">
+    <div><code>True or True</code><span class="step s2" style="font:800 60px var(--code);color:var(--olive)">True</span></div>
+    <div><code>True or False</code><span class="step s3" style="font:800 60px var(--code);color:var(--olive)">True</span></div>
+    <div><code>False or True</code><span class="step s4" style="font:800 60px var(--code);color:var(--olive)">True</span></div>
+    <div><code>False or False</code><span class="step s5" style="font:800 60px var(--code)">False</span></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:790px">第一行最容易猜错：两个都成立，算不算？</p>
+  <p class="abs say step s5" style="left:96px;top:790px;width:1728px">or 像并排的两条路，有一条通就能到。两条都通，当然也能到。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: or -->
+<section class="slide" aria-label="小测：or">
+  <h2 class="t r">小测：x 是 5，这一行输出什么？</h2>
+  <div class="editor r d1" style="left:96px;top:215px;width:1040px;--fs:50px"><div class="tab">输入 5</div>
+<pre class="code"><span class="ln"><span class="f">print</span>(x &gt; <span class="m">8</span> <span class="k">or</span> x &lt; <span class="m">6</span>)</span></pre></div>
+  <div class="quiz r d2" style="top:440px" data-right="0">
+    <button type="button" data-fb="答对了！x &gt; 8 不成立，但 x &lt; 6 成立。or 有一边成立就够了。"><i>1</i>True</button>
+    <button type="button" data-fb="如果这里写的是 and，才会是 False。这里是 or。"><i>2</i>False</button>
+    <button type="button" data-fb="比较和 or 的结果是真或假，不会输出 x 的值。"><i>3</i>5</button>
+    <button type="button" data-fb="这一行可以运行，or 的两边都写完整了。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" style="top:790px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="电影票半价">
+  <div class="band r"><b>动手<br>改一改</b><span>两种人都半价。这时候该用 and 还是 or？</span></div>
+  <div class="turn">
+    <h2 class="r d1">电影票半价</h2>
+    <p class="say r d1">读入年龄（0 到 120 的整数）。不满 12 岁或者满 60 岁输出半价，其他人输出全价。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 60，输出</small><pre>半价</pre></div><div><small>输入 12，输出</small><pre>全价</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_half_price.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/05_half_price.py" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- not -->
+<section class="slide" aria-label="not 的写法" data-steps="3" data-at="3" data-chapter="not">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">not：把真假翻过来</h2>
+  <div class="editor" style="left:96px;top:210px;width:1040px;--fs:44px"><div class="tab">ticket.py</div>
+<pre class="code" data-file="solutions/06_ticket.py"><span class="ln">age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">is_child = age &lt; <span class="m">12</span></span><span class="ln l2"><span class="k">if</span> <span class="k">not</span> is_child:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"成人票"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"儿童票"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:770px;width:1040px;color:var(--paper)">比较的结果也能放进盒子。输入 20，20 &lt; 12 是 False。</p>
+  <p class="abs say only2" style="left:96px;top:770px;width:1040px;color:var(--paper)">not 像把牌子翻个面，False 翻过来是 True。</p>
+  <p class="abs say only3" style="left:96px;top:770px;width:1040px;color:var(--paper)">条件成立，输出成人票。</p>
+  <a class="ide step s3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px;font-size:38px">is_child</i><b style="font-size:84px">False</b></div>
+    <div class="box step s2"><i style="width:190px">not</i><b style="font-size:84px">True</b></div>
+    <div class="box out step s3"><i style="width:190px">输出</i><b style="font-size:76px;line-height:1.5">成人票</b></div>
+  </div>
+</section>
+
+<!-- quiz: not -->
+<section class="slide" aria-label="小测：not">
+  <h2 class="t r">小测：print(not 3 &gt; 2) 输出什么？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="3 &gt; 2 是 True 没错，可是前面还有 not，要再翻一次。"><i>1</i>True</button>
+    <button type="button" data-fb="答对了！先算 3 &gt; 2 得到 True，not 再把它翻成 False。"><i>2</i>False</button>
+    <button type="button" data-fb="not 翻的是真假，结果不是数字。"><i>3</i>3</button>
+    <button type="button" data-fb="这一行可以运行，not 写在条件的前面。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- switches -->
+<section class="slide" aria-label="拨一拨">
+  <div class="band r"><b>动手<br>拨一拨</b><span>点 True 或 False 就能切换。先猜右边会变成什么，再点。</span></div>
+  <div class="turn">
+    <h2 class="r d1">三个词，全试一遍</h2>
+    <div class="r d2" style="margin-top:40px">
+      <div class="gate" data-op="and"><button type="button">True</button><code>and</code><button type="button">False</button><em>→</em><b>False</b></div>
+      <div class="gate" data-op="or"><button type="button">True</button><code>or</code><button type="button">False</button><em>→</em><b>True</b></div>
+      <div class="gate" data-op="not"><span></span><code>not</code><button type="button">True</button><em>→</em><b>False</b></div>
+    </div>
+    <p class="say r d3">数一数：and 这一行，几种拨法能得到 True？or 这一行呢？</p>
+  </div>
+</section>
+
+<!-- predict: order -->
+<section class="slide dark" aria-label="猜一猜：混着用" data-steps="2" data-at="2" data-chapter="括号">
+  <h2 class="t">猜一猜：周末且满 8 岁才能进</h2>
+  <div class="editor" style="left:96px;top:220px;width:1120px;--fs:44px"><div class="tab">no_brackets.py</div>
+<pre class="code" data-file="solutions/07_no_brackets.py"><span class="ln">day = <span class="m">6</span></span><span class="ln">age = <span class="m">5</span></span><span class="ln"><span class="k">if</span> day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span> <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以进"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不能进"</span>)</span></pre></div>
+  <p class="abs only1" style="left:1360px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <div class="slip tilt step s2" style="left:1290px;top:260px"><small>屏幕上</small><pre>可以进</pre></div>
+  <p class="abs say only1" style="left:96px;top:800px">今天星期六，小朋友 5 岁。按规定进不去，程序会怎么说？</p>
+  <p class="abs say step s2" style="left:96px;top:800px;width:1728px">5 岁竟然进去了。因为 and 比 or 先算：程序先算 day == 7 and age &gt;= 8，<br>再和 day == 6 用 or 连起来。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- brackets -->
+<section class="slide" aria-label="加上括号">
+  <h2 class="t r">加上括号，先算里面的</h2>
+  <div class="editor r d1" style="left:96px;top:215px;width:1160px;--fs:44px"><div class="tab">brackets.py</div>
+<pre class="code" data-file="solutions/08_brackets.py"><span class="ln">day = <span class="m">6</span></span><span class="ln">age = <span class="m">5</span></span><span class="ln"><span class="k">if</span> (day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span>) <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以进"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不能进"</span>)</span></pre></div>
+  <div class="slip tilt r d2" style="left:1340px;top:260px"><small>屏幕上</small><pre>不能进</pre></div>
+  <p class="abs say r d3" style="left:96px;top:790px;width:1728px">三个词的先后是 not、and、or。不用背：混着用的时候加上括号，<br>写的人和读的人都看得清。</p>
+  <a class="ide r d3" data-code-file="starter/08_brackets.py" style="left:1340px;top:520px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1"><code>x &gt; 1 and &lt; 5</code><b>SyntaxError</b><span>两边都要写完整</span></div>
+    <div class="r d2"><code>x &gt; 1 And x &lt; 5</code><b>SyntaxError</b><span>and 全部小写</span></div>
+    <div class="r d3"><code>x &gt; 1 &amp;&amp; x &lt; 5</code><b>SyntaxError</b><span>Python 写 and</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">上面三种会报错，还算好找。下一页这种不报错，更要小心。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：怎么都中奖">
+  <h2 class="t r">找错：怎么都中奖？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="2" data-yes="找到了！or 的两边都要写完整：n == 1 or n == 2。只写一个 2，Python 不会拿它和 n 比，而是把它当成成立。" data-no="这一行没问题。想一想：n 是 5，为什么条件成立了？"><span class="ln">n = <span class="m">5</span></span><span class="ln"><span class="k">if</span> n == <span class="m">1</span> <span class="k">or</span> <span class="m">2</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"中奖了"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"没中"</span>)</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">抽到 1 号或 2 号才中奖。n 是 5，程序却输出中奖了，也没有报错。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="top:760px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="闰年" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">闰年</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1040px">读入年份（1 到 9999 的整数），输出闰年或平年。<br>能被 4 整除但不能被 100 整除的是闰年；能被 400 整除的也是闰年；其余是平年。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:560px"><small>输入 2024，输出</small><pre>闰年</pre><small style="margin-top:26px">输入 1900，输出</small><pre>平年</pre></div>
+  <a class="ide r d3" data-code-file="starter/09_leap.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>闰年有两种情况，用哪个词把这两种情况连起来？</span></p>
+    <p class="step s2"><i>提示 2</i><span>能被 4 整除，可以写成 year % 4 == 0。不能被 100 整除呢？</span></p>
+    <p class="step s3"><i>提示 3</i><span>试试这四年：2024 闰年，2023 平年，1900 平年，2000 闰年。结果不对时，先看括号。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个门卫程序" data-chapter="小项目">
+  <h2 class="t r">造一个门卫程序</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">程序问你几个问题，再决定放不放你过去。守什么门，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>读入两个回答，用 and 或 or 决定能不能通过。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>魔法学校入学、太空船登机、秘密基地，什么门都行。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>混用 and、or、not，记得加括号，再用 elif 分出三种结果。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/10_gatekeeper.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>试着闯关</b><span>运行同桌的门卫，想办法让它放你过去</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪一关最有意思</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>有没有不该放行却放行了的回答？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，把门卫的漏洞补上。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>and 和 or 有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　and 要都成立，or 有一个成立就行。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>x &gt;= 60 and x &lt; 90 含 90 吗？<em class="step s3" style="font-style:normal;font-weight:400">　不含，90 &lt; 90 不成立。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>and 和 or 混着用，怎么写才清楚？<em class="step s4" style="font-style:normal;font-weight:400">　加括号。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1"><code>a and b</code><span>两个都成立才是 True</span></div>
+    <div class="r d1"><code>a or b</code><span>有一个成立就是 True</span></div>
+    <div class="r d2"><code>not a</code><span>把真假翻过来</span></div>
+    <div class="r d2"><code>x &gt;= 1 and x &lt; 9</code><span>范围：两边都写完整</span></div>
+    <div class="r d3"><code>(a or b) and c</code><span>括号里的先算</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>60 &lt;= x &lt; 90</code><span>Python 里范围还有更短的写法</span></div>
+    <div class="r d2"><code>if 里面的 if</code><span>一条路里再分几条路</span></div>
+    <div class="r d3"><code>for</code><span>让程序重复做事</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天程序学会了同时看好几个条件。下节课让它学会重复。</p>
+  <div class="foot"></div>
+</section>

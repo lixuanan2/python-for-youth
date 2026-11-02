@@ -1,0 +1,232 @@
+[
+  {
+    "source": "solutions/01_ride.py",
+    "input": "tests/case-01.in",
+    "expected": "tests/case-01.out"
+  },
+  {
+    "source": "solutions/01_ride.py",
+    "input": "tests/case-02.in",
+    "expected": "tests/case-02.out"
+  },
+  {
+    "source": "solutions/01_ride.py",
+    "input": "tests/case-03.in",
+    "expected": "tests/case-03.out"
+  },
+  {
+    "source": "solutions/01_ride.py",
+    "input": "tests/case-04.in",
+    "expected": "tests/case-04.out"
+  },
+  {
+    "source": "solutions/01_ride.py",
+    "input": "tests/case-05.in",
+    "expected": "tests/case-05.out"
+  },
+  {
+    "source": "solutions/01_ride.py",
+    "input": "tests/case-06.in",
+    "expected": "tests/case-06.out"
+  },
+  {
+    "source": "solutions/02_range.py",
+    "input": "tests/case-07.in",
+    "expected": "tests/case-07.out"
+  },
+  {
+    "source": "solutions/02_range.py",
+    "input": "tests/case-08.in",
+    "expected": "tests/case-08.out"
+  },
+  {
+    "source": "solutions/02_range.py",
+    "input": "tests/case-09.in",
+    "expected": "tests/case-09.out"
+  },
+  {
+    "source": "solutions/02_range.py",
+    "input": "tests/case-10.in",
+    "expected": "tests/case-10.out"
+  },
+  {
+    "source": "solutions/02_range.py",
+    "input": "tests/case-11.in",
+    "expected": "tests/case-11.out"
+  },
+  {
+    "source": "solutions/02_range.py",
+    "input": "tests/case-12.in",
+    "expected": "tests/case-12.out"
+  },
+  {
+    "source": "solutions/03_two_digit.py",
+    "input": "tests/case-13.in",
+    "expected": "tests/case-13.out"
+  },
+  {
+    "source": "solutions/03_two_digit.py",
+    "input": "tests/case-14.in",
+    "expected": "tests/case-14.out"
+  },
+  {
+    "source": "solutions/03_two_digit.py",
+    "input": "tests/case-15.in",
+    "expected": "tests/case-15.out"
+  },
+  {
+    "source": "solutions/03_two_digit.py",
+    "input": "tests/case-16.in",
+    "expected": "tests/case-16.out"
+  },
+  {
+    "source": "solutions/03_two_digit.py",
+    "input": "tests/case-17.in",
+    "expected": "tests/case-17.out"
+  },
+  {
+    "source": "solutions/03_two_digit.py",
+    "input": "tests/case-18.in",
+    "expected": "tests/case-18.out"
+  },
+  {
+    "source": "solutions/04_weekend.py",
+    "input": "tests/case-19.in",
+    "expected": "tests/case-19.out"
+  },
+  {
+    "source": "solutions/04_weekend.py",
+    "input": "tests/case-20.in",
+    "expected": "tests/case-20.out"
+  },
+  {
+    "source": "solutions/04_weekend.py",
+    "input": "tests/case-21.in",
+    "expected": "tests/case-21.out"
+  },
+  {
+    "source": "solutions/04_weekend.py",
+    "input": "tests/case-22.in",
+    "expected": "tests/case-22.out"
+  },
+  {
+    "source": "solutions/05_half_price.py",
+    "input": "tests/case-23.in",
+    "expected": "tests/case-23.out"
+  },
+  {
+    "source": "solutions/05_half_price.py",
+    "input": "tests/case-24.in",
+    "expected": "tests/case-24.out"
+  },
+  {
+    "source": "solutions/05_half_price.py",
+    "input": "tests/case-25.in",
+    "expected": "tests/case-25.out"
+  },
+  {
+    "source": "solutions/05_half_price.py",
+    "input": "tests/case-26.in",
+    "expected": "tests/case-26.out"
+  },
+  {
+    "source": "solutions/05_half_price.py",
+    "input": "tests/case-27.in",
+    "expected": "tests/case-27.out"
+  },
+  {
+    "source": "solutions/05_half_price.py",
+    "input": "tests/case-28.in",
+    "expected": "tests/case-28.out"
+  },
+  {
+    "source": "solutions/06_ticket.py",
+    "input": "tests/case-29.in",
+    "expected": "tests/case-29.out"
+  },
+  {
+    "source": "solutions/06_ticket.py",
+    "input": "tests/case-30.in",
+    "expected": "tests/case-30.out"
+  },
+  {
+    "source": "solutions/06_ticket.py",
+    "input": "tests/case-31.in",
+    "expected": "tests/case-31.out"
+  },
+  {
+    "source": "solutions/07_no_brackets.py",
+    "input": "tests/case-32.in",
+    "expected": "tests/case-32.out"
+  },
+  {
+    "source": "solutions/08_brackets.py",
+    "input": "tests/case-33.in",
+    "expected": "tests/case-33.out"
+  },
+  {
+    "source": "solutions/09_leap.py",
+    "input": "tests/case-34.in",
+    "expected": "tests/case-34.out"
+  },
+  {
+    "source": "solutions/09_leap.py",
+    "input": "tests/case-35.in",
+    "expected": "tests/case-35.out"
+  },
+  {
+    "source": "solutions/09_leap.py",
+    "input": "tests/case-36.in",
+    "expected": "tests/case-36.out"
+  },
+  {
+    "source": "solutions/09_leap.py",
+    "input": "tests/case-37.in",
+    "expected": "tests/case-37.out"
+  },
+  {
+    "source": "solutions/09_leap.py",
+    "input": "tests/case-38.in",
+    "expected": "tests/case-38.out"
+  },
+  {
+    "source": "solutions/09_leap.py",
+    "input": "tests/case-39.in",
+    "expected": "tests/case-39.out"
+  },
+  {
+    "source": "solutions/09_leap.py",
+    "input": "tests/case-40.in",
+    "expected": "tests/case-40.out"
+  },
+  {
+    "source": "solutions/09_leap.py",
+    "input": "tests/case-41.in",
+    "expected": "tests/case-41.out"
+  },
+  {
+    "source": "solutions/09_leap.py",
+    "input": "tests/case-42.in",
+    "expected": "tests/case-42.out"
+  },
+  {
+    "source": "solutions/10_gatekeeper_example.py",
+    "input": "tests/case-43.in",
+    "expected": "tests/case-43.out"
+  },
+  {
+    "source": "solutions/10_gatekeeper_example.py",
+    "input": "tests/case-44.in",
+    "expected": "tests/case-44.out"
+  },
+  {
+    "source": "solutions/10_gatekeeper_example.py",
+    "input": "tests/case-45.in",
+    "expected": "tests/case-45.out"
+  },
+  {
+    "source": "solutions/10_gatekeeper_example.py",
+    "input": "tests/case-46.in",
+    "expected": "tests/case-46.out"
+  }
+]

@@ -28,7 +28,10 @@
     "stage": "判断"
   },
   {
+    "id": "05-logic",
+    "tag": "LESSON 05",
     "title": "逻辑运算",
+    "file": "lesson_05.py",
     "stage": "判断"
   },
   {
