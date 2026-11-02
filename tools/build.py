@@ -62,6 +62,12 @@ def number_slides(slides):
 HOME_LINK = '<a class="go-next r d3" href="../index.html">回到课程首页</a>'
 
 
+def thanks_link(link):
+    icon = read(f'template/icons/{link["icon"]}.svg').strip()
+    return (f'<a class="gh-link" href="{html.escape(link["url"], quote=True)}" target="_blank" rel="noopener noreferrer">'
+            f'{icon}{html.escape(link["label"])}</a>')
+
+
 def thanks_slide(lesson):
     """Every deck ends with the same short thank-you, the course links and the way onward."""
     items = course()
@@ -73,10 +79,7 @@ def thanks_slide(lesson):
     else:
         onward = HOME_LINK + f'<p class="abs say r d3 next-note">下一课“{html.escape(following["title"])}”还在准备中</p>'
     thanks = site()['thanks']
-    links = ''.join(
-        f'<a class="gh-link" href="{html.escape(link["url"], quote=True)}" target="_blank" rel="noopener noreferrer">'
-        f'{read(f"template/icons/{link["icon"]}.svg").strip()}{html.escape(link["label"])}</a>'
-        for link in thanks['links'])
+    links = ''.join(thanks_link(link) for link in thanks['links'])
     return f'''
 <!-- generated for every lesson by tools/build.py -->
 <section class="slide dark thanks" aria-label="谢谢">
