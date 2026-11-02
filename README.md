@@ -33,7 +33,7 @@
 
 在 Claude Code 里说“做下一课：if 判断”，会走 [python-lesson](.claude/skills/python-lesson/SKILL.md) 流程。用别的 AI 时，把 [PROMPT.md](PROMPT.md) 发过去。
 
-手动改课后，在仓库根目录运行：
+一节课页面太多时分成上下集，规则见 [PROMPT.md](PROMPT.md)。手动改课后，在仓库根目录运行：
 
 ```sh
 python3 tools/build.py
@@ -51,6 +51,7 @@ template/   所有课共用的外壳、样式和脚本
 tools/      构建和检查
 dist/       生成结果，复制它去上课
 vendor/     字体和舞台样式，含许可
+site.json   网站名称、语言和 IDE 平台
 PROMPT.md   做课提示词和教学要求
 AGENTS.md   项目规则
 ```

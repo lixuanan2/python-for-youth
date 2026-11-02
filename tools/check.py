@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """Check code, answers, claims and offline rules for every lesson. Standard library only."""
 import ast
+import hashlib
 from html.parser import HTMLParser
 import importlib.util
 import json
+import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,8 +21,31 @@ spec.loader.exec_module(builder)
 HIDDEN_ROLES = ['学生小改写', '独立迁移']  # Students write these, so the answers must stay out of dist/.
 
 
+LANGUAGE = builder.site()['language']
+SUFFIX = {'python': '.py', 'cpp': '.cpp'}[LANGUAGE]
+WORK = tempfile.TemporaryDirectory(prefix='lesson-check-')
+BUILT = {}
+
+
+def compile_cpp(source):
+    """Compile C++11 once per program; a failed compile comes back as the result."""
+    if source in BUILT:
+        return BUILT[source]
+    compiler = os.environ.get('CXX') or shutil.which('clang++') or shutil.which('g++')
+    assert compiler, 'No C++ compiler found'
+    exe = Path(WORK.name) / (hashlib.sha256(source.encode()).hexdigest()[:16] + ('.exe' if os.name == 'nt' else ''))
+    BUILT[source] = exe, subprocess.run([compiler, '-std=c++11', '-Wall', '-Wextra', '-pedantic', '-x', 'c++', '-', '-o', str(exe)],
+                                        input=source.encode(), capture_output=True, timeout=60)
+    return BUILT[source]
+
+
 def run(source, stdin):
-    return subprocess.run([sys.executable, '-I', '-X', 'utf8', '-c', source], input=stdin.encode(), capture_output=True, timeout=5)
+    if LANGUAGE == 'python':
+        return subprocess.run([sys.executable, '-I', '-X', 'utf8', '-c', source], input=stdin.encode(), capture_output=True, timeout=5)
+    exe, built = compile_cpp(source)
+    if built.returncode:
+        return built
+    return subprocess.run([str(exe)], input=stdin.encode(), capture_output=True, timeout=5)
 
 
 class Deck(HTMLParser):
@@ -51,11 +78,15 @@ class Deck(HTMLParser):
 
 
 def check_programs(folder):
-    scripts = sorted(folder.glob('starter/*.py')) + sorted(folder.glob('solutions/*.py'))
+    scripts = sorted(folder.glob(f'starter/*{SUFFIX}')) + sorted(folder.glob(f'solutions/*{SUFFIX}'))
     for script in scripts:
         code = script.read_text(encoding='utf-8')
         assert '\t' not in code, f'Tab indentation: {script}'
-        ast.parse(code, filename=str(script))
+        if LANGUAGE == 'python':
+            ast.parse(code, filename=str(script))
+        else:
+            built = compile_cpp(code)[1]
+            assert built.returncode == 0 and not built.stderr, f'{script}: {built.stderr.decode()}'
     cases = json.loads((folder / 'tests/contracts.json').read_text(encoding='utf-8'))
     covered = set()
     for case in cases:
@@ -64,7 +95,7 @@ def check_programs(folder):
         assert result.returncode == 0, (case, result.stderr)
         assert result.stdout.decode().replace('\r\n', '\n') == (folder / case['expected']).read_text(encoding='utf-8'), f'Output mismatch: {case}'
         covered.add(case['source'])
-    solutions = {p.relative_to(folder).as_posix() for p in folder.glob('solutions/*.py')}
+    solutions = {p.relative_to(folder).as_posix() for p in folder.glob(f'solutions/*{SUFFIX}')}
     assert covered == solutions, f'Solutions without tests: {solutions - covered}'
     return len(scripts), len(cases)
 
@@ -119,7 +150,7 @@ def check_dist():
 
 def check_docs():
     for doc in ROOT.rglob('*.md'):
-        if {'.git', 'dist', 'node_modules', '.preview'} & set(doc.parts):
+        if {'.git', 'dist', 'node_modules', '.preview'} & set(doc.relative_to(ROOT).parts):
             continue
         for link in re.findall(r'\]\(([^)#]+)(?:#[^)]*)?\)', doc.read_text(encoding='utf-8')):
             if not link.startswith(('http:', 'https:')):

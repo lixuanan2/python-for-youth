@@ -1,18 +1,19 @@
-/* === IDE LINKS: one place to change the platform or its defaults === */
+/* === IDE LINKS: the platform and its options come from site.json === */
 const IDE = {
-  base: 'https://jupyterlite.github.io/demo/repl/index.html',
-  defaults: {theme: 'JupyterLab Dark', layout: 'left', run: '0'},
+  config: {{ide}},
+  defaults() {
+    return Object.fromEntries(this.config.settings.map(s => [s.param, s.options[0][0]]));
+  },
   load() {
-    try { return {...this.defaults, ...JSON.parse(localStorage.getItem('ide-settings') || '{}')}; }
-    catch { return {...this.defaults}; }
+    try { return {...this.defaults(), ...JSON.parse(localStorage.getItem('ide-settings') || '{}')}; }
+    catch { return this.defaults(); }
   },
   save(settings) {
     try { localStorage.setItem('ide-settings', JSON.stringify(settings)); } catch {}
   },
   url(code, settings) {
-    const q = {kernel: 'python', toolbar: '1', theme: settings.theme, promptCellPosition: settings.layout, showBanner: '0',
-      clearCellsOnExecute: '1', hideCodeInput: '1', clearCodeContentOnExecute: '0', execute: settings.run, code};
-    return this.base + '?' + Object.entries(q).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
+    const q = {...this.config.fixed, ...settings, [this.config.codeParam]: code};
+    return this.config.base + '?' + Object.entries(q).map(([k, v]) => k + '=' + encodeURIComponent(v)).join('&');
   }
 };
 
@@ -175,18 +176,25 @@ class SlidePresentation {
     const quick = document.getElementById('ide-quick');
     const onPage = slide.querySelector('a.ide');
     const code = this.codeOf(slide);
-    quick.href = onPage ? onPage.href : code ? IDE.url(code, IDE.load()) : IDE.url('# 在这里写代码\n', IDE.load());
+    quick.href = onPage ? onPage.href : code ? IDE.url(code, IDE.load()) : IDE.url(IDE.config.blank, IDE.load());
     quick.textContent = onPage || code ? '▶ 本页代码进 IDE' : '▶ 打开空白 IDE';
   }
   setupIde() {
-    const fields = {theme: 'ide-theme', layout: 'ide-layout', run: 'ide-run'};
     const settings = IDE.load();
-    for (const [key, id] of Object.entries(fields)) {
-      const el = document.getElementById(id);
-      el.value = settings[key];
-      el.onchange = () => { settings[key] = el.value; IDE.save(settings); this.linkIde(); };
+    const fields = document.getElementById('ide-fields');
+    for (const field of IDE.config.settings) {
+      const label = document.createElement('label');
+      const select = document.createElement('select');
+      label.append(field.label, select);
+      for (const [value, text] of field.options) select.add(new Option(text, value));
+      select.value = settings[field.param];
+      select.onchange = () => { settings[field.param] = select.value; IDE.save(settings); this.linkIde(); };
+      fields.append(label);
     }
-    document.getElementById('ide-open').onclick = () => this.settings.showModal();
+    document.getElementById('ide-name').textContent = IDE.config.name;
+    const button = document.getElementById('ide-open');
+    button.hidden = !IDE.config.settings.length;
+    button.onclick = () => this.settings.showModal();
     document.getElementById('ide-close').onclick = () => this.settings.close();
     this.linkIde();
   }
@@ -262,7 +270,7 @@ class SlidePresentation {
     const k = e.key;
     const actions = {
       f: () => this.fullscreen(),
-      i: () => this.settings.showModal(),
+      i: () => { if (IDE.config.settings.length) this.settings.showModal(); },
       t: () => document.getElementById('toggle-thumbs').click(),
       r: () => document.getElementById('ide-quick').click(),
       b: () => { this.blank.hidden = false; },

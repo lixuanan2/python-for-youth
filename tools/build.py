@@ -23,6 +23,10 @@ CHROME = [
 ]
 
 
+def site():
+    return json.loads((ROOT / 'site.json').read_text(encoding='utf-8'))
+
+
 def course():
     return json.loads((ROOT / 'course.json').read_text(encoding='utf-8'))
 
@@ -59,8 +63,9 @@ def render(lesson):
     css = '\n'.join([font_face(w) for w in (400, 700, 800)] + [read('vendor/viewport.css'), read('template/theme.css')])
     page = read('template/page.html')
     fields = dict(title=html.escape(lesson['title']), file=lesson['file'], css=css,
+                  site=html.escape(site()['title']),
                   slides=number_slides(read(f'lessons/{lesson["id"]}/slides.html')).rstrip(),
-                  script=read('template/deck.js').rstrip())
+                  script=read('template/deck.js').replace('{{ide}}', json.dumps(site()['ide'], ensure_ascii=False)).rstrip())
     for key, value in fields.items():
         page = page.replace('{{' + key + '}}', value)
     return page
@@ -70,18 +75,26 @@ def stop(number, item):
     if 'id' not in item:
         return f'<li class="stop" data-n="{number}">{html.escape(item["title"])}</li>'
     target = item['id']
-    return f'''<li class="ready"><div><h4>{html.escape(item["title"])}</h4><p>第 {number} 课，{read(f"lessons/{target}/slides.html").count("<section")} 页，含小测、动手题和小项目</p></div>
+    return f'''<li class="ready"><div><h4>{html.escape(item["title"])}</h4><p>{item.get("note") or f'第 {number} 课'}，{read(f"lessons/{target}/slides.html").count("<section")} 页，含小测、动手题和小项目</p></div>
 <nav aria-label="{html.escape(item["title"])}"><a href="{target}/index.html">放映课件</a><a href="{target}/slides.pdf" target="_blank" rel="noopener noreferrer">PDF</a><a href="{target}/starter/">起始程序</a></nav></li>'''
 
 
 def render_index(items):
     stages = {}
-    for number, item in enumerate(items, 1):
+    counted = [item for item in items if not item.get('sample')]
+    number = 0
+    for item in items:
+        number += not item.get('sample')
         stages.setdefault(item['stage'], []).append(stop(number, item))
     route = '\n'.join(f'  <section class="stage"><h3>{html.escape(name)}</h3><ol class="stops">{"".join(rows)}</ol></section>' for name, rows in stages.items())
+    info, hero = site(), site()['hero']
+    code = '\n'.join(f'<span class="g">{n}</span>{line}' for n, line in enumerate(hero['lines'], 1))
     page = read('template/index.html')
     fields = dict(fonts='\n'.join(font_face(w) for w in (400, 700, 800)), first=next(i['id'] for i in items if 'id' in i),
-                  total=str(len(items)), ready=str(sum('id' in i for i in items)), route=route)
+                  total=str(len(counted)), ready=str(sum('id' in i for i in counted)), route=route, site=html.escape(info['title']),
+                  heading='<br>'.join(html.escape(part) for part in info['title'].split(' ', 1)), lead=html.escape(info['lead']), start=html.escape(info['start']),
+                  hero_file=hero['file'], hero_code=code, hero_prompt=html.escape(hero['prompt']), hero_sample=html.escape(hero['sample']),
+                  hero_reply=html.escape(hero['reply']), footer=html.escape(info['footer']))
     for key, value in fields.items():
         page = page.replace('{{' + key + '}}', value)
     return page

@@ -1,0 +1,75 @@
+{
+  "title": "Python 青少年编程",
+  "language": "python",
+  "lead": "写给小学高年级和初中生的第一门编程课。从第一行代码开始，学会写能和人对话的程序。",
+  "start": "▶ 开始第一课",
+  "hero": {
+    "file": "hello.py",
+    "lines": [
+      "name = <span class=\"f\">input</span>()",
+      "<span class=\"f\">print</span>(<span class=\"s\">\"你好\"</span>, name)"
+    ],
+    "prompt": "程序在等你打字，写下你的名字",
+    "reply": "你好 ",
+    "sample": "小明"
+  },
+  "footer": "课件可以离线打开，“在 IDE 打开”按钮需要联网。上课时把整个 dist 文件夹复制到教室电脑。",
+  "ide": {
+    "name": "JupyterLite",
+    "base": "https://jupyterlite.github.io/demo/repl/index.html",
+    "codeParam": "code",
+    "blank": "# 在这里写代码\n",
+    "fixed": {
+      "kernel": "python",
+      "toolbar": "1",
+      "showBanner": "0",
+      "clearCellsOnExecute": "1",
+      "hideCodeInput": "1",
+      "clearCodeContentOnExecute": "0"
+    },
+    "settings": [
+      {
+        "param": "theme",
+        "label": "主题",
+        "options": [
+          [
+            "JupyterLab Dark",
+            "深色"
+          ],
+          [
+            "JupyterLab Light",
+            "浅色"
+          ]
+        ]
+      },
+      {
+        "param": "promptCellPosition",
+        "label": "布局",
+        "options": [
+          [
+            "left",
+            "代码在左，结果在右"
+          ],
+          [
+            "top",
+            "代码在上，结果在下"
+          ]
+        ]
+      },
+      {
+        "param": "execute",
+        "label": "打开后自动运行",
+        "options": [
+          [
+            "0",
+            "不运行，学生自己点"
+          ],
+          [
+            "1",
+            "立刻运行"
+          ]
+        ]
+      }
+    ]
+  }
+}

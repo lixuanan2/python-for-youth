@@ -63,27 +63,32 @@ const INTERACT = `(async () => {
     return lines[Number(c.dataset.bug) - 1].classList.contains('yes');
   });
   const before = links[0].href;
-  const theme = document.getElementById('ide-theme');
-  theme.value = 'JupyterLab Light'; theme.onchange();
-  const changed = links[0].href !== before;
-  theme.value = 'JupyterLab Dark'; theme.onchange();
+  const select = document.querySelector('#ide-fields select');
+  let changed = !select;
+  if (select) {
+    const first = select.value;
+    select.value = select.options[1].value; select.onchange();
+    changed = links[0].href !== before;
+    select.value = first; select.onchange();
+  }
   const shell = {};
   const show = i => document.querySelectorAll('.thumb')[i].click();
   shell.thumbs = document.querySelectorAll('.thumb').length === document.querySelectorAll('#deckStage .slide').length;
-  show(4);
-  shell.thumbJump = document.getElementById('counter').textContent.startsWith('5 /');
+  const codePage = [...stage.querySelectorAll('.slide')].findIndex(s => s.querySelector('pre.code .ln'));
+  show(codePage);
+  shell.thumbJump = document.getElementById('counter').textContent.startsWith((codePage + 1) + ' /');
   shell.thumbOn = document.querySelectorAll('.thumb.on').length === 1;
-  shell.ideHasPageCode = new URL(document.getElementById('ide-quick').href).searchParams.get('code').includes('Hello, Python!');
+  shell.ideHasPageCode = Boolean(new URL(document.getElementById('ide-quick').href).searchParams.get(IDE.config.codeParam).trim());
   const slider = document.getElementById('slider');
-  slider.value = 13; slider.dispatchEvent(new Event('input'));
-  shell.slider = document.getElementById('counter').textContent.startsWith('13 /');
-  shell.segOn = document.querySelectorAll('.seg.on').length === 1 && document.querySelectorAll('.seg.done').length === 12;
+  slider.value = 3; slider.dispatchEvent(new Event('input'));
+  shell.slider = document.getElementById('counter').textContent.startsWith('3 /');
+  shell.segOn = document.querySelectorAll('.seg.on').length === 1 && document.querySelectorAll('.seg.done').length === 2;
   const chips = [...document.querySelectorAll('#chips button')];
   chips.at(-1).click();
   shell.chip = chips.at(-1).classList.contains('on') && document.querySelector('#deckStage .slide.active').dataset.chapter === chips.at(-1).textContent;
   const jump = document.getElementById('jump');
-  jump.value = 9; jump.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', bubbles: true}));
-  shell.jump = document.getElementById('counter').textContent.startsWith('9 /');
+  jump.value = 2; jump.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter', bubbles: true}));
+  shell.jump = document.getElementById('counter').textContent.startsWith('2 /');
   const stageBox = () => document.getElementById('deckStage').getBoundingClientRect();
   const before2 = stageBox();
   document.body.classList.contains('thumbs-open') || document.getElementById('toggle-thumbs').click();
@@ -99,7 +104,7 @@ const INTERACT = `(async () => {
   return {
     shell,
     font: [400, 700, 800].every(w => document.fonts.check(w + ' 40px "JetBrains Mono"')),
-    badLinks: links.filter(a => !a.href.startsWith('https://') || a.target !== '_blank' || !new URL(a.href).searchParams.get('code')).length,
+    badLinks: links.filter(a => !a.href.startsWith('https://') || a.target !== '_blank' || !new URL(a.href).searchParams.get(IDE.config.codeParam)).length,
     links: links.length, quizzes, picks, changed
   };
 })()`;
@@ -139,11 +144,10 @@ try {
     await send('Page.navigate', {url: 'file://' + encodeURI(path.resolve('dist', 'index.html'))});
     await sleep(800);
     assert(await run('document.documentElement.scrollWidth <= innerWidth'), 'Home page scrolls sideways on a phone');
-    await send('Input.insertText', {text: ''});
-    assert.equal(await run(`(() => { const i = document.getElementById('name'); i.value = '小红'; i.oninput(); return document.getElementById('say').textContent; })()`), '你好 小红');
+    assert(await run(`(() => { const i = document.getElementById('name'); i.value = '小红'; i.oninput(); return document.getElementById('say').textContent.endsWith('小红'); })()`), 'Home program does not answer');
     const homeShot = await send('Page.captureScreenshot', {format: 'png', captureBeyondViewport: true});
     fs.writeFileSync(path.join('.preview', 'home-phone.png'), Buffer.from(homeShot.data, 'base64'));
-    await send('Page.navigate', {url: 'file://' + encodeURI(path.resolve('dist', lesson.id, 'index.html')) + '#page-5'});
+    await send('Page.navigate', {url: 'file://' + encodeURI(path.resolve('dist', lesson.id, 'index.html')) + '#page-2'});
     await sleep(800);
     const phone = await run(`(() => { const s = document.getElementById('deckStage').getBoundingClientRect(), b = document.getElementById('controls').getBoundingClientRect(); return {fits: s.left >= -1 && s.right <= innerWidth + 1 && s.bottom <= b.top + 1 && s.width > innerWidth - 2, wide: document.documentElement.scrollWidth <= innerWidth}; })()`);
     assert(phone.fits && phone.wide, 'Deck does not fit a phone');
