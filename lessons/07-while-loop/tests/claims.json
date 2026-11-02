@@ -1,0 +1,77 @@
+[
+  {
+    "page": 4,
+    "code": "i = 1\nif i <= 3:\n    print(i)\n    i = i + 1",
+    "stdout": "1\n"
+  },
+  {
+    "page": 4,
+    "code": "i = 1\nwhile i <= 3:\n    print(i)\n    i = i + 1",
+    "stdout": "1\n2\n3\n"
+  },
+  {
+    "page": 6,
+    "code": "i = 1\nwhile i <= 3:\n    i = i + 1\nprint(i)",
+    "stdout": "4\n"
+  },
+  {
+    "page": 7,
+    "code": "n = 3\nfor i in range(1, n + 1):\n    print(i)",
+    "stdout": "1\n2\n3\n"
+  },
+  {
+    "page": 10,
+    "code": "i = 1\nn = 0\nwhile i <= 3 and n < 5:\n    print(i)\n    n = n + 1",
+    "stdout": "1\n1\n1\n1\n1\n"
+  },
+  {
+    "page": 11,
+    "code": "i = 5\nn = 0\nwhile i > 0 and n < 100:\n    i = i - 1\n    n = n + 1\nprint(i > 0)",
+    "stdout": "False\n"
+  },
+  {
+    "page": 11,
+    "code": "i = 5\nn = 0\nwhile i > 0 and n < 100:\n    i = i - 2\n    n = n + 1\nprint(i > 0)",
+    "stdout": "False\n"
+  },
+  {
+    "page": 11,
+    "code": "i = 5\nn = 0\nwhile i > 0 and n < 100:\n    i = i + 1\n    n = n + 1\nprint(i > 0)",
+    "stdout": "True\n"
+  },
+  {
+    "page": 11,
+    "code": "i = 5\nn = 0\nwhile i > 0 and n < 100:\n    i = 0\n    n = n + 1\nprint(i > 0)",
+    "stdout": "False\n"
+  },
+  {
+    "page": 15,
+    "code": "i = 1\nwhile i <= 3\n    i = i + 1",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 15,
+    "code": "i = 1\nwhile i = 3:\n    i = i + 1",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 15,
+    "code": "while i <= 3:\n    i = i + 1",
+    "error": "NameError"
+  },
+  {
+    "page": 16,
+    "code": "i = 10\nwhile i < 0:\n    print(i)\n    i = i - 1\nprint(\"结束\")",
+    "stdout": "结束\n"
+  },
+  {
+    "page": 16,
+    "code": "i = 2\nwhile i > 0:\n    print(i)\n    i = i - 1\nprint(\"结束\")",
+    "stdout": "2\n1\n结束\n"
+  },
+  {
+    "page": 18,
+    "code": "print(123 // 10)\nprint(123 % 10)",
+    "stdout": "12\n3\n"
+  }
+]

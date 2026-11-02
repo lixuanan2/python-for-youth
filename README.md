@@ -33,6 +33,7 @@
 | [04](dist/04-conditions/index.html) | 条件判断 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [05](dist/05-logic/index.html) | 逻辑运算 | 28 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [06](dist/06-for-loop/index.html) | for 循环 | 27 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [07](dist/07-while-loop/index.html) | while 循环 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 

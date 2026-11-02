@@ -1,0 +1,314 @@
+<!-- cover -->
+<section class="slide" aria-label="while 循环" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 07</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">没好</b><div class="wire r d1"><i></i><span style="font-family:var(--code)">while</span></div><b class="r d2" style="font-size:250px">继续</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">while 循环：条件成立就一直做</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能写一个猜对才结束的小游戏。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="要猜几次">
+  <h2 class="t r">猜数字，要猜几次？</h2>
+  <div class="slip r d1" style="left:96px;top:280px;width:540px"><small style="font-size:34px">小明</small><pre style="font-size:72px">猜 1 次</pre></div>
+  <div class="slip r d2" style="left:690px;top:280px;width:540px"><small style="font-size:34px">小红</small><pre style="font-size:72px">猜 5 次</pre></div>
+  <div class="slip r d3" style="left:1284px;top:280px;width:540px"><small style="font-size:34px">小刚</small><pre style="font-size:72px">猜 12 次</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:610px">写程序的时候，你不知道别人要猜几次，range 里填几都不对。<br>这时要换一种说法：只要还没猜对，就继续。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- smallest while with trace -->
+<section class="slide" aria-label="while 的写法" data-steps="4" data-at="4" data-chapter="while">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">while：条件成立就继续</h2>
+  <div class="editor" style="left:96px;top:200px;width:1040px;--fs:44px"><div class="tab">count.py</div>
+<pre class="code" data-file="solutions/01_count.py"><span class="ln">i = <span class="m">1</span></span><span class="ln l1 l2 l3 l4"><span class="k">while</span> i &lt;= <span class="m">3</span>:</span><span class="ln l1 l2 l3">    <span class="f">print</span>(i)</span><span class="ln l1 l2 l3">    i = i + <span class="m">1</span></span></pre></div>
+  <p class="abs say only1" style="left:96px;top:625px;width:1040px;color:var(--paper)">1 &lt;= 3 成立，输出 1，i 变成 2。</p>
+  <p class="abs say only2" style="left:96px;top:625px;width:1040px;color:var(--paper)">回到 while 再问：2 &lt;= 3 成立，输出 2，i 变成 3。</p>
+  <p class="abs say only3" style="left:96px;top:625px;width:1040px;color:var(--paper)">再问：3 &lt;= 3 成立，输出 3，i 变成 4。</p>
+  <p class="abs say only4" style="left:96px;top:625px;width:1040px;color:var(--paper)">再问：4 &lt;= 3 不成立，循环结束。</p>
+  <p class="abs say" style="left:96px;top:720px;width:1040px;color:var(--paper)">while 是“当……的时候”。条件成立就运行缩进的行，<br>运行完回到 while 再问一次。这一行末尾也有冒号。</p>
+  <a class="ide step s4" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px;color:var(--clay)">1</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px;color:var(--clay)">2</b></div>
+    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:84px;color:var(--clay)">3</b></div>
+    <div class="box step s4"><i style="width:190px;white-space:nowrap">i = 4</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">结束</b></div>
+  </div>
+</section>
+
+<!-- predict: if vs while -->
+<section class="slide" aria-label="猜一猜：把 if 换成 while" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：把 if 换成 while</h2>
+  <div class="vs">
+    <div><h3>写 if</h3><pre style="font-size:56px">i = 1
+if i &lt;= 3:
+    print(i)
+    i = i + 1</pre><p class="res step s2" style="font-size:80px">1</p></div>
+    <div><h3>写 while</h3><pre style="font-size:56px">i = 1
+while i &lt;= 3:
+    print(i)
+    i = i + 1</pre><p class="res step s2" style="font-size:80px">1 2 3</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:800px">两段只差一个词。各输出几行？</p>
+  <p class="abs say step s2" style="left:96px;top:800px;width:1728px">if 只问一次，成立就做一遍。while 做完还会回来再问。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- three things -->
+<section class="slide" aria-label="写 while 要想好三件事">
+  <h2 class="t r">写 while 要想好三件事</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>开始值</b><span>i = 1<br>变量从哪里开始</span></div>
+    <div class="r d2"><i>2</i><b>继续条件</b><span>i &lt;= 3<br>什么时候还要继续</span></div>
+    <div class="r d3"><i>3</i><b>更新</b><span>i = i + 1<br>每一遍怎么往前走</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">这三件事 for 里的 range 帮你管着，用 while 就要自己写。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: value after the loop -->
+<section class="slide" aria-label="小测：结束后 i 是几">
+  <h2 class="t r">小测：最后一行输出几？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:44px"><div class="tab">输出几？</div>
+<pre class="code"><span class="ln">i = <span class="m">1</span></span><span class="ln"><span class="k">while</span> i &lt;= <span class="m">3</span>:</span><span class="ln">    i = i + <span class="m">1</span></span><span class="ln"><span class="f">print</span>(i)</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px" data-right="1">
+    <button type="button" data-fb="i 是 3 时条件还成立，还要再加一次。"><i>1</i>3</button>
+    <button type="button" data-fb="答对了！i 变成 4 时条件才不成立，循环这才停下，所以是 4。"><i>2</i>4</button>
+    <button type="button" data-fb="1 是开始值。循环里 i 一直在变。"><i>3</i>1</button>
+    <button type="button" data-fb="这段程序可以运行。print 没有缩进，循环结束后运行一次。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" style="top:690px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- for and while side by side -->
+<section class="slide" aria-label="for 和 while 对照" data-chapter="对照">
+  <h2 class="t r">同一件事，两种写法</h2>
+  <div class="vs" style="top:210px">
+    <div class="r d1"><h3>for：从 1 数到 n</h3><pre style="font-size:46px">n = int(input())
+for i in range(1, n + 1):
+    print(i)</pre></div>
+    <div class="r d2"><h3>while：从 1 数到 n</h3><pre style="font-size:46px">n = int(input())
+i = 1
+while i &lt;= n:
+    print(i)
+    i = i + 1</pre></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:680px;width:1728px">知道要重复几次，用 for 更短。<br>要等一件事发生才停，比如猜对、读到 0，用 while。</p>
+  <a class="ide r d3" data-code-file="starter/02_while_n.py" style="left:96px;top:860px">▶ 在 IDE 打开 while 版</a>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: which loop -->
+<section class="slide" aria-label="小测：用哪个">
+  <h2 class="t r">小测：一直读数，读到 0 才停，用哪个？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！不知道要读几次，只知道什么时候停，正适合 while。"><i>1</i>while</button>
+    <button type="button" data-fb="用 range 要先知道数的范围，这里不知道要读几次。"><i>2</i>for</button>
+    <button type="button" data-fb="if 只判断一次，读完一个数就过去了。"><i>3</i>if</button>
+    <button type="button" data-fb="print 只负责输出，不会重复。"><i>4</i>print</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="用 while 倒计时">
+  <div class="band r"><b>动手<br>改一改</b><span>三件事都要改：开始值、条件和更新。</span></div>
+  <div class="turn">
+    <h2 class="r d1">用 while 倒计时</h2>
+    <p class="say r d1">读入一个 1 到 100 的整数 n，从 n 倒数到 1，每个数占一行，最后输出发射！</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 2，输出</small><pre>2
+1
+发射！</pre></div><div><small>输入 1，输出</small><pre>1
+发射！</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/03_countdown.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/03_countdown.py" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- infinite loop: read only, and the quick IDE button carries the fixed program -->
+<section class="slide dark" aria-label="停不下来的循环" data-chapter="死循环">
+  <h2 class="t r">忘了更新，就停不下来</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:880px;--fs:50px"><div class="tab">只阅读，不要运行</div>
+<pre class="code" data-full="i = 1&#10;while i &lt;= 3:&#10;    print(i)&#10;    i = i + 1"><span class="ln">i = <span class="m">1</span></span><span class="ln"><span class="k">while</span> i &lt;= <span class="m">3</span>:</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
+  <div class="slip tilt r d2" style="left:1100px;top:200px;width:640px"><small>屏幕上，一直输出 1</small><pre>1
+1
+1
+……</pre></div>
+  <p class="abs say r d3" style="left:96px;top:640px;width:1728px">i 一直是 1，条件一直成立，程序就停不下来了。这叫<b>死循环</b>。</p>
+  <p class="abs say r d3" style="left:96px;top:750px;width:1728px">万一遇到了：在 IDLE 里按 Ctrl + C。在线 IDE 就刷新网页，代码要重新写。<br>运行之前，先看看循环里有没有更新变量。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: which one never stops -->
+<section class="slide" aria-label="小测：哪一句停不下来">
+  <h2 class="t r">小测：填哪一句，循环会停不下来？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:640px;--fs:44px"><div class="tab">空白处填一句</div>
+<pre class="code"><span class="ln">i = <span class="m">5</span></span><span class="ln"><span class="k">while</span> i &gt; <span class="m">0</span>:</span><span class="ln">    ……</span></pre></div>
+  <div class="quiz r d2" style="left:800px;top:220px" data-right="2">
+    <button type="button" data-fb="i 越来越小，变成 0 时条件不成立，能停下。"><i>1</i>i = i - 1</button>
+    <button type="button" data-fb="5、3、1、-1，一样能跳到 0 以下，能停下。"><i>2</i>i = i - 2</button>
+    <button type="button" data-fb="答对了！i 越来越大，离 0 越来越远，i &gt; 0 一直成立。有更新还不够，要往结束的方向走。"><i>3</i>i = i + 1</button>
+    <button type="button" data-fb="i 马上变成 0，条件不成立，一遍就停。"><i>4</i>i = 0</button>
+  </div>
+  <p class="fb" style="top:690px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: guess -->
+<section class="slide" aria-label="猜数字" data-steps="4" data-at="4" data-chapter="猜数字">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：猜对才结束</h2>
+  <div class="editor" style="left:96px;top:200px;width:1040px;--fs:44px"><div class="tab">guess.py</div>
+<pre class="code" data-file="solutions/04_guess.py"><span class="ln">secret = <span class="m">7</span></span><span class="ln l4">guess = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1 l2 l3"><span class="k">while</span> guess != secret:</span><span class="ln l1 l2">    <span class="f">print</span>(<span class="s">"不对，再猜"</span>)</span><span class="ln l1 l2 l4">    guess = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l3"><span class="f">print</span>(<span class="s">"猜对了"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:790px;width:1040px;color:var(--paper)">输入 3，3 != 7 成立，说不对，再读下一个。</p>
+  <p class="abs say only2" style="left:96px;top:790px;width:1040px;color:var(--paper)">输入 9，9 != 7 成立，说不对，再读下一个。</p>
+  <p class="abs say only3" style="left:96px;top:790px;width:1040px;color:var(--paper)">输入 7，7 != 7 不成立，循环结束，说猜对了。</p>
+  <p class="abs say only4" style="left:96px;top:790px;width:1040px;color:var(--paper)">input 写了两次：循环前读第一次，循环里读下一次。</p>
+  <a class="ide step s4" style="left:96px;top:880px">▶ 在 IDE 玩一玩</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:150px;white-space:nowrap">猜 3</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">不对</b></div>
+    <div class="box step s2"><i style="width:150px;white-space:nowrap">猜 9</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">不对</b></div>
+    <div class="box out step s3"><i style="width:150px;white-space:nowrap;font:400 44px var(--code)">猜 7</i><b style="font-size:64px;line-height:1.5">猜对了</b></div>
+  </div>
+</section>
+
+<!-- predict: first try -->
+<section class="slide dark" aria-label="猜一猜：第一次就猜中" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：第一次就输入 7</h2>
+  <div class="editor" style="left:96px;top:210px;width:880px;--fs:44px"><div class="tab">guess.py</div>
+<pre class="code" data-file="solutions/04_guess.py"><span class="ln">secret = <span class="m">7</span></span><span class="ln">guess = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">while</span> guess != secret:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不对，再猜"</span>)</span><span class="ln">    guess = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(<span class="s">"猜对了"</span>)</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <div class="slip tilt step s2" style="left:1100px;top:240px"><small>屏幕上，只有一行</small><pre>猜对了</pre></div>
+  <p class="abs say only1" style="left:96px;top:790px">“不对，再猜”会输出几次？</p>
+  <p class="abs say step s2" style="left:96px;top:790px;width:1728px">一次也没有。while 先判断，再运行。条件一开始就不成立，<br>循环一遍也不运行，直接走到后面。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="猜大猜小">
+  <div class="band r"><b>动手<br>改一改</b><span>while 里面也能放 if，缩进要跟上。</span></div>
+  <div class="turn">
+    <h2 class="r d1">提示大了还是小了</h2>
+    <p class="say r d1">答案还是 7。每行读入一个 1 到 100 的整数，猜大了输出大了，猜小了输出小了，猜中才结束。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">50
+3
+7</pre></div><div><small>输出</small><pre style="line-height:1.2">大了
+小了
+猜对了</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_guess_hint.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/05_guess_hint.py" style="left:610px;top:920px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1"><code>while i &lt;= 3</code><b>SyntaxError</b><span>末尾要加冒号</span></div>
+    <div class="r d2"><code>while i = 3:</code><b>SyntaxError</b><span>比较要写 ==</span></div>
+    <div class="r d3"><code class="plain">循环前忘了写 i = 1</code><b>NameError</b><span>先给开始值</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">要小心：忘了更新变量不报错，只是停不下来。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：一个数也没输出">
+  <h2 class="t r">找错：怎么一个数也没输出？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="2" data-yes="找到了！一开始 10 &lt; 0 就不成立，循环一遍也没运行。倒着数到 1，条件要写 i &gt; 0。" data-no="这一行没问题。想一想：i 是 10 的时候，能进循环吗？"><span class="ln">i = <span class="m">10</span></span><span class="ln"><span class="k">while</span> i &lt; <span class="m">0</span>:</span><span class="ln">    <span class="f">print</span>(i)</span><span class="ln">    i = i - <span class="m">1</span></span><span class="ln"><span class="f">print</span>(<span class="s">"结束"</span>)</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">想从 10 倒数到 1，程序却只输出结束，也没有报错。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="top:770px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="反着念数字" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">反着<br>念数字</h2>
+  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入 n（1 到 1000000 的整数），从个位开始，一位一位地输出，每位占一行。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入一行</small><pre>123</pre><small style="margin-top:26px">输出三行</small><pre>3
+2
+1</pre></div>
+  <a class="ide r d3" data-code-file="starter/06_reverse_digits.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>数有几位事先不知道，所以用 while。怎么取出个位？第 3 课学过。</span></p>
+    <p class="step s2"><i>提示 2</i><span>123 // 10 得到 12，个位就去掉了。把结果放回 n。</span></p>
+    <p class="step s3"><i>提示 3</i><span>n 变成多少时该停？试试输入 7 和 100。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个答对才结束的游戏" data-chapter="小项目">
+  <h2 class="t r">造一个答对才结束的游戏</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">程序一直问，答对了才放你走。题目你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>用 while 一直读回答，答对了才结束。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>猜数字、猜谜语、背口诀、密码锁，什么都行。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>给提示，再加一条规则：用 and 限制最多猜 5 次。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/07_game.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着闯关</b><span>玩同桌的游戏，看几次能答对</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪一句提示最有意思</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>答错的时候，程序怎样说才更好？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让游戏更好玩。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>while 和 if 有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　if 只问一次，while 反复问。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>写 while 要想好哪三件事？<em class="step s3" style="font-style:normal;font-weight:400">　开始值、继续条件、更新。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>什么时候用 while 更合适？<em class="step s4" style="font-style:normal;font-weight:400">　不知道要重复几次的时候。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1"><code>while 条件:</code><span>条件成立就运行缩进的行，再回来问</span></div>
+    <div class="r d1"><code>i = 1</code><span>循环前先给开始值</span></div>
+    <div class="r d2"><code>i = i + 1</code><span>循环里要更新，朝结束的方向走</span></div>
+    <div class="r d2"><code>guess != secret</code><span>不相等就继续，猜对才停</span></div>
+    <div class="r d3"><code>Ctrl + C</code><span>IDLE 里停下死循环</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>total = total + i</code><span>用循环把一串数加起来</span></div>
+    <div class="r d2"><code>i += 1</code><span>更新变量的简写</span></div>
+    <div class="r d3"><code>break</code><span>在循环中间提前跳出来</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天程序学会了等条件。下节课用循环把数加起来。</p>
+  <div class="foot"></div>
+</section>

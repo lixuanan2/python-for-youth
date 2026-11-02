@@ -42,7 +42,10 @@
     "stage": "循环"
   },
   {
+    "id": "07-while-loop",
+    "tag": "LESSON 07",
     "title": "while 循环",
+    "file": "lesson_07.py",
     "stage": "循环"
   },
   {

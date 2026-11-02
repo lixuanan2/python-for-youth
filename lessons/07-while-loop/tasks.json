@@ -1,0 +1,86 @@
+[
+  {
+    "id": "A",
+    "role": "基础例题",
+    "page": 3,
+    "starter": "starter/01_count.py",
+    "solution": "solutions/01_count.py",
+    "required": true,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "1\n2\n3\n",
+    "description": "看清开始值、继续条件和更新。"
+  },
+  {
+    "id": "01",
+    "role": "语法小演示",
+    "page": 7,
+    "starter": "starter/02_while_n.py",
+    "solution": "solutions/02_while_n.py",
+    "required": false,
+    "scope": "n为0到1000的整数",
+    "sample_input": "3\n",
+    "sample_output": "1\n2\n3\n",
+    "description": "用while重写1到n，与for对照。"
+  },
+  {
+    "id": "02",
+    "role": "学生小改写",
+    "page": 9,
+    "starter": "starter/03_countdown.py",
+    "solution": "solutions/03_countdown.py",
+    "required": true,
+    "scope": "n为1到100的整数",
+    "sample_input": "3\n",
+    "sample_output": "3\n2\n1\n发射！\n",
+    "description": "用while倒计时。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 12,
+    "starter": "starter/04_guess.py",
+    "solution": "solutions/04_guess.py",
+    "required": true,
+    "scope": "每行一个1到100的整数，最后一行是7",
+    "sample_input": "3\n9\n7\n",
+    "sample_output": "不对，再猜\n不对，再猜\n猜对了\n",
+    "description": "次数由输入决定的循环。"
+  },
+  {
+    "id": "03",
+    "role": "学生小改写",
+    "page": 14,
+    "starter": "starter/05_guess_hint.py",
+    "solution": "solutions/05_guess_hint.py",
+    "required": true,
+    "scope": "每行一个1到100的整数，最后一行是7",
+    "sample_input": "50\n3\n7\n",
+    "sample_output": "大了\n小了\n猜对了\n",
+    "description": "在循环里提示猜大猜小。"
+  },
+  {
+    "id": "04",
+    "role": "独立迁移",
+    "page": 17,
+    "starter": "starter/06_reverse_digits.py",
+    "solution": "solutions/06_reverse_digits.py",
+    "required": true,
+    "scope": "n为1到1000000的整数",
+    "sample_input": "123\n",
+    "sample_output": "3\n2\n1\n",
+    "description": "用取余和整除一位一位输出。"
+  },
+  {
+    "id": "05",
+    "role": "创作项目",
+    "page": 19,
+    "starter": "starter/07_game.py",
+    "solution": "solutions/07_game_example.py",
+    "required": false,
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "太阳\n月亮\n",
+    "sample_output": "再想想\n答对了\n",
+    "description": "写一个答对才结束的小游戏。"
+  }
+]
