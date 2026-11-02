@@ -2,6 +2,7 @@
 """Check code, answers, claims and offline rules for every lesson. Standard library only."""
 import ast
 import hashlib
+import html
 from html.parser import HTMLParser
 import importlib.util
 import json
@@ -59,7 +60,7 @@ class Deck(HTMLParser):
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if tag == 'pre' and 'data-file' in attrs:
-            self.file, self.lines = attrs['data-file'], []
+            self.file, self.lines, self.range = attrs['data-file'], [], attrs.get('data-lines')
         if self.file and tag == 'span' and 'ln' in (attrs.get('class') or '').split():
             self.lines.append('')
         if tag == 'a' and attrs.get('href'):
@@ -73,7 +74,7 @@ class Deck(HTMLParser):
 
     def handle_endtag(self, tag):
         if tag == 'pre' and self.file:
-            self.shown.append((self.file, '\n'.join(self.lines)))
+            self.shown.append((self.file, '\n'.join(self.lines), self.range))
             self.file = None
 
 
@@ -120,8 +121,12 @@ def check_deck(lesson, folder):
     assert not re.search(r'@import|https?://[^"\')\s]+\.(?:js|css)\b', text), 'Remote resource in deck'
     deck = Deck(text)
     assert deck.shown, 'Deck shows no tested program'
-    for file, code in deck.shown:
-        assert code.strip() == (folder / file).read_text(encoding='utf-8').strip(), f'Slide code differs from {file}'
+    for file, code, lines in deck.shown:
+        want = (folder / file).read_text(encoding='utf-8').strip()
+        if lines:
+            first, last = map(int, lines.split('-'))
+            want = '\n'.join(want.split('\n')[first - 1:last]).strip()
+        assert code.strip() == want, f'Slide code differs from {file}'
     pages = text.count('<section id="page-')
     tasks = json.loads((folder / 'tasks.json').read_text(encoding='utf-8'))
     for task in tasks:
@@ -129,7 +134,8 @@ def check_deck(lesson, folder):
         assert (folder / task['starter']).is_file() and (folder / task['solution']).is_file()
         if task['role'] in HIDDEN_ROLES:
             answer = (folder / task['solution']).read_text(encoding='utf-8').strip()
-            assert answer not in text, f'Answer shown on slides: {task["solution"]}'
+            escaped = html.escape(answer, quote=True).replace('\n', '&#10;')
+            assert answer not in text and escaped not in text, f'Answer shown on slides: {task["solution"]}'
     for link in deck.links:
         parts = urlsplit(link)
         if not parts.scheme and parts.path:

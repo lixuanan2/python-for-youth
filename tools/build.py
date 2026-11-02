@@ -59,12 +59,22 @@ def number_slides(slides):
     return re.sub(r'<section class="slide', mark, slides)
 
 
+def attach_code(slides, lesson):
+    """Fill IDE data from files: data-code-file for buttons, data-lines for excerpts of a longer program."""
+    def source(file):
+        text = read(f'lessons/{lesson["id"]}/{file}')
+        return html.escape(text, quote=True).replace('\n', '&#10;')
+
+    slides = re.sub(r'data-code-file="([^"]+)"', lambda m: f'data-code="{source(m.group(1))}"', slides)
+    return re.sub(r'data-file="([^"]+)"( data-lines="[^"]+")', lambda m: f'data-file="{m.group(1)}"{m.group(2)} data-full="{source(m.group(1))}"', slides)
+
+
 def render(lesson):
     css = '\n'.join([font_face(w) for w in (400, 700, 800)] + [read('vendor/viewport.css'), read('template/theme.css')])
     page = read('template/page.html')
     fields = dict(title=html.escape(lesson['title']), file=lesson['file'], css=css,
                   site=html.escape(site()['title']),
-                  slides=number_slides(read(f'lessons/{lesson["id"]}/slides.html')).rstrip(),
+                  slides=attach_code(number_slides(read(f'lessons/{lesson["id"]}/slides.html')), lesson).rstrip(),
                   script=read('template/deck.js').replace('{{ide}}', json.dumps(site()['ide'], ensure_ascii=False)).rstrip())
     for key, value in fields.items():
         page = page.replace('{{' + key + '}}', value)
