@@ -56,5 +56,11 @@
     "code": "a = input()\nb = int(input())\nprint(a + b)",
     "stdin": "3\n4\n",
     "error": "TypeError"
+  },
+  {
+    "page": 18,
+    "code": "print(input())",
+    "stdin": "3 4\n",
+    "stdout": "3 4\n"
   }
 ]

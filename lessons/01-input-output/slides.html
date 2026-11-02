@@ -8,14 +8,14 @@
 </section>
 
 <!-- three verbs -->
-<section class="slide clay" aria-label="程序只做三件事">
-  <h2 class="t r">程序只做三件事</h2>
+<section class="slide clay" aria-label="程序常见的三步">
+  <h2 class="t r">很多程序都是这三步</h2>
   <div class="verbs">
     <div class="r d1"><b>读入</b><code>input()</code></div><em class="r d1">→</em>
     <div class="r d2"><b>处理</b><code>int()&nbsp;&nbsp;+</code></div><em class="r d2">→</em>
     <div class="r d3"><b>输出</b><code>print()</code></div>
   </div>
-  <p class="abs say r d3" style="left:96px;right:96px;top:640px">计算器就是这样：你按下数字，它算一算，再把结果显示出来。<br>再大的程序，也离不开这三步。今天我们就学会<b>读入</b>和<b>输出</b>。</p>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">计算器就是这样：你按下数字，它算一算，再把结果显示出来。<br>今天我们先学会<b>读入</b>和<b>输出</b>。</p>
   <div class="foot"></div>
 </section>
 
@@ -148,9 +148,9 @@
 <section class="slide" aria-label="int 把文字变成整数" data-chapter="int">
   <h2 class="t r">int：把文字变成整数</h2>
   <div class="morph">
-    <div class="r d1"><div class="q">"3"</div><span>文字，只能拼</span></div>
+    <div class="r d1"><div class="q">"3"</div><span>文字：+ 是拼接</span></div>
     <code class="r d2">int()<br>⟶</code>
-    <div class="r d3"><div class="v">3</div><span>整数，可以算</span></div>
+    <div class="r d3"><div class="v">3</div><span>整数：+ 是加法</span></div>
   </div>
   <p class="abs say r d3" style="left:96px;top:690px">int 是 integer（整数）的前三个字母。<br>把 input() 放进 int() 里写成 <b>int(input())</b>：先读入文字，再变成整数。</p>
   <div class="foot"></div>
@@ -220,8 +220,9 @@
   <div class="ledger">
     <div class="r d1"><code>Print("hi")</code><b>NameError</b><span>print 全部小写</span></div>
     <div class="r d2"><code>print(“hi”)</code><b>SyntaxError</b><span>换成英文引号</span></div>
-    <div class="r d3"><code class="plain">一行输入 3 4</code><b>ValueError</b><span>每个数占一行</span></div>
+    <div class="r d3"><code class="plain">int() 读到 3 4</code><b>ValueError</b><span>一个 int() 只转换一个数</span></div>
   </div>
+  <p class="abs say r d3" style="left:96px;top:790px">只写 input() 读入 3 4 没问题，转不了的是 int()。</p>
   <div class="foot"></div>
 </section>
 
@@ -239,7 +240,7 @@
 <section class="slide clay" aria-label="明年几岁" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 180px/1.2 var(--text)">明年<br>几岁？</h2>
-  <p class="abs say r d2" style="left:96px;top:640px;width:900px">写一个程序：第一行读入名字，第二行读入今年的年龄，输出这个人明年几岁。</p>
+  <p class="abs say r d2" style="left:96px;top:640px;width:900px">写一个程序：第一行读入名字，第二行读入今年的年龄（整数），输出这个人明年几岁。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:190px;width:720px"><small>输入两行</small><pre>Ming
 10</pre><small style="margin-top:30px">输出一句话</small><pre style="font-size:50px">Ming 明年 11 岁</pre></div>
   <a class="ide r d3" data-code='# 第一行读入名字，第二行读入今年的年龄&#10;# 输出：Ming 明年 11 岁&#10;' style="left:96px;top:850px">▶ 在 IDE 开始写</a>
@@ -288,11 +289,11 @@
 <section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
-    <p class="step s2" style="font-weight:700"><i>Q1</i><span>input() 读进来的是什么？<em class="step s2" style="font-style:normal;font-weight:400">　是文字，哪怕你输入的是数字。</em></span></p>
-    <p class="step s3" style="font-weight:700"><i>Q2</i><span>什么时候要用 int()？<em style="font-style:normal;font-weight:400">　读入的数字要拿来计算的时候。</em></span></p>
-    <p class="step s4" style="font-weight:700"><i>Q3</i><span>不看代码，能写出两数求和吗？<em style="font-style:normal;font-weight:400">　合上课件试一试。</em></span></p>
+    <p style="font-weight:700"><i>Q1</i><span>input() 读进来的是什么？<em class="step s2" style="font-style:normal;font-weight:400">　是文字，哪怕你输入的是数字。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>什么时候要用 int()？<em class="step s3" style="font-style:normal;font-weight:400">　读入的数字要拿来计算的时候。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>不看代码，能写出两数求和吗？<em class="step s4" style="font-style:normal;font-weight:400">　合上课件试一试。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看。</p>
+  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 

@@ -53,4 +53,4 @@ C++ 课件在 `lixuanan2/cpp-teaching` 的 `HTML课件/` 文件夹，用同一�
 
 ## 旧资料
 
-上级旧仓库 `Python教学`（`lixuanan2/python-teaching`）存放旧的 18 个模块、PPT 和历史记录，只作内容参考，不搬进来。迁移旧模块时一次读一个，按 PROMPT.md 重写。
+上级旧仓库 `Python教学`（`lixuanan2/python-teaching`）存放旧的 18 个模块、PPT 和历史记录，只作内容参考，不搬进来。[docs/module-baseline.md](docs/module-baseline.md) 是 18 个模块的内容摘要，做课先读它，需要细节再读旧仓库对应的那一个模块，按 PROMPT.md 重写。
