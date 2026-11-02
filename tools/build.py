@@ -60,7 +60,7 @@ def number_slides(slides):
 
 
 def thanks_slide(lesson):
-    """Every deck ends the same way: its program finishes, with this lesson's own details."""
+    """Every deck ends with the same short thank-you, the teacher's link and the way onward."""
     items = course()
     following = items[items.index(lesson) + 1] if items.index(lesson) + 1 < len(items) else None
     if following is None:
@@ -69,17 +69,15 @@ def thanks_slide(lesson):
         onward = f'<a class="go-next r d3" href="../{following["id"]}/index.html">下一课：{html.escape(following["title"])}</a>'
     else:
         onward = f'<p class="abs say r d3" style="left:96px;top:872px">下一课“{html.escape(following["title"])}”还在准备中。</p>'
-    command = site()['thanks']['command'].format(file=lesson['file'], stem=lesson['file'].rsplit('.', 1)[0])
-    learned = '  '.join(html.escape(item) for item in lesson['learned'])
+    thanks = site()['thanks']
+    url = html.escape(thanks['url'], quote=True)
+    label = html.escape(thanks['url'].split('://', 1)[1])
     return f'''
 <!-- generated for every lesson by tools/build.py -->
 <section class="slide dark thanks" aria-label="谢谢">
-  <h2 class="abs r" style="left:96px;top:70px;font:800 150px/1.2 var(--text)">谢谢！</h2>
-  <div class="term r d1"><span class="dim">$ {html.escape(command)}</span>
-<span>谢谢你认真学完这一课</span>
-<span>今天解锁：<b>{learned}</b></span>
-<span class="dim">Process finished with exit code 0</span><i></i></div>
-  <p class="abs say r d2" style="left:96px;top:740px">exit code 0 表示程序顺利跑完了，今天的你也是。</p>
+  <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
+  <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">{html.escape(thanks['message'])}</p>
+  <a class="gh-link r d2" href="{url}" target="_blank" rel="noopener noreferrer">{label}</a>
   {onward}
 </section>
 '''

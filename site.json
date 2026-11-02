@@ -73,6 +73,7 @@
     ]
   },
   "thanks": {
-    "command": "python {file}"
+    "message": "喜欢这节课？来 GitHub 看看我的更多作品。",
+    "url": "https://github.com/lixuanan2"
   }
 }

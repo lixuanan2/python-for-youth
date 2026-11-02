@@ -17,7 +17,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 
 ## 2. 写程序和测试
 
-新建 `lessons/<编号-英文名>/`，复制上一节的结构，在 `course.json` 给这节课补上 `id`、`tag`、`file` 和 `learned`（谢谢页显示的本课语法，三四项）。分集时用 `05a-loops`、`05b-loops` 这样的文件夹，标题写“for 循环（上集）”，每集占一行。
+新建 `lessons/<编号-英文名>/`，复制上一节的结构，在 `course.json` 给这节课补上 `id`、`tag` 和 `file`。分集时用 `05a-loops`、`05b-loops` 这样的文件夹，标题写“for 循环（上集）”，每集占一行。
 
 - `solutions/`：答案，每个都要有测试。
 - `starter/`：起始程序。小改写放例题代码，挑战只放注释。

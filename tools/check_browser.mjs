@@ -114,7 +114,8 @@ const INTERACT = `(async () => {
   const rail = document.getElementById('thumbs').getBoundingClientRect(), barBox = document.getElementById('controls').getBoundingClientRect();
   shell.noOverlap = stageBox().left >= rail.right - 1 && stageBox().bottom <= barBox.top + 1;
   shell.coverStaysWide = document.querySelector('.thumb .cover-row b').getBoundingClientRect().height < 40;
-  shell.thanksLast = [...stage.querySelectorAll('.slide')].at(-1).classList.contains('thanks');
+  const lastPage = [...stage.querySelectorAll('.slide')].at(-1);
+  shell.thanksLast = lastPage.classList.contains('thanks') && lastPage.querySelector('.gh-link')?.href.startsWith('https://') && lastPage.querySelector('.gh-link').target === '_blank';
   shell.noLigatures = [document.body, ...stage.querySelectorAll('pre.code')].every(e => getComputedStyle(e).fontVariantLigatures === 'none');
   shell.ids = new Set([...document.querySelectorAll('[id]')].map(e => e.id)).size === document.querySelectorAll('[id]').length;
   return {
