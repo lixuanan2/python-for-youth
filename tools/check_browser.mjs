@@ -128,6 +128,13 @@ const INTERACT = `(async () => {
   const rail = document.getElementById('thumbs').getBoundingClientRect(), barBox = document.getElementById('controls').getBoundingClientRect();
   shell.noOverlap = stageBox().left >= rail.right - 1 && stageBox().bottom <= barBox.top + 1;
   shell.coverStaysWide = document.querySelector('.thumb .cover-row b').getBoundingClientRect().height < 40;
+  shell.thumbsHideAnswers = [...document.querySelectorAll('.thumb .slide[data-steps]')].every(s => s.dataset.at === '1');
+  const stepped = [...stage.querySelectorAll('.slide')].findIndex(s => s.dataset.steps);
+  show(stepped);
+  dispatchEvent(new Event('beforeprint'));
+  shell.printShowsAll = Boolean(stage.querySelector('.quiz .yes')) && stage.querySelector('.slide.active').dataset.at === stage.querySelector('.slide.active').dataset.steps;
+  dispatchEvent(new Event('afterprint'));
+  shell.printLeavesNoAnswers = !stage.querySelector('.quiz .yes') && stage.querySelector('.slide.active').dataset.at === '1';
   const lastPage = [...stage.querySelectorAll('.slide')].at(-1);
   shell.thanksLast = lastPage.classList.contains('thanks') && lastPage.querySelector('.gh-link')?.href.startsWith('https://') && lastPage.querySelector('.gh-link').target === '_blank' && Boolean(lastPage.querySelector('.go-next'));
   shell.noLigatures = [document.body, ...stage.querySelectorAll('pre.code')].every(e => getComputedStyle(e).fontVariantLigatures === 'none');

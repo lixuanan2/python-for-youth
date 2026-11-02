@@ -26,7 +26,7 @@
     <div class="r d1"><code>+  -</code><span>加法和减法，和数学一样</span></div>
     <div class="r d1"><code>*</code><span>乘法。键盘上没有 ×，用星号代替</span></div>
     <div class="r d2"><code>/</code><span>除法。键盘上没有 ÷，用斜杠代替</span></div>
-    <div class="r d2"><code>//</code><span>整除，只要商的整数部分</span></div>
+    <div class="r d2"><code>//</code><span>整除，算能分出几份完整的</span></div>
     <div class="r d3"><code>%</code><span>求余数，算完还剩多少</span></div>
   </div>
   <div class="foot"></div>
@@ -117,7 +117,7 @@
   <div class="band r"><b>动手<br>改一改</b><span>print 里用逗号隔开，就能把文字和数字放在一起。</span></div>
   <div class="turn">
     <h2 class="r d1">让程序说清楚</h2>
-    <p class="say r d1">分糖程序只输出两个数，别人看不懂。改成输出一句话。</p>
+    <p class="say r d1">分糖程序只输出两个数，别人看不懂。改成输出一句话。分两行读入：糖是 0 到 1000 颗，人数是 1 到 100。</p>
     <div class="sheet r d2"><small>输入 7 和 2，运行后要看到</small><pre>每人 3 颗，剩 1 颗</pre></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/03_candy_sentence.py</p>
   </div>
@@ -196,7 +196,7 @@
   <div class="band r"><b>动手<br>改一改</b><span>周长是长加宽，再乘 2。想想哪里要加括号。</span></div>
   <div class="turn">
     <h2 class="r d1">把面积改成周长</h2>
-    <p class="say r d1">地毯边上要贴边条，改一行程序，算出长方形的周长。</p>
+    <p class="say r d1">地毯边上要贴边条，改一行程序，算出长方形的周长。长和宽是 0.5 到 1000 的数，分两行读入。</p>
     <div class="sheet r d2"><small>输入 2.5 和 4，运行后要看到</small><pre>13.0</pre></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/06_perimeter.py</p>
   </div>
@@ -245,6 +245,16 @@
     <p class="step s2"><i>提示 2</i><span>公式里的 × 和 ÷，在 Python 里怎么写？</span></p>
     <p class="step s3"><i>提示 3</i><span>试试输入 100，答案应该是 212.0。</span></p>
   </div>
+  <div class="foot"></div>
+</section>
+
+<!-- optional challenge -->
+<section class="slide clay" aria-label="秒数换算">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 再挑战一题（选做）</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">秒数<br>换算</h2>
+  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入总秒数（0 到 100000 的整数），输出是几分几秒。写完用 59、60、61 各试一次。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入一行</small><pre>125</pre><small style="margin-top:26px">输出</small><pre>2 分 5 秒</pre></div>
+  <a class="ide r d3" data-code-file="starter/09_seconds.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <div class="foot"></div>
 </section>
 
@@ -304,7 +314,7 @@
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>2 ** 3</code><span>乘方，2 的 3 次方</span></div>
-    <div class="r d2"><code>round()</code><span>四舍五入，保留几位小数</span></div>
+    <div class="r d2"><code>round()</code><span>保留几位小数，规则和四舍五入不完全一样</span></div>
     <div class="r d3"><code>-7 // 2</code><span>负数的整除和余数</span></div>
   </div>
   <p class="abs say r d3" style="left:96px;top:700px">今天学会了算式，程序就能替你算账了。下节课让它学会做判断。</p>

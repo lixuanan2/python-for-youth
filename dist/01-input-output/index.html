@@ -599,7 +599,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="band r"><b>动手<br>改一改</b><span>照着前两行，再读入一个数。</span></div>
   <div class="turn">
     <h2 class="r d1">改成三个数求和</h2>
-    <p class="say r d1">再读入一个整数 c，输出三个数的和。</p>
+    <p class="say r d1">再读入一个整数 c，输出三个数的和。三个数都是 -1000 到 1000 的整数，各占一行。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 1、2、3，输出</small><pre style="font-size:100px;line-height:1.2">6</pre></div><div><small>再试 -5、2、0，输出</small><pre style="font-size:100px;line-height:1.2">-3</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/06_sum_three.py</p>
   </div>
@@ -615,7 +615,7 @@ dialog p{color:var(--muted);font-size:15px}
     <p class="say" style="margin-top:26px"><b>NameError</b> 表示 Python 不认识这个名字。</p>
     <p class="say" style="margin-top:26px"><b>Did you mean</b> 是它在猜：你是想写 print 吗？</p>
   </div>
-  <p class="abs say r d3" style="left:96px;top:760px">程序报错很正常，程序员每天都会遇到。<br>红字是 Python 在告诉你哪里要改，先看最后一行，再看行号。</p>
+  <p class="abs say r d3" style="left:96px;top:760px">程序报错很正常，程序员每天都会遇到。<br>红字是 Python 在告诉你哪里出了问题，先看最后一行，再看行号。</p>
   <div class="foot"></div>
 </section>
 
@@ -636,7 +636,7 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-19" class="slide dark" aria-label="找错游戏">
   <h2 class="t r">找错：哪一行有问题？</h2>
   <div class="editor r d1" style="left:96px;top:230px;width:1040px;--fs:58px"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="1" data-yes="找到了！第 1 行少了 int()，a 还是文字，文字和整数不能相加。" data-no="这一行没有问题，再看看 a 和 b 是不是同一种东西。"><span class="ln">a = <span class="f">input</span>()</span><span class="ln">b = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(a + b)</span></pre></div>
+<pre class="code pick" data-bug="1" data-yes="找到了！程序在第 3 行报错，原因却在第 1 行：少了 int()，a 还是文字。报错的行是程序卡住的地方，要改的地方可能在前面。" data-no="这一行没有问题，再看看 a 和 b 是不是同一种东西。"><span class="ln">a = <span class="f">input</span>()</span><span class="ln">b = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(a + b)</span></pre></div>
   <p class="abs say r d2" style="left:1220px;top:240px;right:96px">这段程序想算两数之和，运行时却报了 TypeError。<br>点你认为有问题的那一行。</p>
   <p class="fb" style="top:690px;color:var(--paper)" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
@@ -646,7 +646,7 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-20" class="slide clay" aria-label="明年几岁" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 180px/1.2 var(--text)">明年<br>几岁？</h2>
-  <p class="abs say r d2" style="left:96px;top:640px;width:900px">写一个程序：第一行读入名字，第二行读入今年的年龄（整数），输出这个人明年几岁。</p>
+  <p class="abs say r d2" style="left:96px;top:640px;width:1500px">写一个程序：第一行读入名字，第二行读入今年的年龄（0 到 150 的整数），输出这个人明年几岁。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:190px;width:720px"><small>输入两行</small><pre>Ming
 10</pre><small style="margin-top:30px">输出一句话</small><pre style="font-size:50px">Ming 明年 11 岁</pre></div>
   <a class="ide r d3" data-code='# 第一行读入名字，第二行读入今年的年龄&#10;# 输出：Ming 明年 11 岁&#10;' style="left:96px;top:850px">▶ 在 IDE 开始写</a>
@@ -696,7 +696,7 @@ dialog p{color:var(--muted);font-size:15px}
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p style="font-weight:700"><i>Q1</i><span>input() 读进来的是什么？<em class="step s2" style="font-style:normal;font-weight:400">　是文字，哪怕你输入的是数字。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>什么时候要用 int()？<em class="step s3" style="font-style:normal;font-weight:400">　读入的数字要拿来计算的时候。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>什么时候要用 int()？<em class="step s3" style="font-style:normal;font-weight:400">　读入的是整数，要按整数来算的时候。</em></span></p>
     <p style="font-weight:700"><i>Q3</i><span>不看代码，能写出两数求和吗？<em class="step s4" style="font-style:normal;font-weight:400">　合上课件试一试。</em></span></p>
   </div>
   <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
@@ -815,6 +815,7 @@ class SlidePresentation {
     addEventListener('resize', () => this.scale());
     addEventListener('hashchange', () => this.fromHash());
     addEventListener('beforeprint', () => this.finishAll());
+    addEventListener('afterprint', () => this.undoFinish());
     document.addEventListener('keydown', e => this.key(e));
     document.addEventListener('mousemove', () => this.reveal());
     document.addEventListener('fullscreenchange', () => {
@@ -867,6 +868,7 @@ class SlidePresentation {
       copy.removeAttribute('id');
       copy.classList.remove('active');
       copy.classList.add('visible');
+      if (copy.dataset.steps) copy.dataset.at = 1;
       copy.inert = true;
       view.append(copy);
       const number = document.createElement('b');
@@ -1102,8 +1104,18 @@ class SlidePresentation {
     this.hide = setTimeout(() => this.bar.classList.remove('show'), 2000);
   }
   finishAll() {
+    this.atBeforePrint = this.slides[this.index].dataset.at;
     this.slides.forEach(s => { if (s.dataset.steps) s.dataset.at = s.dataset.steps; });
     this.stage.querySelectorAll('.quiz').forEach(q => q.querySelectorAll('button')[Number(q.dataset.right)].click());
+  }
+  undoFinish() {
+    const slide = this.slides[this.index];
+    if (slide.dataset.steps) slide.dataset.at = this.atBeforePrint;
+    this.label();
+    this.stage.querySelectorAll('.quiz').forEach(q => {
+      q.querySelectorAll('button').forEach(b => b.classList.remove('yes', 'no'));
+      q.parentElement.querySelector('.fb').textContent = '';
+    });
   }
 }
 new SlidePresentation();

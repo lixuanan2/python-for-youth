@@ -53,5 +53,10 @@
     "source": "solutions/07_character_example.py",
     "input": "tests/case-11.in",
     "expected": "tests/case-11.out"
+  },
+  {
+    "source": "solutions/02b_copy_value.py",
+    "input": "tests/case-12.in",
+    "expected": "tests/case-12.out"
   }
 ]

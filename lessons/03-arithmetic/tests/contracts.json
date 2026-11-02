@@ -83,5 +83,35 @@
     "source": "solutions/08_calculator_example.py",
     "input": "tests/case-17.in",
     "expected": "tests/case-17.out"
+  },
+  {
+    "source": "solutions/09_seconds.py",
+    "input": "tests/case-18.in",
+    "expected": "tests/case-18.out"
+  },
+  {
+    "source": "solutions/09_seconds.py",
+    "input": "tests/case-19.in",
+    "expected": "tests/case-19.out"
+  },
+  {
+    "source": "solutions/09_seconds.py",
+    "input": "tests/case-20.in",
+    "expected": "tests/case-20.out"
+  },
+  {
+    "source": "solutions/09_seconds.py",
+    "input": "tests/case-21.in",
+    "expected": "tests/case-21.out"
+  },
+  {
+    "source": "solutions/09_seconds.py",
+    "input": "tests/case-22.in",
+    "expected": "tests/case-22.out"
+  },
+  {
+    "source": "solutions/09_seconds.py",
+    "input": "tests/case-23.in",
+    "expected": "tests/case-23.out"
   }
 ]

@@ -31,6 +31,7 @@ class SlidePresentation {
     addEventListener('resize', () => this.scale());
     addEventListener('hashchange', () => this.fromHash());
     addEventListener('beforeprint', () => this.finishAll());
+    addEventListener('afterprint', () => this.undoFinish());
     document.addEventListener('keydown', e => this.key(e));
     document.addEventListener('mousemove', () => this.reveal());
     document.addEventListener('fullscreenchange', () => {
@@ -83,6 +84,7 @@ class SlidePresentation {
       copy.removeAttribute('id');
       copy.classList.remove('active');
       copy.classList.add('visible');
+      if (copy.dataset.steps) copy.dataset.at = 1;
       copy.inert = true;
       view.append(copy);
       const number = document.createElement('b');
@@ -318,8 +320,18 @@ class SlidePresentation {
     this.hide = setTimeout(() => this.bar.classList.remove('show'), 2000);
   }
   finishAll() {
+    this.atBeforePrint = this.slides[this.index].dataset.at;
     this.slides.forEach(s => { if (s.dataset.steps) s.dataset.at = s.dataset.steps; });
     this.stage.querySelectorAll('.quiz').forEach(q => q.querySelectorAll('button')[Number(q.dataset.right)].click());
+  }
+  undoFinish() {
+    const slide = this.slides[this.index];
+    if (slide.dataset.steps) slide.dataset.at = this.atBeforePrint;
+    this.label();
+    this.stage.querySelectorAll('.quiz').forEach(q => {
+      q.querySelectorAll('button').forEach(b => b.classList.remove('yes', 'no'));
+      q.parentElement.querySelector('.fb').textContent = '';
+    });
   }
 }
 new SlidePresentation();

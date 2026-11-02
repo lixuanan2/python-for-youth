@@ -36,9 +36,21 @@
     "description": "更新变量后输出。"
   },
   {
+    "id": "02b",
+    "role": "语法小演示",
+    "page": 8,
+    "starter": "starter/02b_copy_value.py",
+    "solution": "solutions/02b_copy_value.py",
+    "required": false,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "3\n",
+    "description": "赋值放进去的是当时的值。"
+  },
+  {
     "id": "03",
     "role": "学生小改写",
-    "page": 8,
+    "page": 9,
     "starter": "starter/03_two_years.py",
     "solution": "solutions/03_two_years.py",
     "required": true,
@@ -50,7 +62,7 @@
   {
     "id": "04",
     "role": "语法小演示",
-    "page": 11,
+    "page": 12,
     "starter": "starter/04_types.py",
     "solution": "solutions/04_types.py",
     "required": false,
@@ -62,7 +74,7 @@
   {
     "id": "05",
     "role": "语法小演示",
-    "page": 15,
+    "page": 16,
     "starter": "starter/05_join_text.py",
     "solution": "solutions/05_join_text.py",
     "required": false,
@@ -74,7 +86,7 @@
   {
     "id": "06",
     "role": "独立迁移",
-    "page": 19,
+    "page": 20,
     "starter": "starter/06_piggy_bank.py",
     "solution": "solutions/06_piggy_bank.py",
     "required": true,
@@ -86,7 +98,7 @@
   {
     "id": "07",
     "role": "创作项目",
-    "page": 21,
+    "page": 22,
     "starter": "starter/07_character.py",
     "solution": "solutions/07_character_example.py",
     "required": false,

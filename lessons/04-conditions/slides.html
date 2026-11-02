@@ -151,6 +151,20 @@
   <div class="foot"></div>
 </section>
 
+<!-- predict: two ifs -->
+<section class="slide dark" aria-label="预测：换成两个 if" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：把 elif 换成 if 呢？</h2>
+  <div class="editor" style="left:96px;top:220px;width:880px;--fs:44px"><div class="tab">two_ifs.py</div>
+<pre class="code" data-file="solutions/06b_two_ifs.py"><span class="ln">x = <span class="m">10</span></span><span class="ln"><span class="k">if</span> x &gt; <span class="m">5</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 5"</span>)</span><span class="ln"><span class="k">if</span> x &gt; <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 8"</span>)</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <div class="slip tilt step s2" style="left:1100px;top:260px"><small>屏幕上，有两行</small><pre>大于 5
+大于 8</pre></div>
+  <p class="abs say only1" style="left:96px;top:760px">和上一页只差一个词。这次输出几行？</p>
+  <p class="abs say step s2" style="left:96px;top:760px;width:1600px">两个 if 是两次判断，各问各的。elif 属于同一次判断，前面走了就不看它。</p>
+  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
 <!-- your turn -->
 <section class="slide" aria-label="再加一档">
   <div class="band r"><b>动手<br>改一改</b><span>elif 可以写很多个，想想新的一档放在哪。</span></div>
@@ -158,7 +172,7 @@
     <h2 class="r d1">再加一档“良好”</h2>
     <p class="say r d1">分数是 0 到 100 的整数，75 分到 89 分输出良好。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 75，输出</small><pre>良好</pre></div><div><small>输入 74，输出</small><pre>及格</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/07_grade_four.py</p>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">写完用 59、60、74、75、89、90 各试一次，这些数都紧贴分界线。<br>教室电脑：打开 starter/07_grade_four.py</p>
   </div>
   <a class="ide r d3" data-code-file="starter/07_grade_four.py" style="left:610px;top:800px">▶ 在 IDE 开始改</a>
 </section>
@@ -180,8 +194,8 @@
 <section class="slide dark" aria-label="找错：优秀去哪了">
   <h2 class="t r">找错：优秀去哪了？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="1" data-yes="找到了！60 分以上都先进了这条路，90 分的判断永远轮不到。范围小的条件要写在前面。" data-no="这一行本身没错。想一想：输入 95 时，程序先走到哪里？"><span class="ln"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">elif</span> score &gt;= <span class="m">90</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"优秀"</span>)</span></pre></div>
-  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">输入 95，程序却输出及格，也没有报错。<br>点你认为要先改的那一行。</p>
+<pre class="code pick" data-bug="1" data-yes="对！95 &gt;= 60 成立，程序从这里走了，后面 90 分的判断轮不到。两段要换位置，范围小的条件写在前面。" data-no="再跟着程序走一遍：95 &gt;= 60 成立吗？"><span class="ln"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">elif</span> score &gt;= <span class="m">90</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"优秀"</span>)</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">输入 95，程序却输出及格，也没有报错。<br>95 分走进了哪条路？点那条路的条件。</p>
   <p class="fb" style="top:690px;color:var(--paper)" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
@@ -190,8 +204,8 @@
 <section class="slide clay" aria-label="快递运费" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">快递<br>运费</h2>
-  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入重量（1 到 100 的整数，单位公斤）。1 公斤以内 10 元，超过 1 公斤的部分每公斤加 2 元。</p>
-  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入</small><pre>3</pre><small style="margin-top:26px">输出</small><pre>运费 14 元</pre></div>
+  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入重量（1 到 100 的整数，单位公斤）。前 3 公斤一共 10 元，超过 3 公斤的部分每公斤加 2 元。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入</small><pre>5</pre><small style="margin-top:26px">输出</small><pre>运费 14 元</pre></div>
   <a class="ide r d3" data-code-file="starter/08_shipping.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
@@ -202,8 +216,8 @@
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>运费有两种算法，用什么来分开这两条路？</span></p>
-    <p class="step s2"><i>提示 2</i><span>3 公斤时，超过 1 公斤的部分是几公斤？</span></p>
-    <p class="step s3"><i>提示 3</i><span>试试边界：输入 1 应该是 10 元，输入 2 应该是 12 元。</span></p>
+    <p class="step s2"><i>提示 2</i><span>5 公斤时，超过 3 公斤的部分是几公斤？</span></p>
+    <p class="step s3"><i>提示 3</i><span>试试边界：输入 3 应该是 10 元，输入 4 应该是 12 元。</span></p>
   </div>
   <div class="foot"></div>
 </section>

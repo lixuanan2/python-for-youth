@@ -96,9 +96,21 @@
     "description": "按公式把摄氏度换算成华氏度。"
   },
   {
+    "id": "06b",
+    "role": "独立迁移",
+    "page": 21,
+    "starter": "starter/09_seconds.py",
+    "solution": "solutions/09_seconds.py",
+    "required": false,
+    "scope": "总秒数为0到100000的整数，一行输入",
+    "sample_input": "125\n",
+    "sample_output": "2 分 5 秒\n",
+    "description": "选做：用整除和取余换算分和秒。"
+  },
+  {
     "id": "07",
     "role": "创作项目",
-    "page": 21,
+    "page": 22,
     "starter": "starter/08_calculator.py",
     "solution": "solutions/08_calculator_example.py",
     "required": false,

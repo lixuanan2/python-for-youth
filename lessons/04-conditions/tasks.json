@@ -72,9 +72,21 @@
     "description": "观察多分支只走一条路。"
   },
   {
+    "id": "04b",
+    "role": "语法小演示",
+    "page": 13,
+    "starter": "starter/06b_two_ifs.py",
+    "solution": "solutions/06b_two_ifs.py",
+    "required": false,
+    "scope": "程序里写好了数据",
+    "sample_input": "",
+    "sample_output": "大于 5\n大于 8\n",
+    "description": "对比两个if和if/elif。"
+  },
+  {
     "id": "05",
     "role": "学生小改写",
-    "page": 13,
+    "page": 14,
     "starter": "starter/07_grade_four.py",
     "solution": "solutions/07_grade_four.py",
     "required": true,
@@ -86,19 +98,19 @@
   {
     "id": "06",
     "role": "独立迁移",
-    "page": 16,
+    "page": 17,
     "starter": "starter/08_shipping.py",
     "solution": "solutions/08_shipping.py",
     "required": true,
     "scope": "重量为1到100的整数",
-    "sample_input": "3\n",
+    "sample_input": "5\n",
     "sample_output": "运费 14 元\n",
-    "description": "按重量分段计算运费。"
+    "description": "超过3公斤才加价，用判断分开两种算法。"
   },
   {
     "id": "07",
     "role": "创作项目",
-    "page": 18,
+    "page": 19,
     "starter": "starter/09_judge.py",
     "solution": "solutions/09_judge_example.py",
     "required": false,

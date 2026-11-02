@@ -87,6 +87,21 @@
   <div class="foot"></div>
 </section>
 
+<!-- predict: copying a value -->
+<section class="slide dark" aria-label="预测 b 是几" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：a 变了，b 跟着变吗？</h2>
+  <div class="editor" style="left:96px;top:230px;width:880px;--fs:58px"><div class="tab">copy_value.py</div>
+<pre class="code" data-file="solutions/02b_copy_value.py"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = a</span><span class="ln">a = <span class="m">8</span></span><span class="ln"><span class="f">print</span>(b)</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <p class="abs say only1" style="left:96px;top:760px">先在纸上写下你的答案。</p>
+  <div class="crate step s2" style="left:1080px;top:250px;width:330px"><small style="color:var(--clay-soft)">a</small>8</div>
+  <div class="crate step s2" style="left:1470px;top:250px;width:330px"><small style="color:var(--clay-soft)">b</small>3</div>
+  <p class="abs say step s2" style="left:96px;top:760px;width:960px">b = a 是把 a 当时的值 3 放进 b。<br>后来 a 换成 8，b 里的 3 不会变。</p>
+  <div class="slip tilt step s2" style="left:1180px;top:680px"><small>屏幕上</small><pre>3</pre></div>
+  <a class="ide step s2" style="left:96px;top:900px">▶ 在 IDE 验证</a>
+  <div class="foot"></div>
+</section>
+
 <!-- your turn -->
 <section class="slide" aria-label="让 age 长两岁">
   <div class="band r"><b>动手<br>改一改</b><span>更新一次不够，就再写一行。</span></div>
@@ -110,7 +125,7 @@ score2</pre></div>
 my age
 my-age</pre></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:640px">名字里用字母、数字和下划线，不能用数字开头，也不能有空格。<br>age 和 Age 是<b>两个不同的变量</b>。名字最好一看就懂：score 比 a 好。</p>
+  <p class="abs say r d3" style="left:96px;top:640px">名字里用字母、数字和下划线，不能用数字开头，也不能有空格。<br>if、else 这些 Python 自己要用的词不能当名字，print、input 也别用。<br>age 和 Age 是<b>两个不同的变量</b>。名字最好一看就懂：score 比 a 好。</p>
   <div class="foot"></div>
 </section>
 
@@ -229,7 +244,7 @@ my-age</pre></div>
 <section class="slide clay" aria-label="压岁钱账本" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">压岁钱<br>账本</h2>
-  <p class="abs say r d2" style="left:96px;top:620px;width:960px">三行分别读入现有的钱、存入的钱和花掉的钱，都是 0 到 10000 的整数。用一个变量 money 记账，输出还剩多少。</p>
+  <p class="abs say r d2" style="left:96px;top:620px;width:960px">三行分别读入现有的钱、存入的钱和花掉的钱，都是 0 到 10000 的整数，花掉的不会超过手里的钱。用一个变量 money 记账，输出还剩多少。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:170px;width:600px"><small>输入三行</small><pre>20
 10
 5</pre><small style="margin-top:26px">输出</small><pre>还剩 25 元</pre></div>
@@ -256,7 +271,7 @@ my-age</pre></div>
   <div class="later" style="top:320px">
     <div class="r d1"><code>先做到</code><span>用两个变量存名字和等级，打印出角色卡。</span></div>
     <div class="r d2"><code>选你喜欢的</code><span>游戏角色、宠物、超级英雄，什么都行。</span></div>
-    <div class="r d3"><code>还想更厉害</code><span>再读入打怪得到的经验，算出升级后的等级。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>再读入打怪得到的经验，规定 1 点经验升 1 级，算出新等级。</span></div>
   </div>
   <a class="ide r d3" data-code-file="starter/07_character.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
