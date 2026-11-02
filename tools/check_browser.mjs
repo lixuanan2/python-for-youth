@@ -29,6 +29,15 @@ const run = async expression => {
   assert(!r.exceptionDetails, JSON.stringify(r.exceptionDetails));
   return r.result?.value;
 };
+const open = async url => {
+  await send('Page.navigate', {url});
+  for (let i = 0; i < 100; i++) {
+    await sleep(200);
+    const state = await send('Runtime.evaluate', {expression: `document.readyState === 'complete' && location.href`, returnByValue: true});
+    if (state.result?.value && decodeURI(state.result.value).split('#')[0] === decodeURI(url).split('#')[0]) return sleep(300);
+  }
+  throw new Error('Page did not load: ' + url);
+};
 const next = async () => {
   for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', {type, key: 'ArrowRight', code: 'ArrowRight', windowsVirtualKeyCode: 39});
   await sleep(800);
@@ -117,8 +126,7 @@ try {
   for (const lesson of lessons.filter(l => l.id)) {
     const dir = path.join('.preview', lesson.id);
     fs.mkdirSync(dir, {recursive: true});
-    await send('Page.navigate', {url: 'file://' + encodeURI(path.resolve('dist', lesson.id, 'index.html'))});
-    await sleep(1500);
+    await open('file://' + encodeURI(path.resolve('dist', lesson.id, 'index.html')));
     assert.equal(await run('location.protocol'), 'file:');
     const total = await run(`document.querySelectorAll('#deckStage .slide').length`);
     const problems = [];
@@ -142,14 +150,12 @@ try {
     assert(result.changed, 'IDE settings did not change links');
     assert.deepEqual(Object.entries(result.shell).filter(([, ok]) => !ok), [], 'Workspace control failed');
     await send('Emulation.setDeviceMetricsOverride', {width: 390, height: 844, deviceScaleFactor: 1, mobile: true});
-    await send('Page.navigate', {url: 'file://' + encodeURI(path.resolve('dist', 'index.html'))});
-    await sleep(800);
+    await open('file://' + encodeURI(path.resolve('dist', 'index.html')));
     assert(await run('document.documentElement.scrollWidth <= innerWidth'), 'Home page scrolls sideways on a phone');
     assert(await run(`(() => { const i = document.getElementById('name'); i.value = '小红'; i.oninput(); return document.getElementById('say').textContent.endsWith('小红'); })()`), 'Home program does not answer');
     const homeShot = await send('Page.captureScreenshot', {format: 'png', captureBeyondViewport: true});
     fs.writeFileSync(path.join('.preview', 'home-phone.png'), Buffer.from(homeShot.data, 'base64'));
-    await send('Page.navigate', {url: 'file://' + encodeURI(path.resolve('dist', lesson.id, 'index.html')) + '#page-2'});
-    await sleep(800);
+    await open('file://' + encodeURI(path.resolve('dist', lesson.id, 'index.html')) + '#page-2');
     const phone = await run(`(() => { const s = document.getElementById('deckStage').getBoundingClientRect(), b = document.getElementById('controls').getBoundingClientRect(); return {fits: s.left >= -1 && s.right <= innerWidth + 1 && s.bottom <= b.top + 1 && s.width > innerWidth - 2, wide: document.documentElement.scrollWidth <= innerWidth}; })()`);
     assert(phone.fits && phone.wide, 'Deck does not fit a phone');
     const deckShot = await send('Page.captureScreenshot', {format: 'png'});
