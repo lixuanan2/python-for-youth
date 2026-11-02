@@ -67,6 +67,14 @@ AGENTS.md   项目规则
 
 每节课按“讲一点、练一点”推进，最后留一个没有标准答案的小项目，再和同桌互相试玩、改一版。课堂结构以 [PROMPT.md](PROMPT.md) 为准；设计时参考过 MIT Media Lab 的[创意学习](https://www.media.mit.edu/groups/lifelong-kindergarten/overview/)。
 
+## 参与
+
+欢迎提意见和改进，怎么提看 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+## 许可
+
+课件内容用 CC BY-NC-SA 4.0，代码用 MIT，详见 [LICENSE.md](LICENSE.md)。
+
 ## 致谢
 
 - 固定舞台样式来自 [Frontend Slides](https://github.com/zarazhangrui/frontend-slides)（MIT）。

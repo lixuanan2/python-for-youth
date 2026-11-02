@@ -1,0 +1,43 @@
+name: 教学建议
+description: 学生会卡住的地方、可以删的页面、顺序或题目的改进
+title: "[第 ? 课] "
+labels: ["教学建议"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: 哪一课哪一页
+      placeholder: 第 4 课第 12 到 15 页
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 看到的问题
+      description: 学生会卡在哪里，或者这里为什么不好
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: 你的建议
+      description: 删掉、换顺序、换例子都可以
+    validations:
+      required: true
+  - type: dropdown
+    id: basis
+    attributes:
+      label: 这条建议来自
+      options:
+        - 实际教过这个内容
+        - 看过学生学这个内容
+        - 看课件时的判断
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 保护学生
+      options:
+        - label: 我没有贴学生的姓名、照片、成绩、学校或联系方式
+          required: true

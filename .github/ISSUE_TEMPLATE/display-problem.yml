@@ -1,0 +1,33 @@
+name: 页面显示问题
+description: 文字重叠、放不下、按钮没反应、打不开
+title: "[第 ? 课第 ? 页] "
+labels: ["页面显示"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: 哪一课哪一页
+      placeholder: 第 4 课第 12 页
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 看到了什么
+      description: 可以贴截图，截图里不要有学生的信息
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: 用的什么设备和浏览器
+      placeholder: Windows 11，Edge，教室投影
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 保护学生
+      options:
+        - label: 我没有贴学生的姓名、照片、成绩、学校或联系方式
+          required: true

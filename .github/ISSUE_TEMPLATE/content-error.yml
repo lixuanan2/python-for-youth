@@ -1,0 +1,33 @@
+name: 内容错误
+description: 讲错了、代码不对，或者说法到后面不成立
+title: "[第 ? 课第 ? 页] "
+labels: ["内容错误"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: 哪一课哪一页
+      placeholder: 第 4 课第 12 页
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: 哪里不对
+      description: 可以贴页面上的原话或代码
+    validations:
+      required: true
+  - type: textarea
+    id: right
+    attributes:
+      label: 应该是什么
+      description: 有运行结果或资料出处的话也写上
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 保护学生
+      options:
+        - label: 我没有贴学生的姓名、照片、成绩、学校或联系方式
+          required: true
