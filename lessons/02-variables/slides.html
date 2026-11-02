@@ -1,0 +1,313 @@
+<!-- cover -->
+<section class="slide" aria-label="变量与数据类型" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 02</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">变量</b><div class="wire r d1"><i></i><span>记住</span></div><b class="r d2" style="font-size:250px">类型</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">让程序记住会变的东西</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能用一个变量记账，还能说清数据是哪一种。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- why variables -->
+<section class="slide clay" aria-label="分数一直在变">
+  <h2 class="t r">游戏里的分数一直在变</h2>
+  <div class="verbs" style="top:250px">
+    <div class="r d1"><b>0</b><code>开始</code></div><em class="r d1">→</em>
+    <div class="r d2"><b>10</b><code>吃到金币</code></div><em class="r d2">→</em>
+    <div class="r d3"><b>30</b><code>打败怪物</code></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">程序要一直记着现在的分数，加分的时候才知道从几开始加。<br>用来记住数据的东西，就叫<b>变量</b>。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- first variable -->
+<section class="slide" aria-label="第一个变量" data-chapter="赋值">
+  <div class="night r" style="width:1120px"></div>
+  <h2 class="t r" style="color:var(--paper)">自己放一个值进去</h2>
+  <div class="editor r d1" style="left:96px;top:230px;width:930px;--fs:58px"><div class="tab">age.py</div>
+<pre class="code" data-file="solutions/00_first_variable.py"><span class="ln">age = <span class="m">12</span></span><span class="ln"><span class="f">print</span>(age)</span></pre></div>
+  <p class="abs say r d2" style="left:96px;top:570px;width:930px;color:var(--paper)">上节课，盒子里的东西是你打字放进去的。<br>这次程序自己放：把 12 放进盒子 age。</p>
+  <a class="ide r d3" style="left:96px;top:850px">▶ 在 IDE 打开</a>
+  <div class="crate r d2" style="left:1250px;top:300px;width:470px"><small>age</small>12</div>
+  <p class="abs say r d3" style="left:1210px;top:640px;right:96px">print(age) 不加引号，输出的是盒子里的 12，不是 age 这三个字母。</p>
+</section>
+
+<!-- reading the equals sign -->
+<section class="slide" aria-label="等号是放进去">
+  <h2 class="t r">这个等号不是“相等”</h2>
+  <div class="vs">
+    <div class="r d1"><h3>数学里的 =</h3><pre>3 + 1 = 4</pre><p class="say">两边的值相等。</p></div>
+    <div class="r d2"><h3>Python 里的 =</h3><pre>age = <span style="color:var(--clay)">12</span></pre><p class="say">把右边的 12 放进左边的 age。</p></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:640px">这个动作叫<b>赋值</b>。读代码时从右往左读：把 12 放进 age。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- overwrite prediction -->
+<section class="slide dark" aria-label="预测 x 最后是几" data-steps="3" data-at="3" data-chapter="更新">
+  <h2 class="t">猜一猜：x 最后是几？</h2>
+  <div class="editor" style="left:96px;top:230px;width:880px;--fs:58px"><div class="tab">box.py</div>
+<pre class="code" data-file="solutions/01_overwrite.py"><span class="ln">x = <span class="m">5</span></span><span class="ln l2">x = <span class="m">8</span></span><span class="ln l3"><span class="f">print</span>(x)</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <p class="abs say only1" style="left:96px;top:660px">先在纸上写下你的答案。</p>
+  <div class="crate step s2" style="left:1160px;top:310px;width:420px"><small style="color:var(--clay-soft)">x</small>8</div>
+  <p class="abs say step s2" style="left:96px;top:660px;width:880px">新的值放进去，旧的 5 就被换掉了。<br>一个变量里，只留<b>最新的值</b>。</p>
+  <div class="slip tilt step s3" style="left:1180px;top:680px"><small>屏幕上</small><pre>8</pre></div>
+  <a class="ide step s3" style="left:96px;top:850px">▶ 在 IDE 验证</a>
+  <div class="foot"></div>
+</section>
+
+<!-- age = age + 1 trace -->
+<section class="slide" aria-label="age 加 1" data-steps="3" data-at="3">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">age = age + 1 怎么读？</h2>
+  <div class="editor" style="left:96px;top:230px;width:1040px;--fs:58px"><div class="tab">birthday.py</div>
+<pre class="code" data-file="solutions/02_variable.py"><span class="ln l1">age = <span class="m">12</span></span><span class="ln l2">age = age + <span class="m">1</span></span><span class="ln l3"><span class="f">print</span>(age)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:660px;color:var(--paper)">把 12 放进盒子 age。</p>
+  <p class="abs say only2" style="left:96px;top:660px;color:var(--paper)">先算右边：12 + 1 得 13，再把 13 放回 age。</p>
+  <p class="abs say only3" style="left:96px;top:660px;color:var(--paper)">输出 age 现在的值。</p>
+  <a class="ide step s3" style="left:96px;top:850px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i>age</i><b>12</b></div>
+    <div class="box step s2"><i>age</i><b>13</b></div>
+    <div class="box out step s3"><i>输出</i><b>13</b></div>
+  </div>
+</section>
+
+<!-- quiz: updating -->
+<section class="slide" aria-label="小测：更新两次">
+  <h2 class="t r">小测：这段程序输出几？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:44px"><div class="tab">score.py</div>
+<pre class="code"><span class="ln">score = <span class="m">10</span></span><span class="ln">score = score + <span class="m">5</span></span><span class="ln">score = score + <span class="m">5</span></span><span class="ln"><span class="f">print</span>(score)</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="2">
+    <button type="button" data-fb="10 只是开始时的值，后面更新了两次。"><i>1</i>10</button>
+    <button type="button" data-fb="只算到第 2 行。第 3 行还会在 15 的基础上再加 5。"><i>2</i>15</button>
+    <button type="button" data-fb="答对了！每一行都从 score 现在的值算起：10、15、20。"><i>3</i>20</button>
+  </div>
+  <p class="fb" style="top:690px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn -->
+<section class="slide" aria-label="让 age 长两岁">
+  <div class="band r"><b>动手<br>改一改</b><span>更新一次不够，就再写一行。</span></div>
+  <div class="turn">
+    <h2 class="r d1">让 age 长两岁</h2>
+    <p class="say r d1">把开始的年龄改成 10，再让 age 一岁一岁地长两次。</p>
+    <div class="sheet r d2"><small>运行后要看到</small><pre>12</pre></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/03_two_years.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/03_two_years.py" style="left:610px;top:800px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- names -->
+<section class="slide" aria-label="变量名怎么起" data-chapter="起名字">
+  <h2 class="t r">给盒子起个好名字</h2>
+  <div class="vs">
+    <div class="r d1"><h3>可以</h3><pre style="font-size:62px">age
+my_age
+score2</pre></div>
+    <div class="r d2"><h3>不可以</h3><pre style="font-size:62px;color:var(--muted)">2age
+my age
+my-age</pre></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:640px">名字里用字母、数字和下划线，不能用数字开头，也不能有空格。<br>age 和 Age 是<b>两个不同的变量</b>。名字最好一看就懂：score 比 a 好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: names -->
+<section class="slide" aria-label="小测：哪个名字能用">
+  <h2 class="t r">小测：哪个名字能用？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="变量名不能用数字开头。"><i>1</i>1st_score</button>
+    <button type="button" data-fb="答对了！字母加下划线，而且一看就知道是总分。"><i>2</i>total_score</button>
+    <button type="button" data-fb="中间有空格，Python 会以为这是两个东西。"><i>3</i>total score</button>
+    <button type="button" data-fb="减号会被当成减法，不能放在名字里。"><i>4</i>total-score</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- four types -->
+<section class="slide" aria-label="四种常用类型" data-chapter="四种类型">
+  <h2 class="t r">盒子里的东西分种类</h2>
+  <div class="later" style="grid-template-columns:repeat(4,1fr);gap:40px;top:240px">
+    <div class="r d1"><code>int</code><p style="font:800 76px/1.3 var(--code)">12</p><span>整数，比如年龄</span></div>
+    <div class="r d1"><code>float</code><p style="font:800 76px/1.3 var(--code)">2.5</p><span>小数，比如价格</span></div>
+    <div class="r d2"><code>str</code><p style="font:800 76px/1.3 var(--code)">"Ming"</p><span>文字，比如名字</span></div>
+    <div class="r d2"><code>bool</code><p style="font:800 76px/1.3 var(--code)">True</p><span>真假，比如过关了吗</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:680px">这就是<b>数据类型</b>。写 age = 12 时不用说明类型，Python 看右边的值就知道。</p>
+  <a class="ide r d3" data-code-file="solutions/04_types.py" style="left:96px;top:800px">▶ 在 IDE 看这四种</a>
+  <div class="foot"></div>
+</section>
+
+<!-- type() -->
+<section class="slide dark" aria-label="用 type 问 Python">
+  <h2 class="t r">不确定？问问 Python</h2>
+  <div class="editor r d1" style="left:96px;top:230px;width:1020px;--fs:58px"><div class="tab">ask.py</div>
+<pre class="code"><span class="ln"><span class="f">print</span>(<span class="f">type</span>(<span class="m">12</span>))</span><span class="ln"><span class="f">print</span>(<span class="f">type</span>(<span class="s">"12"</span>))</span></pre></div>
+  <p class="abs say r d2" style="left:96px;top:570px;width:1020px">type 就是“类型”。把东西放进 type()，它就告诉你是哪一种。</p>
+  <div class="slip tilt r d3" style="left:1190px;top:270px"><small>屏幕上</small><pre style="font-size:42px">&lt;class 'int'&gt;
+&lt;class 'str'&gt;</pre></div>
+  <a class="ide r d3" style="left:96px;top:850px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
+<!-- type prediction -->
+<section class="slide" aria-label="预测三种类型" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：它们是什么类型？</h2>
+  <div class="ledger">
+    <div><code class="plain" style="font-family:var(--code)">"12"</code><b class="step s2">str</b><span class="step s2">有引号，就是文字</span></div>
+    <div><code class="plain" style="font-family:var(--code)">12</code><b class="step s2">int</b><span class="step s2">没有小数点，是整数</span></div>
+    <div><code class="plain" style="font-family:var(--code)">12.0</code><b class="step s2">float</b><span class="step s2">有小数点，就是小数</span></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:760px">先说出你的答案，再翻下一步。</p>
+  <p class="abs say step s2" style="left:96px;top:760px">看起来都是 12，类型却不一样，能做的事情也不一样。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bool -->
+<section class="slide" aria-label="bool 只有两个值">
+  <h2 class="t r">bool：只有两个值</h2>
+  <div class="vs">
+    <div class="r d1"><p class="res" style="color:var(--olive)">True</p><p class="say">成立，是真的。</p></div>
+    <div class="r d2"><p class="res">False</p><p class="say">不成立，是假的。</p></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:590px">第一个字母要大写，写成 true 会报错。<br>比较大小会得到 bool：print(3 &gt; 2) 输出 True。后面学判断时天天用。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- mixing text and numbers -->
+<section class="slide dark" aria-label="文字和数字放在一起" data-chapter="混在一起">
+  <h2 class="t r">把文字和数字放在一起说</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1160px;--fs:46px"><div class="tab">intro.py</div>
+<pre class="code" data-file="solutions/05_join_text.py"><span class="ln">age = <span class="m">12</span></span><span class="ln"><span class="f">print</span>(<span class="s">"我今年"</span>, age, <span class="s">"岁"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"我今年"</span> + <span class="f">str</span>(age) + <span class="s">"岁"</span>)</span></pre></div>
+  <p class="abs say r d2" style="left:96px;top:600px;width:1160px">文字和整数不能直接用 + 连起来，会报 TypeError。<br>办法一：用逗号，print 会加空格。<br>办法二：用 str() 把数字变成文字，再拼接。</p>
+  <div class="slip tilt r d3" style="left:1310px;top:300px"><small>屏幕上</small><pre style="font-size:38px">我今年 12 岁
+我今年12岁</pre></div>
+  <a class="ide r d3" style="left:1320px;top:600px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: type trap -->
+<section class="slide" aria-label="小测：True 加引号">
+  <h2 class="t r">小测："True" 是什么类型？</h2>
+  <div class="quiz r d1" data-right="2">
+    <button type="button" data-fb="整数不会有引号，也不是字母。"><i>1</i>int</button>
+    <button type="button" data-fb="这里没有小数点，还多了一对引号。"><i>2</i>float</button>
+    <button type="button" data-fb="答对了！只要放在引号里，就是文字。"><i>3</i>str</button>
+    <button type="button" data-fb="不加引号的 True 才是 bool。看清那对引号。"><i>4</i>bool</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1"><code>print(scor)</code><b>NameError</b><span>名字写错或还没赋值</span></div>
+    <div class="r d2"><code>2age = 1</code><b>SyntaxError</b><span>名字不能用数字开头</span></div>
+    <div class="r d3"><code>"年龄" + 12</code><b>TypeError</b><span>用逗号或 str()</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">程序从上往下跑，变量要先赋值，后面才能用。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：分数没变">
+  <h2 class="t r">找错：分数怎么没变？</h2>
+  <div class="editor r d1" style="left:96px;top:230px;width:1040px;--fs:58px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="2" data-yes="找到了！score + 5 算出了 15，但没有放回盒子。要写 score = score + 5。" data-no="这一行没有问题。想一想：算出来的结果放到哪里去了？"><span class="ln">score = <span class="m">10</span></span><span class="ln">score + <span class="m">5</span></span><span class="ln"><span class="f">print</span>(score)</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">这段程序想给分数加 5，运行后却输出 10，也没有报错。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="top:690px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="压岁钱账本" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">压岁钱<br>账本</h2>
+  <p class="abs say r d2" style="left:96px;top:620px;width:960px">三行分别读入现有的钱、存入的钱和花掉的钱，都是 0 到 10000 的整数。用一个变量 money 记账，输出还剩多少。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:170px;width:600px"><small>输入三行</small><pre>20
+10
+5</pre><small style="margin-top:26px">输出</small><pre>还剩 25 元</pre></div>
+  <a class="ide r d3" data-code-file="starter/06_piggy_bank.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>三个数都要拿来算，读入时要变成整数吗？</span></p>
+    <p class="step s2"><i>提示 2</i><span>第一个数先放进 money，存入就是在 money 上加。</span></p>
+    <p class="step s3"><i>提示 3</i><span>花掉和存入写法一样，把 + 换成 -，算完要放回 money。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一张角色卡" data-chapter="小项目">
+  <h2 class="t r">造一张角色卡</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">用变量记住一个角色的信息，再把它显示出来。角色你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>用两个变量存名字和等级，打印出角色卡。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>游戏角色、宠物、超级英雄，什么都行。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>再读入打怪得到的经验，算出升级后的等级。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/07_character.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着运行</b><span>运行同桌的程序，看看这是什么角色</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，你最喜欢这张卡的哪一点</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>问问同桌：还可以给角色加什么属性？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，给你的角色多加一个变量。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>x = x + 1 是什么意思？<em class="step s2" style="font-style:normal;font-weight:400">　先算右边，再放回 x。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>四种类型分别是什么？<em class="step s3" style="font-style:normal;font-weight:400">　int、float、str、bool。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>"12" 和 12 有什么不同？<em class="step s4" style="font-style:normal;font-weight:400">　前者是文字，后者是整数。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1"><code>age = 12</code><span>把 12 放进变量 age</span></div>
+    <div class="r d1"><code>age = age + 1</code><span>先算右边，再放回 age</span></div>
+    <div class="r d2"><code>type(age)</code><span>看看 age 是什么类型</span></div>
+    <div class="r d2"><code>str(12)</code><span>把数字变成文字 "12"</span></div>
+    <div class="r d3"><code>True  False</code><span>bool 的两个值，首字母大写</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>/  //  %</code><span>除法、整除和求余数</span></div>
+    <div class="r d2"><code>float(input())</code><span>读入带小数点的数</span></div>
+    <div class="r d3"><code>total += 1</code><span>更新变量的简写</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天学会了赋值和更新，程序就能记账了。下节课让它算得更多。</p>
+  <div class="foot"></div>
+</section>

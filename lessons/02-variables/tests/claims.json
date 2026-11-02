@@ -1,0 +1,107 @@
+[
+  {
+    "page": 3,
+    "code": "age = 12\nprint(age)",
+    "stdout": "12\n"
+  },
+  {
+    "page": 7,
+    "code": "score = 10\nscore = score + 5\nscore = score + 5\nprint(score)",
+    "stdout": "20\n"
+  },
+  {
+    "page": 9,
+    "code": "2age = 1",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 9,
+    "code": "my age = 1",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 9,
+    "code": "my-age = 1",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 9,
+    "code": "age = 1\nmy_age = 2\nscore2 = 3\nprint(age, my_age, score2)",
+    "stdout": "1 2 3\n"
+  },
+  {
+    "page": 9,
+    "code": "age = 1\nprint(Age)",
+    "error": "NameError"
+  },
+  {
+    "page": 10,
+    "code": "1st_score = 1",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 10,
+    "code": "total score = 1",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 10,
+    "code": "total-score = 1",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 10,
+    "code": "total_score = 1\nprint(total_score)",
+    "stdout": "1\n"
+  },
+  {
+    "page": 12,
+    "code": "print(type(12))\nprint(type(\"12\"))",
+    "stdout": "<class 'int'>\n<class 'str'>\n"
+  },
+  {
+    "page": 13,
+    "code": "print(type(\"12\"))\nprint(type(12))\nprint(type(12.0))",
+    "stdout": "<class 'str'>\n<class 'int'>\n<class 'float'>\n"
+  },
+  {
+    "page": 14,
+    "code": "print(true)",
+    "error": "NameError"
+  },
+  {
+    "page": 14,
+    "code": "print(3 > 2)\nprint(type(True))",
+    "stdout": "True\n<class 'bool'>\n"
+  },
+  {
+    "page": 15,
+    "code": "print(\"我今年\" + 12)",
+    "error": "TypeError"
+  },
+  {
+    "page": 16,
+    "code": "print(type(\"True\"))",
+    "stdout": "<class 'str'>\n"
+  },
+  {
+    "page": 17,
+    "code": "print(scor)",
+    "error": "NameError"
+  },
+  {
+    "page": 17,
+    "code": "\"年龄\" + 12",
+    "error": "TypeError"
+  },
+  {
+    "page": 18,
+    "code": "score = 10\nscore + 5\nprint(score)",
+    "stdout": "10\n"
+  },
+  {
+    "page": 24,
+    "code": "print(str(12) + \"3\")",
+    "stdout": "123\n"
+  }
+]

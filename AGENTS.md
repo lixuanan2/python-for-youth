@@ -49,7 +49,7 @@ node tools/check_browser.mjs    # 真实 Chrome 逐页检查和交互测试
 
 ## 姊妹项目
 
-C++ 课件在 `lixuanan2/cpp-teaching` 的 `HTML课件/` 文件夹，用同一套模板。改了 `template/` 或 `tools/` 且对 C++ 也有用时，把这两个文件夹同步过去，再跑那边的检查。
+C++ 课件在 `lixuanan2/cpp-teaching` 的 `HTML课件/` 文件夹，用同一套模板。本仓库为主：`template/`、`tools/`、`vendor/` 只在这里改，C++ 有需要时提过来。改动对 C++ 也有用时，把这三个文件夹同步过去，再跑那边的检查。
 
 ## 旧资料
 

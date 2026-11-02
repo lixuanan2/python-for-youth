@@ -28,6 +28,7 @@
 | 课 | 主题 | 页数 | 状态 |
 | --- | --- | --- | --- |
 | [01](dist/01-input-output/index.html) | 输入输出 | 26 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [02](dist/02-variables/index.html) | 变量与数据类型 | 25 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 

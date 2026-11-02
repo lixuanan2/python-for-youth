@@ -7,7 +7,10 @@
     "stage": "基础"
   },
   {
+    "id": "02-variables",
+    "tag": "LESSON 02",
     "title": "变量与数据类型",
+    "file": "lesson_02.py",
     "stage": "基础"
   },
   {

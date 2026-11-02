@@ -1,0 +1,98 @@
+[
+  {
+    "id": "01",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/00_first_variable.py",
+    "solution": "solutions/00_first_variable.py",
+    "required": false,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "12\n",
+    "description": "给变量赋值并输出。"
+  },
+  {
+    "id": "02",
+    "role": "语法小演示",
+    "page": 5,
+    "starter": "starter/01_overwrite.py",
+    "solution": "solutions/01_overwrite.py",
+    "required": false,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "8\n",
+    "description": "观察新值替换旧值。"
+  },
+  {
+    "id": "A",
+    "role": "基础例题",
+    "page": 6,
+    "starter": "starter/02_variable.py",
+    "solution": "solutions/02_variable.py",
+    "required": true,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "13\n",
+    "description": "更新变量后输出。"
+  },
+  {
+    "id": "03",
+    "role": "学生小改写",
+    "page": 8,
+    "starter": "starter/03_two_years.py",
+    "solution": "solutions/03_two_years.py",
+    "required": true,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "12\n",
+    "description": "初值改成10，更新两次。"
+  },
+  {
+    "id": "04",
+    "role": "语法小演示",
+    "page": 11,
+    "starter": "starter/04_types.py",
+    "solution": "solutions/04_types.py",
+    "required": false,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "12\n2.5\nA\nTrue\n",
+    "description": "输出四种类型的值。"
+  },
+  {
+    "id": "05",
+    "role": "语法小演示",
+    "page": 15,
+    "starter": "starter/05_join_text.py",
+    "solution": "solutions/05_join_text.py",
+    "required": false,
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "我今年 12 岁\n我今年12岁\n",
+    "description": "用逗号和str()把文字和数字放在一起。"
+  },
+  {
+    "id": "06",
+    "role": "独立迁移",
+    "page": 19,
+    "starter": "starter/06_piggy_bank.py",
+    "solution": "solutions/06_piggy_bank.py",
+    "required": true,
+    "scope": "三行整数，均为0到10000",
+    "sample_input": "20\n10\n5\n",
+    "sample_output": "还剩 25 元\n",
+    "description": "用一个变量记账，输出余额。"
+  },
+  {
+    "id": "07",
+    "role": "创作项目",
+    "page": 21,
+    "starter": "starter/07_character.py",
+    "solution": "solutions/07_character_example.py",
+    "required": false,
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "小火龙\n3\n2\n",
+    "sample_output": "角色： 小火龙\n等级： 3\n升级后： 5\n",
+    "description": "用变量做一张角色卡。"
+  }
+]
