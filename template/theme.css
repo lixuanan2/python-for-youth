@@ -173,6 +173,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 
 /* === LAST PAGE OF EVERY DECK: short thanks, teacher's link, the way onward === */
 .gh-link{position:absolute;left:96px;top:590px;font:800 92px/1.3 var(--code);color:var(--mint);text-decoration:none;border-bottom:8px solid var(--mint)}
+.next-note{left:520px;top:864px;font-size:36px;color:var(--ghost)}
 .gh-link:hover{color:#c0e3c5;border-color:#c0e3c5}
 .go-next{position:absolute;left:96px;top:850px;background:var(--mint);color:#16261a;font:700 34px var(--text);text-decoration:none;padding:14px 30px 16px;border-radius:12px;box-shadow:0 6px 0 #5f8f6a}
 

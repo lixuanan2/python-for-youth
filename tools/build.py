@@ -59,16 +59,19 @@ def number_slides(slides):
     return re.sub(r'<section class="slide', mark, slides)
 
 
+HOME_LINK = '<a class="go-next r d3" href="../index.html">回到课程首页</a>'
+
+
 def thanks_slide(lesson):
     """Every deck ends with the same short thank-you, the teacher's link and the way onward."""
     items = course()
     following = items[items.index(lesson) + 1] if items.index(lesson) + 1 < len(items) else None
     if following is None:
-        onward = '<p class="abs say r d3" style="left:96px;top:872px">这门课的路线走完了，了不起！</p>'
+        onward = HOME_LINK + '<p class="abs say r d3 next-note">这门课的路线走完了，了不起！</p>'
     elif 'id' in following:
         onward = f'<a class="go-next r d3" href="../{following["id"]}/index.html">下一课：{html.escape(following["title"])}</a>'
     else:
-        onward = f'<p class="abs say r d3" style="left:96px;top:872px">下一课“{html.escape(following["title"])}”还在准备中。</p>'
+        onward = HOME_LINK + f'<p class="abs say r d3 next-note">下一课“{html.escape(following["title"])}”还在准备中</p>'
     thanks = site()['thanks']
     url = html.escape(thanks['url'], quote=True)
     label = html.escape(thanks['url'].split('://', 1)[1])
