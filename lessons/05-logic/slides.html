@@ -196,10 +196,10 @@
 
 <!-- quiz: not -->
 <section class="slide" aria-label="小测：not">
-  <h2 class="t r">小测：print(not 3 &gt; 2) 输出什么？</h2>
+  <h2 class="t r">小测：print(not (3 &gt; 2)) 输出什么？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="3 &gt; 2 是 True 没错，可是前面还有 not，要再翻一次。"><i>1</i>True</button>
-    <button type="button" data-fb="答对了！先算 3 &gt; 2 得到 True，not 再把它翻成 False。"><i>2</i>False</button>
+    <button type="button" data-fb="答对了！先算括号里的 3 &gt; 2，得到 True，not 再把它翻成 False。"><i>2</i>False</button>
     <button type="button" data-fb="not 翻的是真假，结果不是数字。"><i>3</i>3</button>
     <button type="button" data-fb="这一行可以运行，not 写在条件的前面。"><i>4</i>报错</button>
   </div>
@@ -268,12 +268,12 @@
 </section>
 
 <!-- challenge -->
-<section class="slide clay" aria-label="闰年" data-chapter="挑战">
+<section class="slide clay" aria-label="小奖状" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
-  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">闰年</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1040px">读入年份（1 到 9999 的整数），输出闰年或平年。<br>能被 4 整除但不能被 100 整除的是闰年；能被 400 整除的也是闰年；其余是平年。</p>
-  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:560px"><small>输入 2024，输出</small><pre>闰年</pre><small style="margin-top:26px">输入 1900，输出</small><pre>平年</pre></div>
-  <a class="ide r d3" data-code-file="starter/09_leap.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">小奖状</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1040px">分两行读入语文和数学成绩，都是 0 到 100 的整数。<br>至少有一门满 90 分，并且两门都满 60 分，就输出获奖，否则输出继续努力。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:560px"><small>输入 90 和 60，输出</small><pre>获奖</pre><small style="margin-top:26px">输入 90 和 59，输出</small><pre>继续努力</pre></div>
+  <a class="ide r d3" data-code-file="starter/09_award.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -282,9 +282,9 @@
 <section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
-    <p class="step"><i>提示 1</i><span>闰年有两种情况，用哪个词把这两种情况连起来？</span></p>
-    <p class="step s2"><i>提示 2</i><span>能被 4 整除，可以写成 year % 4 == 0。不能被 100 整除呢？</span></p>
-    <p class="step s3"><i>提示 3</i><span>试试这四年：2024 闰年，2023 平年，1900 平年，2000 闰年。结果不对时，先看括号。</span></p>
+    <p class="step"><i>提示 1</i><span>规则分两层：“至少一门满 90 分”和“两门都满 60 分”。先分开想。</span></p>
+    <p class="step s2"><i>提示 2</i><span>“至少一门”用哪个词连？“两门都”用哪个词连？</span></p>
+    <p class="step s3"><i>提示 3</i><span>试试 90 和 59，应该输出继续努力。结果不对时，先看括号。</span></p>
   </div>
   <div class="foot"></div>
 </section>
@@ -337,6 +337,7 @@
     <div class="r d2"><code>x &gt;= 1 and x &lt; 9</code><span>范围：两边都写完整</span></div>
     <div class="r d3"><code>(a or b) and c</code><span>括号里的先算</span></div>
   </div>
+  <p class="abs say r d3" style="left:96px;top:900px;font-size:34px;color:var(--muted)">这里的 a、b 指比较这样有真假结果的条件。</p>
   <div class="foot"></div>
 </section>
 

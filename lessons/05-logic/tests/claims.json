@@ -61,7 +61,7 @@
   },
   {
     "page": 15,
-    "code": "print(not 3 > 2)\nprint(3 > 2)",
+    "code": "print(not (3 > 2))\nprint(3 > 2)",
     "stdout": "False\nTrue\n"
   },
   {

@@ -165,51 +165,6 @@
     "expected": "tests/case-33.out"
   },
   {
-    "source": "solutions/09_leap.py",
-    "input": "tests/case-34.in",
-    "expected": "tests/case-34.out"
-  },
-  {
-    "source": "solutions/09_leap.py",
-    "input": "tests/case-35.in",
-    "expected": "tests/case-35.out"
-  },
-  {
-    "source": "solutions/09_leap.py",
-    "input": "tests/case-36.in",
-    "expected": "tests/case-36.out"
-  },
-  {
-    "source": "solutions/09_leap.py",
-    "input": "tests/case-37.in",
-    "expected": "tests/case-37.out"
-  },
-  {
-    "source": "solutions/09_leap.py",
-    "input": "tests/case-38.in",
-    "expected": "tests/case-38.out"
-  },
-  {
-    "source": "solutions/09_leap.py",
-    "input": "tests/case-39.in",
-    "expected": "tests/case-39.out"
-  },
-  {
-    "source": "solutions/09_leap.py",
-    "input": "tests/case-40.in",
-    "expected": "tests/case-40.out"
-  },
-  {
-    "source": "solutions/09_leap.py",
-    "input": "tests/case-41.in",
-    "expected": "tests/case-41.out"
-  },
-  {
-    "source": "solutions/09_leap.py",
-    "input": "tests/case-42.in",
-    "expected": "tests/case-42.out"
-  },
-  {
     "source": "solutions/10_gatekeeper_example.py",
     "input": "tests/case-43.in",
     "expected": "tests/case-43.out"
@@ -228,5 +183,40 @@
     "source": "solutions/10_gatekeeper_example.py",
     "input": "tests/case-46.in",
     "expected": "tests/case-46.out"
+  },
+  {
+    "source": "solutions/09_award.py",
+    "input": "tests/case-47.in",
+    "expected": "tests/case-47.out"
+  },
+  {
+    "source": "solutions/09_award.py",
+    "input": "tests/case-48.in",
+    "expected": "tests/case-48.out"
+  },
+  {
+    "source": "solutions/09_award.py",
+    "input": "tests/case-49.in",
+    "expected": "tests/case-49.out"
+  },
+  {
+    "source": "solutions/09_award.py",
+    "input": "tests/case-50.in",
+    "expected": "tests/case-50.out"
+  },
+  {
+    "source": "solutions/09_award.py",
+    "input": "tests/case-51.in",
+    "expected": "tests/case-51.out"
+  },
+  {
+    "source": "solutions/09_award.py",
+    "input": "tests/case-52.in",
+    "expected": "tests/case-52.out"
+  },
+  {
+    "source": "solutions/09_award.py",
+    "input": "tests/case-53.in",
+    "expected": "tests/case-53.out"
   }
 ]
