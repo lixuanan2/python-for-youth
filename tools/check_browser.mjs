@@ -2,7 +2,7 @@
 // Run from the repository root: node tools/check_browser.mjs
 // Screenshots land in .preview/. Set CHROME_PATH if Chrome is not in a usual place.
 import assert from 'node:assert/strict';
-import {spawn} from 'node:child_process';
+import {execFileSync, spawn} from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -90,6 +90,31 @@ const INTERACT = `(async () => {
     inputs.forEach((input, i) => { if (input.textContent !== start[i]) input.click(); });
     return ok;
   });
+  // Number slots: filter what students type, then try many numbers for a real Python run afterwards.
+  const live = [...stage.querySelectorAll('.slide')].flatMap((slide, page) => {
+    const slots = [...slide.querySelectorAll('.slot')];
+    if (!slots.length) return [];
+    const outs = [...slide.querySelectorAll('[data-eval]')], link = slide.querySelector('a.ide');
+    const start = slots.map(s => s.value);
+    const put = (slot, value) => { slot.value = value; slot.dispatchEvent(new Event('input', {bubbles: true})); };
+    const typed = text => { put(slots[0], text); return slots[0].value; };
+    const filter = typed('1a2') === '12' && typed('007') === '7' && typed('12345') === '1234' && typed('０７') === '' && typed('-5') === '5';
+    put(slots[0], '');
+    const waits = outs.every(o => o.textContent === '？');
+    slots.forEach((s, i) => put(s, start[i]));
+    const shown = outs.map(o => o.textContent);
+    const values = ['0', '1', '2', '3', '5', '7', '10', '17', '99', '100', '999', '9999'];
+    const cases = [];
+    for (const a of values) for (const b of values) {
+      put(slots[0], a); put(slots[1], b);
+      cases.push({code: new URL(link.href).searchParams.get(IDE.config.codeParam), outputs: outs.filter(o => !o.classList.contains('skip')).map(o => o.textContent)});
+    }
+    put(slots[0], '1'); put(slots[1], '3');
+    dispatchEvent(new Event('beforeprint'));
+    const printed = slots.every((s, i) => s.value === start[i]) && outs.every((o, i) => o.textContent === shown[i]);
+    dispatchEvent(new Event('afterprint'));
+    return [{page: page + 1, filter, waits, printed, cases}];
+  });
   const before = links[0].href;
   const select = document.querySelector('#ide-fields select');
   let changed = !select;
@@ -143,9 +168,51 @@ const INTERACT = `(async () => {
     shell,
     font: [400, 700, 800].every(w => document.fonts.check(w + ' 40px "JetBrains Mono"')),
     badLinks: links.filter(a => !a.href.startsWith('https://') || a.target !== '_blank' || !new URL(a.href).searchParams.get(IDE.config.codeParam)).length,
-    links: links.length, quizzes, picks, gates, changed
+    links: links.length, quizzes, picks, gates, live, changed
   };
 })()`;
+
+const RUN_LIVE = `
+import contextlib, io, json, sys
+for case in json.load(sys.stdin):
+    out = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(out):
+            exec(case['code'], {})
+        got = out.getvalue().split()
+    except Exception as e:
+        got = out.getvalue().split() + [type(e).__name__]
+    assert got == case['outputs'], (case, got)
+`;
+
+const key = async (name, code = name) => {
+  await send('Input.dispatchKeyEvent', {type: 'keyDown', key: name, code, text: name.length === 1 ? name : undefined});
+  await send('Input.dispatchKeyEvent', {type: 'keyUp', key: name, code});
+};
+
+// Every result must equal real Python; real keys must type into the slot, not turn the page.
+async function checkLive(live, dir) {
+  assert.equal(JSON.parse(fs.readFileSync('site.json', 'utf8')).language, 'python', 'Number slots only know Python arithmetic');
+  assert(live.filter && live.waits && live.printed, `Number slot failed on page ${live.page}`);
+  execFileSync('python3', ['-c', RUN_LIVE], {input: JSON.stringify(live.cases)});
+  const counter = `document.getElementById('counter').textContent`;
+  await run(`location.hash = '#page-${live.page}'`);
+  await sleep(300);
+  await run(`document.querySelector('#deckStage .slide.active .slot').select()`);
+  const page = await run(counter);
+  for (const name of ['1', ' ', 'r', 'f', 'g', 'b', 't', '2']) await key(name);
+  for (const name of ['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp']) await key(name);
+  const state = await run(`({counter: ${counter}, slot: document.activeElement.value, blank: document.getElementById('blank').hidden, full: Boolean(document.fullscreenElement)})`);
+  assert.deepEqual(state, {counter: page, slot: '12', blank: true, full: false}, 'Typing in a slot reached the deck shortcuts');
+  await run(`[...document.querySelectorAll('#deckStage .slide.active .slot')].forEach((s, i) => { s.value = ['1', '3'][i]; s.dispatchEvent(new Event('input')); })`);
+  const found = await run(OVERFLOW);
+  assert.deepEqual(found, [], `Longest result overflows: ${found.join(' | ')}`);
+  const shot = await send('Page.captureScreenshot', {format: 'png'});
+  fs.writeFileSync(path.join(dir, 'live-long.png'), Buffer.from(shot.data, 'base64'));
+  await key('Enter');
+  await key('PageDown');
+  assert.notEqual(await run(counter), page, 'A clicker cannot leave a page with a focused slot');
+}
 
 try {
   await send('Page.enable');
@@ -177,6 +244,7 @@ try {
     assert(result.quizzes.length && result.quizzes.every(Boolean), 'Quiz answer not marked right');
     assert(result.picks.length && result.picks.every(Boolean), 'Bug hunt line not marked right');
     assert(result.gates.every(Boolean), 'Logic switch gave a wrong result');
+    for (const live of result.live) await checkLive(live, dir);
     assert(result.changed, 'IDE settings did not change links');
     assert.deepEqual(Object.entries(result.shell).filter(([, ok]) => !ok), [], 'Workspace control failed');
     await send('Emulation.setDeviceMetricsOverride', {width: 390, height: 844, deviceScaleFactor: 1, mobile: true});

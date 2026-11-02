@@ -31,7 +31,7 @@
 | --- | --- | --- | --- |
 | [01](dist/01-input-output/index.html) | 输入输出 | 27 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [02](dist/02-variables/index.html) | 变量与数据类型 | 27 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [03](dist/03-arithmetic/index.html) | 算术运算 | 27 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [03](dist/03-arithmetic/index.html) | 算术运算 | 28 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [04](dist/04-conditions/index.html) | 条件判断 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [05](dist/05-logic/index.html) | 逻辑运算 | 28 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [06](dist/06-for-loop/index.html) | for 循环 | 29 | macOS Chrome 已验证，Windows 教室待试讲 |

@@ -16,83 +16,103 @@
   },
   {
     "page": 8,
+    "code": "candy = 7\npeople = 2\nprint(candy / people)\nprint(candy // people)\nprint(candy % people)",
+    "stdout": "3.5\n3\n1\n"
+  },
+  {
+    "page": 8,
+    "code": "print(10 / 5)\nprint(10 // 5)\nprint(10 % 5)",
+    "stdout": "2.0\n2\n0\n"
+  },
+  {
+    "page": 8,
+    "code": "print(3 / 5)\nprint(3 // 5)\nprint(3 % 5)",
+    "stdout": "0.6\n0\n3\n"
+  },
+  {
+    "page": 8,
+    "code": "print(7 / 0)",
+    "error": "ZeroDivisionError"
+  },
+  {
+    "page": 9,
     "code": "print(17 % 5)\nprint(17 // 5)\nprint(17 / 5)",
     "stdout": "2\n3\n3.4\n"
   },
   {
-    "page": 9,
+    "page": 10,
     "code": "print(4 % 2)\nprint(7 % 2)\nprint(123 % 10)",
     "stdout": "0\n1\n3\n"
   },
   {
-    "page": 11,
+    "page": 12,
     "code": "print(2 + 3 * 4)\nprint((2 + 3) * 4)",
     "stdout": "14\n20\n"
   },
   {
-    "page": 12,
+    "page": 13,
     "code": "print(10 - 2 * 3)\nprint((10 - 2) * 3)",
     "stdout": "4\n24\n"
   },
   {
-    "page": 14,
+    "page": 15,
     "code": "a = int(input())",
     "stdin": "2.5\n",
     "error": "ValueError"
   },
   {
-    "page": 14,
+    "page": 15,
     "code": "print(float(input()))",
     "stdin": "4\n",
     "stdout": "4.0\n"
   },
   {
-    "page": 15,
+    "page": 16,
     "code": "print(8 / 4)\nprint(8 // 4)\nprint(8 % 4)",
     "stdout": "2.0\n2\n0\n"
   },
   {
-    "page": 17,
+    "page": 18,
     "code": "print(3 x 4)",
     "error": "SyntaxError"
   },
   {
-    "page": 17,
+    "page": 18,
     "code": "print(5 / 0)",
     "error": "ZeroDivisionError"
   },
   {
-    "page": 17,
+    "page": 18,
     "code": "print(5 // 0)",
     "error": "ZeroDivisionError"
   },
   {
-    "page": 17,
+    "page": 18,
     "code": "print(5 % 0)",
     "error": "ZeroDivisionError"
   },
   {
-    "page": 17,
+    "page": 18,
     "code": "int(\"2.5\")",
     "error": "ValueError"
   },
   {
-    "page": 18,
+    "page": 19,
     "code": "a = 80\nb = 90\navg = a + b / 2\nprint(avg)\nprint((a + b) / 2)",
     "stdout": "125.0\n85.0\n"
   },
   {
-    "page": 25,
+    "page": 26,
     "code": "print(3 * 4)",
     "stdout": "12\n"
   },
   {
-    "page": 26,
+    "page": 27,
     "code": "print(2 ** 3)",
     "stdout": "8\n"
   },
   {
-    "page": 26,
+    "page": 27,
     "code": "print(round(2.5))",
     "stdout": "2\n"
   }

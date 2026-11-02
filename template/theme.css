@@ -172,6 +172,14 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .gate button.on{background:#dcebd9;border-color:var(--olive)}
 .gate b{font:800 76px var(--code);padding-left:20px}
 .gate b.on{color:var(--olive)}
+.slot{width:4.6ch;height:1.3em;font:inherit;line-height:1.3;color:var(--night);background:#f0c674;border:0;border-radius:10px;padding:0 .2ch;text-align:center;cursor:text;outline:none}
+.slot:hover{background:#f6d691}
+.slot:focus{background:#fff;box-shadow:0 0 0 3px #f0c674}
+.live-out{position:absolute;left:1090px;right:96px;top:170px}
+.live-out div{border-top:4px solid var(--ink);padding:14px 0 22px}
+.live-out i{display:block;font:400 38px var(--text);font-style:normal;color:var(--muted)}
+.live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay)}
+.live-out b.skip{font:400 44px/84px var(--text);color:var(--muted)}
 
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
 .pick .ln.yes{background:#2f4a36}.pick .ln.no{background:#5a3327}

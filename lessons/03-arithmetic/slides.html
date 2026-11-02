@@ -88,6 +88,23 @@
   </div>
 </section>
 
+<!-- live numbers: change the candy and the people -->
+<section class="slide" aria-label="换数字试试">
+  <div class="night" style="width:1010px"></div>
+  <h2 class="t" style="color:var(--paper)">换几个数试试</h2>
+  <div class="editor" style="left:96px;top:210px;width:830px;--fs:46px"><div class="tab">candy.py</div>
+<pre class="code"><span class="ln">candy = <input class="slot" data-var="candy" value="7" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="糖的颗数"></span><span class="ln">people = <input class="slot" data-var="people" value="2" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="人数"></span><span class="ln"><span class="f">print</span>(candy / people)</span><span class="ln"><span class="f">print</span>(candy // people)</span><span class="ln"><span class="f">print</span>(candy % people)</span></pre></div>
+  <p class="abs say" style="left:96px;top:735px;width:830px;color:var(--paper)">点黄色的数字，改完结果马上变。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这两个数进 IDE</a>
+  <div class="live-out">
+    <div><i>第 3 行：/</i><b data-eval="candy / people">3.5</b></div>
+    <div><i>第 4 行：//，每人几颗</i><b data-eval="candy // people">3</b></div>
+    <div><i>第 5 行：%，还剩几颗</i><b data-eval="candy % people">1</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:780px;width:734px;font-size:38px">先猜再改：10 和 5，3 和 5，7 和 0。</p>
+  <div class="foot"></div>
+</section>
+
 <!-- quiz: remainder -->
 <section class="slide" aria-label="小测：17 除以 5 的余数">
   <h2 class="t r">小测：print(17 % 5) 输出几？</h2>

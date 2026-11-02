@@ -39,7 +39,7 @@ class SlidePresentation {
       this.scale();
     });
     this.stage.addEventListener('click', e => {
-      if (e.target.closest('a,button,.pick,pre,.tb')) return;
+      if (e.target.closest('a,button,.pick,pre,.tb,.live-out')) return;
       this.move(e.clientX < innerWidth / 3 ? -1 : 1);
     });
     let startX = null;
@@ -66,6 +66,7 @@ class SlidePresentation {
     this.setupQuizzes();
     this.setupBugHunt();
     this.setupGates();
+    this.setupLive();
     this.toggleThumbs(this.thumbsPreference());
     this.fromHash();
   }
@@ -165,7 +166,13 @@ class SlidePresentation {
   codeOf(slide) {
     const full = slide.querySelector('pre.code[data-full]');
     if (full) return full.dataset.full;
-    return [...slide.querySelectorAll('pre.code .ln')].map(l => l.textContent).join('\n');
+    return [...slide.querySelectorAll('pre.code .ln')].map(l => this.lineText(l)).join('\n');
+  }
+  lineText(line) {
+    const slots = [...line.querySelectorAll('.slot')];
+    const copy = line.cloneNode(true);
+    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(slots[i].value));
+    return copy.textContent;
   }
   linkIde() {
     const settings = IDE.load();
@@ -247,6 +254,42 @@ class SlidePresentation {
     });
   }
 
+  /* Python's result for one small expression, so a slot can change a number with no Python on the page. */
+  setupLive() {
+    const calc = {
+      '+': (a, b) => a + b, '-': (a, b) => a - b, '*': (a, b) => a * b,
+      '/': (a, b) => Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
+      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b
+    };
+    this.liveSlots = [...this.stage.querySelectorAll('.slot')];
+    this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
+      const slots = [...slide.querySelectorAll('.slot')];
+      const results = [...slide.querySelectorAll('[data-eval]')];
+      const update = () => {
+        const value = Object.fromEntries(slots.map(slot => [slot.dataset.var, slot.value]));
+        const missing = slots.some(slot => !slot.value);
+        let stopped = false;
+        results.forEach(result => {
+          const [left, op, right] = result.dataset.eval.split(' ');
+          const [a, b] = [left, right].map(name => Number(value[name] ?? name));
+          const failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(op);
+          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? 'ZeroDivisionError' : calc[op](a, b);
+          result.classList.toggle('skip', !missing && stopped);
+          stopped ||= failed;
+        });
+        this.linkIde();
+      };
+      slots.forEach(slot => {
+        slot.dataset.start = slot.value;
+        slot.addEventListener('input', () => {
+          slot.value = slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
+          update();
+        });
+      });
+      update();
+    });
+  }
+
   /* --- stage and paging --- */
   scale() {
     const full = Boolean(document.fullscreenElement);
@@ -262,6 +305,7 @@ class SlidePresentation {
     this.index = Math.max(0, Math.min(index, this.slides.length - 1));
     const slide = this.slides[this.index];
     slide.classList.add('active', 'visible');
+    if (document.activeElement.matches('.slot')) document.activeElement.blur();
     if (slide.dataset.steps) slide.dataset.at = atEnd ? slide.dataset.steps : 1;
     history.replaceState(null, '', '#page-' + (this.index + 1));
     this.label();
@@ -290,6 +334,10 @@ class SlidePresentation {
     if (e.ctrlKey || e.metaKey || e.altKey || this.settings.open || this.help.open) return;
     if (e.target.closest('select')) return;
     if (!this.blank.hidden) { this.blank.hidden = true; e.preventDefault(); return; }
+    if (e.target.matches('.slot')) {
+      if (['Enter', 'Escape'].includes(e.key)) e.target.blur();
+      if (!['PageDown', 'PageUp'].includes(e.key)) return;
+    }
     const k = e.key;
     const actions = {
       f: () => this.fullscreen(),
@@ -320,6 +368,7 @@ class SlidePresentation {
     this.hide = setTimeout(() => this.bar.classList.remove('show'), 2000);
   }
   finishAll() {
+    this.liveSlots.forEach(slot => { slot.value = slot.dataset.start; slot.dispatchEvent(new Event('input')); });
     this.atBeforePrint = this.slides[this.index].dataset.at;
     this.slides.forEach(s => { if (s.dataset.steps) s.dataset.at = s.dataset.steps; });
     this.stage.querySelectorAll('.quiz').forEach(q => q.querySelectorAll('button')[Number(q.dataset.right)].click());

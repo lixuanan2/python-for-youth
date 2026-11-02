@@ -318,6 +318,14 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .gate button.on{background:#dcebd9;border-color:var(--olive)}
 .gate b{font:800 76px var(--code);padding-left:20px}
 .gate b.on{color:var(--olive)}
+.slot{width:4.6ch;height:1.3em;font:inherit;line-height:1.3;color:var(--night);background:#f0c674;border:0;border-radius:10px;padding:0 .2ch;text-align:center;cursor:text;outline:none}
+.slot:hover{background:#f6d691}
+.slot:focus{background:#fff;box-shadow:0 0 0 3px #f0c674}
+.live-out{position:absolute;left:1090px;right:96px;top:170px}
+.live-out div{border-top:4px solid var(--ink);padding:14px 0 22px}
+.live-out i{display:block;font:400 38px var(--text);font-style:normal;color:var(--muted)}
+.live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay)}
+.live-out b.skip{font:400 44px/84px var(--text);color:var(--muted)}
 
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
 .pick .ln.yes{background:#2f4a36}.pick .ln.no{background:#5a3327}
@@ -496,8 +504,25 @@ dialog p{color:var(--muted);font-size:15px}
   </div>
 </section>
 
+<!-- live numbers: change the candy and the people -->
+<section id="page-8" class="slide" aria-label="换数字试试">
+  <div class="night" style="width:1010px"></div>
+  <h2 class="t" style="color:var(--paper)">换几个数试试</h2>
+  <div class="editor" style="left:96px;top:210px;width:830px;--fs:46px"><div class="tab">candy.py</div>
+<pre class="code"><span class="ln">candy = <input class="slot" data-var="candy" value="7" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="糖的颗数"></span><span class="ln">people = <input class="slot" data-var="people" value="2" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="人数"></span><span class="ln"><span class="f">print</span>(candy / people)</span><span class="ln"><span class="f">print</span>(candy // people)</span><span class="ln"><span class="f">print</span>(candy % people)</span></pre></div>
+  <p class="abs say" style="left:96px;top:735px;width:830px;color:var(--paper)">点黄色的数字，改完结果马上变。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这两个数进 IDE</a>
+  <div class="live-out">
+    <div><i>第 3 行：/</i><b data-eval="candy / people">3.5</b></div>
+    <div><i>第 4 行：//，每人几颗</i><b data-eval="candy // people">3</b></div>
+    <div><i>第 5 行：%，还剩几颗</i><b data-eval="candy % people">1</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:780px;width:734px;font-size:38px">先猜再改：10 和 5，3 和 5，7 和 0。</p>
+  <div class="foot"></div>
+</section>
+
 <!-- quiz: remainder -->
-<section id="page-8" class="slide" aria-label="小测：17 除以 5 的余数">
+<section id="page-9" class="slide" aria-label="小测：17 除以 5 的余数">
   <h2 class="t r">小测：print(17 % 5) 输出几？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="3 是 17 // 5 的结果，也就是商。"><i>1</i>3</button>
@@ -510,7 +535,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- what % is for -->
-<section id="page-9" class="slide" aria-label="余数有什么用">
+<section id="page-10" class="slide" aria-label="余数有什么用">
   <h2 class="t r">余数很有用</h2>
   <div class="vs">
     <div class="r d1"><h3>判断奇偶</h3><pre>n % 2</pre><p class="say">余数是 0 就是偶数，是 1 就是奇数。</p></div>
@@ -521,7 +546,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- your turn -->
-<section id="page-10" class="slide" aria-label="让程序说清楚">
+<section id="page-11" class="slide" aria-label="让程序说清楚">
   <div class="band r"><b>动手<br>改一改</b><span>print 里用逗号隔开，就能把文字和数字放在一起。</span></div>
   <div class="turn">
     <h2 class="r d1">让程序说清楚</h2>
@@ -533,7 +558,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- order of operations -->
-<section id="page-11" class="slide dark" aria-label="预测运算顺序" data-steps="2" data-at="2" data-chapter="运算顺序">
+<section id="page-12" class="slide dark" aria-label="预测运算顺序" data-steps="2" data-at="2" data-chapter="运算顺序">
   <h2 class="t">猜一猜：这两行结果一样吗？</h2>
   <div class="editor" style="left:96px;top:230px;width:880px;--fs:58px"><div class="tab">order.py</div>
 <pre class="code" data-file="solutions/04_order.py"><span class="ln"><span class="f">print</span>(<span class="m">2</span> + <span class="m">3</span> * <span class="m">4</span>)</span><span class="ln"><span class="f">print</span>((<span class="m">2</span> + <span class="m">3</span>) * <span class="m">4</span>)</span></pre></div>
@@ -546,7 +571,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: order -->
-<section id="page-12" class="slide" aria-label="小测：先乘后减">
+<section id="page-13" class="slide" aria-label="小测：先乘后减">
   <h2 class="t r">小测：print(10 - 2 * 3) 输出几？</h2>
   <div class="quiz r d1" data-right="0">
     <button type="button" data-fb="答对了！先算 2 * 3 得 6，再算 10 - 6。"><i>1</i>4</button>
@@ -559,7 +584,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- float input trace -->
-<section id="page-13" class="slide" aria-label="算面积" data-steps="3" data-at="3" data-chapter="读小数">
+<section id="page-14" class="slide" aria-label="算面积" data-steps="3" data-at="3" data-chapter="读小数">
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">回到地毯：算出面积</h2>
   <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">area.py</div>
@@ -576,7 +601,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- int or float -->
-<section id="page-14" class="slide" aria-label="int 还是 float">
+<section id="page-15" class="slide" aria-label="int 还是 float">
   <h2 class="t r">int 还是 float？</h2>
   <div class="vs">
     <div class="r d1"><h3>只有整数</h3><pre><span style="color:var(--clay)">int</span>(input())</pre><p class="say">人数、个数，用 int。</p></div>
@@ -587,7 +612,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: type of result -->
-<section id="page-15" class="slide" aria-label="小测：8 除以 4">
+<section id="page-16" class="slide" aria-label="小测：8 除以 4">
   <h2 class="t r">小测：print(8 / 4) 输出什么？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="想得到整数 2，要用 8 // 4。"><i>1</i>2</button>
@@ -600,7 +625,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- your turn -->
-<section id="page-16" class="slide" aria-label="面积改周长">
+<section id="page-17" class="slide" aria-label="面积改周长">
   <div class="band r"><b>动手<br>改一改</b><span>周长是长加宽，再乘 2。想想哪里要加括号。</span></div>
   <div class="turn">
     <h2 class="r d1">把面积改成周长</h2>
@@ -612,7 +637,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- errors -->
-<section id="page-17" class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section id="page-18" class="slide" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
   <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
@@ -625,7 +650,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-18" class="slide dark" aria-label="找错：平均分">
+<section id="page-19" class="slide dark" aria-label="找错：平均分">
   <h2 class="t r">找错：平均分怎么这么高？</h2>
   <div class="editor r d1" style="left:96px;top:230px;width:1040px;--fs:58px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！除法先算，变成了 80 + 45。要写成 (a + b) / 2。" data-no="这一行没有问题。想一想：程序先算的是哪一步？"><span class="ln">a = <span class="m">80</span></span><span class="ln">b = <span class="m">90</span></span><span class="ln">avg = a + b / <span class="m">2</span></span><span class="ln"><span class="f">print</span>(avg)</span></pre></div>
@@ -635,7 +660,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- challenge -->
-<section id="page-19" class="slide clay" aria-label="温度换算" data-chapter="挑战">
+<section id="page-20" class="slide clay" aria-label="温度换算" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">温度<br>换算</h2>
   <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入一个摄氏度（-100 到 100，可能有小数），输出华氏度。公式：华氏度 = 摄氏度 × 9 ÷ 5 + 32。</p>
@@ -646,7 +671,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-20" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-21" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>温度可能有小数，读入时用 int 还是 float？</span></p>
@@ -657,7 +682,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- optional challenge -->
-<section id="page-21" class="slide clay" aria-label="秒数换算">
+<section id="page-22" class="slide clay" aria-label="秒数换算">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 再挑战一题</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">秒数<br>换算</h2>
   <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入总秒数（0 到 100000 的整数），输出是几分几秒。写完用 59、60、61 各试一次。</p>
@@ -667,7 +692,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- creative project -->
-<section id="page-22" class="slide" aria-label="造一个小计算器" data-chapter="小项目">
+<section id="page-23" class="slide" aria-label="造一个小计算器" data-chapter="小项目">
   <h2 class="t r">造一个你自己的计算器</h2>
   <p class="abs say r d1" style="left:96px;top:200px">选一件你在意的事，读入数据，算出结果，再用一句话说出来。</p>
   <div class="later" style="top:320px">
@@ -681,7 +706,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- share -->
-<section id="page-23" class="slide" aria-label="和同桌换着玩">
+<section id="page-24" class="slide" aria-label="和同桌换着玩">
   <h2 class="t r">和同桌换着玩</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>换着运行</b><span>输入几组数，看同桌的计算器算得对不对</span></div>
@@ -693,7 +718,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-24" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-25" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p style="font-weight:700"><i>Q1</i><span>/、// 和 % 有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　小数除法、整除、求余数。</em></span></p>
@@ -705,7 +730,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- cheat sheet -->
-<section id="page-25" class="slide" aria-label="速查卡">
+<section id="page-26" class="slide" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>3 * 4</code><span>乘法，结果是 12</span></div>
@@ -718,7 +743,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-26" class="slide" aria-label="后面再学">
+<section id="page-27" class="slide" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>2 ** 3</code><span>乘方，2 的 3 次方</span></div>
@@ -730,7 +755,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-27" class="slide dark thanks" aria-label="谢谢">
+<section id="page-28" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
@@ -824,7 +849,7 @@ class SlidePresentation {
       this.scale();
     });
     this.stage.addEventListener('click', e => {
-      if (e.target.closest('a,button,.pick,pre,.tb')) return;
+      if (e.target.closest('a,button,.pick,pre,.tb,.live-out')) return;
       this.move(e.clientX < innerWidth / 3 ? -1 : 1);
     });
     let startX = null;
@@ -851,6 +876,7 @@ class SlidePresentation {
     this.setupQuizzes();
     this.setupBugHunt();
     this.setupGates();
+    this.setupLive();
     this.toggleThumbs(this.thumbsPreference());
     this.fromHash();
   }
@@ -950,7 +976,13 @@ class SlidePresentation {
   codeOf(slide) {
     const full = slide.querySelector('pre.code[data-full]');
     if (full) return full.dataset.full;
-    return [...slide.querySelectorAll('pre.code .ln')].map(l => l.textContent).join('\n');
+    return [...slide.querySelectorAll('pre.code .ln')].map(l => this.lineText(l)).join('\n');
+  }
+  lineText(line) {
+    const slots = [...line.querySelectorAll('.slot')];
+    const copy = line.cloneNode(true);
+    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(slots[i].value));
+    return copy.textContent;
   }
   linkIde() {
     const settings = IDE.load();
@@ -1032,6 +1064,42 @@ class SlidePresentation {
     });
   }
 
+  /* Python's result for one small expression, so a slot can change a number with no Python on the page. */
+  setupLive() {
+    const calc = {
+      '+': (a, b) => a + b, '-': (a, b) => a - b, '*': (a, b) => a * b,
+      '/': (a, b) => Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
+      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b
+    };
+    this.liveSlots = [...this.stage.querySelectorAll('.slot')];
+    this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
+      const slots = [...slide.querySelectorAll('.slot')];
+      const results = [...slide.querySelectorAll('[data-eval]')];
+      const update = () => {
+        const value = Object.fromEntries(slots.map(slot => [slot.dataset.var, slot.value]));
+        const missing = slots.some(slot => !slot.value);
+        let stopped = false;
+        results.forEach(result => {
+          const [left, op, right] = result.dataset.eval.split(' ');
+          const [a, b] = [left, right].map(name => Number(value[name] ?? name));
+          const failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(op);
+          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? 'ZeroDivisionError' : calc[op](a, b);
+          result.classList.toggle('skip', !missing && stopped);
+          stopped ||= failed;
+        });
+        this.linkIde();
+      };
+      slots.forEach(slot => {
+        slot.dataset.start = slot.value;
+        slot.addEventListener('input', () => {
+          slot.value = slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
+          update();
+        });
+      });
+      update();
+    });
+  }
+
   /* --- stage and paging --- */
   scale() {
     const full = Boolean(document.fullscreenElement);
@@ -1047,6 +1115,7 @@ class SlidePresentation {
     this.index = Math.max(0, Math.min(index, this.slides.length - 1));
     const slide = this.slides[this.index];
     slide.classList.add('active', 'visible');
+    if (document.activeElement.matches('.slot')) document.activeElement.blur();
     if (slide.dataset.steps) slide.dataset.at = atEnd ? slide.dataset.steps : 1;
     history.replaceState(null, '', '#page-' + (this.index + 1));
     this.label();
@@ -1075,6 +1144,10 @@ class SlidePresentation {
     if (e.ctrlKey || e.metaKey || e.altKey || this.settings.open || this.help.open) return;
     if (e.target.closest('select')) return;
     if (!this.blank.hidden) { this.blank.hidden = true; e.preventDefault(); return; }
+    if (e.target.matches('.slot')) {
+      if (['Enter', 'Escape'].includes(e.key)) e.target.blur();
+      if (!['PageDown', 'PageUp'].includes(e.key)) return;
+    }
     const k = e.key;
     const actions = {
       f: () => this.fullscreen(),
@@ -1105,6 +1178,7 @@ class SlidePresentation {
     this.hide = setTimeout(() => this.bar.classList.remove('show'), 2000);
   }
   finishAll() {
+    this.liveSlots.forEach(slot => { slot.value = slot.dataset.start; slot.dispatchEvent(new Event('input')); });
     this.atBeforePrint = this.slides[this.index].dataset.at;
     this.slides.forEach(s => { if (s.dataset.steps) s.dataset.at = s.dataset.steps; });
     this.stage.querySelectorAll('.quiz').forEach(q => q.querySelectorAll('button')[Number(q.dataset.right)].click());

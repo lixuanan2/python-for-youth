@@ -35,7 +35,7 @@
   {
     "id": "03",
     "role": "学生小改写",
-    "page": 10,
+    "page": 11,
     "starter": "starter/03_candy_sentence.py",
     "solution": "solutions/03_candy_sentence.py",
     "scope": "同例题A",
@@ -46,7 +46,7 @@
   {
     "id": "04",
     "role": "语法小演示",
-    "page": 11,
+    "page": 12,
     "starter": "starter/04_order.py",
     "solution": "solutions/04_order.py",
     "scope": "无输入",
@@ -57,7 +57,7 @@
   {
     "id": "B",
     "role": "基础例题",
-    "page": 13,
+    "page": 14,
     "starter": "starter/05_area.py",
     "solution": "solutions/05_area.py",
     "scope": "长宽为0.5到1000的数，分两行输入",
@@ -68,7 +68,7 @@
   {
     "id": "05",
     "role": "学生小改写",
-    "page": 16,
+    "page": 17,
     "starter": "starter/06_perimeter.py",
     "solution": "solutions/06_perimeter.py",
     "scope": "同例题B",
@@ -79,7 +79,7 @@
   {
     "id": "06",
     "role": "独立迁移",
-    "page": 19,
+    "page": 20,
     "starter": "starter/07_temperature.py",
     "solution": "solutions/07_temperature.py",
     "scope": "摄氏度为-100到100的数，一行输入",
@@ -90,7 +90,7 @@
   {
     "id": "06b",
     "role": "独立迁移",
-    "page": 21,
+    "page": 22,
     "starter": "starter/09_seconds.py",
     "solution": "solutions/09_seconds.py",
     "scope": "总秒数为0到100000的整数，一行输入",
@@ -101,7 +101,7 @@
   {
     "id": "07",
     "role": "创作项目",
-    "page": 22,
+    "page": 23,
     "starter": "starter/08_calculator.py",
     "solution": "solutions/08_calculator_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",
