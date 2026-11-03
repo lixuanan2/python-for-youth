@@ -56,6 +56,23 @@
   <div class="foot"></div>
 </section>
 
+<!-- live comparisons: change the score -->
+<section class="slide" aria-label="换个分数比一比">
+  <div class="night" style="width:1010px"></div>
+  <h2 class="t" style="color:var(--paper)">换个分数比一比</h2>
+  <div class="editor" style="left:96px;top:230px;width:830px;--fs:50px"><div class="tab">score.py</div>
+<pre class="code"><span class="ln">score = <input class="slot" data-var="score" value="75" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="分数"></span><span class="ln"><span class="f">print</span>(score &gt;= <span class="m">60</span>)</span><span class="ln"><span class="f">print</span>(score == <span class="m">100</span>)</span><span class="ln"><span class="f">print</span>(score &lt; <span class="m">60</span>)</span></pre></div>
+  <p class="abs say" style="left:96px;top:715px;width:830px;color:var(--paper)">点黄色的分数，改完三个结果马上变。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这个分数进 IDE</a>
+  <div class="live-out">
+    <div><i>第 2 行：大于等于 60 吗</i><b data-eval="score &gt;= 60">True</b></div>
+    <div><i>第 3 行：等于 100 吗</i><b data-eval="score == 100">False</b></div>
+    <div><i>第 4 行：小于 60 吗</i><b data-eval="score &lt; 60">False</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:780px;width:734px;font-size:38px">先猜再改：59 分呢？100 分呢？</p>
+  <div class="foot"></div>
+</section>
+
 <!-- if with trace -->
 <section class="slide dark" aria-label="if 的写法" data-steps="3" data-at="3" data-chapter="if">
   <h2 class="t">if：条件成立才做</h2>

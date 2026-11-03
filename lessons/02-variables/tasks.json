@@ -35,7 +35,7 @@
   {
     "id": "02b",
     "role": "语法小演示",
-    "page": 8,
+    "page": 9,
     "starter": "starter/02b_copy_value.py",
     "solution": "solutions/02b_copy_value.py",
     "scope": "无输入",
@@ -46,7 +46,7 @@
   {
     "id": "03",
     "role": "学生小改写",
-    "page": 9,
+    "page": 10,
     "starter": "starter/03_two_years.py",
     "solution": "solutions/03_two_years.py",
     "scope": "无输入",
@@ -57,7 +57,7 @@
   {
     "id": "04",
     "role": "语法小演示",
-    "page": 12,
+    "page": 13,
     "starter": "starter/04_types.py",
     "solution": "solutions/04_types.py",
     "scope": "无输入",
@@ -68,7 +68,7 @@
   {
     "id": "05",
     "role": "语法小演示",
-    "page": 16,
+    "page": 17,
     "starter": "starter/05_join_text.py",
     "solution": "solutions/05_join_text.py",
     "scope": "无输入",
@@ -79,7 +79,7 @@
   {
     "id": "06",
     "role": "独立迁移",
-    "page": 20,
+    "page": 21,
     "starter": "starter/06_piggy_bank.py",
     "solution": "solutions/06_piggy_bank.py",
     "scope": "三行整数，均为0到10000",
@@ -90,7 +90,7 @@
   {
     "id": "07",
     "role": "创作项目",
-    "page": 22,
+    "page": 23,
     "starter": "starter/07_character.py",
     "solution": "solutions/07_character_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

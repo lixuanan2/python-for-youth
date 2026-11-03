@@ -15,42 +15,52 @@
     "error": "SyntaxError"
   },
   {
-    "page": 8,
+    "page": 6,
+    "code": "score = 75\nprint(score >= 60)\nprint(score == 100)\nprint(score < 60)",
+    "stdout": "True\nFalse\nFalse\n"
+  },
+  {
+    "page": 6,
+    "code": "score = 60\nprint(score >= 60)\nprint(score == 100)\nprint(score < 60)",
+    "stdout": "True\nFalse\nFalse\n"
+  },
+  {
+    "page": 9,
     "code": "score = 60\nif score > 60:\n    print(\"及格\")\nelse:\n    print(\"继续加油\")",
     "stdout": "继续加油\n"
   },
   {
-    "page": 10,
+    "page": 11,
     "code": "print(\"python\" == \"Python\")",
     "stdout": "False\n"
   },
   {
-    "page": 15,
+    "page": 16,
     "code": "x = 5\nif x > 3\n    print(x)",
     "error": "SyntaxError"
   },
   {
-    "page": 15,
+    "page": 16,
     "code": "x = 5\nif x = 3:\n    print(x)",
     "error": "SyntaxError"
   },
   {
-    "page": 15,
+    "page": 16,
     "code": "x = 5\nif x > 3:\nprint(x)",
     "error": "IndentationError"
   },
   {
-    "page": 15,
+    "page": 16,
     "code": "x = 1\nif x > 3:\n    print(\"A\")\n    print(\"B\")\nprint(\"C\")",
     "stdout": "C\n"
   },
   {
-    "page": 15,
+    "page": 16,
     "code": "x = 1\nif x > 3:\n    print(\"A\")\nprint(\"B\")\nprint(\"C\")",
     "stdout": "B\nC\n"
   },
   {
-    "page": 16,
+    "page": 17,
     "code": "score = 95\nif score >= 60:\n    print(\"及格\")\nelif score >= 90:\n    print(\"优秀\")",
     "stdout": "及格\n"
   }

@@ -13,7 +13,7 @@
   {
     "id": "02",
     "role": "学生小改写",
-    "page": 8,
+    "page": 9,
     "starter": "starter/01_two_lines.py",
     "solution": "solutions/01_two_lines.py",
     "scope": "无输入",
@@ -24,7 +24,7 @@
   {
     "id": "03",
     "role": "语法小演示",
-    "page": 9,
+    "page": 10,
     "starter": "starter/03_text_input.py",
     "solution": "solutions/03_text_input.py",
     "scope": "一行文字",
@@ -35,7 +35,7 @@
   {
     "id": "04",
     "role": "语法小演示",
-    "page": 11,
+    "page": 12,
     "starter": "starter/05_text_add.py",
     "solution": "solutions/05_text_add.py",
     "scope": "两行文字，用于观察字符串拼接",
@@ -46,7 +46,7 @@
   {
     "id": "A",
     "role": "基础例题",
-    "page": 14,
+    "page": 15,
     "starter": "starter/04_sum.py",
     "solution": "solutions/04_sum.py",
     "scope": "a、b为-1000到1000的整数，分两行输入",
@@ -57,7 +57,7 @@
   {
     "id": "05",
     "role": "学生小改写",
-    "page": 16,
+    "page": 17,
     "starter": "starter/06_sum_three.py",
     "solution": "solutions/06_sum_three.py",
     "scope": "三个-1000到1000的整数，分三行输入",
@@ -68,7 +68,7 @@
   {
     "id": "06",
     "role": "独立迁移",
-    "page": 20,
+    "page": 21,
     "starter": "starter/07_next_year.py",
     "solution": "solutions/07_next_year.py",
     "scope": "第一行名字；第二行0到150的整数年龄",
@@ -79,7 +79,7 @@
   {
     "id": "07",
     "role": "创作项目",
-    "page": 22,
+    "page": 23,
     "starter": "starter/08_my_bot.py",
     "solution": "solutions/08_my_bot_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

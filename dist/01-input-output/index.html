@@ -320,11 +320,13 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .gate b.on{color:var(--olive)}
 .slot{width:4.6ch;height:1.3em;font:inherit;line-height:1.3;color:var(--night);background:#f0c674;border:0;border-radius:10px;padding:0 .2ch;text-align:center;cursor:text;outline:none}
 .slot:hover{background:#f6d691}
+.slot[data-kind=text]{width:20.8ch;text-align:left;padding:0 .4ch}
 .slot:focus{background:#fff;box-shadow:0 0 0 3px #f0c674}
 .live-out{position:absolute;left:1090px;right:96px;top:170px}
 .live-out div{border-top:4px solid var(--ink);padding:14px 0 22px}
 .live-out i{display:block;font:400 38px var(--text);font-style:normal;color:var(--muted)}
-.live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay)}
+.live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay);white-space:pre}
+.live-out b.long{font-size:42px}
 .live-out b.skip{font:400 44px/84px var(--text);color:var(--muted)}
 
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
@@ -472,8 +474,23 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
+<!-- live text: change the words inside the quotes -->
+<section id="page-6" class="slide" aria-label="改引号里的字">
+  <div class="night" style="width:1060px"></div>
+  <h2 class="t" style="color:var(--paper)">引号里换成你的话</h2>
+  <div class="editor" style="left:96px;top:230px;width:940px;--fs:44px"><div class="tab">hello.py</div>
+<pre class="code"><span class="ln"><span class="f">print</span>(<span class="s">"</span><input class="slot" data-kind="text" data-var="words" value="你好，Python!" maxlength="24" autocomplete="off" spellcheck="false" aria-label="引号里的字"><span class="s">"</span>)</span></pre></div>
+  <p class="abs say" style="left:96px;top:440px;width:900px;color:var(--paper)">点黄框改字，屏幕上马上跟着变。中文、数字、空格都可以。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这句话进 IDE</a>
+  <div class="live-out">
+    <div><i>屏幕上</i><b data-eval="words">你好，Python!</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:520px;width:734px;font-size:38px">先猜再改：写成 3 + 4，屏幕上会出现 7 吗？</p>
+  <div class="foot"></div>
+</section>
+
 <!-- quotes matter -->
-<section id="page-6" class="slide" aria-label="有引号和没引号" data-steps="2" data-at="2">
+<section id="page-7" class="slide" aria-label="有引号和没引号" data-steps="2" data-at="2">
   <h2 class="t r">猜一猜：引号有什么用？</h2>
   <div class="vs">
     <div><h3>有引号</h3><pre><span class="f">print</span>(<span style="color:var(--olive)">"1 + 1"</span>)</pre><p class="res step s2">1 + 1</p></div>
@@ -485,7 +502,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz -->
-<section id="page-7" class="slide" aria-label="小测：选对的写法">
+<section id="page-8" class="slide" aria-label="小测：选对的写法">
   <h2 class="t r">小测：哪一行能运行？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="Python 分大小写，Print 和 print 是两个不同的名字。"><i>1</i>Print("hi")</button>
@@ -498,7 +515,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- your turn -->
-<section id="page-8" class="slide" aria-label="让程序说两句话">
+<section id="page-9" class="slide" aria-label="让程序说两句话">
   <div class="band r"><b>动手<br>改一改</b><span>每个 print 输出后都会换行。</span></div>
   <div class="turn">
     <h2 class="r d1">让程序说两句话</h2>
@@ -511,7 +528,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- input -->
-<section id="page-9" class="slide" aria-label="input 先读入文字" data-chapter="input">
+<section id="page-10" class="slide" aria-label="input 先读入文字" data-chapter="input">
   <div class="night r" style="width:1120px"></div>
   <h2 class="t r" style="color:var(--paper)">input：等你打字</h2>
   <div class="editor r d1" style="left:96px;top:230px;width:930px;--fs:50px"><div class="tab">greet.py</div>
@@ -524,7 +541,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- variable -->
-<section id="page-10" class="slide" aria-label="变量像贴了名字的盒子">
+<section id="page-11" class="slide" aria-label="变量像贴了名字的盒子">
   <h2 class="t r">变量：贴了名字的盒子</h2>
   <div class="crate r d1" style="left:150px;top:380px;width:560px"><small>name</small>"Ming"</div>
   <div class="abs r d2" style="left:840px;top:250px;right:96px">
@@ -536,7 +553,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- predict 34 -->
-<section id="page-11" class="slide dark" aria-label="预测 3 和 4" data-chapter="文字和数字" data-steps="3" data-at="3">
+<section id="page-12" class="slide dark" aria-label="预测 3 和 4" data-chapter="文字和数字" data-steps="3" data-at="3">
   <h2 class="t">输入 3 和 4，会输出几？</h2>
   <div class="editor" style="left:96px;top:230px;width:880px;--fs:58px"><div class="tab">add.py</div>
 <pre class="code" data-file="solutions/05_text_add.py"><span class="ln l1">a = <span class="f">input</span>()</span><span class="ln l2">b = <span class="f">input</span>()</span><span class="ln l3"><span class="f">print</span>(a + b)</span></pre></div>
@@ -550,7 +567,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- text vs number -->
-<section id="page-12" class="slide" aria-label="文字和整数">
+<section id="page-13" class="slide" aria-label="文字和整数">
   <h2 class="t r">文字和整数，加法不一样</h2>
   <div class="vs">
     <div class="r d1"><h3>文字</h3><pre>"3" + "4"</pre><p class="res">"34"</p><p class="say">像把两张纸条接起来。</p></div>
@@ -561,7 +578,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- int -->
-<section id="page-13" class="slide" aria-label="int 把文字变成整数" data-chapter="int">
+<section id="page-14" class="slide" aria-label="int 把文字变成整数" data-chapter="int">
   <h2 class="t r">int：把文字变成整数</h2>
   <div class="morph">
     <div class="r d1"><div class="q">"3"</div><span>文字：+ 是拼接</span></div>
@@ -573,7 +590,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- sum trace -->
-<section id="page-14" class="slide" aria-label="两数求和" data-steps="3" data-at="3">
+<section id="page-15" class="slide" aria-label="两数求和" data-steps="3" data-at="3">
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">两数求和</h2>
   <div class="editor" style="left:96px;top:230px;width:1040px;--fs:58px"><div class="tab">sum.py</div>
@@ -591,7 +608,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz -->
-<section id="page-15" class="slide" aria-label="小测：什么时候用 int">
+<section id="page-16" class="slide" aria-label="小测：什么时候用 int">
   <h2 class="t r">小测：这段程序会怎样？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:46px"><div class="tab">输入 10</div>
 <pre class="code"><span class="ln">age = <span class="f">input</span>()</span><span class="ln"><span class="f">print</span>(age + 1)</span></pre></div>
@@ -605,7 +622,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- your turn -->
-<section id="page-16" class="slide" aria-label="改成三个数求和">
+<section id="page-17" class="slide" aria-label="改成三个数求和">
   <div class="band r"><b>动手<br>改一改</b><span>照着前两行，再读入一个数。</span></div>
   <div class="turn">
     <h2 class="r d1">改成三个数求和</h2>
@@ -617,7 +634,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- read a traceback -->
-<section id="page-17" class="slide" aria-label="怎么读报错" data-chapter="读报错">
+<section id="page-18" class="slide" aria-label="怎么读报错" data-chapter="读报错">
   <h2 class="t r">红字不可怕：从最后一行读</h2>
   <div class="tb r d1"><span class="dim">Traceback (most recent call last):</span><br><span class="dim">&nbsp;&nbsp;File "hello.py", line </span><span class="hot">1</span><span class="dim">, in &lt;module&gt;</span><br><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;Print("hi")</span><br><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;^^^^^</span><br><span class="hot">NameError</span>: name 'Print' is not defined.<br>Did you mean: 'print'?</div>
   <div class="abs r d2" style="left:1270px;right:96px;top:240px">
@@ -630,7 +647,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- errors -->
-<section id="page-18" class="slide" aria-label="三种常见错误">
+<section id="page-19" class="slide" aria-label="三种常见错误">
   <h2 class="t r">三种最常见的错误</h2>
   <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
@@ -643,7 +660,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-19" class="slide dark" aria-label="找错游戏">
+<section id="page-20" class="slide dark" aria-label="找错游戏">
   <h2 class="t r">找错：哪一行有问题？</h2>
   <div class="editor r d1" style="left:96px;top:230px;width:1040px;--fs:58px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="1" data-yes="找到了！程序在第 3 行报错，原因却在第 1 行：少了 int()，a 还是文字。报错的行是程序卡住的地方，要改的地方可能在前面。" data-no="这一行没有问题，再看看 a 和 b 是不是同一种东西。"><span class="ln">a = <span class="f">input</span>()</span><span class="ln">b = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(a + b)</span></pre></div>
@@ -653,7 +670,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- challenge -->
-<section id="page-20" class="slide clay" aria-label="明年几岁" data-chapter="挑战">
+<section id="page-21" class="slide clay" aria-label="明年几岁" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 180px/1.2 var(--text)">明年<br>几岁？</h2>
   <p class="abs say r d2" style="left:96px;top:640px;width:1500px">写一个程序：第一行读入名字，第二行读入今年的年龄（0 到 150 的整数），输出这个人明年几岁。</p>
@@ -665,7 +682,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-21" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-22" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>名字是文字，要不要转换？年龄呢？</span></p>
@@ -676,7 +693,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- creative project: low floor, wide walls, high ceiling -->
-<section id="page-22" class="slide" aria-label="造一个你的小程序" data-chapter="小项目">
+<section id="page-23" class="slide" aria-label="造一个你的小程序" data-chapter="小项目">
   <h2 class="t r">造一个你的小程序</h2>
   <p class="abs say r d1" style="left:96px;top:200px">写一个会聊天的小机器人：它先问你问题，再回答你。主题你自己定。</p>
   <div class="later" style="top:320px">
@@ -690,7 +707,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- share and reflect, then another turn of the spiral -->
-<section id="page-23" class="slide" aria-label="和同桌换着玩">
+<section id="page-24" class="slide" aria-label="和同桌换着玩">
   <h2 class="t r">和同桌换着玩</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>换着运行</b><span>运行同桌的程序，照着它的问题回答</span></div>
@@ -702,7 +719,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-24" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-25" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p style="font-weight:700"><i>Q1</i><span>input() 读进来的是什么？<em class="step s2" style="font-style:normal;font-weight:400">　是文字，哪怕你输入的是数字。</em></span></p>
@@ -714,7 +731,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- cheat sheet -->
-<section id="page-25" class="slide" aria-label="速查卡">
+<section id="page-26" class="slide" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>print("文字")</code><span>在屏幕上显示文字，然后换行</span></div>
@@ -727,7 +744,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-26" class="slide" aria-label="后面再学">
+<section id="page-27" class="slide" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>float()</code><span>带小数点的数，比如 3.5</span></div>
@@ -739,7 +756,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-27" class="slide dark thanks" aria-label="谢谢">
+<section id="page-28" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
@@ -793,6 +810,7 @@ dialog p{color:var(--muted);font-size:15px}
 
 <script>
 /* === IDE LINKS: the platform and its options come from site.json === */
+const LANGUAGE = 'python';
 const IDE = {
   config: {"name": "JupyterLite", "base": "https://jupyterlite.github.io/demo/repl/index.html", "codeParam": "code", "blank": "# 在这里写代码\n", "fixed": {"kernel": "python", "toolbar": "1", "showBanner": "0", "clearCellsOnExecute": "1", "hideCodeInput": "1", "clearCodeContentOnExecute": "0"}, "settings": [{"param": "theme", "label": "主题", "options": [["JupyterLab Dark", "深色"], ["JupyterLab Light", "浅色"]]}, {"param": "promptCellPosition", "label": "布局", "options": [["left", "代码在左，结果在右"], ["top", "代码在上，结果在下"]]}, {"param": "execute", "label": "打开后自动运行", "options": [["0", "不运行，学生自己点"], ["1", "立刻运行"]]}]},
   defaults() {
@@ -1048,13 +1066,20 @@ class SlidePresentation {
     });
   }
 
-  /* Python's result for one small expression, so a slot can change a number with no Python on the page. */
+  /* The result of one small expression in the course language, so a slot can change a value with no compiler on the page. */
   setupLive() {
+    const cpp = LANGUAGE === 'cpp';
+    const truth = v => cpp ? (v ? '1' : '0') : (v ? 'True' : 'False');
     const calc = {
       '+': (a, b) => a + b, '-': (a, b) => a - b, '*': (a, b) => a * b,
-      '/': (a, b) => Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
-      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b
+      '/': (a, b) => cpp ? Math.trunc(a / b) : Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
+      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b,
+      '>': (a, b) => truth(a > b), '<': (a, b) => truth(a < b), '>=': (a, b) => truth(a >= b),
+      '<=': (a, b) => truth(a <= b), '==': (a, b) => truth(a === b), '!=': (a, b) => truth(a !== b)
     };
+    const clean = slot => slot.dataset.kind === 'text'
+      ? Array.from(slot.value.replace(/["\\\r\n]/g, '')).slice(0, 12).join('')
+      : slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -1067,18 +1092,20 @@ class SlidePresentation {
           const [left, op, right] = result.dataset.eval.split(' ');
           const [a, b] = [left, right].map(name => Number(value[name] ?? name));
           const failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(op);
-          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? 'ZeroDivisionError' : calc[op](a, b);
+          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? (cpp ? '除数不能是 0' : 'ZeroDivisionError')
+            : op ? calc[op](a, b) : value[left];
           result.classList.toggle('skip', !missing && stopped);
+          result.classList.toggle('long', result.textContent.length > 18);
           stopped ||= failed;
         });
         this.linkIde();
       };
       slots.forEach(slot => {
         slot.dataset.start = slot.value;
-        slot.addEventListener('input', () => {
-          slot.value = slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
-          update();
-        });
+        // Wait for a Chinese input method to finish the word before tidying the text.
+        const tidy = e => { if (e.isComposing) return; slot.value = clean(slot); update(); };
+        slot.addEventListener('input', tidy);
+        slot.addEventListener('compositionend', tidy);
       });
       update();
     });

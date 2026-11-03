@@ -320,11 +320,13 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .gate b.on{color:var(--olive)}
 .slot{width:4.6ch;height:1.3em;font:inherit;line-height:1.3;color:var(--night);background:#f0c674;border:0;border-radius:10px;padding:0 .2ch;text-align:center;cursor:text;outline:none}
 .slot:hover{background:#f6d691}
+.slot[data-kind=text]{width:20.8ch;text-align:left;padding:0 .4ch}
 .slot:focus{background:#fff;box-shadow:0 0 0 3px #f0c674}
 .live-out{position:absolute;left:1090px;right:96px;top:170px}
 .live-out div{border-top:4px solid var(--ink);padding:14px 0 22px}
 .live-out i{display:block;font:400 38px var(--text);font-style:normal;color:var(--muted)}
-.live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay)}
+.live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay);white-space:pre}
+.live-out b.long{font-size:42px}
 .live-out b.skip{font:400 44px/84px var(--text);color:var(--muted)}
 
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
@@ -472,8 +474,25 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
+<!-- live comparisons: change the score -->
+<section id="page-6" class="slide" aria-label="换个分数比一比">
+  <div class="night" style="width:1010px"></div>
+  <h2 class="t" style="color:var(--paper)">换个分数比一比</h2>
+  <div class="editor" style="left:96px;top:230px;width:830px;--fs:50px"><div class="tab">score.py</div>
+<pre class="code"><span class="ln">score = <input class="slot" data-var="score" value="75" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="分数"></span><span class="ln"><span class="f">print</span>(score &gt;= <span class="m">60</span>)</span><span class="ln"><span class="f">print</span>(score == <span class="m">100</span>)</span><span class="ln"><span class="f">print</span>(score &lt; <span class="m">60</span>)</span></pre></div>
+  <p class="abs say" style="left:96px;top:715px;width:830px;color:var(--paper)">点黄色的分数，改完三个结果马上变。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这个分数进 IDE</a>
+  <div class="live-out">
+    <div><i>第 2 行：大于等于 60 吗</i><b data-eval="score &gt;= 60">True</b></div>
+    <div><i>第 3 行：等于 100 吗</i><b data-eval="score == 100">False</b></div>
+    <div><i>第 4 行：小于 60 吗</i><b data-eval="score &lt; 60">False</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:780px;width:734px;font-size:38px">先猜再改：59 分呢？100 分呢？</p>
+  <div class="foot"></div>
+</section>
+
 <!-- if with trace -->
-<section id="page-6" class="slide dark" aria-label="if 的写法" data-steps="3" data-at="3" data-chapter="if">
+<section id="page-7" class="slide dark" aria-label="if 的写法" data-steps="3" data-at="3" data-chapter="if">
   <h2 class="t">if：条件成立才做</h2>
   <div class="editor" style="left:96px;top:230px;width:1080px;--fs:50px"><div class="tab">if.py</div>
 <pre class="code" data-file="solutions/01_if.py"><span class="ln l1">score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"考完了"</span>)</span></pre></div>
@@ -487,7 +506,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- if / else -->
-<section id="page-7" class="slide" aria-label="if 和 else" data-steps="3" data-at="3" data-chapter="else">
+<section id="page-8" class="slide" aria-label="if 和 else" data-steps="3" data-at="3" data-chapter="else">
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">else：否则走另一条路</h2>
   <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">pass.py</div>
@@ -504,7 +523,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: boundary -->
-<section id="page-8" class="slide" aria-label="小测：边界">
+<section id="page-9" class="slide" aria-label="小测：边界">
   <h2 class="t r">小测：把条件写成这样，60 分输出什么？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:44px"><div class="tab">输入 60</div>
 <pre class="code"><span class="ln"><span class="k">if</span> score &gt; <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"继续加油"</span>)</span></pre></div>
@@ -517,7 +536,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- your turn -->
-<section id="page-9" class="slide" aria-label="判断奇偶">
+<section id="page-10" class="slide" aria-label="判断奇偶">
   <div class="band r"><b>动手<br>改一改</b><span>还记得吗？余数是 0 就是偶数。</span></div>
   <div class="turn">
     <h2 class="r d1">改成判断奇偶</h2>
@@ -529,7 +548,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- comparing text -->
-<section id="page-10" class="slide dark" aria-label="文字也能比较">
+<section id="page-11" class="slide dark" aria-label="文字也能比较">
   <h2 class="t r">文字也能比较</h2>
   <div class="editor r d1" style="left:96px;top:230px;width:1080px;--fs:50px"><div class="tab">secret.py</div>
 <pre class="code" data-file="solutions/04_secret.py"><span class="ln">word = <span class="f">input</span>()</span><span class="ln"><span class="k">if</span> word == <span class="s">"Python"</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"暗号正确"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"再想想"</span>)</span></pre></div>
@@ -539,7 +558,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- elif -->
-<section id="page-11" class="slide" aria-label="elif 多分支" data-steps="3" data-at="3" data-chapter="elif">
+<section id="page-12" class="slide" aria-label="elif 多分支" data-steps="3" data-at="3" data-chapter="elif">
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">elif：不止两条路</h2>
   <div class="editor" style="left:96px;top:210px;width:1040px;--fs:44px"><div class="tab">grade.py</div>
@@ -556,7 +575,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- predict: only one branch -->
-<section id="page-12" class="slide dark" aria-label="预测只走一条路" data-steps="2" data-at="2">
+<section id="page-13" class="slide dark" aria-label="预测只走一条路" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：x = 10，输出几行？</h2>
   <div class="editor" style="left:96px;top:220px;width:880px;--fs:44px"><div class="tab">one_way.py</div>
 <pre class="code" data-file="solutions/06_one_way.py"><span class="ln">x = <span class="m">10</span></span><span class="ln"><span class="k">if</span> x &gt; <span class="m">5</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 5"</span>)</span><span class="ln"><span class="k">elif</span> x &gt; <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 8"</span>)</span></pre></div>
@@ -568,7 +587,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- predict: two ifs -->
-<section id="page-13" class="slide dark" aria-label="预测：换成两个 if" data-steps="2" data-at="2">
+<section id="page-14" class="slide dark" aria-label="预测：换成两个 if" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：把 elif 换成 if 呢？</h2>
   <div class="editor" style="left:96px;top:220px;width:880px;--fs:44px"><div class="tab">two_ifs.py</div>
 <pre class="code" data-file="solutions/06b_two_ifs.py"><span class="ln">x = <span class="m">10</span></span><span class="ln"><span class="k">if</span> x &gt; <span class="m">5</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 5"</span>)</span><span class="ln"><span class="k">if</span> x &gt; <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 8"</span>)</span></pre></div>
@@ -582,7 +601,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- your turn -->
-<section id="page-14" class="slide" aria-label="再加一档">
+<section id="page-15" class="slide" aria-label="再加一档">
   <div class="band r"><b>动手<br>改一改</b><span>elif 可以写很多个，想想新的一档放在哪。</span></div>
   <div class="turn">
     <h2 class="r d1">再加一档“良好”</h2>
@@ -594,7 +613,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- errors -->
-<section id="page-15" class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section id="page-16" class="slide" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
   <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
@@ -607,7 +626,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-16" class="slide dark" aria-label="找错：优秀去哪了">
+<section id="page-17" class="slide dark" aria-label="找错：优秀去哪了">
   <h2 class="t r">找错：优秀去哪了？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="1" data-yes="对！95 &gt;= 60 成立，程序从这里走了，后面 90 分的判断轮不到。两段要换位置，范围小的条件写在前面。" data-no="再跟着程序走一遍：95 &gt;= 60 成立吗？"><span class="ln"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">elif</span> score &gt;= <span class="m">90</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"优秀"</span>)</span></pre></div>
@@ -617,7 +636,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- challenge -->
-<section id="page-17" class="slide clay" aria-label="快递运费" data-chapter="挑战">
+<section id="page-18" class="slide clay" aria-label="快递运费" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">快递<br>运费</h2>
   <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入重量（1 到 100 的整数，单位公斤）。前 3 公斤一共 10 元，超过 3 公斤的部分每公斤加 2 元。</p>
@@ -628,7 +647,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-18" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-19" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>运费有两种算法，用什么来分开这两条路？</span></p>
@@ -639,7 +658,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- creative project -->
-<section id="page-19" class="slide" aria-label="造一个小判官" data-chapter="小项目">
+<section id="page-20" class="slide" aria-label="造一个小判官" data-chapter="小项目">
   <h2 class="t r">造一个会看情况说话的程序</h2>
   <p class="abs say r d1" style="left:96px;top:200px">程序问你一个问题，根据回答说不同的话。主题你自己定。</p>
   <div class="later" style="top:320px">
@@ -653,7 +672,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- share -->
-<section id="page-20" class="slide" aria-label="和同桌换着玩">
+<section id="page-21" class="slide" aria-label="和同桌换着玩">
   <h2 class="t r">和同桌换着玩</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>换着运行</b><span>故意输入不同的回答，把每条路都走一遍</span></div>
@@ -665,7 +684,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-21" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-22" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p style="font-weight:700"><i>Q1</i><span>= 和 == 有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　= 是放进去，== 是比较。</em></span></p>
@@ -677,7 +696,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- cheat sheet -->
-<section id="page-22" class="slide" aria-label="速查卡">
+<section id="page-23" class="slide" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>==  !=</code><span>等于、不等于</span></div>
@@ -690,7 +709,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-23" class="slide" aria-label="后面再学">
+<section id="page-24" class="slide" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>and  or  not</code><span>把几个条件组合起来</span></div>
@@ -702,7 +721,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-24" class="slide dark thanks" aria-label="谢谢">
+<section id="page-25" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
@@ -756,6 +775,7 @@ dialog p{color:var(--muted);font-size:15px}
 
 <script>
 /* === IDE LINKS: the platform and its options come from site.json === */
+const LANGUAGE = 'python';
 const IDE = {
   config: {"name": "JupyterLite", "base": "https://jupyterlite.github.io/demo/repl/index.html", "codeParam": "code", "blank": "# 在这里写代码\n", "fixed": {"kernel": "python", "toolbar": "1", "showBanner": "0", "clearCellsOnExecute": "1", "hideCodeInput": "1", "clearCodeContentOnExecute": "0"}, "settings": [{"param": "theme", "label": "主题", "options": [["JupyterLab Dark", "深色"], ["JupyterLab Light", "浅色"]]}, {"param": "promptCellPosition", "label": "布局", "options": [["left", "代码在左，结果在右"], ["top", "代码在上，结果在下"]]}, {"param": "execute", "label": "打开后自动运行", "options": [["0", "不运行，学生自己点"], ["1", "立刻运行"]]}]},
   defaults() {
@@ -1011,13 +1031,20 @@ class SlidePresentation {
     });
   }
 
-  /* Python's result for one small expression, so a slot can change a number with no Python on the page. */
+  /* The result of one small expression in the course language, so a slot can change a value with no compiler on the page. */
   setupLive() {
+    const cpp = LANGUAGE === 'cpp';
+    const truth = v => cpp ? (v ? '1' : '0') : (v ? 'True' : 'False');
     const calc = {
       '+': (a, b) => a + b, '-': (a, b) => a - b, '*': (a, b) => a * b,
-      '/': (a, b) => Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
-      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b
+      '/': (a, b) => cpp ? Math.trunc(a / b) : Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
+      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b,
+      '>': (a, b) => truth(a > b), '<': (a, b) => truth(a < b), '>=': (a, b) => truth(a >= b),
+      '<=': (a, b) => truth(a <= b), '==': (a, b) => truth(a === b), '!=': (a, b) => truth(a !== b)
     };
+    const clean = slot => slot.dataset.kind === 'text'
+      ? Array.from(slot.value.replace(/["\\\r\n]/g, '')).slice(0, 12).join('')
+      : slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -1030,18 +1057,20 @@ class SlidePresentation {
           const [left, op, right] = result.dataset.eval.split(' ');
           const [a, b] = [left, right].map(name => Number(value[name] ?? name));
           const failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(op);
-          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? 'ZeroDivisionError' : calc[op](a, b);
+          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? (cpp ? '除数不能是 0' : 'ZeroDivisionError')
+            : op ? calc[op](a, b) : value[left];
           result.classList.toggle('skip', !missing && stopped);
+          result.classList.toggle('long', result.textContent.length > 18);
           stopped ||= failed;
         });
         this.linkIde();
       };
       slots.forEach(slot => {
         slot.dataset.start = slot.value;
-        slot.addEventListener('input', () => {
-          slot.value = slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
-          update();
-        });
+        // Wait for a Chinese input method to finish the word before tidying the text.
+        const tidy = e => { if (e.isComposing) return; slot.value = clean(slot); update(); };
+        slot.addEventListener('input', tidy);
+        slot.addEventListener('compositionend', tidy);
       });
       update();
     });

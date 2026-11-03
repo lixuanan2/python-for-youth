@@ -1,4 +1,5 @@
 /* === IDE LINKS: the platform and its options come from site.json === */
+const LANGUAGE = '{{language}}';
 const IDE = {
   config: {{ide}},
   defaults() {
@@ -254,13 +255,20 @@ class SlidePresentation {
     });
   }
 
-  /* Python's result for one small expression, so a slot can change a number with no Python on the page. */
+  /* The result of one small expression in the course language, so a slot can change a value with no compiler on the page. */
   setupLive() {
+    const cpp = LANGUAGE === 'cpp';
+    const truth = v => cpp ? (v ? '1' : '0') : (v ? 'True' : 'False');
     const calc = {
       '+': (a, b) => a + b, '-': (a, b) => a - b, '*': (a, b) => a * b,
-      '/': (a, b) => Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
-      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b
+      '/': (a, b) => cpp ? Math.trunc(a / b) : Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
+      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b,
+      '>': (a, b) => truth(a > b), '<': (a, b) => truth(a < b), '>=': (a, b) => truth(a >= b),
+      '<=': (a, b) => truth(a <= b), '==': (a, b) => truth(a === b), '!=': (a, b) => truth(a !== b)
     };
+    const clean = slot => slot.dataset.kind === 'text'
+      ? Array.from(slot.value.replace(/["\\\r\n]/g, '')).slice(0, 12).join('')
+      : slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -273,18 +281,20 @@ class SlidePresentation {
           const [left, op, right] = result.dataset.eval.split(' ');
           const [a, b] = [left, right].map(name => Number(value[name] ?? name));
           const failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(op);
-          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? 'ZeroDivisionError' : calc[op](a, b);
+          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? (cpp ? '除数不能是 0' : 'ZeroDivisionError')
+            : op ? calc[op](a, b) : value[left];
           result.classList.toggle('skip', !missing && stopped);
+          result.classList.toggle('long', result.textContent.length > 18);
           stopped ||= failed;
         });
         this.linkIde();
       };
       slots.forEach(slot => {
         slot.dataset.start = slot.value;
-        slot.addEventListener('input', () => {
-          slot.value = slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
-          update();
-        });
+        // Wait for a Chinese input method to finish the word before tidying the text.
+        const tidy = e => { if (e.isComposing) return; slot.value = clean(slot); update(); };
+        slot.addEventListener('input', tidy);
+        slot.addEventListener('compositionend', tidy);
       });
       update();
     });

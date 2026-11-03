@@ -320,11 +320,13 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .gate b.on{color:var(--olive)}
 .slot{width:4.6ch;height:1.3em;font:inherit;line-height:1.3;color:var(--night);background:#f0c674;border:0;border-radius:10px;padding:0 .2ch;text-align:center;cursor:text;outline:none}
 .slot:hover{background:#f6d691}
+.slot[data-kind=text]{width:20.8ch;text-align:left;padding:0 .4ch}
 .slot:focus{background:#fff;box-shadow:0 0 0 3px #f0c674}
 .live-out{position:absolute;left:1090px;right:96px;top:170px}
 .live-out div{border-top:4px solid var(--ink);padding:14px 0 22px}
 .live-out i{display:block;font:400 38px var(--text);font-style:normal;color:var(--muted)}
-.live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay)}
+.live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay);white-space:pre}
+.live-out b.long{font-size:42px}
 .live-out b.skip{font:400 44px/84px var(--text);color:var(--muted)}
 
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
@@ -784,6 +786,7 @@ while i &lt;= n:
 
 <script>
 /* === IDE LINKS: the platform and its options come from site.json === */
+const LANGUAGE = 'python';
 const IDE = {
   config: {"name": "JupyterLite", "base": "https://jupyterlite.github.io/demo/repl/index.html", "codeParam": "code", "blank": "# 在这里写代码\n", "fixed": {"kernel": "python", "toolbar": "1", "showBanner": "0", "clearCellsOnExecute": "1", "hideCodeInput": "1", "clearCodeContentOnExecute": "0"}, "settings": [{"param": "theme", "label": "主题", "options": [["JupyterLab Dark", "深色"], ["JupyterLab Light", "浅色"]]}, {"param": "promptCellPosition", "label": "布局", "options": [["left", "代码在左，结果在右"], ["top", "代码在上，结果在下"]]}, {"param": "execute", "label": "打开后自动运行", "options": [["0", "不运行，学生自己点"], ["1", "立刻运行"]]}]},
   defaults() {
@@ -1039,13 +1042,20 @@ class SlidePresentation {
     });
   }
 
-  /* Python's result for one small expression, so a slot can change a number with no Python on the page. */
+  /* The result of one small expression in the course language, so a slot can change a value with no compiler on the page. */
   setupLive() {
+    const cpp = LANGUAGE === 'cpp';
+    const truth = v => cpp ? (v ? '1' : '0') : (v ? 'True' : 'False');
     const calc = {
       '+': (a, b) => a + b, '-': (a, b) => a - b, '*': (a, b) => a * b,
-      '/': (a, b) => Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
-      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b
+      '/': (a, b) => cpp ? Math.trunc(a / b) : Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
+      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b,
+      '>': (a, b) => truth(a > b), '<': (a, b) => truth(a < b), '>=': (a, b) => truth(a >= b),
+      '<=': (a, b) => truth(a <= b), '==': (a, b) => truth(a === b), '!=': (a, b) => truth(a !== b)
     };
+    const clean = slot => slot.dataset.kind === 'text'
+      ? Array.from(slot.value.replace(/["\\\r\n]/g, '')).slice(0, 12).join('')
+      : slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -1058,18 +1068,20 @@ class SlidePresentation {
           const [left, op, right] = result.dataset.eval.split(' ');
           const [a, b] = [left, right].map(name => Number(value[name] ?? name));
           const failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(op);
-          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? 'ZeroDivisionError' : calc[op](a, b);
+          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? (cpp ? '除数不能是 0' : 'ZeroDivisionError')
+            : op ? calc[op](a, b) : value[left];
           result.classList.toggle('skip', !missing && stopped);
+          result.classList.toggle('long', result.textContent.length > 18);
           stopped ||= failed;
         });
         this.linkIde();
       };
       slots.forEach(slot => {
         slot.dataset.start = slot.value;
-        slot.addEventListener('input', () => {
-          slot.value = slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
-          update();
-        });
+        // Wait for a Chinese input method to finish the word before tidying the text.
+        const tidy = e => { if (e.isComposing) return; slot.value = clean(slot); update(); };
+        slot.addEventListener('input', tidy);
+        slot.addEventListener('compositionend', tidy);
       });
       update();
     });

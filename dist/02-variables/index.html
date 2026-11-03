@@ -320,11 +320,13 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .gate b.on{color:var(--olive)}
 .slot{width:4.6ch;height:1.3em;font:inherit;line-height:1.3;color:var(--night);background:#f0c674;border:0;border-radius:10px;padding:0 .2ch;text-align:center;cursor:text;outline:none}
 .slot:hover{background:#f6d691}
+.slot[data-kind=text]{width:20.8ch;text-align:left;padding:0 .4ch}
 .slot:focus{background:#fff;box-shadow:0 0 0 3px #f0c674}
 .live-out{position:absolute;left:1090px;right:96px;top:170px}
 .live-out div{border-top:4px solid var(--ink);padding:14px 0 22px}
 .live-out i{display:block;font:400 38px var(--text);font-style:normal;color:var(--muted)}
-.live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay)}
+.live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay);white-space:pre}
+.live-out b.long{font-size:42px}
 .live-out b.skip{font:400 44px/84px var(--text);color:var(--muted)}
 
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
@@ -489,8 +491,23 @@ dialog p{color:var(--muted);font-size:15px}
   </div>
 </section>
 
+<!-- live numbers: change the age and the step -->
+<section id="page-7" class="slide" aria-label="换个年龄试试">
+  <div class="night" style="width:1010px"></div>
+  <h2 class="t" style="color:var(--paper)">换个年龄试试</h2>
+  <div class="editor" style="left:96px;top:230px;width:830px;--fs:52px"><div class="tab">birthday.py</div>
+<pre class="code"><span class="ln">age = <input class="slot" data-var="age" value="12" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="开始的年龄"></span><span class="ln">age = age + <input class="slot" data-var="step" value="1" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="加几岁"></span><span class="ln"><span class="f">print</span>(age)</span></pre></div>
+  <p class="abs say" style="left:96px;top:660px;width:830px;color:var(--paper)">点黄色的数字，改完输出马上变。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这两个数进 IDE</a>
+  <div class="live-out">
+    <div><i>第 3 行输出 age</i><b data-eval="age + step">13</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:520px;width:734px;font-size:38px">先猜再改：今年 9 岁，过 3 年呢？</p>
+  <div class="foot"></div>
+</section>
+
 <!-- quiz: updating -->
-<section id="page-7" class="slide" aria-label="小测：更新两次">
+<section id="page-8" class="slide" aria-label="小测：更新两次">
   <h2 class="t r">小测：这段程序输出几？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:44px"><div class="tab">score.py</div>
 <pre class="code"><span class="ln">score = <span class="m">10</span></span><span class="ln">score = score + <span class="m">5</span></span><span class="ln">score = score + <span class="m">5</span></span><span class="ln"><span class="f">print</span>(score)</span></pre></div>
@@ -504,7 +521,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- predict: copying a value -->
-<section id="page-8" class="slide dark" aria-label="预测 b 是几" data-steps="2" data-at="2">
+<section id="page-9" class="slide dark" aria-label="预测 b 是几" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：a 变了，b 跟着变吗？</h2>
   <div class="editor" style="left:96px;top:230px;width:880px;--fs:58px"><div class="tab">copy_value.py</div>
 <pre class="code" data-file="solutions/02b_copy_value.py"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = a</span><span class="ln">a = <span class="m">8</span></span><span class="ln"><span class="f">print</span>(b)</span></pre></div>
@@ -519,7 +536,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- your turn -->
-<section id="page-9" class="slide" aria-label="让 age 长两岁">
+<section id="page-10" class="slide" aria-label="让 age 长两岁">
   <div class="band r"><b>动手<br>改一改</b><span>更新一次不够，就再写一行。</span></div>
   <div class="turn">
     <h2 class="r d1">让 age 长两岁</h2>
@@ -531,7 +548,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- names -->
-<section id="page-10" class="slide" aria-label="变量名怎么起" data-chapter="起名字">
+<section id="page-11" class="slide" aria-label="变量名怎么起" data-chapter="起名字">
   <h2 class="t r">给盒子起个好名字</h2>
   <div class="vs">
     <div class="r d1"><h3>可以</h3><pre style="font-size:62px">age
@@ -546,7 +563,7 @@ my-age</pre></div>
 </section>
 
 <!-- quiz: names -->
-<section id="page-11" class="slide" aria-label="小测：哪个名字能用">
+<section id="page-12" class="slide" aria-label="小测：哪个名字能用">
   <h2 class="t r">小测：哪个名字能用？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="变量名不能用数字开头。"><i>1</i>1st_score</button>
@@ -559,7 +576,7 @@ my-age</pre></div>
 </section>
 
 <!-- four types -->
-<section id="page-12" class="slide" aria-label="四种常用类型" data-chapter="四种类型">
+<section id="page-13" class="slide" aria-label="四种常用类型" data-chapter="四种类型">
   <h2 class="t r">盒子里的东西分种类</h2>
   <div class="later" style="grid-template-columns:repeat(4,1fr);gap:40px;top:240px">
     <div class="r d1"><code>int</code><p style="font:800 76px/1.3 var(--code)">12</p><span>整数，比如年龄</span></div>
@@ -573,7 +590,7 @@ my-age</pre></div>
 </section>
 
 <!-- type() -->
-<section id="page-13" class="slide dark" aria-label="用 type 问 Python">
+<section id="page-14" class="slide dark" aria-label="用 type 问 Python">
   <h2 class="t r">不确定？问问 Python</h2>
   <div class="editor r d1" style="left:96px;top:230px;width:1020px;--fs:58px"><div class="tab">ask.py</div>
 <pre class="code"><span class="ln"><span class="f">print</span>(<span class="f">type</span>(<span class="m">12</span>))</span><span class="ln"><span class="f">print</span>(<span class="f">type</span>(<span class="s">"12"</span>))</span></pre></div>
@@ -585,7 +602,7 @@ my-age</pre></div>
 </section>
 
 <!-- type prediction -->
-<section id="page-14" class="slide" aria-label="预测三种类型" data-steps="2" data-at="2">
+<section id="page-15" class="slide" aria-label="预测三种类型" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：它们是什么类型？</h2>
   <div class="ledger">
     <div><code class="plain" style="font-family:var(--code)">"12"</code><b class="step s2">str</b><span class="step s2">有引号，就是文字</span></div>
@@ -598,7 +615,7 @@ my-age</pre></div>
 </section>
 
 <!-- bool -->
-<section id="page-15" class="slide" aria-label="bool 只有两个值">
+<section id="page-16" class="slide" aria-label="bool 只有两个值">
   <h2 class="t r">bool：只有两个值</h2>
   <div class="vs">
     <div class="r d1"><p class="res" style="color:var(--olive)">True</p><p class="say">成立，是真的。</p></div>
@@ -609,7 +626,7 @@ my-age</pre></div>
 </section>
 
 <!-- mixing text and numbers -->
-<section id="page-16" class="slide dark" aria-label="文字和数字放在一起" data-chapter="混在一起">
+<section id="page-17" class="slide dark" aria-label="文字和数字放在一起" data-chapter="混在一起">
   <h2 class="t r">把文字和数字放在一起说</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:1160px;--fs:46px"><div class="tab">intro.py</div>
 <pre class="code" data-file="solutions/05_join_text.py"><span class="ln">age = <span class="m">12</span></span><span class="ln"><span class="f">print</span>(<span class="s">"我今年"</span>, age, <span class="s">"岁"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"我今年"</span> + <span class="f">str</span>(age) + <span class="s">"岁"</span>)</span></pre></div>
@@ -621,7 +638,7 @@ my-age</pre></div>
 </section>
 
 <!-- quiz: type trap -->
-<section id="page-17" class="slide" aria-label="小测：True 加引号">
+<section id="page-18" class="slide" aria-label="小测：True 加引号">
   <h2 class="t r">小测："True" 是什么类型？</h2>
   <div class="quiz r d1" data-right="2">
     <button type="button" data-fb="整数不会有引号，也不是字母。"><i>1</i>int</button>
@@ -634,7 +651,7 @@ my-age</pre></div>
 </section>
 
 <!-- errors -->
-<section id="page-18" class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section id="page-19" class="slide" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
   <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
@@ -647,7 +664,7 @@ my-age</pre></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-19" class="slide dark" aria-label="找错：分数没变">
+<section id="page-20" class="slide dark" aria-label="找错：分数没变">
   <h2 class="t r">找错：分数怎么没变？</h2>
   <div class="editor r d1" style="left:96px;top:230px;width:1040px;--fs:58px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！score + 5 算出了 15，但没有放回盒子。要写 score = score + 5。" data-no="这一行没有问题。想一想：算出来的结果放到哪里去了？"><span class="ln">score = <span class="m">10</span></span><span class="ln">score + <span class="m">5</span></span><span class="ln"><span class="f">print</span>(score)</span></pre></div>
@@ -657,7 +674,7 @@ my-age</pre></div>
 </section>
 
 <!-- challenge -->
-<section id="page-20" class="slide clay" aria-label="压岁钱账本" data-chapter="挑战">
+<section id="page-21" class="slide clay" aria-label="压岁钱账本" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">压岁钱<br>账本</h2>
   <p class="abs say r d2" style="left:96px;top:620px;width:960px">三行分别读入现有的钱、存入的钱和花掉的钱，都是 0 到 10000 的整数，花掉的不会超过手里的钱。用一个变量 money 记账，输出还剩多少。</p>
@@ -670,7 +687,7 @@ my-age</pre></div>
 </section>
 
 <!-- hints -->
-<section id="page-21" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-22" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>三个数都要拿来算，读入时要变成整数吗？</span></p>
@@ -681,7 +698,7 @@ my-age</pre></div>
 </section>
 
 <!-- creative project -->
-<section id="page-22" class="slide" aria-label="造一张角色卡" data-chapter="小项目">
+<section id="page-23" class="slide" aria-label="造一张角色卡" data-chapter="小项目">
   <h2 class="t r">造一张角色卡</h2>
   <p class="abs say r d1" style="left:96px;top:200px">用变量记住一个角色的信息，再把它显示出来。角色你自己定。</p>
   <div class="later" style="top:320px">
@@ -695,7 +712,7 @@ my-age</pre></div>
 </section>
 
 <!-- share -->
-<section id="page-23" class="slide" aria-label="和同桌换着玩">
+<section id="page-24" class="slide" aria-label="和同桌换着玩">
   <h2 class="t r">和同桌换着玩</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>换着运行</b><span>运行同桌的程序，看看这是什么角色</span></div>
@@ -707,7 +724,7 @@ my-age</pre></div>
 </section>
 
 <!-- review -->
-<section id="page-24" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-25" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p style="font-weight:700"><i>Q1</i><span>x = x + 1 是什么意思？<em class="step s2" style="font-style:normal;font-weight:400">　先算右边，再放回 x。</em></span></p>
@@ -719,7 +736,7 @@ my-age</pre></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-25" class="slide" aria-label="速查卡">
+<section id="page-26" class="slide" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>age = 12</code><span>把 12 放进变量 age</span></div>
@@ -732,7 +749,7 @@ my-age</pre></div>
 </section>
 
 <!-- later -->
-<section id="page-26" class="slide" aria-label="后面再学">
+<section id="page-27" class="slide" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>/  //  %</code><span>除法、整除和求余数</span></div>
@@ -744,7 +761,7 @@ my-age</pre></div>
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-27" class="slide dark thanks" aria-label="谢谢">
+<section id="page-28" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
@@ -798,6 +815,7 @@ my-age</pre></div>
 
 <script>
 /* === IDE LINKS: the platform and its options come from site.json === */
+const LANGUAGE = 'python';
 const IDE = {
   config: {"name": "JupyterLite", "base": "https://jupyterlite.github.io/demo/repl/index.html", "codeParam": "code", "blank": "# 在这里写代码\n", "fixed": {"kernel": "python", "toolbar": "1", "showBanner": "0", "clearCellsOnExecute": "1", "hideCodeInput": "1", "clearCodeContentOnExecute": "0"}, "settings": [{"param": "theme", "label": "主题", "options": [["JupyterLab Dark", "深色"], ["JupyterLab Light", "浅色"]]}, {"param": "promptCellPosition", "label": "布局", "options": [["left", "代码在左，结果在右"], ["top", "代码在上，结果在下"]]}, {"param": "execute", "label": "打开后自动运行", "options": [["0", "不运行，学生自己点"], ["1", "立刻运行"]]}]},
   defaults() {
@@ -1053,13 +1071,20 @@ class SlidePresentation {
     });
   }
 
-  /* Python's result for one small expression, so a slot can change a number with no Python on the page. */
+  /* The result of one small expression in the course language, so a slot can change a value with no compiler on the page. */
   setupLive() {
+    const cpp = LANGUAGE === 'cpp';
+    const truth = v => cpp ? (v ? '1' : '0') : (v ? 'True' : 'False');
     const calc = {
       '+': (a, b) => a + b, '-': (a, b) => a - b, '*': (a, b) => a * b,
-      '/': (a, b) => Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
-      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b
+      '/': (a, b) => cpp ? Math.trunc(a / b) : Number.isInteger(a / b) ? (a / b) + '.0' : String(a / b),
+      '//': (a, b) => Math.floor(a / b), '%': (a, b) => a % b,
+      '>': (a, b) => truth(a > b), '<': (a, b) => truth(a < b), '>=': (a, b) => truth(a >= b),
+      '<=': (a, b) => truth(a <= b), '==': (a, b) => truth(a === b), '!=': (a, b) => truth(a !== b)
     };
+    const clean = slot => slot.dataset.kind === 'text'
+      ? Array.from(slot.value.replace(/["\\\r\n]/g, '')).slice(0, 12).join('')
+      : slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -1072,18 +1097,20 @@ class SlidePresentation {
           const [left, op, right] = result.dataset.eval.split(' ');
           const [a, b] = [left, right].map(name => Number(value[name] ?? name));
           const failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(op);
-          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? 'ZeroDivisionError' : calc[op](a, b);
+          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? (cpp ? '除数不能是 0' : 'ZeroDivisionError')
+            : op ? calc[op](a, b) : value[left];
           result.classList.toggle('skip', !missing && stopped);
+          result.classList.toggle('long', result.textContent.length > 18);
           stopped ||= failed;
         });
         this.linkIde();
       };
       slots.forEach(slot => {
         slot.dataset.start = slot.value;
-        slot.addEventListener('input', () => {
-          slot.value = slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
-          update();
-        });
+        // Wait for a Chinese input method to finish the word before tidying the text.
+        const tidy = e => { if (e.isComposing) return; slot.value = clean(slot); update(); };
+        slot.addEventListener('input', tidy);
+        slot.addEventListener('compositionend', tidy);
       });
       update();
     });

@@ -6,106 +6,116 @@
   },
   {
     "page": 7,
+    "code": "age = 12\nage = age + 1\nprint(age)",
+    "stdout": "13\n"
+  },
+  {
+    "page": 7,
+    "code": "age = 9\nage = age + 3\nprint(age)",
+    "stdout": "12\n"
+  },
+  {
+    "page": 8,
     "code": "score = 10\nscore = score + 5\nscore = score + 5\nprint(score)",
     "stdout": "20\n"
   },
   {
-    "page": 10,
+    "page": 11,
     "code": "2age = 1",
     "error": "SyntaxError"
   },
   {
-    "page": 10,
+    "page": 11,
     "code": "my age = 1",
     "error": "SyntaxError"
   },
   {
-    "page": 10,
+    "page": 11,
     "code": "my-age = 1",
     "error": "SyntaxError"
   },
   {
-    "page": 10,
+    "page": 11,
     "code": "age = 1\nmy_age = 2\nscore2 = 3\nprint(age, my_age, score2)",
     "stdout": "1 2 3\n"
   },
   {
-    "page": 10,
+    "page": 11,
     "code": "age = 1\nprint(Age)",
     "error": "NameError"
   },
   {
-    "page": 11,
+    "page": 12,
     "code": "1st_score = 1",
     "error": "SyntaxError"
   },
   {
-    "page": 11,
+    "page": 12,
     "code": "total score = 1",
     "error": "SyntaxError"
   },
   {
-    "page": 11,
+    "page": 12,
     "code": "total-score = 1",
     "error": "SyntaxError"
   },
   {
-    "page": 11,
+    "page": 12,
     "code": "total_score = 1\nprint(total_score)",
     "stdout": "1\n"
   },
   {
-    "page": 13,
+    "page": 14,
     "code": "print(type(12))\nprint(type(\"12\"))",
     "stdout": "<class 'int'>\n<class 'str'>\n"
   },
   {
-    "page": 14,
+    "page": 15,
     "code": "print(type(\"12\"))\nprint(type(12))\nprint(type(12.0))",
     "stdout": "<class 'str'>\n<class 'int'>\n<class 'float'>\n"
   },
   {
-    "page": 15,
+    "page": 16,
     "code": "print(true)",
     "error": "NameError"
   },
   {
-    "page": 15,
+    "page": 16,
     "code": "print(3 > 2)\nprint(type(True))",
     "stdout": "True\n<class 'bool'>\n"
   },
   {
-    "page": 16,
+    "page": 17,
     "code": "print(\"我今年\" + 12)",
     "error": "TypeError"
   },
   {
-    "page": 17,
+    "page": 18,
     "code": "print(type(\"True\"))",
     "stdout": "<class 'str'>\n"
   },
   {
-    "page": 18,
+    "page": 19,
     "code": "print(scor)",
     "error": "NameError"
   },
   {
-    "page": 18,
+    "page": 19,
     "code": "\"年龄\" + 12",
     "error": "TypeError"
   },
   {
-    "page": 19,
+    "page": 20,
     "code": "score = 10\nscore + 5\nprint(score)",
     "stdout": "10\n"
   },
   {
-    "page": 25,
+    "page": 26,
     "code": "print(str(12) + \"3\")",
     "stdout": "123\n"
   },
   {
-    "page": 10,
+    "page": 11,
     "code": "if = 3",
     "error": "SyntaxError"
   }

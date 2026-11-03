@@ -90,30 +90,35 @@ const INTERACT = `(async () => {
     inputs.forEach((input, i) => { if (input.textContent !== start[i]) input.click(); });
     return ok;
   });
-  // Number slots: filter what students type, then try many numbers for a real Python run afterwards.
+  // Slots: filter what students type, then try many values for a real run afterwards.
   const live = [...stage.querySelectorAll('.slide')].flatMap((slide, page) => {
     const slots = [...slide.querySelectorAll('.slot')];
     if (!slots.length) return [];
     const outs = [...slide.querySelectorAll('[data-eval]')], link = slide.querySelector('a.ide');
     const start = slots.map(s => s.value);
     const put = (slot, value) => { slot.value = value; slot.dispatchEvent(new Event('input', {bubbles: true})); };
-    const typed = text => { put(slots[0], text); return slots[0].value; };
-    const filter = typed('1a2') === '12' && typed('007') === '7' && typed('12345') === '1234' && typed('０７') === '' && typed('-5') === '5';
+    const typed = (slot, text) => { put(slot, text); return slot.value; };
+    const filter = slots.every(slot => slot.dataset.kind === 'text'
+      ? typed(slot, 'a"b\\c') === 'abc' && typed(slot, '一二三四五六七八九十一二三') === '一二三四五六七八九十一二' && typed(slot, '😀'.repeat(13)) === '😀'.repeat(12)
+      : typed(slot, '1a2') === '12' && typed(slot, '007') === '7' && typed(slot, '12345') === '1234' && typed(slot, '０７') === '' && typed(slot, '-5') === '5');
     put(slots[0], '');
     const waits = outs.every(o => o.textContent === '？');
     slots.forEach((s, i) => put(s, start[i]));
     const shown = outs.map(o => o.textContent);
-    const values = ['0', '1', '2', '3', '5', '7', '10', '17', '99', '100', '999', '9999'];
-    const cases = [];
-    for (const a of values) for (const b of values) {
-      put(slots[0], a); put(slots[1], b);
-      cases.push({code: new URL(link.href).searchParams.get(IDE.config.codeParam), outputs: outs.filter(o => !o.classList.contains('skip')).map(o => o.textContent)});
-    }
-    put(slots[0], '1'); put(slots[1], '3');
+    const numbers = ['0', '1', '2', '3', '5', '7', '10', '17', '59', '60', '99', '100', '999', '9999'];
+    const words = ['你好', 'Hi there', '  两边空格  ', 'a+b=c', "it's", '😀🎉', '测'.repeat(12), 'Hello, Python!'];
+    let combos = [[]];
+    for (const slot of slots) combos = combos.flatMap(c => (slot.dataset.kind === 'text' ? words : numbers).map(v => [...c, v]));
+    const cases = combos.map(values => {
+      values.forEach((v, i) => put(slots[i], v));
+      return {code: new URL(link.href).searchParams.get(IDE.config.codeParam), outputs: outs.filter(o => !o.classList.contains('skip')).map(o => o.textContent)};
+    });
+    const longest = combos.map((values, i) => [values, cases[i].outputs.join('').length]).sort((x, y) => y[1] - x[1])[0][0];
+    put(slots[0], slots[0].dataset.kind === 'text' ? '测' : '1');
     dispatchEvent(new Event('beforeprint'));
     const printed = slots.every((s, i) => s.value === start[i]) && outs.every((o, i) => o.textContent === shown[i]);
     dispatchEvent(new Event('afterprint'));
-    return [{page: page + 1, filter, waits, printed, cases}];
+    return [{page: page + 1, filter, waits, printed, cases, longest, few: slots.length <= 2}];
   });
   const before = links[0].href;
   const select = document.querySelector('#ide-fields select');
@@ -172,18 +177,29 @@ const INTERACT = `(async () => {
   };
 })()`;
 
-const RUN_LIVE = `
+const RUN_PYTHON = `
 import contextlib, io, json, sys
 for case in json.load(sys.stdin):
     out = io.StringIO()
     try:
         with contextlib.redirect_stdout(out):
             exec(case['code'], {})
-        got = out.getvalue().split()
+        got = out.getvalue().splitlines()
     except Exception as e:
-        got = out.getvalue().split() + [type(e).__name__]
+        got = out.getvalue().splitlines() + [type(e).__name__]
     assert got == case['outputs'], (case, got)
 `;
+
+// C++ divides by zero without a message, so those cases are left to the page text; the rest must match g++ or clang.
+function runCpp(cases) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'live-'));
+  for (const c of cases.filter(c => !c.outputs.includes('除数不能是 0'))) {
+    const code = c.code.includes('main(') ? c.code : `#include <iostream>\nusing namespace std;\nint main() {\n${c.code}\n}\n`;
+    const exe = path.join(dir, 'a.out');
+    execFileSync(process.env.CXX || 'c++', ['-std=c++11', '-x', 'c++', '-', '-o', exe], {input: code});
+    assert.deepEqual(execFileSync(exe).toString().split('\n').filter((l, i, all) => i < all.length - 1 || l), c.outputs, code);
+  }
+}
 
 const key = async (name, code = name) => {
   await send('Input.dispatchKeyEvent', {type: 'keyDown', key: name, code, text: name.length === 1 ? name : undefined});
@@ -192,23 +208,24 @@ const key = async (name, code = name) => {
 
 // Every result must equal real Python; real keys must type into the slot, not turn the page.
 async function checkLive(live, dir) {
-  assert.equal(JSON.parse(fs.readFileSync('site.json', 'utf8')).language, 'python', 'Number slots only know Python arithmetic');
-  assert(live.filter && live.waits && live.printed, `Number slot failed on page ${live.page}`);
-  execFileSync('python3', ['-c', RUN_LIVE], {input: JSON.stringify(live.cases)});
+  assert(live.filter && live.waits && live.printed && live.few, `Slot failed on page ${live.page}`);
+  if (JSON.parse(fs.readFileSync('site.json', 'utf8')).language === 'python') execFileSync('python3', ['-c', RUN_PYTHON], {input: JSON.stringify(live.cases)});
+  else runCpp(live.cases);
   const counter = `document.getElementById('counter').textContent`;
   await run(`location.hash = '#page-${live.page}'`);
   await sleep(300);
   await run(`document.querySelector('#deckStage .slide.active .slot').select()`);
   const page = await run(counter);
+  const text = await run(`document.activeElement.dataset.kind === 'text'`);
   for (const name of ['1', ' ', 'r', 'f', 'g', 'b', 't', '2']) await key(name);
   for (const name of ['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp']) await key(name);
   const state = await run(`({counter: ${counter}, slot: document.activeElement.value, blank: document.getElementById('blank').hidden, full: Boolean(document.fullscreenElement)})`);
-  assert.deepEqual(state, {counter: page, slot: '12', blank: true, full: false}, 'Typing in a slot reached the deck shortcuts');
-  await run(`[...document.querySelectorAll('#deckStage .slide.active .slot')].forEach((s, i) => { s.value = ['1', '3'][i]; s.dispatchEvent(new Event('input')); })`);
+  assert.deepEqual(state, {counter: page, slot: text ? '1 rfgbt2' : '12', blank: true, full: false}, 'Typing in a slot reached the deck shortcuts');
+  await run(`[...document.querySelectorAll('#deckStage .slide.active .slot')].forEach((s, i) => { s.value = ${JSON.stringify(live.longest)}[i]; s.dispatchEvent(new Event('input')); })`);
   const found = await run(OVERFLOW);
   assert.deepEqual(found, [], `Longest result overflows: ${found.join(' | ')}`);
   const shot = await send('Page.captureScreenshot', {format: 'png'});
-  fs.writeFileSync(path.join(dir, 'live-long.png'), Buffer.from(shot.data, 'base64'));
+  fs.writeFileSync(path.join(dir, `live-${live.page}.png`), Buffer.from(shot.data, 'base64'));
   await key('Enter');
   await key('PageDown');
   assert.notEqual(await run(counter), page, 'A clicker cannot leave a page with a focused slot');

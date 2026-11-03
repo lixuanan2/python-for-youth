@@ -107,7 +107,7 @@ def render(lesson):
     fields = dict(title=html.escape(lesson['title']), file=lesson['file'], css=css,
                   site=html.escape(site()['title']),
                   slides=attach_code(number_slides(read(f'lessons/{lesson["id"]}/slides.html').rstrip() + '\n' + thanks_slide(lesson)), lesson).rstrip(),
-                  script=read('template/deck.js').replace('{{ide}}', json.dumps(site()['ide'], ensure_ascii=False)).rstrip())
+                  script=read('template/deck.js').replace('{{ide}}', json.dumps(site()['ide'], ensure_ascii=False)).replace('{{language}}', site()['language']).rstrip())
     for key, value in fields.items():
         page = page.replace('{{' + key + '}}', value)
     return page

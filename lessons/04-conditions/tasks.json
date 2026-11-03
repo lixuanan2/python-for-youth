@@ -2,7 +2,7 @@
   {
     "id": "01",
     "role": "语法小演示",
-    "page": 6,
+    "page": 7,
     "starter": "starter/01_if.py",
     "solution": "solutions/01_if.py",
     "scope": "score为0到100的整数",
@@ -13,7 +13,7 @@
   {
     "id": "A",
     "role": "基础例题",
-    "page": 7,
+    "page": 8,
     "starter": "starter/02_pass.py",
     "solution": "solutions/02_pass.py",
     "scope": "score为0到100的整数",
@@ -24,7 +24,7 @@
   {
     "id": "02",
     "role": "学生小改写",
-    "page": 9,
+    "page": 10,
     "starter": "starter/03_odd_even.py",
     "solution": "solutions/03_odd_even.py",
     "scope": "n为-1000到1000的整数",
@@ -35,7 +35,7 @@
   {
     "id": "03",
     "role": "语法小演示",
-    "page": 10,
+    "page": 11,
     "starter": "starter/04_secret.py",
     "solution": "solutions/04_secret.py",
     "scope": "一行文字",
@@ -46,7 +46,7 @@
   {
     "id": "B",
     "role": "基础例题",
-    "page": 11,
+    "page": 12,
     "starter": "starter/05_grade.py",
     "solution": "solutions/05_grade.py",
     "scope": "score为0到100的整数",
@@ -57,7 +57,7 @@
   {
     "id": "04",
     "role": "语法小演示",
-    "page": 12,
+    "page": 13,
     "starter": "starter/06_one_way.py",
     "solution": "solutions/06_one_way.py",
     "scope": "无输入",
@@ -68,7 +68,7 @@
   {
     "id": "04b",
     "role": "语法小演示",
-    "page": 13,
+    "page": 14,
     "starter": "starter/06b_two_ifs.py",
     "solution": "solutions/06b_two_ifs.py",
     "scope": "程序里写好了数据",
@@ -79,7 +79,7 @@
   {
     "id": "05",
     "role": "学生小改写",
-    "page": 14,
+    "page": 15,
     "starter": "starter/07_grade_four.py",
     "solution": "solutions/07_grade_four.py",
     "scope": "score为0到100的整数",
@@ -90,7 +90,7 @@
   {
     "id": "06",
     "role": "独立迁移",
-    "page": 17,
+    "page": 18,
     "starter": "starter/08_shipping.py",
     "solution": "solutions/08_shipping.py",
     "scope": "重量为1到100的整数",
@@ -101,7 +101,7 @@
   {
     "id": "07",
     "role": "创作项目",
-    "page": 19,
+    "page": 20,
     "starter": "starter/09_judge.py",
     "solution": "solutions/09_judge_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

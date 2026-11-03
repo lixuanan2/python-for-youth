@@ -37,7 +37,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 | 选择小测 | `.quiz data-right="序号"`，选项加 `data-fb`，后面放 `.fb` |
 | 点行找错 | `pre.code.pick data-bug data-yes data-no`，后面放 `.fb` |
 | 拨开关 | `.gate data-op="and/or/not"`，里面放 `button`（写 True 或 False）和 `b`，结果由脚本算 |
-| 黄色数字框 | 代码行里放 `input.slot data-var="名字" value="默认值" maxlength="4"`，结果放 `b data-eval="a // b"`，写好默认结果，放在 `.live-out` 里。只支持两个 0 到 9999 的整数和 `+ - * / // %`，`data-eval` 的顺序要和 `print` 行一致，`check_browser` 会用真实 Python 比对。C++ 要先改 `setupLive` |
+| 黄色框 | 代码行里放 `input.slot data-var="名字" value="默认值"`，数字框加 `maxlength="4" inputmode="numeric"`，文字框加 `data-kind="text"`。结果放 `.live-out` 里的 `b data-eval`，写好默认结果：`a // b` 这样的一次运算，或者只写一个名字。数字是 0 到 9999 的整数，运算有 `+ - * / // %` 和六种比较；文字最多 12 个字，自动去掉英文引号和反斜杠。一页最多 2 个框，`data-eval` 按 `print` 的顺序写。`check_browser` 会把所有组合拿真实 Python 或 C++ 跑一遍。例子见第 1、2、3、4 课 |
 | 数轴 | `.numline` 里放 `u`（线段）、`i`（端点，`.open` 为空心）和 `b`（刻度），位置用百分比 |
 | IDE 按钮 | `a.ide`，默认带本页代码；`data-code` 写其他代码，`data-code-file` 带上某个起始程序 |
 | 只显示部分代码 | `pre.code data-file="…" data-lines="7-13"`，IDE 仍带完整程序 |
