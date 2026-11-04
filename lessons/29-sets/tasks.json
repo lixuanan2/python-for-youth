@@ -1,0 +1,79 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_set.py",
+    "solution": "solutions/01_set.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "3\n[1, 2, 3]\nTrue\n",
+    "description": "集合里同样的只留一个。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 4,
+    "starter": "starter/02_dedupe.py",
+    "solution": "solutions/02_dedupe.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "4\n2\n",
+    "description": "列表变集合去掉重复。"
+  },
+  {
+    "id": "C",
+    "role": "语法小演示",
+    "page": 6,
+    "starter": "starter/03_ops.py",
+    "solution": "solutions/03_ops.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "[3, 4]\n[1, 2, 3, 4, 5]\n[1, 2]\n",
+    "description": "交集、并集、差集。"
+  },
+  {
+    "id": "D",
+    "role": "基础例题",
+    "page": 8,
+    "starter": "starter/04_words.py",
+    "solution": "solutions/04_words.py",
+    "scope": "一行英文，1到100个词，用空格隔开",
+    "sample_input": "i like cats i like dogs\n",
+    "sample_output": "6 个词\n4 个不同的词\n",
+    "description": "数一句话里有几个不同的词。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 9,
+    "starter": "starter/05_repeat.py",
+    "solution": "solutions/05_repeat.py",
+    "scope": "一行英文，1到100个词，用空格隔开",
+    "sample_input": "i like cats i like dogs\n",
+    "sample_output": "6 个词\n4 个不同的词\ncats dogs i like\n",
+    "description": "再把不同的词排好输出。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 12,
+    "starter": "starter/06_attendance.py",
+    "solution": "solutions/06_attendance.py",
+    "scope": "第一行全班名单1到50个名字；第二行签到记录0到200个名字，都在名单里；用空格隔开",
+    "sample_input": "Amy Bob Cat Dan\nBob Amy Bob\n",
+    "sample_output": "到了 2 人\n没到：Cat Dan\n",
+    "description": "签到表去重，找出没到的人。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 14,
+    "starter": "starter/07_my_set.py",
+    "solution": "solutions/07_hobby_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "画画 游泳 下棋\n下棋 跑步 画画\n",
+    "sample_output": "都喜欢：下棋 画画\n",
+    "description": "做一个自己的集合小程序。"
+  }
+]

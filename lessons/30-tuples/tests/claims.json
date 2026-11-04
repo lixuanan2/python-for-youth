@@ -1,0 +1,81 @@
+[
+  {
+    "page": 3,
+    "code": "p = (3, 5)\nprint(p)\nprint(p[0], p[1])\nx, y = p\nprint(x + y)\n",
+    "stdout": "(3, 5)\n3 5\n8\n"
+  },
+  {
+    "page": 4,
+    "code": "p = (3, 5)\np[0] = 9\nprint(p)\n",
+    "error": "TypeError"
+  },
+  {
+    "page": 4,
+    "code": "a = [3, 5]\na[0] = 9\nprint(a)\n",
+    "stdout": "[9, 5]\n"
+  },
+  {
+    "page": 5,
+    "code": "a, b = (4, 7)\nprint(b, a)\n",
+    "stdout": "7 4\n"
+  },
+  {
+    "page": 6,
+    "code": "def low_high(nums):\n    return min(nums), max(nums)\nlow, high = low_high([7, 2, 9, 4])\nprint(\"最低\", low)\nprint(\"最高\", high)\n",
+    "stdout": "最低 2\n最高 9\n"
+  },
+  {
+    "page": 6,
+    "code": "print((min([7, 2, 9, 4]), max([7, 2, 9, 4])))\n",
+    "stdout": "(2, 9)\n"
+  },
+  {
+    "page": 7,
+    "code": "students = [(\"小明\", 90), (\"小红\", 85)]\nfor name, score in students:\n    print(f\"{name}：{score} 分\")\n",
+    "stdout": "小明：90 分\n小红：85 分\n"
+  },
+  {
+    "page": 8,
+    "code": "pairs = [(\"A\", 1), (\"B\", 2)]\nfor name, score in pairs:\n    print(score)\n",
+    "stdout": "1\n2\n"
+  },
+  {
+    "page": 9,
+    "code": "def low_high(nums):\n    return min(nums), max(nums)\nn = int(input())\nscores = []\nfor i in range(n):\n    scores.append(int(input()))\nlow, high = low_high(scores)\nprint(\"最低\", low, \"最高\", high)\nprint(\"相差\", high - low)\n",
+    "stdin": "4\n90\n85\n77\n96\n",
+    "stdout": "最低 77 最高 96\n相差 19\n"
+  },
+  {
+    "page": 10,
+    "code": "def low_high_avg(nums):\n    return min(nums), max(nums), round(sum(nums) / len(nums), 1)\nn = int(input())\nscores = []\nfor i in range(n):\n    scores.append(int(input()))\nlow, high, avg = low_high_avg(scores)\nprint(\"最低\", low, \"最高\", high)\nprint(\"相差\", high - low)\nprint(\"平均\", avg)\n",
+    "stdin": "4\n90\n85\n77\n96\n",
+    "stdout": "最低 77 最高 96\n相差 19\n平均 87.0\n"
+  },
+  {
+    "page": 10,
+    "code": "def low_high_avg(nums):\n    return min(nums), max(nums), round(sum(nums) / len(nums), 1)\nn = int(input())\nscores = []\nfor i in range(n):\n    scores.append(int(input()))\nlow, high, avg = low_high_avg(scores)\nprint(\"最低\", low, \"最高\", high)\nprint(\"相差\", high - low)\nprint(\"平均\", avg)\n",
+    "stdin": "1\n60\n",
+    "stdout": "最低 60 最高 60\n相差 0\n平均 60.0\n"
+  },
+  {
+    "page": 11,
+    "code": "x, y = (1, 2, 3)\n",
+    "error": "ValueError"
+  },
+  {
+    "page": 11,
+    "code": "t = (5)\nprint(type(t).__name__, type((5,)).__name__)\n",
+    "stdout": "int tuple\n"
+  },
+  {
+    "page": 12,
+    "code": "def low_high_total(nums):\n    return min(nums), max(nums), sum(nums)\nlow, high = low_high_total([60, 80, 100])\nprint(low, high)\n",
+    "error": "ValueError: too many values to unpack"
+  },
+  {
+    "page": 13,
+    "code": "n = int(input())\npoints = []\nfor i in range(n):\n    x, y = input().split()\n    points.append((int(x), int(y)))\nbest = points[0]\nfor p in points:\n    if abs(p[0]) + abs(p[1]) < abs(best[0]) + abs(best[1]):\n        best = p\nprint(best)\nprint(abs(best[0]) + abs(best[1]), \"步\")\n",
+    "stdin": "3\n3 4\n-1 2\n5 0\n",
+    "stdout": "(-1, 2)\n3 步\n"
+  }
+]

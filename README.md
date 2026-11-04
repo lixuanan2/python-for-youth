@@ -55,6 +55,10 @@
 | [24](dist/24-bubble-sort/index.html) | 冒泡排序 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [25](dist/25-enumeration/index.html) | 枚举：把可能都试一遍 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [26](dist/26-binary-search/index.html) | 二分查找 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [27](dist/27-break-continue/index.html) | break 和 continue | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [28](dist/28-f-strings/index.html) | f-string 格式化输出 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [29](dist/29-sets/index.html) | 集合 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [30](dist/30-tuples/index.html) | 元组 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 

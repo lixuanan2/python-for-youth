@@ -1,0 +1,79 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_tuple.py",
+    "solution": "solutions/01_tuple.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "(3, 5)\n3 5\n8\n",
+    "description": "元组打包和拆包。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 6,
+    "starter": "starter/02_return_two.py",
+    "solution": "solutions/02_return_two.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "最低 2\n最高 9\n",
+    "description": "函数一次交回两个值。"
+  },
+  {
+    "id": "C",
+    "role": "语法小演示",
+    "page": 7,
+    "starter": "starter/03_pairs.py",
+    "solution": "solutions/03_pairs.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "小明：90 分\n小红：85 分\n",
+    "description": "列表里装着成对的元组。"
+  },
+  {
+    "id": "D",
+    "role": "基础例题",
+    "page": 9,
+    "starter": "starter/04_stats.py",
+    "solution": "solutions/04_stats.py",
+    "scope": "第一行n为1到50的整数；接下来n行，每行一个0到100的整数",
+    "sample_input": "4\n90\n85\n77\n96\n",
+    "sample_output": "最低 77 最高 96\n相差 19\n",
+    "description": "函数交回最低和最高。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 10,
+    "starter": "starter/05_stats_avg.py",
+    "solution": "solutions/05_stats_avg.py",
+    "scope": "第一行n为1到50的整数；接下来n行，每行一个0到100的整数",
+    "sample_input": "4\n90\n85\n77\n96\n",
+    "sample_output": "最低 77 最高 96\n相差 19\n平均 87.0\n",
+    "description": "函数再交回平均分。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 13,
+    "starter": "starter/06_treasure.py",
+    "solution": "solutions/06_treasure.py",
+    "scope": "第一行n为1到50的整数；接下来n行，每行两个-100到100的整数，用空格隔开",
+    "sample_input": "3\n3 4\n-1 2\n5 0\n",
+    "sample_output": "(-1, 2)\n3 步\n",
+    "description": "找出离原点最近的宝藏。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 15,
+    "starter": "starter/07_my_tuple.py",
+    "solution": "solutions/07_birthday_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "3\n",
+    "sample_output": "小明 3 月 12 日过生日\n小刚 3 月 30 日过生日\n",
+    "description": "做一个自己的元组小程序。"
+  }
+]

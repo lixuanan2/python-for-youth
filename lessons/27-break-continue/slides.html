@@ -1,0 +1,232 @@
+<!-- cover -->
+<section class="slide" aria-label="break 和 continue" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 27</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">停下</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">break / continue</span></div><b class="r d2" style="font-size:250px">跳过</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">break 和 continue：让循环听指挥</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让循环在中途停下，或者跳过这一次，写出读到“再见”才结束的聊天程序。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="找到了还在找">
+  <h2 class="t r">找到了，还在接着找？</h2>
+  <div class="slip r d1" style="left:96px;top:290px;width:600px"><small style="font-size:34px">第 25 课的鸡兔同笼</small><pre style="font-size:52px">找到了还试完</pre></div>
+  <div class="slip tilt r d2" style="left:780px;top:290px;width:640px"><small style="font-size:34px">第 22 课一直问到输对</small><pre style="font-size:52px">要记着 done</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">循环原来只会从头转到尾。有时我们想在中间就停下：找到了就别再找，输对了就别再问。<br>这节课学两个词：break 是“跳出”，整个循环马上结束；continue 是“继续”，跳过这一次，直接进下一圈。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- break -->
+<section class="slide" aria-label="break 跳出循环" data-steps="2" data-at="2" data-chapter="break">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">break：马上跳出循环</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">break.py</div>
+<pre class="code" data-file="solutions/01_break.py"><span class="ln l1 l2"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">10</span>):</span><span class="ln l2">    <span class="k">if</span> i * i &gt; <span class="m">30</span>:</span><span class="ln l2">        <span class="k">break</span></span><span class="ln l1">    <span class="f">print</span>(i)</span><span class="ln l2"><span class="f">print</span>(<span class="s">"停在"</span>, i)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:790px;width:960px;color:var(--paper)">i 从 1 到 5，i * i 都不超过 30，不进 if，照常输出。</p>
+  <p class="abs say only2" style="left:96px;top:790px;width:960px;color:var(--paper)">i 是 6 时，36 超过 30，运行 break：循环马上结束，7、8、9 都不再试。跳到循环后面那一行。</p>
+  <a class="ide step s2" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px;font:800 64px/1.35 var(--code)">1<br>2<br>3<br>4<br>5<br><span class="step s2" style="color:var(--clay)">停在 6</span></div>
+</section>
+
+<!-- predict: print before the check -->
+<section class="slide dark" aria-label="猜一猜：print 挪到前面" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：print 挪到 if 前面，会输出 6 吗？</h2>
+  <div class="editor" style="left:96px;top:220px;width:960px;--fs:50px"><div class="tab">break.py</div>
+<pre class="code"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">10</span>):</span><span class="ln l2">    <span class="f">print</span>(i)</span><span class="ln">    <span class="k">if</span> i * i &gt; <span class="m">30</span>:</span><span class="ln">        <span class="k">break</span></span></pre></div>
+  <p class="abs say only1" style="left:1160px;right:96px;top:240px">只是换了两行的位置。<br>输出到 5，还是到 6？</p>
+  <p class="abs step s2" style="left:1160px;right:96px;top:230px;font:800 60px/1.3 var(--code);color:var(--clay-soft)">1 2 3<br>4 5 6</p>
+  <p class="abs say step s2" style="left:96px;top:720px;width:1728px">会输出 6。i 是 6 时，先运行 print(6)，再检查 36 &gt; 30，然后 break。<br>break 只管它后面的事：它前面已经运行过的，不会收回。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: while True -->
+<section class="slide" aria-label="小测：while True">
+  <h2 class="t r">小测：这段程序输出几？</h2>
+  <div class="editor r d1" style="left:96px;top:200px;width:800px;--fs:46px"><div class="tab">jump.py</div>
+<pre class="code"><span class="ln">n = <span class="m">0</span></span><span class="ln"><span class="k">while</span> <span class="k">True</span>:</span><span class="ln">    n = n + <span class="m">3</span></span><span class="ln">    <span class="k">if</span> n &gt; <span class="m">10</span>:</span><span class="ln">        <span class="k">break</span></span><span class="ln"><span class="f">print</span>(n)</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:200px;grid-template-columns:1fr" data-right="2">
+    <button type="button" data-fb="9 还没超过 10，不会停，还要再加一次 3。"><i>1</i>9</button>
+    <button type="button" data-fb="n 每次加 3：3、6、9、12，从来没等于 10。"><i>2</i>10</button>
+    <button type="button" data-fb="答对了！加到 12 才超过 10，break 跳出，输出 12。"><i>3</i>12</button>
+    <button type="button" data-fb="while True 本来会一直转，可里面有 break，超过 10 就停了。"><i>4</i>一直转下去</button>
+  </div>
+  <p class="fb" style="left:960px;top:840px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: chat until goodbye -->
+<section class="slide" aria-label="例题：说再见才停" data-steps="3" data-at="3" data-chapter="while True">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：说“再见”才停</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">chat.py</div>
+<pre class="code" data-file="solutions/02_chat.py"><span class="ln l1 l2 l3"><span class="k">while</span> <span class="k">True</span>:</span><span class="ln l1 l2 l3">    word = <span class="f">input</span>()</span><span class="ln l1 l2 l3">    <span class="k">if</span> word == <span class="s">"再见"</span>:</span><span class="ln l3">        <span class="k">break</span></span><span class="ln l1 l2">    <span class="f">print</span>(<span class="s">"你说"</span>, word)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"拜拜"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:810px;width:960px;color:var(--paper);font-size:34px">while True 的意思是“一直转”。不知道要聊几句，就先一直转，等着说停。输入“你好”，不是再见，照着说一遍。</p>
+  <p class="abs say only2" style="left:96px;top:810px;width:960px;color:var(--paper);font-size:34px">输入“吃了吗”，还不是再见，又说一遍，再回到开头读下一句。</p>
+  <p class="abs say only3" style="left:96px;top:810px;width:960px;color:var(--paper);font-size:34px">输入“再见”，break 跳出循环，最后说“拜拜”。</p>
+  <div class="abs" style="left:1210px;right:96px;top:170px;font:400 48px/1.6 var(--text);color:var(--clay)">你说 你好<br><span class="step s2">你说 吃了吗</span><br><span class="step s3">拜拜</span></div>
+  <a class="ide step s3" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
+</section>
+
+<!-- retry, the short way -->
+<section class="slide" aria-label="一直问到输对，换个写法">
+  <div class="night" style="width:1310px"></div>
+  <h2 class="t" style="color:var(--paper)">第 22 课的例题，换个写法</h2>
+  <div class="editor" style="left:96px;top:200px;width:1170px;--fs:44px"><div class="tab">retry.py</div>
+<pre class="code" data-file="solutions/03_retry.py"><span class="ln"><span class="k">while</span> <span class="k">True</span>:</span><span class="ln">    <span class="k">try</span>:</span><span class="ln">        age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">        <span class="k">break</span></span><span class="ln">    <span class="k">except</span> ValueError:</span><span class="ln">        <span class="f">print</span>(<span class="s">"不是整数，再输一次"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span></pre></div>
+  <p class="abs say" style="left:96px;top:850px;width:1170px;color:var(--paper);font-size:34px">转换成功，才走到 break；出错就跳到 except，break 被跳过，接着再问。<br>不用 done 记着，读起来就像在说：一直问，输对了就停。</p>
+  <a class="ide" style="left:1390px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1390px;right:96px;top:170px">
+    <p class="say" style="font-size:36px;color:var(--muted)">依次输入 abc、3.5、12：</p>
+    <p style="font:400 40px/1.6 var(--text);color:var(--clay);margin-top:16px">不是整数，再输一次<br>不是整数，再输一次<br>明年你 13 岁</p>
+  </div>
+</section>
+
+<!-- continue -->
+<section class="slide" aria-label="continue 跳过这一次" data-steps="2" data-at="2" data-chapter="continue">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">continue：跳过这一次</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">skip.py</div>
+<pre class="code" data-file="solutions/04_continue.py"><span class="ln l1 l2"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">11</span>):</span><span class="ln l2">    <span class="k">if</span> i % <span class="m">3</span> == <span class="m">0</span>:</span><span class="ln l2">        <span class="k">continue</span></span><span class="ln l1">    <span class="f">print</span>(i)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">1 和 2 不是 3 的倍数，不进 if，照常输出。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper);font-size:34px">i 是 3 时运行 continue：剩下的 print 不做了，直接去下一圈。6 和 9 也被跳过。<br>break 是整个循环结束，continue 只跳过这一次。</p>
+  <a class="ide step s2" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px;font:800 64px/1.35 var(--code)">1 2<br><span class="step s2">4 5<br>7 8<br>10</span></div>
+</section>
+
+<!-- quiz: continue to break -->
+<section class="slide" aria-label="小测：换成 break">
+  <h2 class="t r">小测：continue 换成 break，输出什么？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！i 是 3 时 break，整个循环结束，只输出了 1 和 2。"><i>1</i>1 2</button>
+    <button type="button" data-fb="这是 continue 的结果。break 会让整个循环结束。"><i>2</i>1 2 4 5 7 8 10</button>
+    <button type="button" data-fb="是 3 的倍数时才进 if，进了 if 就不会运行 print。"><i>3</i>3 6 9</button>
+    <button type="button" data-fb="1 和 2 在遇到 break 之前就已经输出了。"><i>4</i>什么也不输出</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn: sum until zero -->
+<section class="slide" aria-label="读到 0 就停">
+  <div class="band r"><b>动手<br>改一改</b><span>把聊天程序改成记账。</span></div>
+  <div class="turn">
+    <h2 class="r d1">读到 0 就停，算总和</h2>
+    <p class="say r d1">在例题上改：每行读入一个整数，读到 0 就停。停下以后输出前面所有数的和，0 不算。不知道一共几个数，所以用 while True。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 5、8、-3、0</small><pre>10</pre></div><div><small>第一个就是 0</small><pre>0</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">输入要先变成整数，总和从 0 开始。教室电脑：打开 starter/05_sum_until_zero.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/05_sum_until_zero.py" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:700px 400px 1fr"><code class="plain">break 写在循环外</code><b>SyntaxError</b><span>break 只能用在循环里</span></div>
+    <div class="r d2" style="grid-template-columns:700px 400px 1fr"><code class="plain">while True 没写 break</code><b>停不下来</b><span>要有一个能走到的出口</span></div>
+    <div class="r d3" style="grid-template-columns:700px 400px 1fr"><code class="plain">该停处写成 continue</code><b>停不下来</b><span>continue 只跳过这一次</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:840px">写 while True 时先问自己：哪一句 break 能让它停下？那句真的走得到吗？</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：说了再见也不停">
+  <h2 class="t r">找错：说了“再见”，程序还在等着输入</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:960px;--fs:48px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="5" data-yes="找到了！continue 只跳过这一次，循环还在转，又去读下一句。说“再见”要停下，应该写 break。" data-no="这一行没问题。输入“再见”时，程序走进了 if，然后做了什么？"><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">while</span> <span class="k">True</span>:</span><span class="ln">    word = <span class="f">input</span>()</span><span class="ln">    <span class="k">if</span> word == <span class="s">"再见"</span>:</span><span class="ln">        <span class="k">continue</span></span><span class="ln">    count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(<span class="s">"说了"</span>, count, <span class="s">"句"</span>)</span></pre></div>
+  <p class="abs say r d2" style="left:1160px;top:240px;right:96px">想数一数说了几句，<br>可它一直停不下来。<br>点出写错的那一行。</p>
+  <p class="fb" style="left:1160px;top:520px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="整理成绩单" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">整理成绩单</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">不停读入分数，每行一个整数，读到 -1 就结束。不在 0 到 100 之间的是写错了，跳过不算。<br>输出两行：“有效 几 个”和“平均 多少”，平均分用 round 保留 1 位小数。一个有效分数也没有，就输出“没有有效分数”。</p>
+  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:480px"><small>依次输入</small><pre style="font-size:44px">90
+80
+120
+85
+-1</pre><small style="margin-top:14px">输出</small><pre style="font-size:44px;white-space:pre">有效 3 个
+平均 85.0</pre></div>
+  <a class="ide r d3" data-code-file="starter/06_scores.py" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:886px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>用 while True 一直读。读到 -1 用 break 停下，和动手题读到 0 一样。</span></p>
+    <p class="step s2"><i>提示 2</i><span>小于 0 或者大于 100 的，用 continue 跳过：不加进总和，也不数。</span></p>
+    <p class="step s3"><i>提示 3</i><span>循环结束后再算平均。个数是 0 时不能除，先判断，说“没有有效分数”。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个会停的小程序" data-chapter="小项目">
+  <h2 class="t r">造一个“知道什么时候停”的小程序</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">用 break 让它在该停的时候停，用 continue 跳过不要的。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>改一改聊天程序：换一句结束的话，再换一种回答。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>密码锁：最多试 3 次；点菜机：说“结账”才算总价；跳过不爱吃的菜。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>把第 21 课的猜数字改成 while True，再数一数猜了几次。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/07_my_loop.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着玩</b><span>玩同桌的程序，试试它能不能按说好的那样停下</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪里设计得最好玩</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>有没有一种输入，会让它停不下来？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让程序更稳。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>break 做什么？<em class="step s2" style="font-style:normal;font-weight:400">　马上跳出整个循环，去运行循环后面的。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>continue 做什么？<em class="step s3" style="font-style:normal;font-weight:400">　跳过这一圈剩下的，直接进下一圈。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>while True 什么时候停？<em class="step s4" style="font-style:normal;font-weight:400">　走到里面的 break 才停，所以一定要有一个走得到的 break。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>break</code><span>整个循环马上结束</span></div>
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>continue</code><span>跳过这一次，进下一圈</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>while True:</code><span>一直转，靠里面的 break 停</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>if word == "再见":</code><span>先判断，再 break</span></div>
+    <div class="r d3" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">break 前面的已经做了</code><span>不会收回</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>两层循环里的 break</code><span>只跳出它所在的那一层</span></div>
+    <div class="r d2"><code>for ... else</code><span>循环没被 break 打断时，才运行 else</span></div>
+    <div class="r d3"><code>pass</code><span>什么也不做，先占个位置</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天学会了让循环听指挥：该停就停，该跳就跳。</p>
+  <div class="foot"></div>
+</section>

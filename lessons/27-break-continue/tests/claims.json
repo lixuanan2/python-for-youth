@@ -1,0 +1,68 @@
+[
+  {
+    "page": 3,
+    "code": "for i in range(1, 10):\n    if i * i > 30:\n        break\n    print(i)\nprint(\"停在\", i)\n",
+    "stdout": "1\n2\n3\n4\n5\n停在 6\n"
+  },
+  {
+    "page": 4,
+    "code": "for i in range(1, 10):\n    print(i)\n    if i * i > 30:\n        break\n",
+    "stdout": "1\n2\n3\n4\n5\n6\n"
+  },
+  {
+    "page": 5,
+    "code": "n = 0\nwhile True:\n    n = n + 3\n    if n > 10:\n        break\nprint(n)\n",
+    "stdout": "12\n"
+  },
+  {
+    "page": 6,
+    "code": "while True:\n    word = input()\n    if word == \"再见\":\n        break\n    print(\"你说\", word)\nprint(\"拜拜\")\n",
+    "stdin": "你好\n吃了吗\n再见\n",
+    "stdout": "你说 你好\n你说 吃了吗\n拜拜\n"
+  },
+  {
+    "page": 7,
+    "code": "while True:\n    try:\n        age = int(input())\n        break\n    except ValueError:\n        print(\"不是整数，再输一次\")\nprint(\"明年你\", age + 1, \"岁\")\n",
+    "stdin": "abc\n3.5\n12\n",
+    "stdout": "不是整数，再输一次\n不是整数，再输一次\n明年你 13 岁\n"
+  },
+  {
+    "page": 8,
+    "code": "for i in range(1, 11):\n    if i % 3 == 0:\n        continue\n    print(i)\n",
+    "stdout": "1\n2\n4\n5\n7\n8\n10\n"
+  },
+  {
+    "page": 9,
+    "code": "for i in range(1, 11):\n    if i % 3 == 0:\n        break\n    print(i)\n",
+    "stdout": "1\n2\n"
+  },
+  {
+    "page": 10,
+    "code": "total = 0\nwhile True:\n    n = int(input())\n    if n == 0:\n        break\n    total += n\nprint(total)\n",
+    "stdin": "5\n8\n-3\n0\n",
+    "stdout": "10\n"
+  },
+  {
+    "page": 10,
+    "code": "total = 0\nwhile True:\n    n = int(input())\n    if n == 0:\n        break\n    total += n\nprint(total)\n",
+    "stdin": "0\n",
+    "stdout": "0\n"
+  },
+  {
+    "page": 11,
+    "code": "print(1)\nbreak\n",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 12,
+    "code": "count = 0\nwhile True:\n    word = input()\n    if word == \"再见\":\n        continue\n    count += 1\nprint(\"说了\", count, \"句\")\n",
+    "stdin": "你好\n再见\n",
+    "error": "EOFError"
+  },
+  {
+    "page": 13,
+    "code": "total = 0\ncount = 0\nwhile True:\n    s = int(input())\n    if s == -1:\n        break\n    if s < 0 or s > 100:\n        continue\n    total += s\n    count += 1\nif count == 0:\n    print(\"没有有效分数\")\nelse:\n    print(\"有效\", count, \"个\")\n    print(\"平均\", round(total / count, 1))\n",
+    "stdin": "90\n80\n120\n85\n-1\n",
+    "stdout": "有效 3 个\n平均 85.0\n"
+  }
+]

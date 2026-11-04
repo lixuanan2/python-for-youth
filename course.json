@@ -180,5 +180,33 @@
     "title": "二分查找",
     "file": "lesson_26.py",
     "stage": "算法入门"
+  },
+  {
+    "id": "27-break-continue",
+    "tag": "LESSON 27",
+    "title": "break 和 continue",
+    "file": "lesson_27.py",
+    "stage": "语法进阶"
+  },
+  {
+    "id": "28-f-strings",
+    "tag": "LESSON 28",
+    "title": "f-string 格式化输出",
+    "file": "lesson_28.py",
+    "stage": "语法进阶"
+  },
+  {
+    "id": "29-sets",
+    "tag": "LESSON 29",
+    "title": "集合",
+    "file": "lesson_29.py",
+    "stage": "语法进阶"
+  },
+  {
+    "id": "30-tuples",
+    "tag": "LESSON 30",
+    "title": "元组",
+    "file": "lesson_30.py",
+    "stage": "语法进阶"
   }
 ]

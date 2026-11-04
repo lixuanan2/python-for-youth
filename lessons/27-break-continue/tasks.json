@@ -1,0 +1,79 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_break.py",
+    "solution": "solutions/01_break.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "1\n2\n3\n4\n5\n停在 6\n",
+    "description": "break 让循环中途停下。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 6,
+    "starter": "starter/02_chat.py",
+    "solution": "solutions/02_chat.py",
+    "scope": "每行一句话，直到“再见”",
+    "sample_input": "你好\n吃了吗\n再见\n",
+    "sample_output": "你说 你好\n你说 吃了吗\n拜拜\n",
+    "description": "while True 加 break，说再见才停。"
+  },
+  {
+    "id": "C",
+    "role": "语法小演示",
+    "page": 7,
+    "starter": "starter/03_retry.py",
+    "solution": "solutions/03_retry.py",
+    "scope": "每行一个输入，直到输入整数为止",
+    "sample_input": "abc\n3.5\n12\n",
+    "sample_output": "不是整数，再输一次\n不是整数，再输一次\n明年你 13 岁\n",
+    "description": "用 break 一直问到输对。"
+  },
+  {
+    "id": "D",
+    "role": "语法小演示",
+    "page": 8,
+    "starter": "starter/04_continue.py",
+    "solution": "solutions/04_continue.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "1\n2\n4\n5\n7\n8\n10\n",
+    "description": "continue 跳过 3 的倍数。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 10,
+    "starter": "starter/05_sum_until_zero.py",
+    "solution": "solutions/05_sum_until_zero.py",
+    "scope": "每行一个整数，绝对值不超过10000，以0结束",
+    "sample_input": "5\n8\n-3\n0\n",
+    "sample_output": "10\n",
+    "description": "读到 0 就停，输出总和。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 13,
+    "starter": "starter/06_scores.py",
+    "solution": "solutions/06_scores.py",
+    "scope": "每行一个整数，以-1结束，最多100行",
+    "sample_input": "90\n80\n120\n85\n-1\n",
+    "sample_output": "有效 3 个\n平均 85.0\n",
+    "description": "跳过无效分数，读到 -1 结束，输出个数和平均分。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 15,
+    "starter": "starter/07_my_loop.py",
+    "solution": "solutions/07_lock_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "1111\n1234\n",
+    "sample_output": "不对，再试试\n开锁了！\n",
+    "description": "做一个知道什么时候停的小程序。"
+  }
+]

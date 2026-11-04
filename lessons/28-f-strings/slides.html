@@ -1,0 +1,227 @@
+<!-- cover -->
+<section class="slide" aria-label="f-string" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 28</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">拼句</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">f"{name}"</span></div><b class="r d2" style="font-size:250px">整齐</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">f-string：把话说得整整齐齐</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能把变量直接放进句子里，让小数只留两位，把时间显示成 01:05:09。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="输出不太整齐">
+  <h2 class="t r">输出总是不太整齐</h2>
+  <div class="slip r d1" style="left:96px;top:290px;width:780px"><small style="font-size:34px">print("明年你", age + 1, "岁")</small><pre style="font-size:52px">明年你 13 岁</pre></div>
+  <div class="slip tilt r d2" style="left:960px;top:290px;width:760px"><small style="font-size:34px">print(10 / 3)</small><pre style="font-size:52px">3.3333333333333335</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">逗号会多出空格，小数又长得看不完。写成绩单、小票、时钟，都想要整整齐齐的输出。<br>这节课学 f-string：在引号前面加一个 f，就能把变量直接写进句子里，还能管住小数有几位。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- f-string -->
+<section class="slide" aria-label="f-string 的写法" data-steps="2" data-at="2" data-chapter="f-string">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">引号前面加 f</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">hello.py</div>
+<pre class="code" data-file="solutions/01_fstring.py"><span class="ln">name = <span class="s">"小明"</span></span><span class="ln">age = <span class="m">12</span></span><span class="ln l1"><span class="f">print</span>(<span class="s">f"{name}今年{age}岁"</span>)</span><span class="ln l2"><span class="f">print</span>(<span class="s">f"明年{age + 1}岁"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">f 是 format（格式）的第一个字母。加了 f，引号里的大括号 { } 就会换成变量的值。没有逗号，也就没有多余的空格。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">大括号里还能写算式。{age + 1} 先算出 13，再放进句子里。</p>
+  <a class="ide step s2" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px;font:700 64px/1.5 var(--text);color:var(--clay)">小明今年12岁<br><span class="step s2">明年13岁</span></div>
+</section>
+
+<!-- predict: forgot the f -->
+<section class="slide dark" aria-label="猜一猜：忘了写 f" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：忘了写 f，会输出什么？</h2>
+  <div class="editor" style="left:96px;top:220px;width:1000px;--fs:50px"><div class="tab">hello.py</div>
+<pre class="code"><span class="ln">name = <span class="s">"小明"</span></span><span class="ln">age = <span class="m">12</span></span><span class="ln l2"><span class="f">print</span>(<span class="s">"{name}今年{age}岁"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:1180px;right:96px;top:240px">只少了一个字母 f。<br>会报错吗？</p>
+  <p class="abs step s2" style="left:96px;top:640px;width:1728px;font:700 72px var(--code);color:var(--clay-soft)">{name}今年{age}岁</p>
+  <p class="abs say step s2" style="left:96px;top:800px;width:1728px">不报错，原样输出。没有 f，它就是一串普通的文字，大括号也只是普通的符号。<br>看到屏幕上出现大括号，先检查引号前面有没有 f。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: braces -->
+<section class="slide" aria-label="小测：大括号外面的加号">
+  <h2 class="t r">小测：运行这两行，输出什么？</h2>
+  <pre class="abs r d1" style="left:96px;top:200px;font:400 48px/1.5 var(--code)">age = 12
+print(f"{age}+1")</pre>
+  <div class="quiz r d1" data-right="1" style="top:390px">
+    <button type="button" data-fb="+1 写在大括号外面，只是普通的文字，不会去算。"><i>1</i>13</button>
+    <button type="button" data-fb="答对了！大括号里的 age 换成 12，后面的 +1 原样跟着。想算就写成 {age + 1}。"><i>2</i>12+1</button>
+    <button type="button" data-fb="有 f，大括号会被换成 age 的值。"><i>3</i>{age}+1</button>
+    <button type="button" data-fb="这样写不会报错。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- decimals -->
+<section class="slide" aria-label="保留几位小数" data-steps="2" data-at="2" data-chapter="小数位">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">冒号后面管小数有几位</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">decimal.py</div>
+<pre class="code" data-file="solutions/02_decimal.py"><span class="ln">x = <span class="m">10</span> / <span class="m">3</span></span><span class="ln l1"><span class="f">print</span>(x)</span><span class="ln l2"><span class="f">print</span>(<span class="s">f"{x:.2f}"</span>)</span><span class="ln l2"><span class="f">print</span>(<span class="s">f"{x:.1f}"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">直接输出，小数长得看不完。最后那个 5 是计算机存小数时留下的一点点误差。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">大括号里加 :.2f，意思是“按小数显示，保留 2 位”，会四舍五入。:.1f 就是保留 1 位。只改显示的样子，x 本身没变。</p>
+  <a class="ide step s2" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px;font:700 48px/1.7 var(--code)">3.3333333333333335<br><span class="step s2" style="color:var(--clay);font-size:72px">3.33<br>3.3</span></div>
+</section>
+
+<!-- quiz: .2f -->
+<section class="slide" aria-label="小测：7 保留两位">
+  <h2 class="t r">小测：运行这两行，输出什么？</h2>
+  <pre class="abs r d1" style="left:96px;top:200px;font:400 48px/1.5 var(--code)">price = 7
+print(f"{price:.2f}")</pre>
+  <div class="quiz r d1" data-right="2" style="top:390px">
+    <button type="button" data-fb=":.2f 要显示 2 位小数，整数也会补上。"><i>1</i>7</button>
+    <button type="button" data-fb="只有 1 位。.2f 要 2 位。"><i>2</i>7.0</button>
+    <button type="button" data-fb="答对了！不够 2 位就补 0，小票上的钱常这样写。"><i>3</i>7.00</button>
+    <button type="button" data-fb="冒号后面的是格式说明，不会原样输出。"><i>4</i>7.2f</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: receipt -->
+<section class="slide" aria-label="例题：打印小票" data-steps="3" data-at="3" data-chapter="小票">
+  <div class="night" style="width:1440px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：打印一张小票</h2>
+  <div class="editor" style="left:96px;top:200px;width:1300px;--fs:44px"><div class="tab">receipt.py</div>
+<pre class="code" data-file="solutions/03_receipt.py"><span class="ln l1">price = <span class="f">float</span>(<span class="f">input</span>())</span><span class="ln l1">count = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">total = price * count</span><span class="ln l2"><span class="f">print</span>(<span class="s">f"{count} 件，每件 {price:.2f} 元"</span>)</span><span class="ln l3"><span class="f">print</span>(<span class="s">f"一共 {total:.2f} 元"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:1300px;color:var(--paper)">输入单价 3.5 和件数 4。单价可能有小数，用 float()；件数是整数，用 int()。总价是 14.0。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:1300px;color:var(--paper)">一句话里可以放好几个大括号。件数照常显示，单价按 2 位小数显示：3.50。</p>
+  <p class="abs say only3" style="left:96px;top:700px;width:1300px;color:var(--paper)">14.0 也按 2 位显示成 14.00。钱数都是两位小数，小票看着就整齐了。</p>
+  <a class="ide step s3" style="left:1490px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1490px;right:96px;top:170px;font:400 34px/1.7 var(--text);color:var(--clay)"><span class="step s2">4 件，每件 3.50 元</span><br><span class="step s3">一共 14.00 元</span></div>
+</section>
+
+<!-- your turn: discount -->
+<section class="slide" aria-label="再加一行打八折">
+  <div class="band r"><b>动手<br>改一改</b><span>小票上再加一行。</span></div>
+  <div class="turn">
+    <h2 class="r d1">打八折以后多少钱</h2>
+    <p class="say r d1">在例题上改：最后再输出一行“打八折 …… 元”，也保留 2 位小数。打八折就是乘以 0.8。输入还是两行：单价和件数。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 3.5 和 4，第三行</small><pre>打八折 11.20 元</pre></div><div><small>输入 10 和 1，第三行</small><pre>打八折 8.00 元</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">大括号里可以写算式。教室电脑：打开 starter/04_discount.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/04_discount.py" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- zero padding -->
+<section class="slide" aria-label="不够两位补 0" data-steps="2" data-at="2" data-chapter="补零">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">不够两位，前面补 0</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">time.py</div>
+<pre class="code"><span class="ln">m = <span class="m">5</span></span><span class="ln">s = <span class="m">9</span></span><span class="ln l1"><span class="f">print</span>(<span class="s">f"{m}:{s}"</span>)</span><span class="ln l2"><span class="f">print</span>(<span class="s">f"{m:02d}:{s:02d}"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">5 分 9 秒，直接输出成 5:9，不像钟表上的样子。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">:02d 的意思是“整数，至少 2 位，不够前面补 0”。d 表示整数。12 本来就有两位，就不补。</p>
+  <a class="ide step s2" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px;font:800 96px/1.4 var(--code)">5:9<br><span class="step s2" style="color:var(--clay)">05:09</span></div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:660px 380px 1fr"><code>print("{name}")</code><b>不报错</b><span>忘了 f，原样输出大括号</span></div>
+    <div class="r d2" style="grid-template-columns:660px 380px 1fr"><code class="plain">文字用 :.2f</code><b>ValueError</b><span>先用 float() 变成数</span></div>
+    <div class="r d3" style="grid-template-columns:660px 380px 1fr"><code>f"{name"</code><b>SyntaxError</b><span>大括号要成对</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">:.2f 和 :02d 只能用在数上。input() 读来的是文字，要先转换。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：格式报错">
+  <h2 class="t r">找错：第 3 行报 ValueError</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:48px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="1" data-yes="找到了！input() 读来的是文字，文字不能按 :.2f 显示。改成 price = float(input())。" data-no="这一行没问题。报错说这个值不能按小数显示，它是从哪里来的？"><span class="ln">price = <span class="f">input</span>()</span><span class="ln">count = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(<span class="s">f"每件 {price:.2f} 元"</span>)</span></pre></div>
+  <p class="abs say r d2" style="left:1180px;top:240px;right:96px">输入 3.5 和 4，报错的最后一行是：<br><span style="font-family:var(--code);font-size:30px">ValueError: Unknown format code 'f' for object of type 'str'</span><br>点出该改的那一行。</p>
+  <p class="fb" style="left:1180px;top:520px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="电子钟" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">电子钟</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">读入从零点开始过了多少秒（0 到 86399 的整数），像电子钟那样显示成 时:分:秒。<br>每一段都显示两位，不够两位前面补 0。</p>
+  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:520px"><small>输入</small><pre>3909</pre><small style="margin-top:14px">输出</small><pre style="font-size:60px">01:05:09</pre><small style="margin-top:14px">输入 86399</small><pre style="font-size:60px">23:59:59</pre></div>
+  <a class="ide r d3" data-code-file="starter/05_clock.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>一小时是 3600 秒。秒数 // 3600 就是几点。</span></p>
+    <p class="step s2"><i>提示 2</i><span>去掉整小时，剩下 秒数 % 3600，再 // 60 是分；秒数 % 60 是秒。第 3 课的整除和求余又用上了。</span></p>
+    <p class="step s3"><i>提示 3</i><span>三段都用 :02d 补零，中间用冒号连起来，放在一个 f-string 里。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一张整齐的卡片" data-chapter="小项目">
+  <h2 class="t r">造一张整整齐齐的卡片</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">用 f-string 做一张你自己的卡片、小票或成绩单。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>读入名字和年龄，用一个 f-string 说一句完整的话。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>生日贺卡、零花钱小票、成绩卡：离满分还差几分、平均分保留 1 位。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>倒计时器：读入秒数，用 :02d 显示成 分:秒。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/06_my_card.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着运行</b><span>运行同桌的程序，看输出整不整齐</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪一行最好看</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>输入很大、很小或是 0 时，还整齐吗？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让输出更漂亮。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>f-string 怎么写？<em class="step s2" style="font-style:normal;font-weight:400">　引号前加 f，变量和算式写进大括号。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>:.2f 是什么意思？<em class="step s3" style="font-style:normal;font-weight:400">　按小数显示，保留 2 位，不够补 0。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>怎样把 5 显示成 05？<em class="step s4" style="font-style:normal;font-weight:400">　写 {m:02d}：整数，至少 2 位，前面补 0。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>f"{name}今年{age}岁"</code><span>变量直接写进句子</span></div>
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>f"明年{age + 1}岁"</code><span>大括号里能写算式</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>f"{x:.2f}"</code><span>保留 2 位小数</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>f"{m:02d}"</code><span>至少 2 位，前面补 0</span></div>
+    <div class="r d3" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">忘了 f</code><span>大括号原样输出</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>对齐</code><span>让一列数靠右排整齐，做成表格</span></div>
+    <div class="r d2"><code>百分数</code><span>0.85 显示成 85.0%</span></div>
+    <div class="r d3"><code>千位分隔</code><span>1234567 显示成 1,234,567</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天学会了让输出整整齐齐。以后写的程序，都可以用 f-string 说话。</p>
+  <div class="foot"></div>
+</section>

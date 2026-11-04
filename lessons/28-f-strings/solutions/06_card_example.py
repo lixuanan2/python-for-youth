@@ -1,0 +1,5 @@
+name = input()
+score = float(input())
+print(f"姓名：{name}")
+print(f"成绩：{score:.1f} 分")
+print(f"离满分还差 {100 - score:.1f} 分")

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_fstring.py",
+    "solution": "solutions/01_fstring.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "小明今年12岁\n明年13岁\n",
+    "description": "引号前加 f，把变量放进句子。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 6,
+    "starter": "starter/02_decimal.py",
+    "solution": "solutions/02_decimal.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "3.3333333333333335\n3.33\n3.3\n",
+    "description": "用 :.2f 保留两位小数。"
+  },
+  {
+    "id": "C",
+    "role": "基础例题",
+    "page": 8,
+    "starter": "starter/03_receipt.py",
+    "solution": "solutions/03_receipt.py",
+    "scope": "第一行单价为0到1000的数；第二行件数为0到100的整数",
+    "sample_input": "3.5\n4\n",
+    "sample_output": "4 件，每件 3.50 元\n一共 14.00 元\n",
+    "description": "打印一张小票。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 9,
+    "starter": "starter/04_discount.py",
+    "solution": "solutions/04_discount.py",
+    "scope": "第一行单价为0到1000的数；第二行件数为0到100的整数",
+    "sample_input": "3.5\n4\n",
+    "sample_output": "4 件，每件 3.50 元\n一共 14.00 元\n打八折 11.20 元\n",
+    "description": "小票再加一行打八折。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 13,
+    "starter": "starter/05_clock.py",
+    "solution": "solutions/05_clock.py",
+    "scope": "一行，秒数为0到86399的整数",
+    "sample_input": "3909\n",
+    "sample_output": "01:05:09\n",
+    "description": "把秒数显示成两位一段的电子钟。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 15,
+    "starter": "starter/06_my_card.py",
+    "solution": "solutions/06_card_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "小红\n92.5\n",
+    "sample_output": "姓名：小红\n成绩：92.5 分\n离满分还差 7.5 分\n",
+    "description": "做一张整齐的卡片。"
+  }
+]
