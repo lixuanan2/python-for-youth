@@ -117,5 +117,24 @@
     "title": "字典基础",
     "file": "lesson_17.py",
     "stage": "字典"
+  },
+  {
+    "id": "18-nested-loops",
+    "tag": "LESSON 18",
+    "title": "嵌套循环与图形",
+    "file": "lesson_18.py",
+    "stage": "进阶"
+  },
+  {
+    "title": "列表常用操作",
+    "stage": "进阶"
+  },
+  {
+    "title": "二维列表",
+    "stage": "进阶"
+  },
+  {
+    "title": "随机数与小游戏",
+    "stage": "进阶"
   }
 ]

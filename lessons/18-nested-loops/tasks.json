@@ -1,0 +1,90 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_one_row.py",
+    "solution": "solutions/01_one_row.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "****\n",
+    "description": "end=\"\"不换行，最后print()换行。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 5,
+    "starter": "starter/02_rect.py",
+    "solution": "solutions/02_rect.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "****\n****\n****\n",
+    "description": "两层循环画长方形。"
+  },
+  {
+    "id": "C",
+    "role": "基础例题",
+    "page": 8,
+    "starter": "starter/03_triangle.py",
+    "solution": "solutions/03_triangle.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "*\n**\n***\n****\n",
+    "description": "内层次数跟着外层变。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 10,
+    "starter": "starter/04_square.py",
+    "solution": "solutions/04_square.py",
+    "scope": "一行边长n为0到20的整数",
+    "sample_input": "3\n",
+    "sample_output": "***\n***\n***\n",
+    "description": "读入n，画n行n列的正方形。"
+  },
+  {
+    "id": "D",
+    "role": "基础例题",
+    "page": 11,
+    "starter": "starter/05_seats.py",
+    "solution": "solutions/05_seats.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "1 排 1 号\n1 排 2 号\n1 排 3 号\n2 排 1 号\n2 排 2 号\n2 排 3 号\n",
+    "description": "用排号和座号认识两层循环。"
+  },
+  {
+    "id": "02",
+    "role": "学生小改写",
+    "page": 12,
+    "starter": "starter/06_down_triangle.py",
+    "solution": "solutions/06_down_triangle.py",
+    "scope": "一行n为1到20的整数",
+    "sample_input": "4\n",
+    "sample_output": "****\n***\n**\n*\n",
+    "description": "画倒三角。"
+  },
+  {
+    "id": "03",
+    "role": "独立迁移",
+    "page": 16,
+    "starter": "starter/07_hollow.py",
+    "solution": "solutions/07_hollow.py",
+    "scope": "一行边长n为2到20的整数",
+    "sample_input": "4\n",
+    "sample_output": "****\n*  *\n*  *\n****\n",
+    "description": "内层循环里加判断，画空心正方形。"
+  },
+  {
+    "id": "04",
+    "role": "创作项目",
+    "page": 18,
+    "starter": "starter/08_my_picture.py",
+    "solution": "solutions/08_ladder_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "2\n",
+    "sample_output": "|===|\n|===|\n",
+    "description": "画一幅自己的字符画。"
+  }
+]

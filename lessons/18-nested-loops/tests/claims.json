@@ -1,0 +1,57 @@
+[
+  {
+    "page": 3,
+    "code": "for j in range(4):\n    print(\"*\", end=\"\")\nprint()\n",
+    "stdout": "****\n"
+  },
+  {
+    "page": 4,
+    "code": "for j in range(4):\n    print(\"*\")",
+    "stdout": "*\n*\n*\n*\n"
+  },
+  {
+    "page": 5,
+    "code": "for i in range(3):\n    for j in range(4):\n        print(\"*\", end=\"\")\n    print()\n",
+    "stdout": "****\n****\n****\n"
+  },
+  {
+    "page": 7,
+    "code": "for i in range(2):\n    for j in range(3):\n        print(\"a\")",
+    "stdout": "a\na\na\na\na\na\n"
+  },
+  {
+    "page": 8,
+    "code": "for i in range(1, 5):\n    for j in range(i):\n        print(\"*\", end=\"\")\n    print()\n",
+    "stdout": "*\n**\n***\n****\n"
+  },
+  {
+    "page": 9,
+    "code": "for i in range(3):\n    for j in range(i):\n        print(\"*\", end=\"\")\n    print()",
+    "stdout": "\n*\n**\n"
+  },
+  {
+    "page": 11,
+    "code": "for row in range(1, 3):\n    for col in range(1, 4):\n        print(row, \"排\", col, \"号\")\n",
+    "stdout": "1 排 1 号\n1 排 2 号\n1 排 3 号\n2 排 1 号\n2 排 2 号\n2 排 3 号\n"
+  },
+  {
+    "page": 13,
+    "code": "for i in range(1, 4):\n    for j in range(i):\n        print(i, end=\"\")\n    print()",
+    "stdout": "1\n22\n333\n"
+  },
+  {
+    "page": 14,
+    "code": "for i in range(2):\n    for j in range(3):\n        print(\"*\", end=\"\")",
+    "stdout": "******"
+  },
+  {
+    "page": 14,
+    "code": "for i in range(2):\n    for j in range(3):\n        print(\"*\", end=\"\")\n        print()",
+    "stdout": "*\n*\n*\n*\n*\n*\n"
+  },
+  {
+    "page": 15,
+    "code": "for i in range(1, 4):\n    for j in range(i):\n        print(\"*\", end=\"\")\n        print()",
+    "stdout": "*\n*\n*\n*\n*\n*\n"
+  }
+]
