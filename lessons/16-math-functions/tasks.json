@@ -1,0 +1,79 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_abs.py",
+    "solution": "solutions/01_abs.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "5\n3\n8\n",
+    "description": "abs求绝对值。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 4,
+    "starter": "starter/02_math.py",
+    "solution": "solutions/02_math.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "4.0\n4\n5\n",
+    "description": "import math 以后用 sqrt、floor、ceil。"
+  },
+  {
+    "id": "C",
+    "role": "基础例题",
+    "page": 9,
+    "starter": "starter/03_boxes.py",
+    "solution": "solutions/03_boxes.py",
+    "scope": "分两行读入：东西个数n为0到10000的整数，每箱装k个，k为1到100的整数",
+    "sample_input": "23\n5\n",
+    "sample_output": "5\n",
+    "description": "至少要几个箱子，向上取整。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 10,
+    "starter": "starter/04_full_boxes.py",
+    "solution": "solutions/04_full_boxes.py",
+    "scope": "分两行读入：东西个数n为0到10000的整数，每箱装k个，k为1到100的整数",
+    "sample_input": "23\n5\n",
+    "sample_output": "4\n",
+    "description": "只数装满的箱子，向下取整。"
+  },
+  {
+    "id": "D",
+    "role": "语法小演示",
+    "page": 12,
+    "starter": "starter/05_side.py",
+    "solution": "solutions/05_side.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "7.0\n7\n",
+    "description": "sqrt求正方形边长。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 15,
+    "starter": "starter/06_big_square.py",
+    "solution": "solutions/06_big_square.py",
+    "scope": "一行方块数n为0到10000的整数",
+    "sample_input": "17\n",
+    "sample_output": "4\n",
+    "description": "方块能拼出的最大正方形边长。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 17,
+    "starter": "starter/07_life_calc.py",
+    "solution": "solutions/07_bus_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "100\n",
+    "sample_output": "要坐 3 辆大巴\n坐满的有 2 辆\n",
+    "description": "做一个生活计算器。"
+  }
+]

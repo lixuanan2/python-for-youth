@@ -1,0 +1,265 @@
+<!-- cover -->
+<section class="slide" aria-label="常用数学函数" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 16</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">借来</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">import math</span></div><b class="r d2" style="font-size:250px">就用</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">常用数学函数：Python 准备好的数学工具</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能算出至少要几个箱子、几辆车，还能开平方求正方形的边长。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="要几个箱子">
+  <h2 class="t r">23 个苹果，每箱装 5 个，要几个箱子？</h2>
+  <div class="slip r d1" style="left:96px;top:290px;width:460px"><small style="font-size:34px">直接除</small><pre style="font-size:72px">4.6</pre></div>
+  <div class="slip r d2" style="left:600px;top:290px;width:460px"><small style="font-size:34px">装满的</small><pre style="font-size:72px">4 箱</pre></div>
+  <div class="slip tilt r d3" style="left:1120px;top:290px;width:700px"><small style="font-size:34px">剩下 3 个也要一个箱子</small><pre style="font-size:72px">一共 5 箱</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">箱子没有 0.6 个。有剩下的，就得多拿一个，这叫“向上取整”。<br>这种常用的数学工具，Python 早就写好了，借来就能用。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- abs -->
+<section class="slide" aria-label="abs 绝对值" data-steps="2" data-at="2" data-chapter="数学函数">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">abs：去掉负号</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">abs.py</div>
+<pre class="code" data-file="solutions/01_abs.py"><span class="ln l1"><span class="f">print</span>(<span class="f">abs</span>(-<span class="m">5</span>))</span><span class="ln l1"><span class="f">print</span>(<span class="f">abs</span>(<span class="m">3</span>))</span><span class="ln l2">a = <span class="m">12</span></span><span class="ln l2">b = <span class="m">20</span></span><span class="ln l2"><span class="f">print</span>(<span class="f">abs</span>(a - b))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:760px;width:960px;color:var(--paper)">abs 求“绝对值”：负数去掉负号，正数不变。它是 Python 自带的，直接用。</p>
+  <p class="abs say only2" style="left:96px;top:760px;width:960px;color:var(--paper)">两个数差多少，不管谁大谁小，用 abs(a - b)：12 - 20 是 -8，绝对值是 8。</p>
+  <a class="ide step s2" style="left:96px;top:910px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:220px;white-space:nowrap">abs(-5)</i><b style="font-size:84px">5</b></div>
+    <div class="box step"><i style="width:220px;white-space:nowrap">abs(3)</i><b style="font-size:84px">3</b></div>
+    <div class="box out step s2"><i style="width:220px;white-space:nowrap">差多少</i><b style="font-size:84px">8</b></div>
+  </div>
+</section>
+
+<!-- import math -->
+<section class="slide" aria-label="import math" data-steps="3" data-at="3">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">import math：借工具</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">math_tools.py</div>
+<pre class="code" data-file="solutions/02_math.py"><span class="ln l1"><span class="k">import</span> math</span><span class="ln l1"><span class="f">print</span>(math.<span class="f">sqrt</span>(<span class="m">16</span>))</span><span class="ln l2"><span class="f">print</span>(math.<span class="f">floor</span>(<span class="m">4.6</span>))</span><span class="ln l3"><span class="f">print</span>(math.<span class="f">ceil</span>(<span class="m">4.6</span>))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">import 的意思是“导入”。math 是一盒数学工具，导入以后用“math.名字”。sqrt 开平方：4 × 4 = 16。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">floor 是“地板”，向下取整：4.6 变成 4。</p>
+  <p class="abs say only3" style="left:96px;top:700px;width:960px;color:var(--paper)">ceil 是“天花板”，向上取整：4.6 变成 5。</p>
+  <a class="ide step s3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">sqrt</i><b style="font-size:84px">4.0</b></div>
+    <div class="box step s2"><i style="width:170px">floor</i><b style="font-size:84px">4</b></div>
+    <div class="box out step s3"><i style="width:170px">ceil</i><b style="font-size:84px">5</b></div>
+  </div>
+</section>
+
+<!-- predict: sqrt gives a float -->
+<section class="slide dark" aria-label="猜一猜：sqrt 的结果" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：输出 4 还是 4.0？</h2>
+  <div class="editor" style="left:96px;top:230px;width:1000px;--fs:56px"><div class="tab">guess.py</div>
+<pre class="code"><span class="ln"><span class="k">import</span> math</span><span class="ln"><span class="f">print</span>(math.<span class="f">sqrt</span>(<span class="m">16</span>))</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <p class="abs say only1" style="left:96px;top:560px">先在纸上写下你的答案。</p>
+  <p class="abs step s2" style="left:1200px;top:250px;font:800 220px/1 var(--code);color:var(--clay-soft)">4.0</p>
+  <p class="abs say step s2" style="left:96px;top:560px;width:1600px">是 4.0。sqrt 的结果总是小数，哪怕刚好开得尽，和 / 一样。<br>想要整数，就用 int() 包一下。</p>
+  <a class="ide step s2" style="left:96px;top:760px">▶ 在 IDE 验证</a>
+  <div class="foot"></div>
+</section>
+
+<!-- predict: negative numbers -->
+<section class="slide" aria-label="猜一猜：负数往哪边" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：-2.3 往哪边取？</h2>
+  <div class="abs" style="left:96px;right:96px;top:230px;display:grid;grid-template-columns:repeat(3,1fr);gap:56px">
+    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">floor 往下</h3><pre style="font:700 54px/1.4 var(--code)">math.floor(-2.3)</pre><p class="step s2" style="font:800 130px/1.2 var(--code);color:var(--clay)">-3</p></div>
+    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">ceil 往上</h3><pre style="font:700 54px/1.4 var(--code)">math.ceil(-2.3)</pre><p class="step s2" style="font:800 130px/1.2 var(--code);color:var(--clay)">-2</p></div>
+    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">int 去掉小数</h3><pre style="font:700 54px/1.4 var(--code)">int(-2.3)</pre><p class="step s2" style="font:800 130px/1.2 var(--code);color:var(--clay)">-2</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:740px;width:1728px">在数轴上，-3 在 -2.3 的左边，-2 在右边。</p>
+  <p class="abs say step s2" style="left:96px;top:740px;width:1728px">floor 永远往数轴左边走，所以是 -3，不是 -2。int 只是把小数部分砍掉，往 0 靠。<br>正数时 floor 和 int 一样；碰到负数就不一样了。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz -->
+<section class="slide" aria-label="小测：ceil(7 / 2)">
+  <h2 class="t r">小测：math.ceil(7 / 2) 是几？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="7 / 2 是 3.5，ceil 往上取，不是往下。"><i>1</i>3</button>
+    <button type="button" data-fb="答对了！7 / 2 是 3.5，有小数就往上取，得 4。"><i>2</i>4</button>
+    <button type="button" data-fb="ceil 的结果是整数，没有 .5。"><i>3</i>3.5</button>
+    <button type="button" data-fb="ceil 只往上取到最近的整数，不会是 7。"><i>4</i>7</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- forgot import -->
+<section class="slide dark" aria-label="忘了 import">
+  <h2 class="t r">忘了 import 会怎样？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:52px"><div class="tab">no_import.py（只阅读）</div>
+<pre class="code"><span class="ln"><span class="f">print</span>(math.<span class="f">sqrt</span>(<span class="m">16</span>))</span></pre></div>
+  <div class="slip tilt r d2" style="left:1180px;top:230px;width:640px"><small>屏幕上</small><pre style="font-size:36px;white-space:pre-wrap">NameError: name 'math' is not defined</pre></div>
+  <p class="abs say r d3" style="left:96px;top:520px;width:1600px">程序不认识 math，报 NameError。工具盒要先借来，才能用里面的工具。<br>import math 写在程序第一行，后面整个程序都能用。abs 不用 import，它是 Python 自带的。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: boxes -->
+<section class="slide" aria-label="例题：装箱" data-steps="3" data-at="3" data-chapter="装箱">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：至少要几个箱子</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">boxes.py</div>
+<pre class="code" data-file="solutions/03_boxes.py"><span class="ln"><span class="k">import</span> math</span><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">k = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2 l3"><span class="f">print</span>(math.<span class="f">ceil</span>(n / k))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">分两行读入：苹果 23 个，每箱装 5 个。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">23 / 5 是 4.6，ceil 往上取，得 5。有剩下的就多拿一个箱子。</p>
+  <p class="abs say only3" style="left:96px;top:700px;width:960px;color:var(--paper)">换成 20 个呢？20 / 5 是 4.0，刚好装满，ceil 还是 4，不会多拿。</p>
+  <a class="ide step s3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">n / k</i><b style="font-size:84px">4.6</b></div>
+    <div class="box out step s2"><i style="width:170px">输出</i><b style="font-size:84px">5</b></div>
+    <div class="box out step s3"><i style="width:170px">20 个</i><b style="font-size:84px">4</b></div>
+  </div>
+</section>
+
+<!-- your turn: full boxes -->
+<section class="slide" aria-label="只数满箱">
+  <div class="band r"><b>动手<br>改一改</b><span>换一个取整的方向。</span></div>
+  <div class="turn">
+    <h2 class="r d1">只数装满的箱子</h2>
+    <p class="say r d1">分两行读入东西的个数 n（0 到 10000 的整数）和每箱装几个 k（1 到 100 的整数）。输出能装满几箱，剩下装不满的不算。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>输入 23 和 5</small><pre>4</pre></div><div><small>输入 20 和 5</small><pre>4</pre></div><div><small>输入 4 和 5</small><pre>0</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/04_full_boxes.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/04_full_boxes.py" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- quiz: abs -->
+<section class="slide" aria-label="小测：abs(3 - 8)">
+  <h2 class="t r">小测：abs(3 - 8) 是几？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！3 - 8 是 -5，去掉负号得 5。"><i>1</i>5</button>
+    <button type="button" data-fb="abs 会去掉负号，结果不会是负数。"><i>2</i>-5</button>
+    <button type="button" data-fb="abs 不是把两个数加起来。"><i>3</i>11</button>
+    <button type="button" data-fb="先算括号里的 3 - 8，再取绝对值。"><i>4</i>3</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- sqrt: side of a square -->
+<section class="slide" aria-label="正方形的边长" data-steps="2" data-at="2" data-chapter="开平方">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">sqrt：知道面积，求边长</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">side.py</div>
+<pre class="code" data-file="solutions/05_side.py"><span class="ln"><span class="k">import</span> math</span><span class="ln l1">area = <span class="m">49</span></span><span class="ln l1">side = math.<span class="f">sqrt</span>(area)</span><span class="ln l1"><span class="f">print</span>(side)</span><span class="ln l2"><span class="f">print</span>(<span class="f">int</span>(side))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:760px;width:960px;color:var(--paper)">正方形面积是 49，哪个数自己乘自己是 49？sqrt 算出 7.0。</p>
+  <p class="abs say only2" style="left:96px;top:760px;width:960px;color:var(--paper)">边长要整数，就用 int() 去掉 .0。开不尽时，int 会把小数部分砍掉。</p>
+  <a class="ide step s2" style="left:96px;top:910px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">side</i><b style="font-size:84px">7.0</b></div>
+    <div class="box out step s2"><i style="width:170px">int</i><b style="font-size:84px">7</b></div>
+  </div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:600px 460px 1fr"><code class="plain">忘了 import math</code><b>NameError</b><span>写在第一行</span></div>
+    <div class="r d2" style="grid-template-columns:600px 460px 1fr"><code>math.sqrt(-1)</code><b>ValueError</b><span>负数不能开平方</span></div>
+    <div class="r d3" style="grid-template-columns:600px 460px 1fr"><code>int(n / k)</code><b>不报错</b><span>想往上取，要用 ceil</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">ValueError 的意思是“值不对”：给的数，这个函数算不了。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：少了一个箱子">
+  <h2 class="t r">找错：23 个苹果怎么只要 4 箱？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:50px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="3" data-yes="找到了！int 只是砍掉小数，4.6 变成 4，剩下的 3 个苹果没地方放。要用 math.ceil 往上取，并在第一行 import math。" data-no="这一行没问题。4.6 被变成了 4，看看是哪一行做的。"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">k = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(<span class="f">int</span>(n / k))</span></pre></div>
+  <p class="abs say r d2" style="left:1200px;top:240px;right:96px">输入 23 和 5，程序说要 4 箱，可是还剩 3 个苹果没地方放。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="left:1200px;top:560px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="最大的正方形" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">拼正方形</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">读入方块数 n（0 到 10000 的整数）。用这些方块拼一个实心正方形，每行每列一样多，可以有剩下的。<br>输出最大的正方形每边有几块。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:200px;width:520px"><small>输入 17</small><pre>4</pre><small style="margin-top:14px">输入 16</small><pre>4</pre><small style="margin-top:14px">输入 15</small><pre>3</pre></div>
+  <a class="ide r d3" data-code-file="starter/06_big_square.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>边长是 s 的正方形要用 s × s 块。哪个工具能从面积算回边长？</span></p>
+    <p class="step s2"><i>提示 2</i><span>17 开平方是 4.12……，边长不能是小数，要往哪边取？</span></p>
+    <p class="step s3"><i>提示 3</i><span>试试 0 块、16 块和 10000 块，再试试 15 和 17。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="生活计算器" data-chapter="小项目">
+  <h2 class="t r">造一个你的生活计算器</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">借来数学工具，算一件身边的事。算什么，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>读入一个数，用一个数学函数算出结果，再说一句话。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>春游要几辆车、分组要几组、跑几圈够 1000 米、两个人差几岁。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>同时说出往上取和往下取的结果，或者写成带 return 的函数。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/07_life_calc.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着算</b><span>给同桌的计算器输入几个数，先心算，再运行</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，算的哪件事最实用</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>刚好整除的时候，结果还对吗？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让计算器更可靠。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>用 math 里的工具前要做什么？<em class="step s2" style="font-style:normal;font-weight:400">　先写 import math。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>装箱为什么用 ceil？<em class="step s3" style="font-style:normal;font-weight:400">　有剩下的也要一个箱子，往上取。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>-2.3 用 floor 和 int，结果一样吗？<em class="step s4" style="font-style:normal;font-weight:400">　不一样，floor 得 -3，int 得 -2。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:720px 1fr"><code>abs(-5)</code><span>绝对值，自带的，不用 import</span></div>
+    <div class="r d1" style="grid-template-columns:720px 1fr"><code>import math</code><span>先借来工具盒，写在第一行</span></div>
+    <div class="r d2" style="grid-template-columns:720px 1fr"><code>math.sqrt(49)</code><span>开平方，结果是小数 7.0</span></div>
+    <div class="r d2" style="grid-template-columns:720px 1fr"><code>math.floor(4.6)</code><span>向下取整，得 4</span></div>
+    <div class="r d3" style="grid-template-columns:720px 1fr"><code>math.ceil(4.6)</code><span>向上取整，得 5</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>round()</code><span>四舍五入，保留几位小数</span></div>
+    <div class="r d2"><code>math.pi</code><span>圆周率，算圆的面积</span></div>
+    <div class="r d3"><code>字典</code><span>下节课：按名字查东西，像查字典一样</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天借来了数学工具盒。下节课学一种新的“盒子”：按名字找东西。</p>
+  <div class="foot"></div>
+</section>

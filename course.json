@@ -105,7 +105,10 @@
     "stage": "函数"
   },
   {
+    "id": "16-math-functions",
+    "tag": "LESSON 16",
     "title": "常用数学函数",
+    "file": "lesson_16.py",
     "stage": "函数"
   },
   {
