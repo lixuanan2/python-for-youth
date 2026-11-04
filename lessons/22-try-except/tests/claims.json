@@ -1,0 +1,130 @@
+[
+  {
+    "page": 3,
+    "code": "age = int(input())\nprint(\"明年你\", age + 1, \"岁\")\n",
+    "stdin": "十二\n",
+    "error": "ValueError: invalid literal for int() with base 10: '十二'"
+  },
+  {
+    "page": 4,
+    "code": "try:\n    age = int(input())\n    print(\"明年你\", age + 1, \"岁\")\nexcept ValueError:\n    print(\"请输入整数\")\n",
+    "stdin": "12\n",
+    "stdout": "明年你 13 岁\n"
+  },
+  {
+    "page": 4,
+    "code": "try:\n    age = int(input())\n    print(\"明年你\", age + 1, \"岁\")\nexcept ValueError:\n    print(\"请输入整数\")\n",
+    "stdin": "十二\n",
+    "stdout": "请输入整数\n"
+  },
+  {
+    "page": 5,
+    "code": "try:\n    age = int(input())\n    print(\"明年你\", age + 1, \"岁\")\nexcept ValueError:\n    print(\"请输入整数\")\n",
+    "stdin": "abc\n",
+    "stdout": "请输入整数\n"
+  },
+  {
+    "page": 6,
+    "code": "try:\n    age = int(input())\n    print(\"明年你\", age + 1, \"岁\")\nexcept ValueError:\n    print(\"请输入整数\")\n",
+    "stdin": "-3\n",
+    "stdout": "明年你 -2 岁\n"
+  },
+  {
+    "page": 6,
+    "code": "try:\n    age = int(input())\n    print(\"明年你\", age + 1, \"岁\")\nexcept ValueError:\n    print(\"请输入整数\")\n",
+    "stdin": "007\n",
+    "stdout": "明年你 8 岁\n"
+  },
+  {
+    "page": 6,
+    "code": "try:\n    age = int(input())\n    print(\"明年你\", age + 1, \"岁\")\nexcept ValueError:\n    print(\"请输入整数\")\n",
+    "stdin": "3.5\n",
+    "stdout": "请输入整数\n"
+  },
+  {
+    "page": 7,
+    "code": "try:\n    a = int(input())\n    b = int(input())\n    print(a // b)\nexcept ValueError:\n    print(\"要输入整数\")\nexcept ZeroDivisionError:\n    print(\"除数不能是 0\")\n",
+    "stdin": "8\n2\n",
+    "stdout": "4\n"
+  },
+  {
+    "page": 7,
+    "code": "try:\n    a = int(input())\n    b = int(input())\n    print(a // b)\nexcept ValueError:\n    print(\"要输入整数\")\nexcept ZeroDivisionError:\n    print(\"除数不能是 0\")\n",
+    "stdin": "8\n0\n",
+    "stdout": "除数不能是 0\n"
+  },
+  {
+    "page": 7,
+    "code": "try:\n    a = int(input())\n    b = int(input())\n    print(a // b)\nexcept ValueError:\n    print(\"要输入整数\")\nexcept ZeroDivisionError:\n    print(\"除数不能是 0\")\n",
+    "stdin": "8\nabc\n",
+    "stdout": "要输入整数\n"
+  },
+  {
+    "page": 7,
+    "code": "print(8 // 0)",
+    "error": "ZeroDivisionError"
+  },
+  {
+    "page": 8,
+    "code": "try:\n    a = int(input())\n    b = int(input())\n    print(a // b)\nexcept ValueError:\n    print(\"要输入整数\")\nexcept ZeroDivisionError:\n    print(\"除数不能是 0\")\n",
+    "stdin": "abc\n0\n",
+    "stdout": "要输入整数\n"
+  },
+  {
+    "page": 9,
+    "code": "done = False\nwhile not done:\n    try:\n        age = int(input())\n        done = True\n    except ValueError:\n        print(\"不是整数，再输一次\")\nprint(\"明年你\", age + 1, \"岁\")\n",
+    "stdin": "abc\n3.5\n12\n",
+    "stdout": "不是整数，再输一次\n不是整数，再输一次\n明年你 13 岁\n"
+  },
+  {
+    "page": 10,
+    "code": "wrong = 0\ndone = False\nwhile not done:\n    try:\n        age = int(input())\n        done = True\n    except ValueError:\n        print(\"不是整数，再输一次\")\n        wrong = wrong + 1\nprint(\"明年你\", age + 1, \"岁\")\nprint(\"输错了\", wrong, \"次\")\n",
+    "stdin": "abc\n3.5\n12\n",
+    "stdout": "不是整数，再输一次\n不是整数，再输一次\n明年你 13 岁\n输错了 2 次\n"
+  },
+  {
+    "page": 10,
+    "code": "wrong = 0\ndone = False\nwhile not done:\n    try:\n        age = int(input())\n        done = True\n    except ValueError:\n        print(\"不是整数，再输一次\")\n        wrong = wrong + 1\nprint(\"明年你\", age + 1, \"岁\")\nprint(\"输错了\", wrong, \"次\")\n",
+    "stdin": "12\n",
+    "stdout": "明年你 13 岁\n输错了 0 次\n"
+  },
+  {
+    "page": 11,
+    "code": "done = False\nrounds = 0\nwhile not done:\n    rounds = rounds + 1\n    try:\n        age = int(input())\n        done = True\n    except ValueError:\n        print(\"不是整数，再输一次\")\nprint(\"明年你\", age + 1, \"岁\")\nprint(rounds)\n",
+    "stdin": "12\n",
+    "stdout": "明年你 13 岁\n1\n"
+  },
+  {
+    "page": 12,
+    "code": "try:\n    x = 1\n",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 12,
+    "code": "try:\n    age = int(\"abc\")\nexcept ZeroDivisionError:\n    print(\"除数不能是 0\")\n",
+    "error": "ValueError"
+  },
+  {
+    "page": 12,
+    "code": "try:\n    age = int(inptu())\nexcept:\n    print(\"请输入整数\")\n",
+    "stdin": "12\n",
+    "stdout": "请输入整数\n"
+  },
+  {
+    "page": 13,
+    "code": "try:\n    age = int(inptu())\n    print(\"明年你\", age + 1, \"岁\")\nexcept:\n    print(\"请输入整数\")\n",
+    "stdin": "12\n",
+    "stdout": "请输入整数\n"
+  },
+  {
+    "page": 13,
+    "code": "age = int(inptu())\n",
+    "stdin": "12\n",
+    "error": "NameError: name 'inptu' is not defined"
+  },
+  {
+    "page": 19,
+    "code": "int(\"abc\")",
+    "error": "ValueError"
+  }
+]

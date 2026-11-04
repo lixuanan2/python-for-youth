@@ -145,5 +145,28 @@
     "title": "随机数与小游戏",
     "file": "lesson_21.py",
     "stage": "进阶"
+  },
+  {
+    "id": "22-try-except",
+    "tag": "LESSON 22",
+    "title": "接住报错：try 和 except",
+    "file": "lesson_22.py",
+    "stage": "进阶"
+  },
+  {
+    "title": "递归入门",
+    "stage": "算法入门"
+  },
+  {
+    "title": "排序入门",
+    "stage": "算法入门"
+  },
+  {
+    "title": "枚举：一个个试",
+    "stage": "算法入门"
+  },
+  {
+    "title": "二分查找",
+    "stage": "算法入门"
   }
 ]

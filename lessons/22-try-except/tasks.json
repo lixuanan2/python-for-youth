@@ -1,0 +1,68 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 4,
+    "starter": "starter/01_try.py",
+    "solution": "solutions/01_try.py",
+    "scope": "一行输入，可能不是整数",
+    "sample_input": "十二\n",
+    "sample_output": "请输入整数\n",
+    "description": "try 先试，except 接住 ValueError。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 7,
+    "starter": "starter/02_two_errors.py",
+    "solution": "solutions/02_two_errors.py",
+    "scope": "两行输入，可能不是整数，第二个可能是 0",
+    "sample_input": "8\n0\n",
+    "sample_output": "除数不能是 0\n",
+    "description": "两种报错各用一个 except。"
+  },
+  {
+    "id": "C",
+    "role": "基础例题",
+    "page": 9,
+    "starter": "starter/03_retry.py",
+    "solution": "solutions/03_retry.py",
+    "scope": "每行一个输入，直到输入整数为止",
+    "sample_input": "abc\n3.5\n12\n",
+    "sample_output": "不是整数，再输一次\n不是整数，再输一次\n明年你 13 岁\n",
+    "description": "一直问到输对为止。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 10,
+    "starter": "starter/04_retry_count.py",
+    "solution": "solutions/04_retry_count.py",
+    "scope": "每行一个输入，直到输入整数为止",
+    "sample_input": "abc\n3.5\n12\n",
+    "sample_output": "不是整数，再输一次\n不是整数，再输一次\n明年你 13 岁\n输错了 2 次\n",
+    "description": "数一数输错了几次。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 14,
+    "starter": "starter/05_ledger.py",
+    "solution": "solutions/05_ledger.py",
+    "scope": "第一行行数n为0到20的整数；接下来n行，每行可能是整数，也可能是别的字",
+    "sample_input": "5\n12\n苹果\n-3\n4.5\n7\n",
+    "sample_output": "和是 16\n不是整数的有 2 行\n",
+    "description": "把账本里的整数加起来，数出不是整数的行。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 16,
+    "starter": "starter/06_my_program.py",
+    "solution": "solutions/06_price_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "abc\n10\n",
+    "sample_output": "请输入数字，比如 10 或 2.5\n打五折后 5.0 元\n",
+    "description": "做一个不怕乱输的小程序。"
+  }
+]
