@@ -1,0 +1,63 @@
+[
+  {
+    "page": 3,
+    "code": "scores = [80, 95, 70]\nfor s in scores:\n    print(s)\n",
+    "stdout": "80\n95\n70\n"
+  },
+  {
+    "page": 4,
+    "code": "names = [\"小明\", \"小红\"]\nfor x in names:\n    print(\"你好\", x)",
+    "stdout": "你好 小明\n你好 小红\n"
+  },
+  {
+    "page": 5,
+    "code": "scores = [80, 95, 70]\nfor i in range(len(scores)):\n    print(i, scores[i])",
+    "stdout": "0 80\n1 95\n2 70\n"
+  },
+  {
+    "page": 6,
+    "code": "scores = [80, 95, 70]\nfor i in range(len(scores)):\n    print(i + 1, scores[i])\n",
+    "stdout": "1 80\n2 95\n3 70\n"
+  },
+  {
+    "page": 7,
+    "code": "a = [5, 6, 7, 8]\nfor i in range(len(a)):\n    print(i)",
+    "stdout": "0\n1\n2\n3\n"
+  },
+  {
+    "page": 8,
+    "code": "n = int(input())\nscores = []\nfor i in range(n):\n    scores.append(int(input()))\ncount = 0\nfor s in scores:\n    if s >= 60:\n        count += 1\nprint(count)\n",
+    "stdin": "4\n80\n59\n60\n30\n",
+    "stdout": "2\n"
+  },
+  {
+    "page": 10,
+    "code": "scores = [80, 95, 70]\nfor s in scores:\n    s += 5\nprint(scores)",
+    "stdout": "[80, 95, 70]\n"
+  },
+  {
+    "page": 10,
+    "code": "scores = [80, 95, 70]\nfor i in range(len(scores)):\n    scores[i] += 5\nprint(scores)",
+    "stdout": "[85, 100, 75]\n"
+  },
+  {
+    "page": 12,
+    "code": "a = [10, 20, 30]\nfor x in a:\n    print(x // 10)",
+    "stdout": "1\n2\n3\n"
+  },
+  {
+    "page": 13,
+    "code": "scores = [80, 95, 70]\nfor i in range(len(scores)):\n    print(i)",
+    "stdout": "0\n1\n2\n"
+  },
+  {
+    "page": 13,
+    "code": "scores = [80, 95, 70]\nprint(scores[len(scores)])",
+    "error": "IndexError: list index out of range"
+  },
+  {
+    "page": 14,
+    "code": "scores = [80, 95, 70]\ntotal = 0\nfor i in range(1, len(scores)):\n    total += scores[i]\nprint(total)",
+    "stdout": "165\n"
+  }
+]

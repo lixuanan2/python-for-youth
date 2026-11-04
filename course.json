@@ -70,7 +70,10 @@
     "stage": "列表和字符串"
   },
   {
+    "id": "11-list-loop",
+    "tag": "LESSON 11",
     "title": "列表遍历",
+    "file": "lesson_11.py",
     "stage": "列表和字符串"
   },
   {

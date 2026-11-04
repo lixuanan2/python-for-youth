@@ -1,0 +1,283 @@
+<!-- cover -->
+<section class="slide" aria-label="列表遍历" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 11</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">挨个</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">for s in scores:</span></div><b class="r d2" style="font-size:250px">看完</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">列表遍历：把列表从头看到尾</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能数出及格人数，给全班加分，还能找出谁高于平均分。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="谁高于平均分">
+  <h2 class="t r">有几个人高于平均分？</h2>
+  <div class="slip r d1" style="left:96px;top:300px;width:300px"><small style="font-size:34px">小明</small><pre style="font-size:60px">80</pre></div>
+  <div class="slip r d2" style="left:430px;top:300px;width:300px"><small style="font-size:34px">小红</small><pre style="font-size:60px">90</pre></div>
+  <div class="slip r d2" style="left:764px;top:300px;width:300px"><small style="font-size:34px">小刚</small><pre style="font-size:60px">70</pre></div>
+  <div class="slip r d2" style="left:1098px;top:300px;width:300px"><small style="font-size:34px">小丽</small><pre style="font-size:60px">60</pre></div>
+  <div class="slip tilt r d3" style="left:1470px;top:300px;width:350px"><small style="font-size:34px">平均分</small><pre style="font-size:72px">75</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:620px">要先把全部分数加完，才知道平均分是 75；知道了平均分，还得回头再看一遍每个人。<br>边读边算的老办法做不到“回头看”。这节课把分数存进列表，想看几遍就看几遍。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- first traversal -->
+<section class="slide" aria-label="一个一个拿出来" data-steps="3" data-at="3" data-chapter="遍历">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">for：一个一个拿出来</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">each.py</div>
+<pre class="code" data-file="solutions/01_each.py"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1 l2 l3"><span class="k">for</span> s <span class="k">in</span> scores:</span><span class="ln l1 l2 l3">    <span class="f">print</span>(s)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">第一遍，s 拿到第一个数 80，输出它。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">第二遍，s 换成第二个数 95。</p>
+  <p class="abs say only3" style="left:96px;top:620px;width:960px;color:var(--paper)">第三遍是 70。列表有几个数，循环就转几遍。这叫“遍历”。</p>
+  <a class="ide step s3" style="left:96px;top:820px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px;white-space:nowrap">第 1 遍</i><b style="font-size:84px">80</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">第 2 遍</i><b style="font-size:84px">95</b></div>
+    <div class="box out step s3"><i style="width:190px;white-space:nowrap">第 3 遍</i><b style="font-size:84px">70</b></div>
+  </div>
+</section>
+
+<!-- predict: greet everyone -->
+<section class="slide dark" aria-label="猜一猜：跟每个人打招呼" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：输出几行？</h2>
+  <div class="editor" style="left:96px;top:230px;width:1060px;--fs:52px"><div class="tab">hello.py</div>
+<pre class="code"><span class="ln">names = [<span class="s">"小明"</span>, <span class="s">"小红"</span>]</span><span class="ln"><span class="k">for</span> x <span class="k">in</span> names:</span><span class="ln">    <span class="f">print</span>(<span class="s">"你好"</span>, x)</span></pre></div>
+  <p class="abs only1" style="left:1300px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <p class="abs say only1" style="left:96px;top:620px">先在纸上写下你的答案。</p>
+  <div class="slip tilt step s2" style="left:1260px;top:260px;width:520px"><small>屏幕上</small><pre>你好 小明
+你好 小红</pre></div>
+  <p class="abs say step s2" style="left:96px;top:620px;width:1500px">两个名字，转两遍，输出两行。x 只是个名字，叫 s、x、name 都行，<br>起个好懂的就好。列表里可以放数，也可以放文字。</p>
+  <a class="ide step s2" style="left:96px;top:820px">▶ 在 IDE 验证</a>
+  <div class="foot"></div>
+</section>
+
+<!-- two ways -->
+<section class="slide" aria-label="两种遍历">
+  <h2 class="t r">两种写法：拿数，还是拿下标</h2>
+  <div class="vs" style="top:210px">
+    <div class="r d1"><h3>拿到每个数</h3><pre style="font-size:46px">for s in scores:
+    print(s)</pre><p class="say" style="margin-top:24px">s 依次是 80、95、70。<br>只想看看每个数，用这种。</p></div>
+    <div class="r d2"><h3>拿到每个下标</h3><pre style="font-size:46px">for i in range(len(scores)):
+    print(i, scores[i])</pre><p class="say" style="margin-top:24px">i 依次是 0、1、2，用 scores[i] 取数。<br>要编号、要改列表，用这种。</p></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:820px">range(len(scores)) 就是 range(3)，正好是下标 0、1、2。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- numbered list -->
+<section class="slide" aria-label="带编号输出" data-steps="3" data-at="3">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">用下标，顺便编个号</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">numbered.py</div>
+<pre class="code" data-file="solutions/02_numbered.py"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1 l2 l3"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="f">len</span>(scores)):</span><span class="ln l1 l2 l3">    <span class="f">print</span>(i + <span class="m">1</span>, scores[i])</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">i 是 0，scores[0] 是 80。编号要从 1 开始，所以输出 i + 1。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">i 是 1，输出 2 和 95。</p>
+  <p class="abs say only3" style="left:96px;top:620px;width:960px;color:var(--paper)">i 是 2，输出 3 和 70。下标给程序用，编号给人看。</p>
+  <a class="ide step s3" style="left:96px;top:820px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px;white-space:nowrap">i = 0</i><b style="font-size:84px">1 80</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px">2 95</b></div>
+    <div class="box out step s3"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px">3 70</b></div>
+  </div>
+</section>
+
+<!-- quiz: which i -->
+<section class="slide" aria-label="小测：i 依次是几">
+  <h2 class="t r">小测：a 里有 4 个数，i 依次是哪几个？</h2>
+  <div class="editor r d1" style="left:96px;top:210px;width:1100px;--fs:46px"><div class="tab">i 是几？</div>
+<pre class="code"><span class="ln">a = [<span class="m">5</span>, <span class="m">6</span>, <span class="m">7</span>, <span class="m">8</span>]</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="f">len</span>(a)):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
+  <div class="quiz r d2" style="top:595px" data-right="0">
+    <button type="button" data-fb="答对了！len(a) 是 4，range(4) 是 0、1、2、3，正好是 4 个下标。"><i>1</i>0 1 2 3</button>
+    <button type="button" data-fb="下标从 0 开始，range(4) 不含终点 4。"><i>2</i>1 2 3 4</button>
+    <button type="button" data-fb="这些是列表里的数。i 拿的是下标，a[i] 才是数。"><i>3</i>5 6 7 8</button>
+    <button type="button" data-fb="range(4) 不含终点 4，只有 4 个数。"><i>4</i>0 1 2 3 4</button>
+  </div>
+  <p class="fb" style="top:900px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: count pass -->
+<section class="slide" aria-label="例题：及格人数" data-steps="4" data-at="4" data-chapter="统计">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：存下来，再数及格</h2>
+  <div class="editor" style="left:96px;top:205px;width:960px;--fs:44px"><div class="tab">count_pass.py</div>
+<pre class="code" data-file="solutions/03_count_pass.py"><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">scores = []</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2">count = <span class="m">0</span></span><span class="ln l3"><span class="k">for</span> s <span class="k">in</span> scores:</span><span class="ln l3">    <span class="k">if</span> s &gt;= <span class="m">60</span>:</span><span class="ln l3">        count += <span class="m">1</span></span><span class="ln l4"><span class="f">print</span>(count)</span></pre></div>
+  <p class="abs say only1" style="left:1210px;right:96px;top:170px;font-size:34px">前四行和上节课一样：输入 4，再输入 80、59、60、30，存进列表。</p>
+  <p class="abs say only2" style="left:1210px;right:96px;top:170px;font-size:34px">计数前，先准备 count = 0。</p>
+  <p class="abs say only3" style="left:1210px;right:96px;top:170px;font-size:34px">遍历列表，碰到 60 分及以上就记一个：80 和 60。</p>
+  <p class="abs say only4" style="left:1210px;right:96px;top:170px;font-size:34px">看完了，输出 2。</p>
+  <div class="abs" style="left:1210px;right:96px;top:420px">
+    <div class="box step"><i style="width:170px">scores</i><b style="font-size:40px">[80, 59, 60, 30]</b></div>
+    <div class="box step s2"><i style="width:170px">count</i><b style="font-size:72px">0</b></div>
+    <div class="box step s3"><i style="width:170px">count</i><b style="font-size:72px">2</b></div>
+    <div class="box out step s4"><i style="width:170px">输出</i><b style="font-size:72px">2</b></div>
+  </div>
+  <a class="ide step s4" style="left:1210px;top:930px">▶ 在 IDE 打开</a>
+</section>
+
+<!-- your turn: failed scores -->
+<section class="slide" aria-label="输出不及格的分数">
+  <div class="band r"><b>动手<br>改一改</b><span>不用数了，碰到就直接输出。</span></div>
+  <div class="turn">
+    <h2 class="r d1">把不及格的分数列出来</h2>
+    <p class="say r d1">第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。把不到 60 分的分数按原来的顺序输出，一行一个；一个也没有就什么也不输出。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 5 行</small><pre style="font-size:44px">4、80、59、60、30</pre></div><div><small>输出</small><pre style="line-height:1.2">59
+30</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/04_failed.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/04_failed.py" style="left:610px;top:960px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- predict: changing s does nothing -->
+<section class="slide" aria-label="猜一猜：给每人加 5 分" data-steps="2" data-at="2" data-chapter="改列表">
+  <h2 class="t">猜一猜：两种写法，列表都变了吗？</h2>
+  <div class="vs" style="top:210px">
+    <div><h3>改 s</h3><pre style="font-size:44px">for s in scores:
+    s += 5
+print(scores)</pre><p class="res step s2" style="font-size:66px">[80, 95, 70]</p></div>
+    <div><h3>改 scores[i]</h3><pre style="font-size:44px">for i in range(len(scores)):
+    scores[i] += 5
+print(scores)</pre><p class="res step s2" style="font-size:66px">[85, 100, 75]</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:780px;width:1728px">scores 一开始都是 [80, 95, 70]，想给每个人加 5 分。</p>
+  <p class="abs say step s2" style="left:96px;top:780px;width:1728px">s 只是从盒子里拿出来的一份，改 s 不会放回列表。<br>要改列表，就用下标找到那个盒子，改 scores[i]。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn: add five -->
+<section class="slide" aria-label="全班加 5 分">
+  <div class="band r"><b>动手<br>改一改</b><span>换成用下标遍历，把加分放回列表里。</span></div>
+  <div class="turn">
+    <h2 class="r d1">全班每人加 5 分</h2>
+    <p class="say r d1">第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 95 的整数分数。每人加 5 分，最后输出整个列表。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1.3fr"><div><small>依次输入</small><pre style="font-size:44px">3、80、95、70</pre></div><div><small>输出</small><pre style="font-size:44px">[85, 100, 75]</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_add_five.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/05_add_five.py" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- quiz -->
+<section class="slide" aria-label="小测：输出什么">
+  <h2 class="t r">小测：这段程序输出什么？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:46px"><div class="tab">输出什么？</div>
+<pre class="code"><span class="ln">a = [<span class="m">10</span>, <span class="m">20</span>, <span class="m">30</span>]</span><span class="ln"><span class="k">for</span> x <span class="k">in</span> a:</span><span class="ln">    <span class="f">print</span>(x // <span class="m">10</span>)</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="2">
+    <button type="button" data-fb="x 拿到的是数 10、20、30，不是下标。"><i>1</i>0 1 2</button>
+    <button type="button" data-fb="print 在循环里，每一遍都输出一次，不是只输出一个。"><i>2</i>6</button>
+    <button type="button" data-fb="答对了！10 // 10 是 1，20 // 10 是 2，30 // 10 是 3，一行一个。"><i>3</i>1 2 3，一行一个</button>
+    <button type="button" data-fb="// 是整除，不会出现小数。"><i>4</i>1.0 2.0 3.0</button>
+  </div>
+  <p class="fb" style="top:620px;right:900px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:700px 400px 1fr"><code>print(i)</code><b>不报错</b><span>输出的是下标，不是分数</span></div>
+    <div class="r d2" style="grid-template-columns:700px 400px 1fr"><code>scores[len(scores)]</code><b>IndexError</b><span>最后一个是 len - 1</span></div>
+    <div class="r d3" style="grid-template-columns:700px 400px 1fr"><code>s += 5</code><b>不报错</b><span>改的是拿出来的一份，列表没变</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">两种不报错的最难发现。写完先想：我要的是下标，还是数？</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：总分少了">
+  <h2 class="t r">找错：总分怎么少了 80？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1080px;--fs:44px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="3" data-yes="找到了！range(1, len(scores)) 从下标 1 开始，第一个人的 80 没加。写 range(len(scores)) 就是从 0 开始。" data-no="这一行没问题。少的正好是第一个人的分数，想一想循环从哪里开始。"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln">total = <span class="m">0</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="f">len</span>(scores)):</span><span class="ln">    total += scores[i]</span><span class="ln"><span class="f">print</span>(total)</span></pre></div>
+  <p class="abs say r d2" style="left:1260px;top:240px;right:96px">三个分数加起来应该是 245，程序却输出 165。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="left:1260px;top:520px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="高于平均分" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">高于平均分</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。<br>输出分数严格高于平均分的人数，和平均分一样的不算。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:150px;width:480px"><small>依次输入</small><pre>4
+80
+90
+70
+60</pre><small style="margin-top:20px">输出</small><pre>2</pre></div>
+  <a class="ide r d3" data-code-file="starter/06_above_average.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>先把分数都存进列表，遍历一遍，算出平均分。</span></p>
+    <p class="step s2"><i>提示 2</i><span>知道平均分以后，再从头遍历一遍，比平均分高的数一下。</span></p>
+    <p class="step s3"><i>提示 3</i><span>试试三个人都是 70 分：没有人比平均分高，应该输出 0。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个点名器" data-chapter="小项目">
+  <h2 class="t r">造一个你的点名器</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">程序先把名字都记下来，再一个一个叫到。叫谁、怎么叫，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>读入几个名字存进列表，再一个一个说一句话。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>点名、介绍队员、给每个宠物打招呼、念出购物清单。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>给每一个编号，最后说一共几个；或者只叫名字最长的那个。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/07_roll_call.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着输入</b><span>帮同桌输入几个名字，先猜程序会说什么，再运行</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪一句最有意思</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>只输入一个名字时，程序说得对吗？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让点名器更好玩。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>for s in scores 里，s 拿到的是什么？<em class="step s2" style="font-style:normal;font-weight:400">　列表里的数，一遍一个。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>什么时候要用 range(len(scores))？<em class="step s3" style="font-style:normal;font-weight:400">　要编号或者要改列表的时候。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>为什么高于平均分要遍历两遍？<em class="step s4" style="font-style:normal;font-weight:400">　第一遍算出平均分，第二遍才能比。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:900px 1fr"><code>for s in scores:</code><span>一个一个拿出数</span></div>
+    <div class="r d1" style="grid-template-columns:900px 1fr"><code>for i in range(len(scores)):</code><span>一个一个拿出下标</span></div>
+    <div class="r d2" style="grid-template-columns:900px 1fr"><code>scores[i]</code><span>用下标取数</span></div>
+    <div class="r d2" style="grid-template-columns:900px 1fr"><code>scores[i] += 5</code><span>改列表要用下标</span></div>
+    <div class="r d3" style="grid-template-columns:900px 1fr"><code>i + 1</code><span>给人看的编号从 1 开始</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>sum()</code><span>Python 自带的求和，一行算出总分</span></div>
+    <div class="r d2"><code>enumerate()</code><span>同时拿到编号和数</span></div>
+    <div class="r d3"><code>字符串</code><span>下节课：一句话也能一个字一个字地遍历</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天学会了把列表从头看到尾，还能看好几遍。下节课看看文字里藏着什么。</p>
+  <div class="foot"></div>
+</section>

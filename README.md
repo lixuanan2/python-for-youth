@@ -39,6 +39,7 @@
 | [08](dist/08-loop-tally/index.html) | 累加和计数 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [09](dist/09-max-min/index.html) | 最大值和最小值 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [10](dist/10-list-basics/index.html) | 列表基础 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [11](dist/11-list-loop/index.html) | 列表遍历 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 

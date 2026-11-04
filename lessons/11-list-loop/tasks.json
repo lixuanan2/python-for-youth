@@ -1,0 +1,79 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_each.py",
+    "solution": "solutions/01_each.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "80\n95\n70\n",
+    "description": "for s in scores 一个一个拿出来。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 6,
+    "starter": "starter/02_numbered.py",
+    "solution": "solutions/02_numbered.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "1 80\n2 95\n3 70\n",
+    "description": "用下标遍历，顺便编号。"
+  },
+  {
+    "id": "C",
+    "role": "基础例题",
+    "page": 8,
+    "starter": "starter/03_count_pass.py",
+    "solution": "solutions/03_count_pass.py",
+    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数",
+    "sample_input": "4\n80\n59\n60\n30\n",
+    "sample_output": "2\n",
+    "description": "先存下来，再遍历统计及格人数。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 9,
+    "starter": "starter/04_failed.py",
+    "solution": "solutions/04_failed.py",
+    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数；一个也没有就什么也不输出",
+    "sample_input": "4\n80\n59\n60\n30\n",
+    "sample_output": "59\n30\n",
+    "description": "把不及格的分数一行一个输出。"
+  },
+  {
+    "id": "02",
+    "role": "学生小改写",
+    "page": 11,
+    "starter": "starter/05_add_five.py",
+    "solution": "solutions/05_add_five.py",
+    "scope": "第一行人数n为1到100；接下来n行每行一个0到95的整数",
+    "sample_input": "3\n80\n95\n70\n",
+    "sample_output": "[85, 100, 75]\n",
+    "description": "用下标给每个人加5分。"
+  },
+  {
+    "id": "03",
+    "role": "独立迁移",
+    "page": 15,
+    "starter": "starter/06_above_average.py",
+    "solution": "solutions/06_above_average.py",
+    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数",
+    "sample_input": "4\n80\n90\n70\n60\n",
+    "sample_output": "2\n",
+    "description": "先算平均分，再看一遍，数高于平均分的人。"
+  },
+  {
+    "id": "04",
+    "role": "创作项目",
+    "page": 17,
+    "starter": "starter/07_roll_call.py",
+    "solution": "solutions/07_roll_call_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "2\n小明\n小红\n",
+    "sample_output": "1 小明 到！\n2 小红 到！\n一共 2 人\n",
+    "description": "做一个自己的点名器。"
+  }
+]
