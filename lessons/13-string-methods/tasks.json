@@ -1,0 +1,90 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_strip.py",
+    "solution": "solutions/01_strip.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "[  小明  ]\n[小明]\n",
+    "description": "strip去掉两头的空格。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 5,
+    "starter": "starter/02_replace.py",
+    "solution": "solutions/02_replace.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "我爱狗，狗爱我\n我爱猫，猫爱我\n",
+    "description": "replace换字，原来的不变。"
+  },
+  {
+    "id": "C",
+    "role": "语法小演示",
+    "page": 8,
+    "starter": "starter/03_split.py",
+    "solution": "solutions/03_split.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "['小明', '小红', '小刚']\n3\n",
+    "description": "split把一句话切成列表。"
+  },
+  {
+    "id": "D",
+    "role": "语法小演示",
+    "page": 10,
+    "starter": "starter/04_join.py",
+    "solution": "solutions/04_join.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "red-green-blue\nred green blue\n",
+    "description": "join用连接符把列表拼回去。"
+  },
+  {
+    "id": "E",
+    "role": "基础例题",
+    "page": 11,
+    "starter": "starter/05_clean_names.py",
+    "solution": "solutions/05_clean_names.py",
+    "scope": "一行用英文逗号隔开的名字，名字两头可能有空格",
+    "sample_input": "小明, 小红 ,小刚\n",
+    "sample_output": "小明\n小红\n小刚\n",
+    "description": "按逗号切开，再去掉每个名字两头的空格。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 12,
+    "starter": "starter/06_joiner.py",
+    "solution": "solutions/06_joiner.py",
+    "scope": "一行用英文逗号隔开的词，没有空格",
+    "sample_input": "苹果,香蕉,橙子\n",
+    "sample_output": "苹果、香蕉、橙子\n",
+    "description": "把逗号换成顿号。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 16,
+    "starter": "starter/07_tidy_words.py",
+    "solution": "solutions/07_tidy_words.py",
+    "scope": "一行1到80个字符的英文单词，用空格或连字符隔开，至少有一个单词",
+    "sample_input": "red--green  blue-  pink\n",
+    "sample_output": "red green blue pink\n",
+    "description": "把空格和连字符混着的分隔整理成一个空格。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 18,
+    "starter": "starter/08_word_tool.py",
+    "solution": "solutions/08_tool_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "我不想写作业\n",
+    "sample_output": "一共 6 个字\n说反话： 我很想写作业\n",
+    "description": "做一个自己的文字小工具。"
+  }
+]

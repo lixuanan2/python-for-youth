@@ -1,0 +1,277 @@
+<!-- cover -->
+<section class="slide" aria-label="字符串常用方法" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 13</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">乱糟</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">.strip() .split()</span></div><b class="r d2" style="font-size:250px">整齐</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">字符串常用方法：Python 自带的整理工具</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能去掉多余的空格、换掉词语，还能把一句话切开再拼回去。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="乱糟糟的输入">
+  <h2 class="t r">别人输入的东西，常常乱糟糟</h2>
+  <div class="slip r d1" style="left:96px;top:290px;width:760px"><small style="font-size:34px">名字前后多打了空格</small><pre style="font-size:60px;white-space:pre">"  小明  "</pre></div>
+  <div class="slip tilt r d2" style="left:960px;top:290px;width:860px"><small style="font-size:34px">一行里写了好几个名字</small><pre style="font-size:60px">小明, 小红 ,小刚</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:620px">上节课一个字一个字地拆，能做到，但要写好几行。<br>Python 给字符串带了一套工具，叫“方法”，写法是“字符串.方法名()”，一句就能整理好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- strip -->
+<section class="slide" aria-label="strip 去掉两头空格" data-steps="2" data-at="2" data-chapter="清理">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">strip：去掉两头的空格</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">strip.py</div>
+<pre class="code" data-file="solutions/01_strip.py"><span class="ln l1">name = <span class="s">"  小明  "</span></span><span class="ln l1"><span class="f">print</span>(<span class="s">"["</span> + name + <span class="s">"]"</span>)</span><span class="ln l2">clean = name.<span class="f">strip</span>()</span><span class="ln l2"><span class="f">print</span>(<span class="s">"["</span> + clean + <span class="s">"]"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:660px;width:960px;color:var(--paper)">空格看不见，在两边加上方括号，就能看出前后各有两个空格。</p>
+  <p class="abs say only2" style="left:96px;top:660px;width:960px;color:var(--paper)">strip 的意思是“剥掉”。它做出一个去掉两头空格的新字符串，存进 clean。中间的空格不动。</p>
+  <a class="ide step s2" style="left:96px;top:860px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:150px">name</i><b style="font-size:64px;white-space:pre">[  小明  ]</b></div>
+    <div class="box out step s2"><i style="width:150px">clean</i><b style="font-size:64px">[小明]</b></div>
+  </div>
+</section>
+
+<!-- predict: not saved -->
+<section class="slide dark" aria-label="猜一猜：没有保存" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：strip 以后，name 变了吗？</h2>
+  <div class="editor" style="left:96px;top:230px;width:1100px;--fs:50px"><div class="tab">guess.py</div>
+<pre class="code"><span class="ln">name = <span class="s">"  小明  "</span></span><span class="ln">name.<span class="f">strip</span>()</span><span class="ln"><span class="f">print</span>(<span class="s">"["</span> + name + <span class="s">"]"</span>)</span></pre></div>
+  <p class="abs only1" style="left:1300px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <p class="abs say only1" style="left:96px;top:620px">先在纸上写下你的答案。</p>
+  <p class="abs step s2" style="left:1240px;top:270px;font:800 110px/1 var(--code);color:var(--clay-soft);white-space:pre">[  小明  ]</p>
+  <p class="abs say step s2" style="left:96px;top:620px;width:1600px">没变。上节课说过，字符串里的字不能换。strip 不改 name，只做出一个新字符串，<br>没存起来就丢了。要么存进新变量，要么写 name = name.strip()。</p>
+  <a class="ide step s2" style="left:96px;top:820px">▶ 在 IDE 验证</a>
+  <div class="foot"></div>
+</section>
+
+<!-- replace -->
+<section class="slide" aria-label="replace 换词" data-steps="2" data-at="2">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">replace：换词</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">replace.py</div>
+<pre class="code" data-file="solutions/02_replace.py"><span class="ln">s = <span class="s">"我爱猫，猫爱我"</span></span><span class="ln l1"><span class="f">print</span>(s.<span class="f">replace</span>(<span class="s">"猫"</span>, <span class="s">"狗"</span>))</span><span class="ln l2"><span class="f">print</span>(s)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">括号里先写旧的，再写新的。所有的“猫”都换成了“狗”。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">再输出 s，还是原来的样子。replace 也是做出新字符串，不改原来的。</p>
+  <a class="ide step s2" style="left:96px;top:820px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step" style="display:block"><i style="display:block;width:auto">第 2 行</i><b style="display:block;font-size:56px">我爱狗，狗爱我</b></div>
+    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">第 3 行</i><b style="display:block;font-size:56px">我爱猫，猫爱我</b></div>
+  </div>
+</section>
+
+<!-- predict: count -->
+<section class="slide" aria-label="猜一猜：count 数几个" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：count 数出来是几？</h2>
+  <div class="vs" style="top:220px">
+    <div><h3>数 banana 里的 a</h3><pre style="font-size:54px">"banana".count("a")</pre><p class="res step s2" style="font-size:130px">3</p></div>
+    <div><h3>数 aaaa 里的 aa</h3><pre style="font-size:54px">"aaaa".count("aa")</pre><p class="res step s2" style="font-size:130px">2</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:720px;width:1728px">count 数一数某个词出现了几次。右边好好想：aaaa 里能找出几个 aa？</p>
+  <p class="abs say step s2" style="left:96px;top:720px;width:1728px">右边是 2，不是 3。count 从左往右找，找到一个 aa 就跳过它，接着往后找，用过的字不再用。<br>上节课自己写了五行才数出几个 a，现在一句就行。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz -->
+<section class="slide" aria-label="小测：换成空的">
+  <h2 class="t r">小测："a-b-c".replace("-", "") 是什么？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！把 - 换成空字符串，就等于把它删掉了。"><i>1</i>abc</button>
+    <button type="button" data-fb="新的是空字符串 &quot;&quot;，什么也没有，不是空格。"><i>2</i>a b c</button>
+    <button type="button" data-fb="replace 会换掉所有的 -，不止第一个。"><i>3</i>ab-c</button>
+    <button type="button" data-fb="空字符串可以当新的，不会报错。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- split -->
+<section class="slide" aria-label="split 切开" data-steps="2" data-at="2" data-chapter="切分">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">split：切成列表</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">split.py</div>
+<pre class="code" data-file="solutions/03_split.py"><span class="ln">line = <span class="s">"小明 小红 小刚"</span></span><span class="ln l1">names = line.<span class="f">split</span>()</span><span class="ln l1"><span class="f">print</span>(names)</span><span class="ln l2"><span class="f">print</span>(<span class="f">len</span>(names))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:690px;width:960px;color:var(--paper)">split 的意思是“切开”。括号里不写，就按空格切，切出来是一个列表。</p>
+  <p class="abs say only2" style="left:96px;top:690px;width:960px;color:var(--paper)">切出来是列表，列表会的它都会：len 数个数、下标、for 遍历。按逗号切就写 split(",")。</p>
+  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step" style="display:block"><i style="display:block;width:auto">names</i><b style="display:block;font-size:40px">['小明', '小红', '小刚']</b></div>
+    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">len</i><b style="display:block;font-size:84px">3</b></div>
+  </div>
+</section>
+
+<!-- predict: split() vs split(" ") -->
+<section class="slide" aria-label="猜一猜：两个空格" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：中间有两个空格，切出来一样吗？</h2>
+  <div class="vs" style="top:220px">
+    <div><h3>括号里不写</h3><pre style="font-size:54px">"a  b".split()</pre><p class="res step s2" style="font-size:90px">['a', 'b']</p></div>
+    <div><h3>写一个空格</h3><pre style="font-size:54px">"a  b".split(" ")</pre><p class="res step s2" style="font-size:90px">['a', '', 'b']</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:720px;width:1728px">a 和 b 中间连着两个空格。</p>
+  <p class="abs say step s2" style="left:96px;top:720px;width:1728px">不写，就把连着的空格当成一处，两头的空格也不管。<br>写了 " "，就每遇到一个空格切一刀，两个空格中间切出一个空字符串。按空格切词，一般不写。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- join -->
+<section class="slide" aria-label="join 拼回去" data-steps="2" data-at="2">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">join：用连接符拼回去</h2>
+  <div class="editor" style="left:96px;top:200px;width:1010px;--fs:44px"><div class="tab">join.py</div>
+<pre class="code" data-file="solutions/04_join.py"><span class="ln">words = [<span class="s">"red"</span>, <span class="s">"green"</span>, <span class="s">"blue"</span>]</span><span class="ln l1"><span class="f">print</span>(<span class="s">"-"</span>.<span class="f">join</span>(words))</span><span class="ln l2"><span class="f">print</span>(<span class="s">" "</span>.<span class="f">join</span>(words))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">join 的意思是“连起来”。点前面写连接符，括号里放列表。用 - 把三个词连起来。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">换成空格当连接符。split 把句子切成列表，join 把列表拼回句子，正好相反。</p>
+  <a class="ide step s2" style="left:96px;top:820px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step" style="display:block"><i style="display:block;width:auto">"-"</i><b style="display:block;font-size:52px">red-green-blue</b></div>
+    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">" "</i><b style="display:block;font-size:52px">red green blue</b></div>
+  </div>
+</section>
+
+<!-- worked example: clean names -->
+<section class="slide" aria-label="例题：整理名字" data-steps="3" data-at="3">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：整理一行名字</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">clean_names.py</div>
+<pre class="code" data-file="solutions/05_clean_names.py"><span class="ln l1">line = <span class="f">input</span>()</span><span class="ln l2 l3"><span class="k">for</span> name <span class="k">in</span> line.<span class="f">split</span>(<span class="s">","</span>):</span><span class="ln l3">    <span class="f">print</span>(name.<span class="f">strip</span>())</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">输入：小明, 小红 ,小刚。逗号前后的空格有多有少。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">按逗号切开，得到三段，有的两头带着空格。切出来的列表直接拿来遍历。</p>
+  <p class="abs say only3" style="left:96px;top:620px;width:960px;color:var(--paper)">每一段都 strip 一下，再输出，一行一个，干干净净。</p>
+  <a class="ide step s3" style="left:96px;top:820px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:150px">输入</i><b style="font-size:48px;white-space:pre">小明, 小红 ,小刚</b></div>
+    <div class="box step s2"><i style="width:150px">切开</i><b style="font-size:40px;white-space:pre">'小明' ' 小红 ' '小刚'</b></div>
+    <div class="box out step s3"><i style="width:150px">输出</i><b style="font-size:48px;line-height:1.3">小明<br>小红<br>小刚</b></div>
+  </div>
+</section>
+
+<!-- your turn: joiner -->
+<section class="slide" aria-label="换一种连接符">
+  <div class="band r"><b>动手<br>改一改</b><span>切开以后，用 join 拼回去。</span></div>
+  <div class="turn">
+    <h2 class="r d1">把逗号换成顿号</h2>
+    <p class="say r d1">读入一行用英文逗号隔开的词，没有空格。把它们用中文顿号“、”连起来，输出一行。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入</small><pre style="font-size:48px">苹果,香蕉,橙子</pre></div><div><small>输出</small><pre style="font-size:48px">苹果、香蕉、橙子</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">只有一个词时，就输出它自己。教室电脑：打开 starter/06_joiner.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/06_joiner.py" style="left:610px;top:820px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- quiz: empty piece -->
+<section class="slide" aria-label="小测：切出几段">
+  <h2 class="t r">小测：len("a,b,,c".split(",")) 是几？</h2>
+  <div class="quiz r d1" data-right="2">
+    <button type="button" data-fb="两个逗号连在一起，中间也会切出一段。"><i>1</i>3</button>
+    <button type="button" data-fb="len 数的是切出几段，不是有几个逗号。"><i>2</i>2</button>
+    <button type="button" data-fb="答对了！切出 'a'、'b'、''、'c'，两个逗号中间是一个空字符串，也算一段。"><i>3</i>4</button>
+    <button type="button" data-fb="一共只有 3 个逗号，切 3 刀得到 4 段。"><i>4</i>5</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:620px 440px 1fr"><code>name.strip()</code><b>不报错</b><span>没有存起来，name 没变</span></div>
+    <div class="r d2" style="grid-template-columns:620px 440px 1fr"><code>line.split(" ")</code><b>不报错</b><span>连着的空格切出空字符串</span></div>
+    <div class="r d3" style="grid-template-columns:620px 440px 1fr"><code>",".join([1, 2])</code><b>TypeError</b><span>join 只能拼字符串</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">方法做出来的是新字符串。用完记得存起来，或者直接输出。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：猫还是猫">
+  <h2 class="t r">找错：猫怎么没换成狗？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:50px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="2" data-yes="找到了！replace 做出了新字符串，但没有存起来。写成 s = s.replace(&quot;猫&quot;, &quot;狗&quot;) 就对了。" data-no="这一行没问题。想一想：换好的新字符串去哪了？"><span class="ln">s = <span class="s">"我爱猫"</span></span><span class="ln">s.<span class="f">replace</span>(<span class="s">"猫"</span>, <span class="s">"狗"</span>)</span><span class="ln"><span class="f">print</span>(s)</span></pre></div>
+  <p class="abs say r d2" style="left:1200px;top:240px;right:96px">应该输出“我爱狗”，程序却输出“我爱猫”，也没有报错。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="left:1200px;top:520px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="整理单词" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">整理单词</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:960px">读入一行英文单词，单词之间用空格或连字符 - 隔开，可能连着好几个，两头也可能有。<br>整理成单词之间只隔一个空格、两头没有空格，输出一行。</p>
+  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:700px"><small>输入</small><pre style="font-size:40px;white-space:pre">red--green  blue-  pink</pre><small style="margin-top:20px">输出</small><pre style="font-size:40px">red green blue pink</pre></div>
+  <a class="ide r d3" data-code-file="starter/07_tidy_words.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>两种分隔符太麻烦，先把连字符都换成空格。</span></p>
+    <p class="step s2"><i>提示 2</i><span>现在只剩空格了。哪种 split 能把连着的空格当成一处？</span></p>
+    <p class="step s3"><i>提示 3</i><span>切出单词列表以后，用一个空格把它们拼回去。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="文字小工具" data-chapter="小项目">
+  <h2 class="t r">造一个你的文字小工具</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">输入一句话，程序帮你整理它、改造它。做什么工具，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>读入一句话，说出有几个字，再换掉其中一个词。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>说反话机、敏感词变星号、给名单加编号、数一数口头禅。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>切成一个个词，数一数有几个词，再用别的符号拼回去。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/08_word_tool.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着输入</b><span>给同桌的工具输入一句话，先猜结果，再运行</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪个功能最好玩</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>输入前后多打几个空格，工具还好用吗？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让工具更好用。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>name.strip() 之后，name 变了吗？<em class="step s2" style="font-style:normal;font-weight:400">　没变，要存起来才算数。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>split 和 join 各得到什么？<em class="step s3" style="font-style:normal;font-weight:400">　split 得到列表，join 得到字符串。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>按空格切词，为什么一般不写 " "？<em class="step s4" style="font-style:normal;font-weight:400">　不写能把连着的空格当成一处。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:780px 1fr"><code>s.strip()</code><span>去掉两头的空格</span></div>
+    <div class="r d1" style="grid-template-columns:780px 1fr"><code>s.replace("旧", "新")</code><span>把旧的都换成新的</span></div>
+    <div class="r d2" style="grid-template-columns:780px 1fr"><code>s.count("a")</code><span>数一数出现几次</span></div>
+    <div class="r d2" style="grid-template-columns:780px 1fr"><code>s.split()  s.split(",")</code><span>按空格或逗号切成列表</span></div>
+    <div class="r d3" style="grid-template-columns:780px 1fr"><code>"-".join(words)</code><span>用连接符把列表拼起来</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>upper() lower()</code><span>英文变大写、变小写</span></div>
+    <div class="r d2"><code>find()</code><span>找一找某个词在第几个位置</span></div>
+    <div class="r d3"><code>def</code><span>下节课：自己造一个工具，起个名字反复用</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天用了 Python 自带的工具。下节课，自己动手造工具。</p>
+  <div class="foot"></div>
+</section>
