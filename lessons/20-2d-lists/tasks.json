@@ -1,0 +1,79 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_grid.py",
+    "solution": "solutions/01_grid.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "[90, 80, 70]\n95\n2\n",
+    "description": "列表里装列表，两个下标定位一格。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 7,
+    "starter": "starter/02_each_cell.py",
+    "solution": "solutions/02_each_cell.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "1 2 3 \n4 5 6 \n",
+    "description": "两层循环走遍每一格。"
+  },
+  {
+    "id": "C",
+    "role": "基础例题",
+    "page": 8,
+    "starter": "starter/03_row_totals.py",
+    "solution": "solutions/03_row_totals.py",
+    "scope": "第一行人数n为1到30；接下来n行，每行三个0到100的整数，用空格隔开",
+    "sample_input": "2\n90 80 70\n60 85 95\n",
+    "sample_output": "1 240\n2 240\n",
+    "description": "读入成绩表，算每个人的总分。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 9,
+    "starter": "starter/04_subject_totals.py",
+    "solution": "solutions/04_subject_totals.py",
+    "scope": "第一行人数n为1到30；接下来n行，每行三个0到100的整数，用空格隔开",
+    "sample_input": "2\n90 80 70\n60 85 95\n",
+    "sample_output": "150\n165\n165\n",
+    "description": "改成算每一科的总分。"
+  },
+  {
+    "id": "D",
+    "role": "语法小演示",
+    "page": 10,
+    "starter": "starter/05_change_cell.py",
+    "solution": "solutions/05_change_cell.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "[[1, 2, 3], [4, 0, 6]]\n",
+    "description": "改一个格子。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 14,
+    "starter": "starter/06_treasure.py",
+    "solution": "solutions/06_treasure.py",
+    "scope": "第一行行数n为1到20；接下来n行等长的地图，只有.和#",
+    "sample_input": "3\n.#..\n....\n#..#\n",
+    "sample_output": "1 2\n3 1\n3 4\n3\n",
+    "description": "在地图上找出每个宝藏的位置。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 16,
+    "starter": "starter/07_my_table.py",
+    "solution": "solutions/07_seats_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "",
+    "sample_output": "['空', '小明', '空']\n['空', '空', '小红']\n",
+    "description": "做一张自己的表格。"
+  }
+]

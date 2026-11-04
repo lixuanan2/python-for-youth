@@ -1,0 +1,53 @@
+[
+  {
+    "page": 3,
+    "code": "scores = [[90, 80, 70],\n          [60, 85, 95]]\nprint(scores[0])\nprint(scores[1][2])\nprint(len(scores))\n",
+    "stdout": "[90, 80, 70]\n95\n2\n"
+  },
+  {
+    "page": 4,
+    "code": "scores = [[90, 80, 70], [60, 85, 95]]\nprint(scores[1][0])",
+    "stdout": "60\n"
+  },
+  {
+    "page": 6,
+    "code": "grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nprint(grid[2][1])",
+    "stdout": "8\n"
+  },
+  {
+    "page": 7,
+    "code": "grid = [[1, 2, 3], [4, 5, 6]]\nfor row in grid:\n    for x in row:\n        print(x, end=\" \")\n    print()\n",
+    "stdout": "1 2 3 \n4 5 6 \n"
+  },
+  {
+    "page": 8,
+    "code": "n = int(input())\ntable = []\nfor i in range(n):\n    row = []\n    for w in input().split():\n        row.append(int(w))\n    table.append(row)\nfor i in range(n):\n    print(i + 1, sum(table[i]))\n",
+    "stdin": "2\n90 80 70\n60 85 95\n",
+    "stdout": "1 240\n2 240\n"
+  },
+  {
+    "page": 10,
+    "code": "grid = [[1, 2, 3], [4, 5, 6]]\ngrid[1][1] = 0\nprint(grid)\n",
+    "stdout": "[[1, 2, 3], [4, 0, 6]]\n"
+  },
+  {
+    "page": 11,
+    "code": "grid = [[1, 2, 3], [4, 5, 6]]\nprint(len(grid))\nprint(len(grid[0]))",
+    "stdout": "2\n3\n"
+  },
+  {
+    "page": 12,
+    "code": "grid = [[1, 2, 3], [4, 5, 6]]\nprint(grid[2])",
+    "error": "IndexError: list index out of range"
+  },
+  {
+    "page": 12,
+    "code": "grid = [[1, 2, 3], [4, 5, 6]]\nprint(grid[1, 2])",
+    "error": "TypeError"
+  },
+  {
+    "page": 13,
+    "code": "grid = [[1, 2, 3], [4, 5, 6]]\nfor i in range(2):\n    for j in range(3):\n        print(grid[j][i])",
+    "error": "IndexError: list index out of range"
+  }
+]

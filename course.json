@@ -133,7 +133,10 @@
     "stage": "进阶"
   },
   {
+    "id": "20-2d-lists",
+    "tag": "LESSON 20",
     "title": "二维列表",
+    "file": "lesson_20.py",
     "stage": "进阶"
   },
   {
