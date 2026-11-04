@@ -1,0 +1,64 @@
+[
+  {
+    "page": 3,
+    "code": "scores = [80, 95, 70]\nprint(scores)\nprint(scores[0])\nprint(len(scores))\n",
+    "stdout": "[80, 95, 70]\n80\n3\n"
+  },
+  {
+    "page": 4,
+    "code": "scores = [80, 95, 70]\nprint(scores[1])",
+    "stdout": "95\n"
+  },
+  {
+    "page": 6,
+    "code": "names = [\"小明\", \"小红\", \"小刚\", \"小丽\"]\nprint(names[2])",
+    "stdout": "小刚\n"
+  },
+  {
+    "page": 7,
+    "code": "scores = [80, 95, 70]\nprint(scores[3])",
+    "error": "IndexError: list index out of range"
+  },
+  {
+    "page": 8,
+    "code": "scores = [80, 95, 70]\nprint(scores[-1])\nprint(scores[-2])\nprint(len(scores))",
+    "stdout": "70\n95\n3\n"
+  },
+  {
+    "page": 10,
+    "code": "scores = [80, 95, 70]\nscores[1] = 100\nprint(scores)\n",
+    "stdout": "[80, 100, 70]\n"
+  },
+  {
+    "page": 11,
+    "code": "scores = []\nscores.append(80)\nscores.append(95)\nprint(scores)\nprint(len(scores))\n",
+    "stdout": "[80, 95]\n2\n"
+  },
+  {
+    "page": 13,
+    "code": "n = int(input())\nfor i in range(n):\n    scores = []\n    scores.append(int(input()))\nprint(scores)\n",
+    "stdin": "3\n80\n95\n70\n",
+    "stdout": "[70]\n"
+  },
+  {
+    "page": 15,
+    "code": "a = [3]\na.append(5)\na.append(5)\nprint(len(a))\nprint(a)",
+    "stdout": "3\n[3, 5, 5]\n"
+  },
+  {
+    "page": 16,
+    "code": "scores = [80, 95]\nscores.add(70)",
+    "error": "AttributeError: 'list' object has no attribute 'add'"
+  },
+  {
+    "page": 16,
+    "code": "scores = [80, 95, 70]\nprint(scores[1])",
+    "stdout": "95\n"
+  },
+  {
+    "page": 17,
+    "code": "n = int(input())\nscores = []\nfor i in range(n):\n    scores.append(int(input()))\nprint(scores[n])",
+    "stdin": "3\n80\n95\n70\n",
+    "error": "IndexError: list index out of range"
+  }
+]

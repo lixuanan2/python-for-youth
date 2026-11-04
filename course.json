@@ -63,7 +63,10 @@
     "stage": "循环"
   },
   {
+    "id": "10-list-basics",
+    "tag": "LESSON 10",
     "title": "列表基础",
+    "file": "lesson_10.py",
     "stage": "列表和字符串"
   },
   {
