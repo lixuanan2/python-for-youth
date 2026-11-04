@@ -1,0 +1,283 @@
+<!-- cover -->
+<section class="slide" aria-label="列表常用操作" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 19</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">一句</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">sorted(scores)</span></div><b class="r d2" style="font-size:250px">排好</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">列表常用操作：求和、找最大、排名次</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能一句话算出总分和最高分，排出名次表，还能做比赛评分。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="以前写好几行">
+  <h2 class="t r">以前要写好几行的事</h2>
+  <div class="slip r d1" style="left:96px;top:290px;width:520px"><small style="font-size:34px">第 8 课：算总分</small><pre style="font-size:40px">total = 0
+for s in scores:
+    total += s</pre></div>
+  <div class="slip r d2" style="left:660px;top:290px;width:520px"><small style="font-size:34px">第 9 课：找最大</small><pre style="font-size:40px">best = scores[0]
+for s in scores:
+    if s > best: …</pre></div>
+  <div class="slip tilt r d3" style="left:1240px;top:290px;width:580px"><small style="font-size:34px">今天</small><pre style="font-size:52px">sum(scores)
+max(scores)</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:680px">自己写过一遍，就知道它们是怎么算出来的。现在可以用 Python 自带的工具，一句话完成。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- sum max min -->
+<section class="slide" aria-label="sum max min" data-steps="3" data-at="3" data-chapter="一句话">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">sum、max、min</h2>
+  <div class="editor" style="left:96px;top:200px;width:1010px;--fs:44px"><div class="tab">tools.py</div>
+<pre class="code" data-file="solutions/01_tools.py"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1"><span class="f">print</span>(<span class="f">sum</span>(scores))</span><span class="ln l2"><span class="f">print</span>(<span class="f">max</span>(scores))</span><span class="ln l2"><span class="f">print</span>(<span class="f">min</span>(scores))</span><span class="ln l3"><span class="f">print</span>(<span class="f">sum</span>(scores) / <span class="f">len</span>(scores))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:760px;width:960px;color:var(--paper)">sum 把列表里的数全加起来：245。</p>
+  <p class="abs say only2" style="left:96px;top:760px;width:960px;color:var(--paper)">max 找最大的，min 找最小的。</p>
+  <p class="abs say only3" style="left:96px;top:760px;width:960px;color:var(--paper)">总和除以个数，就是平均分。除不尽时，小数会很长。</p>
+  <a class="ide step s3" style="left:96px;top:910px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:150px">sum</i><b style="font-size:72px">245</b></div>
+    <div class="box step s2"><i style="width:150px">max</i><b style="font-size:72px">95</b></div>
+    <div class="box step s2"><i style="width:150px">min</i><b style="font-size:72px">70</b></div>
+    <div class="box out step s3" style="display:block"><i style="display:block;width:auto">平均</i><b style="display:block;font-size:52px">81.66666666666667</b></div>
+  </div>
+</section>
+
+<!-- predict: empty list -->
+<section class="slide dark" aria-label="猜一猜：空列表" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：空列表里找最大，会怎样？</h2>
+  <div class="editor" style="left:96px;top:230px;width:1000px;--fs:56px"><div class="tab">guess.py</div>
+<pre class="code"><span class="ln">scores = []</span><span class="ln"><span class="f">print</span>(<span class="f">max</span>(scores))</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <p class="abs say only1" style="left:96px;top:560px">输出 0？什么也不输出？还是报错？</p>
+  <div class="slip tilt step s2" style="left:1240px;top:250px;width:560px"><small>屏幕上</small><pre style="font-size:52px">ValueError</pre></div>
+  <p class="abs say step s2" style="left:96px;top:560px;width:1600px">报 ValueError。一个数也没有，说不出谁最大。sum 不会报错，空列表的和是 0；<br>但 sum / len 又会除以 0。用这些工具前，先想一想列表会不会是空的。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- sorted -->
+<section class="slide" aria-label="sorted 排序" data-steps="3" data-at="3" data-chapter="排序">
+  <div class="night" style="width:1210px"></div>
+  <h2 class="t" style="color:var(--paper)">sorted：排好顺序</h2>
+  <div class="editor" style="left:96px;top:200px;width:1090px;--fs:44px"><div class="tab">sorted.py</div>
+<pre class="code" data-file="solutions/02_sorted.py"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1"><span class="f">print</span>(<span class="f">sorted</span>(scores))</span><span class="ln l2"><span class="f">print</span>(<span class="f">sorted</span>(scores, reverse=<span class="k">True</span>))</span><span class="ln l3"><span class="f">print</span>(scores)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:690px;width:960px;color:var(--paper)">sorted 交回一个从小到大排好的新列表。</p>
+  <p class="abs say only2" style="left:96px;top:690px;width:960px;color:var(--paper)">加上 reverse=True，就从大到小。reverse 的意思是“反过来”。</p>
+  <p class="abs say only3" style="left:96px;top:690px;width:960px;color:var(--paper)">原来的 scores 没变。sorted 是照着排一份新的。</p>
+  <a class="ide step s3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1270px;right:96px;top:170px">
+    <div class="box step"><i style="width:150px">从小</i><b style="font-size:50px">[70, 80, 95]</b></div>
+    <div class="box step s2"><i style="width:150px">从大</i><b style="font-size:50px">[95, 80, 70]</b></div>
+    <div class="box out step s3"><i style="width:150px">原来</i><b style="font-size:50px">[80, 95, 70]</b></div>
+  </div>
+</section>
+
+<!-- predict: sort vs sorted -->
+<section class="slide" aria-label="猜一猜：sort 和 sorted" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：sort 和 sorted 有什么不同？</h2>
+  <div class="vs" style="top:210px">
+    <div><h3>sorted(a)</h3><pre style="font-size:46px">a = [3, 1, 2]
+b = sorted(a)
+print(a, b)</pre><p class="res step s2" style="font-size:60px">[3, 1, 2] [1, 2, 3]</p></div>
+    <div><h3>a.sort()</h3><pre style="font-size:46px">a = [3, 1, 2]
+x = a.sort()
+print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:760px;width:1728px">一个写在括号外面，一个用点接在列表后面。</p>
+  <p class="abs say step s2" style="left:96px;top:760px;width:1728px">sorted 排一份新的交回来，原来的不动。a.sort() 直接把 a 自己排好，什么也不交回，<br>所以 x 拿到 None。想要新列表用 sorted，想直接改原来的用 sort。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz -->
+<section class="slide" aria-label="小测：倒着排">
+  <h2 class="t r">小测：倒着排的结果是什么？</h2>
+  <p class="abs r d1" style="left:96px;top:210px;font:700 60px var(--code)">sorted([3, 1, 2], reverse=True)</p>
+  <div class="quiz r d1" style="top:340px" data-right="3">
+    <button type="button" data-fb="这是从小到大。reverse=True 是反过来。"><i>1</i>[1, 2, 3]</button>
+    <button type="button" data-fb="reverse 不是把原来的顺序倒过来，而是按从大到小排。"><i>2</i>[2, 1, 3]</button>
+    <button type="button" data-fb="sorted 交回的是排好的列表，不是 None。"><i>3</i>None</button>
+    <button type="button" data-fb="答对了！从大到小排好：3、2、1。"><i>4</i>[3, 2, 1]</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- in -->
+<section class="slide" aria-label="in 在不在" data-steps="2" data-at="2" data-chapter="在不在">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">in：在不在名单上</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">in.py</div>
+<pre class="code" data-file="solutions/03_in.py"><span class="ln">names = [<span class="s">"小明"</span>, <span class="s">"小红"</span>]</span><span class="ln l1"><span class="f">print</span>(<span class="s">"小红"</span> <span class="k">in</span> names)</span><span class="ln l1"><span class="f">print</span>(<span class="s">"小刚"</span> <span class="k">in</span> names)</span><span class="ln l2"><span class="f">print</span>(<span class="s">"小刚"</span> <span class="k">not in</span> names)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:690px;width:960px;color:var(--paper)">和字典一样，in 也能问列表：这个东西在不在里面？</p>
+  <p class="abs say only2" style="left:96px;top:690px;width:960px;color:var(--paper)">not in 正好相反：不在才是 True。</p>
+  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:150px">小红</i><b style="font-size:72px">True</b></div>
+    <div class="box step"><i style="width:150px">小刚</i><b style="font-size:72px">False</b></div>
+    <div class="box out step s2"><i style="width:150px">not in</i><b style="font-size:72px">True</b></div>
+  </div>
+</section>
+
+<!-- worked example: report -->
+<section class="slide" aria-label="例题：成绩小报告" data-steps="2" data-at="2" data-chapter="名次">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：成绩小报告</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:44px"><div class="tab">report.py</div>
+<pre class="code" data-file="solutions/04_report.py"><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">scores = []</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2"><span class="f">print</span>(<span class="s">"总分"</span>, <span class="f">sum</span>(scores))</span><span class="ln l2"><span class="f">print</span>(<span class="s">"最高"</span>, <span class="f">max</span>(scores))</span><span class="ln l2"><span class="f">print</span>(<span class="s">"最低"</span>, <span class="f">min</span>(scores))</span></pre></div>
+  <p class="abs say only1" style="left:1210px;right:96px;top:170px;font-size:34px">前四行还是老样子：输入 3，再输入 80、95、70，存进列表。</p>
+  <p class="abs say only2" style="left:1210px;right:96px;top:170px;font-size:34px">后三行，一行一个工具。以前要好几个循环，现在一眼就看得懂。</p>
+  <div class="abs step s2" style="left:1210px;right:96px;top:420px;font:400 56px/1.5 var(--code);color:var(--clay)">总分 245<br>最高 95<br>最低 70</div>
+  <a class="ide step s2" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
+</section>
+
+<!-- your turn: ranking -->
+<section class="slide" aria-label="名次表">
+  <div class="band r"><b>动手<br>改一改</b><span>先从大到小排好，再用下标编名次。</span></div>
+  <div class="turn">
+    <h2 class="r d1">排一张名次表</h2>
+    <p class="say r d1">第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。从高到低输出名次和分数，一行一个，分数一样也各占一个名次。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="font-size:44px">3、80、95、70</pre></div><div><small>输出</small><pre style="line-height:1.2">1 95
+2 80
+3 70</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_ranking.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/05_ranking.py" style="left:610px;top:960px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- quiz: in -->
+<section class="slide" aria-label="小测：90 在不在">
+  <h2 class="t r">小测：90 in [80, 95, 70] 是什么？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="in 只看有没有一模一样的 90，不看大小。"><i>1</i>True，因为 90 比 80 大</button>
+    <button type="button" data-fb="答对了！列表里没有 90 这个数。"><i>2</i>False</button>
+    <button type="button" data-fb="in 回答的是真或假，不是位置。"><i>3</i>1</button>
+    <button type="button" data-fb="数不在列表里不会报错，只是 False。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- list slicing -->
+<section class="slide" aria-label="列表也能切片" data-steps="2" data-at="2">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">列表也能切片</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">slice.py</div>
+<pre class="code"><span class="ln">a = [<span class="m">10</span>, <span class="m">20</span>, <span class="m">30</span>, <span class="m">40</span>, <span class="m">50</span>]</span><span class="ln l1"><span class="f">print</span>(a[:<span class="m">2</span>])</span><span class="ln l2"><span class="f">print</span>(a[<span class="m">1</span>:-<span class="m">1</span>])</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">第 12 课的切片，列表也能用：[:2] 是前两个。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">[1:-1] 从第二个开始，截到最后一个的前面：去掉了头和尾。</p>
+  <a class="ide step s2" style="left:96px;top:820px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:150px">[:2]</i><b style="font-size:60px">[10, 20]</b></div>
+    <div class="box out step s2"><i style="width:150px">[1:-1]</i><b style="font-size:60px">[20, 30, 40]</b></div>
+  </div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:620px 420px 1fr"><code>max([])</code><b>ValueError</b><span>空列表找不出最大</span></div>
+    <div class="r d2" style="grid-template-columns:620px 420px 1fr"><code>a = a.sort()</code><b>不报错</b><span>a 变成了 None</span></div>
+    <div class="r d3" style="grid-template-columns:620px 420px 1fr"><code>sum(["1", "2"])</code><b>TypeError</b><span>只能加数，先用 int()</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">记住：sort 改原来的、什么也不交回；sorted 交回新的。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：排完变成 None">
+  <h2 class="t r">找错：排好的分数怎么成了 None？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:50px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="2" data-yes="找到了！sort 直接把列表排好，但交回的是 None，又赋给了 scores，排好的列表就丢了。只写 scores.sort()，或者写 scores = sorted(scores)。" data-no="这一行没问题。输出 None，想一想是哪一行把 None 放进了 scores。"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln">scores = scores.<span class="f">sort</span>()</span><span class="ln"><span class="f">print</span>(scores)</span></pre></div>
+  <p class="abs say r d2" style="left:1200px;top:240px;right:96px">想输出排好的分数，屏幕上却是 None。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="left:1200px;top:520px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="比赛评分" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">比赛评分</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:960px">第一行读入评委人数 n（3 到 20 的整数），接下来 n 行，每行一个 0 到 10 的整数分数。<br>去掉一个最高分、一个最低分，输出剩下分数的平均分。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:150px;width:440px"><small>依次输入</small><pre>5
+9
+7
+8
+10
+6</pre><small style="margin-top:14px">输出</small><pre>8.0</pre></div>
+  <a class="ide r d3" data-code-file="starter/06_judge.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>先把分数存进列表，再排好顺序。最高分和最低分在哪？</span></p>
+    <p class="step s2"><i>提示 2</i><span>排好以后，去掉头和尾：切片可以帮忙。</span></p>
+    <p class="step s3"><i>提示 3</i><span>剩下的求和再除以个数。试试三个人都是 7 分，应该是 7.0。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="数据小报告" data-chapter="小项目">
+  <h2 class="t r">造一份你的数据小报告</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">把一串数存进列表，用今天的工具说出几句总结。记什么，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>读入几个数，说出总和、最大和最小。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>每天步数、零花钱、跳绳成绩、读书页数。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>排出前三名，算平均，问一问某个数有没有出现过。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/07_my_stats.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着输入</b><span>给同桌的报告输入几个数，先猜结果，再运行</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪一句总结最有用</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>只输入一个数，报告还对吗？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让报告更清楚。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>平均分怎么一句话算出来？<em class="step s2" style="font-style:normal;font-weight:400">　sum 除以 len。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>sort 和 sorted 有什么不同？<em class="step s3" style="font-style:normal;font-weight:400">　sort 改原来的，sorted 交回新的。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>用 max 前要想到什么？<em class="step s4" style="font-style:normal;font-weight:400">　列表会不会是空的。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>sum(a)  max(a)  min(a)</code><span>总和、最大、最小</span></div>
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>sum(a) / len(a)</code><span>平均数</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>sorted(a, reverse=True)</code><span>交回排好的新列表</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>a.sort()</code><span>直接排好 a，交回 None</span></div>
+    <div class="r d3" style="grid-template-columns:860px 1fr"><code>x in a   a[1:-1]</code><span>在不在；去掉头尾</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>二维列表</code><span>下节课：列表里放列表，像一张表格</span></div>
+    <div class="r d2"><code>a.count(x)</code><span>数一数某个数出现几次</span></div>
+    <div class="r d3"><code>round()</code><span>把平均分保留一位小数</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天用一句话做了以前要写好几行的事。下节课把列表排成一张表格。</p>
+  <div class="foot"></div>
+</section>

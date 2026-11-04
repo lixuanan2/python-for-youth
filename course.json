@@ -126,7 +126,10 @@
     "stage": "进阶"
   },
   {
+    "id": "19-list-tools",
+    "tag": "LESSON 19",
     "title": "列表常用操作",
+    "file": "lesson_19.py",
     "stage": "进阶"
   },
   {

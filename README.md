@@ -47,6 +47,7 @@
 | [16](dist/16-math-functions/index.html) | 常用数学函数 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [17](dist/17-dict-basics/index.html) | 字典基础 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [18](dist/18-nested-loops/index.html) | 嵌套循环与图形 | 22 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [19](dist/19-list-tools/index.html) | 列表常用操作 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 

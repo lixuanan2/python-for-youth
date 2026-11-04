@@ -1,0 +1,79 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_tools.py",
+    "solution": "solutions/01_tools.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "245\n95\n70\n81.66666666666667\n",
+    "description": "sum、max、min和平均数。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 5,
+    "starter": "starter/02_sorted.py",
+    "solution": "solutions/02_sorted.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "[70, 80, 95]\n[95, 80, 70]\n[80, 95, 70]\n",
+    "description": "sorted排序，原来的列表不变。"
+  },
+  {
+    "id": "C",
+    "role": "语法小演示",
+    "page": 8,
+    "starter": "starter/03_in.py",
+    "solution": "solutions/03_in.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "True\nFalse\nTrue\n",
+    "description": "in和not in问在不在列表里。"
+  },
+  {
+    "id": "D",
+    "role": "基础例题",
+    "page": 9,
+    "starter": "starter/04_report.py",
+    "solution": "solutions/04_report.py",
+    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数",
+    "sample_input": "3\n80\n95\n70\n",
+    "sample_output": "总分 245\n最高 95\n最低 70\n",
+    "description": "一句一个工具，做成绩小报告。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 10,
+    "starter": "starter/05_ranking.py",
+    "solution": "solutions/05_ranking.py",
+    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数",
+    "sample_input": "3\n80\n95\n70\n",
+    "sample_output": "1 95\n2 80\n3 70\n",
+    "description": "从高到低输出名次表。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 15,
+    "starter": "starter/06_judge.py",
+    "solution": "solutions/06_judge.py",
+    "scope": "第一行评委人数n为3到20；接下来n行每行一个0到10的整数",
+    "sample_input": "5\n9\n7\n8\n10\n6\n",
+    "sample_output": "8.0\n",
+    "description": "去掉最高分和最低分再算平均。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 17,
+    "starter": "starter/07_my_stats.py",
+    "solution": "solutions/07_steps_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "3\n8000\n10000\n6500\n",
+    "sample_output": "一共走了 24500 步\n走得最多的一天 10000 步\n有一天刚好一万步！\n",
+    "description": "做一份自己的数据小报告。"
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "source": "solutions/01_tools.py",
+    "input": "tests/case-01.in",
+    "expected": "tests/case-01.out"
+  },
+  {
+    "source": "solutions/02_sorted.py",
+    "input": "tests/case-02.in",
+    "expected": "tests/case-02.out"
+  },
+  {
+    "source": "solutions/03_in.py",
+    "input": "tests/case-03.in",
+    "expected": "tests/case-03.out"
+  },
+  {
+    "source": "solutions/04_report.py",
+    "input": "tests/case-04.in",
+    "expected": "tests/case-04.out"
+  },
+  {
+    "source": "solutions/04_report.py",
+    "input": "tests/case-05.in",
+    "expected": "tests/case-05.out"
+  },
+  {
+    "source": "solutions/05_ranking.py",
+    "input": "tests/case-06.in",
+    "expected": "tests/case-06.out"
+  },
+  {
+    "source": "solutions/05_ranking.py",
+    "input": "tests/case-07.in",
+    "expected": "tests/case-07.out"
+  },
+  {
+    "source": "solutions/05_ranking.py",
+    "input": "tests/case-08.in",
+    "expected": "tests/case-08.out"
+  },
+  {
+    "source": "solutions/06_judge.py",
+    "input": "tests/case-09.in",
+    "expected": "tests/case-09.out"
+  },
+  {
+    "source": "solutions/06_judge.py",
+    "input": "tests/case-10.in",
+    "expected": "tests/case-10.out"
+  },
+  {
+    "source": "solutions/06_judge.py",
+    "input": "tests/case-11.in",
+    "expected": "tests/case-11.out"
+  },
+  {
+    "source": "solutions/06_judge.py",
+    "input": "tests/case-12.in",
+    "expected": "tests/case-12.out"
+  },
+  {
+    "source": "solutions/07_steps_example.py",
+    "input": "tests/case-13.in",
+    "expected": "tests/case-13.out"
+  }
+]

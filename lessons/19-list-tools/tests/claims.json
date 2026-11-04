@@ -1,0 +1,63 @@
+[
+  {
+    "page": 3,
+    "code": "scores = [80, 95, 70]\nprint(sum(scores))\nprint(max(scores))\nprint(min(scores))\nprint(sum(scores) / len(scores))\n",
+    "stdout": "245\n95\n70\n81.66666666666667\n"
+  },
+  {
+    "page": 4,
+    "code": "scores = []\nprint(max(scores))",
+    "error": "ValueError"
+  },
+  {
+    "page": 5,
+    "code": "scores = [80, 95, 70]\nprint(sorted(scores))\nprint(sorted(scores, reverse=True))\nprint(scores)\n",
+    "stdout": "[70, 80, 95]\n[95, 80, 70]\n[80, 95, 70]\n"
+  },
+  {
+    "page": 6,
+    "code": "a = [3, 1, 2]\nb = sorted(a)\nprint(a, b)",
+    "stdout": "[3, 1, 2] [1, 2, 3]\n"
+  },
+  {
+    "page": 6,
+    "code": "a = [3, 1, 2]\nx = a.sort()\nprint(a, x)",
+    "stdout": "[1, 2, 3] None\n"
+  },
+  {
+    "page": 7,
+    "code": "print(sorted([3, 1, 2], reverse=True))",
+    "stdout": "[3, 2, 1]\n"
+  },
+  {
+    "page": 8,
+    "code": "names = [\"小明\", \"小红\"]\nprint(\"小红\" in names)\nprint(\"小刚\" in names)\nprint(\"小刚\" not in names)\n",
+    "stdout": "True\nFalse\nTrue\n"
+  },
+  {
+    "page": 9,
+    "code": "n = int(input())\nscores = []\nfor i in range(n):\n    scores.append(int(input()))\nprint(\"总分\", sum(scores))\nprint(\"最高\", max(scores))\nprint(\"最低\", min(scores))\n",
+    "stdin": "3\n80\n95\n70\n",
+    "stdout": "总分 245\n最高 95\n最低 70\n"
+  },
+  {
+    "page": 11,
+    "code": "print(90 in [80, 95, 70])",
+    "stdout": "False\n"
+  },
+  {
+    "page": 12,
+    "code": "a = [10, 20, 30, 40, 50]\nprint(a[:2])\nprint(a[1:-1])",
+    "stdout": "[10, 20]\n[20, 30, 40]\n"
+  },
+  {
+    "page": 13,
+    "code": "print(sum([\"1\", \"2\"]))",
+    "error": "TypeError"
+  },
+  {
+    "page": 14,
+    "code": "scores = [80, 95, 70]\nscores = scores.sort()\nprint(scores)",
+    "stdout": "None\n"
+  }
+]
