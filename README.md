@@ -37,6 +37,7 @@
 | [06](dist/06-for-loop/index.html) | for 循环 | 29 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [07](dist/07-while-loop/index.html) | while 循环 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [08](dist/08-loop-tally/index.html) | 累加和计数 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [09](dist/09-max-min/index.html) | 最大值和最小值 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 

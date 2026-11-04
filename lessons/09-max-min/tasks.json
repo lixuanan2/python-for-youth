@@ -1,0 +1,68 @@
+[
+  {
+    "id": "A",
+    "role": "基础例题",
+    "page": 3,
+    "starter": "starter/01_max.py",
+    "solution": "solutions/01_max.py",
+    "scope": "第一行个数n为1到100；接下来n行每行一个0到100的整数",
+    "sample_input": "3\n80\n95\n70\n",
+    "sample_output": "95\n",
+    "description": "打擂台：第一个数先上台，后面的更大就换。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 8,
+    "starter": "starter/02_min.py",
+    "solution": "solutions/02_min.py",
+    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数",
+    "sample_input": "3\n80\n95\n70\n",
+    "sample_output": "70\n",
+    "description": "改成找最低分。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 9,
+    "starter": "starter/03_winner.py",
+    "solution": "solutions/03_winner.py",
+    "scope": "第一行人数n为1到100；接下来每人两行，名字一行，0到100的整数分数一行",
+    "sample_input": "3\n小明\n80\n小红\n95\n小刚\n70\n",
+    "sample_output": "小红 95\n",
+    "description": "换擂主时把名字一起换。"
+  },
+  {
+    "id": "02",
+    "role": "学生小改写",
+    "page": 11,
+    "starter": "starter/04_position.py",
+    "solution": "solutions/04_position.py",
+    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数；一样高算先出场的",
+    "sample_input": "3\n80\n95\n70\n",
+    "sample_output": "2 95\n",
+    "description": "再记住最高分是第几个出场的。"
+  },
+  {
+    "id": "03",
+    "role": "独立迁移",
+    "page": 15,
+    "starter": "starter/05_temp_range.py",
+    "solution": "solutions/05_temp_range.py",
+    "scope": "第一行天数n为1到100；接下来n行每行一个-50到50的整数",
+    "sample_input": "4\n3\n-2\n8\n-5\n",
+    "sample_output": "13\n",
+    "description": "同时守住最大和最小，算温差。"
+  },
+  {
+    "id": "04",
+    "role": "创作项目",
+    "page": 17,
+    "starter": "starter/06_board.py",
+    "solution": "solutions/06_board_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "3\n120\n150\n90\n",
+    "sample_output": "跳得最多的一次是 150 下\n",
+    "description": "做一个自己的排行榜。"
+  }
+]

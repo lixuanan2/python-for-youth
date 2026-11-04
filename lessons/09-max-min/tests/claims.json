@@ -1,0 +1,60 @@
+[
+  {
+    "page": 3,
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        best = x\nprint(best)\n",
+    "stdin": "3\n80\n95\n70\n",
+    "stdout": "95\n"
+  },
+  {
+    "page": 4,
+    "code": "n = int(input())\nbest = 0\nfor i in range(n):\n    x = int(input())\n    if x > best:\n        best = x\nprint(best)",
+    "stdin": "3\n-5\n-3\n-8\n",
+    "stdout": "0\n"
+  },
+  {
+    "page": 4,
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        best = x\nprint(best)\n",
+    "stdin": "3\n-5\n-3\n-8\n",
+    "stdout": "-3\n"
+  },
+  {
+    "page": 7,
+    "code": "best = 80\nx = 95\nprint(x > best)",
+    "stdout": "True\n"
+  },
+  {
+    "page": 7,
+    "code": "best = 80\nx = 80\nprint(x > best)",
+    "stdout": "False\n"
+  },
+  {
+    "page": 10,
+    "code": "n = int(input())\nwinner = input()\nbest = int(input())\nfor i in range(n - 1):\n    name = input()\n    score = int(input())\n    if score > best:\n        best = score\n        winner = name\nprint(winner, best)\n",
+    "stdin": "2\n小明\n90\n小红\n90\n",
+    "stdout": "小明 90\n"
+  },
+  {
+    "page": 10,
+    "code": "n = int(input())\nwinner = input()\nbest = int(input())\nfor i in range(n - 1):\n    name = input()\n    score = int(input())\n    if score >= best:\n        best = score\n        winner = name\nprint(winner, best)\n",
+    "stdin": "2\n小明\n90\n小红\n90\n",
+    "stdout": "小红 90\n"
+  },
+  {
+    "page": 12,
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        best = x\nprint(best)\n",
+    "stdin": "1\n77\n",
+    "stdout": "77\n"
+  },
+  {
+    "page": 13,
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        x = best\nprint(best)\n",
+    "stdin": "3\n80\n95\n70\n",
+    "stdout": "80\n"
+  },
+  {
+    "page": 14,
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        print(\"换人了\")\n    best = x\nprint(best)",
+    "stdin": "3\n80\n95\n70\n",
+    "stdout": "换人了\n70\n"
+  }
+]

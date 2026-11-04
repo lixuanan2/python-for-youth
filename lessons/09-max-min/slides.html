@@ -1,0 +1,288 @@
+<!-- cover -->
+<section class="slide" aria-label="最大值和最小值" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 09</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">上台</b><div class="wire r d1"><i></i><span style="font-family:var(--code)">if x &gt; best:</span></div><b class="r d2" style="font-size:250px">换人</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">最大值和最小值：让程序记住最大的那个</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能找出最高分和最低分，还能说出冠军是谁。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="谁的分数最高">
+  <h2 class="t r">谁的分数最高？</h2>
+  <div class="slip r d1" style="left:96px;top:300px;width:380px"><small style="font-size:34px">第一个</small><pre style="font-size:60px">80 分</pre></div>
+  <div class="slip r d2" style="left:510px;top:300px;width:380px"><small style="font-size:34px">第二个</small><pre style="font-size:60px">95 分</pre></div>
+  <div class="slip r d2" style="left:924px;top:300px;width:380px"><small style="font-size:34px">第三个</small><pre style="font-size:60px">70 分</pre></div>
+  <div class="slip tilt r d3" style="left:1370px;top:300px;width:450px"><small style="font-size:34px">台上站着</small><pre style="font-size:72px">95 分</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:620px">循环每一遍只看得到一个数。办法像打擂台：第一个人先站上台，<br>后面每来一个就比一比，比台上的大就换他上台。全部比完，台上的就是最大的。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the arena with trace -->
+<section class="slide" aria-label="打擂台的写法" data-steps="4" data-at="4" data-chapter="打擂台">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">打擂台：更大就换</h2>
+  <div class="editor" style="left:96px;top:190px;width:1040px;--fs:44px"><div class="tab">max.py</div>
+<pre class="code" data-file="solutions/01_max.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">best = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln l2 l3">    x = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2 l3">    <span class="k">if</span> x &gt; best:</span><span class="ln l2">        best = x</span><span class="ln l4"><span class="f">print</span>(best)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:830px;width:1040px;color:var(--paper)">输入 3，再输入 80、95、70。第一个数 80 直接上台。</p>
+  <p class="abs say only2" style="left:96px;top:830px;width:1040px;color:var(--paper)">读到 95，比台上的 80 大，换 95 上台。</p>
+  <p class="abs say only3" style="left:96px;top:830px;width:1040px;color:var(--paper)">读到 70，没有 95 大，不换。</p>
+  <p class="abs say only4" style="left:96px;top:830px;width:1040px;color:var(--paper)">全部比完，输出台上的 95。</p>
+  <a class="ide step s4" style="left:96px;top:930px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1310px;right:96px;top:170px">
+    <div class="box step"><i style="width:190px;white-space:nowrap">读到 80</i><b style="font-size:84px">80</b></div>
+    <div class="box step s2"><i style="width:190px;white-space:nowrap">读到 95</i><b style="font-size:84px">95</b></div>
+    <div class="box step s3"><i style="width:190px;white-space:nowrap">读到 70</i><b style="font-size:84px">95</b></div>
+    <div class="box out step s4"><i style="width:190px">输出</i><b style="font-size:84px">95</b></div>
+  </div>
+</section>
+
+<!-- predict: start from 0 -->
+<section class="slide" aria-label="猜一猜：从 0 开始行不行" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：三天气温 -5、-3、-8</h2>
+  <div class="vs" style="top:210px">
+    <div><h3>best 从 0 开始</h3><pre style="font-size:44px">best = 0
+for i in range(n):
+    x = int(input())
+    if x &gt; best:
+        best = x</pre><p class="res step s2" style="font-size:90px">输出 0</p></div>
+    <div><h3>第一个数先上台</h3><pre style="font-size:44px">best = int(input())
+for i in range(n - 1):
+    x = int(input())
+    if x &gt; best:
+        best = x</pre><p class="res step s2" style="font-size:90px">输出 -3</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:820px;width:1728px">两边都先读入 3，最后都输出 best。哪边找对了最高气温？</p>
+  <p class="abs say step s2" style="left:96px;top:820px;width:1728px">左边的 0 比三个气温都大，谁也打不过它，输出了一个根本没出现过的数。<br>让第一个数先上台，台上站的就一定是真的数据。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- three places -->
+<section class="slide" aria-label="打擂台的三步">
+  <h2 class="t r">打擂台分三步</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>第一个上台</b><span>best = int(input())<br>先读一个，直接当擂主</span></div>
+    <div class="r d2"><i>2</i><b>后面的来比</b><span>if x &gt; best:<br>&nbsp;&nbsp;&nbsp;&nbsp;best = x<br>比台上大才换</span></div>
+    <div class="r d3"><i>3</i><b>比完再宣布</b><span>print(best)<br>写在循环后面</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:820px">第一个数在循环前读过了，所以循环只再读 n - 1 个。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: n - 1 -->
+<section class="slide" aria-label="小测：循环转几遍">
+  <h2 class="t r">小测：一共输入 5 个分数，循环转几遍？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="5 个分数里，第一个在循环前已经读过了。"><i>1</i>5 遍</button>
+    <button type="button" data-fb="答对了！第一个先上台，剩下 4 个，range(n - 1) 正好转 4 遍。"><i>2</i>4 遍</button>
+    <button type="button" data-fb="range(n - 1) 比 n 还少一遍，不会是 6。"><i>3</i>6 遍</button>
+    <button type="button" data-fb="for 循环会把剩下的每一个都读一遍，不是只读一个。"><i>4</i>1 遍</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- live comparison: swap or not -->
+<section class="slide" aria-label="换不换">
+  <div class="night" style="width:1010px"></div>
+  <h2 class="t" style="color:var(--paper)">换不换？改个数试试</h2>
+  <div class="editor" style="left:96px;top:230px;width:830px;--fs:52px"><div class="tab">swap.py</div>
+<pre class="code"><span class="ln">best = <input class="slot" data-var="best" value="80" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="台上的数"></span><span class="ln">x = <input class="slot" data-var="x" value="95" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="新来的数"></span><span class="ln"><span class="f">print</span>(x &gt; best)</span></pre></div>
+  <p class="abs say" style="left:96px;top:660px;width:830px;color:var(--paper)">True 就换 x 上台，False 就不换。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这两个数进 IDE</a>
+  <div class="live-out">
+    <div><i>第 3 行：x 比台上的大吗</i><b data-eval="x &gt; best">True</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:520px;width:734px;font-size:38px">先猜再改：两个数一样大，换不换？</p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn: lowest -->
+<section class="slide" aria-label="改成最低分" data-chapter="最小值">
+  <div class="band r"><b>动手<br>改一改</b><span>改一个符号，再给变量起个好懂的名字。</span></div>
+  <div class="turn">
+    <h2 class="r d1">改成找最低分</h2>
+    <p class="say r d1">第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。输出最低分。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">3
+80
+95
+70</pre></div><div><small>输出</small><pre style="line-height:1.2">70</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/02_min.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/02_min.py" style="left:610px;top:930px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- worked example: the winner's name -->
+<section class="slide" aria-label="例题：冠军是谁" data-steps="4" data-at="4" data-chapter="冠军">
+  <div class="night" style="width:1230px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：冠军是谁</h2>
+  <div class="editor" style="left:96px;top:200px;width:1040px;--fs:44px"><div class="tab">winner.py</div>
+<pre class="code" data-file="solutions/03_winner.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">winner = <span class="f">input</span>()</span><span class="ln l1">best = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln l2 l3">    name = <span class="f">input</span>()</span><span class="ln l2 l3">    score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2 l3">    <span class="k">if</span> score &gt; best:</span><span class="ln l2">        best = score</span><span class="ln l2">        winner = name</span><span class="ln l4"><span class="f">print</span>(winner, best)</span></pre></div>
+  <p class="abs say only1" style="left:1310px;right:96px;top:170px;font-size:34px">输入 3，然后每人两行：名字一行，分数一行。小明 80 分，先上台。</p>
+  <p class="abs say only2" style="left:1310px;right:96px;top:170px;font-size:34px">小红 95 分，比 80 大。分数和名字一起换。</p>
+  <p class="abs say only3" style="left:1310px;right:96px;top:170px;font-size:34px">小刚 70 分，没有 95 大，不换。</p>
+  <p class="abs say only4" style="left:1310px;right:96px;top:170px;font-size:34px">比完了，输出台上的名字和分数。</p>
+  <div class="abs" style="left:1310px;right:96px;top:420px">
+    <div class="box step"><i style="width:150px">台上</i><b style="font-size:60px">小明 80</b></div>
+    <div class="box step s2"><i style="width:150px">台上</i><b style="font-size:60px">小红 95</b></div>
+    <div class="box step s3"><i style="width:150px">台上</i><b style="font-size:60px">小红 95</b></div>
+    <div class="box out step s4"><i style="width:150px">输出</i><b style="font-size:60px">小红 95</b></div>
+  </div>
+  <a class="ide step s4" style="left:1310px;top:930px">▶ 在 IDE 打开</a>
+</section>
+
+<!-- predict: a tie -->
+<section class="slide" aria-label="猜一猜：一样高" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：两人都是 90 分，谁是冠军？</h2>
+  <div class="vs" style="top:220px">
+    <div><h3>用 &gt;</h3><pre style="font-size:50px">if score &gt; best:
+    best = score
+    winner = name</pre><p class="res step s2" style="font-size:90px">小明 90</p></div>
+    <div><h3>用 &gt;=</h3><pre style="font-size:50px">if score &gt;= best:
+    best = score
+    winner = name</pre><p class="res step s2" style="font-size:90px">小红 90</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:760px;width:1728px">小明先出场，小红后出场，两人都是 90 分。两边只差一个等号。</p>
+  <p class="abs say step s2" style="left:96px;top:760px;width:1728px">&gt; 要比台上大才换，一样大不换，先上台的留下。<br>&gt;= 一样大也换，后来的留下。比赛规则怎么定，写程序前先想清楚。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn: position -->
+<section class="slide" aria-label="记住是第几个">
+  <div class="band r"><b>动手<br>改一改</b><span>再请一个变量帮忙，记住擂主是第几个出场的。</span></div>
+  <div class="turn">
+    <h2 class="r d1">最高分是第几个？</h2>
+    <p class="say r d1">第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。输出两个数：最高分是第几个出场的，最高分是多少。一样高时算先出场的。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">3
+80
+95
+70</pre></div><div><small>输出</small><pre style="line-height:1.2">2 95</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/04_position.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/04_position.py" style="left:610px;top:960px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- quiz: only one number -->
+<section class="slide" aria-label="小测：只有一个数">
+  <h2 class="t r">小测：打擂台程序依次输入 1 和 77，输出什么？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！range(0) 一遍也不转，台上只有 77，最后输出它。"><i>1</i>77</button>
+    <button type="button" data-fb="best 是读进来的 77，不是 0。"><i>2</i>0</button>
+    <button type="button" data-fb="print 在循环后面，循环一遍不转也会运行。"><i>3</i>什么也不输出</button>
+    <button type="button" data-fb="range(0) 不会报错，只是一遍也不转。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1"><code>best = 0</code><b>不报错</b><span>全是负数就错了</span></div>
+    <div class="r d2"><code>x = best</code><b>不报错</b><span>写反了，擂主一直不换</span></div>
+    <div class="r d3"><code>range(n)</code><b>多等一行</b><span>第一个已经读过了</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">这三种都不报错，最难发现。多试几组：全是负数、只有一个数、最大的在最后。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：怎么输出了最后一个">
+  <h2 class="t r">找错：最高分怎么成了 70？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:44px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="7" data-yes="找到了！这一行和 if 对齐，不归 if 管，每一遍都换人，最后台上站的是最后一个数。再缩进 4 个空格就对了。" data-no="这一行没问题。想一想：哪一行每一遍都运行了？"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">best = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    x = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="k">if</span> x &gt; best:</span><span class="ln">        <span class="f">print</span>(<span class="s">"换人了"</span>)</span><span class="ln">    best = x</span><span class="ln"><span class="f">print</span>(best)</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">依次输入 3、80、95、70，最后一行却输出 70，不是 95。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="left:1220px;top:520px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="温差" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">温差</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">第一行读入天数 n（1 到 100 的整数），接下来 n 行，每行一个 -50 到 50 的整数气温。<br>输出这几天里最热和最冷差了几度。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:150px;width:520px"><small>依次输入</small><pre>4
+3
+-2
+8
+-5</pre><small style="margin-top:20px">输出</small><pre>13</pre></div>
+  <a class="ide r d3" data-code-file="starter/05_temp_range.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>这次要两个擂台：一个守最大，一个守最小。两个擂主都从第一个数开始。</span></p>
+    <p class="step s2"><i>提示 2</i><span>每读到一个数，两个擂台都要比一次，写两个 if。</span></p>
+    <p class="step s3"><i>提示 3</i><span>试试只有一天：最热和最冷是同一个数，应该输出 0。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个排行榜" data-chapter="小项目">
+  <h2 class="t r">造一个你的排行榜</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">程序一个一个地比，最后宣布谁最厉害。比什么，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>读入几个成绩，说出最好的那个，再说一句话。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>跳绳、口算速度、游戏得分、每天读书页数，什么都行。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>同时说出最好和最差，记住是谁、是第几次。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/06_board.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着比赛</b><span>帮同桌输入几个成绩，先猜冠军，再运行</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪一句宣布最有意思</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>一样高的时候，程序是怎么判的？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让排行榜更好玩。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>为什么让第一个数先上台，不从 0 开始？<em class="step s2" style="font-style:normal;font-weight:400">　0 可能比所有数据都大，比如全是负数。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>读过第一个以后，为什么只循环 n - 1 遍？<em class="step s3" style="font-style:normal;font-weight:400">　第一个已经读了，只剩 n - 1 个。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>一样大的时候，&gt; 和 &gt;= 有什么不同？<em class="step s4" style="font-style:normal;font-weight:400">　&gt; 不换，留先来的；&gt;= 换成后来的。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:720px 1fr"><code>best = int(input())</code><span>第一个数先上台</span></div>
+    <div class="r d1" style="grid-template-columns:720px 1fr"><code>for i in range(n - 1):</code><span>剩下的一个一个来</span></div>
+    <div class="r d2" style="grid-template-columns:720px 1fr"><code>if x &gt; best:</code><span>比台上大，就换 best = x</span></div>
+    <div class="r d2" style="grid-template-columns:720px 1fr"><code>if x &lt; low:</code><span>比台上小，就换，用来找最小</span></div>
+    <div class="r d3" style="grid-template-columns:720px 1fr"><code>print(best)</code><span>全部比完再输出</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>max()  min()</code><span>Python 自带的找最大和找最小</span></div>
+    <div class="r d2"><code>列表</code><span>下节课：把全班的分数都存下来</span></div>
+    <div class="r d3"><code>排序</code><span>从高到低排出名次</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天程序学会了只记住最大的那一个。下节课让它把每个数都记住。</p>
+  <div class="foot"></div>
+</section>

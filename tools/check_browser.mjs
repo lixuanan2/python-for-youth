@@ -235,7 +235,8 @@ try {
   await send('Page.enable');
   await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
   const lessons = JSON.parse(fs.readFileSync('course.json', 'utf8'));
-  for (const lesson of lessons.filter(l => l.id)) {
+  // LESSON=09-max-min checks one lesson while working on it; run without it before committing.
+  for (const lesson of lessons.filter(l => l.id && (!process.env.LESSON || l.id === process.env.LESSON))) {
     const dir = path.join('.preview', lesson.id);
     fs.rmSync(dir, {recursive: true, force: true});
     fs.mkdirSync(dir, {recursive: true});

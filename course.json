@@ -56,7 +56,10 @@
     "stage": "循环"
   },
   {
+    "id": "09-max-min",
+    "tag": "LESSON 09",
     "title": "最大值和最小值",
+    "file": "lesson_09.py",
     "stage": "循环"
   },
   {
