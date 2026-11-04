@@ -161,15 +161,24 @@
     "stage": "算法入门"
   },
   {
-    "title": "排序入门",
+    "id": "24-bubble-sort",
+    "tag": "LESSON 24",
+    "title": "冒泡排序",
+    "file": "lesson_24.py",
     "stage": "算法入门"
   },
   {
-    "title": "枚举：一个个试",
+    "id": "25-enumeration",
+    "tag": "LESSON 25",
+    "title": "枚举：把可能都试一遍",
+    "file": "lesson_25.py",
     "stage": "算法入门"
   },
   {
+    "id": "26-binary-search",
+    "tag": "LESSON 26",
     "title": "二分查找",
+    "file": "lesson_26.py",
     "stage": "算法入门"
   }
 ]

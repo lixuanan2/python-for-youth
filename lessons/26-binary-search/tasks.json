@@ -1,0 +1,57 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 4,
+    "starter": "starter/01_mid.py",
+    "solution": "solutions/01_mid.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "50\n",
+    "description": "用整除算出中间。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 6,
+    "starter": "starter/02_guess.py",
+    "solution": "solutions/02_guess.py",
+    "scope": "一行，秘密数为1到100的整数",
+    "sample_input": "42\n",
+    "sample_output": "50\n25\n37\n43\n40\n41\n42\n",
+    "description": "电脑用二分猜你的数。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 8,
+    "starter": "starter/03_guess_count.py",
+    "solution": "solutions/03_guess_count.py",
+    "scope": "一行，秘密数为1到100的整数",
+    "sample_input": "42\n",
+    "sample_output": "50\n25\n37\n43\n40\n41\n42\n猜了 7 次\n",
+    "description": "数一数猜了几次。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 11,
+    "starter": "starter/04_find.py",
+    "solution": "solutions/04_find.py",
+    "scope": "第一行n为1到100的整数；接下来n行是从小到大排好的整数；最后一行是要找的整数",
+    "sample_input": "8\n3\n8\n15\n21\n30\n42\n57\n66\n42\n",
+    "sample_output": "5\n2\n",
+    "description": "在排好序的数里二分查找，输出下标和看了几个数。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 13,
+    "starter": "starter/05_my_halving.py",
+    "solution": "solutions/05_page_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "137\n",
+    "sample_output": "翻到 250 页，往前翻\n翻到 125 页，往后翻\n翻到 187 页，往前翻\n翻到 156 页，往前翻\n翻到 140 页，往前翻\n翻到 132 页，往后翻\n翻到 136 页，往后翻\n翻到 138 页，往前翻\n找到第 137 页\n",
+    "description": "做一个每次砍一半的小程序。"
+  }
+]

@@ -1,0 +1,218 @@
+<!-- cover -->
+<section class="slide" aria-label="二分查找" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 26</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">一半</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">(lo + hi) // 2</span></div><b class="r d2" style="font-size:250px">一半</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">二分查找：每次排除一半</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让电脑猜 1 到 100 的数最多 7 次就猜中，还能在排好序的数里飞快找到一个。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the idea -->
+<section class="slide clay" aria-label="猜数字怎么猜最快">
+  <h2 class="t r">猜 1 到 100 的数，怎么猜最快？</h2>
+  <div class="slip r d1" style="left:96px;top:290px;width:600px"><small style="font-size:34px">上节课的办法：从 1 猜起</small><pre style="font-size:52px">最多猜 100 次</pre></div>
+  <div class="slip tilt r d2" style="left:780px;top:290px;width:640px"><small style="font-size:34px">先猜中间的 50</small><pre style="font-size:52px">一下去掉一半</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">猜 50，对方说“大了”，51 到 100 就都不用想了。每次都猜剩下的正中间，每次都去掉一半。<br>这叫二分查找。它有个前提：数要排好顺序，才能从“大了、小了”知道往哪边找。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- predict: how many guesses -->
+<section class="slide dark" aria-label="猜一猜：最多几次" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：每次都猜中间，最多要猜几次？</h2>
+  <p class="abs say only1" style="left:96px;top:240px;width:1728px">从 1 到 100，每猜一次没猜中，剩下的就少一半。猜几次一定能猜中？<br>先自己估一个数。</p>
+  <div class="abs step s2" style="left:96px;top:230px;right:96px;font:700 60px/1.5 var(--code)">剩 100 → 50 → 25 → 12 → 6 → 3 → 1</div>
+  <p class="abs step s2" style="left:96px;top:400px;font:800 120px var(--text);color:var(--clay-soft)">最多 7 次</p>
+  <p class="abs say step s2" style="left:96px;top:620px;width:1728px">猜一次没中，剩下的不到一半。猜 6 次以后最多剩 1 个，第 7 次一定中。<br>从 1 猜起最多要 100 次，二分只要 7 次。数越多，差得越远：1000 个数也只要 10 次。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the middle -->
+<section class="slide" aria-label="中间怎么算" data-steps="2" data-at="2" data-chapter="中间">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">中间怎么算</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">mid.py</div>
+<pre class="code" data-file="solutions/01_mid.py"><span class="ln l1">lo = <span class="m">1</span></span><span class="ln l1">hi = <span class="m">100</span></span><span class="ln l2">mid = (lo + hi) // <span class="m">2</span></span><span class="ln"><span class="f">print</span>(mid)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">lo 是还可能的最小的数，hi 是最大的。low 和 high 的意思是“低”和“高”。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">两头加起来除以 2 就是中间。用 // 整除，101 // 2 是 50，结果还是整数，正好拿来猜。</p>
+  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:120px">lo</i><b style="font-size:96px">1</b></div>
+    <div class="box step"><i style="width:120px">hi</i><b style="font-size:96px">100</b></div>
+    <div class="box out step s2"><i style="width:120px">mid</i><b style="font-size:96px">50</b></div>
+  </div>
+</section>
+
+<!-- quiz: mid -->
+<section class="slide" aria-label="小测：中间是几">
+  <h2 class="t r">小测：lo = 51，hi = 100，mid 是几？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！51 + 100 是 151，151 // 2 是 75。"><i>1</i>75</button>
+    <button type="button" data-fb="// 是整除，不留小数。"><i>2</i>75.5</button>
+    <button type="button" data-fb="// 往下取整，不会往上进到 76。"><i>3</i>76</button>
+    <button type="button" data-fb="这是 100 // 2。别忘了 lo 也要加进去。"><i>4</i>50</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: the computer guesses -->
+<section class="slide" aria-label="例题：电脑来猜" data-steps="4" data-at="4" data-chapter="电脑来猜">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper);top:40px">例题：电脑来猜你的数</h2>
+  <div class="editor" style="left:96px;top:175px;width:960px;--fs:44px"><div class="tab">guess.py</div>
+<pre class="code" data-file="solutions/02_guess.py"><span class="ln l1">secret = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">lo = <span class="m">1</span></span><span class="ln l1">hi = <span class="m">100</span></span><span class="ln">guess = <span class="m">0</span></span><span class="ln l2 l3"><span class="k">while</span> guess != secret:</span><span class="ln l1 l2 l3">    guess = (lo + hi) // <span class="m">2</span></span><span class="ln">    <span class="f">print</span>(guess)</span><span class="ln l3">    <span class="k">if</span> guess &lt; secret:</span><span class="ln l3">        lo = guess + <span class="m">1</span></span><span class="ln l2">    <span class="k">elif</span> guess &gt; secret:</span><span class="ln l2">        hi = guess - <span class="m">1</span></span></pre></div>
+  <div class="abs" style="left:1210px;right:96px;top:150px">
+    <div class="box"><i style="width:190px">1–100</i><b style="font:700 44px var(--text)">猜 50，大了</b></div>
+    <div class="box step s2"><i style="width:190px">1–49</i><b style="font:700 44px var(--text)">猜 25，小了</b></div>
+    <div class="box step s3"><i style="width:190px">26–49</i><b style="font:700 44px var(--text)">猜 37，小了</b></div>
+    <div class="box step s3"><i style="width:190px">38–49</i><b style="font:700 44px var(--text)">猜 43，大了</b></div>
+    <div class="box step s4"><i style="width:190px">38–42</i><b style="font:700 44px var(--text)">猜 40、41、42</b></div>
+  </div>
+  <p class="abs say only1" style="left:1210px;right:96px;top:640px;font-size:34px">秘密数是 42。一开始 1 到 100 都可能，先猜中间 50。</p>
+  <p class="abs say only2" style="left:1210px;right:96px;top:640px;font-size:34px">50 比 42 大，50 和后面的都不可能了：hi 变成 49。</p>
+  <p class="abs say only3" style="left:1210px;right:96px;top:640px;font-size:34px">25 比 42 小：lo 变成 26。每猜一次，范围缩小一半。</p>
+  <p class="abs say only4" style="left:1210px;right:96px;top:640px;font-size:34px">范围越来越小，第 7 次猜到 42，guess 等于 secret，循环停下。</p>
+  <a class="ide step s4" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
+</section>
+
+<!-- quiz: best case -->
+<section class="slide" aria-label="小测：秘密数是 50">
+  <h2 class="t r">小测：例题里秘密数是 50，电脑猜几次？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！第一次就猜中间 50，正好中了。"><i>1</i>1 次</button>
+    <button type="button" data-fb="7 次是最多的时候。50 正好是第一次猜的数。"><i>2</i>7 次</button>
+    <button type="button" data-fb="二分不会从 1 一个个猜到 50。"><i>3</i>50 次</button>
+    <button type="button" data-fb="guess 从 0 开始，不等于 50，至少会进循环猜一次。"><i>4</i>0 次</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn: count -->
+<section class="slide" aria-label="数一数猜了几次">
+  <div class="band r"><b>动手<br>改一改</b><span>加一个计数器。</span></div>
+  <div class="turn">
+    <h2 class="r d1">最后说出猜了几次</h2>
+    <p class="say r d1">在例题上改：每猜一次，计数加 1。猜中以后，再输出一行“猜了 几 次”。秘密数是 1 到 100 的整数。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>秘密数 42</small><pre>猜了 7 次</pre></div><div><small>秘密数 50</small><pre>猜了 1 次</pre></div><div><small>秘密数 100</small><pre>猜了 7 次</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">把 1 到 100 都试一试，看看有没有超过 7 次的。教室电脑：打开 starter/03_guess_count.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/03_guess_count.py" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:560px 300px 1fr"><code>lo = guess</code><b>不报错</b><span>可能一直猜同一个，停不下来</span></div>
+    <div class="r d2" style="grid-template-columns:560px 300px 1fr"><code>(lo + hi) / 2</code><b>不对劲</b><span>/ 得到小数，猜 50.5 这样的数</span></div>
+    <div class="r d3" style="grid-template-columns:560px 300px 1fr"><code class="plain">数没排好就二分</code><b>不报错</b><span>可能找不到明明有的数</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">猜过的数已经不可能了，所以写 guess + 1 和 guess - 1。用 1 和 100 两头试一试。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：一直猜 99">
+  <h2 class="t r">找错：秘密数是 100，一直猜 99</h2>
+  <div class="editor r d1" style="left:96px;top:180px;width:960px;--fs:44px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="9" data-yes="找到了！99 已经猜过、不对了，lo 还停在 99。(99 + 100) // 2 又是 99，永远猜不到 100。改成 lo = guess + 1。" data-no="这一行没问题。猜过 99 以后，范围变成了多少？"><span class="ln">secret = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">lo = <span class="m">1</span></span><span class="ln">hi = <span class="m">100</span></span><span class="ln">guess = <span class="m">0</span></span><span class="ln"><span class="k">while</span> guess != secret:</span><span class="ln">    guess = (lo + hi) // <span class="m">2</span></span><span class="ln">    <span class="f">print</span>(guess)</span><span class="ln">    <span class="k">if</span> guess &lt; secret:</span><span class="ln">        lo = guess</span><span class="ln">    <span class="k">elif</span> guess &gt; secret:</span><span class="ln">        hi = guess - <span class="m">1</span></span></pre></div>
+  <p class="abs say r d2" style="left:1160px;top:220px;right:96px">输出 50、75、87、93、96、98、99，然后一直是 99。<br>点出该改的那一行。</p>
+  <p class="fb" style="left:1160px;top:520px;color:var(--paper)" data-empty="点代码里的一行"></p>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="在排好的数里找" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">在排好的数里找</h2>
+  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">图书馆的书按编号从小到大排好了。第一行读入 n（1 到 100 的整数），接下来 n 行是排好的编号，最后一行是要找的编号。<br>用二分查找，输出两行：它的下标，找不到就输出 -1；一共看了几个数。</p>
+  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:420px"><small>依次输入</small><pre style="font-size:36px;white-space:pre">8
+3
+8
+15
+21
+30
+42
+57
+66
+42</pre><small style="margin-top:10px">输出</small><pre style="font-size:36px;white-space:pre">5
+2</pre></div>
+  <a class="ide r d3" data-code-file="starter/04_find.py" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:886px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>这回 lo 和 hi 是下标：lo = 0，hi = n - 1。每次看中间的 a[mid]，看一次计数加 1。</span></p>
+    <p class="step s2"><i>提示 2</i><span>a[mid] 比要找的小，往右半边找：lo = mid + 1；大了往左半边：hi = mid - 1。</span></p>
+    <p class="step s3"><i>提示 3</i><span>用 pos = -1 记着下标，找到了就改成 mid。循环条件写 lo &lt;= hi and pos == -1：还有得找，又还没找到。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个砍一半的小程序" data-chapter="小项目">
+  <h2 class="t r">造一个“每次砍一半”的小程序</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">找一件能对半排除的事，让程序来找。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>把例题的范围改成 1 到 1000，看看电脑最多要猜几次。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>翻书找页码：每次翻到中间，说往前翻还是往后翻；猜同桌的身高。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>你心里想一个数，程序每猜一次就问你，你输入“大了”或“小了”。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/05_my_halving.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>比一比</b><span>你用嘴猜，同桌的程序来猜，看谁次数少</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪里想得最巧</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>1 和最大的那个数，能猜到吗？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让程序更稳。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>二分查找为什么快？<em class="step s2" style="font-style:normal;font-weight:400">　每次去掉一半，1 到 100 最多 7 次。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>用二分有什么前提？<em class="step s3" style="font-style:normal;font-weight:400">　数要排好顺序。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>为什么是 guess + 1，不是 guess？<em class="step s4" style="font-style:normal;font-weight:400">　猜过的已经不对，不用再留着，不然可能停不下来。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>mid = (lo + hi) // 2</code><span>取中间，用整除</span></div>
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>lo = mid + 1</code><span>中间太小，去右半边</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>hi = mid - 1</code><span>中间太大，去左半边</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>while lo &lt;= hi:</code><span>还有数没排除，就接着找</span></div>
+    <div class="r d3" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">先排好序</code><span>二分只能用在排好的数上</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>二分答案</code><span>答案不在列表里，也能对半猜，比如开平方</span></div>
+    <div class="r d2"><code>bisect</code><span>Python 自带的二分工具</span></div>
+    <div class="r d3"><code>比一比快慢</code><span>数越多，挨个试和二分差得越远</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天学会了每次排除一半。排序和二分常常一起用：先排好，再快快地找。</p>
+  <div class="foot"></div>
+</section>

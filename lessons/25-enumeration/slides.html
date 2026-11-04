@@ -1,0 +1,222 @@
+<!-- cover -->
+<section class="slide" aria-label="枚举" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 25</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">挨个</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">for x in range(...)</span></div><b class="r d2" style="font-size:250px">试遍</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">枚举：把可能都试一遍</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让程序把所有可能一个个试过去，找出鸡兔同笼这类题的答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the idea -->
+<section class="slide clay" aria-label="忘了密码锁">
+  <h2 class="t r">行李箱的密码忘了怎么办？</h2>
+  <div class="slip r d1" style="left:96px;top:290px;width:520px"><small style="font-size:34px">三位数的密码锁</small><pre style="font-size:60px">000 到 999</pre></div>
+  <div class="slip tilt r d2" style="left:700px;top:290px;width:600px"><small style="font-size:34px">一个个拨过去</small><pre style="font-size:60px">总能打开</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">不知道答案，就把所有可能都试一遍。最多拨 1000 次，一定能找到。<br>人拨很累，计算机试起来飞快。这种办法叫枚举，也叫“穷举”：挨个列出来，一个个检查。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- smallest example -->
+<section class="slide" aria-label="哪个数自己乘自己是 144" data-steps="2" data-at="2" data-chapter="枚举">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">哪个数自己乘自己是 144？</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">square.py</div>
+<pre class="code" data-file="solutions/01_square.py"><span class="ln l1"><span class="k">for</span> x <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">145</span>):</span><span class="ln l2">    <span class="k">if</span> x * x == <span class="m">144</span>:</span><span class="ln l2">        <span class="f">print</span>(x)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:630px;width:960px;color:var(--paper)">先定范围：答案一定在 1 到 144 之间。range(1, 145) 把它们一个个交给 x。</p>
+  <p class="abs say only2" style="left:96px;top:630px;width:960px;color:var(--paper)">每个 x 都检查一下：x * x 是 144 吗？是就输出。试到 12 时对上了。</p>
+  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">要试</i><b style="font-size:72px">144 次</b></div>
+    <div class="box out step s2"><i style="width:170px">屏幕上</i><b style="font-size:100px">12</b></div>
+  </div>
+</section>
+
+<!-- predict: range too small -->
+<section class="slide dark" aria-label="猜一猜：范围漏了" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：把范围改成 range(1, 12)，输出什么？</h2>
+  <div class="editor" style="left:96px;top:220px;width:960px;--fs:52px"><div class="tab">square.py</div>
+<pre class="code"><span class="ln l2"><span class="k">for</span> x <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">12</span>):</span><span class="ln">    <span class="k">if</span> x * x == <span class="m">144</span>:</span><span class="ln">        <span class="f">print</span>(x)</span></pre></div>
+  <p class="abs say only1" style="left:1160px;right:96px;top:240px">答案 12 还在里面吗？</p>
+  <p class="abs step s2" style="left:1160px;right:96px;top:230px;font:800 72px/1.4 var(--text);color:var(--clay-soft)">什么也<br>不输出</p>
+  <p class="abs say step s2" style="left:96px;top:620px;width:1728px">range(1, 12) 只试到 11，不含 12。答案不在范围里，就一个也找不到，而且不报错。<br>枚举最要紧的是范围：答案可能出现的地方，一个都不能漏。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: the range -->
+<section class="slide" aria-label="小测：1 到 100 怎么写">
+  <h2 class="t r">小测：1 到 100 都要试，range 怎么写？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="range 不含终点，这样只试到 99，漏了 100。"><i>1</i>range(1, 100)</button>
+    <button type="button" data-fb="答对了！从 1 开始，终点写 101，正好试到 100。"><i>2</i>range(1, 101)</button>
+    <button type="button" data-fb="这是 0 到 99：多了 0，又漏了 100。"><i>3</i>range(0, 100)</button>
+    <button type="button" data-fb="起点比终点大，一个数也没有。"><i>4</i>range(100, 1)</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- three steps -->
+<section class="slide" aria-label="枚举三步">
+  <h2 class="t r">枚举分三步</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>定范围</b><span>答案可能是哪些？一个都不能漏</span></div>
+    <div class="r d2"><i>2</i><b>一个个试</b><span>用 for 循环把它们挨个拿出来</span></div>
+    <div class="r d3"><i>3</i><b>判断对不对</b><span>用 if 检查，对上了就输出</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">想不出巧办法时，先想想能不能挨个试。题目给的条件，就是第 3 步的判断。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: chickens and rabbits -->
+<section class="slide" aria-label="例题：鸡兔同笼" data-steps="3" data-at="3" data-chapter="鸡兔同笼">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper);top:40px">例题：鸡兔同笼</h2>
+  <div class="editor" style="left:96px;top:175px;width:960px;--fs:46px"><div class="tab">cage.py</div>
+<pre class="code" data-file="solutions/02_cage.py"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1 l2 l3"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads + <span class="m">1</span>):</span><span class="ln l1 l2 l3">    r = heads - c</span><span class="ln l1 l2 l3">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln l3">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:790px;width:960px;color:var(--paper);font-size:36px">笼子里有 35 个头、94 只脚。c 是鸡的只数，从 0 试起；剩下的 r 就是兔。</p>
+  <p class="abs say only2" style="left:96px;top:790px;width:960px;color:var(--paper);font-size:36px">鸡一只 2 只脚，兔一只 4 只脚。算出的脚数对不上 94，就试下一个。</p>
+  <p class="abs say only3" style="left:96px;top:790px;width:960px;color:var(--paper);font-size:36px">试到 23 只鸡、12 只兔，正好 94 只脚，输出“鸡 23 兔 12”。循环会接着试完，只有这一种对得上。</p>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box" style="display:block"><i style="width:auto;font-size:40px">鸡 0 兔 35</i><b style="font:700 48px var(--code);display:block">140 只脚</b></div>
+    <div class="box step s2" style="display:block"><i style="width:auto;font-size:40px">鸡 1 兔 34</i><b style="font:700 48px var(--code);display:block">138 只脚</b></div>
+    <div class="box step s2" style="display:block"><i style="width:auto;font-size:40px">……</i></div>
+    <div class="box step s3" style="display:block"><i style="width:auto;font-size:40px">鸡 23 兔 12</i><b style="font:700 48px var(--code);color:var(--clay);display:block">94 只脚</b></div>
+  </div>
+  <a class="ide step s3" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
+</section>
+
+<!-- quiz: how many tries -->
+<section class="slide" aria-label="小测：试了几次">
+  <h2 class="t r">小测：35 个头时，例题的循环一共试了几次？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="鸡可以是 0 只，也可以是 35 只。从 0 数到 35，比 35 多一个。"><i>1</i>35 次</button>
+    <button type="button" data-fb="答对了！range(heads + 1) 是 0 到 35，一共 36 个。"><i>2</i>36 次</button>
+    <button type="button" data-fb="试的是鸡的只数，跟脚数 94 没关系。"><i>3</i>94 次</button>
+    <button type="button" data-fb="找到答案后循环没有停，会一直试到最后。"><i>4</i>24 次</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn: no answer -->
+<section class="slide" aria-label="没有答案时说一声">
+  <div class="band r"><b>动手<br>改一改</b><span>一个也没找到时，说一声。</span></div>
+  <div class="turn">
+    <h2 class="r d1">没有答案时说一声</h2>
+    <p class="say r d1">脚数是单数，或者太多太少，就怎么也凑不上。在例题上改：一种答案也没有时，输出“没有答案”。输入还是两行：头数和脚数。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 35 和 94</small><pre>鸡 23 兔 12</pre></div><div><small>输入 10 和 21</small><pre>没有答案</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 22 课的 done 记着“输对了没有”，这里也可以记着“找到过没有”。教室电脑：打开 starter/03_cage_none.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/03_cage_none.py" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:780px 280px 1fr"><code>range(heads)</code><b>不报错</b><span>漏了“全是鸡”这一种</span></div>
+    <div class="r d2" style="grid-template-columns:780px 280px 1fr"><code>range(1, heads + 1)</code><b>不报错</b><span>漏了“一只鸡也没有”</span></div>
+    <div class="r d3" style="grid-template-columns:780px 280px 1fr"><code class="plain">循环里写“没有答案”</code><b>不报错</b><span>每试错一次就说一遍</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">枚举的错大多不报错，只是少了答案或多了废话。用两头的数据试一试：全是鸡、全是兔。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：全是鸡却没输出">
+  <h2 class="t r">找错：10 个头 20 只脚，全是鸡，却没输出</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="3" data-yes="找到了！range(heads) 是 0 到 9，鸡最多试到 9 只，“10 只鸡”这种可能被漏掉了。改成 range(heads + 1)。" data-no="这一行没问题。答案是鸡 10 只，循环试到过 10 吗？"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
+  <p class="abs say r d2" style="left:1180px;top:240px;right:96px">点出该改的那一行。</p>
+  <p class="fb" style="left:1180px;top:400px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="百钱买百鸡" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">百钱买百鸡</h2>
+  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只。读入 n（1 到 300 的整数），用 n 元正好买 n 只鸡，小鸡要整 3 只地买。<br>每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。一种也没有就输出“没有答案”。</p>
+  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:560px"><small>输入</small><pre>100</pre><small style="margin-top:14px">输出</small><pre style="font-size:38px;white-space:pre">公鸡 0 母鸡 25 小鸡 75
+公鸡 4 母鸡 18 小鸡 78
+公鸡 8 母鸡 11 小鸡 81
+公鸡 12 母鸡 4 小鸡 84</pre></div>
+  <a class="ide r d3" data-code-file="starter/04_hundred.py" style="left:96px;top:890px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:896px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>定范围：公鸡最多 n // 5 只，母鸡最多 n // 3 只。用第 18 课的两层循环，外层试公鸡，内层试母鸡。</span></p>
+    <p class="step s2"><i>提示 2</i><span>只数凑满 n，小鸡就是 n - 公鸡 - 母鸡。小鸡不能是负数，还要是 3 的倍数：% 3 == 0。</span></p>
+    <p class="step s3"><i>提示 3</i><span>再检查钱：公鸡 × 5 + 母鸡 × 3 + 小鸡 // 3 等于 n 就输出。没找到过就说“没有答案”，和动手题一样。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个挨个试的小程序" data-chapter="小项目">
+  <h2 class="t r">造一个“挨个试”的小程序</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">自己出一道题，让程序挨个试出答案。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>找出 1 到 100 里你的幸运数，比如个位是 7、又是 3 的倍数。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>三位数里百位和个位一样、各位加起来是 10 的；两个数和是 20、积是 96。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>数一数一共试了几次，再想办法缩小范围，少试几次。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/05_my_search.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>先猜后跑</b><span>先听同桌的题，自己猜答案，再运行看看</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪道题出得最有意思</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>范围有没有漏？能不能少试几次？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让题目更好玩。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>枚举分哪三步？<em class="step s2" style="font-style:normal;font-weight:400">　定范围，一个个试，判断对不对。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>范围漏了会怎样？<em class="step s3" style="font-style:normal;font-weight:400">　不报错，只是找不到漏掉的答案。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>怎样在没答案时说一声？<em class="step s4" style="font-style:normal;font-weight:400">　用 found 记着找到过没有，循环结束后再判断。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>for x in range(1, 101):</code><span>1 到 100 挨个试</span></div>
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>if 条件:</code><span>对上了就输出</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>range(heads + 1)</code><span>从 0 到 heads，两头都要试</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>found = False</code><span>记着找到过没有</span></div>
+    <div class="r d3" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">两个未知数</code><span>两层循环，或者用一个算出另一个</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>缩小范围</code><span>先想清楚哪些不可能，就不用试</span></div>
+    <div class="r d2"><code>二分查找</code><span>排好序的数，每次去掉一半，试得更少</span></div>
+    <div class="r d3"><code>回溯</code><span>走不通就退一步，换条路再试</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天学会了挨个试。下节课学二分查找：同样是找，每次能排除一半。</p>
+  <div class="foot"></div>
+</section>

@@ -1,0 +1,238 @@
+<!-- cover -->
+<section class="slide" aria-label="冒泡排序" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 24</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">比比</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">a[j] &gt; a[j + 1]</span></div><b class="r d2" style="font-size:250px">换换</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">冒泡排序：自己动手排整齐</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能不用 sorted，自己写出一个排序程序，看清每一步是怎么换的。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="sorted 是怎么排的">
+  <h2 class="t r">sorted 一下就排好了，它是怎么做到的？</h2>
+  <div class="slip r d1" style="left:96px;top:290px;width:560px"><small style="font-size:34px">第 19 课</small><pre style="font-size:52px">sorted(a)</pre></div>
+  <div class="slip tilt r d2" style="left:740px;top:290px;width:680px"><small style="font-size:34px">体育课按身高排队</small><pre style="font-size:52px">挨着的两人比一比</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">排队时，老师常让挨着的两个人比一比：前面的高，就换个位置。一遍遍比下去，队伍就整齐了。<br>这节课用同样的办法写一个排序程序。高的数会像水里的泡泡一样往后冒，所以叫冒泡排序。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- predict: a wrong swap -->
+<section class="slide dark" aria-label="猜一猜：这样能换吗" data-steps="2" data-at="2" data-chapter="交换">
+  <h2 class="t">猜一猜：想把 a 和 b 换过来，输出什么？</h2>
+  <div class="editor" style="left:96px;top:220px;width:820px;--fs:52px"><div class="tab">swap.py</div>
+<pre class="code"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln l2">a = b</span><span class="ln l2">b = a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre></div>
+  <p class="abs say only1" style="left:1020px;right:96px;top:240px">想要的是 5 3。<br>真的能换过来吗？</p>
+  <p class="abs step s2" style="left:1020px;right:96px;top:230px;font:800 100px var(--code);color:var(--clay-soft)">5 5</p>
+  <p class="abs say step s2" style="left:96px;top:790px;width:1728px">第 3 行 a 变成 5，原来的 3 就被盖掉了。第 4 行 b = a，拿到的也是 5。<br>就像两杯饮料互换，直接倒过去会混在一起，得先找个空杯子。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- swap -->
+<section class="slide" aria-label="一行交换">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">Python 一行就能交换</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">swap.py</div>
+<pre class="code" data-file="solutions/01_swap.py"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln">a, b = b, a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre></div>
+  <p class="abs say" style="left:96px;top:690px;width:960px;color:var(--paper)">a, b = b, a：先把右边的 b 和 a 都看好，再同时放进左边。谁也不会被盖掉。</p>
+  <a class="ide" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box out" style="display:block"><i>屏幕上</i><b style="font-size:100px;display:block">5 3</b></div>
+    <p class="say" style="margin-top:60px">列表里的两个位置也能这样换：</p>
+    <p style="font:400 40px/1.5 var(--code);margin-top:16px">a[0], a[1] =<br>a[1], a[0]</p>
+  </div>
+</section>
+
+<!-- quiz: swap in a list -->
+<section class="slide" aria-label="小测：列表里换位置">
+  <h2 class="t r">小测：运行这两行以后，a 是什么？</h2>
+  <pre class="abs r d1" style="left:96px;top:200px;font:400 48px/1.5 var(--code)">a = [4, 1, 3]
+a[0], a[1] = a[1], a[0]</pre>
+  <div class="quiz r d1" data-right="0" style="top:390px">
+    <button type="button" data-fb="答对了！下标 0 和 1 的两个数换了位置，3 没动。"><i>1</i>[1, 4, 3]</button>
+    <button type="button" data-fb="交换真的发生了，列表变了。"><i>2</i>[4, 1, 3]</button>
+    <button type="button" data-fb="这是分两行写才会出的事。一行交换不会把数盖掉。"><i>3</i>[1, 1, 3]</button>
+    <button type="button" data-fb="下标 2 的 3 没参加交换，还在最后。"><i>4</i>[3, 1, 4]</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- one pass -->
+<section class="slide" aria-label="一轮比较" data-steps="3" data-at="3" data-chapter="一轮">
+  <div class="night" style="width:1310px"></div>
+  <h2 class="t" style="color:var(--paper)">从头到尾比一轮</h2>
+  <div class="editor" style="left:96px;top:200px;width:1170px;--fs:44px"><div class="tab">one_pass.py</div>
+<pre class="code" data-file="solutions/02_one_pass.py"><span class="ln">a = [<span class="m">5</span>, <span class="m">2</span>, <span class="m">4</span>, <span class="m">1</span>]</span><span class="ln l1 l2 l3"><span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln l1 l2 l3">    <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln l1 l2 l3">        a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln">    <span class="f">print</span>(a)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:1170px;color:var(--paper)">j 是 0：比 a[0] 和 a[1]，也就是 5 和 2。前面的大，换。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:1170px;color:var(--paper)">j 是 1：比 5 和 4，前面的大，换。5 又往后走了一格。</p>
+  <p class="abs say only3" style="left:96px;top:700px;width:1170px;color:var(--paper)">j 是 2：比 5 和 1，换。最大的 5 像泡泡一样，一路冒到了最后。<br>4 个数挨着比，只有 3 对，所以是 range(3)。</p>
+  <a class="ide step s3" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1390px;right:96px;top:170px;font:700 48px/1.7 var(--code)">[2, 5, 4, 1]<br><span class="step s2">[2, 4, 5, 1]</span><br><span class="step s3" style="color:var(--clay)">[2, 4, 1, 5]</span></div>
+</section>
+
+<!-- quiz: after one pass -->
+<section class="slide" aria-label="小测：一轮之后">
+  <h2 class="t r">小测：比完一轮，哪一个一定站对了位置？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="最小的 1 只往前挪了一格，还没到最前面。"><i>1</i>最小的在最前</button>
+    <button type="button" data-fb="答对了！最大的一路都比别人大，每次都被换到后面，一轮就到了最后。"><i>2</i>最大的在最后</button>
+    <button type="button" data-fb="[2, 4, 1, 5] 还没排好，1 还在后面。"><i>3</i>全部排好了</button>
+    <button type="button" data-fb="有一个是一定站对了的。想想 5 是怎么走的。"><i>4</i>一个也说不准</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: bubble sort -->
+<section class="slide" aria-label="例题：冒泡排序" data-steps="4" data-at="4" data-chapter="冒泡排序">
+  <div class="night" style="width:1440px"></div>
+  <h2 class="t" style="color:var(--paper);top:40px">例题：一轮轮比，直到排好</h2>
+  <div class="editor" style="left:96px;top:175px;width:1300px;--fs:44px"><div class="tab">bubble.py</div>
+<pre class="code" data-file="solutions/03_bubble.py"><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">a = []</span><span class="ln l1"><span class="k">for</span> k <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    a.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2 l3 l4"><span class="k">for</span> r <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln l2 l3 l4">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span> - r):</span><span class="ln l2 l3 l4">        <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln l2 l3 l4">            a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln l2 l3 l4">    <span class="f">print</span>(a)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:935px;width:1300px;color:var(--paper);font-size:34px">先用第 11 课的办法读入：第一行 4，再读 5、2、4、1，放进列表 a。</p>
+  <p class="abs say only2" style="left:96px;top:935px;width:1300px;color:var(--paper);font-size:34px">r 是轮数。第 1 轮（r 是 0）比 3 对，最大的 5 到了最后。每轮结束输出一次。</p>
+  <p class="abs say only3" style="left:96px;top:935px;width:1300px;color:var(--paper);font-size:34px">第 2 轮少比一对：最后的 5 已经站好，不用再比。所以内层是 range(n - 1 - r)。</p>
+  <p class="abs say only4" style="left:96px;top:935px;width:1300px;color:var(--paper);font-size:34px">第 3 轮把 2 和 1 换好。4 个数，比 n - 1 也就是 3 轮，一定排好。</p>
+  <div class="abs" style="left:1490px;right:96px;top:170px;font:700 40px/1.8 var(--code)"><span class="step s2">[2, 4, 1, 5]</span><br><span class="step s3">[2, 1, 4, 5]</span><br><span class="step s4" style="color:var(--clay)">[1, 2, 4, 5]</span></div>
+  <a class="ide step s4" style="left:1490px;top:900px">▶ 在 IDE 打开</a>
+</section>
+
+<!-- quiz: rounds -->
+<section class="slide" aria-label="小测：要几轮">
+  <h2 class="t r">小测：用例题排 10 个数，外层循环要转几轮？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="一轮只能保证最大的那个站好，10 个数一轮不够。"><i>1</i>1 轮</button>
+    <button type="button" data-fb="答对了！range(n - 1)，n 是 10，就是 9 轮。最后剩下的那个自然站对了。"><i>2</i>9 轮</button>
+    <button type="button" data-fb="9 个站好以后，最后一个已经在对的位置，不用再来一轮。"><i>3</i>10 轮</button>
+    <button type="button" data-fb="100 是 10 × 10。外层只转 range(n - 1) 那么多轮。"><i>4</i>100 轮</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- your turn: descending -->
+<section class="slide" aria-label="改成从大到小">
+  <div class="band r"><b>动手<br>改一改</b><span>只改一个符号。</span></div>
+  <div class="turn">
+    <h2 class="r d1">从大到小排</h2>
+    <p class="say r d1">在例题上改，让大的排前面。第一行读入 n（2 到 10 的整数），接下来 n 行每行一个整数。和例题一样，每轮输出一次列表。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 4，再输入 1、2、3、4</small><pre style="font-size:40px;white-space:pre">[2, 3, 4, 1]
+[3, 4, 2, 1]
+[4, 3, 2, 1]</pre></div><div><small>输入 2，再输入 3、9</small><pre style="font-size:40px">[9, 3]</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">想一想：什么时候该换？教室电脑：打开 starter/04_bubble_down.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/04_bubble_down.py" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:720px 360px 1fr"><code class="plain">先 a = b，再 b = a</code><b>不报错</b><span>两个都变成一样的数</span></div>
+    <div class="r d2" style="grid-template-columns:720px 360px 1fr"><code>for j in range(n):</code><b>IndexError</b><span>a[j + 1] 超出了列表</span></div>
+    <div class="r d3" style="grid-template-columns:720px 360px 1fr"><code>if a[j] &lt; a[j + 1]:</code><b>不报错</b><span>排成了从大到小</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">排序写错，常常不报错，只是结果不对。写完用几组数试一试：本来就排好的、倒着的、有一样的。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：超出了列表">
+  <h2 class="t r">找错：报 IndexError，j + 1 超出了列表</h2>
+  <div class="editor r d1" style="left:96px;top:200px;width:1300px;--fs:44px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="4" data-yes="找到了！j 能走到 3，a[j + 1] 就是 a[4]，4 个数的列表没有下标 4。改成 range(n - 1 - r)。" data-no="这一行没问题。报错说下标超出了范围，看看 j 最大会走到几。"><span class="ln">a = [<span class="m">5</span>, <span class="m">2</span>, <span class="m">4</span>, <span class="m">1</span>]</span><span class="ln">n = <span class="f">len</span>(a)</span><span class="ln"><span class="k">for</span> r <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">        <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln">            a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln"><span class="f">print</span>(a)</span></pre></div>
+  <p class="abs say r d2" style="left:96px;top:820px;width:1300px">点出该改的那一行。</p>
+  <p class="fb" style="left:1460px;top:220px;right:96px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="排队换了几次" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">排队换了几次</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">体育课按身高从矮到高排队，每次只能让挨着的两个人换位置。第一行读入人数 n（1 到 20 的整数），接下来 n 行，每行一个身高。<br>用冒泡排序排好，输出两行：排好的列表；一共换了几次。</p>
+  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:480px"><small>依次输入</small><pre style="font-size:44px">4
+5
+2
+4
+1</pre><small style="margin-top:14px">输出</small><pre style="font-size:44px;white-space:pre">[1, 2, 4, 5]
+5</pre></div>
+  <a class="ide r d3" data-code-file="starter/05_count_swaps.py" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:886px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>读入和排序都可以照例题写。去掉每轮的 print，排好以后再输出一次列表。</span></p>
+    <p class="step s2"><i>提示 2</i><span>准备一个计数器，从 0 开始。真的换了才加 1，所以加 1 要写在 if 里面。</span></p>
+    <p class="step s3"><i>提示 3</i><span>两个人一样高时不用换，比较用 &gt;，不要用 &gt;=。试试本来就排好的队，应该换 0 次。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个排序小程序" data-chapter="小项目">
+  <h2 class="t r">造一个你的排序小程序</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">不用 sorted，自己排。排什么，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>把你喜欢的几个数写进列表，用冒泡排序排好再输出。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>给成绩从高到低排、给英文单词按字母排、每轮都输出看泡泡往后冒。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>某一轮一次也没换，说明已经排好了，提前停下；数一数省了几轮。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/06_my_sort.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着运行</b><span>给同桌的程序一组乱的数，看排得对不对</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪里写得最清楚</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>本来就排好的、有一样的数，还对吗？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让程序更稳。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>怎样交换两个变量？<em class="step s2" style="font-style:normal;font-weight:400">　a, b = b, a，一行同时换。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>比完一轮，哪个站对了位置？<em class="step s3" style="font-style:normal;font-weight:400">　最大的到了最后。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>为什么内层是 range(n - 1 - r)？<em class="step s4" style="font-style:normal;font-weight:400">　后面 r 个已经排好，不用再比；再减 1 是因为要比 a[j + 1]。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>a, b = b, a</code><span>一行交换，谁也不会被盖掉</span></div>
+    <div class="r d1" style="grid-template-columns:860px 1fr"><code>a[j], a[j + 1] = a[j + 1], a[j]</code><span>交换列表里挨着的两个</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>for r in range(n - 1):</code><span>n 个数比 n - 1 轮</span></div>
+    <div class="r d2" style="grid-template-columns:860px 1fr"><code>for j in range(n - 1 - r):</code><span>每轮少比一对</span></div>
+    <div class="r d3" style="grid-template-columns:860px 1fr"><code>if a[j] &gt; a[j + 1]:</code><span>从小到大；换成 &lt; 就从大到小</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>选择排序</code><span>每轮找出最小的，放到最前面</span></div>
+    <div class="r d2"><code>插入排序</code><span>像整理手里的扑克牌，一张张插进去</span></div>
+    <div class="r d3"><code>更快的排序</code><span>数很多时冒泡太慢，sorted 用的是更快的办法</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天自己写出了排序。以后用 sorted 时，你知道它在背后做的是什么样的事了。</p>
+  <div class="foot"></div>
+</section>

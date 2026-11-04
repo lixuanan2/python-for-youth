@@ -1,0 +1,57 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_square.py",
+    "solution": "solutions/01_square.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "12\n",
+    "description": "挨个试，找自己乘自己是 144 的数。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 7,
+    "starter": "starter/02_cage.py",
+    "solution": "solutions/02_cage.py",
+    "scope": "第一行头数、第二行脚数，都是0到1000的整数",
+    "sample_input": "35\n94\n",
+    "sample_output": "鸡 23 兔 12\n",
+    "description": "鸡兔同笼。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 9,
+    "starter": "starter/03_cage_none.py",
+    "solution": "solutions/03_cage_none.py",
+    "scope": "第一行头数、第二行脚数，都是0到1000的整数",
+    "sample_input": "10\n21\n",
+    "sample_output": "没有答案\n",
+    "description": "没有答案时输出“没有答案”。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 12,
+    "starter": "starter/04_hundred.py",
+    "solution": "solutions/04_hundred.py",
+    "scope": "一行，n为1到300的整数",
+    "sample_input": "100\n",
+    "sample_output": "公鸡 0 母鸡 25 小鸡 75\n公鸡 4 母鸡 18 小鸡 78\n公鸡 8 母鸡 11 小鸡 81\n公鸡 12 母鸡 4 小鸡 84\n",
+    "description": "百钱买百鸡。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 14,
+    "starter": "starter/05_my_search.py",
+    "solution": "solutions/05_digits_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "",
+    "sample_output": "181\n262\n343\n424\n505\n",
+    "description": "自己出题，让程序挨个试出答案。"
+  }
+]

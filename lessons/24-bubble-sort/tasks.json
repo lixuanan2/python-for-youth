@@ -1,0 +1,68 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 4,
+    "starter": "starter/01_swap.py",
+    "solution": "solutions/01_swap.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "5 3\n",
+    "description": "一行交换两个变量。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 6,
+    "starter": "starter/02_one_pass.py",
+    "solution": "solutions/02_one_pass.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "[2, 5, 4, 1]\n[2, 4, 5, 1]\n[2, 4, 1, 5]\n",
+    "description": "从头到尾比一轮，最大的冒到最后。"
+  },
+  {
+    "id": "C",
+    "role": "基础例题",
+    "page": 8,
+    "starter": "starter/03_bubble.py",
+    "solution": "solutions/03_bubble.py",
+    "scope": "第一行n为2到10的整数；接下来n行，每行一个整数",
+    "sample_input": "4\n5\n2\n4\n1\n",
+    "sample_output": "[2, 4, 1, 5]\n[2, 1, 4, 5]\n[1, 2, 4, 5]\n",
+    "description": "冒泡排序，每轮输出一次。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 10,
+    "starter": "starter/04_bubble_down.py",
+    "solution": "solutions/04_bubble_down.py",
+    "scope": "第一行n为2到10的整数；接下来n行，每行一个整数",
+    "sample_input": "4\n1\n2\n3\n4\n",
+    "sample_output": "[2, 3, 4, 1]\n[3, 4, 2, 1]\n[4, 3, 2, 1]\n",
+    "description": "改成从大到小排。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 13,
+    "starter": "starter/05_count_swaps.py",
+    "solution": "solutions/05_count_swaps.py",
+    "scope": "第一行n为1到20的整数；接下来n行，每行一个整数身高",
+    "sample_input": "4\n5\n2\n4\n1\n",
+    "sample_output": "[1, 2, 4, 5]\n5\n",
+    "description": "冒泡排序并数出交换次数。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 15,
+    "starter": "starter/06_my_sort.py",
+    "solution": "solutions/06_words_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "",
+    "sample_output": "['apple', 'banana', 'kiwi', 'pear']\n",
+    "description": "做一个自己的排序小程序。"
+  }
+]
