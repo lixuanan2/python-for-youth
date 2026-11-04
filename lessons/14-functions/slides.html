@@ -1,0 +1,285 @@
+<!-- cover -->
+<section class="slide" aria-label="函数定义与调用" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 14</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">起名</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">def cheer():</span></div><b class="r d2" style="font-size:250px">叫它</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">函数定义与调用：给一段代码起个名字</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能把常用的几行打包成函数，想用几次就叫几次。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="同样几行写好几遍">
+  <h2 class="t r">同样的几行，要写好几遍？</h2>
+  <div class="slip r d1" style="left:96px;top:280px;width:520px"><small style="font-size:34px">开机前</small><pre style="font-size:44px">1. 检查电源
+2. 检查屏幕</pre></div>
+  <div class="slip r d2" style="left:660px;top:280px;width:520px"><small style="font-size:34px">关机前</small><pre style="font-size:44px">1. 检查电源
+2. 检查屏幕</pre></div>
+  <div class="slip tilt r d3" style="left:1240px;top:280px;width:580px"><small style="font-size:34px">想再加一步</small><pre style="font-size:44px">每一处都要改</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:620px">复制粘贴能做到，可是一要改就得每处都改，漏一处就错。<br>办法是给这几行起个名字，叫“函数”。要用的时候叫它的名字，改也只改一处。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- first function -->
+<section class="slide" aria-label="第一个函数" data-steps="3" data-at="3" data-chapter="定义">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">def：定义一个函数</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">hello.py</div>
+<pre class="code" data-file="solutions/01_hello.py"><span class="ln l1"><span class="k">def</span> <span class="f">hello</span>():</span><span class="ln l1">    <span class="f">print</span>(<span class="s">"你好！"</span>)</span><span class="ln l1">    <span class="f">print</span>(<span class="s">"欢迎来上课"</span>)</span><span class="ln l2"><span class="f">hello</span>()</span><span class="ln l3"><span class="f">hello</span>()</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:760px;width:960px;color:var(--paper)">def 是“定义”。前三行只是把两句话装进一个叫 hello 的盒子，这时什么也不输出。</p>
+  <p class="abs say only2" style="left:96px;top:760px;width:960px;color:var(--paper)">名字后面加括号，叫“调用”。程序跳进函数，把两句话输出一遍。</p>
+  <p class="abs say only3" style="left:96px;top:760px;width:960px;color:var(--paper)">再调用一次，再输出一遍。写一次，用两次。</p>
+  <a class="ide step s3" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">定义</i><b style="font-size:56px;color:var(--muted)">不输出</b></div>
+    <div class="box step s2"><i style="width:170px">第 4 行</i><b style="font-size:48px;line-height:1.3">你好！<br>欢迎来上课</b></div>
+    <div class="box out step s3"><i style="width:170px">第 5 行</i><b style="font-size:48px;line-height:1.3">你好！<br>欢迎来上课</b></div>
+  </div>
+</section>
+
+<!-- predict: define only -->
+<section class="slide dark" aria-label="猜一猜：只定义不调用" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：这段程序输出什么？</h2>
+  <div class="editor" style="left:96px;top:230px;width:1000px;--fs:56px"><div class="tab">guess.py</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">hello</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"你好！"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"结束"</span>)</span></pre></div>
+  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <p class="abs say only1" style="left:96px;top:640px">先在纸上写下你的答案。</p>
+  <p class="abs step s2" style="left:1240px;top:260px;font:800 180px/1 var(--text);color:var(--clay-soft)">结束</p>
+  <p class="abs say step s2" style="left:96px;top:640px;width:1600px">只输出“结束”。定义函数就像把菜谱写好放进抽屉，没人照着做，就不会有菜。<br>函数里的话，只有调用 hello() 的时候才会说。</p>
+  <a class="ide step s2" style="left:96px;top:840px">▶ 在 IDE 验证</a>
+  <div class="foot"></div>
+</section>
+
+<!-- three parts -->
+<section class="slide" aria-label="函数的三个部分">
+  <h2 class="t r">写函数分三部分</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>起名字</b><span>def hello():<br>def、名字、括号、冒号，一个都不能少</span></div>
+    <div class="r d2"><i>2</i><b>写函数体</b><span>下面缩进 4 个空格<br>缩进的几行都归这个函数</span></div>
+    <div class="r d3"><i>3</i><b>调用</b><span>hello()<br>不缩进，名字加括号</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:820px">名字的起法和变量一样：英文字母开头，看名字就知道它做什么。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz -->
+<section class="slide" aria-label="小测：输出几行">
+  <h2 class="t r">小测：一共输出几行？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:46px"><div class="tab">几行？</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">f</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"a"</span>)</span><span class="ln">    <span class="f">print</span>(<span class="s">"b"</span>)</span><span class="ln"><span class="f">f</span>()</span><span class="ln"><span class="f">f</span>()</span><span class="ln"><span class="f">f</span>()</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="2">
+    <button type="button" data-fb="定义的时候不输出，要看调用了几次。"><i>1</i>2 行</button>
+    <button type="button" data-fb="调用了 3 次，但每次输出两行。"><i>2</i>3 行</button>
+    <button type="button" data-fb="答对了！调用 3 次，每次输出 a 和 b 两行，一共 6 行。"><i>3</i>6 行</button>
+    <button type="button" data-fb="定义的那几行不会自己输出，不用多算。"><i>4</i>8 行</button>
+  </div>
+  <p class="fb" style="left:960px;top:700px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: order of running -->
+<section class="slide" aria-label="例题：检查步骤" data-steps="4" data-at="4" data-chapter="调用顺序">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：跳进去，再回来</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:46px"><div class="tab">check.py</div>
+<pre class="code" data-file="solutions/02_check.py"><span class="ln l1"><span class="k">def</span> <span class="f">check</span>():</span><span class="ln l1 l3">    <span class="f">print</span>(<span class="s">"1. 检查电源"</span>)</span><span class="ln l1 l3">    <span class="f">print</span>(<span class="s">"2. 检查屏幕"</span>)</span><span class="ln l2"><span class="f">print</span>(<span class="s">"开机前："</span>)</span><span class="ln l2"><span class="f">check</span>()</span><span class="ln l4"><span class="f">print</span>(<span class="s">"关机前："</span>)</span><span class="ln l4"><span class="f">check</span>()</span></pre></div>
+  <p class="abs say only1" style="left:1210px;right:96px;top:170px;font-size:34px">前三行是定义，先记住，不输出。程序从第 4 行开始做事。</p>
+  <p class="abs say only2" style="left:1210px;right:96px;top:170px;font-size:34px">输出“开机前：”，然后第 5 行调用 check。</p>
+  <p class="abs say only3" style="left:1210px;right:96px;top:170px;font-size:34px">跳进函数，输出两步。做完了，回到第 5 行的下一行接着走。</p>
+  <p class="abs say only4" style="left:1210px;right:96px;top:170px;font-size:34px">输出“关机前：”，再调用一次，又跳进去做一遍。</p>
+  <div class="abs" style="left:1210px;right:96px;top:420px;font:400 40px/1.6 var(--code)">
+    <p class="step s2">开机前：</p>
+    <p class="step s3" style="color:var(--clay)">1. 检查电源<br>2. 检查屏幕</p>
+    <p class="step s4">关机前：</p>
+    <p class="step s4" style="color:var(--clay)">1. 检查电源<br>2. 检查屏幕</p>
+  </div>
+  <a class="ide step s4" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+</section>
+
+<!-- your turn: add a step -->
+<section class="slide" aria-label="函数里加一步">
+  <div class="band r"><b>动手<br>改一改</b><span>只改一处，两次调用都跟着变。</span></div>
+  <div class="turn">
+    <h2 class="r d1">检查再加一步</h2>
+    <p class="say r d1">在检查步骤的最后加上“3. 检查网线”。开机前和关机前都要检查三步。</p>
+    <div class="sheet r d2"><small>输出</small><pre style="font-size:42px;line-height:1.3">开机前：
+1. 检查电源
+2. 检查屏幕
+3. 检查网线
+关机前：
+……（同样三步）</pre></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/03_check_more.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/03_check_more.py" style="left:610px;top:960px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- predict: call before define -->
+<section class="slide" aria-label="猜一猜：先调用后定义" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：先调用，再定义，行吗？</h2>
+  <div class="editor" style="left:96px;top:230px;width:1000px;--fs:52px"><div class="tab">order.py（只阅读）</div>
+<pre class="code"><span class="ln"><span class="f">hello</span>()</span><span class="ln"><span class="k">def</span> <span class="f">hello</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"你好！"</span>)</span></pre></div>
+  <div class="slip tilt step s2" style="left:1200px;top:250px;width:620px"><small>屏幕上</small><pre style="font-size:34px;white-space:pre-wrap">NameError: name 'hello' is not defined</pre></div>
+  <p class="abs say only1" style="left:96px;top:640px;width:1600px">程序从上往下一行一行地走。走到第 1 行时，它认识 hello 吗？</p>
+  <p class="abs say step s2" style="left:96px;top:640px;width:1600px">不行。第 1 行时还没读到定义，程序不认识 hello，报 NameError。<br>先定义，后调用。定义一般都写在程序最上面。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- loop inside a function -->
+<section class="slide" aria-label="函数里放循环" data-steps="3" data-at="3" data-chapter="函数里的循环">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">函数里也能放循环</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:44px"><div class="tab">countdown.py</div>
+<pre class="code" data-file="solutions/04_countdown.py"><span class="ln l1"><span class="k">def</span> <span class="f">countdown</span>():</span><span class="ln l1">    <span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>, <span class="m">0</span>, -<span class="m">1</span>):</span><span class="ln l1">        <span class="f">print</span>(i)</span><span class="ln l1">    <span class="f">print</span>(<span class="s">"发射！"</span>)</span><span class="ln l2"><span class="f">countdown</span>()</span><span class="ln l3"><span class="f">print</span>(<span class="s">"再来一次"</span>)</span><span class="ln l3"><span class="f">countdown</span>()</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:850px;width:960px;color:var(--paper)">函数体可以是好几行，循环、判断都能放。看缩进：发射在循环外，函数里。</p>
+  <p class="abs say only2" style="left:96px;top:850px;width:960px;color:var(--paper)">调用一次：倒数 3、2、1，再喊发射。</p>
+  <p class="abs say only3" style="left:96px;top:850px;width:960px;color:var(--paper)">再调用一次，整套又来一遍。</p>
+  <a class="ide step s3" style="left:96px;top:960px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px;font:400 40px/1.5 var(--code)">
+    <p class="step s2" style="color:var(--clay)">3<br>2<br>1<br>发射！</p>
+    <p class="step s3">再来一次</p>
+    <p class="step s3" style="color:var(--clay)">3<br>2<br>1<br>发射！</p>
+  </div>
+</section>
+
+<!-- your turn: birthday song -->
+<section class="slide" aria-label="生日歌">
+  <div class="band r"><b>动手<br>改一改</b><span>把重复的那一句做成函数，换个名字。</span></div>
+  <div class="turn">
+    <h2 class="r d1">用函数唱生日歌</h2>
+    <p class="say r d1">把 hello 改成一个叫 happy 的函数，它输出“祝你生日快乐”。用它唱出下面四句，不同的那一句直接 print。</p>
+    <div class="sheet r d2"><small>输出</small><pre style="font-size:44px;line-height:1.3">祝你生日快乐
+祝你生日快乐
+祝你生日快乐，亲爱的朋友
+祝你生日快乐</pre></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_birthday.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/05_birthday.py" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- quiz: no parentheses -->
+<section class="slide" aria-label="小测：忘了括号">
+  <h2 class="t r">小测：最后一行只写了 hello，会怎样？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:46px"><div class="tab">会怎样？</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">hello</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"你好！"</span>)</span><span class="ln"><span class="f">hello</span></span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="1">
+    <button type="button" data-fb="没有括号就没有调用，函数里的话不会说。"><i>1</i>输出“你好！”</button>
+    <button type="button" data-fb="答对了！只写名字不加括号，不会调用，也不报错，什么都没发生。"><i>2</i>什么也不输出</button>
+    <button type="button" data-fb="hello 已经定义过了，不会报错。"><i>3</i>报 NameError</button>
+    <button type="button" data-fb="hello 只是被提了一下，没有被调用，不会输出名字。"><i>4</i>输出 hello</button>
+  </div>
+  <p class="fb" style="top:700px;right:900px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:540px 600px 1fr"><code>hello</code><b>不报错</b><span>没有括号，没调用</span></div>
+    <div class="r d2" style="grid-template-columns:540px 600px 1fr"><code class="plain">先调用后定义</code><b>NameError</b><span>定义写在最上面</span></div>
+    <div class="r d3" style="grid-template-columns:540px 600px 1fr"><code class="plain">函数体没缩进</code><b>IndentationError</b><span>函数体缩进 4 个空格</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">IndentationError 的意思是“缩进出错”。看到它，先看 def 下面一行有没有缩进。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：口号只喊了一次">
+  <h2 class="t r">找错：第二句口号怎么跑到最前面了？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="3" data-yes="找到了！这一行没缩进，不归函数管，程序一开始就输出了它，而且只输出一次。缩进 4 个空格，它才是函数的一部分。" data-no="这一行没问题。想一想：哪一句不在函数里？"><span class="ln"><span class="k">def</span> <span class="f">cheer</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"加油！"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"我们是最棒的！"</span>)</span><span class="ln"><span class="f">cheer</span>()</span><span class="ln"><span class="f">cheer</span>()</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">想让每次都喊“加油！我们是最棒的！”，结果输出了“我们是最棒的！加油！加油！”。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="left:1220px;top:600px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="发射练习" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">发射练习</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:960px">读入练习次数 n（1 到 5 的整数）。每次先输出“第 k 次”，再倒数 3、2、1，最后输出“发射！”。<br>倒数的部分写成一个函数，在循环里调用它。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:120px;width:460px"><small>输入</small><pre style="font-size:48px">2</pre><small style="margin-top:14px">输出</small><pre style="font-size:40px;line-height:1.25">第 1 次
+3
+2
+1
+发射！
+第 2 次
+……</pre></div>
+  <a class="ide r d3" data-code-file="starter/06_launch.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>倒数函数上面已经写过了，放在程序最上面。</span></p>
+    <p class="step s2"><i>提示 2</i><span>读入 n，用 for 让 k 从 1 走到 n。每一遍先输出“第 k 次”，再调用函数。</span></p>
+    <p class="step s3"><i>提示 3</i><span>调用要缩进在循环里，才会每一遍都调用。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个函数" data-chapter="小项目">
+  <h2 class="t r">造一个你的函数</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">给一段常常要说的话起个名字，想用就叫它。说什么，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>定义一个函数，至少调用两次，中间穿插别的话。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>儿歌的副歌、班级口号、游戏开场、广播体操口令。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>定义两个函数搭配着用，或者在循环里调用函数。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/07_my_function.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着运行</b><span>先读同桌的程序，猜会输出几行，再运行</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪个函数名起得最好</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>哪几行还在重复，能不能也做成函数？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让程序更短、更好改。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>定义了函数，为什么没有输出？<em class="step s2" style="font-style:normal;font-weight:400">　没有调用，函数体不会运行。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>调用完函数，程序接着走哪里？<em class="step s3" style="font-style:normal;font-weight:400">　回到调用那一行的下一行。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>用函数有什么好处？<em class="step s4" style="font-style:normal;font-weight:400">　写一次用多次，要改只改一处。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1"><code>def hello():</code><span>定义：起名字，后面有括号和冒号</span></div>
+    <div class="r d1"><code style="white-space:pre">    print("你好")</code><span>函数体：缩进 4 个空格</span></div>
+    <div class="r d2"><code>hello()</code><span>调用：名字加括号</span></div>
+    <div class="r d2"><code>hello</code><span>没有括号，不会调用</span></div>
+    <div class="r d3"><code class="plain" style="font-family:var(--text)">先定义，后调用</code><span>定义写在程序最上面</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>参数</code><span>下节课：调用时往括号里塞数据，每次做的不一样</span></div>
+    <div class="r d2"><code>return</code><span>下节课：函数算完把结果交回来</span></div>
+    <div class="r d3"><code>print() len()</code><span>它们也是函数，Python 早就写好了</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天的函数每次都做一样的事。下节课让它根据你给的数据，做不一样的事。</p>
+  <div class="foot"></div>
+</section>

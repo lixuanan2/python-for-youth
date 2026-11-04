@@ -1,0 +1,47 @@
+[
+  {
+    "page": 3,
+    "code": "def hello():\n    print(\"你好！\")\n    print(\"欢迎来上课\")\nhello()\nhello()\n",
+    "stdout": "你好！\n欢迎来上课\n你好！\n欢迎来上课\n"
+  },
+  {
+    "page": 4,
+    "code": "def hello():\n    print(\"你好！\")\nprint(\"结束\")",
+    "stdout": "结束\n"
+  },
+  {
+    "page": 6,
+    "code": "def f():\n    print(\"a\")\n    print(\"b\")\nf()\nf()\nf()",
+    "stdout": "a\nb\na\nb\na\nb\n"
+  },
+  {
+    "page": 7,
+    "code": "def check():\n    print(\"1. 检查电源\")\n    print(\"2. 检查屏幕\")\nprint(\"开机前：\")\ncheck()\nprint(\"关机前：\")\ncheck()\n",
+    "stdout": "开机前：\n1. 检查电源\n2. 检查屏幕\n关机前：\n1. 检查电源\n2. 检查屏幕\n"
+  },
+  {
+    "page": 9,
+    "code": "hello()\ndef hello():\n    print(\"你好！\")",
+    "error": "NameError: name 'hello' is not defined"
+  },
+  {
+    "page": 10,
+    "code": "def countdown():\n    for i in range(3, 0, -1):\n        print(i)\n    print(\"发射！\")\ncountdown()\nprint(\"再来一次\")\ncountdown()\n",
+    "stdout": "3\n2\n1\n发射！\n再来一次\n3\n2\n1\n发射！\n"
+  },
+  {
+    "page": 12,
+    "code": "def hello():\n    print(\"你好！\")\nhello",
+    "stdout": ""
+  },
+  {
+    "page": 13,
+    "code": "def hello():\nprint(\"你好！\")",
+    "error": "IndentationError: expected an indented block"
+  },
+  {
+    "page": 14,
+    "code": "def cheer():\n    print(\"加油！\")\nprint(\"我们是最棒的！\")\ncheer()\ncheer()",
+    "stdout": "我们是最棒的！\n加油！\n加油！\n"
+  }
+]

@@ -91,7 +91,10 @@
     "stage": "列表和字符串"
   },
   {
+    "id": "14-functions",
+    "tag": "LESSON 14",
     "title": "函数定义与调用",
+    "file": "lesson_14.py",
     "stage": "函数"
   },
   {

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_hello.py",
+    "solution": "solutions/01_hello.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "你好！\n欢迎来上课\n你好！\n欢迎来上课\n",
+    "description": "定义一个函数，调用两次。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 7,
+    "starter": "starter/02_check.py",
+    "solution": "solutions/02_check.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "开机前：\n1. 检查电源\n2. 检查屏幕\n关机前：\n1. 检查电源\n2. 检查屏幕\n",
+    "description": "调用时跳进函数，做完回到原处。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 8,
+    "starter": "starter/03_check_more.py",
+    "solution": "solutions/03_check_more.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "开机前：\n1. 检查电源\n2. 检查屏幕\n3. 检查网线\n关机前：\n1. 检查电源\n2. 检查屏幕\n3. 检查网线\n",
+    "description": "函数体加一步，两次调用都跟着变。"
+  },
+  {
+    "id": "C",
+    "role": "语法小演示",
+    "page": 10,
+    "starter": "starter/04_countdown.py",
+    "solution": "solutions/04_countdown.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "3\n2\n1\n发射！\n再来一次\n3\n2\n1\n发射！\n",
+    "description": "函数里也能放循环。"
+  },
+  {
+    "id": "02",
+    "role": "学生小改写",
+    "page": 11,
+    "starter": "starter/05_birthday.py",
+    "solution": "solutions/05_birthday.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "祝你生日快乐\n祝你生日快乐\n祝你生日快乐，亲爱的朋友\n祝你生日快乐\n",
+    "description": "用函数写生日歌。"
+  },
+  {
+    "id": "03",
+    "role": "独立迁移",
+    "page": 15,
+    "starter": "starter/06_launch.py",
+    "solution": "solutions/06_launch.py",
+    "scope": "一行练习次数n为1到5的整数",
+    "sample_input": "2\n",
+    "sample_output": "第 1 次\n3\n2\n1\n发射！\n第 2 次\n3\n2\n1\n发射！\n",
+    "description": "在循环里调用函数。"
+  },
+  {
+    "id": "04",
+    "role": "创作项目",
+    "page": 17,
+    "starter": "starter/07_my_function.py",
+    "solution": "solutions/07_song_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "",
+    "sample_output": "一闪一闪亮晶晶\n满天都是小星星\n挂在天上放光明\n好像许多小眼睛\n一闪一闪亮晶晶\n满天都是小星星\n",
+    "description": "给一段常用的话起个名字。"
+  }
+]
