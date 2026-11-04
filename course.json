@@ -140,7 +140,10 @@
     "stage": "进阶"
   },
   {
+    "id": "21-random-games",
+    "tag": "LESSON 21",
     "title": "随机数与小游戏",
+    "file": "lesson_21.py",
     "stage": "进阶"
   }
 ]

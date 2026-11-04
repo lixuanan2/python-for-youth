@@ -1,0 +1,43 @@
+[
+  {
+    "page": 4,
+    "code": "import random\nseen = set()\nfor i in range(10000):\n    seen.add(random.randint(1, 6))\nprint(sorted(seen))",
+    "stdout": "[1, 2, 3, 4, 5, 6]\n"
+  },
+  {
+    "page": 6,
+    "code": "import random\nseen = set()\nfor i in range(10000):\n    seen.add(random.randint(1, 3))\nprint(sorted(seen))",
+    "stdout": "[1, 2, 3]\n"
+  },
+  {
+    "page": 7,
+    "code": "import random\nrandom.seed(7)\nprint(random.randint(1, 100))\nprint(random.randint(1, 100))\n",
+    "stdout": "42\n20\n"
+  },
+  {
+    "page": 8,
+    "code": "import random\nrandom.seed(int(input()))\nsecret = random.randint(1, 100)\nguess = int(input())\nwhile guess != secret:\n    if guess > secret:\n        print(\"大了\")\n    else:\n        print(\"小了\")\n    guess = int(input())\nprint(\"猜中了！\")\n",
+    "stdin": "7\n50\n25\n42\n",
+    "stdout": "大了\n小了\n猜中了！\n"
+  },
+  {
+    "page": 10,
+    "code": "import random\nrandom.seed(7)\na = random.randint(1, 100)\nrandom.seed(7)\nb = random.randint(1, 100)\nprint(a == b)",
+    "stdout": "True\n"
+  },
+  {
+    "page": 11,
+    "code": "import random\nprint(random.randint(6))",
+    "error": "TypeError"
+  },
+  {
+    "page": 11,
+    "code": "print(random.randint(1, 6))",
+    "error": "NameError: name 'random' is not defined"
+  },
+  {
+    "page": 12,
+    "code": "import random\nseen = set()\nfor i in range(10000):\n    seen.add(random.randint(0, 6))\nprint(0 in seen)",
+    "stdout": "True\n"
+  }
+]

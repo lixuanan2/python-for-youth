@@ -1,0 +1,57 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 7,
+    "starter": "starter/01_seed.py",
+    "solution": "solutions/01_seed.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "42\n20\n",
+    "description": "种子一样，抽到的数就一样。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 8,
+    "starter": "starter/02_guess.py",
+    "solution": "solutions/02_guess.py",
+    "scope": "第一行种子为整数；之后每行一个1到100的整数，直到猜中",
+    "sample_input": "7\n50\n25\n42\n",
+    "sample_output": "大了\n小了\n猜中了！\n",
+    "description": "秘密数随机出的猜数字。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 9,
+    "starter": "starter/03_count_six.py",
+    "solution": "solutions/03_count_six.py",
+    "scope": "第一行种子为整数；第二行掷骰子次数n为0到1000",
+    "sample_input": "1\n10\n",
+    "sample_output": "1\n",
+    "description": "掷n次骰子，数出现了几次6。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 13,
+    "starter": "starter/04_rps.py",
+    "solution": "solutions/04_rps.py",
+    "scope": "第一行种子为整数；第二行是石头、剪刀或布",
+    "sample_input": "7\n石头\n",
+    "sample_output": "电脑出 剪刀\n赢\n",
+    "description": "石头剪刀布裁判。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 15,
+    "starter": "starter/05_my_game.py",
+    "solution": "solutions/05_quiz_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "7\n9\n",
+    "sample_output": "6 + 3 = 9 答对了！\n",
+    "description": "做一个自己的随机小游戏。"
+  }
+]

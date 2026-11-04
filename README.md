@@ -49,6 +49,7 @@
 | [18](dist/18-nested-loops/index.html) | 嵌套循环与图形 | 22 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [19](dist/19-list-tools/index.html) | 列表常用操作 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [20](dist/20-2d-lists/index.html) | 二维列表 | 20 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [21](dist/21-random-games/index.html) | 随机数与小游戏 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 
