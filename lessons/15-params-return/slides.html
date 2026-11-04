@@ -1,0 +1,296 @@
+<!-- cover -->
+<section class="slide" aria-label="参数与返回值" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 15</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">给它</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">area(3, 4)</span></div><b class="r d2" style="font-size:250px">还你</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">参数与返回值：给函数数据，让它交回结果</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能写出算面积、判等级的函数，把算出的结果接着拿来用。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="每次都一样的函数">
+  <h2 class="t r">函数每次都做一样的事？</h2>
+  <div class="slip r d1" style="left:96px;top:290px;width:520px"><small style="font-size:34px">想跟每个人打招呼</small><pre style="font-size:52px">你好 小明
+你好 小红</pre></div>
+  <div class="slip r d2" style="left:660px;top:290px;width:520px"><small style="font-size:34px">想算不同房间的面积</small><pre style="font-size:52px">3 × 4 = 12
+2 × 5 = 10</pre></div>
+  <div class="slip tilt r d3" style="left:1240px;top:290px;width:580px"><small style="font-size:34px">上节课的函数</small><pre style="font-size:52px">只会说
+同一句话</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:640px">上节课的函数像只会放一首歌的音乐盒。这节课给函数开两扇门：<br>进门的叫“参数”，把数据带进去；出门的叫“返回值”，把算好的结果带回来。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- parameters -->
+<section class="slide" aria-label="参数" data-steps="3" data-at="3" data-chapter="参数">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">参数：调用时把数据带进去</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">greet.py</div>
+<pre class="code" data-file="solutions/01_greet.py"><span class="ln l1"><span class="k">def</span> <span class="f">greet</span>(name):</span><span class="ln l2 l3">    <span class="f">print</span>(<span class="s">"你好"</span>, name)</span><span class="ln l2"><span class="f">greet</span>(<span class="s">"小明"</span>)</span><span class="ln l3"><span class="f">greet</span>(<span class="s">"小红"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">括号里的 name 就是参数，像函数自己的一个变量，现在还是空的。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">调用 greet("小明")，"小明" 被放进 name，函数说“你好 小明”。</p>
+  <p class="abs say only3" style="left:96px;top:700px;width:960px;color:var(--paper)">再调用时放进 "小红"。同一个函数，给的不一样，做的就不一样。</p>
+  <a class="ide step s3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">name</i><b style="font-size:60px;color:var(--muted)">还没有</b></div>
+    <div class="box step s2"><i style="width:170px">第 3 行</i><b style="font-size:60px">你好 小明</b></div>
+    <div class="box out step s3"><i style="width:170px">第 4 行</i><b style="font-size:60px">你好 小红</b></div>
+  </div>
+</section>
+
+<!-- predict: order of arguments -->
+<section class="slide" aria-label="猜一猜：换了顺序" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：数据换了顺序，结果一样吗？</h2>
+  <div class="editor" style="left:96px;top:220px;width:900px;--fs:50px"><div class="tab">order.py</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">show</span>(a, b):</span><span class="ln">    <span class="f">print</span>(a - b)</span><span class="ln"><span class="f">show</span>(<span class="m">10</span>, <span class="m">3</span>)</span><span class="ln"><span class="f">show</span>(<span class="m">3</span>, <span class="m">10</span>)</span></pre></div>
+  <div class="abs step s2" style="left:1100px;top:250px;font:800 130px/1.3 var(--code);color:var(--clay)">7<br>-7</div>
+  <p class="abs say only1" style="left:96px;top:700px;width:1728px">两次调用给的都是 10 和 3，只是顺序不同。</p>
+  <p class="abs say step s2" style="left:96px;top:700px;width:1728px">不一样。数据按顺序一个对一个：第一个给 a，第二个给 b。<br>show(3, 10) 时 a 是 3、b 是 10，算出 -7。调用时要按参数的顺序给。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- return -->
+<section class="slide" aria-label="return 交回结果" data-steps="3" data-at="3" data-chapter="返回值">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">return：把结果交回来</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">area.py</div>
+<pre class="code" data-file="solutions/02_area.py"><span class="ln l2"><span class="k">def</span> <span class="f">area</span>(w, h):</span><span class="ln l2">    <span class="k">return</span> w * h</span><span class="ln l1 l2">s = <span class="f">area</span>(<span class="m">3</span>, <span class="m">4</span>)</span><span class="ln l3"><span class="f">print</span>(s)</span><span class="ln l3"><span class="f">print</span>(<span class="f">area</span>(<span class="m">2</span>, <span class="m">5</span>))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:760px;width:960px;color:var(--paper)">第 3 行调用 area，把 3 和 4 带进去。</p>
+  <p class="abs say only2" style="left:96px;top:760px;width:960px;color:var(--paper)">return 的意思是“返回”。函数算出 12，交回调用的地方，整个 area(3, 4) 就变成 12，存进 s。</p>
+  <p class="abs say only3" style="left:96px;top:760px;width:960px;color:var(--paper)">交回来的数，可以存起来、输出，也可以直接放进 print 里。</p>
+  <a class="ide step s3" style="left:96px;top:910px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">w, h</i><b style="font-size:72px">3, 4</b></div>
+    <div class="box step s2"><i style="width:170px">s</i><b style="font-size:84px">12</b></div>
+    <div class="box out step s3"><i style="width:170px">输出</i><b style="font-size:72px;line-height:1.2">12<br>10</b></div>
+  </div>
+</section>
+
+<!-- live: change the numbers -->
+<section class="slide" aria-label="改长和宽">
+  <div class="night" style="width:1010px"></div>
+  <h2 class="t" style="color:var(--paper)">改长和宽试试</h2>
+  <div class="editor" style="left:96px;top:230px;width:870px;--fs:46px"><div class="tab">area.py</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">area</span>(w, h):</span><span class="ln">    <span class="k">return</span> w * h</span><span class="ln"><span class="f">print</span>(<span class="f">area</span>(<input class="slot" data-var="w" value="3" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="长">, <input class="slot" data-var="h" value="4" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="宽">))</span></pre></div>
+  <p class="abs say" style="left:96px;top:660px;width:830px;color:var(--paper)">函数不用改，只改调用时给的两个数。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这两个数进 IDE</a>
+  <div class="live-out">
+    <div><i>第 3 行输出</i><b data-eval="w * h">12</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:520px;width:734px;font-size:38px">先猜再改：一边是 0 呢？两个数对调呢？</p>
+  <div class="foot"></div>
+</section>
+
+<!-- predict: print vs return -->
+<section class="slide" aria-label="猜一猜：print 和 return" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：函数里用 print，能接着算吗？</h2>
+  <div class="vs" style="top:210px">
+    <div><h3>函数里 print</h3><pre style="font-size:46px">def f():
+    print(5)
+x = f()
+print(x)</pre><p class="res step s2" style="font-size:80px;line-height:1.2">5<br>None</p></div>
+    <div><h3>函数里 return</h3><pre style="font-size:46px">def g():
+    return 5
+y = g() + 1
+print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
+  </div>
+  <p class="abs say only1" style="left:96px;top:800px;width:1728px">左边的 x 拿到了什么？</p>
+  <p class="abs say step s2" style="left:96px;top:800px;width:1728px">print 只是显示，没有交回。没有 return 的函数交回 None，意思是“什么也没有”。<br>None 不能拿来算，f() + 1 会报 TypeError。要接着用结果，就用 return。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- quiz: after return -->
+<section class="slide" aria-label="小测：return 后面">
+  <h2 class="t r">小测：调用 f() 会输出 hi 吗？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:48px"><div class="tab">会吗？</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">f</span>():</span><span class="ln">    <span class="k">return</span> <span class="m">1</span></span><span class="ln">    <span class="f">print</span>(<span class="s">"hi"</span>)</span><span class="ln"><span class="f">f</span>()</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="1">
+    <button type="button" data-fb="print 在 return 后面，轮不到它。"><i>1</i>会，输出 hi</button>
+    <button type="button" data-fb="答对了！碰到 return，函数就交回结果、马上结束，后面的不再运行。"><i>2</i>不会，什么也不输出</button>
+    <button type="button" data-fb="return 交回 1，但没有 print 它，不会显示。"><i>3</i>输出 1</button>
+    <button type="button" data-fb="return 后面写代码不报错，只是永远轮不到。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" style="left:96px;right:1000px;top:690px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- worked example: two rooms -->
+<section class="slide" aria-label="例题：两个房间" data-steps="3" data-at="3">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：两个房间一共多大</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:44px"><div class="tab">rooms.py</div>
+<pre class="code" data-file="solutions/03_rooms.py"><span class="ln"><span class="k">def</span> <span class="f">area</span>(w, h):</span><span class="ln">    <span class="k">return</span> w * h</span><span class="ln l1">w1 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">h1 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">w2 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">h2 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2">s1 = <span class="f">area</span>(w1, h1)</span><span class="ln l2">s2 = <span class="f">area</span>(w2, h2)</span><span class="ln l3"><span class="f">print</span>(s1 + s2)</span></pre></div>
+  <p class="abs say only1" style="left:1210px;right:96px;top:170px;font-size:34px">分四行读入两个房间的长和宽：3、4、2、5。</p>
+  <p class="abs say only2" style="left:1210px;right:96px;top:170px;font-size:34px">算面积的方法只写一次，调用两次。返回的 12 和 10 分别存进 s1 和 s2。</p>
+  <p class="abs say only3" style="left:1210px;right:96px;top:170px;font-size:34px">两个返回值相加，输出一共 22。</p>
+  <div class="abs" style="left:1210px;right:96px;top:420px">
+    <div class="box step"><i style="width:170px">输入</i><b style="font-size:60px">3 4 2 5</b></div>
+    <div class="box step s2"><i style="width:170px">s1, s2</i><b style="font-size:60px">12, 10</b></div>
+    <div class="box out step s3"><i style="width:170px">输出</i><b style="font-size:72px">22</b></div>
+  </div>
+  <a class="ide step s3" style="left:1210px;top:930px">▶ 在 IDE 打开</a>
+</section>
+
+<!-- your turn: perimeter -->
+<section class="slide" aria-label="改成周长">
+  <div class="band r"><b>动手<br>改一改</b><span>换个名字，换个算法，别的不用动。</span></div>
+  <div class="turn">
+    <h2 class="r d1">写一个周长函数</h2>
+    <p class="say r d1">起始程序里有面积函数。把它改成 perimeter(w, h)，返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，都是 0 到 100 的整数，输出周长。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">3
+4</pre></div><div><small>输出</small><pre style="line-height:1.2">14</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/04_perimeter.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/04_perimeter.py" style="left:610px;top:920px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- quiz: missing argument -->
+<section class="slide" aria-label="小测：少给一个">
+  <h2 class="t r">小测：area 要两个数，只给一个会怎样？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:48px"><div class="tab">会怎样？</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">area</span>(w, h):</span><span class="ln">    <span class="k">return</span> w * h</span><span class="ln"><span class="f">print</span>(<span class="f">area</span>(<span class="m">3</span>))</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="2">
+    <button type="button" data-fb="h 没有数，Python 不会替你补 0。"><i>1</i>输出 0</button>
+    <button type="button" data-fb="Python 不会把一个数用两次。"><i>2</i>输出 9</button>
+    <button type="button" data-fb="答对了！报 TypeError，说 area() 少了一个参数 h。参数有几个，调用就给几个。"><i>3</i>报 TypeError</button>
+    <button type="button" data-fb="print 会运行，但 area(3) 先出错了。"><i>4</i>什么也不输出</button>
+  </div>
+  <p class="fb" style="left:96px;right:1000px;top:690px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- if inside: bigger -->
+<section class="slide" aria-label="谁大返回谁" data-steps="2" data-at="2" data-chapter="函数里的判断">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">谁大就交回谁</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">bigger.py</div>
+<pre class="code" data-file="solutions/05_bigger.py"><span class="ln"><span class="k">def</span> <span class="f">bigger</span>(a, b):</span><span class="ln l1 l2">    <span class="k">if</span> a &gt; b:</span><span class="ln l2">        <span class="k">return</span> a</span><span class="ln l1">    <span class="k">return</span> b</span><span class="ln l1"><span class="f">print</span>(<span class="f">bigger</span>(<span class="m">3</span>, <span class="m">8</span>))</span><span class="ln l2"><span class="f">print</span>(<span class="f">bigger</span>(<span class="m">9</span>, <span class="m">2</span>))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:800px;width:960px;color:var(--paper)">bigger(3, 8)：3 不比 8 大，跳过 if，走到最后一行，交回 b，也就是 8。</p>
+  <p class="abs say only2" style="left:96px;top:800px;width:960px;color:var(--paper)">bigger(9, 2)：9 比 2 大，交回 9，函数马上结束，最后一行轮不到。不用写 else。</p>
+  <a class="ide step s2" style="left:96px;top:950px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step" style="display:block"><i style="display:block;width:auto">bigger(3, 8)</i><b style="display:block;font-size:84px">8</b></div>
+    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">bigger(9, 2)</i><b style="display:block;font-size:84px">9</b></div>
+  </div>
+</section>
+
+<!-- your turn: grade -->
+<section class="slide" aria-label="成绩等级函数">
+  <div class="band r"><b>动手<br>改一改</b><span>一个参数，三种结果，碰到 return 就结束。</span></div>
+  <div class="turn">
+    <h2 class="r d1">写一个成绩等级函数</h2>
+    <p class="say r d1">写 grade(score)：90 分及以上返回“优秀”，60 分及以上返回“及格”，其余返回“不及格”。读入一个 0 到 100 的整数分数，输出等级。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>输入 95</small><pre>优秀</pre></div><div><small>输入 60</small><pre>及格</pre></div><div><small>输入 59</small><pre>不及格</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/06_grade.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/06_grade.py" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:600px 440px 1fr"><code>area(3)</code><b>TypeError</b><span>参数有几个，就给几个</span></div>
+    <div class="r d2" style="grid-template-columns:600px 440px 1fr"><code class="plain">函数里只 print</code><b>拿到 None</b><span>要接着用结果就 return</span></div>
+    <div class="r d3" style="grid-template-columns:600px 440px 1fr"><code class="plain">return 后面还写代码</code><b>不报错</b><span>那几行永远轮不到</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">分清两件事：print 是给人看的，return 是交给程序接着用的。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：拿到了 None">
+  <h2 class="t r">找错：想输出 12，怎么报错了？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="3" data-yes="找到了！这一行只把 6 显示出来，没有交回去，x 拿到的是 None，None 不能乘 2。改成 return s 就对了。" data-no="这一行没问题。报错说 x 是 None，想一想函数交回了什么。"><span class="ln"><span class="k">def</span> <span class="f">total</span>(a, b, c):</span><span class="ln">    s = a + b + c</span><span class="ln">    <span class="f">print</span>(s)</span><span class="ln">x = <span class="f">total</span>(<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>)</span><span class="ln"><span class="f">print</span>(x * <span class="m">2</span>)</span></pre></div>
+  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">程序先输出 6，然后报 TypeError，说 None 不能和 2 相乘。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="left:1220px;top:560px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="三个数里最大" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">三个数比大小</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">分三行读入三个整数（-1000 到 1000），输出最大的那个。<br>先写 bigger(a, b)，返回两个数里大的那个，再只用它比出三个数里最大的，不再写别的 if。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:200px;width:440px"><small>依次输入</small><pre>3
+9
+5</pre><small style="margin-top:20px">输出</small><pre>9</pre></div>
+  <a class="ide r d3" data-code-file="starter/07_max3.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>bigger 就是上面“谁大就交回谁”的那个函数。</span></p>
+    <p class="step s2"><i>提示 2</i><span>先比 a 和 b，交回来的那个，再和 c 比一次。</span></p>
+    <p class="step s3"><i>提示 3</i><span>交回来的结果可以直接放进另一次调用的括号里。试试三个数一样大，或者全是负数。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个工具函数" data-chapter="小项目">
+  <h2 class="t r">造一个你的工具函数</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">给它数据，它算好交回来，你拿结果做别的事。算什么，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>写一个带参数、有 return 的函数，调用两次，输出结果。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>打折计算、零花钱几周攒够、跑步用时、作业还剩几页。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>写两个函数，把一个的结果交给另一个；或者在函数里用 if。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/08_my_tool.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着用</b><span>给同桌的函数换几组数据，先猜结果，再运行</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪个函数最有用</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>给 0 或者负数，函数还对吗？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让工具更可靠。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>调用时给的数据，按什么放进参数？<em class="step s2" style="font-style:normal;font-weight:400">　按顺序，一个对一个。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>print 和 return 有什么不同？<em class="step s3" style="font-style:normal;font-weight:400">　print 给人看，return 交回结果接着用。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>碰到 return 以后，函数还会往下走吗？<em class="step s4" style="font-style:normal;font-weight:400">　不会，马上结束。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div style="grid-template-columns:780px 1fr" class="r d1"><code>def area(w, h):</code><span>括号里是参数</span></div>
+    <div style="grid-template-columns:780px 1fr" class="r d1"><code style="white-space:pre">    return w * h</code><span>交回结果，函数结束</span></div>
+    <div style="grid-template-columns:780px 1fr" class="r d2"><code>s = area(3, 4)</code><span>3 给 w，4 给 h，s 是 12</span></div>
+    <div style="grid-template-columns:780px 1fr" class="r d2"><code>area(1, 2) + area(3, 4)</code><span>返回值可以接着算</span></div>
+    <div style="grid-template-columns:780px 1fr" class="r d3"><code class="plain" style="font-family:var(--text)">没有 return</code><span>交回 None</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>max() abs()</code><span>Python 自带的函数，也有参数和返回值</span></div>
+    <div class="r d2"><code>import math</code><span>下节课：借来一整盒数学函数</span></div>
+    <div class="r d3"><code>默认参数</code><span>不给数据时，参数自己用一个默认值</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">今天自己写了会算数的函数。下节课看看 Python 早就准备好的数学函数。</p>
+  <div class="foot"></div>
+</section>

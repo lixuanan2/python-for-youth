@@ -1,0 +1,68 @@
+[
+  {
+    "page": 3,
+    "code": "def greet(name):\n    print(\"你好\", name)\ngreet(\"小明\")\ngreet(\"小红\")\n",
+    "stdout": "你好 小明\n你好 小红\n"
+  },
+  {
+    "page": 4,
+    "code": "def show(a, b):\n    print(a - b)\nshow(10, 3)\nshow(3, 10)",
+    "stdout": "7\n-7\n"
+  },
+  {
+    "page": 5,
+    "code": "def area(w, h):\n    return w * h\ns = area(3, 4)\nprint(s)\nprint(area(2, 5))\n",
+    "stdout": "12\n10\n"
+  },
+  {
+    "page": 6,
+    "code": "def area(w, h):\n    return w * h\nprint(area(3, 4))",
+    "stdout": "12\n"
+  },
+  {
+    "page": 6,
+    "code": "def area(w, h):\n    return w * h\nprint(area(0, 4))",
+    "stdout": "0\n"
+  },
+  {
+    "page": 7,
+    "code": "def f():\n    print(5)\nx = f()\nprint(x)",
+    "stdout": "5\nNone\n"
+  },
+  {
+    "page": 7,
+    "code": "def g():\n    return 5\ny = g() + 1\nprint(y)",
+    "stdout": "6\n"
+  },
+  {
+    "page": 7,
+    "code": "def f():\n    print(5)\nx = f() + 1",
+    "error": "TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'"
+  },
+  {
+    "page": 8,
+    "code": "def f():\n    return 1\n    print(\"hi\")\nf()",
+    "stdout": ""
+  },
+  {
+    "page": 9,
+    "code": "def area(w, h):\n    return w * h\nw1 = int(input())\nh1 = int(input())\nw2 = int(input())\nh2 = int(input())\ns1 = area(w1, h1)\ns2 = area(w2, h2)\nprint(s1 + s2)\n",
+    "stdin": "3\n4\n2\n5\n",
+    "stdout": "22\n"
+  },
+  {
+    "page": 11,
+    "code": "def area(w, h):\n    return w * h\nprint(area(3))",
+    "error": "TypeError: area() missing 1 required positional argument: 'h'"
+  },
+  {
+    "page": 12,
+    "code": "def bigger(a, b):\n    if a > b:\n        return a\n    return b\nprint(bigger(3, 8))\nprint(bigger(9, 2))\n",
+    "stdout": "8\n9\n"
+  },
+  {
+    "page": 15,
+    "code": "def total(a, b, c):\n    s = a + b + c\n    print(s)\nx = total(1, 2, 3)\nprint(x * 2)",
+    "error": "TypeError: unsupported operand type(s) for *: 'NoneType' and 'int'"
+  }
+]

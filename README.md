@@ -43,6 +43,7 @@
 | [12](dist/12-string-basics/index.html) | 字符串基础 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [13](dist/13-string-methods/index.html) | 字符串常用方法 | 22 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [14](dist/14-functions/index.html) | 函数定义与调用 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [15](dist/15-params-return/index.html) | 参数与返回值 | 22 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 

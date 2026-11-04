@@ -1,0 +1,90 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_greet.py",
+    "solution": "solutions/01_greet.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "你好 小明\n你好 小红\n",
+    "description": "参数把数据带进函数。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 5,
+    "starter": "starter/02_area.py",
+    "solution": "solutions/02_area.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "12\n10\n",
+    "description": "return把结果交回来。"
+  },
+  {
+    "id": "C",
+    "role": "基础例题",
+    "page": 9,
+    "starter": "starter/03_rooms.py",
+    "solution": "solutions/03_rooms.py",
+    "scope": "分四行读入两个房间的长和宽，都是0到100的整数",
+    "sample_input": "3\n4\n2\n5\n",
+    "sample_output": "22\n",
+    "description": "调用两次，把返回值加起来。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 10,
+    "starter": "starter/04_perimeter.py",
+    "solution": "solutions/04_perimeter.py",
+    "scope": "分两行读入长和宽，都是0到100的整数",
+    "sample_input": "3\n4\n",
+    "sample_output": "14\n",
+    "description": "改成周长函数。"
+  },
+  {
+    "id": "D",
+    "role": "语法小演示",
+    "page": 12,
+    "starter": "starter/05_bigger.py",
+    "solution": "solutions/05_bigger.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "8\n9\n",
+    "description": "函数里用if，碰到return就结束。"
+  },
+  {
+    "id": "02",
+    "role": "学生小改写",
+    "page": 13,
+    "starter": "starter/06_grade.py",
+    "solution": "solutions/06_grade.py",
+    "scope": "一行0到100的整数分数",
+    "sample_input": "95\n",
+    "sample_output": "优秀\n",
+    "description": "写一个成绩等级函数。"
+  },
+  {
+    "id": "03",
+    "role": "独立迁移",
+    "page": 16,
+    "starter": "starter/07_max3.py",
+    "solution": "solutions/07_max3.py",
+    "scope": "分三行读入三个-1000到1000的整数",
+    "sample_input": "3\n9\n5\n",
+    "sample_output": "9\n",
+    "description": "把返回值再交给函数，比出三个数里最大的。"
+  },
+  {
+    "id": "04",
+    "role": "创作项目",
+    "page": 18,
+    "starter": "starter/08_my_tool.py",
+    "solution": "solutions/08_sale_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "100\n",
+    "sample_output": "打八折是 80.0 元\n打五折是 50.0 元\n",
+    "description": "做一个自己的工具函数。"
+  }
+]
