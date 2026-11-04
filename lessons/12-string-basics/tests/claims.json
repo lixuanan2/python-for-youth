@@ -1,0 +1,74 @@
+[
+  {
+    "page": 3,
+    "code": "word = \"Python\"\nprint(len(word))\nprint(word[0])\nprint(word[-1])\n",
+    "stdout": "6\nP\nn\n"
+  },
+  {
+    "page": 4,
+    "code": "word = \"Python\"\nprint(word[1])",
+    "stdout": "y\n"
+  },
+  {
+    "page": 6,
+    "code": "s = \"你好世界\"\nprint(s[2])",
+    "stdout": "世\n"
+  },
+  {
+    "page": 7,
+    "code": "word = input()\nprint(word[0], word[-1])\n",
+    "stdin": "hello\n",
+    "stdout": "h o\n"
+  },
+  {
+    "page": 8,
+    "code": "word = \"Python\"\nprint(word[0:2])\nprint(word[2:5])\n",
+    "stdout": "Py\ntho\n"
+  },
+  {
+    "page": 9,
+    "code": "word = \"Python\"\nprint(word[:3])\nprint(word[3:])",
+    "stdout": "Pyt\nhon\n"
+  },
+  {
+    "page": 10,
+    "code": "s = \"abcdef\"\nprint(s[1:4])",
+    "stdout": "bcd\n"
+  },
+  {
+    "page": 12,
+    "code": "word = \"cat\"\nfor ch in word:\n    print(ch)\n",
+    "stdout": "c\na\nt\n"
+  },
+  {
+    "page": 13,
+    "code": "word = input()\ncount = 0\nfor ch in word:\n    if ch == \"a\":\n        count += 1\nprint(count)\n",
+    "stdin": "banana\n",
+    "stdout": "3\n"
+  },
+  {
+    "page": 15,
+    "code": "word = \"Python\"\nword[0] = \"J\"",
+    "error": "TypeError: 'str' object does not support item assignment"
+  },
+  {
+    "page": 15,
+    "code": "word = \"Python\"\nnew = \"J\" + word[1:]\nprint(new)",
+    "stdout": "Jython\n"
+  },
+  {
+    "page": 16,
+    "code": "word = \"Python\"\nprint(word[6])",
+    "error": "IndexError: string index out of range"
+  },
+  {
+    "page": 16,
+    "code": "word = \"Python\"\nprint(word[1:3])",
+    "stdout": "yt\n"
+  },
+  {
+    "page": 17,
+    "code": "word = \"banana\"\ncount = 0\nfor ch in word:\n    if ch == \"A\":\n        count += 1\nprint(count)",
+    "stdout": "0\n"
+  }
+]

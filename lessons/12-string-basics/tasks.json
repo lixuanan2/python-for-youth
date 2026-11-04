@@ -1,0 +1,101 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_basics.py",
+    "solution": "solutions/01_basics.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "6\nP\nn\n",
+    "description": "len、正下标和负下标。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 7,
+    "starter": "starter/02_ends.py",
+    "solution": "solutions/02_ends.py",
+    "scope": "一行1到50个字的文字",
+    "sample_input": "hello\n",
+    "sample_output": "h o\n",
+    "description": "输出第一个字和最后一个字。"
+  },
+  {
+    "id": "C",
+    "role": "语法小演示",
+    "page": 8,
+    "starter": "starter/03_slice.py",
+    "solution": "solutions/03_slice.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "Py\ntho\n",
+    "description": "切片取一段，不含终点。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 11,
+    "starter": "starter/04_two_two.py",
+    "solution": "solutions/04_two_two.py",
+    "scope": "一行2到50个字的文字",
+    "sample_input": "Python\n",
+    "sample_output": "Py on\n",
+    "description": "输出前两个字和后两个字。"
+  },
+  {
+    "id": "D",
+    "role": "语法小演示",
+    "page": 12,
+    "starter": "starter/05_each.py",
+    "solution": "solutions/05_each.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "c\na\nt\n",
+    "description": "一个字一个字地遍历。"
+  },
+  {
+    "id": "E",
+    "role": "基础例题",
+    "page": 13,
+    "starter": "starter/06_count_a.py",
+    "solution": "solutions/06_count_a.py",
+    "scope": "一行1到50个英文字母，区分大小写",
+    "sample_input": "banana\n",
+    "sample_output": "3\n",
+    "description": "数一数有几个小写a。"
+  },
+  {
+    "id": "02",
+    "role": "学生小改写",
+    "page": 14,
+    "starter": "starter/07_count_char.py",
+    "solution": "solutions/07_count_char.py",
+    "scope": "第一行一个字，可以是空格；第二行1到50个字的文字；区分大小写",
+    "sample_input": "a\na cat and a dog\n",
+    "sample_output": "4\n",
+    "description": "先读入要数的字，再读入一句话。"
+  },
+  {
+    "id": "03",
+    "role": "独立迁移",
+    "page": 18,
+    "starter": "starter/08_reverse.py",
+    "solution": "solutions/08_reverse.py",
+    "scope": "一行1到50个字的文字，可以有空格",
+    "sample_input": "hello\n",
+    "sample_output": "olleh\n",
+    "description": "倒着输出一行文字。"
+  },
+  {
+    "id": "04",
+    "role": "创作项目",
+    "page": 20,
+    "starter": "starter/09_name_game.py",
+    "solution": "solutions/09_name_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "小明\n",
+    "sample_output": "你的名字有 2 个字\n第一个字是 小\n最后一个字是 明\n",
+    "description": "做一个名字小把戏。"
+  }
+]
