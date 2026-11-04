@@ -1,0 +1,57 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_countdown.py",
+    "solution": "solutions/01_countdown.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "3\n2\n1\n发射！\n",
+    "description": "函数调用自己，倒数发射。"
+  },
+  {
+    "id": "B",
+    "role": "基础例题",
+    "page": 7,
+    "starter": "starter/02_total.py",
+    "solution": "solutions/02_total.py",
+    "scope": "一行，n为1到100的整数",
+    "sample_input": "4\n",
+    "sample_output": "10\n",
+    "description": "用递归从 1 加到 n。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 9,
+    "starter": "starter/03_factorial.py",
+    "solution": "solutions/03_factorial.py",
+    "scope": "一行，n为1到10的整数",
+    "sample_input": "4\n",
+    "sample_output": "24\n",
+    "description": "把加法改成乘法，算阶乘。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 12,
+    "starter": "starter/04_hanoi.py",
+    "solution": "solutions/04_hanoi.py",
+    "scope": "一行，n为1到6的整数",
+    "sample_input": "2\n",
+    "sample_output": "A -> B\nA -> C\nB -> C\n",
+    "description": "汉诺塔，输出每一步。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 14,
+    "starter": "starter/05_my_recursion.py",
+    "solution": "solutions/05_triangle_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "4\n",
+    "sample_output": "*\n**\n***\n****\n",
+    "description": "做一个自己的递归小程序。"
+  }
+]

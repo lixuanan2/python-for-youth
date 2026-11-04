@@ -154,7 +154,10 @@
     "stage": "进阶"
   },
   {
+    "id": "23-recursion",
+    "tag": "LESSON 23",
     "title": "递归入门",
+    "file": "lesson_23.py",
     "stage": "算法入门"
   },
   {

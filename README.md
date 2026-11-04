@@ -51,6 +51,7 @@
 | [20](dist/20-2d-lists/index.html) | 二维列表 | 20 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [21](dist/21-random-games/index.html) | 随机数与小游戏 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [22](dist/22-try-except/index.html) | 接住报错：try 和 except | 20 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [23](dist/23-recursion/index.html) | 递归入门 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 

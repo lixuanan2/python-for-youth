@@ -1,0 +1,71 @@
+[
+  {
+    "page": 3,
+    "code": "def countdown(n):\n    if n == 0:\n        print(\"发射！\")\n    else:\n        print(n)\n        countdown(n - 1)\ncountdown(3)\n",
+    "stdout": "3\n2\n1\n发射！\n"
+  },
+  {
+    "page": 4,
+    "code": "def up(n):\n    if n > 0:\n        up(n - 1)\n        print(n)\nup(3)\n",
+    "stdout": "1\n2\n3\n"
+  },
+  {
+    "page": 4,
+    "code": "def up(n):\n    if n > 0:\n        up(n - 1)\n        print(n)\nup(0)\n",
+    "stdout": ""
+  },
+  {
+    "page": 5,
+    "code": "def countdown(n):\n    if n == 0:\n        print(\"发射！\")\n    else:\n        print(n)\n        countdown(n - 1)\ncountdown(0)\n",
+    "stdout": "发射！\n"
+  },
+  {
+    "page": 6,
+    "code": "def countdown(n):\n    print(n)\n    countdown(n - 1)\ncountdown(3)\n",
+    "error": "RecursionError"
+  },
+  {
+    "page": 6,
+    "code": "def countdown(n):\n    if n == 0:\n        print(\"发射！\")\n    else:\n        countdown(n)\ncountdown(3)\n",
+    "error": "RecursionError"
+  },
+  {
+    "page": 7,
+    "code": "def total(n):\n    if n == 1:\n        return 1\n    return n + total(n - 1)\nprint(total(int(input())))\n",
+    "stdin": "4\n",
+    "stdout": "10\n"
+  },
+  {
+    "page": 8,
+    "code": "def total(n):\n    if n == 1:\n        return 1\n    return n + total(n - 1)\nprint(total(int(input())))\n",
+    "stdin": "5\n",
+    "stdout": "15\n"
+  },
+  {
+    "page": 8,
+    "code": "n = 1\nfor i in range(2, 6):\n    n = n * i\nprint(n)\n",
+    "stdout": "120\n"
+  },
+  {
+    "page": 9,
+    "code": "def fact(n):\n    if n == 1:\n        return 1\n    return n * fact(n - 1)\nprint(fact(int(input())))\n",
+    "stdin": "4\n",
+    "stdout": "24\n"
+  },
+  {
+    "page": 9,
+    "code": "def fact(n):\n    if n == 1:\n        return 1\n    return n * fact(n - 1)\nprint(fact(int(input())))\n",
+    "stdin": "10\n",
+    "stdout": "3628800\n"
+  },
+  {
+    "page": 10,
+    "code": "def total(n):\n    if n == 1:\n        return 1\n    n + total(n - 1)\nprint(total(4))\n",
+    "error": "TypeError"
+  },
+  {
+    "page": 11,
+    "code": "def total(n):\n    if n == 1:\n        return 1\n    return n + total(n)\nprint(total(4))\n",
+    "error": "RecursionError"
+  }
+]
