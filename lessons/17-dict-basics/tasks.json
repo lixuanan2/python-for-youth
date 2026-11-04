@@ -1,0 +1,90 @@
+[
+  {
+    "id": "A",
+    "role": "语法小演示",
+    "page": 3,
+    "starter": "starter/01_price.py",
+    "solution": "solutions/01_price.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "5\n2\n",
+    "description": "建一个字典，按键取值。"
+  },
+  {
+    "id": "B",
+    "role": "语法小演示",
+    "page": 5,
+    "starter": "starter/02_update.py",
+    "solution": "solutions/02_update.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "{'苹果': 6, '香蕉': 3, '西瓜': 20}\n",
+    "description": "赋值能改旧的，也能加新的。"
+  },
+  {
+    "id": "C",
+    "role": "语法小演示",
+    "page": 8,
+    "starter": "starter/03_in_get.py",
+    "solution": "solutions/03_in_get.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "False\n0\n2\n",
+    "description": "in问在不在，get查不到给默认值。"
+  },
+  {
+    "id": "D",
+    "role": "基础例题",
+    "page": 9,
+    "starter": "starter/04_lookup.py",
+    "solution": "solutions/04_lookup.py",
+    "scope": "一行商品名",
+    "sample_input": "香蕉\n",
+    "sample_output": "3\n",
+    "description": "按商品名查价格，没有就说一声。"
+  },
+  {
+    "id": "01",
+    "role": "学生小改写",
+    "page": 10,
+    "starter": "starter/05_total.py",
+    "solution": "solutions/05_total.py",
+    "scope": "第一行商品名，第二行购买数量为0到100的整数",
+    "sample_input": "苹果\n3\n",
+    "sample_output": "15\n",
+    "description": "按数量算总价。"
+  },
+  {
+    "id": "E",
+    "role": "语法小演示",
+    "page": 11,
+    "starter": "starter/06_each.py",
+    "solution": "solutions/06_each.py",
+    "scope": "无输入",
+    "sample_input": "",
+    "sample_output": "小明 11\n小红 12\n",
+    "description": "for遍历字典，拿到的是键。"
+  },
+  {
+    "id": "02",
+    "role": "独立迁移",
+    "page": 15,
+    "starter": "starter/07_word_count.py",
+    "solution": "solutions/07_word_count.py",
+    "scope": "一行英文，单词用空格隔开，至少一个单词，区分大小写",
+    "sample_input": "the cat and the hat\n",
+    "sample_output": "the 2\ncat 1\nand 1\nhat 1\n",
+    "description": "统计每个单词出现几次。"
+  },
+  {
+    "id": "03",
+    "role": "创作项目",
+    "page": 17,
+    "starter": "starter/08_my_dict.py",
+    "solution": "solutions/08_dictionary_example.py",
+    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "sample_input": "dog\n",
+    "sample_output": "狗\n",
+    "description": "做一个自己的小词典。"
+  }
+]

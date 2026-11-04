@@ -1,0 +1,69 @@
+[
+  {
+    "page": 3,
+    "code": "price = {\"苹果\": 5, \"香蕉\": 3}\nprint(price[\"苹果\"])\nprint(len(price))\n",
+    "stdout": "5\n2\n"
+  },
+  {
+    "page": 4,
+    "code": "price = {\"苹果\": 5, \"香蕉\": 3}\nprint(price[\"西瓜\"])",
+    "error": "KeyError: '西瓜'"
+  },
+  {
+    "page": 5,
+    "code": "price = {\"苹果\": 5, \"香蕉\": 3}\nprice[\"苹果\"] = 6\nprice[\"西瓜\"] = 20\nprint(price)\n",
+    "stdout": "{'苹果': 6, '香蕉': 3, '西瓜': 20}\n"
+  },
+  {
+    "page": 6,
+    "code": "d = {\"a\": 1}\nd[\"a\"] = 2\nd[\"b\"] = 3\nprint(len(d))",
+    "stdout": "2\n"
+  },
+  {
+    "page": 7,
+    "code": "price = {\"苹果\": 5, \"香蕉\": 3}\nprint(\"苹果\" in price)\nprint(\"西瓜\" in price)",
+    "stdout": "True\nFalse\n"
+  },
+  {
+    "page": 8,
+    "code": "price = {\"苹果\": 5, \"香蕉\": 3}\nprint(\"西瓜\" in price)\nprint(price.get(\"西瓜\", 0))\nprint(len(price))\n",
+    "stdout": "False\n0\n2\n"
+  },
+  {
+    "page": 9,
+    "code": "price = {\"苹果\": 5, \"香蕉\": 3,\n         \"橙子\": 4}\nname = input()\nif name in price:\n    print(price[name])\nelse:\n    print(\"没有这个商品\")\n",
+    "stdin": "香蕉\n",
+    "stdout": "3\n"
+  },
+  {
+    "page": 9,
+    "code": "price = {\"苹果\": 5, \"香蕉\": 3,\n         \"橙子\": 4}\nname = input()\nif name in price:\n    print(price[name])\nelse:\n    print(\"没有这个商品\")\n",
+    "stdin": "西瓜\n",
+    "stdout": "没有这个商品\n"
+  },
+  {
+    "page": 11,
+    "code": "ages = {\"小明\": 11, \"小红\": 12}\nfor name in ages:\n    print(name, ages[name])\n",
+    "stdout": "小明 11\n小红 12\n"
+  },
+  {
+    "page": 12,
+    "code": "d = {\"a\": 1}\nprint(d.get(\"x\", 0))\nprint(len(d))",
+    "stdout": "0\n1\n"
+  },
+  {
+    "page": 13,
+    "code": "price = {\"苹果\": 5, \"香蕉\": 3}\nprint(price[0])",
+    "error": "KeyError: 0"
+  },
+  {
+    "page": 13,
+    "code": "price = {\"apple\": 5}\nprint(\"Apple\" in price)",
+    "stdout": "False\n"
+  },
+  {
+    "page": 14,
+    "code": "counts = {}\nfor f in [\"苹果\", \"香蕉\", \"苹果\"]:\n    counts[f] += 1\nprint(counts)",
+    "error": "KeyError: '苹果'"
+  }
+]

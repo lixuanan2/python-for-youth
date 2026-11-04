@@ -112,7 +112,10 @@
     "stage": "函数"
   },
   {
+    "id": "17-dict-basics",
+    "tag": "LESSON 17",
     "title": "字典基础",
+    "file": "lesson_17.py",
     "stage": "字典"
   }
 ]

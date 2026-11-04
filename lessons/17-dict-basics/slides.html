@@ -1,0 +1,279 @@
+<!-- cover -->
+<section class="slide" aria-label="字典基础" data-chapter="开始">
+  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 17</p>
+  <div class="cover-row"><b class="r" style="font-size:250px">报名</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">price["苹果"]</span></div><b class="r d2" style="font-size:250px">得数</b></div>
+  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">字典基础：按名字找东西</p>
+  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能做一张价格表、一本小词典，还能数出每个词出现了几次。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- the problem -->
+<section class="slide clay" aria-label="按名字找">
+  <h2 class="t r">苹果多少钱？</h2>
+  <div class="slip r d1" style="left:96px;top:290px;width:520px"><small style="font-size:34px">列表：按编号找</small><pre style="font-size:52px">[5, 3, 4]
+第几个是苹果？</pre></div>
+  <div class="slip tilt r d2" style="left:700px;top:290px;width:620px"><small style="font-size:34px">字典：按名字找</small><pre style="font-size:52px">苹果 → 5
+香蕉 → 3
+橙子 → 4</pre></div>
+  <p class="abs say r d3" style="left:96px;right:96px;top:680px">查字典时，按字找到它的解释，不用记它在第几页。<br>Python 的字典也一样：每个“键”对应一个“值”，报出键，就拿到值。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- first dictionary -->
+<section class="slide" aria-label="第一个字典" data-steps="3" data-at="3" data-chapter="查和改">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">第一个字典</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">price.py</div>
+<pre class="code" data-file="solutions/01_price.py"><span class="ln l1">price = {<span class="s">"苹果"</span>: <span class="m">5</span>, <span class="s">"香蕉"</span>: <span class="m">3</span>}</span><span class="ln l2"><span class="f">print</span>(price[<span class="s">"苹果"</span>])</span><span class="ln l3"><span class="f">print</span>(<span class="f">len</span>(price))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">字典用花括号 {}。每一对是“键: 值”，对和对之间用逗号隔开。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">方括号里写键，拿到对应的值：苹果是 5。</p>
+  <p class="abs say only3" style="left:96px;top:620px;width:960px;color:var(--paper)">len 数一数有几对：2 对。</p>
+  <a class="ide step s3" style="left:96px;top:820px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">键</i><b style="font-size:60px">苹果、香蕉</b></div>
+    <div class="box step s2"><i style="width:170px">苹果</i><b style="font-size:84px">5</b></div>
+    <div class="box out step s3"><i style="width:170px">len</i><b style="font-size:84px">2</b></div>
+  </div>
+</section>
+
+<!-- predict: missing key -->
+<section class="slide dark" aria-label="猜一猜：查一个没有的" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：查一个没有的东西会怎样？</h2>
+  <div class="editor" style="left:96px;top:230px;width:1100px;--fs:50px"><div class="tab">guess.py</div>
+<pre class="code"><span class="ln">price = {<span class="s">"苹果"</span>: <span class="m">5</span>, <span class="s">"香蕉"</span>: <span class="m">3</span>}</span><span class="ln"><span class="f">print</span>(price[<span class="s">"西瓜"</span>])</span></pre></div>
+  <p class="abs only1" style="left:1300px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <p class="abs say only1" style="left:96px;top:560px">输出 0？什么也不输出？还是报错？</p>
+  <div class="slip tilt step s2" style="left:1280px;top:250px;width:540px"><small>屏幕上</small><pre style="font-size:44px">KeyError: '西瓜'</pre></div>
+  <p class="abs say step s2" style="left:96px;top:560px;width:1600px">报 KeyError。Key 就是“键”，意思是：没有这个键。字典不会替你编一个数出来。<br>后面会学两种办法：先问在不在，或者查不到时给个默认值。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- change and add -->
+<section class="slide" aria-label="改和加" data-steps="2" data-at="2">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">赋值：改和加</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">update.py</div>
+<pre class="code" data-file="solutions/02_update.py"><span class="ln">price = {<span class="s">"苹果"</span>: <span class="m">5</span>, <span class="s">"香蕉"</span>: <span class="m">3</span>}</span><span class="ln l1">price[<span class="s">"苹果"</span>] = <span class="m">6</span></span><span class="ln l2">price[<span class="s">"西瓜"</span>] = <span class="m">20</span></span><span class="ln l2"><span class="f">print</span>(price)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:690px;width:960px;color:var(--paper)">苹果已经有了，赋值就是改价：5 换成 6。</p>
+  <p class="abs say only2" style="left:96px;top:690px;width:960px;color:var(--paper)">西瓜原来没有，赋值就是新加一对。读取时没有会报错，赋值时没有就新建。</p>
+  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step" style="display:block"><i style="display:block;width:auto">改</i><b style="display:block;font-size:48px">苹果: 5 → 6</b></div>
+    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">输出</i><b style="display:block;font-size:44px;line-height:1.3">{'苹果': 6, '香蕉': 3,<br>&nbsp;'西瓜': 20}</b></div>
+  </div>
+</section>
+
+<!-- quiz -->
+<section class="slide" aria-label="小测：几对">
+  <h2 class="t r">小测：最后 d 里有几对？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:48px"><div class="tab">几对？</div>
+<pre class="code"><span class="ln">d = {<span class="s">"a"</span>: <span class="m">1</span>}</span><span class="ln">d[<span class="s">"a"</span>] = <span class="m">2</span></span><span class="ln">d[<span class="s">"b"</span>] = <span class="m">3</span></span><span class="ln"><span class="f">print</span>(<span class="f">len</span>(d))</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="1">
+    <button type="button" data-fb="a 已经有了，第 2 行是改值，不是再加一对。"><i>1</i>3</button>
+    <button type="button" data-fb="答对了！第 2 行把 a 改成 2，第 3 行新加 b，一共 a 和 b 两对。"><i>2</i>2</button>
+    <button type="button" data-fb="第 3 行加了一个新键 b。"><i>3</i>1</button>
+    <button type="button" data-fb="len 数的是有几对，不是值加起来。"><i>4</i>5</button>
+  </div>
+  <p class="fb" style="left:96px;right:1000px;top:700px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- in -->
+<section class="slide" aria-label="in 问一问" data-steps="2" data-at="2" data-chapter="在不在">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">in：先问一问在不在</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">in.py</div>
+<pre class="code"><span class="ln">price = {<span class="s">"苹果"</span>: <span class="m">5</span>, <span class="s">"香蕉"</span>: <span class="m">3</span>}</span><span class="ln l1"><span class="f">print</span>(<span class="s">"苹果"</span> <span class="k">in</span> price)</span><span class="ln l2"><span class="f">print</span>(<span class="s">"西瓜"</span> <span class="k">in</span> price)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">“键 in 字典”问的是：有没有这个键？有就是 True。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">没有就是 False。先用 if 问一问，再去取，就不会报 KeyError。</p>
+  <a class="ide step s2" style="left:96px;top:820px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">苹果</i><b style="font-size:72px">True</b></div>
+    <div class="box out step s2"><i style="width:170px">西瓜</i><b style="font-size:72px">False</b></div>
+  </div>
+</section>
+
+<!-- get -->
+<section class="slide" aria-label="get 给默认值" data-steps="2" data-at="2">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">get：给个默认值</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">in_get.py</div>
+<pre class="code" data-file="solutions/03_in_get.py"><span class="ln">price = {<span class="s">"苹果"</span>: <span class="m">5</span>, <span class="s">"香蕉"</span>: <span class="m">3</span>}</span><span class="ln"><span class="f">print</span>(<span class="s">"西瓜"</span> <span class="k">in</span> price)</span><span class="ln l1"><span class="f">print</span>(price.<span class="f">get</span>(<span class="s">"西瓜"</span>, <span class="m">0</span>))</span><span class="ln l2"><span class="f">print</span>(<span class="f">len</span>(price))</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:690px;width:960px;color:var(--paper)">get 的意思是“拿”。括号里先写键，再写查不到时用的数。西瓜没有，就给 0，不报错。</p>
+  <p class="abs say only2" style="left:96px;top:690px;width:960px;color:var(--paper)">get 只是查，不会把西瓜加进去，所以还是 2 对。</p>
+  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">get</i><b style="font-size:84px">0</b></div>
+    <div class="box out step s2"><i style="width:170px">len</i><b style="font-size:84px">2</b></div>
+  </div>
+</section>
+
+<!-- worked example: lookup -->
+<section class="slide" aria-label="例题：查价格" data-steps="3" data-at="3" data-chapter="查价格">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">例题：小卖部查价格</h2>
+  <div class="editor" style="left:96px;top:200px;width:960px;--fs:44px"><div class="tab">lookup.py</div>
+<pre class="code" data-file="solutions/04_lookup.py"><span class="ln">price = {<span class="s">"苹果"</span>: <span class="m">5</span>, <span class="s">"香蕉"</span>: <span class="m">3</span>,</span><span class="ln">         <span class="s">"橙子"</span>: <span class="m">4</span>}</span><span class="ln l1">name = <span class="f">input</span>()</span><span class="ln l2 l3"><span class="k">if</span> name <span class="k">in</span> price:</span><span class="ln l2">    <span class="f">print</span>(price[name])</span><span class="ln l3"><span class="k">else</span>:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"没有这个商品"</span>)</span></pre></div>
+  <p class="abs say only1" style="left:1210px;right:96px;top:560px;font-size:34px">读入顾客要的商品名。键也可以是变量，name 里装着什么，就查什么。</p>
+  <p class="abs say only2" style="left:1210px;right:96px;top:560px;font-size:34px">输入香蕉：在字典里，取出价格 3。</p>
+  <p class="abs say only3" style="left:1210px;right:96px;top:560px;font-size:34px">输入西瓜：不在，走 else，说一声没有，不会报错。</p>
+  <a class="ide step s3" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">输入</i><b style="font-size:60px">香蕉</b></div>
+    <div class="box out step s2"><i style="width:170px">输出</i><b style="font-size:72px">3</b></div>
+    <div class="box out step s3"><i style="width:170px">西瓜</i><b style="font-size:48px">没有这个商品</b></div>
+  </div>
+</section>
+
+<!-- your turn: total -->
+<section class="slide" aria-label="按数量算总价">
+  <div class="band r"><b>动手<br>改一改</b><span>多读一个数量，查到价格后乘上去。</span></div>
+  <div class="turn">
+    <h2 class="r d1">买几个，一共多少钱</h2>
+    <p class="say r d1">价格表不变。第一行读入商品名，第二行读入购买数量（0 到 100 的整数）。输出一共多少钱；没有这个商品就输出“没有这个商品”。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 苹果 和 3</small><pre>15</pre></div><div><small>输入 葡萄 和 2</small><pre style="font-size:48px">没有这个商品</pre></div></div>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_total.py</p>
+  </div>
+  <a class="ide r d3" data-code-file="starter/05_total.py" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+</section>
+
+<!-- loop over a dictionary -->
+<section class="slide" aria-label="遍历字典" data-steps="2" data-at="2" data-chapter="遍历">
+  <div class="night" style="width:1130px"></div>
+  <h2 class="t" style="color:var(--paper)">for：一对一对地看</h2>
+  <div class="editor" style="left:96px;top:200px;width:1030px;--fs:44px"><div class="tab">each.py</div>
+<pre class="code" data-file="solutions/06_each.py"><span class="ln">ages = {<span class="s">"小明"</span>: <span class="m">11</span>, <span class="s">"小红"</span>: <span class="m">12</span>}</span><span class="ln l1 l2"><span class="k">for</span> name <span class="k">in</span> ages:</span><span class="ln l1 l2">    <span class="f">print</span>(name, ages[name])</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">遍历字典时，name 依次拿到的是键：先是小明。用键再去取值，得到 11。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">然后是小红和 12。顺序就是放进字典的先后顺序。</p>
+  <a class="ide step s2" style="left:96px;top:820px">▶ 在 IDE 打开</a>
+  <div class="abs" style="left:1210px;right:96px;top:170px">
+    <div class="box step"><i style="width:170px">第 1 遍</i><b style="font-size:72px">小明 11</b></div>
+    <div class="box out step s2"><i style="width:170px">第 2 遍</i><b style="font-size:72px">小红 12</b></div>
+  </div>
+</section>
+
+<!-- quiz: get does not add -->
+<section class="slide" aria-label="小测：get 之后">
+  <h2 class="t r">小测：这段程序输出什么？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:48px"><div class="tab">输出什么？</div>
+<pre class="code"><span class="ln">d = {<span class="s">"a"</span>: <span class="m">1</span>}</span><span class="ln"><span class="f">print</span>(d.<span class="f">get</span>(<span class="s">"x"</span>, <span class="m">0</span>))</span><span class="ln"><span class="f">print</span>(<span class="f">len</span>(d))</span></pre></div>
+  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="2">
+    <button type="button" data-fb="get 只是查，不会把 x 加进去，所以还是 1 对。"><i>1</i>0 和 2</button>
+    <button type="button" data-fb="get 查不到不会报错，会给出默认值 0。"><i>2</i>报 KeyError</button>
+    <button type="button" data-fb="答对了！查不到给 0，字典还是只有 a 这 1 对。"><i>3</i>0 和 1</button>
+    <button type="button" data-fb="x 不在字典里，拿到的是默认值 0，不是 a 的值。"><i>4</i>1 和 1</button>
+  </div>
+  <p class="fb" style="left:96px;right:1000px;top:640px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- errors -->
+<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <div class="ledger">
+    <div class="r d1" style="grid-template-columns:620px 440px 1fr"><code>price["西瓜"]</code><b>KeyError</b><span>先用 in 问，或者用 get</span></div>
+    <div class="r d2" style="grid-template-columns:620px 440px 1fr"><code>price[0]</code><b>KeyError</b><span>字典按键找，没有编号</span></div>
+    <div class="r d3" style="grid-template-columns:620px 440px 1fr"><code>"Apple" in price</code><b>不报错</b><span>大小写不同，算两个键</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:790px">查不到的时候，先看看键是不是写得一模一样，空格和大小写都算。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- bug hunt -->
+<section class="slide dark" aria-label="找错：数水果">
+  <h2 class="t r">找错：数水果，怎么报 KeyError？</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:1080px;--fs:44px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="3" data-yes="找到了！第一次碰到苹果时，字典里还没有苹果这个键，没法在原来的数上加 1。要先让它有个开始的 0：可以先用 in 问一问，也可以用 get。" data-no="这一行没问题。报错说没有“苹果”这个键，想一想第一次碰到苹果时发生了什么。"><span class="ln">counts = {}</span><span class="ln"><span class="k">for</span> f <span class="k">in</span> [<span class="s">"苹果"</span>, <span class="s">"香蕉"</span>, <span class="s">"苹果"</span>]:</span><span class="ln">    counts[f] += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(counts)</span></pre></div>
+  <p class="abs say r d2" style="left:1260px;top:240px;right:96px">想数出每种水果有几个，程序却报 KeyError: '苹果'。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="left:1260px;top:560px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- challenge -->
+<section class="slide clay" aria-label="数单词" data-chapter="挑战">
+  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">数单词</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:960px">读入一行英文，单词之间用空格隔开（至少一个单词，大写和小写算不同的词）。<br>按第一次出现的顺序，输出每个单词和它出现的次数，一行一个。</p>
+  <div class="slip tilt2 r d3" style="right:110px;top:150px;width:600px"><small>输入</small><pre style="font-size:44px">the cat and the hat</pre><small style="margin-top:20px">输出</small><pre style="font-size:44px;line-height:1.3">the 2
+cat 1
+and 1
+hat 1</pre></div>
+  <a class="ide r d3" data-code-file="starter/07_word_count.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- hints -->
+<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+  <h2 class="t">卡住了？一次看一条提示</h2>
+  <div class="hints">
+    <p class="step"><i>提示 1</i><span>先用 split 切出单词，再准备一个空字典 counts = {}。</span></p>
+    <p class="step s2"><i>提示 2</i><span>每碰到一个词，就让它的次数加 1。第一次碰到时还没有这个键，怎么办？</span></p>
+    <p class="step s3"><i>提示 3</i><span>都数完了，再遍历字典，输出键和值。试试只有一个词，或者 Go 和 go。</span></p>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- creative project -->
+<section class="slide" aria-label="造一个小词典" data-chapter="小项目">
+  <h2 class="t r">造一个你的小词典</h2>
+  <p class="abs say r d1" style="left:96px;top:200px">程序按名字查东西，查不到也要好好回答。查什么，你自己定。</p>
+  <div class="later" style="top:320px">
+    <div class="r d1"><code>先做到</code><span>放进至少三对，读入一个键，说出它的值。</span></div>
+    <div class="r d2"><code>选你喜欢的</code><span>英汉小词典、宠物的年龄、值日表、游戏角色的技能。</span></div>
+    <div class="r d3"><code>还想更厉害</code><span>查不到时让用户教它一个新词，存进字典；最后把整本词典列出来。</span></div>
+  </div>
+  <a class="ide r d3" data-code-file="starter/08_my_dict.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- share -->
+<section class="slide" aria-label="和同桌换着玩">
+  <h2 class="t r">和同桌换着玩</h2>
+  <div class="steps3">
+    <div class="r d1"><i>1</i><b>换着查</b><span>在同桌的词典里查几个词，先猜结果，再运行</span></div>
+    <div class="r d2"><i>2</i><b>说一个喜欢的</b><span>告诉同桌，哪一对最有意思</span></div>
+    <div class="r d3"><i>3</i><b>提一个想法</b><span>查一个没有的词，或者换个大小写，程序会怎样？</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:800px">听完再改一版，让词典更好用。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- review -->
+<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
+  <div class="hints" style="top:290px">
+    <p style="font-weight:700"><i>Q1</i><span>字典和列表找东西有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　列表按编号，字典按键。</em></span></p>
+    <p style="font-weight:700"><i>Q2</i><span>给一个没有的键赋值会怎样？<em class="step s3" style="font-style:normal;font-weight:400">　新加一对，不报错。</em></span></p>
+    <p style="font-weight:700"><i>Q3</i><span>怎样查才不会报 KeyError？<em class="step s4" style="font-style:normal;font-weight:400">　先用 in 问一问，或者用 get 给默认值。</em></span></p>
+  </div>
+  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <div class="foot"></div>
+</section>
+
+<!-- cheat sheet -->
+<section class="slide" aria-label="速查卡">
+  <h2 class="t r">速查卡</h2>
+  <div class="sheet3">
+    <div class="r d1" style="grid-template-columns:780px 1fr"><code>d = {"苹果": 5}</code><span>建一个字典，键: 值</span></div>
+    <div class="r d1" style="grid-template-columns:780px 1fr"><code>d["苹果"]</code><span>按键取值，没有会报错</span></div>
+    <div class="r d2" style="grid-template-columns:780px 1fr"><code>d["西瓜"] = 20</code><span>有就改，没有就加</span></div>
+    <div class="r d2" style="grid-template-columns:780px 1fr"><code>"西瓜" in d</code><span>问一问有没有这个键</span></div>
+    <div class="r d3" style="grid-template-columns:780px 1fr"><code>d.get("西瓜", 0)</code><span>查不到给默认值，不会加进去</span></div>
+  </div>
+  <div class="foot"></div>
+</section>
+
+<!-- later -->
+<section class="slide" aria-label="后面再学">
+  <h2 class="t r">这些后面再学</h2>
+  <div class="later">
+    <div class="r d1"><code>keys() values()</code><span>只拿出所有的键，或者所有的值</span></div>
+    <div class="r d2"><code>列表套字典</code><span>一个列表里放很多张卡片，做成通讯录</span></div>
+    <div class="r d3"><code>文件</code><span>把字典存到文件里，下次打开还在</span></div>
+  </div>
+  <p class="abs say r d3" style="left:96px;top:700px">到这里，你已经学会了变量、判断、循环、列表、字符串、函数和字典。用它们，能写出很多好玩的程序了。</p>
+  <div class="foot"></div>
+</section>
