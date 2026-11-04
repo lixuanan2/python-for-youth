@@ -44,17 +44,17 @@
 | [13](dist/13-string-methods/index.html) | 字符串常用方法 | 22 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [14](dist/14-functions/index.html) | 函数定义与调用 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [15](dist/15-params-return/index.html) | 参数与返回值 | 22 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [16](dist/16-math-functions/index.html) | 常用数学函数 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [16](dist/16-math-functions/index.html) | 常用数学函数 | 22 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [17](dist/17-dict-basics/index.html) | 字典基础 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [18](dist/18-nested-loops/index.html) | 嵌套循环与图形 | 22 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [19](dist/19-list-tools/index.html) | 列表常用操作 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [20](dist/20-2d-lists/index.html) | 二维列表 | 20 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [21](dist/21-random-games/index.html) | 随机数与小游戏 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [22](dist/22-try-except/index.html) | 接住报错：try 和 except | 20 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [22](dist/22-try-except/index.html) | 接住报错：try 和 except | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [23](dist/23-recursion/index.html) | 递归入门 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [24](dist/24-bubble-sort/index.html) | 冒泡排序 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [25](dist/25-enumeration/index.html) | 枚举：把可能都试一遍 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [26](dist/26-binary-search/index.html) | 二分查找 | 17 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [25](dist/25-enumeration/index.html) | 枚举：把可能都试一遍 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [26](dist/26-binary-search/index.html) | 二分查找 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
 
 ## 做新课
 

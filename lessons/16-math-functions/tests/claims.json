@@ -36,22 +36,22 @@
     "stdout": "5\n"
   },
   {
-    "page": 11,
+    "page": 12,
     "code": "print(abs(3 - 8))",
     "stdout": "5\n"
   },
   {
-    "page": 12,
+    "page": 13,
     "code": "import math\narea = 49\nside = math.sqrt(area)\nprint(side)\nprint(int(side))\n",
     "stdout": "7.0\n7\n"
   },
   {
-    "page": 13,
+    "page": 14,
     "code": "import math\nprint(math.sqrt(-1))",
     "error": "ValueError"
   },
   {
-    "page": 14,
+    "page": 15,
     "code": "n = int(input())\nk = int(input())\nprint(int(n / k))",
     "stdin": "23\n5\n",
     "stdout": "4\n"

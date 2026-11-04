@@ -20,52 +20,52 @@
     "stdout": "50\n"
   },
   {
-    "page": 5,
+    "page": 6,
     "code": "print((51 + 100) // 2)",
     "stdout": "75\n"
   },
   {
-    "page": 6,
+    "page": 7,
     "code": "secret = int(input())\nlo = 1\nhi = 100\nguess = 0\nwhile guess != secret:\n    guess = (lo + hi) // 2\n    print(guess)\n    if guess < secret:\n        lo = guess + 1\n    elif guess > secret:\n        hi = guess - 1\n",
     "stdin": "42\n",
     "stdout": "50\n25\n37\n43\n40\n41\n42\n"
   },
   {
-    "page": 7,
+    "page": 8,
     "code": "secret = int(input())\nlo = 1\nhi = 100\nguess = 0\nwhile guess != secret:\n    guess = (lo + hi) // 2\n    print(guess)\n    if guess < secret:\n        lo = guess + 1\n    elif guess > secret:\n        hi = guess - 1\n",
     "stdin": "50\n",
     "stdout": "50\n"
   },
   {
-    "page": 8,
+    "page": 9,
     "code": "secret = int(input())\nlo = 1\nhi = 100\nguess = 0\ntimes = 0\nwhile guess != secret:\n    guess = (lo + hi) // 2\n    times += 1\n    print(guess)\n    if guess < secret:\n        lo = guess + 1\n    elif guess > secret:\n        hi = guess - 1\nprint(\"猜了\", times, \"次\")\n",
     "stdin": "42\n",
     "stdout": "50\n25\n37\n43\n40\n41\n42\n猜了 7 次\n"
   },
   {
-    "page": 8,
+    "page": 9,
     "code": "secret = int(input())\nlo = 1\nhi = 100\nguess = 0\ntimes = 0\nwhile guess != secret:\n    guess = (lo + hi) // 2\n    times += 1\n    print(guess)\n    if guess < secret:\n        lo = guess + 1\n    elif guess > secret:\n        hi = guess - 1\nprint(\"猜了\", times, \"次\")\n",
     "stdin": "50\n",
     "stdout": "50\n猜了 1 次\n"
   },
   {
-    "page": 8,
+    "page": 9,
     "code": "secret = int(input())\nlo = 1\nhi = 100\nguess = 0\ntimes = 0\nwhile guess != secret:\n    guess = (lo + hi) // 2\n    times += 1\n    print(guess)\n    if guess < secret:\n        lo = guess + 1\n    elif guess > secret:\n        hi = guess - 1\nprint(\"猜了\", times, \"次\")\n",
     "stdin": "100\n",
     "stdout": "50\n75\n88\n94\n97\n99\n100\n猜了 7 次\n"
   },
   {
-    "page": 9,
+    "page": 10,
     "code": "lo = 1\nhi = 100\nprint((lo + hi) / 2)\n",
     "stdout": "50.5\n"
   },
   {
-    "page": 10,
+    "page": 11,
     "code": "secret = 100\nlo = 1\nhi = 100\nguess = 0\nk = 0\nwhile guess != secret and k < 9:\n    guess = (lo + hi) // 2\n    print(guess)\n    k += 1\n    if guess < secret:\n        lo = guess\n    elif guess > secret:\n        hi = guess - 1\n",
     "stdout": "50\n75\n87\n93\n96\n98\n99\n99\n99\n"
   },
   {
-    "page": 11,
+    "page": 12,
     "code": "n = int(input())\na = []\nfor k in range(n):\n    a.append(int(input()))\ntarget = int(input())\nlo = 0\nhi = n - 1\npos = -1\nlooks = 0\nwhile lo <= hi and pos == -1:\n    mid = (lo + hi) // 2\n    looks += 1\n    if a[mid] == target:\n        pos = mid\n    elif a[mid] < target:\n        lo = mid + 1\n    else:\n        hi = mid - 1\nprint(pos)\nprint(looks)\n",
     "stdin": "8\n3\n8\n15\n21\n30\n42\n57\n66\n42\n",
     "stdout": "5\n2\n"

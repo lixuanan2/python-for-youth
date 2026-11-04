@@ -35,7 +35,7 @@
   {
     "id": "01",
     "role": "学生小改写",
-    "page": 10,
+    "page": 11,
     "starter": "starter/04_full_boxes.py",
     "solution": "solutions/04_full_boxes.py",
     "scope": "分两行读入：东西个数n为0到10000的整数，每箱装k个，k为1到100的整数",
@@ -46,7 +46,7 @@
   {
     "id": "D",
     "role": "语法小演示",
-    "page": 12,
+    "page": 13,
     "starter": "starter/05_side.py",
     "solution": "solutions/05_side.py",
     "scope": "无输入",
@@ -57,7 +57,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 15,
+    "page": 16,
     "starter": "starter/06_big_square.py",
     "solution": "solutions/06_big_square.py",
     "scope": "一行方块数n为0到10000的整数",
@@ -68,7 +68,7 @@
   {
     "id": "03",
     "role": "创作项目",
-    "page": 17,
+    "page": 18,
     "starter": "starter/07_life_calc.py",
     "solution": "solutions/07_bus_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

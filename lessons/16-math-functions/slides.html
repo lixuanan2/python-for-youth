@@ -116,6 +116,21 @@
   </div>
 </section>
 
+<!-- live numbers: apples and boxes -->
+<section class="slide" aria-label="换数字试试：几个箱子">
+  <div class="night" style="width:1010px"></div>
+  <h2 class="t" style="color:var(--paper)">换几个数试试</h2>
+  <div class="editor" style="left:96px;top:210px;width:830px;--fs:46px"><div class="tab">boxes.py</div>
+<pre class="code"><span class="ln"><span class="k">import</span> math</span><span class="ln">n = <input class="slot" data-var="n" value="23" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="苹果个数"></span><span class="ln">k = <input class="slot" data-var="k" value="5" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="每箱装几个"></span><span class="ln"><span class="f">print</span>(math.<span class="f">ceil</span>(n / k))</span></pre></div>
+  <p class="abs say" style="left:96px;top:735px;width:830px;color:var(--paper)">点黄色的数字，改完结果马上变。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这两个数进 IDE</a>
+  <div class="live-out">
+    <div><i>第 4 行：至少几个箱子</i><b data-eval="n + k - 1 // k">5</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:480px;width:734px;font-size:38px">先猜再改：20 和 5，21 和 5，0 和 5。<br>正好装满时，ceil 不会多拿箱子。</p>
+  <div class="foot"></div>
+</section>
+
 <!-- your turn: full boxes -->
 <section class="slide" aria-label="只数满箱">
   <div class="band r"><b>动手<br>改一改</b><span>换一个取整的方向。</span></div>

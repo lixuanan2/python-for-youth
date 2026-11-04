@@ -13,7 +13,7 @@
   {
     "id": "B",
     "role": "基础例题",
-    "page": 7,
+    "page": 8,
     "starter": "starter/02_cage.py",
     "solution": "solutions/02_cage.py",
     "scope": "第一行头数、第二行脚数，都是0到1000的整数",
@@ -24,7 +24,7 @@
   {
     "id": "01",
     "role": "学生小改写",
-    "page": 9,
+    "page": 10,
     "starter": "starter/03_cage_none.py",
     "solution": "solutions/03_cage_none.py",
     "scope": "第一行头数、第二行脚数，都是0到1000的整数",
@@ -35,7 +35,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 12,
+    "page": 13,
     "starter": "starter/04_hundred.py",
     "solution": "solutions/04_hundred.py",
     "scope": "一行，n为1到300的整数",
@@ -46,7 +46,7 @@
   {
     "id": "03",
     "role": "创作项目",
-    "page": 14,
+    "page": 15,
     "starter": "starter/05_my_search.py",
     "solution": "solutions/05_digits_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

@@ -449,8 +449,24 @@ dialog p{color:var(--muted);font-size:15px}
   </div>
 </section>
 
+<!-- live numbers: be the computer -->
+<section id="page-4" class="slide" aria-label="你来当计算机">
+  <div class="night" style="width:1010px"></div>
+  <h2 class="t" style="color:var(--paper)">你来当计算机，试一试</h2>
+  <div class="editor" style="left:96px;top:210px;width:830px;--fs:52px"><div class="tab">try.py</div>
+<pre class="code"><span class="ln">x = <input class="slot" data-var="x" value="10" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="试的数"></span><span class="ln"><span class="f">print</span>(x * x)</span><span class="ln"><span class="f">print</span>(x * x == <span class="m">144</span>)</span></pre></div>
+  <p class="abs say" style="left:96px;top:640px;width:830px;color:var(--paper)">点黄色的数字，改完结果马上变。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这个数进 IDE</a>
+  <div class="live-out">
+    <div><i>第 2 行：x 乘 x</i><b data-eval="x * x">100</b></div>
+    <div><i>第 3 行：对上了吗</i><b data-eval="x * x == 144">False</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:560px;width:734px;font-size:38px">从 1 开始一个个改，改到几才是 True？<br>你一个个试，就是在做枚举。程序替你试，快得多。</p>
+  <div class="foot"></div>
+</section>
+
 <!-- predict: range too small -->
-<section id="page-4" class="slide dark" aria-label="猜一猜：范围漏了" data-steps="2" data-at="2">
+<section id="page-5" class="slide dark" aria-label="猜一猜：范围漏了" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：把范围改成 range(1, 12)，输出什么？</h2>
   <div class="editor" style="left:96px;top:220px;width:960px;--fs:52px"><div class="tab">square.py</div>
 <pre class="code"><span class="ln l2"><span class="k">for</span> x <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">12</span>):</span><span class="ln">    <span class="k">if</span> x * x == <span class="m">144</span>:</span><span class="ln">        <span class="f">print</span>(x)</span></pre></div>
@@ -461,7 +477,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: the range -->
-<section id="page-5" class="slide" aria-label="小测：1 到 100 怎么写">
+<section id="page-6" class="slide" aria-label="小测：1 到 100 怎么写">
   <h2 class="t r">小测：1 到 100 都要试，range 怎么写？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="range 不含终点，这样只试到 99，漏了 100。"><i>1</i>range(1, 100)</button>
@@ -474,7 +490,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- three steps -->
-<section id="page-6" class="slide" aria-label="枚举三步">
+<section id="page-7" class="slide" aria-label="枚举三步">
   <h2 class="t r">枚举分三步</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>定范围</b><span>答案可能是哪些？一个都不能漏</span></div>
@@ -486,7 +502,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- worked example: chickens and rabbits -->
-<section id="page-7" class="slide" aria-label="例题：鸡兔同笼" data-steps="3" data-at="3" data-chapter="鸡兔同笼">
+<section id="page-8" class="slide" aria-label="例题：鸡兔同笼" data-steps="3" data-at="3" data-chapter="鸡兔同笼">
   <div class="night" style="width:1130px"></div>
   <h2 class="t" style="color:var(--paper);top:40px">例题：鸡兔同笼</h2>
   <div class="editor" style="left:96px;top:175px;width:960px;--fs:46px"><div class="tab">cage.py</div>
@@ -504,7 +520,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: how many tries -->
-<section id="page-8" class="slide" aria-label="小测：试了几次">
+<section id="page-9" class="slide" aria-label="小测：试了几次">
   <h2 class="t r">小测：35 个头时，例题的循环一共试了几次？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="鸡可以是 0 只，也可以是 35 只。从 0 数到 35，比 35 多一个。"><i>1</i>35 次</button>
@@ -517,7 +533,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- your turn: no answer -->
-<section id="page-9" class="slide" aria-label="没有答案时说一声">
+<section id="page-10" class="slide" aria-label="没有答案时说一声">
   <div class="band r"><b>动手<br>改一改</b><span>一个也没找到时，说一声。</span></div>
   <div class="turn">
     <h2 class="r d1">没有答案时说一声</h2>
@@ -529,7 +545,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- errors -->
-<section id="page-10" class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section id="page-11" class="slide" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
   <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
@@ -542,7 +558,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-11" class="slide dark" aria-label="找错：全是鸡却没输出">
+<section id="page-12" class="slide dark" aria-label="找错：全是鸡却没输出">
   <h2 class="t r">找错：10 个头 20 只脚，全是鸡，却没输出</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！range(heads) 是 0 到 9，鸡最多试到 9 只，“10 只鸡”这种可能被漏掉了。改成 range(heads + 1)。" data-no="这一行没问题。答案是鸡 10 只，循环试到过 10 吗？"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
@@ -552,7 +568,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- challenge -->
-<section id="page-12" class="slide clay" aria-label="百钱买百鸡" data-chapter="挑战">
+<section id="page-13" class="slide clay" aria-label="百钱买百鸡" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">百钱买百鸡</h2>
   <p class="abs say r d2" style="left:96px;top:410px;width:1060px">一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只。读入 n（1 到 300 的整数），用 n 元正好买 n 只鸡，小鸡要整 3 只地买。<br>每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。一种也没有就输出“没有答案”。</p>
@@ -566,7 +582,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-13" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-14" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>定范围：公鸡最多 n // 5 只，母鸡最多 n // 3 只。用第 18 课的两层循环，外层试公鸡，内层试母鸡。</span></p>
@@ -577,7 +593,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- creative project -->
-<section id="page-14" class="slide" aria-label="造一个挨个试的小程序" data-chapter="小项目">
+<section id="page-15" class="slide" aria-label="造一个挨个试的小程序" data-chapter="小项目">
   <h2 class="t r">造一个“挨个试”的小程序</h2>
   <p class="abs say r d1" style="left:96px;top:200px">自己出一道题，让程序挨个试出答案。</p>
   <div class="later" style="top:320px">
@@ -591,7 +607,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- share -->
-<section id="page-15" class="slide" aria-label="和同桌换着玩">
+<section id="page-16" class="slide" aria-label="和同桌换着玩">
   <h2 class="t r">和同桌换着玩</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>先猜后跑</b><span>先听同桌的题，自己猜答案，再运行看看</span></div>
@@ -603,7 +619,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-16" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-17" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p style="font-weight:700"><i>Q1</i><span>枚举分哪三步？<em class="step s2" style="font-style:normal;font-weight:400">　定范围，一个个试，判断对不对。</em></span></p>
@@ -615,7 +631,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- cheat sheet -->
-<section id="page-17" class="slide" aria-label="速查卡">
+<section id="page-18" class="slide" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1" style="grid-template-columns:860px 1fr"><code>for x in range(1, 101):</code><span>1 到 100 挨个试</span></div>
@@ -628,7 +644,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-18" class="slide" aria-label="后面再学">
+<section id="page-19" class="slide" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>缩小范围</code><span>先想清楚哪些不可能，就不用试</span></div>
@@ -640,7 +656,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-19" class="slide dark thanks" aria-label="谢谢">
+<section id="page-20" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
@@ -973,11 +989,17 @@ class SlidePresentation {
         const missing = slots.some(slot => !slot.value);
         let stopped = false;
         results.forEach(result => {
-          const [left, op, right] = result.dataset.eval.split(' ');
-          const [a, b] = [left, right].map(name => Number(value[name] ?? name));
-          const failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(op);
-          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? (cpp ? '除数不能是 0' : 'ZeroDivisionError')
-            : op ? calc[op](a, b) : value[left];
+          // A name alone, or names and numbers joined by operators, worked out from left to right.
+          // The page code must group the same way, e.g. (lo + hi) // 2; the browser check runs it for real.
+          const [first, ...rest] = result.dataset.eval.split(' ');
+          const num = name => Number(value[name] ?? name);
+          let out = rest.length ? num(first) : value[first], failed = false;
+          for (let i = 0; i < rest.length && !failed; i += 2) {
+            const b = num(rest[i + 1]);
+            failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(rest[i]);
+            if (!failed) out = calc[rest[i]](Number(out), b);
+          }
+          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? (cpp ? '除数不能是 0' : 'ZeroDivisionError') : out;
           result.classList.toggle('skip', !missing && stopped);
           result.classList.toggle('long', result.textContent.length > 18);
           stopped ||= failed;

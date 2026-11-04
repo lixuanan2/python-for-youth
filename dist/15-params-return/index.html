@@ -1047,11 +1047,17 @@ class SlidePresentation {
         const missing = slots.some(slot => !slot.value);
         let stopped = false;
         results.forEach(result => {
-          const [left, op, right] = result.dataset.eval.split(' ');
-          const [a, b] = [left, right].map(name => Number(value[name] ?? name));
-          const failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(op);
-          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? (cpp ? '除数不能是 0' : 'ZeroDivisionError')
-            : op ? calc[op](a, b) : value[left];
+          // A name alone, or names and numbers joined by operators, worked out from left to right.
+          // The page code must group the same way, e.g. (lo + hi) // 2; the browser check runs it for real.
+          const [first, ...rest] = result.dataset.eval.split(' ');
+          const num = name => Number(value[name] ?? name);
+          let out = rest.length ? num(first) : value[first], failed = false;
+          for (let i = 0; i < rest.length && !failed; i += 2) {
+            const b = num(rest[i + 1]);
+            failed = !missing && !stopped && b === 0 && ['/', '//', '%'].includes(rest[i]);
+            if (!failed) out = calc[rest[i]](Number(out), b);
+          }
+          result.textContent = missing ? '？' : stopped ? '没有运行' : failed ? (cpp ? '除数不能是 0' : 'ZeroDivisionError') : out;
           result.classList.toggle('skip', !missing && stopped);
           result.classList.toggle('long', result.textContent.length > 18);
           stopped ||= failed;

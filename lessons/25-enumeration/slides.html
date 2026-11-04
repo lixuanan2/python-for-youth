@@ -31,6 +31,22 @@
   </div>
 </section>
 
+<!-- live numbers: be the computer -->
+<section class="slide" aria-label="你来当计算机">
+  <div class="night" style="width:1010px"></div>
+  <h2 class="t" style="color:var(--paper)">你来当计算机，试一试</h2>
+  <div class="editor" style="left:96px;top:210px;width:830px;--fs:52px"><div class="tab">try.py</div>
+<pre class="code"><span class="ln">x = <input class="slot" data-var="x" value="10" maxlength="4" inputmode="numeric" autocomplete="off" aria-label="试的数"></span><span class="ln"><span class="f">print</span>(x * x)</span><span class="ln"><span class="f">print</span>(x * x == <span class="m">144</span>)</span></pre></div>
+  <p class="abs say" style="left:96px;top:640px;width:830px;color:var(--paper)">点黄色的数字，改完结果马上变。</p>
+  <a class="ide" style="left:96px;top:850px">▶ 带这个数进 IDE</a>
+  <div class="live-out">
+    <div><i>第 2 行：x 乘 x</i><b data-eval="x * x">100</b></div>
+    <div><i>第 3 行：对上了吗</i><b data-eval="x * x == 144">False</b></div>
+  </div>
+  <p class="abs say" style="left:1090px;top:560px;width:734px;font-size:38px">从 1 开始一个个改，改到几才是 True？<br>你一个个试，就是在做枚举。程序替你试，快得多。</p>
+  <div class="foot"></div>
+</section>
+
 <!-- predict: range too small -->
 <section class="slide dark" aria-label="猜一猜：范围漏了" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：把范围改成 range(1, 12)，输出什么？</h2>

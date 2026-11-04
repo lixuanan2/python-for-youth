@@ -13,7 +13,7 @@
   {
     "id": "B",
     "role": "基础例题",
-    "page": 6,
+    "page": 7,
     "starter": "starter/02_guess.py",
     "solution": "solutions/02_guess.py",
     "scope": "一行，秘密数为1到100的整数",
@@ -24,7 +24,7 @@
   {
     "id": "01",
     "role": "学生小改写",
-    "page": 8,
+    "page": 9,
     "starter": "starter/03_guess_count.py",
     "solution": "solutions/03_guess_count.py",
     "scope": "一行，秘密数为1到100的整数",
@@ -35,7 +35,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 11,
+    "page": 12,
     "starter": "starter/04_find.py",
     "solution": "solutions/04_find.py",
     "scope": "第一行n为1到100的整数；接下来n行是从小到大排好的整数；最后一行是要找的整数",
@@ -46,7 +46,7 @@
   {
     "id": "03",
     "role": "创作项目",
-    "page": 13,
+    "page": 14,
     "starter": "starter/05_my_halving.py",
     "solution": "solutions/05_page_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

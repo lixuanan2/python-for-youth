@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('builder', ROOT / 'tools/build.py')
 builder = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(builder)
+TEXT_FILES = {'.html', '.py', '.cpp', '.h', '.txt', '.md', '.json', '.js', '.css', '.csv'}
 HIDDEN_ROLES = ['学生小改写', '独立迁移']  # Students write these, so the answers must stay out of dist/.
 
 
@@ -144,6 +145,8 @@ def check_deck(lesson, folder):
             want = '\n'.join(want.split('\n')[first - 1:last]).strip()
         assert code.strip() == want, f'Slide code differs from {file}'
     pages = text.count('<section id="page-')
+    attributes = [unquote(html.unescape(v)) for v in re.findall(r'="([^"]*)"', text)]
+    shown = squash(html.unescape(re.sub(r'<[^>]+>', '', text)) + ''.join(attributes))
     tasks = json.loads((folder / 'tasks.json').read_text(encoding='utf-8'))
     for task in tasks:
         assert 1 <= task['page'] <= pages, f'Bad page: {task["id"]}'
@@ -152,12 +155,24 @@ def check_deck(lesson, folder):
             answer = (folder / task['solution']).read_text(encoding='utf-8').strip()
             escaped = html.escape(answer, quote=True).replace('\n', '&#10;')
             assert answer not in text and escaped not in text, f'Answer shown on slides: {task["solution"]}'
+            # Spaces and line breaks may differ on a page, so compare with all whitespace removed,
+            # in the visible text, in every attribute (IDE links carry code) and in every file given to students.
+            key = squash(answer)
+            assert key != squash((folder / task['starter']).read_text(encoding='utf-8')), f'Starter is the answer: {task["starter"]}'
+            assert key not in shown, f'Answer shown on slides: {task["solution"]}'
+            for file in built.parent.rglob('*'):
+                if file.is_file() and file.suffix in TEXT_FILES and file != built:
+                    assert key not in squash(file.read_text(encoding='utf-8')), f'Answer in {file.relative_to(builder.DIST)}'
     for link in deck.links:
         parts = urlsplit(link)
         if not parts.scheme and parts.path:
             assert (built.parent / unquote(parts.path)).is_file(), f'Broken link: {link}'
     assert '<a class="ide' in text, 'Deck has no IDE link'
     return pages
+
+
+def squash(text):
+    return re.sub(r'\s+', '', text)
 
 
 def check_dist():

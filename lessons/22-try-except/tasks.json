@@ -13,7 +13,7 @@
   {
     "id": "B",
     "role": "语法小演示",
-    "page": 7,
+    "page": 8,
     "starter": "starter/02_two_errors.py",
     "solution": "solutions/02_two_errors.py",
     "scope": "两行输入，可能不是整数，第二个可能是 0",
@@ -24,7 +24,7 @@
   {
     "id": "C",
     "role": "基础例题",
-    "page": 9,
+    "page": 10,
     "starter": "starter/03_retry.py",
     "solution": "solutions/03_retry.py",
     "scope": "每行一个输入，直到输入整数为止",
@@ -35,7 +35,7 @@
   {
     "id": "01",
     "role": "学生小改写",
-    "page": 10,
+    "page": 11,
     "starter": "starter/04_retry_count.py",
     "solution": "solutions/04_retry_count.py",
     "scope": "每行一个输入，直到输入整数为止",
@@ -46,7 +46,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 14,
+    "page": 15,
     "starter": "starter/05_ledger.py",
     "solution": "solutions/05_ledger.py",
     "scope": "第一行行数n为0到20的整数；接下来n行，每行可能是整数，也可能是别的字",
@@ -57,7 +57,7 @@
   {
     "id": "03",
     "role": "创作项目",
-    "page": 16,
+    "page": 17,
     "starter": "starter/06_my_program.py",
     "solution": "solutions/06_price_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",
