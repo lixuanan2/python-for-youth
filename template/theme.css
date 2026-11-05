@@ -176,6 +176,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slot:hover{background:#f6d691}
 .slot[data-kind=text]{width:20.8ch;text-align:left;padding:0 .4ch}
 .slot:focus{background:#fff;box-shadow:0 0 0 3px #f0c674}
+.slot.bad,.slot.bad:focus{background:#fbe3da;box-shadow:0 0 0 4px var(--clay)}
+.slot-tip{position:absolute;z-index:6;margin:0;padding:12px 22px;max-width:1100px;font:600 32px/1.4 var(--text);color:#fff;background:var(--clay);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.slot-tip[hidden]{display:none}
+@media print{.slot-tip{display:none}}
 .live-out{position:absolute;left:1090px;right:96px;top:170px}
 .live-out div{border-top:4px solid var(--ink);padding:14px 0 22px}
 .live-out i{display:block;font:400 38px var(--text);font-style:normal;color:var(--muted)}

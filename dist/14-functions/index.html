@@ -322,6 +322,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slot:hover{background:#f6d691}
 .slot[data-kind=text]{width:20.8ch;text-align:left;padding:0 .4ch}
 .slot:focus{background:#fff;box-shadow:0 0 0 3px #f0c674}
+.slot.bad,.slot.bad:focus{background:#fbe3da;box-shadow:0 0 0 4px var(--clay)}
+.slot-tip{position:absolute;z-index:6;margin:0;padding:12px 22px;max-width:1100px;font:600 32px/1.4 var(--text);color:#fff;background:var(--clay);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.slot-tip[hidden]{display:none}
+@media print{.slot-tip{display:none}}
 .live-out{position:absolute;left:1090px;right:96px;top:170px}
 .live-out div{border-top:4px solid var(--ink);padding:14px 0 22px}
 .live-out i{display:block;font:400 38px var(--text);font-style:normal;color:var(--muted)}
@@ -930,7 +934,8 @@ class SlidePresentation {
   lineText(line) {
     const slots = [...line.querySelectorAll('.slot')];
     const copy = line.cloneNode(true);
-    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(slots[i].value));
+    // A value the page marked as not fitting is left out of the IDE code; the last good one goes instead.
+    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(slots[i].classList.contains('bad') ? slots[i].dataset.good : slots[i].value));
     return copy.textContent;
   }
   linkIde() {
@@ -1024,16 +1029,35 @@ class SlidePresentation {
       '>': (a, b) => truth(a > b), '<': (a, b) => truth(a < b), '>=': (a, b) => truth(a >= b),
       '<=': (a, b) => truth(a <= b), '==': (a, b) => truth(a === b), '!=': (a, b) => truth(a !== b)
     };
-    const clean = slot => slot.dataset.kind === 'text'
-      ? Array.from(slot.value.replace(/["\\\r\n]/g, '')).slice(0, 12).join('')
-      : slot.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 4);
+    // Never turn what a student typed into a different value: a value the page cannot work out is marked and explained.
+    // Full-width digits and leading zeros are the same number, so those alone are tidied.
+    const fits = slot => {
+      if (slot.dataset.kind === 'text') return !/["\\\r\n]/.test(slot.value) && Array.from(slot.value).length <= 12;
+      const digits = slot.value.replace(/[０-９]/g, d => String.fromCharCode(d.charCodeAt(0) - 0xFEE0));
+      const tidy = /^\d+$/.test(digits) ? digits.replace(/^0+(?=\d)/, '') : digits;
+      if (tidy !== slot.value) slot.value = tidy;
+      return /^\d{0,4}$/.test(tidy);
+    };
+    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。'};
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
       const results = [...slide.querySelectorAll('[data-eval]')];
+      const tip = Object.assign(document.createElement('p'), {className: 'slot-tip', hidden: true});
+      tip.setAttribute('role', 'status');
+      slide.append(tip);
       const update = () => {
         const value = Object.fromEntries(slots.map(slot => [slot.dataset.var, slot.value]));
-        const missing = slots.some(slot => !slot.value);
+        const bad = slots.find(slot => slot.classList.contains('bad'));
+        const missing = Boolean(bad) || slots.some(slot => !slot.value);
+        tip.hidden = !bad;
+        if (bad) {
+          tip.textContent = tips[bad.dataset.kind === 'text' ? 'text' : 'number'];
+          // Under the editor, so the hint never hides another slot in the code.
+          const box = (bad.closest('.editor') || bad).getBoundingClientRect(), base = slide.getBoundingClientRect(), f = base.width / 1920 || 1;
+          tip.style.left = Math.max(48, Math.min((box.left - base.left) / f, 1872 - tip.offsetWidth)) + 'px';
+          tip.style.top = Math.min((box.bottom - base.top) / f + 14, 1032 - tip.offsetHeight) + 'px';
+        }
         let stopped = false;
         results.forEach(result => {
           // A name alone, or names and numbers joined by operators, worked out from left to right.
@@ -1054,9 +1078,15 @@ class SlidePresentation {
         this.linkIde();
       };
       slots.forEach(slot => {
-        slot.dataset.start = slot.value;
-        // Wait for a Chinese input method to finish the word before tidying the text.
-        const tidy = e => { if (e.isComposing) return; slot.value = clean(slot); update(); };
+        slot.dataset.start = slot.dataset.good = slot.value;
+        // Wait for a Chinese input method to finish the word before checking the text.
+        const tidy = e => {
+          if (e.isComposing) return;
+          const ok = fits(slot);
+          slot.classList.toggle('bad', !ok);
+          if (ok) slot.dataset.good = slot.value;
+          update();
+        };
         slot.addEventListener('input', tidy);
         slot.addEventListener('compositionend', tidy);
       });

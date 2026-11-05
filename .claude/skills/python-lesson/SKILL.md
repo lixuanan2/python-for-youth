@@ -37,7 +37,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 | 选择小测 | `.quiz data-right="序号"`，选项加 `data-fb`，后面放 `.fb` |
 | 点行找错 | `pre.code.pick data-bug data-yes data-no`，后面放 `.fb` |
 | 拨开关 | `.gate data-op="and/or/not"`，里面放 `button`（写 True 或 False）和 `b`，结果由脚本算 |
-| 黄色框 | 代码行里放 `input.slot data-var="名字" value="默认值"`，数字框加 `maxlength="4" inputmode="numeric"`，文字框加 `data-kind="text"`。结果放 `.live-out` 里的 `b data-eval`，写好默认结果：`a // b` 这样的运算，或者只写一个名字。几次运算从左往右算，页面代码要用括号写成同样的顺序，比如 `lo + hi // 2` 对应 `(lo + hi) // 2`。数字是 0 到 9999 的整数，运算有 `+ - * / // %` 和六种比较；文字最多 12 个字，自动去掉英文引号和反斜杠。一页最多 2 个框，`data-eval` 按 `print` 的顺序写。`check_browser` 会把所有组合拿真实 Python 或 C++ 跑一遍。例子见第 1、2、3、4 课，几次运算见第 16、26 课。答案不能出现在黄色框页上：小改写和独立迁移的程序不要做成黄色框 |
+| 黄色框 | 代码行里放 `input.slot data-var="名字" value="默认值"`，数字框加 `maxlength="4" inputmode="numeric"`，文字框加 `data-kind="text"`。结果放 `.live-out` 里的 `b data-eval`，写好默认结果：`a // b` 这样的运算，或者只写一个名字。几次运算从左往右算，页面代码要用括号写成同样的顺序，比如 `lo + hi // 2` 对应 `(lo + hi) // 2`。数字是 0 到 9999 的整数，运算有 `+ - * / // %` 和六种比较；文字最多 12 个字，不能有英文引号和反斜杠。填了范围外的值（负数、小数、字母、太长），页面不会偷偷改成别的数：框变红、结果变成“？”、编辑器下面出一句提示，IDE 按钮带的是上一个能用的值。一页最多 2 个框，`data-eval` 按 `print` 的顺序写。`check_browser` 会把所有组合拿真实 Python 或 C++ 跑一遍。例子见第 1、2、3、4 课，几次运算见第 16、26 课。答案不能出现在黄色框页上：小改写和独立迁移的程序不要做成黄色框 |
 | 数轴 | `.numline` 里放 `u`（线段）、`i`（端点，`.open` 为空心）和 `b`（刻度），位置用百分比 |
 | IDE 按钮 | `a.ide`，默认带本页代码；`data-code` 写其他代码，`data-code-file` 带上某个起始程序 |
 | 只显示部分代码 | `pre.code data-file="…" data-lines="7-13"`，IDE 仍带完整程序 |

@@ -98,15 +98,22 @@ const INTERACT = `(async () => {
     const start = slots.map(s => s.value);
     const put = (slot, value) => { slot.value = value; slot.dispatchEvent(new Event('input', {bubbles: true})); };
     const typed = (slot, text) => { put(slot, text); return slot.value; };
+    // A value the page cannot work out stays as typed, is marked, shows a hint and makes every result '？'.
+    const tip = slide.querySelector('.slot-tip');
+    const kept = (slot, text, shown = text) => typed(slot, text) === shown && !slot.classList.contains('bad') && tip.hidden;
+    const marked = (slot, text) => typed(slot, text) === text && slot.classList.contains('bad') && !tip.hidden
+      && outs.every(o => o.textContent === '？') && !new URL(link.href).searchParams.get(IDE.config.codeParam).includes(text);
     const filter = slots.every(slot => slot.dataset.kind === 'text'
-      ? typed(slot, 'a"b\\c') === 'abc' && typed(slot, '一二三四五六七八九十一二三') === '一二三四五六七八九十一二' && typed(slot, '😀'.repeat(13)) === '😀'.repeat(12)
-      : typed(slot, '1a2') === '12' && typed(slot, '007') === '7' && typed(slot, '12345') === '1234' && typed(slot, '０７') === '' && typed(slot, '-5') === '5');
+      ? kept(slot, '一二三四五六七八九十一二') && marked(slot, 'a"b') && marked(slot, 'a\\\\b') && marked(slot, '一二三四五六七八九十一二三')
+        && kept(slot, '😀'.repeat(12)) && marked(slot, '😀'.repeat(13))
+      : kept(slot, '12') && marked(slot, '1a2') && kept(slot, '007', '7') && kept(slot, '０７', '7') && marked(slot, '-5')
+        && marked(slot, '2.5') && marked(slot, '12345') && kept(slot, '9999'));
     put(slots[0], '');
     const waits = outs.every(o => o.textContent === '？');
     slots.forEach((s, i) => put(s, start[i]));
     const shown = outs.map(o => o.textContent);
     const numbers = ['0', '1', '2', '3', '5', '7', '10', '17', '59', '60', '99', '100', '999', '9999'];
-    const words = ['你好', 'Hi there', '  两边空格  ', 'a+b=c', "it's", '😀🎉', '测'.repeat(12), 'Hello, Python!'];
+    const words = ['你好', 'Hi there', '  两边空格  ', 'a+b=c', "it's", '😀🎉', '测'.repeat(12), 'Hello, Py!'];
     let combos = [[]];
     for (const slot of slots) combos = combos.flatMap(c => (slot.dataset.kind === 'text' ? words : numbers).map(v => [...c, v]));
     const cases = combos.map(values => {
@@ -219,8 +226,9 @@ async function checkLive(live, dir) {
   const text = await run(`document.activeElement.dataset.kind === 'text'`);
   for (const name of ['1', ' ', 'r', 'f', 'g', 'b', 't', '2']) await key(name);
   for (const name of ['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp']) await key(name);
+  const room = await run(`document.activeElement.maxLength`);
   const state = await run(`({counter: ${counter}, slot: document.activeElement.value, blank: document.getElementById('blank').hidden, full: Boolean(document.fullscreenElement)})`);
-  assert.deepEqual(state, {counter: page, slot: text ? '1 rfgbt2' : '12', blank: true, full: false}, 'Typing in a slot reached the deck shortcuts');
+  assert.deepEqual(state, {counter: page, slot: '1 rfgbt2'.slice(0, room > 0 ? room : undefined), blank: true, full: false}, 'Typing in a slot reached the deck shortcuts');
   await run(`[...document.querySelectorAll('#deckStage .slide.active .slot')].forEach((s, i) => { s.value = ${JSON.stringify(live.longest)}[i]; s.dispatchEvent(new Event('input')); })`);
   const found = await run(OVERFLOW);
   assert.deepEqual(found, [], `Longest result overflows: ${found.join(' | ')}`);
