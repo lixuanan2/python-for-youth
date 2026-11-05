@@ -18,8 +18,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      # The home page sits at the top; each module's dist/ goes under its own folder name.
+      - name: Assemble the site
+        run: |
+          mkdir -p _site/fonts
+          cp home/index.html _site/
+          cp basics/vendor/fonts/*.woff2 basics/vendor/fonts/JetBrainsMono-OFL.txt _site/fonts/
+          cp -R basics/dist _site/basics
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: _site
       - id: deployment
         uses: actions/deploy-pages@v4

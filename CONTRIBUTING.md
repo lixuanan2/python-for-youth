@@ -24,15 +24,16 @@
 
 错字和小改动可以直接发 PR。新增页面、调整结构这类大改动，先开 Issue 商量，免得白做。
 
-改课只改 `lessons/` 和 `template/`，`dist/` 由工具生成，不要手改。在仓库根目录运行：
+现在只有一个模块“基础课件”，在 `basics/` 文件夹里。改课只改 `basics/lessons/` 和 `basics/template/`，`basics/dist/` 由工具生成，不要手改。从仓库最外层运行：
 
 ```sh
+cd basics
 python3 tools/build.py
 python3 tools/check.py
 node tools/check_browser.mjs
 ```
 
-然后把重新生成的 `dist/` 一起提交。页面上新写的输出或报错，要加进那节课的 `tests/claims.json`。教学要求都在 [PROMPT.md](PROMPT.md)。
+然后把重新生成的 `basics/dist/` 一起提交。页面上新写的输出或报错，要加进那节课的 `tests/claims.json`。教学要求都在 [basics/PROMPT.md](basics/PROMPT.md)。
 
 ## 不收的内容
 

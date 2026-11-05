@@ -5,3 +5,4 @@ __pycache__/
 .frontend-slides/
 node_modules
 students-private/
+_site/

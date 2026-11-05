@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Python 青少年编程</title>
+<meta name="description" content="给小学高年级和初中生的 Python 课件，免费、开源。离线双击打开，学生能照着自学，代码一键进在线 IDE。">
+<!-- The site's home page. Keep it in step with README.md. The workflow copies the fonts into fonts/. -->
+<style>
+@font-face{font-family:"JetBrains Mono";font-weight:400;font-style:normal;src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:700;font-style:normal;src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:800;font-style:normal;src:url(fonts/jetbrains-mono-latin-800-normal.woff2) format("woff2")}
+:root{
+  --paper:#faf9f5;--sand:#f0eee6;--line:#dcd9ce;--ink:#141413;--night:#1f1e1d;--panel:#2a2927;
+  --muted:#6b6a64;--clay:#c6613f;--clay-soft:#e8a58d;--amber:#e8b04b;--olive:#5b6f45;--mint:#a9d4b0;
+  --code:"JetBrains Mono",Consolas,Menlo,monospace;
+  --text:"JetBrains Mono","Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+*{font-variant-ligatures:none!important}
+body{background:var(--paper);color:var(--ink);font:400 18px/1.7 var(--text)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--clay);outline-offset:3px}
+code{font:400 .92em var(--code);background:var(--sand);padding:1px 6px;border-radius:5px}
+kbd{font:700 .85em var(--code);border:2px solid #b9b5a8;border-bottom-width:4px;border-radius:6px;padding:0 6px;background:#fff}
+
+/* === HERO === */
+.hero{background:var(--night);color:var(--paper)}
+.hero-in{max-width:1180px;margin:0 auto;padding:72px 32px 76px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:64px;align-items:center}
+h1{font:800 clamp(42px,6vw,76px)/1.14 var(--text);letter-spacing:-1px}
+.en{margin-top:22px;font:400 15px/1.65 var(--code);color:#a8a59b;max-width:38em}
+.lead{margin-top:18px;font-size:21px;color:#d9d6cc;max-width:30em}
+.actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center}
+.start{display:inline-block;background:var(--mint);color:#16261a;font:700 21px var(--code);text-decoration:none;padding:14px 28px 16px;border-radius:12px;box-shadow:0 6px 0 #5f8f6a}
+.start:hover{filter:brightness(1.06)}.start:active{transform:translateY(4px);box-shadow:0 2px 0 #5f8f6a}
+.second{font:700 18px var(--code);color:var(--paper);text-decoration:none;padding:12px 20px 13px;border:2px solid #77746b;border-radius:12px}
+.second:hover{border-color:var(--amber);color:var(--amber)}
+.editor{background:var(--panel);border-radius:14px;overflow:hidden;box-shadow:0 24px 50px #0006}
+.tab{padding:10px 22px;font:400 15px var(--code);color:#cfccc3;background:#232220;border-bottom:3px solid var(--clay)}
+.editor pre{font:400 clamp(17px,2vw,24px)/1.8 var(--code);padding:20px 24px;color:#f4f2ec;overflow-x:auto}
+.g{display:inline-block;width:2em;color:#77746b}.f{color:var(--clay-soft)}.s{color:var(--mint)}
+.run{background:#191817;padding:18px 24px 22px;border-top:1px solid #3a3936}
+.run label{display:block;font-size:15px;color:#a8a59b;margin-bottom:6px}
+.run input{width:100%;background:none;border:0;border-bottom:3px solid var(--amber);color:#fff;font:700 clamp(20px,2.4vw,28px) var(--code);padding:4px 0;outline:none}
+.say{margin-top:14px;font:700 clamp(20px,2.4vw,28px)/1.4 var(--code);color:var(--amber);min-height:1.4em;overflow-wrap:anywhere}
+
+/* === SECTIONS === */
+main{max-width:1180px;margin:0 auto;padding:20px 32px 40px}
+section{padding:52px 0 8px}
+h2{font:800 36px/1.3 var(--text)}
+h2::before{content:"# ";color:var(--clay)}
+.intro{margin-top:8px;color:var(--muted)}
+.grid{margin-top:26px;display:grid;gap:18px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:var(--sand);border-top:6px solid var(--ink);padding:22px 24px 24px}
+.card h3{font:800 22px/1.4 var(--text)}
+.card p{margin-top:8px;color:#3d3c38;font-size:17px}
+.who .card:nth-child(1){border-color:var(--clay)}.who .card:nth-child(2){border-color:var(--amber)}.who .card:nth-child(3){border-color:var(--olive)}
+.features{margin-top:26px;list-style:none;border-top:4px solid var(--ink)}
+.features li{display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;padding:20px 0;border-bottom:1px solid var(--line)}
+.features b{font:800 21px/1.5 var(--text)}
+.features b::before{content:"▸ ";color:var(--clay)}
+.features span{color:#3d3c38}
+.slot{display:inline-block;min-width:2.6em;text-align:center;background:#fff3c4;border:2px solid var(--amber);border-radius:6px;font:700 .9em var(--code);padding:0 6px}
+.use{grid-template-columns:repeat(2,minmax(0,1fr))}
+.use .card{border-color:var(--clay)}
+.use .card:nth-child(2){border-color:var(--amber)}
+.keys{margin-top:18px;color:var(--muted);font-size:16px}
+
+/* === MODULES === */
+.module{margin-top:26px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;align-items:center;background:var(--sand);border-left:8px solid var(--clay);padding:22px 26px}
+.module h3{font:800 28px/1.3 var(--text)}
+.module h3 small{font:700 15px var(--code);color:#fff;background:var(--olive);padding:3px 10px 4px;border-radius:7px;margin-left:12px;vertical-align:middle}
+.module p{color:var(--muted);font-size:16px;margin-top:4px}
+.module nav{display:flex;flex-wrap:wrap;gap:10px}
+.module a,.talk a{font:700 16px var(--code);text-decoration:none;padding:9px 16px 10px;border-radius:9px;border:2px solid var(--ink)}
+.module a:first-child,.talk a{background:var(--ink);color:var(--paper)}
+.module a:hover,.talk a:hover{background:var(--clay);border-color:var(--clay);color:#fff}
+.stages{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.stages span{font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:2px 12px}
+.later{margin-top:14px;color:var(--muted)}
+
+/* === NOTES === */
+.edge{margin-top:22px;background:#fdf3dc;border-left:8px solid var(--amber);padding:20px 26px}
+.talk{margin-top:22px;background:var(--night);color:var(--paper);padding:30px 32px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 28px;align-items:center}
+.talk p{color:#d9d6cc}
+.talk p a{all:unset;color:var(--amber);text-decoration:underline;cursor:pointer}
+.talk a{background:var(--mint);color:#16261a;border-color:var(--mint)}
+
+footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);font-size:15px}
+footer a{color:var(--ink)}
+@media(max-width:860px){
+  .hero-in{grid-template-columns:minmax(0,1fr);gap:40px;padding:48px 20px 56px}
+  main{padding:8px 20px 24px}footer{padding:24px 20px 44px}
+  section{padding-top:40px}
+  .grid,.use{grid-template-columns:minmax(0,1fr)}
+  .features li{grid-template-columns:minmax(0,1fr);gap:4px}
+  .module,.talk{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+<header class="hero"><div class="hero-in">
+  <div>
+    <h1>Python<br>青少年编程</h1>
+    <p class="en" lang="en">Free, open Python courseware in Chinese for upper-primary and middle-school students (about ages 10 to 15). Each lesson is a web page that opens offline with a double-click, reads well enough for self-study, and sends any code on the page to an online IDE in one click. Teachers, schools and anyone who wants to collaborate are welcome to get in touch through GitHub Discussions.</p>
+    <p class="lead">这是一套给小学高年级和初中生的 Python 课件，免费、开源。每节课是一个网页，老师拿来上课，学生也能照着自学。</p>
+    <div class="actions">
+      <a class="start" href="basics/">▶ 打开基础课件</a>
+      <a class="second" href="basics/01-input-output/">直接看第一课</a>
+    </div>
+  </div>
+  <div class="editor">
+    <div class="tab">hello.py</div>
+    <pre><span class="g">1</span>name = <span class="f">input</span>()
+<span class="g">2</span><span class="f">print</span>(<span class="s">"你好"</span>, name)</pre>
+    <div class="run">
+      <label for="name">程序在等你打字，写下你的名字</label>
+      <input id="name" value="小明" maxlength="16" autocomplete="off">
+      <p class="say" id="say" role="status">你好 小明</p>
+    </div>
+  </div>
+</div></header>
+
+<main>
+  <section>
+    <h2>适合谁</h2>
+    <div class="grid who">
+      <div class="card"><h3>学生</h3><p>小学高年级和初中生，零基础起步。</p></div>
+      <div class="card"><h3>老师</h3><p>学校、机构和兴趣班的老师。课件里的句子写得完整、口语化，老师照着读就能讲，不用另备讲稿。</p></div>
+      <div class="card"><h3>自学的孩子和家长</h3><p>只看页面也能看懂，每讲一点就有一道题马上练。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>有什么不一样</h2>
+    <ul class="features">
+      <li><b>离线双击就能打开</b><span>每节课是一个网页文件，样式、脚本和字体都在里面，不用装软件，不用联网。只有打开 IDE 和官方文档时要联网。</span></li>
+      <li><b>学生能照着自学</b><span>每节课按“讲一点、练一点”推进：先猜结果再揭晓，选择小测点了马上解释，点出报错的那一行，最后做一个自己定主题的小程序，再和同桌换着玩。</span></li>
+      <li><b>代码一键进在线 IDE</b><span>页面上的代码点一下就带到 JupyterLite 里运行，动手题带着起始程序打开，不用复制粘贴。</span></li>
+      <li><b>黄色框能在页面上直接改值</b><span>只改一个数、结果一眼能看到的地方，学生在页面上改 <span class="slot">7</span>，结果马上变，省掉打开 IDE 的时间。</span></li>
+      <li><b>每个程序和页面说法都有自动检查</b><span>页面上的每个程序都真实运行过，页面说的输出和报错都用真实 Python 核对过，答案不会出现在学生拿到的文件里。每一页还会在真实的 Chrome 里打开检查一遍。</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>怎么用</h2>
+    <div class="grid use">
+      <div class="card"><h3>在线</h3><p>在这个网站上选一节课，直接放映。</p></div>
+      <div class="card"><h3>教室电脑</h3><p>在 <a href="https://github.com/lixuanan2/python-for-youth">GitHub 仓库</a>的页面点 Code → Download ZIP，解压后把 <code>basics/dist</code> 文件夹整个复制到教室电脑，双击里面的 <code>index.html</code>。这个文件夹里有课件、PDF 和起始程序，没有答案。</p></div>
+    </div>
+    <p class="keys">放映时按 <kbd>→</kbd> 或空格翻页，<kbd>R</kbd> 带着本页代码打开 IDE，<kbd>F</kbd> 全屏，<kbd>?</kbd> 查看全部快捷键。</p>
+  </section>
+
+  <section>
+    <h2>模块和进度</h2>
+    <div class="module">
+      <div>
+        <h3>基础课件<small>30 节已完成</small></h3>
+        <p>从输入输出、变量讲起，经过判断、循环、列表、字符串、函数、字典，到递归、排序、二分查找这些算法入门。</p>
+        <div class="stages"><span>基础</span><span>判断</span><span>循环</span><span>列表和字符串</span><span>函数</span><span>字典</span><span>进阶</span><span>算法入门</span><span>语法进阶</span></div>
+      </div>
+      <nav aria-label="基础课件"><a href="basics/">课程目录</a><a href="basics/01-input-output/">第一课</a><a href="https://github.com/lixuanan2/python-for-youth/tree/main/basics">说明和源文件</a></nav>
+    </div>
+    <p class="later">以后会继续加别的模块，比如项目课。</p>
+  </section>
+
+  <section>
+    <h2>用 Edge 的话</h2>
+    <p class="edge">IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”时会关掉它要用的功能，表现是点了运行右边一直空白。在 Edge 设置里搜“增强的安全性”，在“例外”里添加 <code>jupyterlite.github.io</code> 就好了；或者改用 Chrome。</p>
+  </section>
+
+  <section>
+    <h2>想合作或交流</h2>
+    <div class="talk">
+      <p>在学校或机构里用了这套课、想一起做新模块、发现哪里讲得不好，都欢迎来说。具体的错误和建议可以开 Issue，怎么提见<a href="https://github.com/lixuanan2/python-for-youth/blob/main/CONTRIBUTING.md">参与说明</a>。</p>
+      <a href="https://github.com/lixuanan2/python-for-youth/discussions">来 Discussions 留言</a>
+    </div>
+  </section>
+</main>
+
+<footer>课件内容用 CC BY-NC-SA 4.0，可以免费用在课堂上、修改和分享；代码用 MIT。详见 <a href="https://github.com/lixuanan2/python-for-youth/blob/main/LICENSE.md">许可</a>。源文件在 <a href="https://github.com/lixuanan2/python-for-youth">GitHub</a>。</footer>
+
+<script>
+const input = document.getElementById('name'), say = document.getElementById('say');
+input.oninput = () => { say.textContent = '你好 ' + input.value; };
+</script>
+</body>
+</html>

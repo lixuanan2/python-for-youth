@@ -5,11 +5,13 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 
 # 做一节 Python 课
 
-先读 [PROMPT.md](../../../PROMPT.md)，那里是全部教学要求。这里只规定操作顺序。一次只做一节课。
+先读 [PROMPT.md](../../../basics/PROMPT.md)，那里是全部教学要求。这里只规定操作顺序。一次只做一节课。
+
+课都在“基础课件”模块 `basics/` 里。下面的路径都从 `basics/` 算起，命令也都在 `basics/` 里运行（从仓库最外层先 `cd basics`）。模块规则见 [basics/AGENTS.md](../../../basics/AGENTS.md)。
 
 ## 1. 定设计，等老师确认
 
-读 `course.json` 和上一节课的 `slides.html`，确认学生已经学过什么。给老师一份大纲：每页一句话，标出小测、预测、追踪、找错和项目放在哪里。再读 [模块内容摘要](../../../docs/module-baseline.md) 里这一节，需要细节时只读旧仓库的这一个模块。
+读 `course.json` 和上一节课的 `slides.html`，确认学生已经学过什么。给老师一份大纲：每页一句话，标出小测、预测、追踪、找错和项目放在哪里。再读 [模块内容摘要](../../../basics/docs/module-baseline.md) 里这一节，需要细节时只读旧仓库的这一个模块。
 
 大纲超过约 30 页时，主动提出在哪里分上下集。
 
@@ -49,7 +51,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 
 ## 4. 构建和检查
 
-在仓库根目录运行：
+在 `basics/` 里运行：
 
 ```sh
 python3 tools/build.py --pdf
@@ -61,4 +63,4 @@ node tools/check_browser.mjs
 
 ## 5. 交给老师
 
-打开 `dist/<课>/index.html`，说明验证了什么、没验证什么。Windows 和投影只有老师现场能确认。更新 `README.md` 的课程表，提交并推送。老师的修改意见如果是通用的，写回 PROMPT.md，下节课就不会再犯。
+打开 `dist/<课>/index.html`，说明验证了什么、没验证什么。Windows 和投影只有老师现场能确认。更新 `basics/README.md` 的课程表；课数变了，同时改仓库最外层宣传 `README.md` 和 `home/index.html` 里的节数。提交并推送。老师的修改意见如果是通用的，写回 PROMPT.md，下节课就不会再犯。

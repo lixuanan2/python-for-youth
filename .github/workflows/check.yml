@@ -17,4 +17,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: python tools/check.py
+      - name: basics
+        working-directory: basics
+        run: python tools/check.py
