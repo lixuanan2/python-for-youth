@@ -51,6 +51,7 @@
   },
   {
     "page": 12,
+    "ide": true,
     "code": "x = 5\nprint(x > 8 or x < 6)\nprint(x > 8)\nprint(x < 6)",
     "stdout": "True\nFalse\nTrue\n"
   },

@@ -13,7 +13,7 @@
     "reply": "你好 ",
     "sample": "小明"
   },
-  "footer": "课件可以离线打开，“在 IDE 打开”按钮需要联网。上课时把整个 dist 文件夹复制到教室电脑。",
+  "footer": "课件可以离线打开，“在 IDE 打开”按钮需要联网。上课时把整个 dist 文件夹复制到教室电脑。用 Edge 时，IDE 点了运行右边一直空白，就在 Edge 设置里搜“增强的安全性”，把 jupyterlite.github.io 加进例外，或者改用 Chrome。",
   "ide": {
     "name": "JupyterLite",
     "base": "https://jupyterlite.github.io/demo/repl/index.html",

@@ -73,5 +73,11 @@
     "page": 18,
     "code": "print(123 // 10)\nprint(123 % 10)",
     "stdout": "12\n3\n"
+  },
+  {
+    "page": 11,
+    "ide": true,
+    "code": "i = 5\nwhile i > 0:\n    i = i - 1\nprint(i)\n",
+    "stdout": "0\n"
   }
 ]

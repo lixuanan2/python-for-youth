@@ -50,7 +50,8 @@ def compile_cpp(source):
         return BUILT[source]
     compiler = find_compiler()
     exe = Path(WORK.name) / (hashlib.sha256(source.encode()).hexdigest()[:16] + ('.exe' if os.name == 'nt' else ''))
-    BUILT[source] = exe, subprocess.run([compiler, '-std=c++11', '-Wall', '-Wextra', '-pedantic', '-x', 'c++', '-', '-o', str(exe)],
+    # Newer clang refuses a chained comparison such as 60 <= x < 90; g++ and cpp.sh only warn, as lesson 5 shows.
+    BUILT[source] = exe, subprocess.run([compiler, '-std=c++11', '-Wall', '-Wextra', '-pedantic', '-Wno-error=parentheses', '-x', 'c++', '-', '-o', str(exe)],
                                         input=source.encode(), capture_output=True, timeout=60)
     return BUILT[source]
 
@@ -62,6 +63,79 @@ def run(source, stdin):
     if built.returncode:
         return built
     return subprocess.run([str(exe)], input=stdin.encode(), capture_output=True, timeout=5)
+
+
+def compiles(source):
+    if LANGUAGE == 'python':
+        try:
+            compile(source, 'page', 'exec')
+            return True
+        except SyntaxError:
+            return False
+    return compile_cpp(source)[1].returncode == 0
+
+
+class Pages(HTMLParser):
+    """The code each page hands the IDE, worked out the way deck.js does it."""
+
+    def __init__(self, text):
+        super().__init__()
+        self.pages, self.in_code = [], False
+        self.feed(text)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        classes = (attrs.get('class') or '').split()
+        if tag == 'section' and (attrs.get('id') or '').startswith('page-'):
+            self.pages.append(dict(ide=attrs.get('data-ide'), full=None, lines=[], slots=0, button=False, code=None))
+        if not self.pages:
+            return
+        page = self.pages[-1]
+        if tag == 'pre' and 'code' in classes:
+            self.in_code = True
+            if page['full'] is None:
+                page['full'] = attrs.get('data-full')
+        if self.in_code and tag == 'span' and 'ln' in classes:
+            page['lines'].append('')
+        if self.in_code and tag == 'input' and 'slot' in classes and page['lines']:
+            page['slots'] += 1
+            page['lines'][-1] += attrs.get('value') or ''
+        if tag == 'a' and 'ide' in classes and not page['button']:
+            page['button'], page['code'] = True, attrs.get('data-code')
+
+    def handle_data(self, data):
+        if self.in_code and self.pages and self.pages[-1]['lines']:
+            self.pages[-1]['lines'][-1] += data
+
+    def handle_endtag(self, tag):
+        if tag == 'pre':
+            self.in_code = False
+
+    def ide_code(self, page):
+        if page['code'] is not None:
+            return page['code']
+        return page['ide'] or page['full'] or '\n'.join(page['lines'])
+
+
+def check_ide(text, folder):
+    """What a page sends to the IDE must be a whole program, so the student can press Run."""
+    claims = json.loads((folder / 'tests/claims.json').read_text(encoding='utf-8'))
+    pages = Pages(text)
+    hint = 'mark the whole program in tests/claims.json with "ide": true'
+    for number, page in enumerate(pages.pages, 1):
+        code = pages.ide_code(page).strip()
+        assert not (page['ide'] and page['slots']), f'{folder.name} page {number} has yellow boxes, so its IDE code must follow them, not "ide"'
+        if not code or any(c['page'] == number and c['code'].strip() == code for c in claims):
+            continue  # nothing to send, or a claim already runs exactly this program
+        if LANGUAGE == 'cpp':
+            assert re.search(r'\bmain\s*\(', code), f'{folder.name} page {number} sends only part of a program to the IDE; {hint}'
+        assert compiles(code), f'{folder.name} page {number} sends code that does not compile to the IDE; {hint}'
+        if LANGUAGE == 'python':
+            try:
+                result = run(code, '')
+            except subprocess.TimeoutExpired:
+                continue
+            assert b'NameError' not in result.stderr, f'{folder.name} page {number} sends code that uses a name it never sets; {hint}'
 
 
 class Deck(HTMLParser):
@@ -120,6 +194,11 @@ def check_claims(folder):
     """Outputs and errors the slides promise must happen in real Python."""
     claims = json.loads((folder / 'tests/claims.json').read_text(encoding='utf-8'))
     for claim in claims:
+        if 'stdout' not in claim and 'error' not in claim:
+            # A program that never stops, given to the IDE as it is: it only has to compile.
+            assert claim.get('ide'), f'Claim without stdout or error: {claim}'
+            assert compiles(claim['code']), f'IDE program does not compile: {claim}'
+            continue
         result = run(claim['code'], claim.get('stdin', ''))
         if 'error' in claim:
             # GCC prints curly quotes in a UTF-8 locale and straight ones elsewhere, such as on Windows.
@@ -138,6 +217,7 @@ def check_deck(lesson, folder):
     assert not re.search(r'@import|https?://[^"\')\s]+\.(?:js|css)\b', text), 'Remote resource in deck'
     deck = Deck(text)
     assert deck.shown, 'Deck shows no tested program'
+    check_ide(text, folder)
     for file, code, lines in deck.shown:
         want = (folder / file).read_text(encoding='utf-8').strip()
         if lines:

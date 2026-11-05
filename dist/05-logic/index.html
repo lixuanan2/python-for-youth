@@ -573,7 +573,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: or -->
-<section id="page-12" class="slide" aria-label="小测：or">
+<section id="page-12" data-ide="x = 5&#10;print(x &gt; 8 or x &lt; 6)&#10;print(x &gt; 8)&#10;print(x &lt; 6)" class="slide" aria-label="小测：or">
   <h2 class="t r">小测：x 是 5，这一行输出什么？</h2>
   <div class="editor r d1" style="left:96px;top:215px;width:1040px;--fs:50px"><div class="tab">输入 5</div>
 <pre class="code"><span class="ln"><span class="f">print</span>(x &gt; <span class="m">8</span> <span class="k">or</span> x &lt; <span class="m">6</span>)</span></pre></div>
@@ -996,6 +996,7 @@ class SlidePresentation {
 
   /* --- IDE: every button carries its own page's code --- */
   codeOf(slide) {
+    if (slide.dataset.ide) return slide.dataset.ide;
     const full = slide.querySelector('pre.code[data-full]');
     if (full) return full.dataset.full;
     return [...slide.querySelectorAll('pre.code .ln')].map(l => this.lineText(l)).join('\n');

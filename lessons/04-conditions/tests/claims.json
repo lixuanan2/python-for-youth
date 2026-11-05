@@ -26,6 +26,7 @@
   },
   {
     "page": 9,
+    "ide": true,
     "code": "score = 60\nif score > 60:\n    print(\"及格\")\nelse:\n    print(\"继续加油\")",
     "stdout": "继续加油\n"
   },
@@ -61,6 +62,7 @@
   },
   {
     "page": 17,
+    "ide": true,
     "code": "score = 95\nif score >= 60:\n    print(\"及格\")\nelif score >= 90:\n    print(\"优秀\")",
     "stdout": "及格\n"
   }

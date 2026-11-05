@@ -565,7 +565,7 @@ while i &lt;= n:
 </section>
 
 <!-- quiz: which one never stops -->
-<section id="page-11" class="slide" aria-label="小测：哪一句停不下来">
+<section id="page-11" data-ide="i = 5&#10;while i &gt; 0:&#10;    i = i - 1&#10;print(i)&#10;" class="slide" aria-label="小测：哪一句停不下来">
   <h2 class="t r">小测：填哪一句，循环会停不下来？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:640px;--fs:44px"><div class="tab">空白处填一句</div>
 <pre class="code"><span class="ln">i = <span class="m">5</span></span><span class="ln"><span class="k">while</span> i &gt; <span class="m">0</span>:</span><span class="ln">    ……</span></pre></div>
@@ -956,6 +956,7 @@ class SlidePresentation {
 
   /* --- IDE: every button carries its own page's code --- */
   codeOf(slide) {
+    if (slide.dataset.ide) return slide.dataset.ide;
     const full = slide.querySelector('pre.code[data-full]');
     if (full) return full.dataset.full;
     return [...slide.querySelectorAll('pre.code .ln')].map(l => this.lineText(l)).join('\n');

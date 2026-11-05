@@ -41,6 +41,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 | 数轴 | `.numline` 里放 `u`（线段）、`i`（端点，`.open` 为空心）和 `b`（刻度），位置用百分比 |
 | IDE 按钮 | `a.ide`，默认带本页代码；`data-code` 写其他代码，`data-code-file` 带上某个起始程序 |
 | 只显示部分代码 | `pre.code data-file="…" data-lines="7-13"`，IDE 仍带完整程序 |
+| 代码只是片段 | 页面只放几行、不是完整程序时，在 `tests/claims.json` 里给这页那条完整程序加 `"ide": true`，“本页代码进 IDE”就带它。读报错页也这样，学生在 IDE 里看到的是页面讲的同一个报错。停不下来的程序只写 `page`、`ide`、`code`，检查只编译不运行。`check.py` 会查每页进 IDE 的代码是不是完整、能运行的程序 |
 | 章节跳转 | 每章第一页的 `<section>` 加 `data-chapter="名字"` |
 | 满版颜色 | `.dark` 听讲，`.band` 动手，`.clay` 挑战，`.olive` 复盘 |
 

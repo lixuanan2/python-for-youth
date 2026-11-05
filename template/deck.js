@@ -165,6 +165,7 @@ class SlidePresentation {
 
   /* --- IDE: every button carries its own page's code --- */
   codeOf(slide) {
+    if (slide.dataset.ide) return slide.dataset.ide;
     const full = slide.querySelector('pre.code[data-full]');
     if (full) return full.dataset.full;
     return [...slide.querySelectorAll('pre.code .ln')].map(l => this.lineText(l)).join('\n');

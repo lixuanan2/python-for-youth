@@ -527,7 +527,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: boundary -->
-<section id="page-9" class="slide" aria-label="小测：边界">
+<section id="page-9" data-ide="score = 60&#10;if score &gt; 60:&#10;    print(&quot;及格&quot;)&#10;else:&#10;    print(&quot;继续加油&quot;)" class="slide" aria-label="小测：边界">
   <h2 class="t r">小测：把条件写成这样，60 分输出什么？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:44px"><div class="tab">输入 60</div>
 <pre class="code"><span class="ln"><span class="k">if</span> score &gt; <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"继续加油"</span>)</span></pre></div>
@@ -630,7 +630,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-17" class="slide dark" aria-label="找错：优秀去哪了">
+<section id="page-17" data-ide="score = 95&#10;if score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;elif score &gt;= 90:&#10;    print(&quot;优秀&quot;)" class="slide dark" aria-label="找错：优秀去哪了">
   <h2 class="t r">找错：优秀去哪了？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="1" data-yes="对！95 &gt;= 60 成立，程序从这里走了，后面 90 分的判断轮不到。两段要换位置，范围小的条件写在前面。" data-no="再跟着程序走一遍：95 &gt;= 60 成立吗？"><span class="ln"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">elif</span> score &gt;= <span class="m">90</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"优秀"</span>)</span></pre></div>
@@ -945,6 +945,7 @@ class SlidePresentation {
 
   /* --- IDE: every button carries its own page's code --- */
   codeOf(slide) {
+    if (slide.dataset.ide) return slide.dataset.ide;
     const full = slide.querySelector('pre.code[data-full]');
     if (full) return full.dataset.full;
     return [...slide.querySelectorAll('pre.code .ln')].map(l => this.lineText(l)).join('\n');
