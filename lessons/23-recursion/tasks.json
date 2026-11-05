@@ -36,12 +36,12 @@
     "id": "02",
     "role": "独立迁移",
     "page": 12,
-    "starter": "starter/04_hanoi.py",
-    "solution": "solutions/04_hanoi.py",
-    "scope": "一行，n为1到6的整数",
-    "sample_input": "2\n",
-    "sample_output": "A -> B\nA -> C\nB -> C\n",
-    "description": "汉诺塔，输出每一步。"
+    "starter": "starter/04_digit_sum.py",
+    "solution": "solutions/04_digit_sum.py",
+    "scope": "一行，n为1到999999999的整数",
+    "sample_input": "2026\n",
+    "sample_output": "10\n",
+    "description": "用递归把各位数字加起来。"
   },
   {
     "id": "03",

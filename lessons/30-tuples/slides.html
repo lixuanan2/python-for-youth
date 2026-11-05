@@ -35,7 +35,7 @@
 <pre class="code"><span class="ln">p = (<span class="m">3</span>, <span class="m">5</span>)</span><span class="ln l2">p[<span class="m">0</span>] = <span class="m">9</span></span><span class="ln"><span class="f">print</span>(p)</span></pre></div>
   <p class="abs say only1" style="left:1020px;right:96px;top:240px">第 10 课的列表这样改是可以的。<br>元组呢？</p>
   <div class="slip tilt step s2" style="left:1020px;top:230px;width:780px"><small>屏幕上</small><pre style="font-size:44px;white-space:pre-wrap">TypeError</pre></div>
-  <p class="abs say step s2" style="left:96px;top:600px;width:1728px">报 TypeError：元组不支持给某一格重新赋值。元组一打好包就不能改，比列表“牢”。<br>要换一个点，就整个重新写：p = (9, 5)。这样也不容易被别的代码不小心改掉。</p>
+  <p class="abs say step s2" style="left:96px;top:600px;width:1728px">报 TypeError：元组不支持给某一格重新赋值。元组打好包，就不能给哪一格重新赋值，比列表“牢”。<br>要换一个点，就整个重新写：p = (9, 5)。这样也不容易被别的代码不小心改掉。</p>
   <div class="foot"></div>
 </section>
 
@@ -148,7 +148,7 @@ print(b, a)</pre>
 <section class="slide clay" aria-label="最近的宝藏" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">最近的宝藏</h2>
-  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">你站在 (0, 0)，只能横着或竖着走，走到 (x, y) 要 |x| + |y| 步。第一行读入宝藏个数 n（1 到 50），接下来 n 行每行两个整数 x 和 y，用空格隔开。<br>找出最近的宝藏，一样近时选先出现的。输出两行：它的位置，写成 (1, -2) 的样子；还有“几 步”。</p>
+  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">你站在 (0, 0)，只能横着或竖着走，走到 (x, y) 要 |x| + |y| 步。第一行读入宝藏个数 n（1 到 50），接下来 n 行每行两个整数 x 和 y（-100 到 100），用空格隔开。<br>找出最近的宝藏，一样近时选先出现的。输出两行：它的位置，写成 (1, -2) 的样子；还有“几 步”。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:460px"><small>依次输入</small><pre style="font-size:44px;white-space:pre">3
 3 4
 -1 2
@@ -180,7 +180,7 @@ print(b, a)</pre>
     <div class="r d3"><code>还想更厉害</code><span>读入生日表，找出这个月过生日的人；或者算两个点之间要走几步。</span></div>
   </div>
   <a class="ide r d3" data-code-file="starter/07_my_tuple.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
-  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>
 

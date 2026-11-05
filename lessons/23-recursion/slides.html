@@ -117,7 +117,7 @@
   <div class="ledger">
     <div class="r d1" style="grid-template-columns:560px 540px 1fr"><code class="plain">没写出口</code><b>RecursionError</b><span>先想好什么时候停</span></div>
     <div class="r d2" style="grid-template-columns:560px 540px 1fr"><code>countdown(n)</code><b>RecursionError</b><span>每次要变小：n - 1</span></div>
-    <div class="r d3" style="grid-template-columns:560px 540px 1fr"><code class="plain">忘了写 return</code><b>TypeError</b><span>结果没交回来</span></div>
+    <div class="r d3" style="grid-template-columns:560px 540px 1fr"><code class="plain">忘了写 return</code><b>TypeError</b><span>交回 None，拿去加数就报错</span></div>
   </div>
   <p class="abs say r d3" style="left:96px;top:790px">看到 RecursionError，先查两件事：有没有出口，每次有没有变小。</p>
   <div class="foot"></div>
@@ -134,15 +134,13 @@
 </section>
 
 <!-- challenge -->
-<section class="slide clay" aria-label="汉诺塔" data-chapter="挑战">
+<section class="slide clay" aria-label="数字加起来" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
-  <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">汉诺塔</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">三根柱子 A、B、C。A 上套着 n 个盘子，下面大、上面小。把它们全搬到 C：一次只搬最上面的一个，大盘子不能压在小盘子上。<br>读入 n（1 到 6 的整数），每搬一次输出一行，比如 <span style="white-space:nowrap">A -&gt; C</span>。</p>
-  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:480px"><small>输入</small><pre>2</pre><small style="margin-top:14px">输出</small><pre style="font-size:48px;white-space:pre">A -&gt; B
-A -&gt; C
-B -&gt; C</pre></div>
-  <a class="ide r d3" data-code-file="starter/04_hanoi.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
-  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">3 个盘子要搬 7 次。先自己写，卡住了再翻下一页。</p>
+  <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">数字加起来</h2>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">读入一个正整数 n（1 到 999999999），用递归把它的每一位数字加起来，输出结果。<br>比如 2026：2 + 0 + 2 + 6 = 10。不许把 n 变成字符串，只用数和递归。</p>
+  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:480px"><small>输入</small><pre>2026</pre><small style="margin-top:14px">输出</small><pre>10</pre></div>
+  <a class="ide r d3" data-code-file="starter/04_digit_sum.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">试试 7 和 10。先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
 
@@ -150,9 +148,9 @@ B -&gt; C</pre></div>
 <section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
-    <p class="step"><i>提示 1</i><span>只有 1 个盘子时，直接从 A 搬到 C，输出 A -&gt; C。这就是出口。</span></p>
-    <p class="step s2"><i>提示 2</i><span>n 个盘子分三步：先把上面 n - 1 个从 A 搬到 B，再把最大的从 A 搬到 C，最后把那 n - 1 个从 B 搬到 C。</span></p>
-    <p class="step s3"><i>提示 3</i><span>函数写成 hanoi(n, 从, 借, 到)，四个参数。搬 n - 1 个的那两步，就是调用自己，只是柱子换了位置。</span></p>
+    <p class="step"><i>提示 1</i><span>只有一位数时（n &lt; 10），各位加起来就是它自己。这就是出口。</span></p>
+    <p class="step s2"><i>提示 2</i><span>第 3 课学过：n % 10 是个位，n // 10 是去掉个位以后剩下的数。</span></p>
+    <p class="step s3"><i>提示 3</i><span>各位之和 = 个位 + 剩下那个数的各位之和。后面这一半，就是调用自己，n 每次少一位。</span></p>
   </div>
   <div class="foot"></div>
 </section>
@@ -167,7 +165,7 @@ B -&gt; C</pre></div>
     <div class="r d3"><code>还想更厉害</code><span>先变小再变大的沙漏图形；或者兔子数列 1 1 2 3 5 8。</span></div>
   </div>
   <a class="ide r d3" data-code-file="starter/05_my_recursion.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
-  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>
 
@@ -214,7 +212,7 @@ B -&gt; C</pre></div>
   <div class="later">
     <div class="r d1"><code>兔子数列</code><span>直接递归会把同一个数算很多遍，很慢</span></div>
     <div class="r d2"><code>记住算过的</code><span>把算过的结果存进字典，下次直接拿</span></div>
-    <div class="r d3"><code>分而治之</code><span>把大问题切成两半，许多排序和查找都这样做</span></div>
+    <div class="r d3"><code>汉诺塔</code><span>一层里调用自己两次，把一摞盘子搬到另一根柱子</span></div>
   </div>
   <p class="abs say r d3" style="left:96px;top:700px">今天学会了把大事拆成一样的小事。下节课学排序，看看怎样把一堆数排整齐。</p>
   <div class="foot"></div>

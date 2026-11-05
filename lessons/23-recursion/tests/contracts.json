@@ -35,22 +35,22 @@
     "expected": "tests/case-07.out"
   },
   {
-    "source": "solutions/04_hanoi.py",
+    "source": "solutions/04_digit_sum.py",
     "input": "tests/case-08.in",
     "expected": "tests/case-08.out"
   },
   {
-    "source": "solutions/04_hanoi.py",
+    "source": "solutions/04_digit_sum.py",
     "input": "tests/case-09.in",
     "expected": "tests/case-09.out"
   },
   {
-    "source": "solutions/04_hanoi.py",
+    "source": "solutions/04_digit_sum.py",
     "input": "tests/case-10.in",
     "expected": "tests/case-10.out"
   },
   {
-    "source": "solutions/04_hanoi.py",
+    "source": "solutions/04_digit_sum.py",
     "input": "tests/case-11.in",
     "expected": "tests/case-11.out"
   },

@@ -141,7 +141,7 @@
 <section class="slide clay" aria-label="在排好的数里找" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">在排好的数里找</h2>
-  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">图书馆的书按编号从小到大排好了。第一行读入 n（1 到 100 的整数），接下来 n 行是排好的编号，最后一行是要找的编号。<br>用二分查找，输出两行：它的下标，找不到就输出 -1；一共看了几个数。</p>
+  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">图书馆的书按编号从小到大排好了。第一行读入 n（1 到 100 的整数），接下来 n 行是排好的编号，最后一行是要找的编号。<br>用二分查找，输出两行：它的下标，找不到就输出 -1；一共看了几个数。<br>编号各不相同。每次看中间 (lo + hi) // 2 那个，看一次算一次。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:420px"><small>依次输入</small><pre style="font-size:36px;white-space:pre">8
 3
 8
@@ -179,7 +179,7 @@
     <div class="r d3"><code>还想更厉害</code><span>你心里想一个数，程序每猜一次就问你，你输入“大了”或“小了”。</span></div>
   </div>
   <a class="ide r d3" data-code-file="starter/05_my_halving.py" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
-  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案，能运行、你喜欢就好。</p>
+  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>
 
@@ -215,7 +215,7 @@
     <div class="r d1" style="grid-template-columns:860px 1fr"><code>lo = mid + 1</code><span>中间太小，去右半边</span></div>
     <div class="r d2" style="grid-template-columns:860px 1fr"><code>hi = mid - 1</code><span>中间太大，去左半边</span></div>
     <div class="r d2" style="grid-template-columns:860px 1fr"><code>while lo &lt;= hi:</code><span>还有数没排除，就接着找</span></div>
-    <div class="r d3" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">先排好序</code><span>二分只能用在排好的数上</span></div>
+    <div class="r d3" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">先排好序</code><span>这节课的数要先排好，比完才知道扔哪一半</span></div>
   </div>
   <div class="foot"></div>
 </section>
