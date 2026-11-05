@@ -49,7 +49,7 @@
     "page": 14,
     "starter": "starter/05_my_halving.py",
     "solution": "solutions/05_page_example.py",
-    "scope": "主题自选，没有标准答案；这里只是一份参考",
+    "scope": "主题自选，没有标准答案；这里只是一份参考；例子里页码在 1 到 500，范围外的先拦下来",
     "sample_input": "137\n",
     "sample_output": "翻到 250 页，往前翻\n翻到 125 页，往后翻\n翻到 187 页，往前翻\n翻到 156 页，往前翻\n翻到 140 页，往前翻\n翻到 132 页，往后翻\n翻到 136 页，往后翻\n翻到 138 页，往前翻\n找到第 137 页\n",
     "description": "做一个每次砍一半的小程序。"
