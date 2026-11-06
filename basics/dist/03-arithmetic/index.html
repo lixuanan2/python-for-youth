@@ -669,7 +669,7 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-20" class="slide clay" aria-label="温度换算" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">温度<br>换算</h2>
-  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入一个摄氏度（-100 到 100，可能有小数），输出华氏度。公式：华氏度 = 摄氏度 × 9 ÷ 5 + 32。</p>
+  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入一个摄氏度（-100 到 100，可能有小数），输出华氏度。公式：华氏度 = 摄氏度 × 9 ÷ 5 + 32。<br>直接输出算出来的数：输入 0，输出 32.0。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入一行</small><pre>36.5</pre><small style="margin-top:26px">输出</small><pre>97.7</pre></div>
   <a class="ide r d3" data-code="# 读入一个摄氏度，可能有小数&#10;# 输出华氏度：摄氏度 × 9 ÷ 5 + 32&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
@@ -989,9 +989,20 @@ class SlidePresentation {
   lineText(line) {
     const slots = [...line.querySelectorAll('.slot')];
     const copy = line.cloneNode(true);
-    // A value the page marked as not fitting is left out of the IDE code; the last good one goes instead.
-    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(slots[i].classList.contains('bad') ? slots[i].dataset.good : slots[i].value));
+    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(this.slotCode(slots[i])));
     return copy.textContent;
+  }
+  /* The IDE gets exactly what the student typed, even a value the page itself cannot work out, such as -3 or 2.5.
+     Text sits inside quotes, so only what would end or change the string there is escaped: a backslash and the
+     quote itself in both languages, {} in a Python f-string, and the ?? that starts a trigraph in C++. */
+  slotCode(slot) {
+    if (slot.dataset.kind !== 'text') return slot.value;
+    const before = slot.previousSibling?.textContent ?? '';
+    const quote = /['"]$/.exec(before)?.[0] ?? '"';
+    let text = slot.value.replace(/\\/g, '\\\\').replaceAll(quote, '\\' + quote);
+    if (LANGUAGE === 'python' && /(?:^|\W)[a-z]*f[a-z]*['"]$/i.test(before)) text = text.replace(/[{}]/g, '$&$&');
+    if (LANGUAGE === 'cpp') text = text.replace(/\?(?=\?)/g, '\\?');
+    return text;
   }
   linkIde() {
     const settings = IDE.load();
@@ -1093,7 +1104,7 @@ class SlidePresentation {
       if (tidy !== slot.value) slot.value = tidy;
       return /^\d{0,4}$/.test(tidy);
     };
-    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。'};
+    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。到 IDE 里试的话，代码里它们前面会多一个 \\。'};
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -1133,13 +1144,12 @@ class SlidePresentation {
         this.linkIde();
       };
       slots.forEach(slot => {
-        slot.dataset.start = slot.dataset.good = slot.value;
+        slot.dataset.start = slot.value;
         // Wait for a Chinese input method to finish the word before checking the text.
         const tidy = e => {
           if (e.isComposing) return;
           const ok = fits(slot);
           slot.classList.toggle('bad', !ok);
-          if (ok) slot.dataset.good = slot.value;
           update();
         };
         slot.addEventListener('input', tidy);

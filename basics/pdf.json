@@ -1,0 +1,122 @@
+{
+  "01-input-output": {
+    "deck": "d74f00bb0b96b1713e3623d9f04e1080cde782e572647e123f341c0285b9c6da",
+    "pdf": "aa06f88d00e430e708351d06df9ba57b7a085b700b61aac40abcbe78d53a4680"
+  },
+  "02-variables": {
+    "deck": "ae350c75cc7e7d91b82a65880fbf2f1bc2c8a97389b2a8dc12e348241d0bd37b",
+    "pdf": "3566986eb6a1147ad64bb445a35e17796063257ba090f29420a6169db799366d"
+  },
+  "03-arithmetic": {
+    "deck": "07e347dde2cf60f2034945af499ea128c78f25579822b883c59df8164d33b6a8",
+    "pdf": "2c127ed882d72b50a1961d8cc9b0944022dc42a13a880880cab2387c0c312f8d"
+  },
+  "04-conditions": {
+    "deck": "766d9b9f205c3a89dd351cc72004f9c36ec48538231235878e565eaf7d061c46",
+    "pdf": "cfbf40f7adcaaa4441c6cce62278011244ae41dec5a1f90ce824ebebbc25ad41"
+  },
+  "05-logic": {
+    "deck": "0a71fe2c1945112c81d4740ea97c5910f0811512a5db2f8a78f1ee6422b36895",
+    "pdf": "9589a770caf81fc85cdbb75e3d71e84bc72431b147f43b898c40a8500fc5a935"
+  },
+  "06-for-loop": {
+    "deck": "2d953dcd3850b7d0bf65e44989767ed052dba22ea8cb27e352a5d303367069fa",
+    "pdf": "5fb55d46a3ab71e1ccd6ae6012b24bb4342dc57d473f3bd54a5a63330c518d8a"
+  },
+  "07-while-loop": {
+    "deck": "0053930f90cba9924f17abf92f235680139128692962da2ae7a7db00b4355f13",
+    "pdf": "02f7319b20c0da592ef321bebfa14ef9c0d495c740972d6d4906ee9e673a6dfc"
+  },
+  "08-loop-tally": {
+    "deck": "664aa94fcbdcac7ed6a9266354cb958613675d6a67ec2077a754982963d4694f",
+    "pdf": "cf51f38347b714cfdea2a24e9d61f57ff4151de10034e5f90a61e893aca6a540"
+  },
+  "09-max-min": {
+    "deck": "9834373473c7dd5fe887428be4815efe6d5ce1d519cc22a02481462a43df0c98",
+    "pdf": "43cb08beb85efd896f11b7c85dd9f4d5327a8cc5fb35ecfdd5d06bf85567962e"
+  },
+  "10-list-basics": {
+    "deck": "8c302a796722b3fe9ff032e8655d5b662a8ff25ac7b4d0e965d3374a45dbffea",
+    "pdf": "994b6833b9e9e3d095b9936fc1ddaece3d7afb45a0b6eb4d4dd395fef0916a7f"
+  },
+  "11-list-loop": {
+    "deck": "8fcd766ea955aa79e806b2f2a525a55d6fa146df91b799bdb2f6d0b8be0605df",
+    "pdf": "b9e8be0965c625c20e10701b59b98a5bce99bc55834f2841c03dee212108ca18"
+  },
+  "12-string-basics": {
+    "deck": "a7dfaf8c9aef74755faed233520ca0d7e0effafd7449259e1eaf35a5cb71a67c",
+    "pdf": "25cf6edfb958e35409c8c8ecd2db6ec046752c2da2c623e4d810b3125c79b1b5"
+  },
+  "13-string-methods": {
+    "deck": "7456a4d5548c2ff7aaf278c9cf14d81b935b5b8b5bcd92ddc3eb18713ea6898a",
+    "pdf": "ee3b03e71652b2876b4994a5272fd1fdf3ae29a07acaa9b70e2af74b6a1585b2"
+  },
+  "14-functions": {
+    "deck": "1c400c0c087d46f344bc62d2a0ec7f41c34d2a412099ae5dbc537fda902002dd",
+    "pdf": "ad2f24004b4f731b00337054fe1283c4c7b378c5be37d941ffc7c8df0b11fd54"
+  },
+  "15-params-return": {
+    "deck": "e7441066b443890c6b9b055fd64cdd97b57781757246cb9fa2f5221a39aca44a",
+    "pdf": "50690df428100c633e0f1eb3108231fdca0774bfa42e40e46e08abb40b4833ef"
+  },
+  "16-math-functions": {
+    "deck": "92e86a8d081bf3366ef890b4a5d1cf488076adc4ceef41aa821e5fe5c007e14f",
+    "pdf": "c6cb464f65610d798f00dcbc6b2dfb463302d953e997c60ffd2e0eff3b646f54"
+  },
+  "17-dict-basics": {
+    "deck": "825a3948258173ebf6a568d3c90711ac4a4ea922b7b4caa69ede45f7350d4c2a",
+    "pdf": "5e8af1a559882dfc304908e2fdbf3e441edfe3f880a7d3d699b07604fb003345"
+  },
+  "18-nested-loops": {
+    "deck": "ccfae72ff1cf4bde94fc8f6a320afe8abfaca1aea7ed2caaa7c3ea7c5e44d252",
+    "pdf": "b383a77f554bf75345c2b046fcf4318d504d227275f5666bdfd8f2fe291ad59f"
+  },
+  "19-list-tools": {
+    "deck": "1b9c18c9dbe4b986d62514381b2f60fd2d77e1dfbb9a1837fe4fc869c0c8ecc0",
+    "pdf": "300e9fbfbb4644cd9e42e6034c579b18e178fcf3aeabf32f2bb3e582afc3eab0"
+  },
+  "20-2d-lists": {
+    "deck": "6fe1fd0336ed2c53d7d2c4b0488e8a504b27b049853fc64ba25d28de9e46a980",
+    "pdf": "b2c7358b2ea047fccfc83ba2dbba56166585f0ec361b7e74ef83d876774eb444"
+  },
+  "21-random-games": {
+    "deck": "33778182090d1b3f8bb33d12f5d080cc9b71fa0083c0ef0a5144c9113079bc20",
+    "pdf": "720e28fc6afef908e7cec2065671425fc1a3a9be470ee64ccde713b62919cef9"
+  },
+  "22-try-except": {
+    "deck": "a26a05aa07a8c746f92a354df04bdc8744dfa05f3d26a3fca7312a27d1953d48",
+    "pdf": "33732c9e2623ade80042a52ea9e313455e8c53015802bb5b77c679af17fbbcb3"
+  },
+  "23-recursion": {
+    "deck": "f51d98586d7d4717c1dc57ccdaa0fa2af18c7f438060c413c5712783b253f8d0",
+    "pdf": "257c6ec968907b12b5a1cdb6e3da376b408fc9a5ec0a162092305fbdb79445ab"
+  },
+  "24-bubble-sort": {
+    "deck": "70789b3515598c16828d79ef832b28746a1fbf686c5c85b5ccfcd0fa931abb62",
+    "pdf": "9deb718adb1a6a47ec6a6fcd375aaed7f6a8e54a041526aab173a6dc3c6b3e56"
+  },
+  "25-enumeration": {
+    "deck": "201bd37b504dba4a92aceb675b613ed27125c66d4f9927a6744ed99df16f8dcf",
+    "pdf": "2439238920b334eb64b890a26f32a169e6b6e445fb9bec2b842eecc628f71b4a"
+  },
+  "26-binary-search": {
+    "deck": "dcdb64a3a9d3f96c5cb74e5fa5854fbc818bd272ded1c439cb0f45a2f2648314",
+    "pdf": "f02757cebd3c96272b5d31ce2e4c4307c245c591bd50f7380c0f7448948f1fca"
+  },
+  "27-break-continue": {
+    "deck": "78ab70b85d4a6844112f01924078ee258cf833ed59cbfd77c1e131c72ffaed80",
+    "pdf": "7784a1c50903cd3a7d5b59b2719d8c7275146c4793ada88f9c4b6504360beb68"
+  },
+  "28-f-strings": {
+    "deck": "0b1db7f3e05e115de230af7ddca84472a446baf583c903e47fd0bf44f74f6d35",
+    "pdf": "dc265419e1c65cc7ec8a05cd6449db2281829c6443851d49d055535b2ba4fd40"
+  },
+  "29-sets": {
+    "deck": "4a5839ad7c094849ddef3e24d290370e1e423ba23d557eb3d62046fb2d5b6834",
+    "pdf": "c5c213468cc917fcf899cde831fd766850c18d7c989cc838095a3b2869426013"
+  },
+  "30-tuples": {
+    "deck": "972677f1ad8524a62ffd61d48bf3ab33cb1850279b632db2565328791fc3ef11",
+    "pdf": "43612a0aed617aa556500700b973bf457d71fb2b8aa89830873897fbf52dc058"
+  }
+}

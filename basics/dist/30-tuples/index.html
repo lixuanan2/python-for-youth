@@ -548,7 +548,7 @@ print(b, a)</pre>
   <h2 class="t r">这节课常见的三种错误</h2>
   <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
-    <div class="r d1" style="grid-template-columns:640px 380px 1fr"><code>p[0] = 9</code><b>TypeError</b><span>元组不能改，整个重写</span></div>
+    <div class="r d1" style="grid-template-columns:640px 380px 1fr"><code>p[0] = 9</code><b>TypeError</b><span>不能给某一格重新赋值，整个重写</span></div>
     <div class="r d2" style="grid-template-columns:640px 380px 1fr"><code>x, y = (1, 2, 3)</code><b>ValueError</b><span>左右个数要一样</span></div>
     <div class="r d3" style="grid-template-columns:640px 380px 1fr"><code>t = (5)</code><b>不报错</b><span>这只是数 5；要写 (5,)</span></div>
   </div>
@@ -622,7 +622,7 @@ print(b, a)</pre>
 <section id="page-17" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>元组和列表有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　元组用圆括号，打好包就不能改。</em></span></p>
+    <p style="font-weight:700"><i>Q1</i><span>元组和列表有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　元组用圆括号，打好包就不能给某一格重新赋值。</em></span></p>
     <p style="font-weight:700"><i>Q2</i><span>什么是拆包？<em class="step s3" style="font-style:normal;font-weight:400">　x, y = p，按顺序拆成几个变量，左右个数要一样。</em></span></p>
     <p style="font-weight:700"><i>Q3</i><span>函数怎么交回两个值？<em class="step s4" style="font-style:normal;font-weight:400">　return a, b 打成一包，调用时 x, y = 函数() 拆开。</em></span></p>
   </div>
@@ -884,9 +884,20 @@ class SlidePresentation {
   lineText(line) {
     const slots = [...line.querySelectorAll('.slot')];
     const copy = line.cloneNode(true);
-    // A value the page marked as not fitting is left out of the IDE code; the last good one goes instead.
-    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(slots[i].classList.contains('bad') ? slots[i].dataset.good : slots[i].value));
+    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(this.slotCode(slots[i])));
     return copy.textContent;
+  }
+  /* The IDE gets exactly what the student typed, even a value the page itself cannot work out, such as -3 or 2.5.
+     Text sits inside quotes, so only what would end or change the string there is escaped: a backslash and the
+     quote itself in both languages, {} in a Python f-string, and the ?? that starts a trigraph in C++. */
+  slotCode(slot) {
+    if (slot.dataset.kind !== 'text') return slot.value;
+    const before = slot.previousSibling?.textContent ?? '';
+    const quote = /['"]$/.exec(before)?.[0] ?? '"';
+    let text = slot.value.replace(/\\/g, '\\\\').replaceAll(quote, '\\' + quote);
+    if (LANGUAGE === 'python' && /(?:^|\W)[a-z]*f[a-z]*['"]$/i.test(before)) text = text.replace(/[{}]/g, '$&$&');
+    if (LANGUAGE === 'cpp') text = text.replace(/\?(?=\?)/g, '\\?');
+    return text;
   }
   linkIde() {
     const settings = IDE.load();
@@ -988,7 +999,7 @@ class SlidePresentation {
       if (tidy !== slot.value) slot.value = tidy;
       return /^\d{0,4}$/.test(tidy);
     };
-    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。'};
+    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。到 IDE 里试的话，代码里它们前面会多一个 \\。'};
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -1028,13 +1039,12 @@ class SlidePresentation {
         this.linkIde();
       };
       slots.forEach(slot => {
-        slot.dataset.start = slot.dataset.good = slot.value;
+        slot.dataset.start = slot.value;
         // Wait for a Chinese input method to finish the word before checking the text.
         const tidy = e => {
           if (e.isComposing) return;
           const ok = fits(slot);
           slot.classList.toggle('bad', !ok);
-          if (ok) slot.dataset.good = slot.value;
           update();
         };
         slot.addEventListener('input', tidy);

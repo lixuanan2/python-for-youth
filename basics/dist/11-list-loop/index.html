@@ -933,9 +933,20 @@ class SlidePresentation {
   lineText(line) {
     const slots = [...line.querySelectorAll('.slot')];
     const copy = line.cloneNode(true);
-    // A value the page marked as not fitting is left out of the IDE code; the last good one goes instead.
-    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(slots[i].classList.contains('bad') ? slots[i].dataset.good : slots[i].value));
+    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(this.slotCode(slots[i])));
     return copy.textContent;
+  }
+  /* The IDE gets exactly what the student typed, even a value the page itself cannot work out, such as -3 or 2.5.
+     Text sits inside quotes, so only what would end or change the string there is escaped: a backslash and the
+     quote itself in both languages, {} in a Python f-string, and the ?? that starts a trigraph in C++. */
+  slotCode(slot) {
+    if (slot.dataset.kind !== 'text') return slot.value;
+    const before = slot.previousSibling?.textContent ?? '';
+    const quote = /['"]$/.exec(before)?.[0] ?? '"';
+    let text = slot.value.replace(/\\/g, '\\\\').replaceAll(quote, '\\' + quote);
+    if (LANGUAGE === 'python' && /(?:^|\W)[a-z]*f[a-z]*['"]$/i.test(before)) text = text.replace(/[{}]/g, '$&$&');
+    if (LANGUAGE === 'cpp') text = text.replace(/\?(?=\?)/g, '\\?');
+    return text;
   }
   linkIde() {
     const settings = IDE.load();
@@ -1037,7 +1048,7 @@ class SlidePresentation {
       if (tidy !== slot.value) slot.value = tidy;
       return /^\d{0,4}$/.test(tidy);
     };
-    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。'};
+    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。到 IDE 里试的话，代码里它们前面会多一个 \\。'};
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -1077,13 +1088,12 @@ class SlidePresentation {
         this.linkIde();
       };
       slots.forEach(slot => {
-        slot.dataset.start = slot.dataset.good = slot.value;
+        slot.dataset.start = slot.value;
         // Wait for a Chinese input method to finish the word before checking the text.
         const tidy = e => {
           if (e.isComposing) return;
           const ok = fits(slot);
           slot.classList.toggle('bad', !ok);
-          if (ok) slot.dataset.good = slot.value;
           update();
         };
         slot.addEventListener('input', tidy);

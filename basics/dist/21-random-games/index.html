@@ -572,11 +572,11 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-13" class="slide clay" aria-label="石头剪刀布" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">石头剪刀布</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:960px">第一行读入种子，第二行读入你出的：石头、剪刀或布。电脑用 choice 随机出一个。<br>先输出“电脑出 ……”，再输出你的结果：赢、输或平。石头赢剪刀，剪刀赢布，布赢石头。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:960px">第一行读入种子（0 到 1000 的整数），第二行读入你出的：石头、剪刀或布。电脑用 random.choice(["石头", "剪刀", "布"]) 出一个，列表照这个顺序写，结果才和样例一样。<br>先输出“电脑出 ……”，再输出你的结果：赢、输或平。石头赢剪刀，剪刀赢布，布赢石头。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:540px"><small>依次输入</small><pre>7
 石头</pre><small style="margin-top:14px">输出</small><pre style="font-size:48px;white-space:pre">电脑出 剪刀
 赢</pre></div>
-  <a class="ide r d3" data-code="import random&#10;# 第一行读入种子，用 random.seed() 设好&#10;# 第二行读入你出的：石头、剪刀或布&#10;# 电脑用 random.choice 从三个里随机出一个&#10;# 先输出“电脑出 ……”，再输出你的结果：赢、输或平&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="import random&#10;# 第一行读入种子，用 random.seed() 设好&#10;# 第二行读入你出的：石头、剪刀或布&#10;# 电脑用 random.choice([&quot;石头&quot;, &quot;剪刀&quot;, &quot;布&quot;]) 出一个，列表照这个顺序写&#10;# 先输出“电脑出 ……”，再输出你的结果：赢、输或平&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -884,9 +884,20 @@ class SlidePresentation {
   lineText(line) {
     const slots = [...line.querySelectorAll('.slot')];
     const copy = line.cloneNode(true);
-    // A value the page marked as not fitting is left out of the IDE code; the last good one goes instead.
-    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(slots[i].classList.contains('bad') ? slots[i].dataset.good : slots[i].value));
+    copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(this.slotCode(slots[i])));
     return copy.textContent;
+  }
+  /* The IDE gets exactly what the student typed, even a value the page itself cannot work out, such as -3 or 2.5.
+     Text sits inside quotes, so only what would end or change the string there is escaped: a backslash and the
+     quote itself in both languages, {} in a Python f-string, and the ?? that starts a trigraph in C++. */
+  slotCode(slot) {
+    if (slot.dataset.kind !== 'text') return slot.value;
+    const before = slot.previousSibling?.textContent ?? '';
+    const quote = /['"]$/.exec(before)?.[0] ?? '"';
+    let text = slot.value.replace(/\\/g, '\\\\').replaceAll(quote, '\\' + quote);
+    if (LANGUAGE === 'python' && /(?:^|\W)[a-z]*f[a-z]*['"]$/i.test(before)) text = text.replace(/[{}]/g, '$&$&');
+    if (LANGUAGE === 'cpp') text = text.replace(/\?(?=\?)/g, '\\?');
+    return text;
   }
   linkIde() {
     const settings = IDE.load();
@@ -988,7 +999,7 @@ class SlidePresentation {
       if (tidy !== slot.value) slot.value = tidy;
       return /^\d{0,4}$/.test(tidy);
     };
-    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。'};
+    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。到 IDE 里试的话，代码里它们前面会多一个 \\。'};
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -1028,13 +1039,12 @@ class SlidePresentation {
         this.linkIde();
       };
       slots.forEach(slot => {
-        slot.dataset.start = slot.dataset.good = slot.value;
+        slot.dataset.start = slot.value;
         // Wait for a Chinese input method to finish the word before checking the text.
         const tidy = e => {
           if (e.isComposing) return;
           const ok = fits(slot);
           slot.classList.toggle('bad', !ok);
-          if (ok) slot.dataset.good = slot.value;
           update();
         };
         slot.addEventListener('input', tidy);
