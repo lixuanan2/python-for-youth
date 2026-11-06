@@ -99,10 +99,17 @@ const INTERACT = `(async () => {
     const put = (slot, value) => { slot.value = value; slot.dispatchEvent(new Event('input', {bubbles: true})); };
     const typed = (slot, text) => { put(slot, text); return slot.value; };
     // A value the page cannot work out stays as typed, is marked, shows a hint and makes every result '？'.
+    // The IDE still gets what was typed: a number as it is, text escaped only as the language needs, which runs for real later.
     const tip = slide.querySelector('.slot-tip');
+    const ide = () => new URL(link.href).searchParams.get(IDE.config.codeParam);
     const kept = (slot, text, shown = text) => typed(slot, text) === shown && !slot.classList.contains('bad') && tip.hidden;
-    const marked = (slot, text) => typed(slot, text) === text && slot.classList.contains('bad') && !tip.hidden
-      && outs.every(o => o.textContent === '？') && !new URL(link.href).searchParams.get(IDE.config.codeParam).includes(text);
+    const raw = [];
+    const marked = (slot, text) => {
+      const ok = typed(slot, text) === text && slot.classList.contains('bad') && !tip.hidden && outs.every(o => o.textContent === '？');
+      const kind = slot.dataset.kind === 'text' ? 'text' : 'number';
+      if (['-5', '2.5', 'a"b', 'a\\\\b'].includes(text)) raw.push({code: ide(), text, kind});
+      return ok && (kind === 'text' || ide().includes(text));
+    };
     const filter = slots.every(slot => slot.dataset.kind === 'text'
       ? kept(slot, '一二三四五六七八九十一二') && marked(slot, 'a"b') && marked(slot, 'a\\\\b') && marked(slot, '一二三四五六七八九十一二三')
         && kept(slot, '😀'.repeat(12)) && marked(slot, '😀'.repeat(13))
@@ -113,7 +120,7 @@ const INTERACT = `(async () => {
     slots.forEach((s, i) => put(s, start[i]));
     const shown = outs.map(o => o.textContent);
     const numbers = ['0', '1', '2', '3', '5', '7', '10', '17', '59', '60', '99', '100', '999', '9999'];
-    const words = ['你好', 'Hi there', '  两边空格  ', 'a+b=c', "it's", '😀🎉', '测'.repeat(12), 'Hello, Py!'];
+    const words = ['你好', 'Hi there', '  两边空格  ', 'a+b=c', "it's", 'why??!', 'a{1}', '😀🎉', '测'.repeat(12), 'Hello, Py!'];
     let combos = [[]];
     for (const slot of slots) combos = combos.flatMap(c => (slot.dataset.kind === 'text' ? words : numbers).map(v => [...c, v]));
     const cases = combos.map(values => {
@@ -125,7 +132,7 @@ const INTERACT = `(async () => {
     dispatchEvent(new Event('beforeprint'));
     const printed = slots.every((s, i) => s.value === start[i]) && outs.every((o, i) => o.textContent === shown[i]);
     dispatchEvent(new Event('afterprint'));
-    return [{page: page + 1, filter, waits, printed, cases, longest, few: slots.length <= 2}];
+    return [{page: page + 1, filter, waits, printed, cases, raw, slots: slots.length, longest, few: slots.length <= 2}];
   });
   const before = links[0].href;
   const select = document.querySelector('#ide-fields select');
@@ -197,14 +204,36 @@ for case in json.load(sys.stdin):
     assert got == case['outputs'], (case, got)
 `;
 
+// Values the page itself refuses still go to the IDE: numbers must compile, text must print exactly as typed.
+const RUN_RAW = `
+import contextlib, io, json, sys
+for case in json.load(sys.stdin):
+    if case['kind'] == 'text':
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            exec(case['code'], {})
+        assert case['text'] in out.getvalue(), (case, out.getvalue())
+    else:
+        compile(case['code'], 'ide', 'exec')
+`;
+
 // C++ divides by zero without a message, so those cases are left to the page text; the rest must match g++ or clang.
+function buildCpp(code) {
+  const exe = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'live-')), 'a.out');
+  const whole = code.includes('main(') ? code : `#include <iostream>\nusing namespace std;\nint main() {\n${code}\n}\n`;
+  execFileSync(process.env.CXX || 'c++', ['-std=c++11', '-x', 'c++', '-', '-o', exe], {input: whole});
+  return exe;
+}
 function runCpp(cases) {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'live-'));
   for (const c of cases.filter(c => !c.outputs.includes('除数不能是 0'))) {
-    const code = c.code.includes('main(') ? c.code : `#include <iostream>\nusing namespace std;\nint main() {\n${c.code}\n}\n`;
-    const exe = path.join(dir, 'a.out');
-    execFileSync(process.env.CXX || 'c++', ['-std=c++11', '-x', 'c++', '-', '-o', exe], {input: code});
-    assert.deepEqual(execFileSync(exe).toString().split('\n').filter((l, i, all) => i < all.length - 1 || l), c.outputs, code);
+    const out = execFileSync(buildCpp(c.code)).toString();
+    assert.deepEqual(out.split('\n').filter((l, i, all) => i < all.length - 1 || l), c.outputs, c.code);
+  }
+}
+function runCppRaw(cases) {
+  for (const c of cases) {
+    const exe = buildCpp(c.code);
+    if (c.kind === 'text') assert(execFileSync(exe).toString().includes(c.text), c.code);
   }
 }
 
@@ -216,8 +245,14 @@ const key = async (name, code = name) => {
 // Every result must equal real Python; real keys must type into the slot, not turn the page.
 async function checkLive(live, dir) {
   assert(live.filter && live.waits && live.printed && live.few, `Slot failed on page ${live.page}`);
-  if (JSON.parse(fs.readFileSync('site.json', 'utf8')).language === 'python') execFileSync('python3', ['-c', RUN_PYTHON], {input: JSON.stringify(live.cases)});
-  else runCpp(live.cases);
+  assert.equal(live.raw.length, 2 * live.slots, `Slot values were not tried in the IDE on page ${live.page}`);
+  if (JSON.parse(fs.readFileSync('site.json', 'utf8')).language === 'python') {
+    execFileSync('python3', ['-c', RUN_PYTHON], {input: JSON.stringify(live.cases)});
+    execFileSync('python3', ['-c', RUN_RAW], {input: JSON.stringify(live.raw)});
+  } else {
+    runCpp(live.cases);
+    runCppRaw(live.raw);
+  }
   const counter = `document.getElementById('counter').textContent`;
   await run(`location.hash = '#page-${live.page}'`);
   await sleep(300);
