@@ -1,3 +1,4 @@
+# Check every module, then publish the site from main only when every check has passed.
 name: check
 on:
   push:
@@ -21,3 +22,58 @@ jobs:
       - name: basics
         working-directory: basics
         run: python tools/check.py
+
+  # Every page in real Chrome: layout, quizzes, yellow boxes run against real Python, IDE links.
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Chinese fonts and the Chrome sandbox
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -yq fonts-noto-cjk
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 || true
+      - name: basics
+        working-directory: basics
+        run: node tools/check_browser.mjs
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-screenshots
+          path: basics/.preview
+          include-hidden-files: true
+
+  deploy:
+    needs: [check, browser]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      # The home page sits at the top; each module's dist/ goes under its own folder name.
+      - name: Assemble the site
+        run: |
+          mkdir -p _site/fonts
+          cp home/index.html _site/
+          cp basics/vendor/fonts/*.woff2 basics/vendor/fonts/JetBrainsMono-OFL.txt _site/fonts/
+          cp -R basics/dist _site/basics
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
