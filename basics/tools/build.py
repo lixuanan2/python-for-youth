@@ -2,10 +2,11 @@
 """Build every lesson into dist/: one offline HTML deck, its starter files and an index.
 
 Usage: python3 tools/build.py [--pdf] [--chrome PATH]
-Only the Python standard library is needed. --pdf also prints each deck with Chrome.
+Only the Python standard library is needed. --pdf also prints with Chrome every deck whose PDF is out of date.
 """
 import argparse
 import base64
+import hashlib
 import html
 import json
 from pathlib import Path
@@ -16,6 +17,8 @@ from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
+# Which deck each slides.pdf was printed from, so tools/check.py can tell when a PDF falls behind its page.
+PDF_RECORD = ROOT / 'pdf.json'
 CHROME = [
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     'C:/Program Files/Google/Chrome/Application/chrome.exe',
@@ -203,6 +206,26 @@ def outputs():
     return files
 
 
+def digest(data):
+    return hashlib.sha256(data.encode('utf-8') if isinstance(data, str) else data).hexdigest()
+
+
+def pdf_stamp(lesson):
+    """The deck a PDF should match and the PDF that is there now; a missing PDF has no hash."""
+    pdf = DIST / lesson['id'] / 'slides.pdf'
+    return {'deck': digest(render(lesson)), 'pdf': digest(pdf.read_bytes()) if pdf.is_file() else None}
+
+
+def pdf_record():
+    return json.loads(PDF_RECORD.read_text(encoding='utf-8')) if PDF_RECORD.is_file() else {}
+
+
+def stale_pdfs():
+    """Lessons whose PDF was not printed from the deck as it is now, or was changed by hand since."""
+    record = pdf_record()
+    return [lesson for lesson in lessons() if record.get(lesson['id']) != pdf_stamp(lesson)]
+
+
 def print_pdf(lesson, chrome):
     target = DIST / lesson['id']
     subprocess.run([chrome, '--headless=new', '--no-pdf-header-footer', '--virtual-time-budget=4000',
@@ -226,8 +249,16 @@ def main():
         chrome = args.chrome or next((c for c in CHROME if Path(c).is_file()), None)
         if not chrome:
             parser.error('Chrome not found; pass --chrome')
-        for lesson in lessons():
+        record = pdf_record()
+        for lesson in stale_pdfs():
             print_pdf(lesson, chrome)
+            record[lesson['id']] = pdf_stamp(lesson)
+        record = {lesson['id']: record[lesson['id']] for lesson in lessons() if lesson['id'] in record}
+        PDF_RECORD.write_text(json.dumps(record, indent=2) + '\n', encoding='utf-8', newline='\n')
+        print('Every PDF matches its deck')
+    elif stale := stale_pdfs():
+        print(f'{len(stale)} PDF(s) are older than their deck: {", ".join(l["id"] for l in stale)}')
+        print('Run python3 tools/build.py --pdf before committing; tools/check.py stops on an old PDF.')
 
 
 if __name__ == '__main__':

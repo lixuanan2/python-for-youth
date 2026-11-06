@@ -288,12 +288,21 @@ def local_links(page):
 
 
 def check_docs():
-    for doc in ROOT.rglob('*.md'):
-        if {'.git', 'dist', 'node_modules', '.preview'} & set(doc.relative_to(ROOT).parts):
+    """Every Markdown link in the whole repository opens a file in it: someone who clones only this repository has nothing else."""
+    repo = ROOT.parent.resolve()
+    count = 0
+    for doc in repo.rglob('*.md'):
+        if {'.git', 'dist', 'node_modules', '.preview'} & set(doc.relative_to(repo).parts):
             continue
-        for link in re.findall(r'\]\(([^)#]+)(?:#[^)]*)?\)', doc.read_text(encoding='utf-8')):
-            if not link.startswith(('http:', 'https:')):
-                assert (doc.parent / link).exists(), f'Broken link: {doc}: {link}'
+        name = doc.relative_to(repo).as_posix()
+        for link in re.findall(r'\]\(<?([^)#>\s]*)>?(?:#[^)\s]*)?(?:\s+"[^"]*")?\)', doc.read_text(encoding='utf-8')):
+            if not link or urlsplit(link).scheme:
+                continue
+            target = (doc.parent / unquote(link)).resolve()
+            assert target.is_relative_to(repo), f'Link leaves the repository: {name}: {link}'
+            assert target.exists(), f'Broken link: {name}: {link}'
+            count += 1
+    return count
 
 
 def main():
@@ -306,8 +315,10 @@ def main():
         claims += check_claims(folder)
         pages += check_deck(lesson, folder)
     links = check_dist()
-    check_docs()
-    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {links} index and starter links.')
+    stale = [lesson['id'] for lesson in builder.stale_pdfs()]
+    assert not stale, f'PDF older than its deck, run python3 tools/build.py --pdf: {", ".join(stale)}'
+    docs = check_docs()
+    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {links} index and starter links, {docs} document links.')
 
 
 if __name__ == '__main__':
