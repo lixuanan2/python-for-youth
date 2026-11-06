@@ -882,14 +882,15 @@ class SlidePresentation {
   }
   /* The IDE gets exactly what the student typed, even a value the page itself cannot work out, such as -3 or 2.5.
      Text sits inside quotes, so only what would end or change the string there is escaped: a backslash and the
-     quote itself in both languages, {} in a Python f-string, and the ?? that starts a trigraph in C++. */
+     quote itself in both languages, {} in a Python f-string, and ?? in C++. C++11 turns ??! and the like into
+     other characters before it reads escapes, so the second ? is escaped: ?? becomes ?\? and why??! stays why??!. */
   slotCode(slot) {
     if (slot.dataset.kind !== 'text') return slot.value;
     const before = slot.previousSibling?.textContent ?? '';
     const quote = /['"]$/.exec(before)?.[0] ?? '"';
     let text = slot.value.replace(/\\/g, '\\\\').replaceAll(quote, '\\' + quote);
     if (LANGUAGE === 'python' && /(?:^|\W)[a-z]*f[a-z]*['"]$/i.test(before)) text = text.replace(/[{}]/g, '$&$&');
-    if (LANGUAGE === 'cpp') text = text.replace(/\?(?=\?)/g, '\\?');
+    if (LANGUAGE === 'cpp') text = text.replace(/\?(?=\?)/g, '?\\');
     return text;
   }
   linkIde() {
