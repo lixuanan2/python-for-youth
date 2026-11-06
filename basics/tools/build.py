@@ -12,6 +12,7 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
@@ -126,7 +127,7 @@ def stop(number, item):
         return f'<li class="stop" data-n="{number}">{html.escape(item["title"])}</li>'
     target = item['id']
     return f'''<li class="ready"><div><h4>{html.escape(item["title"])}</h4><p>{item.get("note") or f'第 {number} 课'}，{read(f"lessons/{target}/slides.html").count("<section") + 1} 页，含小测、动手题和小项目</p></div>
-<nav aria-label="{html.escape(item["title"])}"><a href="{target}/index.html">放映课件</a><a href="{target}/slides.pdf" target="_blank" rel="noopener noreferrer">PDF</a><a href="{target}/starter/">起始程序</a></nav></li>'''
+<nav aria-label="{html.escape(item["title"])}"><a href="{target}/index.html">放映课件</a><a href="{target}/slides.pdf" target="_blank" rel="noopener noreferrer">PDF</a><a href="{target}/starter/index.html">起始程序</a></nav></li>'''
 
 
 def render_index(items):
@@ -150,11 +151,55 @@ def render_index(items):
     return page
 
 
+def ide_url(code):
+    """The same link deck.js makes, with the default settings, so it works without scripts."""
+    ide = site()['ide']
+    query = {**ide['fixed'], **{s['param']: s['options'][0][0] for s in ide['settings']}, ide['codeParam']: code}
+    return ide['base'] + '?' + '&'.join(k + '=' + quote(str(v), safe="-_.!~*'()") for k, v in query.items())
+
+
+def starters(lesson):
+    """Starter files in the order the slides use them; files no task names go last."""
+    folder = ROOT / 'lessons' / lesson['id']
+    tasks = sorted(json.loads((folder / 'tasks.json').read_text(encoding='utf-8')), key=lambda t: t['page'])
+    files = sorted(folder.glob('starter/*'))
+    assert not any(f.name == 'index.html' for f in files), f'starter/index.html is made by the build: {lesson["id"]}'
+    order = {}
+    for task in tasks:
+        order.setdefault(task['starter'], task)
+    named = [folder / name for name in order]
+    return [(f, order.get(f.relative_to(folder).as_posix())) for f in named + [f for f in files if f not in named] if f.is_file()]
+
+
+def render_starter(lesson):
+    """dist/<lesson>/starter/index.html: GitHub Pages lists no folders, so every lesson gets a page of its files."""
+    ide = site()['ide']['name']
+    rows = []
+    for file, task in starters(lesson):
+        code = file.read_text(encoding='utf-8')
+        name = html.escape(file.name)
+        about = ''
+        actions = [f'<a href="{name}" download="{name}">下载</a>', f'<a href="{html.escape(ide_url(code), quote=True)}" target="_blank" rel="noopener noreferrer">在 {html.escape(ide)} 打开</a>']
+        if task:
+            about = f'<p>课件第 {task["page"]} 页：{html.escape(task["description"])}</p>'
+            actions.append(f'<a href="../index.html#page-{task["page"]}">看第 {task["page"]} 页</a>')
+        rows.append(f'''    <li class="file"><div><h2><a href="{name}" download="{name}">{name}</a></h2>{about}</div>
+      <nav aria-label="{name}">{"".join(actions)}</nav>
+      <details><summary>看代码</summary><pre>{html.escape(code.rstrip())}</pre></details></li>''')
+    page = read('template/starter.html')
+    fields = dict(fonts='\n'.join(font_face(w) for w in (400, 700, 800)), title=html.escape(lesson['title']), count=str(len(rows)),
+                  ide=html.escape(ide), files='\n'.join(rows), footer=html.escape(site()['footer']))
+    for key, value in fields.items():
+        page = page.replace('{{' + key + '}}', value)
+    return page
+
+
 def outputs():
     """Everything in dist/ that comes from a template, as {path: text}."""
     files = {DIST / 'index.html': render_index(course())}
     for lesson in lessons():
         files[DIST / lesson['id'] / 'index.html'] = render(lesson)
+        files[DIST / lesson['id'] / 'starter' / 'index.html'] = render_starter(lesson)
     return files
 
 

@@ -17,7 +17,7 @@
 - `template/`：所有课共用的外壳、样式和脚本。缩略图、时间轴、章节跳转都在这里。
 - `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。
 - `site.json`：网站名称、首页文字、语言、IDE 平台和谢谢页的文案、链接。换语言或换 IDE 只改这里。谢谢页加链接就在 `thanks.links` 加一项，图标放 `template/icons/`。
-- `dist/`：生成结果，提交进仓库，不要手改。
+- `dist/`：生成结果，提交进仓库，不要手改。每节课的 `starter/index.html` 由 `template/starter.html` 生成，列出这节课的起始程序。GitHub Pages 不列出文件夹内容，所以页面上的链接都要指向具体文件，`tools/check.py` 会查。
 
 ## 命令
 

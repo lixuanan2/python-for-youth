@@ -242,7 +242,9 @@ def check_deck(lesson, folder):
             assert key not in shown, f'Answer shown on slides: {task["solution"]}'
             for file in built.parent.rglob('*'):
                 if file.is_file() and file.suffix in TEXT_FILES and file != built:
-                    assert key not in squash(file.read_text(encoding='utf-8')), f'Answer in {file.relative_to(builder.DIST)}'
+                    given = file.read_text(encoding='utf-8')
+                    for form in (given, html.unescape(given)):
+                        assert key not in squash(form), f'Answer in {file.relative_to(builder.DIST)}'
     for link in deck.links:
         parts = urlsplit(link)
         if not parts.scheme and parts.path:
@@ -261,8 +263,28 @@ def check_dist():
     text = index.read_text(encoding='utf-8')
     assert text == builder.render_index(builder.course()), 'Rebuild dist index'
     assert not re.search(r'/Users/|/home/', text), 'Absolute path in index'
+    links = local_links(index)
+    for lesson in builder.lessons():
+        page = builder.DIST / lesson['id'] / 'starter' / 'index.html'
+        assert page.is_file() and page.read_text(encoding='utf-8') == builder.render_starter(lesson), f'Rebuild dist starter page: {lesson["id"]}'
+        links += local_links(page)
+    return len(links)
+
+
+def local_links(page):
+    """Every local link must open a file: GitHub Pages lists no folders, so a link to one is a 404 online."""
+    text = page.read_text(encoding='utf-8')
+    assert not re.search(r'/Users/|/home/|[A-Za-z]:\\\\', text), f'Absolute path in {page.relative_to(builder.DIST)}'
+    links = []
     for link in re.findall(r'href="([^"]+)"', text):
-        assert (index.parent / unquote(link)).exists(), f'Broken index link: {link}'
+        parts = urlsplit(html.unescape(link))
+        if parts.scheme or not parts.path:
+            continue
+        target = (page.parent / unquote(parts.path)).resolve()
+        assert target.is_relative_to(builder.DIST.resolve()), f'Link leaves dist: {page.relative_to(builder.DIST)}: {link}'
+        assert target.is_file(), f'Link to a folder or a missing file: {page.relative_to(builder.DIST)}: {link}'
+        links.append(link)
+    return links
 
 
 def check_docs():
@@ -283,9 +305,9 @@ def main():
         scripts += s; cases += c
         claims += check_claims(folder)
         pages += check_deck(lesson, folder)
-    check_dist()
+    links = check_dist()
     check_docs()
-    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims.')
+    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {links} index and starter links.')
 
 
 if __name__ == '__main__':
