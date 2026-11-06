@@ -28,12 +28,16 @@
 
 ```sh
 cd basics
-python3 tools/build.py
+python3 tools/build.py --pdf
 python3 tools/check.py
 node tools/check_browser.mjs
 ```
 
-然后把重新生成的 `basics/dist/` 一起提交。页面上新写的输出或报错，要加进那节课的 `tests/claims.json`。教学要求都在 [basics/PROMPT.md](basics/PROMPT.md)。
+`--pdf` 会用 Chrome 把页面变了的课重新打印成 PDF。改了课件正文或模板都要带上它：`basics/pdf.json` 记着每份 PDF 是照哪一版页面打印的，`check.py` 发现 PDF 跟不上页面就会报错，GitHub 上的检查也会拦住。没装 Chrome 的话，只运行 `python3 tools/build.py` 也行，在 PR 里说一声，由维护者补打 PDF。
+
+然后把重新生成的 `basics/dist/` 和 `basics/pdf.json` 一起提交。页面上新写的输出或报错，要加进那节课的 `tests/claims.json`。教学要求都在 [basics/PROMPT.md](basics/PROMPT.md)。
+
+`basics/template/`、`basics/tools/`、`basics/vendor/` 是这门课和 [C++ 课](https://github.com/lixuanan2/cpp-for-youth)共用的模板、工具和字体，以这里为准。要改就在这里改，由维护者同步到 C++ 课，不用去 C++ 那边再提一次。
 
 ## 不收的内容
 

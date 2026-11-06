@@ -12,11 +12,12 @@
 
 下面的路径都从 `basics/` 算起。
 
-- `lessons/<编号-英文名>/slides.html`：一节课的页面，只写 `<section>`。这是唯一的内容源。
+- `lessons/<编号-英文名>/slides.html`：一节课的页面，只写 `<section>`。这是页面正文的唯一来源。题目的条件（输入、范围、输出格式、样例）改了，要同时核对这节课的 `tasks.json`、`solutions/`、`starter/` 和 `tests/`，让它们和页面说的一致。
 - `lessons/<…>/tasks.json`、`starter/`、`solutions/`、`tests/`：题目、起始程序、答案和测试。`tests/claims.json` 记录页面说过的输出和报错。
 - `template/`：所有课共用的外壳、样式和脚本。缩略图、时间轴、章节跳转都在这里。
 - `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。
 - `site.json`：网站名称、首页文字、语言、IDE 平台和谢谢页的文案、链接。换语言或换 IDE 只改这里。谢谢页加链接就在 `thanks.links` 加一项，图标放 `template/icons/`。
+- `pdf.json`：每份 `dist/<课>/slides.pdf` 照哪一版页面打印、PDF 本身的哈希，由 `build.py --pdf` 写，不要手改。`check.py` 比对它，PDF 跟不上页面就报错。
 - `dist/`：生成结果，提交进仓库，不要手改。每节课的 `starter/index.html` 由 `template/starter.html` 生成，列出这节课的起始程序。GitHub Pages 不列出文件夹内容，所以页面上的链接都要指向具体文件，`tools/check.py` 会查。
 
 ## 命令
@@ -24,16 +25,16 @@
 都在 `basics/` 里运行（从仓库最外层先 `cd basics`）：
 
 ```sh
-python3 tools/build.py          # 生成 dist/
-python3 tools/build.py --pdf    # 同时用 Chrome 打印 PDF
-python3 tools/check.py          # 程序、答案、页面说法、路径
+python3 tools/build.py          # 生成 dist/，PDF 过期时提醒
+python3 tools/build.py --pdf    # 同时用 Chrome 重新打印页面变了的课的 PDF
+python3 tools/check.py          # 程序、答案、页面说法、路径、PDF 是否过期、整个仓库的文档链接
 node tools/check_browser.mjs    # 真实 Chrome 逐页检查和交互测试
 ```
 
 ## 规则
 
 - 一律用相对路径：课件、文档和给老师的命令都不写绝对路径。给命令时说明要在 `basics/` 里运行。
-- 改课只改 `lessons/` 和 `template/`，再重建。
+- 改课只改 `lessons/` 和 `template/`，再用 `--pdf` 重建，让 PDF 跟上页面。
 - 课件离线可用：样式、脚本和字体都内联，不用 CDN 和在线字体。只有 IDE 和官方文档链接需要联网。
 - IDE 地址只写在 `site.json` 的 `ide` 里，换平台只改这一处。
 - 程序、页面说法和答案都要过 `tools/check.py`。页面上新写的输出或报错要加进 `claims.json`。
@@ -52,7 +53,7 @@ node tools/check_browser.mjs    # 真实 Chrome 逐页检查和交互测试
 
 ## 姊妹项目
 
-C++ 课件在主文件夹里的 `cpp-for-youth/`（从这里算是 `../../cpp-for-youth/`，仓库 `lixuanan2/cpp-for-youth`），用同一套模板，跨课程规则见主文件夹的 `AGENTS.md`（从这里算是 `../../AGENTS.md`）。本仓库为主：`template/`、`tools/`、`vendor/` 只在这里（`basics/` 里）改，C++ 有需要时提过来。改动对 C++ 也有用时，按主文件夹 `AGENTS.md` 的命令同步过去，再跑那边的检查。
+C++ 课件是仓库 `lixuanan2/cpp-for-youth`，用同一套模板。跨课程的规则写在仓库最外层 [AGENTS.md](../AGENTS.md) 的“跨课程的规则”：本仓库为主，`template/`、`tools/`、`vendor/` 只在这里（`basics/` 里）改，C++ 有需要时提过来，改好后由维护者同步过去，再跑那边的检查。老师本机有主文件夹的话，C++ 课在 `../../cpp-for-youth/`，同步命令在主文件夹的 `AGENTS.md`，那只是老师本机的补充。
 
 ## 旧资料
 
