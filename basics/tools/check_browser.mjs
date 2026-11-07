@@ -105,7 +105,7 @@ const INTERACT = `(async () => {
     const kept = (slot, text, shown = text) => typed(slot, text) === shown && !slot.classList.contains('bad') && tip.hidden;
     const raw = [];
     const marked = (slot, text) => {
-      const ok = typed(slot, text) === text && slot.classList.contains('bad') && !tip.hidden && outs.every(o => o.textContent === '？');
+      const ok = typed(slot, text) === text && slot.classList.contains('bad') && !tip.hidden && !tip.classList.contains('calm') && outs.every(o => o.textContent === '？');
       const kind = slot.dataset.kind === 'text' ? 'text' : 'number';
       if (['-5', '2.5', 'a"b', 'a\\\\b'].includes(text)) raw.push({code: ide(), text, kind});
       return ok && (kind === 'text' || ide().includes(text));
@@ -116,7 +116,8 @@ const INTERACT = `(async () => {
       : kept(slot, '12') && marked(slot, '1a2') && kept(slot, '007', '7') && kept(slot, '０７', '7') && marked(slot, '-5')
         && marked(slot, '2.5') && marked(slot, '12345') && kept(slot, '9999'));
     put(slots[0], '');
-    const waits = outs.every(o => o.textContent === '？');
+    // An empty box is not a mistake: the results wait and an amber hint, not a red one, says to fill it.
+    const waits = outs.every(o => o.textContent === '？') && !tip.hidden && tip.classList.contains('calm') && !slots[0].classList.contains('bad');
     slots.forEach((s, i) => put(s, start[i]));
     const shown = outs.map(o => o.textContent);
     const numbers = ['0', '1', '2', '3', '5', '7', '10', '17', '59', '60', '99', '100', '999', '9999'];
@@ -274,6 +275,67 @@ async function checkLive(live, dir) {
   assert.notEqual(await run(counter), page, 'A clicker cannot leave a page with a focused slot');
 }
 
+// Code changes: read both versions from the built file with no deck.js, then play the change with real keys.
+const VERSIONS = raw => `(() => {
+  const doc = new DOMParser().parseFromString(${JSON.stringify(raw)}, 'text/html');
+  const slides = [...doc.querySelectorAll('#deckStage .slide')];
+  const lines = pre => [...pre.querySelectorAll('.ln')].map(l => l.textContent);
+  return [...doc.querySelectorAll('pre.code.was')].map(old => ({page: slides.indexOf(old.closest('.slide')) + 1,
+    before: lines(old), after: lines(old.nextElementSibling), at: old.nextElementSibling.dataset.change}));
+})()`;
+const CHANGE_STATE = `(() => {
+  const slide = document.querySelector('#deckStage .slide.active'), pre = slide.querySelector('pre.change');
+  const seen = e => Number(getComputedStyle(e).opacity) > 0.5;
+  const shown = [...pre.querySelectorAll('.ln')].filter(l => l.getBoundingClientRect().height > 1 && seen(l))
+    .map(l => ([...l.querySelectorAll('.now, .then')].find(seen) || l).textContent);
+  const thumb = document.querySelectorAll('.thumb')[[...document.querySelectorAll('#deckStage .slide')].indexOf(slide)];
+  return {shown, at: slide.dataset.at, moving: pre.getAnimations({subtree: true}).length,
+    ide: new URL(document.getElementById('ide-quick').href).searchParams.get(IDE.config.codeParam),
+    marked: pre.classList.contains('new') && [...pre.querySelectorAll('.add, .edit')].every(l => getComputedStyle(l).backgroundColor !== 'rgba(0, 0, 0, 0)'),
+    thumbOld: !thumb.querySelector('pre.change').classList.contains('new')};
+})()`;
+async function checkChange(change, dir) {
+  const shot = async name => fs.writeFileSync(path.join(dir, `change-${change.page}-${name}.png`), Buffer.from((await send('Page.captureScreenshot', {format: 'png'})).data, 'base64'));
+  const at = Number(change.at), where = `Code change on page ${change.page}`;
+  await run(`location.hash = '#page-${change.page}'`);
+  await sleep(400);
+  for (let i = 1; i < at - 1; i++) { await key('ArrowRight'); await sleep(50); }
+  let state = await run(CHANGE_STATE);
+  assert.deepEqual(state.shown, change.before, `${where} does not start with the old version`);
+  assert.equal(state.ide, change.after.join('\n'), `${where}: the IDE must get the new version`);
+  assert(state.thumbOld, `${where}: the thumbnail gives the new version away`);
+  await shot('1-old');
+  await key('ArrowRight');
+  await sleep(150);
+  assert((await run(CHANGE_STATE)).moving > 0, `${where} does not play when going forward`);
+  await shot('2-moving');
+  await sleep(900);
+  state = await run(CHANGE_STATE);
+  assert.deepEqual(state.shown, change.after, `${where} does not end with the new version`);
+  assert(state.marked && !state.moving && state.at === String(at), `${where}: new and edited lines are not marked`);
+  await shot('3-new');
+  await key('ArrowLeft');
+  await sleep(150);
+  assert((await run(CHANGE_STATE)).moving > 0, `${where} does not play back when going back`);
+  await sleep(900);
+  assert.deepEqual((await run(CHANGE_STATE)).shown, change.before, `${where} does not go back to the old version`);
+  // Reduced motion: the same switch, at once.
+  await send('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'reduce'}]});
+  await key('ArrowRight');
+  state = await run(CHANGE_STATE);
+  assert(!state.moving && JSON.stringify(state.shown) === JSON.stringify(change.after), `${where} animates with reduced motion`);
+  await shot('4-reduced');
+  await key('ArrowLeft');
+  state = await run(CHANGE_STATE);
+  assert(!state.moving && JSON.stringify(state.shown) === JSON.stringify(change.before), `${where} animates back with reduced motion`);
+  await send('Emulation.setEmulatedMedia', {features: []});
+  await run(`dispatchEvent(new Event('beforeprint'))`);
+  state = await run(CHANGE_STATE);
+  assert(!state.moving && state.marked && JSON.stringify(state.shown) === JSON.stringify(change.after), `${where}: print does not show the marked new version`);
+  await run(`dispatchEvent(new Event('afterprint'))`);
+  assert.deepEqual((await run(CHANGE_STATE)).shown, change.before, `${where}: after printing the page is not back where it was`);
+}
+
 try {
   await send('Page.enable');
   await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
@@ -306,6 +368,8 @@ try {
     assert(result.picks.length && result.picks.every(Boolean), 'Bug hunt line not marked right');
     assert(result.gates.every(Boolean), 'Logic switch gave a wrong result');
     for (const live of result.live) await checkLive(live, dir);
+    const changes = await run(VERSIONS(fs.readFileSync(path.resolve('dist', lesson.id, 'index.html'), 'utf8')));
+    for (const change of changes) await checkChange(change, dir);
     assert(result.changed, 'IDE settings did not change links');
     assert.deepEqual(Object.entries(result.shell).filter(([, ok]) => !ok), [], 'Workspace control failed');
     await send('Emulation.setDeviceMetricsOverride', {width: 390, height: 844, deviceScaleFactor: 1, mobile: true});
@@ -320,7 +384,7 @@ try {
     const deckShot = await send('Page.captureScreenshot', {format: 'png'});
     fs.writeFileSync(path.join('.preview', 'deck-phone.png'), Buffer.from(deckShot.data, 'base64'));
     await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
-    console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; thumbnails, timeline, chapters and jump work; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.gates.length} logic switches, ${result.links} IDE links.`);
+    console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; thumbnails, timeline, chapters and jump work; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.gates.length} logic switches, ${changes.length} code changes, ${result.links} IDE links.`);
   }
 } finally {
   ws.close();

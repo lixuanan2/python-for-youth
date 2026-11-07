@@ -21,6 +21,21 @@ print(100)</pre></div>
   <div class="foot"></div>
 </section>
 
+<!-- code change: three prints become a for -->
+<section class="slide" aria-label="把三行改成 for" data-steps="2" data-at="2">
+  <h2 class="t">把三行改成 for</h2>
+  <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">cheer.py</div>
+<pre class="code was"><span class="ln"><span class="f">print</span>(<span class="s">"加油"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"加油"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"加油"</span>)</span></pre>
+<pre class="code" data-file="solutions/01_cheer.py" data-change="2"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">    <span class="f">print</span>(<span class="s">"加油"</span>)</span></pre></div>
+  <div class="slip tilt" style="left:1300px;top:240px;width:420px"><small>屏幕上</small><pre>加油
+加油
+加油</pre></div>
+  <p class="abs say only1" style="left:96px;top:660px;width:1728px">喊三遍加油，最直接的写法是把 print 写三遍。<br>要喊一百遍呢？</p>
+  <p class="abs say step s2" style="left:96px;top:660px;width:1728px">改成 for：上面加一行 for，print 缩进 4 个空格，另外两行删掉。<br>输出一样。<b style="color:var(--olive)">绿条</b>是新加的行，<b style="color:#a8741a">黄条</b>是改过的行。</p>
+  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
 <!-- smallest for with trace -->
 <section class="slide" aria-label="for 的写法" data-steps="3" data-at="3" data-chapter="for">
   <div class="night" style="width:1230px"></div>
@@ -226,8 +241,26 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   <div class="foot"></div>
 </section>
 
+<!-- code change: add an if to the last program -->
+<section class="slide" aria-label="在上一题上加 if" data-steps="2" data-at="2" data-chapter="筛选">
+  <h2 class="t">在上一题上加一个 if</h2>
+  <div class="editor" style="left:96px;top:230px;width:1100px;--fs:50px"><div class="tab">even.py</div>
+<pre class="code was" data-file="solutions/04_one_to_n.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre>
+<pre class="code" data-file="solutions/09_even.py" data-change="2"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="k">if</span> i % <span class="m">2</span> == <span class="m">0</span>:</span><span class="ln">        <span class="f">print</span>(i)</span></pre></div>
+  <div class="slip tilt only1" style="left:1340px;top:230px;width:380px"><small>输入 4，屏幕上</small><pre>1
+2
+3
+4</pre></div>
+  <div class="slip tilt step s2" style="left:1340px;top:230px;width:380px"><small>输入 4，屏幕上</small><pre>2
+4</pre></div>
+  <p class="abs say only1" style="left:96px;top:730px;width:1728px">先把上一题“从 1 数到 n”的程序拿过来。<br>现在只想要双数，要改哪里？</p>
+  <p class="abs say step s2" style="left:96px;top:730px;width:1728px">在 for 里面加一行 if，print 再缩进 4 个空格，归 if 管。<br>前两行一个字都不用改。</p>
+  <a class="ide step s2" style="left:96px;top:910px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
 <!-- filter with trace -->
-<section class="slide" aria-label="循环里放 if" data-steps="4" data-at="4" data-chapter="筛选">
+<section class="slide" aria-label="循环里放 if" data-steps="4" data-at="4">
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">循环里放 if：一个一个筛</h2>
   <div class="editor" style="left:96px;top:210px;width:1040px;--fs:44px"><div class="tab">even.py</div>

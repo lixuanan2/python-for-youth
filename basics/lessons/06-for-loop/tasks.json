@@ -2,7 +2,7 @@
   {
     "id": "01",
     "role": "语法小演示",
-    "page": 3,
+    "page": 4,
     "starter": "starter/01_cheer.py",
     "solution": "solutions/01_cheer.py",
     "scope": "无输入",
@@ -13,7 +13,7 @@
   {
     "id": "02",
     "role": "语法小演示",
-    "page": 4,
+    "page": 5,
     "starter": "starter/02_print_i.py",
     "solution": "solutions/02_print_i.py",
     "scope": "无输入",
@@ -24,7 +24,7 @@
   {
     "id": "03",
     "role": "语法小演示",
-    "page": 6,
+    "page": 7,
     "starter": "starter/03_range_two.py",
     "solution": "solutions/03_range_two.py",
     "scope": "无输入",
@@ -35,7 +35,7 @@
   {
     "id": "A",
     "role": "基础例题",
-    "page": 7,
+    "page": 8,
     "starter": "starter/04_one_to_n.py",
     "solution": "solutions/04_one_to_n.py",
     "scope": "n为0到1000的整数",
@@ -46,7 +46,7 @@
   {
     "id": "04",
     "role": "学生小改写",
-    "page": 10,
+    "page": 11,
     "starter": "starter/05_times_table.py",
     "solution": "solutions/05_times_table.py",
     "scope": "n为1到9的整数",
@@ -57,7 +57,7 @@
   {
     "id": "05",
     "role": "语法小演示",
-    "page": 11,
+    "page": 12,
     "starter": "starter/06_step.py",
     "solution": "solutions/06_step.py",
     "scope": "无输入",
@@ -68,7 +68,7 @@
   {
     "id": "06",
     "role": "语法小演示",
-    "page": 12,
+    "page": 13,
     "starter": "starter/07_rocket.py",
     "solution": "solutions/07_rocket.py",
     "scope": "无输入",
@@ -79,7 +79,7 @@
   {
     "id": "07",
     "role": "学生小改写",
-    "page": 15,
+    "page": 16,
     "starter": "starter/08_countdown.py",
     "solution": "solutions/08_countdown.py",
     "scope": "n为1到100的整数",
@@ -90,7 +90,7 @@
   {
     "id": "B",
     "role": "基础例题",
-    "page": 17,
+    "page": 19,
     "starter": "starter/09_even.py",
     "solution": "solutions/09_even.py",
     "scope": "n为1到1000的整数",
@@ -101,7 +101,7 @@
   {
     "id": "08",
     "role": "学生小改写",
-    "page": 19,
+    "page": 21,
     "starter": "starter/10_multiples.py",
     "solution": "solutions/10_multiples.py",
     "scope": "n为1到1000的整数",
@@ -112,7 +112,7 @@
   {
     "id": "09",
     "role": "独立迁移",
-    "page": 22,
+    "page": 24,
     "starter": "starter/11_pass_seven.py",
     "solution": "solutions/11_pass_seven.py",
     "scope": "n为1到1000的整数",
@@ -123,7 +123,7 @@
   {
     "id": "10",
     "role": "创作项目",
-    "page": 24,
+    "page": 26,
     "starter": "starter/12_frog.py",
     "solution": "solutions/12_frog_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

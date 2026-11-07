@@ -323,7 +323,12 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slot[data-kind=text]{width:20.8ch;text-align:left;padding:0 .4ch}
 .slot:focus{background:#fff;box-shadow:0 0 0 3px #f0c674}
 .slot.bad,.slot.bad:focus{background:#fbe3da;box-shadow:0 0 0 4px var(--clay)}
-.slot-tip{position:absolute;z-index:6;margin:0;padding:12px 22px;max-width:1100px;font:600 32px/1.4 var(--text);color:#fff;background:var(--clay);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.slot-tip{position:absolute;z-index:6;margin:0;padding:14px 28px 16px 82px;font:700 38px/1.4 var(--text);color:#fff;background:var(--clay);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+.slot-tip::before{content:"!";position:absolute;left:24px;top:50%;width:42px;height:42px;margin-top:-21px;border-radius:50%;background:#fff;color:var(--clay);font:800 32px/42px var(--code);text-align:center}
+.slot-tip::after{content:"";position:absolute;left:36px;top:-16px;border:16px solid transparent;border-top:0;border-bottom-color:var(--clay)}
+.slot-tip.calm{color:var(--ink);background:var(--amber);padding-left:28px}
+.slot-tip.calm::before{display:none}.slot-tip.calm::after{border-bottom-color:var(--amber)}
+.tip-under{visibility:hidden}
 .slot-tip[hidden]{display:none}
 @media print{.slot-tip{display:none}}
 .live-out{position:absolute;left:1090px;right:96px;top:170px}
@@ -332,6 +337,26 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay);white-space:pre}
 .live-out b.long{font-size:42px}
 .live-out b.skip{font:400 44px/84px var(--text);color:var(--muted)}
+
+/* === CODE CHANGE: deck.js merges the old and new version; .new shows the new one, .play animates the switch === */
+.change .ln{height:1.55em;overflow:hidden;transition:none}
+.change .then{position:absolute;left:120px;top:0;opacity:0}
+.change:not(.new) .now{opacity:0}.change:not(.new) .then{opacity:1}
+.change:not(.new) .add,.change.new .cut{height:0;opacity:0}
+.change:not(.new) .add{transform:translateX(-1.2em)}
+.change:not(.new) .add::before,.change.new .cut::before{content:none;counter-increment:none}
+.change.new .add{background:#33503b;box-shadow:inset 10px 0 var(--mint)}
+.change.new .edit{background:#54462b;box-shadow:inset 10px 0 var(--amber)}
+.change.play .ln,.change.play .now,.change.play .then{transition:height .3s .15s,opacity .25s,transform .3s,background .4s .3s,box-shadow .4s .3s}
+.change.play.new .add{transition:height .3s .15s,opacity .3s .4s,transform .3s .4s,background .4s .4s,box-shadow .4s .4s}
+.change.play.new .then{transition:opacity .25s .2s}
+.change.play.new .now{transition:opacity .25s .35s}
+.change.play:not(.new) .cut{transition:height .3s .15s,opacity .3s .4s}
+.change.play:not(.new) .then{transition:opacity .25s .3s}
+.change.play.new .edit{animation:flash .5s .3s}
+@keyframes flash{from{background:#8a6a2e}}
+@media (prefers-reduced-motion:reduce){.change .ln,.change .ln *{transition:none!important;animation:none!important}}
+@media print{.change .ln,.change .ln *{transition:none!important}}
 
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
 .pick .ln.yes{background:#2f4a36}.pick .ln.no{background:#5a3327}
@@ -443,8 +468,23 @@ print(100)</pre></div>
   <div class="foot"></div>
 </section>
 
+<!-- code change: three prints become a for -->
+<section id="page-3" class="slide" aria-label="把三行改成 for" data-steps="2" data-at="2">
+  <h2 class="t">把三行改成 for</h2>
+  <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">cheer.py</div>
+<pre class="code was"><span class="ln"><span class="f">print</span>(<span class="s">"加油"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"加油"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"加油"</span>)</span></pre>
+<pre class="code" data-file="solutions/01_cheer.py" data-change="2"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">    <span class="f">print</span>(<span class="s">"加油"</span>)</span></pre></div>
+  <div class="slip tilt" style="left:1300px;top:240px;width:420px"><small>屏幕上</small><pre>加油
+加油
+加油</pre></div>
+  <p class="abs say only1" style="left:96px;top:660px;width:1728px">喊三遍加油，最直接的写法是把 print 写三遍。<br>要喊一百遍呢？</p>
+  <p class="abs say step s2" style="left:96px;top:660px;width:1728px">改成 for：上面加一行 for，print 缩进 4 个空格，另外两行删掉。<br>输出一样。<b style="color:var(--olive)">绿条</b>是新加的行，<b style="color:#a8741a">黄条</b>是改过的行。</p>
+  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
 <!-- smallest for with trace -->
-<section id="page-3" class="slide" aria-label="for 的写法" data-steps="3" data-at="3" data-chapter="for">
+<section id="page-4" class="slide" aria-label="for 的写法" data-steps="3" data-at="3" data-chapter="for">
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">for：一遍一遍地做</h2>
   <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">cheer.py</div>
@@ -462,7 +502,7 @@ print(100)</pre></div>
 </section>
 
 <!-- predict: i starts at 0 -->
-<section id="page-4" class="slide dark" aria-label="猜一猜：i 是几" data-steps="2" data-at="2">
+<section id="page-5" class="slide dark" aria-label="猜一猜：i 是几" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：print(i) 会输出什么？</h2>
   <div class="editor" style="left:96px;top:220px;width:880px;--fs:50px"><div class="tab">print_i.py</div>
 <pre class="code" data-file="solutions/02_print_i.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
@@ -477,7 +517,7 @@ print(100)</pre></div>
 </section>
 
 <!-- quiz: range(5) -->
-<section id="page-5" class="slide" aria-label="小测：range 最后一个数">
+<section id="page-6" class="slide" aria-label="小测：range 最后一个数">
   <h2 class="t r">小测：range(5) 最后一个数是几？</h2>
   <div class="quiz r d1" data-right="0">
     <button type="button" data-fb="答对了！从 0 开始数 5 个数：0、1、2、3、4。"><i>1</i>4</button>
@@ -490,7 +530,7 @@ print(100)</pre></div>
 </section>
 
 <!-- range(start, stop) -->
-<section id="page-6" class="slide" aria-label="range 的起点和终点" data-chapter="range">
+<section id="page-7" class="slide" aria-label="range 的起点和终点" data-chapter="range">
   <h2 class="t r">range 可以写起点和终点</h2>
   <div class="numline r d1" style="top:230px">
     <i style="left:14.29%"></i><i style="left:28.57%"></i><i style="left:42.86%"></i><i style="left:57.14%"></i><i style="left:71.43%"></i><i class="open" style="left:85.71%"></i>
@@ -505,7 +545,7 @@ print(100)</pre></div>
 </section>
 
 <!-- worked example -->
-<section id="page-7" class="slide" aria-label="从 1 数到 n" data-steps="4" data-at="4">
+<section id="page-8" class="slide" aria-label="从 1 数到 n" data-steps="4" data-at="4">
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">例题：从 1 数到 n</h2>
   <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">one_to_n.py</div>
@@ -524,7 +564,7 @@ print(100)</pre></div>
 </section>
 
 <!-- predict: n = 0 -->
-<section id="page-8" class="slide dark" aria-label="猜一猜：输入 0" data-steps="2" data-at="2">
+<section id="page-9" class="slide dark" aria-label="猜一猜：输入 0" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：输入 0，输出几行？</h2>
   <div class="editor" style="left:96px;top:220px;width:1040px;--fs:50px"><div class="tab">one_to_n.py</div>
 <pre class="code" data-file="solutions/04_one_to_n.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
@@ -536,7 +576,7 @@ print(100)</pre></div>
 </section>
 
 <!-- quiz: how many -->
-<section id="page-9" class="slide" aria-label="小测：有几个数">
+<section id="page-10" class="slide" aria-label="小测：有几个数">
   <h2 class="t r">小测：range(2, 5) 里有几个数？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="再数一遍，起点 2 也算在内。"><i>1</i>2</button>
@@ -549,7 +589,7 @@ print(100)</pre></div>
 </section>
 
 <!-- your turn -->
-<section id="page-10" class="slide" aria-label="乘法口诀">
+<section id="page-11" class="slide" aria-label="乘法口诀">
   <div class="band r"><b>动手<br>改一改</b><span>i 不光能输出，还能拿来算。</span></div>
   <div class="turn">
     <h2 class="r d1">输出一列乘法口诀</h2>
@@ -561,7 +601,7 @@ print(100)</pre></div>
 </section>
 
 <!-- step -->
-<section id="page-11" class="slide" aria-label="range 的步长" data-chapter="步长">
+<section id="page-12" class="slide" aria-label="range 的步长" data-chapter="步长">
   <h2 class="t r">第三个数：一次跳几步</h2>
   <div class="numline r d1" style="top:230px">
     <i style="left:9.09%"></i><i style="left:27.27%"></i><i style="left:45.45%"></i><i style="left:63.64%"></i><i style="left:81.82%"></i><i class="open" style="left:90.91%"></i>
@@ -576,7 +616,7 @@ print(100)</pre></div>
 </section>
 
 <!-- predict: counting down -->
-<section id="page-12" class="slide dark" aria-label="猜一猜：火箭倒计时" data-steps="2" data-at="2">
+<section id="page-13" class="slide dark" aria-label="猜一猜：火箭倒计时" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：火箭倒计时</h2>
   <div class="editor" style="left:96px;top:220px;width:1000px;--fs:50px"><div class="tab">rocket.py</div>
 <pre class="code" data-file="solutions/07_rocket.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>, <span class="m">0</span>, -<span class="m">1</span>):</span><span class="ln">    <span class="f">print</span>(i)</span><span class="ln"><span class="f">print</span>(<span class="s">"发射！"</span>)</span></pre></div>
@@ -592,7 +632,7 @@ print(100)</pre></div>
 </section>
 
 <!-- quiz: negative step -->
-<section id="page-13" class="slide" aria-label="小测：倒着跳">
+<section id="page-14" class="slide" aria-label="小测：倒着跳">
   <h2 class="t r">小测：range(10, 0, -2) 最后一个数是几？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="终点不算在内，到不了 0。"><i>1</i>0</button>
@@ -605,7 +645,7 @@ print(100)</pre></div>
 </section>
 
 <!-- predict: three ranges -->
-<section id="page-14" class="slide" aria-label="猜一猜：三个 range" data-steps="4" data-at="4">
+<section id="page-15" class="slide" aria-label="猜一猜：三个 range" data-steps="4" data-at="4">
   <h2 class="t">猜一猜：这三个 range 给出哪些数？</h2>
   <div class="sheet3" style="top:200px">
     <div><code>range(1, 6, 2)</code><span class="step s2" style="font:800 56px var(--code)">1、3、5</span></div>
@@ -618,7 +658,7 @@ print(100)</pre></div>
 </section>
 
 <!-- your turn -->
-<section id="page-15" class="slide" aria-label="从 n 开始倒计时">
+<section id="page-16" class="slide" aria-label="从 n 开始倒计时">
   <div class="band r"><b>动手<br>改一改</b><span>起点不再是固定的 3 了。</span></div>
   <div class="turn">
     <h2 class="r d1">自己定倒计时</h2>
@@ -633,7 +673,7 @@ print(100)</pre></div>
 </section>
 
 <!-- predict: indentation -->
-<section id="page-16" class="slide" aria-label="猜一猜：缩进" data-steps="2" data-at="2" data-chapter="缩进">
+<section id="page-17" class="slide" aria-label="猜一猜：缩进" data-steps="2" data-at="2" data-chapter="缩进">
   <h2 class="t">猜一猜：b 输出几次？</h2>
   <div class="vs">
     <div><h3>print("b") 不缩进</h3><pre style="font-size:56px">for i in range(2):
@@ -648,8 +688,26 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   <div class="foot"></div>
 </section>
 
+<!-- code change: add an if to the last program -->
+<section id="page-18" class="slide" aria-label="在上一题上加 if" data-steps="2" data-at="2" data-chapter="筛选">
+  <h2 class="t">在上一题上加一个 if</h2>
+  <div class="editor" style="left:96px;top:230px;width:1100px;--fs:50px"><div class="tab">even.py</div>
+<pre class="code was" data-file="solutions/04_one_to_n.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre>
+<pre class="code" data-file="solutions/09_even.py" data-change="2"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="k">if</span> i % <span class="m">2</span> == <span class="m">0</span>:</span><span class="ln">        <span class="f">print</span>(i)</span></pre></div>
+  <div class="slip tilt only1" style="left:1340px;top:230px;width:380px"><small>输入 4，屏幕上</small><pre>1
+2
+3
+4</pre></div>
+  <div class="slip tilt step s2" style="left:1340px;top:230px;width:380px"><small>输入 4，屏幕上</small><pre>2
+4</pre></div>
+  <p class="abs say only1" style="left:96px;top:730px;width:1728px">先把上一题“从 1 数到 n”的程序拿过来。<br>现在只想要双数，要改哪里？</p>
+  <p class="abs say step s2" style="left:96px;top:730px;width:1728px">在 for 里面加一行 if，print 再缩进 4 个空格，归 if 管。<br>前两行一个字都不用改。</p>
+  <a class="ide step s2" style="left:96px;top:910px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
 <!-- filter with trace -->
-<section id="page-17" class="slide" aria-label="循环里放 if" data-steps="4" data-at="4" data-chapter="筛选">
+<section id="page-19" class="slide" aria-label="循环里放 if" data-steps="4" data-at="4">
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">循环里放 if：一个一个筛</h2>
   <div class="editor" style="left:96px;top:210px;width:1040px;--fs:44px"><div class="tab">even.py</div>
@@ -669,7 +727,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- quiz: runs vs outputs -->
-<section id="page-18" class="slide" aria-label="小测：循环几遍，输出几个">
+<section id="page-20" class="slide" aria-label="小测：循环几遍，输出几个">
   <h2 class="t r">小测：刚才输入 4，循环几遍？输出几个数？</h2>
   <div class="quiz r d1" data-right="0">
     <button type="button" data-fb="答对了！i 从 1 走到 4，循环 4 遍，每遍都判断一次，只有 2 和 4 输出。"><i>1</i>4 遍，2 个</button>
@@ -682,7 +740,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- your turn -->
-<section id="page-19" class="slide" aria-label="筛出 3 的倍数">
+<section id="page-21" class="slide" aria-label="筛出 3 的倍数">
   <div class="band r"><b>动手<br>改一改</b><span>只要改一个地方。想想是哪一个。</span></div>
   <div class="turn">
     <h2 class="r d1">挑出 3 的倍数</h2>
@@ -696,7 +754,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- errors -->
-<section id="page-20" class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section id="page-22" class="slide" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
   <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
@@ -709,7 +767,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-21" class="slide dark" aria-label="找错：少了一个数">
+<section id="page-23" class="slide dark" aria-label="找错：少了一个数">
   <h2 class="t r">找错：怎么少了一个数？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！终点不算在内，range(1, n) 只到 4。要数到 n，就写 range(1, n + 1)。" data-no="这一行没问题。想一想：range 的终点算不算在内？"><span class="ln">n = <span class="m">5</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n):</span><span class="ln">    <span class="f">print</span>(i)</span><span class="ln"><span class="f">print</span>(<span class="s">"数完了"</span>)</span></pre></div>
@@ -719,7 +777,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- challenge -->
-<section id="page-22" class="slide clay" aria-label="拍七" data-chapter="挑战">
+<section id="page-24" class="slide clay" aria-label="拍七" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">拍七</h2>
   <p class="abs say r d2" style="left:96px;top:480px;width:1728px">读入 n（1 到 1000 的整数），从 1 数到 n，每个数占一行。<br>碰到 7 的倍数，或者个位是 7 的数，不说这个数，改说“过”。</p>
@@ -731,7 +789,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- hints -->
-<section id="page-23" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-25" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>每个数要做的事都一样：先判断，再说话。这件事放在哪里重复？</span></p>
@@ -742,7 +800,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- creative project -->
-<section id="page-24" class="slide" aria-label="造一首数数儿歌" data-chapter="小项目">
+<section id="page-26" class="slide" aria-label="造一首数数儿歌" data-chapter="小项目">
   <h2 class="t r">造一首会数数的儿歌</h2>
   <p class="abs say r d1" style="left:96px;top:200px">让程序一遍一遍地唱，每一遍都不太一样。唱什么，你自己定。</p>
   <div class="later" style="top:320px">
@@ -756,7 +814,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- share -->
-<section id="page-25" class="slide" aria-label="和同桌换着玩">
+<section id="page-27" class="slide" aria-label="和同桌换着玩">
   <h2 class="t r">和同桌换着玩</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>换着运行</b><span>输入大的数，也试试 0 和 1</span></div>
@@ -768,7 +826,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- review -->
-<section id="page-26" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-28" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p style="font-weight:700"><i>Q1</i><span>range(1, 5) 里有 5 吗？<em class="step s2" style="font-style:normal;font-weight:400">　没有，终点不算在内。</em></span></p>
@@ -780,7 +838,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-27" class="slide" aria-label="速查卡">
+<section id="page-29" class="slide" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>range(3)</code><span>0、1、2</span></div>
@@ -793,7 +851,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- later -->
-<section id="page-28" class="slide" aria-label="后面再学">
+<section id="page-30" class="slide" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>while</code><span>不知道要重复几次时的循环</span></div>
@@ -805,7 +863,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-29" class="slide dark thanks" aria-label="谢谢">
+<section id="page-31" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
@@ -919,6 +977,7 @@ class SlidePresentation {
     document.getElementById('help').onclick = () => this.help.showModal();
     document.getElementById('help-close').onclick = () => this.help.close();
     this.blank.onclick = () => { this.blank.hidden = true; };
+    this.setupChanges();
     this.buildThumbs();
     this.buildTimeline();
     this.buildChapters();
@@ -947,6 +1006,7 @@ class SlidePresentation {
       copy.classList.remove('active');
       copy.classList.add('visible');
       if (copy.dataset.steps) copy.dataset.at = 1;
+      copy.querySelectorAll('pre.change').forEach(pre => this.setChange(pre, 1, false));
       copy.inert = true;
       view.append(copy);
       const number = document.createElement('b');
@@ -1028,11 +1088,12 @@ class SlidePresentation {
     if (slide.dataset.ide) return slide.dataset.ide;
     const full = slide.querySelector('pre.code[data-full]');
     if (full) return full.dataset.full;
-    return [...slide.querySelectorAll('pre.code .ln')].map(l => this.lineText(l)).join('\n');
+    return [...slide.querySelectorAll('pre.code .ln:not(.cut)')].map(l => this.lineText(l)).join('\n');
   }
   lineText(line) {
     const slots = [...line.querySelectorAll('.slot')];
     const copy = line.cloneNode(true);
+    copy.querySelectorAll('.then').forEach(old => old.remove());
     copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(this.slotCode(slots[i])));
     return copy.textContent;
   }
@@ -1142,14 +1203,26 @@ class SlidePresentation {
     };
     // Never turn what a student typed into a different value: a value the page cannot work out is marked and explained.
     // Full-width digits and leading zeros are the same number, so those alone are tidied.
-    const fits = slot => {
-      if (slot.dataset.kind === 'text') return !/["\\\r\n]/.test(slot.value) && Array.from(slot.value).length <= 12;
+    const problem = slot => {
+      if (slot.dataset.kind === 'text') {
+        if (/["\r\n]/.test(slot.value)) return 'quote';
+        if (slot.value.includes('\\')) return 'slash';
+        return Array.from(slot.value).length > 12 ? 'long' : null;
+      }
       const digits = slot.value.replace(/[０-９]/g, d => String.fromCharCode(d.charCodeAt(0) - 0xFEE0));
       const tidy = /^\d+$/.test(digits) ? digits.replace(/^0+(?=\d)/, '') : digits;
       if (tidy !== slot.value) slot.value = tidy;
-      return /^\d{0,4}$/.test(tidy);
+      if (/^\d{0,4}$/.test(tidy)) return null;
+      if (/^\d+$/.test(tidy)) return 'big';
+      if (/^[-－]\s*\d/.test(tidy)) return 'negative';
+      return /^\d*[.。]\d+$|^\d+[.。]$/.test(tidy) ? 'decimal' : 'letters';
     };
-    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。到 IDE 里试的话，代码里它们前面会多一个 \\。'};
+    // Short enough to read from the back of the room; red means the page cannot use it, amber only that a box is empty.
+    const tips = {
+      letters: '这里只能填数字，比如 7。', negative: '负数这里算不了，到 IDE 里试。', decimal: '小数这里算不了，到 IDE 里试。',
+      big: '最大只能填 9999。', quote: '英文引号 " 用不了，换成中文引号 “ ”。', slash: '反斜杠 \\ 这里用不了，到 IDE 里试。',
+      long: '最多 12 个字，删掉几个吧。', empty: '框里空着，填上就有结果。'
+    };
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -1160,14 +1233,24 @@ class SlidePresentation {
       const update = () => {
         const value = Object.fromEntries(slots.map(slot => [slot.dataset.var, slot.value]));
         const bad = slots.find(slot => slot.classList.contains('bad'));
-        const missing = Boolean(bad) || slots.some(slot => !slot.value);
-        tip.hidden = !bad;
-        if (bad) {
-          tip.textContent = tips[bad.dataset.kind === 'text' ? 'text' : 'number'];
-          // Under the editor, so the hint never hides another slot in the code.
-          const box = (bad.closest('.editor') || bad).getBoundingClientRect(), base = slide.getBoundingClientRect(), f = base.width / 1920 || 1;
+        const empty = slots.find(slot => !slot.value);
+        const missing = Boolean(bad || empty);
+        tip.hidden = !missing;
+        slide.querySelectorAll('.tip-under').forEach(e => e.classList.remove('tip-under'));
+        if (missing) {
+          tip.classList.toggle('calm', !bad);
+          tip.textContent = tips[bad ? bad.dataset.problem : 'empty'];
+          // Under the editor and no wider than it, so the hint never hides another slot or the results beside it.
+          const box = ((bad || empty).closest('.editor') || bad || empty).getBoundingClientRect(), base = slide.getBoundingClientRect(), f = base.width / 1920 || 1;
+          tip.style.maxWidth = Math.max(560, box.width / f) + 'px';
           tip.style.left = Math.max(48, Math.min((box.left - base.left) / f, 1872 - tip.offsetWidth)) + 'px';
-          tip.style.top = Math.min((box.bottom - base.top) / f + 14, 1032 - tip.offsetHeight) + 'px';
+          tip.style.top = Math.min((box.bottom - base.top) / f + 22, 1032 - tip.offsetHeight) + 'px';
+          // Words half covered by the hint are hard to read, so the page text under it steps aside until it goes.
+          const t = tip.getBoundingClientRect();
+          slide.querySelectorAll(':scope > p:not(.slot-tip)').forEach(p => {
+            const b = p.getBoundingClientRect();
+            if (b.width && b.left < t.right && b.right > t.left && b.top < t.bottom && b.bottom > t.top) p.classList.add('tip-under');
+          });
         }
         let stopped = false;
         results.forEach(result => {
@@ -1193,8 +1276,9 @@ class SlidePresentation {
         // Wait for a Chinese input method to finish the word before checking the text.
         const tidy = e => {
           if (e.isComposing) return;
-          const ok = fits(slot);
-          slot.classList.toggle('bad', !ok);
+          const why = problem(slot);
+          slot.dataset.problem = why || '';
+          slot.classList.toggle('bad', Boolean(why));
           update();
         };
         slot.addEventListener('input', tidy);
@@ -1202,6 +1286,84 @@ class SlidePresentation {
       });
       update();
     });
+  }
+
+  /* --- code changes: pre.code.was is the old version, the pre.code after it the new one, shown from step data-change.
+     Both become one list of lines: kept lines stay put, new ones slide in, removed ones fade out, edited ones swap text.
+     The IDE always gets the new version. --- */
+  setupChanges() {
+    this.changes = [...this.stage.querySelectorAll('pre.code.was')].map(old => {
+      const pre = old.nextElementSibling;
+      const lines = [...pre.querySelectorAll('.ln')];
+      const rows = this.diffLines([...old.querySelectorAll('.ln')].map(l => l.textContent), lines.map(l => l.textContent));
+      const olds = [...old.querySelectorAll('.ln')];
+      pre.replaceChildren(...rows.map(row => {
+        if (row.kind === 'cut') return Object.assign(olds[row.from], {className: olds[row.from].className + ' cut'});
+        const line = lines[row.to];
+        line.classList.add(row.kind);
+        if (row.kind === 'edit') {
+          const now = document.createElement('span'), then = document.createElement('span');
+          now.className = 'now';
+          now.append(...line.childNodes);
+          then.className = 'then';
+          then.setAttribute('aria-hidden', 'true');
+          then.append(...olds[row.from].childNodes);
+          line.append(now, then);
+        }
+        return line;
+      }));
+      old.remove();
+      pre.classList.add('change');
+      const slide = pre.closest('.slide');
+      this.setChange(pre, Number(slide.dataset.at || slide.dataset.steps || 1), false);
+      return {slide, pre};
+    });
+  }
+  /* Lines in both versions are kept (longest common run); the rest of each gap is matched to an old line that reads
+     about the same once spaces are trimmed, such as print(i) indented further, or else counted as added or removed. */
+  diffLines(a, b) {
+    const n = a.length, m = b.length;
+    const common = Array.from({length: n + 1}, () => new Array(m + 1).fill(0));
+    for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) {
+      common[i][j] = a[i] === b[j] ? common[i + 1][j + 1] + 1 : Math.max(common[i + 1][j], common[i][j + 1]);
+    }
+    const alike = (x, y) => {
+      x = x.trim(); y = y.trim();
+      const t = Array.from({length: x.length + 1}, () => new Array(y.length + 1).fill(0));
+      for (let i = x.length - 1; i >= 0; i--) for (let j = y.length - 1; j >= 0; j--) {
+        t[i][j] = x[i] === y[j] ? t[i + 1][j + 1] + 1 : Math.max(t[i + 1][j], t[i][j + 1]);
+      }
+      return 2 * t[0][0] / ((x.length + y.length) || 1) >= 0.6;
+    };
+    const rows = [];
+    let cut = [], add = [];
+    const flush = () => {
+      let next = 0;
+      for (const to of add) {
+        const match = cut.slice(next).findIndex(from => alike(a[from], b[to]));
+        if (match < 0) { rows.push({kind: 'add', to}); continue; }
+        cut.slice(next, next + match).forEach(from => rows.push({kind: 'cut', from}));
+        rows.push({kind: 'edit', from: cut[next + match], to});
+        next += match + 1;
+      }
+      cut.slice(next).forEach(from => rows.push({kind: 'cut', from}));
+      cut = []; add = [];
+    };
+    let i = 0, j = 0;
+    while (i < n || j < m) {
+      if (i < n && j < m && a[i] === b[j]) { flush(); rows.push({kind: 'same', to: j}); i++; j++; }
+      else if (j < m && (i === n || common[i][j + 1] >= common[i + 1][j])) add.push(j++);
+      else cut.push(i++);
+    }
+    flush();
+    return rows;
+  }
+  setChange(pre, at, animate) {
+    pre.classList.toggle('play', animate && !matchMedia('(prefers-reduced-motion: reduce)').matches);
+    pre.classList.toggle('new', at >= Number(pre.dataset.change || 2));
+  }
+  syncChanges(animate) {
+    this.changes.forEach(c => this.setChange(c.pre, Number(c.slide.dataset.at || 1), animate && c.slide === this.slides[this.index]));
   }
 
   /* --- stage and paging --- */
@@ -1221,6 +1383,7 @@ class SlidePresentation {
     slide.classList.add('active', 'visible');
     if (document.activeElement.matches('.slot')) document.activeElement.blur();
     if (slide.dataset.steps) slide.dataset.at = atEnd ? slide.dataset.steps : 1;
+    this.syncChanges(false);
     history.replaceState(null, '', '#page-' + (this.index + 1));
     this.label();
     this.segments.forEach((seg, i) => {
@@ -1241,7 +1404,7 @@ class SlidePresentation {
   }
   move(delta) {
     const slide = this.slides[this.index], at = Number(slide.dataset.at || 1), next = at + delta;
-    if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.label(); return; }
+    if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.syncChanges(true); this.label(); return; }
     if (this.index + delta >= 0 && this.index + delta < this.slides.length) this.show(this.index + delta, delta < 0);
   }
   key(e) {
@@ -1285,11 +1448,13 @@ class SlidePresentation {
     this.liveSlots.forEach(slot => { slot.value = slot.dataset.start; slot.dispatchEvent(new Event('input')); });
     this.atBeforePrint = this.slides[this.index].dataset.at;
     this.slides.forEach(s => { if (s.dataset.steps) s.dataset.at = s.dataset.steps; });
+    this.syncChanges(false);
     this.stage.querySelectorAll('.quiz').forEach(q => q.querySelectorAll('button')[Number(q.dataset.right)].click());
   }
   undoFinish() {
     const slide = this.slides[this.index];
     if (slide.dataset.steps) slide.dataset.at = this.atBeforePrint;
+    this.syncChanges(false);
     this.label();
     this.stage.querySelectorAll('.quiz').forEach(q => {
       q.querySelectorAll('button').forEach(b => b.classList.remove('yes', 'no'));

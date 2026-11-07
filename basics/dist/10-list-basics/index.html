@@ -323,7 +323,12 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slot[data-kind=text]{width:20.8ch;text-align:left;padding:0 .4ch}
 .slot:focus{background:#fff;box-shadow:0 0 0 3px #f0c674}
 .slot.bad,.slot.bad:focus{background:#fbe3da;box-shadow:0 0 0 4px var(--clay)}
-.slot-tip{position:absolute;z-index:6;margin:0;padding:12px 22px;max-width:1100px;font:600 32px/1.4 var(--text);color:#fff;background:var(--clay);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.slot-tip{position:absolute;z-index:6;margin:0;padding:14px 28px 16px 82px;font:700 38px/1.4 var(--text);color:#fff;background:var(--clay);border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+.slot-tip::before{content:"!";position:absolute;left:24px;top:50%;width:42px;height:42px;margin-top:-21px;border-radius:50%;background:#fff;color:var(--clay);font:800 32px/42px var(--code);text-align:center}
+.slot-tip::after{content:"";position:absolute;left:36px;top:-16px;border:16px solid transparent;border-top:0;border-bottom-color:var(--clay)}
+.slot-tip.calm{color:var(--ink);background:var(--amber);padding-left:28px}
+.slot-tip.calm::before{display:none}.slot-tip.calm::after{border-bottom-color:var(--amber)}
+.tip-under{visibility:hidden}
 .slot-tip[hidden]{display:none}
 @media print{.slot-tip{display:none}}
 .live-out{position:absolute;left:1090px;right:96px;top:170px}
@@ -332,6 +337,26 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .live-out b{display:block;min-height:84px;font:800 60px/84px var(--code);color:var(--clay);white-space:pre}
 .live-out b.long{font-size:42px}
 .live-out b.skip{font:400 44px/84px var(--text);color:var(--muted)}
+
+/* === CODE CHANGE: deck.js merges the old and new version; .new shows the new one, .play animates the switch === */
+.change .ln{height:1.55em;overflow:hidden;transition:none}
+.change .then{position:absolute;left:120px;top:0;opacity:0}
+.change:not(.new) .now{opacity:0}.change:not(.new) .then{opacity:1}
+.change:not(.new) .add,.change.new .cut{height:0;opacity:0}
+.change:not(.new) .add{transform:translateX(-1.2em)}
+.change:not(.new) .add::before,.change.new .cut::before{content:none;counter-increment:none}
+.change.new .add{background:#33503b;box-shadow:inset 10px 0 var(--mint)}
+.change.new .edit{background:#54462b;box-shadow:inset 10px 0 var(--amber)}
+.change.play .ln,.change.play .now,.change.play .then{transition:height .3s .15s,opacity .25s,transform .3s,background .4s .3s,box-shadow .4s .3s}
+.change.play.new .add{transition:height .3s .15s,opacity .3s .4s,transform .3s .4s,background .4s .4s,box-shadow .4s .4s}
+.change.play.new .then{transition:opacity .25s .2s}
+.change.play.new .now{transition:opacity .25s .35s}
+.change.play:not(.new) .cut{transition:height .3s .15s,opacity .3s .4s}
+.change.play:not(.new) .then{transition:opacity .25s .3s}
+.change.play.new .edit{animation:flash .5s .3s}
+@keyframes flash{from{background:#8a6a2e}}
+@media (prefers-reduced-motion:reduce){.change .ln,.change .ln *{transition:none!important;animation:none!important}}
+@media print{.change .ln,.change .ln *{transition:none!important}}
 
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
 .pick .ln.yes{background:#2f4a36}.pick .ln.no{background:#5a3327}
@@ -856,6 +881,7 @@ class SlidePresentation {
     document.getElementById('help').onclick = () => this.help.showModal();
     document.getElementById('help-close').onclick = () => this.help.close();
     this.blank.onclick = () => { this.blank.hidden = true; };
+    this.setupChanges();
     this.buildThumbs();
     this.buildTimeline();
     this.buildChapters();
@@ -884,6 +910,7 @@ class SlidePresentation {
       copy.classList.remove('active');
       copy.classList.add('visible');
       if (copy.dataset.steps) copy.dataset.at = 1;
+      copy.querySelectorAll('pre.change').forEach(pre => this.setChange(pre, 1, false));
       copy.inert = true;
       view.append(copy);
       const number = document.createElement('b');
@@ -965,11 +992,12 @@ class SlidePresentation {
     if (slide.dataset.ide) return slide.dataset.ide;
     const full = slide.querySelector('pre.code[data-full]');
     if (full) return full.dataset.full;
-    return [...slide.querySelectorAll('pre.code .ln')].map(l => this.lineText(l)).join('\n');
+    return [...slide.querySelectorAll('pre.code .ln:not(.cut)')].map(l => this.lineText(l)).join('\n');
   }
   lineText(line) {
     const slots = [...line.querySelectorAll('.slot')];
     const copy = line.cloneNode(true);
+    copy.querySelectorAll('.then').forEach(old => old.remove());
     copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(this.slotCode(slots[i])));
     return copy.textContent;
   }
@@ -1079,14 +1107,26 @@ class SlidePresentation {
     };
     // Never turn what a student typed into a different value: a value the page cannot work out is marked and explained.
     // Full-width digits and leading zeros are the same number, so those alone are tidied.
-    const fits = slot => {
-      if (slot.dataset.kind === 'text') return !/["\\\r\n]/.test(slot.value) && Array.from(slot.value).length <= 12;
+    const problem = slot => {
+      if (slot.dataset.kind === 'text') {
+        if (/["\r\n]/.test(slot.value)) return 'quote';
+        if (slot.value.includes('\\')) return 'slash';
+        return Array.from(slot.value).length > 12 ? 'long' : null;
+      }
       const digits = slot.value.replace(/[０-９]/g, d => String.fromCharCode(d.charCodeAt(0) - 0xFEE0));
       const tidy = /^\d+$/.test(digits) ? digits.replace(/^0+(?=\d)/, '') : digits;
       if (tidy !== slot.value) slot.value = tidy;
-      return /^\d{0,4}$/.test(tidy);
+      if (/^\d{0,4}$/.test(tidy)) return null;
+      if (/^\d+$/.test(tidy)) return 'big';
+      if (/^[-－]\s*\d/.test(tidy)) return 'negative';
+      return /^\d*[.。]\d+$|^\d+[.。]$/.test(tidy) ? 'decimal' : 'letters';
     };
-    const tips = {number: '这里只能填 0 到 9999 的整数。负数和小数到 IDE 里试。', text: '这里最多 12 个字，不能有英文引号 " 和 \\。到 IDE 里试的话，代码里它们前面会多一个 \\。'};
+    // Short enough to read from the back of the room; red means the page cannot use it, amber only that a box is empty.
+    const tips = {
+      letters: '这里只能填数字，比如 7。', negative: '负数这里算不了，到 IDE 里试。', decimal: '小数这里算不了，到 IDE 里试。',
+      big: '最大只能填 9999。', quote: '英文引号 " 用不了，换成中文引号 “ ”。', slash: '反斜杠 \\ 这里用不了，到 IDE 里试。',
+      long: '最多 12 个字，删掉几个吧。', empty: '框里空着，填上就有结果。'
+    };
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
     this.slides.filter(slide => slide.querySelector('.slot')).forEach(slide => {
       const slots = [...slide.querySelectorAll('.slot')];
@@ -1097,14 +1137,24 @@ class SlidePresentation {
       const update = () => {
         const value = Object.fromEntries(slots.map(slot => [slot.dataset.var, slot.value]));
         const bad = slots.find(slot => slot.classList.contains('bad'));
-        const missing = Boolean(bad) || slots.some(slot => !slot.value);
-        tip.hidden = !bad;
-        if (bad) {
-          tip.textContent = tips[bad.dataset.kind === 'text' ? 'text' : 'number'];
-          // Under the editor, so the hint never hides another slot in the code.
-          const box = (bad.closest('.editor') || bad).getBoundingClientRect(), base = slide.getBoundingClientRect(), f = base.width / 1920 || 1;
+        const empty = slots.find(slot => !slot.value);
+        const missing = Boolean(bad || empty);
+        tip.hidden = !missing;
+        slide.querySelectorAll('.tip-under').forEach(e => e.classList.remove('tip-under'));
+        if (missing) {
+          tip.classList.toggle('calm', !bad);
+          tip.textContent = tips[bad ? bad.dataset.problem : 'empty'];
+          // Under the editor and no wider than it, so the hint never hides another slot or the results beside it.
+          const box = ((bad || empty).closest('.editor') || bad || empty).getBoundingClientRect(), base = slide.getBoundingClientRect(), f = base.width / 1920 || 1;
+          tip.style.maxWidth = Math.max(560, box.width / f) + 'px';
           tip.style.left = Math.max(48, Math.min((box.left - base.left) / f, 1872 - tip.offsetWidth)) + 'px';
-          tip.style.top = Math.min((box.bottom - base.top) / f + 14, 1032 - tip.offsetHeight) + 'px';
+          tip.style.top = Math.min((box.bottom - base.top) / f + 22, 1032 - tip.offsetHeight) + 'px';
+          // Words half covered by the hint are hard to read, so the page text under it steps aside until it goes.
+          const t = tip.getBoundingClientRect();
+          slide.querySelectorAll(':scope > p:not(.slot-tip)').forEach(p => {
+            const b = p.getBoundingClientRect();
+            if (b.width && b.left < t.right && b.right > t.left && b.top < t.bottom && b.bottom > t.top) p.classList.add('tip-under');
+          });
         }
         let stopped = false;
         results.forEach(result => {
@@ -1130,8 +1180,9 @@ class SlidePresentation {
         // Wait for a Chinese input method to finish the word before checking the text.
         const tidy = e => {
           if (e.isComposing) return;
-          const ok = fits(slot);
-          slot.classList.toggle('bad', !ok);
+          const why = problem(slot);
+          slot.dataset.problem = why || '';
+          slot.classList.toggle('bad', Boolean(why));
           update();
         };
         slot.addEventListener('input', tidy);
@@ -1139,6 +1190,84 @@ class SlidePresentation {
       });
       update();
     });
+  }
+
+  /* --- code changes: pre.code.was is the old version, the pre.code after it the new one, shown from step data-change.
+     Both become one list of lines: kept lines stay put, new ones slide in, removed ones fade out, edited ones swap text.
+     The IDE always gets the new version. --- */
+  setupChanges() {
+    this.changes = [...this.stage.querySelectorAll('pre.code.was')].map(old => {
+      const pre = old.nextElementSibling;
+      const lines = [...pre.querySelectorAll('.ln')];
+      const rows = this.diffLines([...old.querySelectorAll('.ln')].map(l => l.textContent), lines.map(l => l.textContent));
+      const olds = [...old.querySelectorAll('.ln')];
+      pre.replaceChildren(...rows.map(row => {
+        if (row.kind === 'cut') return Object.assign(olds[row.from], {className: olds[row.from].className + ' cut'});
+        const line = lines[row.to];
+        line.classList.add(row.kind);
+        if (row.kind === 'edit') {
+          const now = document.createElement('span'), then = document.createElement('span');
+          now.className = 'now';
+          now.append(...line.childNodes);
+          then.className = 'then';
+          then.setAttribute('aria-hidden', 'true');
+          then.append(...olds[row.from].childNodes);
+          line.append(now, then);
+        }
+        return line;
+      }));
+      old.remove();
+      pre.classList.add('change');
+      const slide = pre.closest('.slide');
+      this.setChange(pre, Number(slide.dataset.at || slide.dataset.steps || 1), false);
+      return {slide, pre};
+    });
+  }
+  /* Lines in both versions are kept (longest common run); the rest of each gap is matched to an old line that reads
+     about the same once spaces are trimmed, such as print(i) indented further, or else counted as added or removed. */
+  diffLines(a, b) {
+    const n = a.length, m = b.length;
+    const common = Array.from({length: n + 1}, () => new Array(m + 1).fill(0));
+    for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) {
+      common[i][j] = a[i] === b[j] ? common[i + 1][j + 1] + 1 : Math.max(common[i + 1][j], common[i][j + 1]);
+    }
+    const alike = (x, y) => {
+      x = x.trim(); y = y.trim();
+      const t = Array.from({length: x.length + 1}, () => new Array(y.length + 1).fill(0));
+      for (let i = x.length - 1; i >= 0; i--) for (let j = y.length - 1; j >= 0; j--) {
+        t[i][j] = x[i] === y[j] ? t[i + 1][j + 1] + 1 : Math.max(t[i + 1][j], t[i][j + 1]);
+      }
+      return 2 * t[0][0] / ((x.length + y.length) || 1) >= 0.6;
+    };
+    const rows = [];
+    let cut = [], add = [];
+    const flush = () => {
+      let next = 0;
+      for (const to of add) {
+        const match = cut.slice(next).findIndex(from => alike(a[from], b[to]));
+        if (match < 0) { rows.push({kind: 'add', to}); continue; }
+        cut.slice(next, next + match).forEach(from => rows.push({kind: 'cut', from}));
+        rows.push({kind: 'edit', from: cut[next + match], to});
+        next += match + 1;
+      }
+      cut.slice(next).forEach(from => rows.push({kind: 'cut', from}));
+      cut = []; add = [];
+    };
+    let i = 0, j = 0;
+    while (i < n || j < m) {
+      if (i < n && j < m && a[i] === b[j]) { flush(); rows.push({kind: 'same', to: j}); i++; j++; }
+      else if (j < m && (i === n || common[i][j + 1] >= common[i + 1][j])) add.push(j++);
+      else cut.push(i++);
+    }
+    flush();
+    return rows;
+  }
+  setChange(pre, at, animate) {
+    pre.classList.toggle('play', animate && !matchMedia('(prefers-reduced-motion: reduce)').matches);
+    pre.classList.toggle('new', at >= Number(pre.dataset.change || 2));
+  }
+  syncChanges(animate) {
+    this.changes.forEach(c => this.setChange(c.pre, Number(c.slide.dataset.at || 1), animate && c.slide === this.slides[this.index]));
   }
 
   /* --- stage and paging --- */
@@ -1158,6 +1287,7 @@ class SlidePresentation {
     slide.classList.add('active', 'visible');
     if (document.activeElement.matches('.slot')) document.activeElement.blur();
     if (slide.dataset.steps) slide.dataset.at = atEnd ? slide.dataset.steps : 1;
+    this.syncChanges(false);
     history.replaceState(null, '', '#page-' + (this.index + 1));
     this.label();
     this.segments.forEach((seg, i) => {
@@ -1178,7 +1308,7 @@ class SlidePresentation {
   }
   move(delta) {
     const slide = this.slides[this.index], at = Number(slide.dataset.at || 1), next = at + delta;
-    if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.label(); return; }
+    if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.syncChanges(true); this.label(); return; }
     if (this.index + delta >= 0 && this.index + delta < this.slides.length) this.show(this.index + delta, delta < 0);
   }
   key(e) {
@@ -1222,11 +1352,13 @@ class SlidePresentation {
     this.liveSlots.forEach(slot => { slot.value = slot.dataset.start; slot.dispatchEvent(new Event('input')); });
     this.atBeforePrint = this.slides[this.index].dataset.at;
     this.slides.forEach(s => { if (s.dataset.steps) s.dataset.at = s.dataset.steps; });
+    this.syncChanges(false);
     this.stage.querySelectorAll('.quiz').forEach(q => q.querySelectorAll('button')[Number(q.dataset.right)].click());
   }
   undoFinish() {
     const slide = this.slides[this.index];
     if (slide.dataset.steps) slide.dataset.at = this.atBeforePrint;
+    this.syncChanges(false);
     this.label();
     this.stage.querySelectorAll('.quiz').forEach(q => {
       q.querySelectorAll('button').forEach(b => b.classList.remove('yes', 'no'));

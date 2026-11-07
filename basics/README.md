@@ -38,7 +38,7 @@ IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”
 | [03](dist/03-arithmetic/index.html) | 算术运算 | 28 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [04](dist/04-conditions/index.html) | 条件判断 | 25 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [05](dist/05-logic/index.html) | 逻辑运算 | 28 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [06](dist/06-for-loop/index.html) | for 循环 | 29 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [06](dist/06-for-loop/index.html) | for 循环 | 31 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [07](dist/07-while-loop/index.html) | while 循环 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [08](dist/08-loop-tally/index.html) | 累加和计数 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [09](dist/09-max-min/index.html) | 最大值和最小值 | 21 | macOS Chrome 已验证，Windows 教室待试讲 |

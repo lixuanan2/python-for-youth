@@ -80,41 +80,73 @@ class Pages(HTMLParser):
 
     def __init__(self, text):
         super().__init__()
-        self.pages, self.in_code = [], False
+        self.pages, self.lines = [], None
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         classes = (attrs.get('class') or '').split()
         if tag == 'section' and (attrs.get('id') or '').startswith('page-'):
-            self.pages.append(dict(ide=attrs.get('data-ide'), full=None, lines=[], slots=0, button=False, code=None))
+            self.pages.append(dict(ide=attrs.get('data-ide'), full=None, lines=[], slots=0, button=False, code=None,
+                                   steps=int(attrs.get('data-steps') or 1), changes=[]))
         if not self.pages:
             return
         page = self.pages[-1]
         if tag == 'pre' and 'code' in classes:
-            self.in_code = True
+            self.lines = page['lines']
+            if 'was' in classes:
+                # The old version of a code change: shown first, never sent to the IDE.
+                page['changes'].append(dict(old=[], old_file=attrs.get('data-file'), new=None))
+                self.lines = page['changes'][-1]['old']
+            elif page['changes'] and page['changes'][-1]['new'] is None:
+                change = page['changes'][-1]
+                change.update(new=len(page['lines']), new_file=attrs.get('data-file'), at=attrs.get('data-change'))
             if page['full'] is None:
                 page['full'] = attrs.get('data-full')
-        if self.in_code and tag == 'span' and 'ln' in classes:
-            page['lines'].append('')
-        if self.in_code and tag == 'input' and 'slot' in classes and page['lines']:
+        if self.lines is not None and tag == 'span' and 'ln' in classes:
+            self.lines.append('')
+        if self.lines is not None and tag == 'input' and 'slot' in classes and self.lines:
+            assert self.lines is page['lines'] and not page['changes'], 'A code change cannot hold yellow boxes'
             page['slots'] += 1
-            page['lines'][-1] += attrs.get('value') or ''
+            self.lines[-1] += attrs.get('value') or ''
         if tag == 'a' and 'ide' in classes and not page['button']:
             page['button'], page['code'] = True, attrs.get('data-code')
 
     def handle_data(self, data):
-        if self.in_code and self.pages and self.pages[-1]['lines']:
-            self.pages[-1]['lines'][-1] += data
+        if self.lines:
+            self.lines[-1] += data
 
     def handle_endtag(self, tag):
-        if tag == 'pre':
-            self.in_code = False
+        if tag == 'pre' and self.lines is not None:
+            page = self.pages[-1]
+            change = page['changes'][-1] if page['changes'] else None
+            if change and isinstance(change['new'], int) and self.lines is page['lines']:
+                change['new'] = page['lines'][change['new']:]
+            self.lines = None
 
     def ide_code(self, page):
         if page['code'] is not None:
             return page['code']
         return page['ide'] or page['full'] or '\n'.join(page['lines'])
+
+
+def check_changes(text, folder):
+    """Both versions of a code change are programs the page shows, so each must be tested: a data-file or a claim on that page."""
+    claims = json.loads((folder / 'tests/claims.json').read_text(encoding='utf-8'))
+    count = 0
+    for number, page in enumerate(Pages(text).pages, 1):
+        for change in page['changes']:
+            where = f'{folder.name} page {number}'
+            assert isinstance(change['new'], list) and change['new'], f'{where}: pre.code.was must be followed by the new version, a pre.code'
+            assert change['at'] and 2 <= int(change['at']) <= page['steps'], f'{where}: the new version needs data-change, a step of this page from 2 on'
+            for lines, file in ((change['old'], change['old_file']), (change['new'], change.get('new_file'))):
+                code = '\n'.join(lines).strip()
+                assert code, f'{where}: an empty version in a code change'
+                if not file:  # with data-file, check_deck compares the page with that tested file
+                    assert any(c['page'] == number and c['code'].strip() == code and ('stdout' in c or 'error' in c) for c in claims), \
+                        f'{where}: a version of the code change without data-file needs a claim with its output in tests/claims.json'
+            count += 1
+    return count
 
 
 def check_ide(text, folder):
@@ -218,6 +250,7 @@ def check_deck(lesson, folder):
     deck = Deck(text)
     assert deck.shown, 'Deck shows no tested program'
     check_ide(text, folder)
+    changes = check_changes(text, folder)
     for file, code, lines in deck.shown:
         want = (folder / file).read_text(encoding='utf-8').strip()
         if lines:
@@ -250,7 +283,7 @@ def check_deck(lesson, folder):
         if not parts.scheme and parts.path:
             assert (built.parent / unquote(parts.path)).is_file(), f'Broken link: {link}'
     assert '<a class="ide' in text, 'Deck has no IDE link'
-    return pages
+    return pages, changes
 
 
 def squash(text):
@@ -306,19 +339,20 @@ def check_docs():
 
 
 def main():
-    scripts = cases = claims = pages = 0
+    scripts = cases = claims = pages = changes = 0
     lessons = builder.lessons()
     for lesson in lessons:
         folder = ROOT / 'lessons' / lesson['id']
         s, c = check_programs(folder)
         scripts += s; cases += c
         claims += check_claims(folder)
-        pages += check_deck(lesson, folder)
+        p, c = check_deck(lesson, folder)
+        pages += p; changes += c
     links = check_dist()
     stale = [lesson['id'] for lesson in builder.stale_pdfs()]
     assert not stale, f'PDF older than its deck, run python3 tools/build.py --pdf: {", ".join(stale)}'
     docs = check_docs()
-    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {links} index and starter links, {docs} document links.')
+    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {links} index and starter links, {docs} document links.')
 
 
 if __name__ == '__main__':
