@@ -149,6 +149,35 @@ def check_changes(text, folder):
     return count
 
 
+def check_algos(text):
+    """An algorithm demo plays a real run of the page's program: it must end where the program really ends."""
+    count = 0
+    for number, section in enumerate(re.findall(r'<section id="page-\d+".*?</section>', text, re.S), 1):
+        for demo in builder.algo.Demos(section).demos:
+            where = f'page {number}'
+            assert LANGUAGE == 'python', f'{where}: algorithm demos trace Python programs only'
+            data = json.loads(demo['trace'])
+            steps, start, end = data['steps'], data['steps'][0], data['steps'][-1]
+            code = '\n'.join(builder.algo.Demos(section).code)
+            result = run(code, demo['stdin'])
+            assert result.returncode == 0 and result.stdout.decode().replace('\r\n', '\n') == end['out'], \
+                f'{where}: the demo does not end with what the program prints'
+            if data['kind'] == 'sort':
+                assert sorted(end['list']) == sorted(start['list']), f'{where}: the sort lost or gained numbers'
+                assert end['list'][-1] == max(start['list']), f'{where}: after a pass the biggest number must be last'
+                assert not end['sorted'] or end['list'] == sorted(start['list']), f'{where}: the demo says sorted but is not'
+            if data['kind'] == 'search':
+                assert end['found'] and end['mid'] == end['target'], f'{where}: the search demo must find its number'
+                assert all(s['lo'] <= s['target'] <= s['hi'] for s in steps), f'{where}: the number left the range'
+            if data['kind'] == 'try':
+                assert end['hits'] and all(s['hit'] == (s['left'] == s['right']) for s in steps if s['type'] == 'try'), \
+                    f'{where}: the try demo must find an answer'
+            lines = code.split('\n')
+            assert all(s['line'] is None or 1 <= s['line'] <= len(lines) for s in steps), f'{where}: a step points at no line'
+            count += 1
+    return count
+
+
 def check_ide(text, folder):
     """What a page sends to the IDE must be a whole program, so the student can press Run."""
     claims = json.loads((folder / 'tests/claims.json').read_text(encoding='utf-8'))
@@ -251,6 +280,7 @@ def check_deck(lesson, folder):
     assert deck.shown, 'Deck shows no tested program'
     check_ide(text, folder)
     changes = check_changes(text, folder)
+    algos = check_algos(text)
     for file, code, lines in deck.shown:
         want = (folder / file).read_text(encoding='utf-8').strip()
         if lines:
@@ -283,7 +313,7 @@ def check_deck(lesson, folder):
         if not parts.scheme and parts.path:
             assert (built.parent / unquote(parts.path)).is_file(), f'Broken link: {link}'
     assert '<a class="ide' in text, 'Deck has no IDE link'
-    return pages, changes
+    return pages, changes, algos
 
 
 def squash(text):
@@ -339,20 +369,21 @@ def check_docs():
 
 
 def main():
-    scripts = cases = claims = pages = changes = 0
+    scripts = cases = claims = pages = changes = algos = 0
     lessons = builder.lessons()
     for lesson in lessons:
         folder = ROOT / 'lessons' / lesson['id']
         s, c = check_programs(folder)
         scripts += s; cases += c
         claims += check_claims(folder)
-        p, c = check_deck(lesson, folder)
+        p, c, a = check_deck(lesson, folder)
+        algos += a
         pages += p; changes += c
     links = check_dist()
     stale = [lesson['id'] for lesson in builder.stale_pdfs()]
     assert not stale, f'PDF older than its deck, run python3 tools/build.py --pdf: {", ".join(stale)}'
     docs = check_docs()
-    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {links} index and starter links, {docs} document links.')
+    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {algos} algorithm demos, {links} index and starter links, {docs} document links.')
 
 
 if __name__ == '__main__':

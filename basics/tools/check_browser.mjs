@@ -300,6 +300,92 @@ const CHANGE_STATE = `(() => {
       return range.getBoundingClientRect().right > l.getBoundingClientRect().right + 1;
     })};
 })()`;
+const ALGO_STATE = `(() => {
+  const box = document.querySelector('#deckStage .slide.active .algo'), player = box.player;
+  const data = JSON.parse(box.dataset.trace), step = data.steps[player.at];
+  const bars = [...box.querySelectorAll('.algo-live .algo-bar-item')].sort((x, y) => parseFloat(x.style.left) - parseFloat(y.style.left))
+    .map(b => Number(b.querySelector('b').textContent));
+  const lines = [...box.closest('.slide').querySelectorAll('pre.code .ln')];
+  return {at: player.at, total: data.steps.length, playing: box.dataset.playing === '1', speed: box.dataset.speed,
+    bars, want: step.list || null, run: lines.findIndex(l => l.classList.contains('run')) + 1 || null, line: step.line,
+    say: box.querySelector('.algo-live .algo-say').textContent, page: document.getElementById('counter').textContent,
+    playOff: box.querySelector('.algo-play').disabled, frames: box.querySelectorAll('.algo-film figure').length,
+    film: getComputedStyle(box.querySelector('.algo-film')).display !== 'none', live: getComputedStyle(box.querySelector('.algo-live')).display !== 'none'};
+})()`;
+// Play, pause, step, restart and speed work by button and by key; arrows still turn pages; reduced motion never plays.
+async function checkAlgo(page, dir) {
+  const shot = async name => fs.writeFileSync(path.join(dir, `algo-${page}-${name}.png`), Buffer.from((await send('Page.captureScreenshot', {format: 'png'})).data, 'base64'));
+  const where = `Algorithm demo on page ${page}`;
+  const press = what => run(`document.querySelector('#deckStage .slide.active .algo [data-${what}]').click()`);
+  await run(`location.hash = '#page-${page}'`);
+  await sleep(400);
+  let state = await run(ALGO_STATE);
+  assert(state.at === 0 && !state.playing && state.run === null && state.say, `${where} does not start at its first step`);
+  await shot('1-start');
+  await press('do="next"');
+  state = await run(ALGO_STATE);
+  assert(state.at === 1 && state.run === state.line, `${where}: the next button does not step or light the code line`);
+  await press('do="back"');
+  assert.equal((await run(ALGO_STATE)).at, 0, `${where}: the back button does not step back`);
+  await key('.');
+  assert.equal((await run(ALGO_STATE)).at, 1, `${where}: the . key does not step`);
+  await key(',');
+  assert.equal((await run(ALGO_STATE)).at, 0, `${where}: the , key does not step back`);
+  // Walk every step: the bars are the list the program had, the lit line is the line it ran, and the words make sense.
+  const middle = Math.floor(state.total / 2);
+  for (let at = 1; at < state.total; at++) {
+    await press('do="next"');
+    state = await run(ALGO_STATE);
+    assert(state.at === at && state.run === state.line, `${where}: step ${at + 1} lights the wrong line`);
+    if (state.want) assert.deepEqual(state.bars, state.want, `${where}: step ${at + 1} shows other numbers than the program had`);
+    assert(state.say && !/undefined|NaN|null/.test(state.say), `${where}: step ${at + 1} says "${state.say}"`);
+    if (at === middle) { await sleep(500); await shot('2-middle'); }
+  }
+  await sleep(500);
+  await shot('3-end');
+  await key('0');
+  assert.equal((await run(ALGO_STATE)).at, 0, `${where}: the 0 key does not restart`);
+  await press('speed="fast"');
+  await key('p');
+  assert((await run(ALGO_STATE)).playing, `${where}: P does not play`);
+  await sleep(1500);
+  await key('p');
+  state = await run(ALGO_STATE);
+  assert(!state.playing && state.at >= 2 && state.speed === 'fast', `${where}: playing fast did not move on, or P did not pause`);
+  const paused = state.at;
+  await sleep(900);
+  assert.equal((await run(ALGO_STATE)).at, paused, `${where} keeps going after pause`);
+  await key('s');
+  assert.equal((await run(ALGO_STATE)).speed, 'slow', `${where}: S does not change the speed`);
+  await press('speed="mid"');
+  await press('do="reset"');
+  await press('do="play"');
+  await sleep(300);
+  const before = await run(ALGO_STATE);
+  await key('ArrowRight', 'ArrowRight');
+  await sleep(300);
+  assert((await run(`document.getElementById('counter').textContent`)) !== before.page, `${where}: the arrow key does not turn the page`);
+  await key('ArrowLeft', 'ArrowLeft');
+  await sleep(300);
+  state = await run(ALGO_STATE);
+  assert(before.playing && !state.playing, `${where} keeps playing after the page was turned`);
+  await send('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'reduce'}]});
+  await press('do="reset"');
+  await key('p');
+  await sleep(1300);
+  state = await run(ALGO_STATE);
+  assert(state.playOff && !state.playing && state.at === 0, `${where} plays by itself with reduced motion`);
+  await key('.');
+  assert.equal((await run(ALGO_STATE)).at, 1, `${where} cannot be stepped with reduced motion`);
+  await send('Emulation.setEmulatedMedia', {features: []});
+  await press('do="reset"');
+  await send('Emulation.setEmulatedMedia', {media: 'print'});
+  state = await run(ALGO_STATE);
+  assert(state.film && !state.live && state.frames >= 3, `${where}: print does not show the key steps`);
+  await run(`document.querySelector('#deckStage .slide.active').scrollIntoView()`);
+  await shot('4-print');
+  await send('Emulation.setEmulatedMedia', {media: ''});
+}
 async function checkChange(change, dir) {
   const shot = async name => fs.writeFileSync(path.join(dir, `change-${change.page}-${name}.png`), Buffer.from((await send('Page.captureScreenshot', {format: 'png'})).data, 'base64'));
   const at = Number(change.at), where = `Code change on page ${change.page}`;
@@ -378,6 +464,8 @@ try {
     for (const live of result.live) await checkLive(live, dir);
     const changes = await run(VERSIONS(fs.readFileSync(path.resolve('dist', lesson.id, 'index.html'), 'utf8')));
     for (const change of changes) await checkChange(change, dir);
+    const algos = await run(`[...document.querySelectorAll('#deckStage .slide')].flatMap((s, i) => s.querySelector('.algo') ? [i + 1] : [])`);
+    for (const page of algos) await checkAlgo(page, dir);
     assert(result.changed, 'IDE settings did not change links');
     assert.deepEqual(Object.entries(result.shell).filter(([, ok]) => !ok), [], 'Workspace control failed');
     await send('Emulation.setDeviceMetricsOverride', {width: 390, height: 844, deviceScaleFactor: 1, mobile: true});
@@ -392,7 +480,7 @@ try {
     const deckShot = await send('Page.captureScreenshot', {format: 'png'});
     fs.writeFileSync(path.join('.preview', 'deck-phone.png'), Buffer.from(deckShot.data, 'base64'));
     await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
-    console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; thumbnails, timeline, chapters and jump work; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.gates.length} logic switches, ${changes.length} code changes, ${result.links} IDE links.`);
+    console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; thumbnails, timeline, chapters and jump work; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.gates.length} logic switches, ${changes.length} code changes, ${algos.length} algorithm demos, ${result.links} IDE links.`);
   }
 } finally {
   ws.close();

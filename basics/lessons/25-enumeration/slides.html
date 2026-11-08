@@ -84,21 +84,14 @@
 </section>
 
 <!-- worked example: chickens and rabbits -->
-<section class="slide" aria-label="例题：鸡兔同笼" data-steps="3" data-at="3" data-chapter="鸡兔同笼">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper);top:40px">例题：鸡兔同笼</h2>
-  <div class="editor" style="left:96px;top:175px;width:960px;--fs:46px"><div class="tab">cage.py</div>
-<pre class="code" data-file="solutions/02_cage.py"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1 l2 l3"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads + <span class="m">1</span>):</span><span class="ln l1 l2 l3">    r = heads - c</span><span class="ln l1 l2 l3">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln l3">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:790px;width:960px;color:var(--paper);font-size:36px">笼子里有 35 个头、94 只脚。c 是鸡的只数，从 0 试起；剩下的 r 就是兔。</p>
-  <p class="abs say only2" style="left:96px;top:790px;width:960px;color:var(--paper);font-size:36px">鸡一只 2 只脚，兔一只 4 只脚。算出的脚数对不上 94，就试下一个。</p>
-  <p class="abs say only3" style="left:96px;top:790px;width:960px;color:var(--paper);font-size:36px">试到 23 只鸡、12 只兔，正好 94 只脚，输出“鸡 23 兔 12”。循环会接着试完，只有这一种对得上。</p>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
-    <div class="box" style="display:block"><i style="width:auto;font-size:40px">鸡 0 兔 35</i><b style="font:700 48px var(--code);display:block">140 只脚</b></div>
-    <div class="box step s2" style="display:block"><i style="width:auto;font-size:40px">鸡 1 兔 34</i><b style="font:700 48px var(--code);display:block">138 只脚</b></div>
-    <div class="box step s2" style="display:block"><i style="width:auto;font-size:40px">……</i></div>
-    <div class="box step s3" style="display:block"><i style="width:auto;font-size:40px">鸡 23 兔 12</i><b style="font:700 48px var(--code);color:var(--clay);display:block">94 只脚</b></div>
-  </div>
-  <a class="ide step s3" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
+<section class="slide dark" aria-label="例题：鸡兔同笼" data-chapter="鸡兔同笼">
+  <h2 class="t" style="top:40px">例题：鸡兔同笼</h2>
+  <div class="editor" style="left:96px;top:175px;width:960px;--fs:40px"><div class="tab">cage.py</div>
+<pre class="code" data-file="solutions/02_cage.py"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads + <span class="m">1</span>):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
+  <p class="abs say" style="left:96px;top:710px;width:960px;font-size:38px">35 个头、94 只脚，c 是鸡，r 是兔。<br>鸡一只 2 只脚，兔一只 4 只脚。</p>
+  <a class="ide" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="algo" data-algo="try" data-var="c" data-stdin="35&#10;94&#10;" data-speed="fast" style="left:1096px;top:150px;width:728px;height:800px"></div>
+  <div class="foot"></div>
 </section>
 
 <!-- quiz: how many tries -->

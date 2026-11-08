@@ -18,6 +18,214 @@ const IDE = {
   }
 };
 
+/* === ALGORITHM DEMO: build.py ran the page's program and wrote every step into data-trace; this plays them === */
+const ALGO_SPEEDS = {slow: ['慢', 2600], mid: ['中', 1600], fast: ['快', 600]};
+const ALGO_KEYS = {p: 'play', ',': 'back', '.': 'next', '0': 'reset', s: 'speed'};
+const quiet = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const listText = list => `[${list.join(', ')}]`;
+
+class AlgoPlayer {
+  constructor(box) {
+    this.box = box;
+    const data = JSON.parse(box.dataset.trace);
+    this.kind = data.kind;
+    this.names = data.names;
+    this.steps = data.steps;
+    this.lines = [...box.closest('.slide').querySelectorAll('pre.code .ln')];
+    this.speed = box.dataset.speed || 'mid';
+    this.at = 0;
+    box.player = this;
+    box.innerHTML = `<div class="algo-live"><div class="algo-stage"></div>
+      <p class="algo-say" aria-live="polite"></p><div class="algo-out"><i>屏幕上</i><pre></pre></div>
+      <div class="algo-bar">
+        <button type="button" data-do="play" class="algo-play" title="播放或暂停（P）">▶ 播放</button>
+        <button type="button" data-do="back" title="上一步（,）">◀ 上一步</button>
+        <button type="button" data-do="next" title="下一步（.）">下一步 ▶</button>
+      </div>
+      <div class="algo-bar algo-small"><button type="button" data-do="reset" title="重来（0）">⟲ 重来</button><span>速度</span>${
+        Object.entries(ALGO_SPEEDS).map(([k, [label]]) => `<button type="button" data-speed="${k}" title="换速度（S）">${label}</button>`).join('')}<span class="algo-count"></span></div></div>
+      <div class="algo-film" aria-hidden="true"></div>`;
+    this.stage = box.querySelector('.algo-stage');
+    this.say = box.querySelector('.algo-say');
+    this.out = box.querySelector('.algo-out pre');
+    this.count = box.querySelector('.algo-count');
+    this.playButton = box.querySelector('.algo-play');
+    // A click must not leave focus on a button, or the next space or Enter would press it again instead of turning the page.
+    box.addEventListener('mousedown', e => { if (e.target.closest('button')) e.preventDefault(); });
+    box.addEventListener('click', e => {
+      const button = e.target.closest('button');
+      if (button) this.do(button.dataset.do || 'speed', button.dataset.speed);
+    });
+    matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', () => { this.pause(); this.draw(false); });
+    this.buildFilm();
+    this.draw(false);
+  }
+  do(action, speed) {
+    if (action === 'play') return this.timer ? this.pause() : this.play();
+    if (action === 'speed') {
+      const keys = Object.keys(ALGO_SPEEDS);
+      this.speed = speed || keys[(keys.indexOf(this.speed) + 1) % keys.length];
+      if (this.timer) { this.pause(); this.play(); }
+      return this.draw(false);
+    }
+    this.pause();
+    if (action === 'reset') this.go(0);
+    if (action === 'back') this.go(this.at - 1);
+    if (action === 'next') this.go(this.at + 1);
+  }
+  go(at) {
+    if (at < 0 || at >= this.steps.length) return;
+    this.at = at;
+    this.draw(!quiet());
+  }
+  play() {
+    if (quiet()) return;  // with reduced motion the demo only moves when someone presses a step
+    if (this.at === this.steps.length - 1) this.go(0);
+    const tick = () => {
+      if (this.at >= this.steps.length - 1) return this.pause();
+      this.go(this.at + 1);
+      this.timer = setTimeout(tick, ALGO_SPEEDS[this.speed][1]);
+    };
+    this.timer = setTimeout(tick, Math.min(700, ALGO_SPEEDS[this.speed][1]));
+    this.draw(false);
+  }
+  pause() {
+    clearTimeout(this.timer);
+    this.timer = null;
+    this.draw(false);
+  }
+  draw(animate) {
+    const step = this.steps[this.at];
+    this.box.classList.toggle('moving', animate);
+    this.box.dataset.at = this.at;
+    this.box.dataset.playing = this.timer ? '1' : '';
+    this.box.dataset.speed = this.speed;
+    this.render(this.stage, this.at);
+    this.say.textContent = this.caption(this.at);
+    this.out.textContent = step.out.split('\n').slice(0, -1).slice(-3).join('\n');
+    this.box.querySelector('.algo-out').classList.toggle('empty', !step.out);
+    this.count.textContent = `${this.at + 1} / ${this.steps.length}`;
+    this.playButton.textContent = this.timer ? '❚❚ 暂停' : '▶ 播放';
+    this.playButton.disabled = quiet();
+    this.box.querySelectorAll('[data-speed]').forEach(b => b.classList.toggle('on', b.dataset.speed === this.speed));
+    this.lines.forEach((line, i) => line.classList.toggle('run', step.line === i + 1));
+  }
+  // Each place keeps its own bar, so a swap moves the two bars instead of relabelling them.
+  render(stage, at) {
+    const step = this.steps[at];
+    if (this.kind === 'sort') return this.renderBars(stage, step);
+    return this.renderTrack(stage, at);
+  }
+  renderBars(stage, step) {
+    const list = step.list, top = Math.max(...this.steps.flatMap(s => s.list));
+    let bars = [...stage.querySelectorAll('.algo-bar-item')];
+    if (bars.length !== list.length) {
+      stage.innerHTML = list.map((_, i) => `<div class="algo-bar-item"><b></b></div><span class="algo-index" style="left:${(i + .5) * 100 / list.length}%">${i}</span>`).join('');
+      bars = [...stage.querySelectorAll('.algo-bar-item')];
+      bars.forEach((bar, i) => { bar.dataset.place = i; bar.dataset.value = list[i]; });
+    }
+    const free = new Set(bars);
+    const placed = list.map((value, i) => {
+      const keep = bars.find(b => free.has(b) && Number(b.dataset.place) === i && Number(b.dataset.value) === value)
+        || bars.find(b => free.has(b) && Number(b.dataset.value) === value) || [...free][0];
+      free.delete(keep);
+      return keep;
+    });
+    stage.querySelectorAll('.algo-tag').forEach(tag => tag.remove());
+    placed.forEach((bar, i) => {
+      bar.dataset.place = i;
+      bar.dataset.value = list[i];
+      bar.querySelector('b').textContent = list[i];
+      bar.style.left = `${(i + .5) * 100 / list.length}%`;
+      bar.style.height = `${18 + 72 * list[i] / top}%`;
+      bar.className = 'algo-bar-item';
+      if ((step.at || []).includes(i)) bar.classList.add(step.type === 'swap' ? 'swapped' : 'looking');
+      if (step.done.includes(i)) bar.classList.add('done');
+    });
+    if (step.type === 'compare') step.at.forEach((i, k) => {
+      stage.insertAdjacentHTML('beforeend', `<span class="algo-tag" style="left:${(i + .5) * 100 / list.length}%">${this.names.list}[${this.names.at[k]}]</span>`);
+    });
+  }
+  renderTrack(stage, at) {
+    const step = this.steps[at], [from, to] = this.steps[0].range, size = to - from + 1;
+    if (!stage.querySelector('.algo-track')) {
+      stage.innerHTML = `<div class="algo-track">${Array.from({length: size}, () => '<i></i>').join('')}</div>`;
+    }
+    const cells = [...stage.querySelectorAll('.algo-track i')];
+    // Marks keep their element, so lo, hi and the guess slide along the track when they change.
+    const mark = (key, v, text, where) => {
+      let m = stage.querySelector(`.algo-mark[data-key="${key}"]`);
+      if (!m) { m = document.createElement('span'); m.dataset.key = key; stage.append(m); }
+      m.hidden = v == null;
+      if (v == null) return;
+      const spot = (v - from + .5) / size;
+      m.className = `algo-mark ${where}${spot < .12 ? ' edge-l' : spot > .88 ? ' edge-r' : ''}`;
+      m.style.left = `${spot * 100}%`;
+      m.textContent = text;
+    };
+    if (this.kind === 'search') {
+      cells.forEach((cell, i) => {
+        const v = from + i;
+        cell.className = v < step.lo || v > step.hi ? 'out' : '';
+        if (v === step.mid && step.type !== 'start') cell.className += ' looking';
+        if (v === step.target) cell.className += ' goal';
+      });
+      mark('lo', step.lo, `${this.names.lo} ${step.lo}`, 'below');
+      mark('hi', step.hi, `${this.names.hi} ${step.hi}`, 'lower');
+      mark('mid', step.type === 'start' ? null : step.mid, `猜 ${step.mid}`, 'above');
+    } else {
+      const tried = new Set(this.steps.slice(0, at + 1).filter(s => s.type === 'try').map(s => s.value));
+      const hits = new Set(this.steps.slice(0, at + 1).filter(s => s.hit).map(s => s.value));
+      cells.forEach((cell, i) => {
+        const v = from + i;
+        cell.className = hits.has(v) ? 'done' : tried.has(v) ? 'out' : '';
+        if (step.type === 'try' && v === step.value) cell.className += ' looking';
+      });
+      mark('from', from, from, 'below');
+      mark('to', to, to, 'below');
+      mark('now', step.type === 'try' ? step.value : null, `${this.names.var} = ${step.value}`, 'above');
+    }
+  }
+  caption(at) {
+    const step = this.steps[at], n = this.names;
+    if (this.kind === 'sort') {
+      const newly = step.done.filter(i => !(this.steps[at - 1]?.done || []).includes(i)).map(i => step.list[i]);
+      const settled = newly.length && step.type !== 'end' ? `${newly.join('、')} 站好了位置，以后不用再比。` : '';
+      if (step.type === 'start') return `开始：${n.list} 是 ${listText(step.list)}。挨着的两个比一比。`;
+      if (step.type === 'compare') {
+        const [x, y] = step.at.map(i => step.list[i]);
+        const how = x === y ? `${x} 和 ${y} 一样大` : `${x} 比 ${y} ${x > y ? '大' : '小'}`;
+        return `比 ${n.list}[${step.at[0]}] 和 ${n.list}[${step.at[1]}]：${how}，${step.swap ? '要换' : '不用换'}。`;
+      }
+      if (step.type === 'swap') return `换好了：${step.list[step.at[1]]} 往后挪了一格。${settled}`;
+      if (step.type === 'print') return `输出现在的 ${n.list}：${step.text.trim()}。${settled}`;
+      const order = step.sorted ? '从小到大排好了' : '';
+      return order ? `全部比完，${order}。` : `比完了。${step.done.map(i => step.list[i]).join('、')} 已经站好，前面的还没排好。`;
+    }
+    if (this.kind === 'search') {
+      if (step.type === 'start') return `秘密数是 ${step.target}。一开始 ${step.lo} 到 ${step.hi} 都有可能。`;
+      if (step.type === 'pick') return `猜中间：(${step.before[0]} + ${step.before[1]}) // 2 是 ${step.mid}。`;
+      if (step.type === 'hi') return `${step.mid} 比 ${step.target} 大，${step.mid} 和后面的都不可能了：${n.hi} 变成 ${step.hi}。`;
+      if (step.type === 'lo') return `${step.mid} 比 ${step.target} 小，${step.mid} 和前面的都不可能了：${n.lo} 变成 ${step.lo}。`;
+      return step.found ? `猜中了！第 ${step.count} 次猜到 ${step.target}，循环停下。` : `范围空了，没有找到 ${step.target}。`;
+    }
+    const [from, to] = this.steps[0].range;
+    if (step.type === 'start') return `${n.var} 从 ${from} 试到 ${to}，一个一个试。`;
+    if (step.type === 'try') return step.hit
+      ? `${n.var} 是 ${step.value}：算出 ${step.left}，对上了！${step.text ? `输出 ${step.text.trim()}。` : ''}`
+      : `${n.var} 是 ${step.value}：算出 ${step.left}，不是 ${step.right}，试下一个。`;
+    return `试完了，一共试了 ${step.count} 个，${step.hits.length ? `对上的只有 ${step.hits.join('、')}` : '一个也没对上'}。`;
+  }
+  // Print shows a few key steps, not only the last one: the start, one or two in the middle, the end.
+  buildFilm() {
+    const last = this.steps.length - 1;
+    const picks = [...new Set([0, Math.round(last / 3), Math.round(2 * last / 3), last])];
+    const film = this.box.querySelector('.algo-film');
+    film.innerHTML = picks.map(at => `<figure><div class="algo-stage"></div><figcaption><b>第 ${at + 1} 步</b>${this.caption(at)}</figcaption></figure>`).join('');
+    film.querySelectorAll('.algo-stage').forEach((stage, k) => this.render(stage, picks[k]));
+  }
+}
+
 /* === SLIDE CONTROLLER: scale the stage, turn pages, play steps before turning === */
 class SlidePresentation {
   constructor() {
@@ -60,6 +268,7 @@ class SlidePresentation {
     document.getElementById('help-close').onclick = () => this.help.close();
     this.blank.onclick = () => { this.blank.hidden = true; };
     this.setupChanges();
+    this.stage.querySelectorAll('.algo[data-trace]').forEach(box => new AlgoPlayer(box));
     this.buildThumbs();
     this.buildTimeline();
     this.buildChapters();
@@ -471,6 +680,7 @@ class SlidePresentation {
   steps(slide) { return Number(slide.dataset.steps || 1); }
   show(index, atEnd = false) {
     this.slides.forEach(s => s.classList.remove('active', 'visible'));
+    this.stage.querySelectorAll('.algo').forEach(box => box.player?.pause());
     this.index = Math.max(0, Math.min(index, this.slides.length - 1));
     const slide = this.slides[this.index];
     slide.classList.add('active', 'visible');
@@ -509,6 +719,9 @@ class SlidePresentation {
       if (!['PageDown', 'PageUp'].includes(e.key)) return;
     }
     const k = e.key;
+    // Demo keys are letters and the < > keys, so arrows, space and a clicker still turn pages on a demo page.
+    const player = this.slides[this.index].querySelector('.algo')?.player;
+    if (player && ALGO_KEYS[k.toLowerCase()]) { e.preventDefault(); player.do(ALGO_KEYS[k.toLowerCase()]); return; }
     const actions = {
       f: () => this.fullscreen(),
       i: () => { if (IDE.config.settings.length) this.settings.showModal(); },
@@ -538,6 +751,7 @@ class SlidePresentation {
     this.hide = setTimeout(() => this.bar.classList.remove('show'), 2000);
   }
   finishAll() {
+    this.stage.querySelectorAll('.algo').forEach(box => box.player?.pause());
     this.liveSlots.forEach(slot => { slot.value = slot.dataset.start; slot.dispatchEvent(new Event('input')); });
     this.atBeforePrint = this.slides[this.index].dataset.at;
     this.slides.forEach(s => { if (s.dataset.steps) s.dataset.at = s.dataset.steps; });

@@ -71,23 +71,13 @@
 </section>
 
 <!-- worked example: the computer guesses -->
-<section class="slide" aria-label="例题：电脑来猜" data-steps="4" data-at="4" data-chapter="电脑来猜">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper);top:40px">例题：电脑来猜你的数</h2>
-  <div class="editor" style="left:96px;top:175px;width:960px;--fs:44px"><div class="tab">guess.py</div>
-<pre class="code" data-file="solutions/02_guess.py"><span class="ln l1">secret = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">lo = <span class="m">1</span></span><span class="ln l1">hi = <span class="m">100</span></span><span class="ln">guess = <span class="m">0</span></span><span class="ln l2 l3"><span class="k">while</span> guess != secret:</span><span class="ln l1 l2 l3">    guess = (lo + hi) // <span class="m">2</span></span><span class="ln">    <span class="f">print</span>(guess)</span><span class="ln l3">    <span class="k">if</span> guess &lt; secret:</span><span class="ln l3">        lo = guess + <span class="m">1</span></span><span class="ln l2">    <span class="k">elif</span> guess &gt; secret:</span><span class="ln l2">        hi = guess - <span class="m">1</span></span></pre></div>
-  <div class="abs" style="left:1210px;right:96px;top:150px">
-    <div class="box"><i style="width:190px">1–100</i><b style="font:700 44px var(--text)">猜 50，大了</b></div>
-    <div class="box step s2"><i style="width:190px">1–49</i><b style="font:700 44px var(--text)">猜 25，小了</b></div>
-    <div class="box step s3"><i style="width:190px">26–49</i><b style="font:700 44px var(--text)">猜 37，小了</b></div>
-    <div class="box step s3"><i style="width:190px">38–49</i><b style="font:700 44px var(--text)">猜 43，大了</b></div>
-    <div class="box step s4"><i style="width:190px">38–42</i><b style="font:700 44px var(--text)">猜 40、41、42</b></div>
-  </div>
-  <p class="abs say only1" style="left:1210px;right:96px;top:640px;font-size:34px">秘密数是 42。一开始 1 到 100 都可能，先猜中间 50。</p>
-  <p class="abs say only2" style="left:1210px;right:96px;top:640px;font-size:34px">50 比 42 大，50 和后面的都不可能了：hi 变成 49。</p>
-  <p class="abs say only3" style="left:1210px;right:96px;top:640px;font-size:34px">25 比 42 小：lo 变成 26。每猜一次，范围缩小一半。</p>
-  <p class="abs say only4" style="left:1210px;right:96px;top:640px;font-size:34px">范围越来越小，第 7 次猜到 42，guess 等于 secret，循环停下。</p>
-  <a class="ide step s4" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
+<section class="slide dark" aria-label="例题：电脑来猜" data-chapter="电脑来猜">
+  <h2 class="t" style="top:40px">例题：电脑来猜你的数</h2>
+  <div class="editor" style="left:96px;top:175px;width:760px;--fs:36px"><div class="tab">guess.py</div>
+<pre class="code" data-file="solutions/02_guess.py"><span class="ln">secret = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">lo = <span class="m">1</span></span><span class="ln">hi = <span class="m">100</span></span><span class="ln">guess = <span class="m">0</span></span><span class="ln"><span class="k">while</span> guess != secret:</span><span class="ln">    guess = (lo + hi) // <span class="m">2</span></span><span class="ln">    <span class="f">print</span>(guess)</span><span class="ln">    <span class="k">if</span> guess &lt; secret:</span><span class="ln">        lo = guess + <span class="m">1</span></span><span class="ln">    <span class="k">elif</span> guess &gt; secret:</span><span class="ln">        hi = guess - <span class="m">1</span></span></pre></div>
+  <div class="algo" data-algo="search" data-lo="lo" data-hi="hi" data-mid="guess" data-target="secret" data-stdin="42&#10;" style="left:896px;top:175px;width:928px;height:660px"></div>
+  <a class="ide" style="left:896px;top:870px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
 </section>
 
 <!-- quiz: best case -->

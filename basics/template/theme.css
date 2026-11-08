@@ -219,6 +219,50 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 @media (prefers-reduced-motion:reduce){.change .ln,.change .ln *{transition:none!important;animation:none!important}.step,.only1,.only2,.only3,.only4,.only5,.ln{transition:none}}
 @media print{.change .ln,.change .ln *{transition:none!important}}
 
+/* === ALGORITHM DEMO: bars for a list, a track for a range of numbers; deck.js fills it from data-trace === */
+.algo{position:absolute;background:var(--panel);border-radius:14px;color:#f4f2ec;padding:24px 30px 24px}
+.algo-live{position:relative;display:flex;flex-direction:column;gap:14px;height:100%}
+.algo-stage{position:relative;flex:1;min-height:200px;margin:58px 6px 84px}
+.algo-bar-item{position:absolute;bottom:0;width:min(16%,104px);transform:translateX(-50%);background:#8d8a82;border-radius:10px 10px 4px 4px}
+.algo-bar-item b{position:absolute;left:0;right:0;top:-54px;text-align:center;font:800 44px var(--code)}
+.algo-bar-item.looking{background:var(--amber)}.algo-bar-item.swapped{background:var(--clay)}.algo-bar-item.done{background:var(--mint)}
+.algo-index,.algo-tag{position:absolute;transform:translateX(-50%);white-space:nowrap;font:400 26px var(--code)}
+.algo-index{bottom:-38px;color:#9a968c}.algo-tag{bottom:-78px;color:var(--amber);font-weight:700}
+.algo-track{position:absolute;left:0;right:0;top:50%;height:72px;transform:translateY(-50%);display:flex;gap:1px}
+.algo-track i{flex:1;background:#cfccc3;border-radius:2px}
+.algo-track i.out{background:#4a4843}.algo-track i.looking{background:var(--amber)}.algo-track i.done{background:var(--mint)}
+.algo-track i{position:relative}.algo-track i.goal{box-shadow:inset 0 -24px var(--mint)}
+.algo-track i.looking{z-index:1;box-shadow:0 0 0 4px var(--amber)}
+.algo-mark{position:absolute;transform:translateX(-50%);white-space:nowrap;font:700 32px var(--code)}
+.algo-mark.edge-l{transform:none}.algo-mark.edge-r{transform:translateX(-100%)}
+.algo-mark.above{bottom:calc(50% + 50px);color:var(--amber)}.algo-mark.below{top:calc(50% + 46px)}.algo-mark.lower{top:calc(50% + 88px)}
+.algo.moving .algo-bar-item{transition:left .45s ease,height .3s,background .25s}
+.algo.moving .algo-track i{transition:background .3s}.algo.moving .algo-mark{transition:left .4s ease}
+.algo-say{margin:0;min-height:2.9em;font:400 38px/1.45 var(--text)}
+.algo-out{display:flex;gap:18px;height:4.05em;overflow:hidden;font:400 30px/1.35 var(--code)}
+.algo-out i{flex:none;font:700 26px/1.55 var(--text);font-style:normal;color:#9a968c}
+.algo-out pre{margin:0;white-space:pre}.algo-out.empty pre{visibility:hidden}
+.algo-bar{display:flex;gap:12px;align-items:center}
+.algo-bar button{font:700 30px var(--text);padding:12px 20px 14px;border:0;border-radius:12px;background:#45423d;color:#f4f2ec;cursor:pointer;white-space:nowrap}
+.algo-bar button:hover{background:#56524b}.algo-bar button:disabled{opacity:.35;cursor:default}
+.algo-bar .algo-play{background:var(--mint);color:#16261a;min-width:176px;box-shadow:0 5px 0 #5f8f6a}
+.algo-small{gap:10px;font:400 26px var(--text);color:#9a968c}.algo-small span{margin-left:14px}.algo-small button{font-size:26px;padding:8px 18px 10px}
+.algo-small button.on{background:var(--amber);color:var(--ink)}
+.algo-count{margin-left:auto;font:400 26px var(--code)}
+.ln.run{background:#4d4536;box-shadow:inset 10px 0 var(--amber)}
+.algo-film{display:none}
+@media (prefers-reduced-motion:reduce){.algo .algo-bar-item,.algo .algo-track i,.algo .algo-mark{transition:none!important}}
+@media print{
+  .algo-live{display:none}.ln.run{background:none;box-shadow:none}
+  .algo-film{display:grid;grid-template-columns:1fr 1fr;gap:16px;height:100%}
+  .algo-film figure{margin:0;display:flex;flex-direction:column;background:#2b2a27;border-radius:10px;padding:10px 14px}
+  .algo-film .algo-stage{margin:34px 4px 36px;min-height:0}
+  .algo-film .algo-bar-item b{top:-34px;font-size:26px}.algo-film .algo-index{bottom:-28px;font-size:18px}.algo-film .algo-tag{display:none}
+  .algo-film .algo-track{height:40px}.algo-film .algo-mark{font-size:18px}
+  .algo-film .algo-mark.above{bottom:calc(50% + 26px)}.algo-film .algo-mark.below{top:calc(50% + 24px)}.algo-film .algo-mark.lower{top:calc(50% + 46px)}
+  .algo-film figcaption{font:400 22px/1.4 var(--text)}.algo-film figcaption b{color:var(--amber);margin-right:8px}
+}
+
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
 .pick .ln.yes{background:#2f4a36}.pick .ln.no{background:#5a3327}
 

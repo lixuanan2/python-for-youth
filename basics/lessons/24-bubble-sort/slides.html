@@ -49,16 +49,14 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- one pass -->
-<section class="slide" aria-label="一轮比较" data-steps="3" data-at="3" data-chapter="一轮">
-  <div class="night" style="width:1310px"></div>
-  <h2 class="t" style="color:var(--paper)">从头到尾比一轮</h2>
-  <div class="editor" style="left:96px;top:200px;width:1170px;--fs:44px"><div class="tab">one_pass.py</div>
-<pre class="code" data-file="solutions/02_one_pass.py"><span class="ln">a = [<span class="m">5</span>, <span class="m">2</span>, <span class="m">4</span>, <span class="m">1</span>]</span><span class="ln l1 l2 l3"><span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln l1 l2 l3">    <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln l1 l2 l3">        a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln">    <span class="f">print</span>(a)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:700px;width:1170px;color:var(--paper)">j 是 0：比 a[0] 和 a[1]，也就是 5 和 2。前面的大，换。</p>
-  <p class="abs say only2" style="left:96px;top:700px;width:1170px;color:var(--paper)">j 是 1：比 5 和 4，前面的大，换。5 又往后走了一格。</p>
-  <p class="abs say only3" style="left:96px;top:700px;width:1170px;color:var(--paper)">j 是 2：比 5 和 1，换。最大的 5 像泡泡一样，一路冒到了最后。<br>4 个数挨着比，只有 3 对，所以是 range(3)。</p>
-  <a class="ide step s3" style="left:96px;top:900px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1390px;right:96px;top:170px;font:700 48px/1.7 var(--code)">[2, 5, 4, 1]<br><span class="step s2">[2, 4, 5, 1]</span><br><span class="step s3" style="color:var(--clay)">[2, 4, 1, 5]</span></div>
+<section class="slide dark" aria-label="一轮比较" data-chapter="一轮">
+  <h2 class="t">从头到尾比一轮</h2>
+  <div class="editor" style="left:96px;top:200px;width:1060px;--fs:38px"><div class="tab">one_pass.py</div>
+<pre class="code" data-file="solutions/02_one_pass.py"><span class="ln">a = [<span class="m">5</span>, <span class="m">2</span>, <span class="m">4</span>, <span class="m">1</span>]</span><span class="ln"><span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">    <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln">        a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln">    <span class="f">print</span>(a)</span></pre></div>
+  <p class="abs say" style="left:96px;top:670px;width:1060px">4 个数挨着比，只有 3 对，所以是 range(3)。<br>按“播放”看一轮：最大的数像泡泡，一路冒到最后。</p>
+  <a class="ide" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <div class="algo" data-algo="sort" data-list="a" style="left:1186px;top:150px;width:638px;height:800px"></div>
+  <div class="foot"></div>
 </section>
 
 <!-- quiz: after one pass -->
@@ -75,17 +73,14 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- worked example: bubble sort -->
-<section class="slide" aria-label="例题：冒泡排序" data-steps="4" data-at="4" data-chapter="冒泡排序">
-  <div class="night" style="width:1440px"></div>
-  <h2 class="t" style="color:var(--paper);top:40px">例题：一轮轮比，直到排好</h2>
-  <div class="editor" style="left:96px;top:175px;width:1300px;--fs:44px"><div class="tab">bubble.py</div>
-<pre class="code" data-file="solutions/03_bubble.py"><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">a = []</span><span class="ln l1"><span class="k">for</span> k <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    a.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2 l3 l4"><span class="k">for</span> r <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln l2 l3 l4">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span> - r):</span><span class="ln l2 l3 l4">        <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln l2 l3 l4">            a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln l2 l3 l4">    <span class="f">print</span>(a)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:935px;width:1300px;color:var(--paper);font-size:34px">先用第 11 课的办法读入：第一行 4，再读 5、2、4、1，放进列表 a。</p>
-  <p class="abs say only2" style="left:96px;top:935px;width:1300px;color:var(--paper);font-size:34px">r 是轮数。第 1 轮（r 是 0）比 3 对，最大的 5 到了最后。每轮结束输出一次。</p>
-  <p class="abs say only3" style="left:96px;top:935px;width:1300px;color:var(--paper);font-size:34px">第 2 轮少比一对：最后的 5 已经站好，不用再比。所以内层是 range(n - 1 - r)。</p>
-  <p class="abs say only4" style="left:96px;top:935px;width:1300px;color:var(--paper);font-size:34px">第 3 轮把 2 和 1 换好。4 个数，比 n - 1 也就是 3 轮，一定排好。</p>
-  <div class="abs" style="left:1490px;right:96px;top:170px;font:700 40px/1.8 var(--code)"><span class="step s2">[2, 4, 1, 5]</span><br><span class="step s3">[2, 1, 4, 5]</span><br><span class="step s4" style="color:var(--clay)">[1, 2, 4, 5]</span></div>
-  <a class="ide step s4" style="left:1490px;top:900px">▶ 在 IDE 打开</a>
+<section class="slide dark" aria-label="例题：冒泡排序" data-chapter="冒泡排序">
+  <h2 class="t" style="top:40px">例题：一轮轮比，直到排好</h2>
+  <a class="ide" style="left:1186px;top:52px">▶ 在 IDE 打开</a>
+  <div class="editor" style="left:96px;top:175px;width:1060px;--fs:35px"><div class="tab">bubble.py</div>
+<pre class="code" data-file="solutions/03_bubble.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">a = []</span><span class="ln"><span class="k">for</span> k <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">    a.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln"><span class="k">for</span> r <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span> - r):</span><span class="ln">        <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln">            a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln">    <span class="f">print</span>(a)</span></pre></div>
+  <p class="abs say" style="left:96px;top:820px;width:1060px;font-size:34px">站好的不用再比，所以内层是 range(n - 1 - r)。<br>输入 4 个数，比 n - 1 也就是 3 轮，一定排好。</p>
+  <div class="algo" data-algo="sort" data-list="a" data-stdin="4&#10;5&#10;2&#10;4&#10;1&#10;" style="left:1186px;top:150px;width:638px;height:800px"></div>
+  <div class="foot"></div>
 </section>
 
 <!-- quiz: rounds -->
