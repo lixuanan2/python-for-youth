@@ -1,19 +1,27 @@
 """Algorithm demos: run the program on the page with a line tracer, then turn the run into steps for the player.
 
-The page shows the program; build.py runs exactly that text with real Python and writes the steps into the page,
-so the animation can never disagree with the code. tools/check.py runs it again and checks the end result.
+The page shows the program; build.py runs exactly that program and writes the steps into the page, so the
+animation can never disagree with the code. tools/check.py runs it again and checks the end result.
+Python is traced with sys.settrace. C++ is copied with a trace call put before each statement of main, compiled
+with the same compiler the checks use, and run: the calls print each line and the variables in scope.
 Standard library only.
 """
 import html
 from html.parser import HTMLParser
 import json
+import os
+from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 
 KINDS = ('sort', 'search', 'try')
 # The variables each kind of demo watches, named by data- attributes on div.algo.
 ROLES = {'sort': ('list',), 'search': ('lo', 'hi', 'mid', 'target'), 'try': ('var',)}
+# A C++ array is longer than the numbers in it, so data-size names the variable that says how many are used.
+OPTIONAL = {'sort': ('size',), 'search': (), 'try': ()}
 MAX_EVENTS = 4000
 MAX_STEPS = 60
 
@@ -60,21 +68,175 @@ def run(code, stdin):
     return json.loads(result.stdout)
 
 
+# Put before the C++ program: each trace call prints \x02{"l": line, "v": {name: value}}\x03 to cout, so the
+# steps and the program's own output stay in the order they happened.
+CPP_HELPERS = r'''#include <iostream>
+#include <string>
+#include <type_traits>
+#include <vector>
+static bool algo_first_ = true;
+static void algo_text_(const std::string &s) {
+    std::cout << '"';
+    for (char c : s) {
+        if (c == '"' || c == '\\') std::cout << '\\';
+        if (c == '\n') std::cout << "\\n"; else std::cout << c;
+    }
+    std::cout << '"';
+}
+static void algo_val_(bool x) { std::cout << (x ? "true" : "false"); }
+static void algo_val_(char x) { algo_text_(std::string(1, x)); }
+static void algo_val_(const std::string &x) { algo_text_(x); }
+template <class T> static typename std::enable_if<std::is_arithmetic<T>::value>::type algo_val_(T x) { std::cout << x; }
+template <class T> static void algo_val_(const std::vector<T> &v) {
+    std::cout << '[';
+    for (size_t i = 0; i < v.size(); i++) { if (i) std::cout << ','; algo_val_(v[i]); }
+    std::cout << ']';
+}
+template <class T, size_t N> static void algo_val_(const T (&a)[N]) {
+    std::cout << '[';
+    for (size_t i = 0; i < N; i++) { if (i) std::cout << ','; algo_val_(a[i]); }
+    std::cout << ']';
+}
+static int algo_line_(int line) { std::cout << "\x02{\"l\":" << line << ",\"v\":{"; algo_first_ = true; return 0; }
+template <class T> static int algo_put_(const char *name, const T &x) {
+    if (!algo_first_) std::cout << ',';
+    algo_first_ = false;
+    algo_text_(name);
+    std::cout << ':';
+    algo_val_(x);
+    return 0;
+}
+static int algo_end_() { std::cout << "}}\x03"; return 0; }
+#line 1
+'''
+CPP_TYPE = r'(?:const\s+)?(?:unsigned\s+)?(?:long\s+long|long|int|short|bool|char|string|double|float|size_t|vector\s*<[^;]*?>)'
+
+
+def code_only(line):
+    """The line without strings, characters and a // comment, for counting braces and finding names."""
+    line = re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', '""', line)
+    return line.split('//')[0]
+
+
+def split_top(text):
+    """Split at commas that are not inside brackets, as in int lo = 1, hi = n;"""
+    parts, depth, word = [], 0, ''
+    for ch in text:
+        depth += ch in '([{'
+        depth -= ch in ')]}'
+        if ch == ',' and depth == 0:
+            parts.append(word)
+            word = ''
+        else:
+            word += ch
+    return parts + [word]
+
+
+def watch(test, names):
+    """What the steps need from an if line, worked out by C++ itself: the test, each [place], and both sides of ==."""
+    found = [test] + re.findall(r'\w+\[([^\[\]]+)\]', test)
+    sides = re.fullmatch(r'(.+?)\s*==\s*(.+)', test)
+    return found + (list(sides.groups()) if sides else [])
+
+
+def instrument(code):
+    """The C++ program with a trace call before each statement of main, listing every variable in scope there."""
+    lines = code.split('\n')
+    start = next((i for i, l in enumerate(lines) if re.match(r'\s*int\s+main\s*\(', l)), None)
+    assert start is not None, 'a C++ algorithm demo needs the whole program with int main()'
+    out, scope, depth, previous = list(lines), [], 0, ''
+    for i in range(start, len(lines)):
+        text = code_only(lines[i]).strip()
+        stripped = lines[i].strip()
+        opening = depth
+        if i > start and opening >= 1:
+            braceless = re.match(r'(?:for|while|if)\b.*\)$|else$', previous)
+            starts = stripped and not re.match(r'[{}#]|//|else\b|case\b|default\b', stripped) and (
+                not previous or previous[-1] in ';{}' or braceless)
+            if starts:
+                names = [n for n, d, until in scope if until is None or until == i]
+                ending = opening == 1 and re.match(r'return\b', stripped)
+                calls = [f'algo_line_({-1 if ending else i + 1})'] + [f'algo_put_("{n}", {n})' for n in names]
+                test = re.match(r'if\s*\((.*)\)\s*\{?$', text)
+                if test and not ending:
+                    calls += [f'algo_put_(R"algo({e.strip()})algo", ({e}))' for e in watch(test.group(1).strip(), names)]
+                trace = ', '.join(calls + ['algo_end_()']) + '; '
+                indent = lines[i][:len(lines[i]) - len(lines[i].lstrip())]
+                out[i] = indent + ('{ ' + trace + stripped + ' }' if braceless else trace + stripped)
+        # Names declared on this line are in scope from the next line; a for loop's own variable only inside it.
+        declared = re.match(CPP_TYPE + r'\s+(.*);$', text)
+        if declared and opening >= 1:
+            for part in split_top(declared.group(1)):
+                name = re.match(r'\s*(\w+)', part)
+                if name:
+                    scope.append((name.group(1), opening, None))
+        loop = re.match(r'for\s*\(\s*' + CPP_TYPE + r'\s+(\w+)', text)
+        depth += text.count('{') - text.count('}')
+        if i > start and depth == 0:  # the closing brace of main: one last record, in case main has no return
+            names = [n for n, d, u in scope if d <= 1]
+            out[i] = ', '.join(['algo_line_(-1)'] + [f'algo_put_("{n}", {n})' for n in names] + ['algo_end_()']) + '; ' + lines[i]
+            break
+        if loop:  # a loop without braces owns only the next line
+            scope.append((loop.group(1), opening + 1, None) if '{' in text else (loop.group(1), opening, i + 1))
+        scope = [(n, d, u) for n, d, u in scope if d <= depth and (u is None or u >= i)]
+        if text:
+            previous = text
+    return CPP_HELPERS + '\n'.join(out) + '\n'
+
+
+def compiler():
+    found = os.environ.get('CXX') or shutil.which('clang++') or shutil.which('g++')
+    assert found, 'No C++ compiler found for the algorithm demo'
+    return found
+
+
+def run_cpp(code, stdin):
+    """Compile the traced copy, run it, and read its trace calls back as events."""
+    with tempfile.TemporaryDirectory() as folder:
+        exe = Path(folder) / ('demo.exe' if os.name == 'nt' else 'demo')
+        built = subprocess.run([compiler(), '-std=c++11', '-x', 'c++', '-', '-o', str(exe)], input=instrument(code).encode(),
+                               capture_output=True, timeout=60)
+        assert built.returncode == 0, 'the traced C++ program does not compile:\n' + built.stderr.decode(errors='replace')
+        result = subprocess.run([str(exe)], input=stdin.encode(), capture_output=True, timeout=10)
+    assert result.returncode == 0, 'the C++ program of the demo did not finish normally'
+    text = result.stdout.decode('utf-8', errors='replace').replace('\r\n', '\n')
+    events, out = [], ''
+    for k, piece in enumerate(text.split('\x02')):
+        if k:
+            record, piece = piece.split('\x03', 1)
+            record = json.loads(record)
+            events.append([None if record['l'] < 0 else record['l'], record['v'], out])
+        out += piece
+    assert len(events) <= MAX_EVENTS, 'too many steps'
+    if not events or events[-1][0] is not None:
+        events.append([None, events[-1][1] if events else {}, out])
+    events[-1][2] = out
+    return events
+
+
 def condition(source):
-    """The test of an if line, without if and the colon."""
-    match = re.fullmatch(r'\s*(?:if|elif)\s+(.*):\s*', source)
-    return match and match.group(1)
+    """The test of an if line: Python if x: or elif x:, C++ if (x) {."""
+    match = re.fullmatch(r'\s*(?:if|elif)\s+(.*):\s*', source) or re.fullmatch(r'\s*if\s*\((.*)\)\s*\{?\s*', code_only(source))
+    return match and match.group(1).strip()
 
 
 def value(expr, names):
+    """C++ worked its own expressions out and recorded them; Python ones are worked out here."""
+    if expr in names:
+        return names[expr]
     return eval(expr, {'__builtins__': {}}, dict(names))
 
 
-def steps(kind, code, stdin, names):
+def steps(kind, code, stdin, names, language='python'):
     """The run as player steps. names maps a role to the variable on the page, such as {"list": "a"}."""
     assert kind in KINDS, f'data-algo must be one of {", ".join(KINDS)}'
+    assert language in ('python', 'cpp'), f'algorithm demos trace Python and C++, not {language}'
     lines = code.split('\n')
-    events = run(code, stdin)
+    events = run(code, stdin) if language == 'python' else run_cpp(code, stdin)
+    if names.get('size'):  # only the used part of a C++ array
+        for event in events:
+            if names['list'] in event[1] and isinstance(event[1].get(names['size']), int):
+                event[1][names['list']] = event[1][names['list']][:event[1][names['size']]]
     make = {'sort': sort_steps, 'search': search_steps, 'try': try_steps}[kind]
     found = make(lines, events, names)
     if kind == 'sort':
@@ -99,7 +261,7 @@ def printed(before, after):
 def sort_steps(lines, events, names):
     """Compare two neighbours, swap them, print: every list change is a swap the player can animate."""
     name = names['list']
-    steps = []
+    steps, settled = [], None
     for before, after in moves(events):
         line, now, new = before[0], before[1], after[1]
         test = condition(lines[line - 1])
@@ -112,14 +274,21 @@ def sort_steps(lines, events, names):
             assert op, f'the compare line must compare {name}[…] with {name}[…] using < or >: {lines[line - 1].strip()}'
             if not steps:
                 steps.append(dict(type='start', line=None, list=now[name], out=before[2]))
+                settled = now[name]
             steps.append(dict(type='compare', line=line, list=now[name], at=spots, op=op.group(1),
                               swap=bool(value(test, now)), out=before[2]))
         elif steps and name in new and new[name] != now[name]:
-            changed = [i for i, (x, y) in enumerate(zip(now[name], new[name])) if x != y]
-            assert len(changed) == 2 and sorted(now[name]) == sorted(new[name]), f'a sort demo can only swap two places at a time (line {line})'
+            if sorted(new[name]) != sorted(settled):
+                continue  # halfway through a swap by way of a temporary variable
+            changed = [i for i, (x, y) in enumerate(zip(settled, new[name])) if x != y]
+            assert len(changed) == 2, f'a sort demo can only swap two places at a time (line {line})'
             steps.append(dict(type='swap', line=line, list=new[name], at=changed, out=after[2]))
+            settled = new[name]
         elif steps and printed(before, after):
-            steps.append(dict(type='print', line=line, list=new.get(name, now[name]), text=printed(before, after), out=after[2]))
+            if steps[-1]['type'] == 'print':  # a loop that prints the numbers one by one is one step
+                steps[-1].update(text=steps[-1]['text'] + printed(before, after), out=after[2])
+            else:
+                steps.append(dict(type='print', line=line, list=settled, text=printed(before, after), out=after[2]))
     assert steps, f'no line compares two places in {name}'
     final = steps[-1]['list']
     steps.append(dict(type='end', line=None, list=final, sorted=final == sorted(final), out=events[-1][2]))
@@ -194,7 +363,7 @@ class Demos(HTMLParser):
 
     def __init__(self, text):
         super().__init__()
-        self.demos, self.lines, self.code = [], None, None
+        self.demos, self.lines, self.code, self.full, self.first = [], None, None, None, 1
         self.feed(text)
         self.close()
 
@@ -206,9 +375,14 @@ class Demos(HTMLParser):
             assert kind in KINDS, f'data-algo must be one of {", ".join(KINDS)}'
             roles = {role: attrs.get(f'data-{role}') for role in ROLES[kind]}
             assert all(roles.values()), f'a {kind} demo needs ' + ', '.join(f'data-{r}' for r in ROLES[kind])
+            roles.update({role: attrs[f'data-{role}'] for role in OPTIONAL[kind] if attrs.get(f'data-{role}')})
             self.demos.append(dict(kind=kind, names=roles, stdin=attrs.get('data-stdin') or '', trace=attrs.get('data-trace')))
         if tag == 'pre' and 'code' in classes and 'was' not in classes and self.code is None:
             self.code = self.lines = []
+            # A page that shows only some lines of a longer program runs the whole one (data-full, from data-file).
+            if attrs.get('data-full') is not None:
+                self.full = attrs['data-full']
+                self.first = int((attrs.get('data-lines') or '1').split('-')[0])
         if self.lines is not None and tag == 'span' and 'ln' in classes:
             self.lines.append('')
 
@@ -221,15 +395,21 @@ class Demos(HTMLParser):
             self.lines = None
 
 
-def demos(section):
-    """Each demo of a page with its steps: the program is the text of the page's code editor, run for real."""
+    def program(self):
+        """The program the demo runs, and the line of it the page's first code line is."""
+        return (self.full if self.full is not None else '\n'.join(self.code or [])).rstrip('\n'), self.first
+
+
+def demos(section, language='python'):
+    """Each demo of a page with its steps: the program is the one in the page's code editor, run for real."""
     found = Demos(section)
     assert not found.demos or found.code, 'an algorithm demo needs its program in a pre.code on the same page'
-    code = '\n'.join(found.code or [])
+    code, first = found.program()
     for demo in found.demos:
         names = dict(demo['names'])
         demo['code'] = code
-        demo['data'] = dict(kind=demo['kind'], names=names, steps=steps(demo['kind'], code, demo['stdin'], names))
+        demo['data'] = dict(kind=demo['kind'], names=names, first=first, language=language,
+                            steps=steps(demo['kind'], code, demo['stdin'], names, language))
     return found.demos
 
 
@@ -237,11 +417,13 @@ def encode(data):
     return html.escape(json.dumps(data, ensure_ascii=False, separators=(',', ':')), quote=True)
 
 
-def embed(slides):
+def embed(slides, language='python'):
     """Write the steps into the div.algo of every built page, as data-trace."""
     def page(match):
         section = match.group(0)
-        found = demos(section)
+        if 'class="algo"' not in section:
+            return section
+        found = demos(section, language)
         if not found:
             return section
         assert len(found) == 1, 'one algorithm demo per page'

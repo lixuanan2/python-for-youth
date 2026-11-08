@@ -22,7 +22,7 @@ const IDE = {
 const ALGO_SPEEDS = {slow: ['慢', 2600], mid: ['中', 1600], fast: ['快', 600]};
 const ALGO_KEYS = {p: 'play', ',': 'back', '.': 'next', '0': 'reset', s: 'speed'};
 const quiet = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
-const listText = list => `[${list.join(', ')}]`;
+const listText = (list, cpp) => cpp ? `{${list.join(', ')}}` : `[${list.join(', ')}]`;
 
 class AlgoPlayer {
   constructor(box) {
@@ -31,7 +31,10 @@ class AlgoPlayer {
     this.kind = data.kind;
     this.names = data.names;
     this.steps = data.steps;
-    this.lines = [...box.closest('.slide').querySelectorAll('pre.code .ln')];
+    this.cpp = data.language === 'cpp';
+    // A page may show only some lines of the program it runs: data.first is the program line its first row shows.
+    this.first = data.first || 1;
+    this.lines = [...box.closest('.slide').querySelectorAll('pre.code:not(.was) .ln')];
     this.speed = box.dataset.speed || 'mid';
     this.at = 0;
     box.player = this;
@@ -108,7 +111,7 @@ class AlgoPlayer {
     this.playButton.textContent = this.timer ? '❚❚ 暂停' : '▶ 播放';
     this.playButton.disabled = quiet();
     this.box.querySelectorAll('[data-speed]').forEach(b => b.classList.toggle('on', b.dataset.speed === this.speed));
-    this.lines.forEach((line, i) => line.classList.toggle('run', step.line === i + 1));
+    this.lines.forEach((line, i) => line.classList.toggle('run', step.line === i + this.first));
   }
   // Each place keeps its own bar, so a swap moves the two bars instead of relabelling them.
   render(stage, at) {
@@ -191,7 +194,7 @@ class AlgoPlayer {
     if (this.kind === 'sort') {
       const newly = step.done.filter(i => !(this.steps[at - 1]?.done || []).includes(i)).map(i => step.list[i]);
       const settled = newly.length && step.type !== 'end' ? `${newly.join('、')} 站好了位置，以后不用再比。` : '';
-      if (step.type === 'start') return `开始：${n.list} 是 ${listText(step.list)}。挨着的两个比一比。`;
+      if (step.type === 'start') return `开始：${n.list} 是 ${listText(step.list, this.cpp)}。挨着的两个比一比。`;
       if (step.type === 'compare') {
         const [x, y] = step.at.map(i => step.list[i]);
         const how = x === y ? `${x} 和 ${y} 一样大` : `${x} 比 ${y} ${x > y ? '大' : '小'}`;
@@ -204,7 +207,7 @@ class AlgoPlayer {
     }
     if (this.kind === 'search') {
       if (step.type === 'start') return `秘密数是 ${step.target}。一开始 ${step.lo} 到 ${step.hi} 都有可能。`;
-      if (step.type === 'pick') return `猜中间：(${step.before[0]} + ${step.before[1]}) // 2 是 ${step.mid}。`;
+      if (step.type === 'pick') return `猜中间：(${step.before[0]} + ${step.before[1]}) ${this.cpp ? '/' : '//'} 2 是 ${step.mid}。`;
       if (step.type === 'hi') return `${step.mid} 比 ${step.target} 大，${step.mid} 和后面的都不可能了：${n.hi} 变成 ${step.hi}。`;
       if (step.type === 'lo') return `${step.mid} 比 ${step.target} 小，${step.mid} 和前面的都不可能了：${n.lo} 变成 ${step.lo}。`;
       return step.found ? `猜中了！第 ${step.count} 次猜到 ${step.target}，循环停下。` : `范围空了，没有找到 ${step.target}。`;

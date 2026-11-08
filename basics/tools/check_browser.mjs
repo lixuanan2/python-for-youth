@@ -281,7 +281,8 @@ const VERSIONS = raw => `(() => {
   const slides = [...doc.querySelectorAll('#deckStage .slide')];
   const lines = pre => [...pre.querySelectorAll('.ln')].map(l => l.textContent);
   return [...doc.querySelectorAll('pre.code.was')].map(old => ({page: slides.indexOf(old.closest('.slide')) + 1,
-    before: lines(old), after: lines(old.nextElementSibling), at: old.nextElementSibling.dataset.change}));
+    before: lines(old), after: lines(old.nextElementSibling), at: old.nextElementSibling.dataset.change,
+    whole: old.nextElementSibling.dataset.full ?? null}));
 })()`;
 const CHANGE_STATE = `(() => {
   const slide = document.querySelector('#deckStage .slide.active'), pre = slide.querySelector('pre.change');
@@ -305,9 +306,10 @@ const ALGO_STATE = `(() => {
   const data = JSON.parse(box.dataset.trace), step = data.steps[player.at];
   const bars = [...box.querySelectorAll('.algo-live .algo-bar-item')].sort((x, y) => parseFloat(x.style.left) - parseFloat(y.style.left))
     .map(b => Number(b.querySelector('b').textContent));
-  const lines = [...box.closest('.slide').querySelectorAll('pre.code .ln')];
+  const lines = [...box.closest('.slide').querySelectorAll('pre.code:not(.was) .ln')], row = step.line - (data.first || 1) + 1;
   return {at: player.at, total: data.steps.length, playing: box.dataset.playing === '1', speed: box.dataset.speed,
-    bars, want: step.list || null, run: lines.findIndex(l => l.classList.contains('run')) + 1 || null, line: step.line,
+    bars, want: step.list || null, run: lines.findIndex(l => l.classList.contains('run')) + 1 || null,
+    line: step.line && row >= 1 && row <= lines.length ? row : null,
     say: box.querySelector('.algo-live .algo-say').textContent, page: document.getElementById('counter').textContent,
     playOff: box.querySelector('.algo-play').disabled, frames: box.querySelectorAll('.algo-film figure').length,
     film: getComputedStyle(box.querySelector('.algo-film')).display !== 'none', live: getComputedStyle(box.querySelector('.algo-live')).display !== 'none'};
@@ -405,7 +407,8 @@ async function checkChange(change, dir) {
   state = await run(CHANGE_STATE);
   assert.deepEqual(state.shown, change.after, `${where} does not end with the new version`);
   assert(state.marked && !state.moving && state.at === String(at), `${where}: new and edited lines are not marked`);
-  assert.equal(state.ide, change.after.join('\n'), `${where}: the IDE must get the new version`);
+  // A page that shows some lines of a longer program (C++ often does) sends the whole new program.
+  assert.equal(state.ide, change.whole ?? change.after.join('\n'), `${where}: the IDE must get the new version`);
   assert(!state.clipped, `${where}: a line of the new version is cut off at the right, widen the editor`);
   await shot('3-new');
   await key('ArrowLeft');

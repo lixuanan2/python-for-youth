@@ -96,12 +96,13 @@ class Pages(HTMLParser):
             self.lines = page['lines']
             if 'was' in classes:
                 # The old version of a code change: shown first, never sent to the IDE.
-                page['changes'].append(dict(old=[], old_file=attrs.get('data-file'), new=None))
+                page['changes'].append(dict(old=[], old_file=attrs.get('data-file'), old_full=attrs.get('data-full'), new=None))
                 self.lines = page['changes'][-1]['old']
             elif page['changes'] and page['changes'][-1]['new'] is None:
                 change = page['changes'][-1]
-                change.update(new=len(page['lines']), new_file=attrs.get('data-file'), at=attrs.get('data-change'))
-            if page['full'] is None:
+                change.update(new=len(page['lines']), new_file=attrs.get('data-file'), new_full=attrs.get('data-full'),
+                              at=attrs.get('data-change'))
+            if page['full'] is None and 'was' not in classes:
                 page['full'] = attrs.get('data-full')
         if self.lines is not None and tag == 'span' and 'ln' in classes:
             self.lines.append('')
@@ -139,11 +140,14 @@ def check_changes(text, folder):
             where = f'{folder.name} page {number}'
             assert isinstance(change['new'], list) and change['new'], f'{where}: pre.code.was must be followed by the new version, a pre.code'
             assert change['at'] and 2 <= int(change['at']) <= page['steps'], f'{where}: the new version needs data-change, a step of this page from 2 on'
-            for lines, file in ((change['old'], change['old_file']), (change['new'], change.get('new_file'))):
+            for lines, file, full in ((change['old'], change['old_file'], change['old_full']),
+                                      (change['new'], change.get('new_file'), change.get('new_full'))):
                 code = '\n'.join(lines).strip()
                 assert code, f'{where}: an empty version in a code change'
+                # A page that shows only some lines (C++ often does) gives the whole program in data-full.
+                whole = {code, (full or '').strip()} - {''}
                 if not file:  # with data-file, check_deck compares the page with that tested file
-                    assert any(c['page'] == number and c['code'].strip() == code and ('stdout' in c or 'error' in c) for c in claims), \
+                    assert any(c['page'] == number and c['code'].strip() in whole and ('stdout' in c or 'error' in c) for c in claims), \
                         f'{where}: a version of the code change without data-file needs a claim with its output in tests/claims.json'
             count += 1
     return count
@@ -153,12 +157,13 @@ def check_algos(text):
     """An algorithm demo plays a real run of the page's program: it must end where the program really ends."""
     count = 0
     for number, section in enumerate(re.findall(r'<section id="page-\d+".*?</section>', text, re.S), 1):
-        for demo in builder.algo.Demos(section).demos:
+        found = builder.algo.Demos(section)
+        for demo in found.demos:
             where = f'page {number}'
-            assert LANGUAGE == 'python', f'{where}: algorithm demos trace Python programs only'
             data = json.loads(demo['trace'])
             steps, start, end = data['steps'], data['steps'][0], data['steps'][-1]
-            code = '\n'.join(builder.algo.Demos(section).code)
+            code, first = found.program()
+            assert data['language'] == LANGUAGE and data['first'] == first, f'{where}: rebuild the demo'
             result = run(code, demo['stdin'])
             assert result.returncode == 0 and result.stdout.decode().replace('\r\n', '\n') == end['out'], \
                 f'{where}: the demo does not end with what the program prints'
@@ -174,6 +179,8 @@ def check_algos(text):
                     f'{where}: the try demo must find an answer'
             lines = code.split('\n')
             assert all(s['line'] is None or 1 <= s['line'] <= len(lines) for s in steps), f'{where}: a step points at no line'
+            shown = len(found.code)
+            assert any(s['line'] and first <= s['line'] < first + shown for s in steps), f'{where}: no step runs a line the page shows'
             count += 1
     return count
 
