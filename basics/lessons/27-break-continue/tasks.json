@@ -13,7 +13,7 @@
   {
     "id": "B",
     "role": "基础例题",
-    "page": 6,
+    "page": 5,
     "starter": "starter/02_chat.py",
     "solution": "solutions/02_chat.py",
     "scope": "每行一句话，直到“再见”",
@@ -24,7 +24,7 @@
   {
     "id": "C",
     "role": "语法小演示",
-    "page": 7,
+    "page": 6,
     "starter": "starter/03_retry.py",
     "solution": "solutions/03_retry.py",
     "scope": "每行一个输入，直到输入整数为止",
@@ -35,7 +35,7 @@
   {
     "id": "D",
     "role": "语法小演示",
-    "page": 8,
+    "page": 7,
     "starter": "starter/04_continue.py",
     "solution": "solutions/04_continue.py",
     "scope": "无输入",
@@ -46,7 +46,7 @@
   {
     "id": "01",
     "role": "学生小改写",
-    "page": 10,
+    "page": 9,
     "starter": "starter/05_sum_until_zero.py",
     "solution": "solutions/05_sum_until_zero.py",
     "scope": "每行一个整数，绝对值不超过10000，以0结束",
@@ -57,7 +57,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 13,
+    "page": 12,
     "starter": "starter/06_scores.py",
     "solution": "solutions/06_scores.py",
     "scope": "每行一个整数，以-1结束，最多100行",
@@ -68,7 +68,7 @@
   {
     "id": "03",
     "role": "创作项目",
-    "page": 15,
+    "page": 14,
     "starter": "starter/07_my_loop.py",
     "solution": "solutions/07_lock_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

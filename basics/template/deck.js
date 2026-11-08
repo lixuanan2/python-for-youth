@@ -204,7 +204,11 @@ class SlidePresentation {
   updateQuickIde() {
     const slide = this.slides[this.index];
     const quick = document.getElementById('ide-quick');
-    const onPage = slide.querySelector('a.ide');
+    // The button follows the step: the IDE link the page shows now, else the one it ends with.
+    const at = Number(slide.dataset.at || 1), links = [...slide.querySelectorAll('a.ide')];
+    const from = (a, re) => Number([...a.classList].find(c => re.test(c))?.replace(/\D/g, '') || 0);
+    const shown = a => from(a, /^only\d$/) ? from(a, /^only\d$/) === at : from(a, /^s\d$/) <= at;
+    const onPage = links.find(shown) || links.find(a => !from(a, /^only\d$/)) || links[0];
     const code = this.codeOf(slide);
     quick.href = onPage ? onPage.href : code ? IDE.url(code, IDE.load()) : IDE.url(IDE.config.blank, IDE.load());
     quick.textContent = onPage || code ? '▶ 本页代码进 IDE' : '▶ 打开空白 IDE';
@@ -287,7 +291,7 @@ class SlidePresentation {
     // Full-width digits and leading zeros are the same number, so those alone are tidied.
     const problem = slot => {
       if (slot.dataset.kind === 'text') {
-        if (/["\r\n]/.test(slot.value)) return 'quote';
+        if (/["'“”‘’\r\n]/.test(slot.value)) return 'quote';
         if (slot.value.includes('\\')) return 'slash';
         return Array.from(slot.value).length > 12 ? 'long' : null;
       }
@@ -302,7 +306,7 @@ class SlidePresentation {
     // Short enough to read from the back of the room; red means the page cannot use it, amber only that a box is empty.
     const tips = {
       letters: '这里只能填数字，比如 7。', negative: '负数这里算不了，到 IDE 里试。', decimal: '小数这里算不了，到 IDE 里试。',
-      big: '最大只能填 9999。', quote: '英文引号 " 用不了，换成中文引号 “ ”。', slash: '反斜杠 \\ 这里用不了，到 IDE 里试。',
+      big: '最大只能填 9999。', quote: '两边的引号已经写好了，框里只填字。', slash: '反斜杠 \\ 这里用不了，到 IDE 里试。',
       long: '最多 12 个字，删掉几个吧。', empty: '框里空着，填上就有结果。'
     };
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
@@ -391,6 +395,11 @@ class SlidePresentation {
           then.setAttribute('aria-hidden', 'true');
           then.append(...olds[row.from].childNodes);
           line.append(now, then);
+          const indent = text => text.length - text.trimStart().length;
+          if (now.textContent.trim() === then.textContent.trim()) {
+            line.classList.add('indent');  // only moved: the old line slides over instead of fading into the new one
+            line.style.setProperty('--shift', indent(now.textContent) - indent(then.textContent));
+          }
         }
         return line;
       }));
@@ -401,13 +410,15 @@ class SlidePresentation {
       return {slide, pre};
     });
   }
-  /* Lines in both versions are kept (longest common run); the rest of each gap is matched to an old line that reads
-     about the same once spaces are trimmed, such as print(i) indented further, or else counted as added or removed. */
+  /* Lines that read the same once the indent is trimmed are kept (longest common run): unchanged, or only moved
+     right or left, as when a loop is wrapped around them. The rest of each gap is matched to an old line that reads
+     about the same, such as print(i) becoming print(i * 2), or else counted as added or removed. */
   diffLines(a, b) {
     const n = a.length, m = b.length;
+    const same = (i, j) => a[i].trim() === b[j].trim();
     const common = Array.from({length: n + 1}, () => new Array(m + 1).fill(0));
     for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) {
-      common[i][j] = a[i] === b[j] ? common[i + 1][j + 1] + 1 : Math.max(common[i + 1][j], common[i][j + 1]);
+      common[i][j] = same(i, j) ? common[i + 1][j + 1] + 1 : Math.max(common[i + 1][j], common[i][j + 1]);
     }
     const alike = (x, y) => {
       x = x.trim(); y = y.trim();
@@ -433,7 +444,7 @@ class SlidePresentation {
     };
     let i = 0, j = 0;
     while (i < n || j < m) {
-      if (i < n && j < m && a[i] === b[j]) { flush(); rows.push({kind: 'same', to: j}); i++; j++; }
+      if (i < n && j < m && same(i, j)) { flush(); rows.push(a[i] === b[j] ? {kind: 'same', to: j} : {kind: 'edit', from: i, to: j}); i++; j++; }
       else if (j < m && (i === n || common[i][j + 1] >= common[i + 1][j])) add.push(j++);
       else cut.push(i++);
     }
@@ -486,7 +497,7 @@ class SlidePresentation {
   }
   move(delta) {
     const slide = this.slides[this.index], at = Number(slide.dataset.at || 1), next = at + delta;
-    if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.syncChanges(true); this.label(); return; }
+    if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.syncChanges(true); this.updateQuickIde(); this.label(); return; }
     if (this.index + delta >= 0 && this.index + delta < this.slides.length) this.show(this.index + delta, delta < 0);
   }
   key(e) {

@@ -16,26 +16,21 @@
   <div class="foot"></div>
 </section>
 
-<!-- f-string -->
-<section class="slide" aria-label="f-string 的写法" data-steps="2" data-at="2" data-chapter="f-string">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">引号前面加 f</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">hello.py</div>
-<pre class="code" data-file="solutions/01_fstring.py"><span class="ln">name = <span class="s">"小明"</span></span><span class="ln">age = <span class="m">12</span></span><span class="ln l1"><span class="f">print</span>(<span class="s">f"{name}今年{age}岁"</span>)</span><span class="ln l2"><span class="f">print</span>(<span class="s">f"明年{age + 1}岁"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">f 是 format（格式）的第一个字母。加了 f，引号里的大括号 { } 就会换成变量的值。没有逗号，也就没有多余的空格。</p>
-  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">大括号里还能写算式。{age + 1} 先算出 13，再放进句子里。</p>
-  <a class="ide step s2" style="left:96px;top:900px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px;font:700 64px/1.5 var(--text);color:var(--clay)">小明今年12岁<br><span class="step s2">明年13岁</span></div>
-</section>
-
-<!-- predict: forgot the f -->
-<section class="slide dark" aria-label="猜一猜：忘了写 f" data-steps="2" data-at="2">
-  <h2 class="t">猜一猜：忘了写 f，会输出什么？</h2>
-  <div class="editor" style="left:96px;top:220px;width:1000px;--fs:50px"><div class="tab">hello.py</div>
-<pre class="code"><span class="ln">name = <span class="s">"小明"</span></span><span class="ln">age = <span class="m">12</span></span><span class="ln l2"><span class="f">print</span>(<span class="s">"{name}今年{age}岁"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:1180px;right:96px;top:240px">只少了一个字母 f。<br>会报错吗？</p>
-  <p class="abs step s2" style="left:96px;top:640px;width:1728px;font:700 72px var(--code);color:var(--clay-soft)">{name}今年{age}岁</p>
-  <p class="abs say step s2" style="left:96px;top:800px;width:1728px">不报错，原样输出。没有 f，它就是一串普通的文字，大括号也只是普通的符号。<br>看到屏幕上出现大括号，先检查引号前面有没有 f。</p>
+<!-- f-string, then forget the f -->
+<section class="slide dark" aria-label="f-string 的写法，再忘了写 f" data-steps="4" data-at="4" data-chapter="f-string">
+  <h2 class="t">引号前面加 f</h2>
+  <div class="editor" style="left:96px;top:210px;width:1000px;--fs:50px"><div class="tab">hello.py</div>
+<pre class="code was" data-file="solutions/01_fstring.py"><span class="ln">name = <span class="s">"小明"</span></span><span class="ln">age = <span class="m">12</span></span><span class="ln l1"><span class="f">print</span>(<span class="s">f"{name}今年{age}岁"</span>)</span><span class="ln l2"><span class="f">print</span>(<span class="s">f"明年{age + 1}岁"</span>)</span></pre>
+<pre class="code" data-change="3"><span class="ln">name = <span class="s">"小明"</span></span><span class="ln">age = <span class="m">12</span></span><span class="ln l1"><span class="f">print</span>(<span class="s">"{name}今年{age}岁"</span>)</span></pre></div>
+  <p class="abs only1" style="left:1180px;right:96px;top:220px;font:700 64px/1.5 var(--text);color:var(--clay-soft)">小明今年12岁</p>
+  <p class="abs only2" style="left:1180px;right:96px;top:220px;font:700 64px/1.5 var(--text);color:var(--clay-soft)">小明今年12岁<br>明年13岁</p>
+  <a class="ide only2" data-code-file="starter/01_fstring.py" style="left:1180px;top:460px">▶ 在 IDE 打开</a>
+  <p class="abs say only3" style="left:1180px;right:96px;top:240px">猜一猜：忘了写 f，会输出什么？<br>只少了一个字母 f，会报错吗？</p>
+  <a class="ide step s4" style="left:1180px;top:260px">▶ 在 IDE 验证</a>
+  <p class="abs say only1" style="left:96px;top:700px;width:1728px">f 是 format（格式）的第一个字母。加了 f，引号里的大括号 { } 就会换成变量的值。<br>没有逗号，也就没有多余的空格。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:1728px">大括号里还能写算式。{age + 1} 先算出 13，再放进句子里。</p>
+  <p class="abs step s4" style="left:96px;top:640px;width:1728px;font:700 72px var(--code);color:var(--clay-soft)">{name}今年{age}岁</p>
+  <p class="abs say step s4" style="left:96px;top:800px;width:1728px">不报错，原样输出。没有 f，它就是一串普通的文字，大括号也只是普通的符号。<br>看到屏幕上出现大括号，先检查引号前面有没有 f。</p>
   <div class="foot"></div>
 </section>
 

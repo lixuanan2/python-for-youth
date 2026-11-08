@@ -16,30 +16,21 @@
   <div class="foot"></div>
 </section>
 
-<!-- predict: a wrong swap -->
-<section class="slide dark" aria-label="猜一猜：这样能换吗" data-steps="2" data-at="2" data-chapter="交换">
+<!-- predict: a wrong swap, then the one-line swap -->
+<section class="slide dark" aria-label="猜一猜：这样能换吗，再一行交换" data-steps="3" data-at="3" data-chapter="交换">
   <h2 class="t">猜一猜：想把 a 和 b 换过来，输出什么？</h2>
   <div class="editor" style="left:96px;top:220px;width:820px;--fs:52px"><div class="tab">swap.py</div>
-<pre class="code"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln l2">a = b</span><span class="ln l2">b = a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre></div>
+<pre class="code was"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln">a = b</span><span class="ln l2">b = a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre>
+<pre class="code" data-file="solutions/01_swap.py" data-change="3"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln l2">a, b = b, a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre></div>
   <p class="abs say only1" style="left:1020px;right:96px;top:240px">想要的是 5 3。<br>真的能换过来吗？</p>
-  <p class="abs step s2" style="left:1020px;right:96px;top:230px;font:800 100px var(--code);color:var(--clay-soft)">5 5</p>
-  <p class="abs say step s2" style="left:96px;top:790px;width:1728px">第 3 行 a 变成 5，原来的 3 就被盖掉了。第 4 行 b = a，拿到的也是 5。<br>就像两杯饮料互换，直接倒过去会混在一起，得先找个空杯子。</p>
+  <p class="abs only2" style="left:1020px;right:96px;top:230px;font:800 100px var(--code);color:var(--clay-soft)">5 5</p>
+  <p class="abs step s3" style="left:1020px;right:96px;top:230px;font:800 100px var(--code);color:var(--mint)">5 3</p>
+  <p class="abs say step s3" style="left:1020px;right:96px;top:400px">列表里的两个位置也能这样换：</p>
+  <p class="abs step s3" style="left:1020px;right:96px;top:470px;font:400 40px/1.5 var(--code)">a[0], a[1] = a[1], a[0]</p>
+  <a class="ide step s3" style="left:1020px;top:600px">▶ 在 IDE 打开</a>
+  <p class="abs say only2" style="left:96px;top:790px;width:1728px">第 3 行 a 变成 5，原来的 3 就被盖掉了。第 4 行 b = a，拿到的也是 5。<br>就像两杯饮料互换，直接倒过去会混在一起，得先找个空杯子。</p>
+  <p class="abs say step s3" style="left:96px;top:790px;width:1728px">Python 一行就能交换。a, b = b, a：先把右边的 b 和 a 都看好，<br>再同时放进左边，谁也不会被盖掉，不用找空杯子。</p>
   <div class="foot"></div>
-</section>
-
-<!-- swap -->
-<section class="slide" aria-label="一行交换">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">Python 一行就能交换</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">swap.py</div>
-<pre class="code" data-file="solutions/01_swap.py"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln">a, b = b, a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre></div>
-  <p class="abs say" style="left:96px;top:690px;width:960px;color:var(--paper)">a, b = b, a：先把右边的 b 和 a 都看好，再同时放进左边。谁也不会被盖掉。</p>
-  <a class="ide" style="left:96px;top:900px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
-    <div class="box out" style="display:block"><i>屏幕上</i><b style="font-size:100px;display:block">5 3</b></div>
-    <p class="say" style="margin-top:60px">列表里的两个位置也能这样换：</p>
-    <p style="font:400 40px/1.5 var(--code);margin-top:16px">a[0], a[1] =<br>a[1], a[0]</p>
-  </div>
 </section>
 
 <!-- quiz: swap in a list -->

@@ -36,32 +36,32 @@
     "stdout": "False\n"
   },
   {
-    "page": 16,
+    "page": 15,
     "code": "x = 5\nif x > 3\n    print(x)",
     "error": "SyntaxError"
   },
   {
-    "page": 16,
+    "page": 15,
     "code": "x = 5\nif x = 3:\n    print(x)",
     "error": "SyntaxError"
   },
   {
-    "page": 16,
+    "page": 15,
     "code": "x = 5\nif x > 3:\nprint(x)",
     "error": "IndentationError"
   },
   {
-    "page": 16,
+    "page": 15,
     "code": "x = 1\nif x > 3:\n    print(\"A\")\n    print(\"B\")\nprint(\"C\")",
     "stdout": "C\n"
   },
   {
-    "page": 16,
+    "page": 15,
     "code": "x = 1\nif x > 3:\n    print(\"A\")\nprint(\"B\")\nprint(\"C\")",
     "stdout": "B\nC\n"
   },
   {
-    "page": 17,
+    "page": 16,
     "ide": true,
     "code": "score = 95\nif score >= 60:\n    print(\"及格\")\nelif score >= 90:\n    print(\"优秀\")",
     "stdout": "及格\n"

@@ -10,77 +10,77 @@
     "stdout": "小明今年12岁\n明年13岁\n"
   },
   {
-    "page": 4,
+    "page": 3,
     "code": "name = \"小明\"\nage = 12\nprint(\"{name}今年{age}岁\")\n",
     "stdout": "{name}今年{age}岁\n"
   },
   {
-    "page": 5,
+    "page": 4,
     "code": "age = 12\nprint(f\"{age}+1\")\n",
     "stdout": "12+1\n"
   },
   {
-    "page": 6,
+    "page": 5,
     "code": "x = 10 / 3\nprint(x)\nprint(f\"{x:.2f}\")\nprint(f\"{x:.1f}\")\n",
     "stdout": "3.3333333333333335\n3.33\n3.3\n"
   },
   {
-    "page": 7,
+    "page": 6,
     "code": "price = 7\nprint(f\"{price:.2f}\")\n",
     "stdout": "7.00\n"
   },
   {
-    "page": 8,
+    "page": 7,
     "code": "price = float(input())\ncount = int(input())\ntotal = price * count\nprint(f\"{count} 件，每件 {price:.2f} 元\")\nprint(f\"一共 {total:.2f} 元\")\n",
     "stdin": "3.5\n4\n",
     "stdout": "4 件，每件 3.50 元\n一共 14.00 元\n"
   },
   {
-    "page": 9,
+    "page": 8,
     "code": "price = float(input())\ncount = int(input())\ntotal = price * count\nprint(f\"{count} 件，每件 {price:.2f} 元\")\nprint(f\"一共 {total:.2f} 元\")\nprint(f\"打八折 {total * 0.8:.2f} 元\")\n",
     "stdin": "3.5\n4\n",
     "stdout": "4 件，每件 3.50 元\n一共 14.00 元\n打八折 11.20 元\n"
   },
   {
-    "page": 9,
+    "page": 8,
     "code": "price = float(input())\ncount = int(input())\ntotal = price * count\nprint(f\"{count} 件，每件 {price:.2f} 元\")\nprint(f\"一共 {total:.2f} 元\")\nprint(f\"打八折 {total * 0.8:.2f} 元\")\n",
     "stdin": "10\n1\n",
     "stdout": "1 件，每件 10.00 元\n一共 10.00 元\n打八折 8.00 元\n"
   },
   {
-    "page": 10,
+    "page": 9,
     "code": "m = 5\ns = 9\nprint(f\"{m}:{s}\")\nprint(f\"{m:02d}:{s:02d}\")\nprint(f\"{12:02d}\")\n",
     "stdout": "5:9\n05:09\n12\n"
   },
   {
-    "page": 11,
+    "page": 10,
     "code": "name = \"小明\"\nprint(\"{name}\")\n",
     "stdout": "{name}\n"
   },
   {
-    "page": 11,
+    "page": 10,
     "code": "x = \"3.5\"\nprint(f\"{x:.2f}\")\n",
     "error": "ValueError"
   },
   {
-    "page": 11,
+    "page": 10,
     "code": "name = \"小明\"\nprint(f\"{name\")\n",
     "error": "SyntaxError"
   },
   {
-    "page": 12,
+    "page": 11,
     "code": "price = input()\ncount = int(input())\nprint(f\"每件 {price:.2f} 元\")\n",
     "stdin": "3.5\n4\n",
     "error": "ValueError: Unknown format code 'f' for object of type 'str'"
   },
   {
-    "page": 13,
+    "page": 12,
     "code": "seconds = int(input())\nh = seconds // 3600\nm = seconds % 3600 // 60\ns = seconds % 60\nprint(f\"{h:02d}:{m:02d}:{s:02d}\")\n",
     "stdin": "3909\n",
     "stdout": "01:05:09\n"
   },
   {
-    "page": 13,
+    "page": 12,
     "code": "seconds = int(input())\nh = seconds // 3600\nm = seconds % 3600 // 60\ns = seconds % 60\nprint(f\"{h:02d}:{m:02d}:{s:02d}\")\n",
     "stdin": "86399\n",
     "stdout": "23:59:59\n"

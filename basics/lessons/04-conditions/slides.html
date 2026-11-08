@@ -156,29 +156,22 @@
   <a class="ide step s3" style="left:1310px;top:740px">▶ 在 IDE 打开</a>
 </section>
 
-<!-- predict: only one branch -->
-<section class="slide dark" aria-label="预测只走一条路" data-steps="2" data-at="2">
+<!-- predict: only one branch, then elif becomes if -->
+<section class="slide dark" aria-label="猜一猜：elif 换成 if" data-steps="4" data-at="4">
   <h2 class="t">猜一猜：x = 10，输出几行？</h2>
-  <div class="editor" style="left:96px;top:220px;width:880px;--fs:44px"><div class="tab">one_way.py</div>
-<pre class="code" data-file="solutions/06_one_way.py"><span class="ln">x = <span class="m">10</span></span><span class="ln"><span class="k">if</span> x &gt; <span class="m">5</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 5"</span>)</span><span class="ln"><span class="k">elif</span> x &gt; <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 8"</span>)</span></pre></div>
+  <div class="editor" style="left:96px;top:220px;width:880px;--fs:44px"><div class="tab">branch.py</div>
+<pre class="code was" data-file="solutions/06_one_way.py"><span class="ln">x = <span class="m">10</span></span><span class="ln"><span class="k">if</span> x &gt; <span class="m">5</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 5"</span>)</span><span class="ln"><span class="k">elif</span> x &gt; <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 8"</span>)</span></pre>
+<pre class="code" data-file="solutions/06b_two_ifs.py" data-change="3"><span class="ln">x = <span class="m">10</span></span><span class="ln"><span class="k">if</span> x &gt; <span class="m">5</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 5"</span>)</span><span class="ln"><span class="k">if</span> x &gt; <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 8"</span>)</span></pre></div>
   <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
-  <div class="slip tilt step s2" style="left:1100px;top:260px"><small>屏幕上，只有一行</small><pre>大于 5</pre></div>
-  <p class="abs say only1" style="left:96px;top:760px">10 既大于 5，也大于 8。先想一想。</p>
-  <p class="abs say step s2" style="left:96px;top:760px;width:1600px">虽然两个条件都成立，但第一条路走了，后面的 elif 就不看了。</p>
-  <div class="foot"></div>
-</section>
-
-<!-- predict: two ifs -->
-<section class="slide dark" aria-label="预测：换成两个 if" data-steps="2" data-at="2">
-  <h2 class="t">猜一猜：把 elif 换成 if 呢？</h2>
-  <div class="editor" style="left:96px;top:220px;width:880px;--fs:44px"><div class="tab">two_ifs.py</div>
-<pre class="code" data-file="solutions/06b_two_ifs.py"><span class="ln">x = <span class="m">10</span></span><span class="ln"><span class="k">if</span> x &gt; <span class="m">5</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 5"</span>)</span><span class="ln"><span class="k">if</span> x &gt; <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 8"</span>)</span></pre></div>
-  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
-  <div class="slip tilt step s2" style="left:1100px;top:260px"><small>屏幕上，有两行</small><pre>大于 5
+  <p class="abs only3" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <div class="slip tilt only2" style="left:1100px;top:260px"><small>屏幕上，只有一行</small><pre>大于 5</pre></div>
+  <div class="slip tilt step s4" style="left:1100px;top:260px"><small>屏幕上，有两行</small><pre>大于 5
 大于 8</pre></div>
-  <p class="abs say only1" style="left:96px;top:760px">和上一页只差一个词。这次输出几行？</p>
-  <p class="abs say step s2" style="left:96px;top:760px;width:1600px">两个 if 是两次判断，各问各的。elif 属于同一次判断，前面走了就不看它。</p>
-  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  <p class="abs say only1" style="left:96px;top:760px">10 既大于 5，也大于 8。先想一想。</p>
+  <p class="abs say only2" style="left:96px;top:760px;width:1600px">虽然两个条件都成立，但第一条路走了，后面的 elif 就不看了。</p>
+  <p class="abs say only3" style="left:96px;top:760px;width:1600px">把 elif 换成 if，只差一个词。这次输出几行？</p>
+  <p class="abs say step s4" style="left:96px;top:760px;width:1600px">两个 if 是两次判断，各问各的，输出两行。<br>elif 属于同一次判断，前面走了就不看它，只输出一行。</p>
+  <a class="ide step s4" style="left:96px;top:880px">▶ 在 IDE 打开</a>
   <div class="foot"></div>
 </section>
 

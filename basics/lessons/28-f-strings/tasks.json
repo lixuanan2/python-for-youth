@@ -13,7 +13,7 @@
   {
     "id": "B",
     "role": "语法小演示",
-    "page": 6,
+    "page": 5,
     "starter": "starter/02_decimal.py",
     "solution": "solutions/02_decimal.py",
     "scope": "无输入",
@@ -24,7 +24,7 @@
   {
     "id": "C",
     "role": "基础例题",
-    "page": 8,
+    "page": 7,
     "starter": "starter/03_receipt.py",
     "solution": "solutions/03_receipt.py",
     "scope": "第一行单价为0到1000的数；第二行件数为0到100的整数",
@@ -35,7 +35,7 @@
   {
     "id": "01",
     "role": "学生小改写",
-    "page": 9,
+    "page": 8,
     "starter": "starter/04_discount.py",
     "solution": "solutions/04_discount.py",
     "scope": "第一行单价为0到1000的数；第二行件数为0到100的整数",
@@ -46,7 +46,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 13,
+    "page": 12,
     "starter": "starter/05_clock.py",
     "solution": "solutions/05_clock.py",
     "scope": "一行，秒数为0到86399的整数",
@@ -57,7 +57,7 @@
   {
     "id": "03",
     "role": "创作项目",
-    "page": 15,
+    "page": 14,
     "starter": "starter/06_my_card.py",
     "solution": "solutions/06_card_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

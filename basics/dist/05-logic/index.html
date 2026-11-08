@@ -183,9 +183,10 @@ h2.t::before{content:"# ";color:var(--clay)}
 
 /* === STEPS: data-at on the slide drives everything; the static state is the last step === */
 .step{transition:opacity .3s}
-.slide[data-at="1"] .s2,.slide[data-at="1"] .s3,.slide[data-at="1"] .s4,.slide[data-at="1"] .s5,.slide[data-at="2"] .s3,.slide[data-at="2"] .s4,.slide[data-at="2"] .s5,.slide[data-at="3"] .s4,.slide[data-at="3"] .s5,.slide[data-at="4"] .s5{opacity:0}
-.only1,.only2,.only3,.only4{opacity:0;transition:opacity .3s}
-.slide[data-at="1"] .only1,.slide[data-at="2"] .only2,.slide[data-at="3"] .only3,.slide[data-at="4"] .only4{opacity:1}
+/* What a step hides cannot be clicked either, so a hidden IDE button never opens by accident. */
+.slide[data-at="1"] .s2,.slide[data-at="1"] .s3,.slide[data-at="1"] .s4,.slide[data-at="1"] .s5,.slide[data-at="2"] .s3,.slide[data-at="2"] .s4,.slide[data-at="2"] .s5,.slide[data-at="3"] .s4,.slide[data-at="3"] .s5,.slide[data-at="4"] .s5{opacity:0;pointer-events:none}
+.only1,.only2,.only3,.only4,.only5{opacity:0;pointer-events:none;transition:opacity .3s}
+.slide[data-at="1"] .only1,.slide[data-at="2"] .only2,.slide[data-at="3"] .only3,.slide[data-at="4"] .only4,.slide[data-at="5"] .only5{opacity:1;pointer-events:auto}
 
 /* === EDITOR: tab, gutter, syntax colours; the code stays selectable text === */
 .editor{position:absolute;background:var(--panel);border-radius:14px;color:#f4f2ec;overflow:hidden}
@@ -194,7 +195,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .ln{display:block;padding-left:120px;position:relative;transition:background .25s}
 .ln::before{counter-increment:ln;content:counter(ln);position:absolute;left:0;width:90px;text-align:right;color:#77746b;font-weight:400}
 .f,.k{color:#e8a58d}.s{color:#a9d4b0}.m{color:#e8b04b}
-.slide[data-at="1"] .l1,.slide[data-at="2"] .l2,.slide[data-at="3"] .l3,.slide[data-at="4"] .l4{background:#45413b}
+.slide[data-at="1"] .l1,.slide[data-at="2"] .l2,.slide[data-at="3"] .l3,.slide[data-at="4"] .l4,.slide[data-at="5"] .l5{background:#45413b}
 .ide{position:absolute;display:inline-flex;align-items:center;gap:14px;background:var(--mint);color:#16261a;font:700 32px var(--code);text-decoration:none;padding:14px 28px 16px;border-radius:12px;box-shadow:0 6px 0 #5f8f6a}
 .ide:hover{filter:brightness(1.06)}.ide:active{transform:translateY(4px);box-shadow:0 2px 0 #5f8f6a}
 
@@ -354,8 +355,14 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .change.play:not(.new) .cut{transition:height .3s .15s,opacity .3s .4s}
 .change.play:not(.new) .then{transition:opacity .25s .3s}
 .change.play.new .edit{animation:flash .5s .3s}
+/* a line that only moved right or left slides to its new indent, then the new line takes its place */
+.change.new .indent .then{transform:translateX(calc(var(--shift) * 1ch))}
+.change.play.new .indent .then{transition:transform .35s .15s,opacity .1s .5s}
+.change.play.new .indent .now{transition:opacity .1s .5s}
+.change.play:not(.new) .indent .then{transition:transform .35s .1s,opacity 0s}
+.change.play:not(.new) .indent .now{transition:opacity 0s}
 @keyframes flash{from{background:#8a6a2e}}
-@media (prefers-reduced-motion:reduce){.change .ln,.change .ln *{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){.change .ln,.change .ln *{transition:none!important;animation:none!important}.step,.only1,.only2,.only3,.only4,.only5,.ln{transition:none}}
 @media print{.change .ln,.change .ln *{transition:none!important}}
 
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
@@ -668,31 +675,24 @@ dialog p{color:var(--muted);font-size:15px}
   </div>
 </section>
 
-<!-- predict: order -->
-<section id="page-17" class="slide dark" aria-label="猜一猜：混着用" data-steps="2" data-at="2" data-chapter="括号">
+<!-- predict: order, then add brackets -->
+<section id="page-17" class="slide dark" aria-label="猜一猜：混着用，再加上括号" data-steps="3" data-at="3" data-chapter="括号">
   <h2 class="t">猜一猜：周末且满 8 岁才能进</h2>
-  <div class="editor" style="left:96px;top:220px;width:1120px;--fs:44px"><div class="tab">no_brackets.py</div>
-<pre class="code" data-file="solutions/07_no_brackets.py"><span class="ln">day = <span class="m">6</span></span><span class="ln">age = <span class="m">5</span></span><span class="ln"><span class="k">if</span> day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span> <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以进"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不能进"</span>)</span></pre></div>
-  <p class="abs only1" style="left:1360px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
-  <div class="slip tilt step s2" style="left:1290px;top:260px"><small>屏幕上</small><pre>可以进</pre></div>
+  <div class="editor" style="left:96px;top:220px;width:1210px;--fs:44px"><div class="tab">brackets.py</div>
+<pre class="code was" data-file="solutions/07_no_brackets.py"><span class="ln">day = <span class="m">6</span></span><span class="ln">age = <span class="m">5</span></span><span class="ln"><span class="k">if</span> day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span> <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以进"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不能进"</span>)</span></pre>
+<pre class="code" data-file="solutions/08_brackets.py" data-change="3"><span class="ln">day = <span class="m">6</span></span><span class="ln">age = <span class="m">5</span></span><span class="ln"><span class="k">if</span> (day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span>) <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以进"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不能进"</span>)</span></pre></div>
+  <p class="abs only1" style="left:1420px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <div class="slip tilt only2" style="left:1370px;top:260px"><small>屏幕上</small><pre>可以进</pre></div>
+  <div class="slip tilt step s3" style="left:1370px;top:260px"><small>加上括号以后</small><pre>不能进</pre></div>
+  <a class="ide step s3" style="left:1370px;top:560px">▶ 在 IDE 打开</a>
   <p class="abs say only1" style="left:96px;top:800px">今天星期六，小朋友 5 岁。按规定进不去，程序会怎么说？</p>
-  <p class="abs say step s2" style="left:96px;top:800px;width:1728px">5 岁竟然进去了。因为 and 比 or 先算：程序先算 day == 7 and age &gt;= 8，<br>再和 day == 6 用 or 连起来。</p>
-  <div class="foot"></div>
-</section>
-
-<!-- brackets -->
-<section id="page-18" class="slide" aria-label="加上括号">
-  <h2 class="t r">加上括号，先算里面的</h2>
-  <div class="editor r d1" style="left:96px;top:215px;width:1160px;--fs:44px"><div class="tab">brackets.py</div>
-<pre class="code" data-file="solutions/08_brackets.py"><span class="ln">day = <span class="m">6</span></span><span class="ln">age = <span class="m">5</span></span><span class="ln"><span class="k">if</span> (day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span>) <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以进"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不能进"</span>)</span></pre></div>
-  <div class="slip tilt r d2" style="left:1340px;top:260px"><small>屏幕上</small><pre>不能进</pre></div>
-  <p class="abs say r d3" style="left:96px;top:790px;width:1728px">三个词的先后是 not、and、or。不用背：混着用的时候加上括号，<br>写的人和读的人都看得清。</p>
-  <a class="ide r d3" data-code="day = 6&#10;age = 5&#10;if (day == 6 or day == 7) and age &gt;= 8:&#10;    print(&quot;可以进&quot;)&#10;else:&#10;    print(&quot;不能进&quot;)&#10;" style="left:1340px;top:520px">▶ 在 IDE 打开</a>
+  <p class="abs say only2" style="left:96px;top:800px;width:1728px">5 岁竟然进去了。因为 and 比 or 先算：程序先算 day == 7 and age &gt;= 8，<br>再和 day == 6 用 or 连起来。</p>
+  <p class="abs say step s3" style="left:96px;top:800px;width:1728px">加上括号，先算里面的，这回进不去了。三个词的先后是 not、and、or。<br>不用背：混着用的时候加上括号，写的人和读的人都看得清。</p>
   <div class="foot"></div>
 </section>
 
 <!-- errors -->
-<section id="page-19" class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section id="page-18" class="slide" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
   <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
@@ -705,7 +705,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-20" class="slide dark" aria-label="找错：怎么都中奖">
+<section id="page-19" class="slide dark" aria-label="找错：怎么都中奖">
   <h2 class="t r">找错：怎么都中奖？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！or 的两边都要写完整：n == 1 or n == 2。只写一个 2，Python 不会拿它和 n 比，而是把它当成成立。" data-no="这一行没问题。想一想：n 是 5，为什么条件成立了？"><span class="ln">n = <span class="m">5</span></span><span class="ln"><span class="k">if</span> n == <span class="m">1</span> <span class="k">or</span> <span class="m">2</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"中奖了"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"没中"</span>)</span></pre></div>
@@ -715,7 +715,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- challenge -->
-<section id="page-21" class="slide clay" aria-label="小奖状" data-chapter="挑战">
+<section id="page-20" class="slide clay" aria-label="小奖状" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">小奖状</h2>
   <p class="abs say r d2" style="left:96px;top:420px;width:1040px">分两行读入语文和数学成绩，都是 0 到 100 的整数。<br>至少有一门满 90 分，并且两门都满 60 分，就输出获奖，否则输出继续努力。</p>
@@ -726,7 +726,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-22" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-21" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>规则分两层：“至少一门满 90 分”和“两门都满 60 分”。先分开想。</span></p>
@@ -737,7 +737,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- creative project -->
-<section id="page-23" class="slide" aria-label="造一个门卫程序" data-chapter="小项目">
+<section id="page-22" class="slide" aria-label="造一个门卫程序" data-chapter="小项目">
   <h2 class="t r">造一个门卫程序</h2>
   <p class="abs say r d1" style="left:96px;top:200px">程序问你几个问题，再决定放不放你过去。守什么门，你自己定。</p>
   <div class="later" style="top:320px">
@@ -751,7 +751,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- share -->
-<section id="page-24" class="slide" aria-label="和同桌换着玩">
+<section id="page-23" class="slide" aria-label="和同桌换着玩">
   <h2 class="t r">和同桌换着玩</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>试着闯关</b><span>运行同桌的门卫，想办法让它放你过去</span></div>
@@ -763,7 +763,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-25" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-24" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p style="font-weight:700"><i>Q1</i><span>and 和 or 有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　and 要都成立，or 有一个成立就行。</em></span></p>
@@ -775,7 +775,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- cheat sheet -->
-<section id="page-26" class="slide" aria-label="速查卡">
+<section id="page-25" class="slide" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>a and b</code><span>两个都成立才是 True</span></div>
@@ -789,7 +789,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-27" class="slide" aria-label="后面再学">
+<section id="page-26" class="slide" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>60 &lt;= x &lt; 90</code><span>Python 里范围还有更短的写法</span></div>
@@ -801,7 +801,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-28" class="slide dark thanks" aria-label="谢谢">
+<section id="page-27" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
@@ -1060,7 +1060,11 @@ class SlidePresentation {
   updateQuickIde() {
     const slide = this.slides[this.index];
     const quick = document.getElementById('ide-quick');
-    const onPage = slide.querySelector('a.ide');
+    // The button follows the step: the IDE link the page shows now, else the one it ends with.
+    const at = Number(slide.dataset.at || 1), links = [...slide.querySelectorAll('a.ide')];
+    const from = (a, re) => Number([...a.classList].find(c => re.test(c))?.replace(/\D/g, '') || 0);
+    const shown = a => from(a, /^only\d$/) ? from(a, /^only\d$/) === at : from(a, /^s\d$/) <= at;
+    const onPage = links.find(shown) || links.find(a => !from(a, /^only\d$/)) || links[0];
     const code = this.codeOf(slide);
     quick.href = onPage ? onPage.href : code ? IDE.url(code, IDE.load()) : IDE.url(IDE.config.blank, IDE.load());
     quick.textContent = onPage || code ? '▶ 本页代码进 IDE' : '▶ 打开空白 IDE';
@@ -1143,7 +1147,7 @@ class SlidePresentation {
     // Full-width digits and leading zeros are the same number, so those alone are tidied.
     const problem = slot => {
       if (slot.dataset.kind === 'text') {
-        if (/["\r\n]/.test(slot.value)) return 'quote';
+        if (/["'“”‘’\r\n]/.test(slot.value)) return 'quote';
         if (slot.value.includes('\\')) return 'slash';
         return Array.from(slot.value).length > 12 ? 'long' : null;
       }
@@ -1158,7 +1162,7 @@ class SlidePresentation {
     // Short enough to read from the back of the room; red means the page cannot use it, amber only that a box is empty.
     const tips = {
       letters: '这里只能填数字，比如 7。', negative: '负数这里算不了，到 IDE 里试。', decimal: '小数这里算不了，到 IDE 里试。',
-      big: '最大只能填 9999。', quote: '英文引号 " 用不了，换成中文引号 “ ”。', slash: '反斜杠 \\ 这里用不了，到 IDE 里试。',
+      big: '最大只能填 9999。', quote: '两边的引号已经写好了，框里只填字。', slash: '反斜杠 \\ 这里用不了，到 IDE 里试。',
       long: '最多 12 个字，删掉几个吧。', empty: '框里空着，填上就有结果。'
     };
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
@@ -1247,6 +1251,11 @@ class SlidePresentation {
           then.setAttribute('aria-hidden', 'true');
           then.append(...olds[row.from].childNodes);
           line.append(now, then);
+          const indent = text => text.length - text.trimStart().length;
+          if (now.textContent.trim() === then.textContent.trim()) {
+            line.classList.add('indent');  // only moved: the old line slides over instead of fading into the new one
+            line.style.setProperty('--shift', indent(now.textContent) - indent(then.textContent));
+          }
         }
         return line;
       }));
@@ -1257,13 +1266,15 @@ class SlidePresentation {
       return {slide, pre};
     });
   }
-  /* Lines in both versions are kept (longest common run); the rest of each gap is matched to an old line that reads
-     about the same once spaces are trimmed, such as print(i) indented further, or else counted as added or removed. */
+  /* Lines that read the same once the indent is trimmed are kept (longest common run): unchanged, or only moved
+     right or left, as when a loop is wrapped around them. The rest of each gap is matched to an old line that reads
+     about the same, such as print(i) becoming print(i * 2), or else counted as added or removed. */
   diffLines(a, b) {
     const n = a.length, m = b.length;
+    const same = (i, j) => a[i].trim() === b[j].trim();
     const common = Array.from({length: n + 1}, () => new Array(m + 1).fill(0));
     for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) {
-      common[i][j] = a[i] === b[j] ? common[i + 1][j + 1] + 1 : Math.max(common[i + 1][j], common[i][j + 1]);
+      common[i][j] = same(i, j) ? common[i + 1][j + 1] + 1 : Math.max(common[i + 1][j], common[i][j + 1]);
     }
     const alike = (x, y) => {
       x = x.trim(); y = y.trim();
@@ -1289,7 +1300,7 @@ class SlidePresentation {
     };
     let i = 0, j = 0;
     while (i < n || j < m) {
-      if (i < n && j < m && a[i] === b[j]) { flush(); rows.push({kind: 'same', to: j}); i++; j++; }
+      if (i < n && j < m && same(i, j)) { flush(); rows.push(a[i] === b[j] ? {kind: 'same', to: j} : {kind: 'edit', from: i, to: j}); i++; j++; }
       else if (j < m && (i === n || common[i][j + 1] >= common[i + 1][j])) add.push(j++);
       else cut.push(i++);
     }
@@ -1342,7 +1353,7 @@ class SlidePresentation {
   }
   move(delta) {
     const slide = this.slides[this.index], at = Number(slide.dataset.at || 1), next = at + delta;
-    if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.syncChanges(true); this.label(); return; }
+    if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.syncChanges(true); this.updateQuickIde(); this.label(); return; }
     if (this.index + delta >= 0 && this.index + delta < this.slides.length) this.show(this.index + delta, delta < 0);
   }
   key(e) {

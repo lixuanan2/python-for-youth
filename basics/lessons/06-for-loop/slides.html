@@ -98,21 +98,23 @@ print(100)</pre></div>
 </section>
 
 <!-- worked example -->
-<section class="slide" aria-label="从 1 数到 n" data-steps="4" data-at="4">
+<section class="slide" aria-label="从 1 数到 n" data-steps="5" data-at="5">
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">例题：从 1 数到 n</h2>
   <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">one_to_n.py</div>
-<pre class="code" data-file="solutions/04_one_to_n.py"><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln l2 l3 l4">    <span class="f">print</span>(i)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:620px;width:1040px;color:var(--paper)">输入 3。终点不算在内，所以要写 n + 1，也就是 range(1, 4)。</p>
-  <p class="abs say only2" style="left:96px;top:620px;width:1040px;color:var(--paper)">i 拿到 1，输出 1。</p>
-  <p class="abs say only3" style="left:96px;top:620px;width:1040px;color:var(--paper)">i 拿到 2，输出 2。</p>
-  <p class="abs say only4" style="left:96px;top:620px;width:1040px;color:var(--paper)">i 拿到 3，输出 3。4 取不到，循环结束。</p>
-  <a class="ide step s4" style="left:96px;top:800px">▶ 在 IDE 打开</a>
+<pre class="code was" data-file="solutions/03_range_two.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">6</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre>
+<pre class="code" data-change="2" data-file="solutions/04_one_to_n.py"><span class="ln l2">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln l3 l4 l5">    <span class="f">print</span>(i)</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:620px;width:1040px;color:var(--paper)">上一页的程序只能数到 5。想数到输入的数，改两处：先读入 n，终点写成 n + 1。</p>
+  <p class="abs say only2" style="left:96px;top:620px;width:1040px;color:var(--paper)">输入 3。终点不算在内，所以要写 n + 1，也就是 range(1, 4)。</p>
+  <p class="abs say only3" style="left:96px;top:620px;width:1040px;color:var(--paper)">i 拿到 1，输出 1。</p>
+  <p class="abs say only4" style="left:96px;top:620px;width:1040px;color:var(--paper)">i 拿到 2，输出 2。</p>
+  <p class="abs say only5" style="left:96px;top:620px;width:1040px;color:var(--paper)">i 拿到 3，输出 3。4 取不到，循环结束。</p>
+  <a class="ide step s5" style="left:96px;top:800px">▶ 在 IDE 打开</a>
   <div class="abs" style="left:1310px;right:96px;top:170px">
-    <div class="box step"><i style="width:190px">n</i><b style="font-size:84px">3</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px;color:var(--clay)">1</b></div>
-    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px;color:var(--clay)">2</b></div>
-    <div class="box step s4"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:84px;color:var(--clay)">3</b></div>
+    <div class="box step s2"><i style="width:190px">n</i><b style="font-size:84px">3</b></div>
+    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px;color:var(--clay)">1</b></div>
+    <div class="box step s4"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px;color:var(--clay)">2</b></div>
+    <div class="box step s5"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:84px;color:var(--clay)">3</b></div>
   </div>
 </section>
 

@@ -47,17 +47,19 @@
 </section>
 
 <!-- rectangle -->
-<section class="slide" aria-label="例题：长方形" data-steps="4" data-at="4" data-chapter="两层循环">
+<section class="slide" aria-label="例题：长方形" data-steps="5" data-at="5" data-chapter="两层循环">
   <div class="night" style="width:1130px"></div>
   <h2 class="t" style="color:var(--paper)">例题：画长方形</h2>
   <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">rect.py</div>
-<pre class="code" data-file="solutions/02_rect.py"><span class="ln l1 l2 l3"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln l1 l2 l3">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">4</span>):</span><span class="ln l1 l2 l3">        <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln l1 l2 l3">    <span class="f">print</span>()</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">外层第一遍，i 是 0。里面的循环整个跑一遍：画 4 颗星，再换行。</p>
-  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">外层第二遍，i 是 1。里面的循环从头再来，又画 4 颗，换行。</p>
-  <p class="abs say only3" style="left:96px;top:700px;width:960px;color:var(--paper)">第三遍，i 是 2，画出第三行。</p>
-  <p class="abs say only4" style="left:96px;top:700px;width:960px;color:var(--paper)">外层转 3 遍，每遍里面转 4 遍，一共 3 × 4 = 12 颗星。看缩进：print() 在外层里、内层外。</p>
-  <a class="ide step s4" style="left:96px;top:900px">▶ 在 IDE 打开</a>
-  <div class="abs step" style="left:1210px;right:96px;top:200px;font:800 110px/1.25 var(--code)"><span>****</span><br><span class="step s2">****</span><br><span class="step s3">****</span></div>
+<pre class="code was" data-file="solutions/01_one_row.py"><span class="ln"><span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">4</span>):</span><span class="ln">    <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln"><span class="f">print</span>()</span></pre>
+<pre class="code" data-change="2" data-file="solutions/02_rect.py"><span class="ln l2 l3 l4"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln l2 l3 l4">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">4</span>):</span><span class="ln l2 l3 l4">        <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln l2 l3 l4">    <span class="f">print</span>()</span></pre></div>
+  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">前面画一行的程序，外面再套一层 for i。原来的三行都往右缩进 4 格，归外层管。</p>
+  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">外层第一遍，i 是 0。里面的循环整个跑一遍：画 4 颗星，再换行。</p>
+  <p class="abs say only3" style="left:96px;top:700px;width:960px;color:var(--paper)">外层第二遍，i 是 1。里面的循环从头再来，又画 4 颗，换行。</p>
+  <p class="abs say only4" style="left:96px;top:700px;width:960px;color:var(--paper)">第三遍，i 是 2，画出第三行。</p>
+  <p class="abs say only5" style="left:96px;top:700px;width:960px;color:var(--paper)">外层转 3 遍，每遍里面转 4 遍，一共 3 × 4 = 12 颗星。看缩进：print() 在外层里、内层外。</p>
+  <a class="ide step s5" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="abs step s2" style="left:1210px;right:96px;top:200px;font:800 110px/1.25 var(--code)"><span>****</span><br><span class="step s3">****</span><br><span class="step s4">****</span></div>
 </section>
 
 <!-- outer and inner -->

@@ -221,26 +221,19 @@
   </div>
 </section>
 
-<!-- predict: order -->
-<section class="slide dark" aria-label="猜一猜：混着用" data-steps="2" data-at="2" data-chapter="括号">
+<!-- predict: order, then add brackets -->
+<section class="slide dark" aria-label="猜一猜：混着用，再加上括号" data-steps="3" data-at="3" data-chapter="括号">
   <h2 class="t">猜一猜：周末且满 8 岁才能进</h2>
-  <div class="editor" style="left:96px;top:220px;width:1120px;--fs:44px"><div class="tab">no_brackets.py</div>
-<pre class="code" data-file="solutions/07_no_brackets.py"><span class="ln">day = <span class="m">6</span></span><span class="ln">age = <span class="m">5</span></span><span class="ln"><span class="k">if</span> day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span> <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以进"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不能进"</span>)</span></pre></div>
-  <p class="abs only1" style="left:1360px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
-  <div class="slip tilt step s2" style="left:1290px;top:260px"><small>屏幕上</small><pre>可以进</pre></div>
+  <div class="editor" style="left:96px;top:220px;width:1210px;--fs:44px"><div class="tab">brackets.py</div>
+<pre class="code was" data-file="solutions/07_no_brackets.py"><span class="ln">day = <span class="m">6</span></span><span class="ln">age = <span class="m">5</span></span><span class="ln"><span class="k">if</span> day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span> <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以进"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不能进"</span>)</span></pre>
+<pre class="code" data-file="solutions/08_brackets.py" data-change="3"><span class="ln">day = <span class="m">6</span></span><span class="ln">age = <span class="m">5</span></span><span class="ln"><span class="k">if</span> (day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span>) <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以进"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不能进"</span>)</span></pre></div>
+  <p class="abs only1" style="left:1420px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
+  <div class="slip tilt only2" style="left:1370px;top:260px"><small>屏幕上</small><pre>可以进</pre></div>
+  <div class="slip tilt step s3" style="left:1370px;top:260px"><small>加上括号以后</small><pre>不能进</pre></div>
+  <a class="ide step s3" style="left:1370px;top:560px">▶ 在 IDE 打开</a>
   <p class="abs say only1" style="left:96px;top:800px">今天星期六，小朋友 5 岁。按规定进不去，程序会怎么说？</p>
-  <p class="abs say step s2" style="left:96px;top:800px;width:1728px">5 岁竟然进去了。因为 and 比 or 先算：程序先算 day == 7 and age &gt;= 8，<br>再和 day == 6 用 or 连起来。</p>
-  <div class="foot"></div>
-</section>
-
-<!-- brackets -->
-<section class="slide" aria-label="加上括号">
-  <h2 class="t r">加上括号，先算里面的</h2>
-  <div class="editor r d1" style="left:96px;top:215px;width:1160px;--fs:44px"><div class="tab">brackets.py</div>
-<pre class="code" data-file="solutions/08_brackets.py"><span class="ln">day = <span class="m">6</span></span><span class="ln">age = <span class="m">5</span></span><span class="ln"><span class="k">if</span> (day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span>) <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以进"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"不能进"</span>)</span></pre></div>
-  <div class="slip tilt r d2" style="left:1340px;top:260px"><small>屏幕上</small><pre>不能进</pre></div>
-  <p class="abs say r d3" style="left:96px;top:790px;width:1728px">三个词的先后是 not、and、or。不用背：混着用的时候加上括号，<br>写的人和读的人都看得清。</p>
-  <a class="ide r d3" data-code-file="starter/08_brackets.py" style="left:1340px;top:520px">▶ 在 IDE 打开</a>
+  <p class="abs say only2" style="left:96px;top:800px;width:1728px">5 岁竟然进去了。因为 and 比 or 先算：程序先算 day == 7 and age &gt;= 8，<br>再和 day == 6 用 or 连起来。</p>
+  <p class="abs say step s3" style="left:96px;top:800px;width:1728px">加上括号，先算里面的，这回进不去了。三个词的先后是 not、and、or。<br>不用背：混着用的时候加上括号，写的人和读的人都看得清。</p>
   <div class="foot"></div>
 </section>
 

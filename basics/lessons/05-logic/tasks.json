@@ -79,7 +79,7 @@
   {
     "id": "06",
     "role": "语法小演示",
-    "page": 18,
+    "page": 17,
     "starter": "starter/08_brackets.py",
     "solution": "solutions/08_brackets.py",
     "scope": "程序里写好了数据",
@@ -90,7 +90,7 @@
   {
     "id": "07",
     "role": "独立迁移",
-    "page": 21,
+    "page": 20,
     "starter": "starter/09_award.py",
     "solution": "solutions/09_award.py",
     "scope": "两行，语文和数学成绩均为0到100的整数",
@@ -101,7 +101,7 @@
   {
     "id": "08",
     "role": "创作项目",
-    "page": 23,
+    "page": 22,
     "starter": "starter/10_gatekeeper.py",
     "solution": "solutions/10_gatekeeper_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

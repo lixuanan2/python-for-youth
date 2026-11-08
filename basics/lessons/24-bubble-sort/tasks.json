@@ -2,7 +2,7 @@
   {
     "id": "A",
     "role": "语法小演示",
-    "page": 4,
+    "page": 3,
     "starter": "starter/01_swap.py",
     "solution": "solutions/01_swap.py",
     "scope": "无输入",
@@ -13,7 +13,7 @@
   {
     "id": "B",
     "role": "语法小演示",
-    "page": 6,
+    "page": 5,
     "starter": "starter/02_one_pass.py",
     "solution": "solutions/02_one_pass.py",
     "scope": "无输入",
@@ -24,7 +24,7 @@
   {
     "id": "C",
     "role": "基础例题",
-    "page": 8,
+    "page": 7,
     "starter": "starter/03_bubble.py",
     "solution": "solutions/03_bubble.py",
     "scope": "第一行n为2到10的整数；接下来n行，每行一个整数",
@@ -35,7 +35,7 @@
   {
     "id": "01",
     "role": "学生小改写",
-    "page": 10,
+    "page": 9,
     "starter": "starter/04_bubble_down.py",
     "solution": "solutions/04_bubble_down.py",
     "scope": "第一行n为2到10的整数；接下来n行，每行一个整数",
@@ -46,7 +46,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 13,
+    "page": 12,
     "starter": "starter/05_count_swaps.py",
     "solution": "solutions/05_count_swaps.py",
     "scope": "第一行n为1到20的整数；接下来n行，每行一个整数身高",
@@ -57,7 +57,7 @@
   {
     "id": "03",
     "role": "创作项目",
-    "page": 15,
+    "page": 14,
     "starter": "starter/06_my_sort.py",
     "solution": "solutions/06_words_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

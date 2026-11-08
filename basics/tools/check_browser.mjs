@@ -111,7 +111,7 @@ const INTERACT = `(async () => {
       return ok && (kind === 'text' || ide().includes(text));
     };
     const filter = slots.every(slot => slot.dataset.kind === 'text'
-      ? kept(slot, '一二三四五六七八九十一二') && marked(slot, 'a"b') && marked(slot, 'a\\\\b') && marked(slot, '一二三四五六七八九十一二三')
+      ? kept(slot, '一二三四五六七八九十一二') && marked(slot, 'a"b') && marked(slot, "a'b") && marked(slot, '“ab”') && marked(slot, '‘a’') && marked(slot, 'a\\\\b') && marked(slot, '一二三四五六七八九十一二三')
         && kept(slot, '😀'.repeat(12)) && marked(slot, '😀'.repeat(13))
       : kept(slot, '12') && marked(slot, '1a2') && kept(slot, '007', '7') && kept(slot, '０７', '7') && marked(slot, '-5')
         && marked(slot, '2.5') && marked(slot, '12345') && kept(slot, '9999'));
@@ -121,7 +121,7 @@ const INTERACT = `(async () => {
     slots.forEach((s, i) => put(s, start[i]));
     const shown = outs.map(o => o.textContent);
     const numbers = ['0', '1', '2', '3', '5', '7', '10', '17', '59', '60', '99', '100', '999', '9999'];
-    const words = ['你好', 'Hi there', '  两边空格  ', 'a+b=c', "it's", 'why??!', 'a{1}', '😀🎉', '测'.repeat(12), 'Hello, Py!'];
+    const words = ['你好', 'Hi there', '  两边空格  ', 'a+b=c', "x = 1", 'why??!', 'a{1}', '😀🎉', '测'.repeat(12), 'Hello, Py!'];
     let combos = [[]];
     for (const slot of slots) combos = combos.flatMap(c => (slot.dataset.kind === 'text' ? words : numbers).map(v => [...c, v]));
     const cases = combos.map(values => {
@@ -292,7 +292,13 @@ const CHANGE_STATE = `(() => {
   return {shown, at: slide.dataset.at, moving: pre.getAnimations({subtree: true}).length,
     ide: new URL(document.getElementById('ide-quick').href).searchParams.get(IDE.config.codeParam),
     marked: pre.classList.contains('new') && [...pre.querySelectorAll('.add, .edit')].every(l => getComputedStyle(l).backgroundColor !== 'rgba(0, 0, 0, 0)'),
-    thumbOld: !thumb.querySelector('pre.change').classList.contains('new')};
+    thumbOld: !thumb.querySelector('pre.change').classList.contains('new'),
+    // a change line clips what does not fit, so the visible text must end inside its line
+    clipped: [...pre.querySelectorAll('.ln')].filter(l => l.getBoundingClientRect().height > 1 && seen(l)).some(l => {
+      const range = document.createRange();
+      range.selectNodeContents([...l.querySelectorAll('.now, .then')].find(seen) || l);
+      return range.getBoundingClientRect().right > l.getBoundingClientRect().right + 1;
+    })};
 })()`;
 async function checkChange(change, dir) {
   const shot = async name => fs.writeFileSync(path.join(dir, `change-${change.page}-${name}.png`), Buffer.from((await send('Page.captureScreenshot', {format: 'png'})).data, 'base64'));
@@ -302,8 +308,8 @@ async function checkChange(change, dir) {
   for (let i = 1; i < at - 1; i++) { await key('ArrowRight'); await sleep(50); }
   let state = await run(CHANGE_STATE);
   assert.deepEqual(state.shown, change.before, `${where} does not start with the old version`);
-  assert.equal(state.ide, change.after.join('\n'), `${where}: the IDE must get the new version`);
   assert(state.thumbOld, `${where}: the thumbnail gives the new version away`);
+  assert(!state.clipped, `${where}: a line of the old version is cut off at the right, widen the editor`);
   await shot('1-old');
   await key('ArrowRight');
   await sleep(150);
@@ -313,6 +319,8 @@ async function checkChange(change, dir) {
   state = await run(CHANGE_STATE);
   assert.deepEqual(state.shown, change.after, `${where} does not end with the new version`);
   assert(state.marked && !state.moving && state.at === String(at), `${where}: new and edited lines are not marked`);
+  assert.equal(state.ide, change.after.join('\n'), `${where}: the IDE must get the new version`);
+  assert(!state.clipped, `${where}: a line of the new version is cut off at the right, widen the editor`);
   await shot('3-new');
   await key('ArrowLeft');
   await sleep(150);

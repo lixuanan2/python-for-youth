@@ -183,9 +183,10 @@ h2.t::before{content:"# ";color:var(--clay)}
 
 /* === STEPS: data-at on the slide drives everything; the static state is the last step === */
 .step{transition:opacity .3s}
-.slide[data-at="1"] .s2,.slide[data-at="1"] .s3,.slide[data-at="1"] .s4,.slide[data-at="1"] .s5,.slide[data-at="2"] .s3,.slide[data-at="2"] .s4,.slide[data-at="2"] .s5,.slide[data-at="3"] .s4,.slide[data-at="3"] .s5,.slide[data-at="4"] .s5{opacity:0}
-.only1,.only2,.only3,.only4{opacity:0;transition:opacity .3s}
-.slide[data-at="1"] .only1,.slide[data-at="2"] .only2,.slide[data-at="3"] .only3,.slide[data-at="4"] .only4{opacity:1}
+/* What a step hides cannot be clicked either, so a hidden IDE button never opens by accident. */
+.slide[data-at="1"] .s2,.slide[data-at="1"] .s3,.slide[data-at="1"] .s4,.slide[data-at="1"] .s5,.slide[data-at="2"] .s3,.slide[data-at="2"] .s4,.slide[data-at="2"] .s5,.slide[data-at="3"] .s4,.slide[data-at="3"] .s5,.slide[data-at="4"] .s5{opacity:0;pointer-events:none}
+.only1,.only2,.only3,.only4,.only5{opacity:0;pointer-events:none;transition:opacity .3s}
+.slide[data-at="1"] .only1,.slide[data-at="2"] .only2,.slide[data-at="3"] .only3,.slide[data-at="4"] .only4,.slide[data-at="5"] .only5{opacity:1;pointer-events:auto}
 
 /* === EDITOR: tab, gutter, syntax colours; the code stays selectable text === */
 .editor{position:absolute;background:var(--panel);border-radius:14px;color:#f4f2ec;overflow:hidden}
@@ -194,7 +195,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .ln{display:block;padding-left:120px;position:relative;transition:background .25s}
 .ln::before{counter-increment:ln;content:counter(ln);position:absolute;left:0;width:90px;text-align:right;color:#77746b;font-weight:400}
 .f,.k{color:#e8a58d}.s{color:#a9d4b0}.m{color:#e8b04b}
-.slide[data-at="1"] .l1,.slide[data-at="2"] .l2,.slide[data-at="3"] .l3,.slide[data-at="4"] .l4{background:#45413b}
+.slide[data-at="1"] .l1,.slide[data-at="2"] .l2,.slide[data-at="3"] .l3,.slide[data-at="4"] .l4,.slide[data-at="5"] .l5{background:#45413b}
 .ide{position:absolute;display:inline-flex;align-items:center;gap:14px;background:var(--mint);color:#16261a;font:700 32px var(--code);text-decoration:none;padding:14px 28px 16px;border-radius:12px;box-shadow:0 6px 0 #5f8f6a}
 .ide:hover{filter:brightness(1.06)}.ide:active{transform:translateY(4px);box-shadow:0 2px 0 #5f8f6a}
 
@@ -354,8 +355,14 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .change.play:not(.new) .cut{transition:height .3s .15s,opacity .3s .4s}
 .change.play:not(.new) .then{transition:opacity .25s .3s}
 .change.play.new .edit{animation:flash .5s .3s}
+/* a line that only moved right or left slides to its new indent, then the new line takes its place */
+.change.new .indent .then{transform:translateX(calc(var(--shift) * 1ch))}
+.change.play.new .indent .then{transition:transform .35s .15s,opacity .1s .5s}
+.change.play.new .indent .now{transition:opacity .1s .5s}
+.change.play:not(.new) .indent .then{transition:transform .35s .1s,opacity 0s}
+.change.play:not(.new) .indent .now{transition:opacity 0s}
 @keyframes flash{from{background:#8a6a2e}}
-@media (prefers-reduced-motion:reduce){.change .ln,.change .ln *{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){.change .ln,.change .ln *{transition:none!important;animation:none!important}.step,.only1,.only2,.only3,.only4,.only5,.ln{transition:none}}
 @media print{.change .ln,.change .ln *{transition:none!important}}
 
 .pick .ln{cursor:pointer}.pick .ln:hover{background:#3a3834}
@@ -463,34 +470,25 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
-<!-- predict: a wrong swap -->
-<section id="page-3" class="slide dark" aria-label="猜一猜：这样能换吗" data-steps="2" data-at="2" data-chapter="交换">
+<!-- predict: a wrong swap, then the one-line swap -->
+<section id="page-3" class="slide dark" aria-label="猜一猜：这样能换吗，再一行交换" data-steps="3" data-at="3" data-chapter="交换">
   <h2 class="t">猜一猜：想把 a 和 b 换过来，输出什么？</h2>
   <div class="editor" style="left:96px;top:220px;width:820px;--fs:52px"><div class="tab">swap.py</div>
-<pre class="code"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln l2">a = b</span><span class="ln l2">b = a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre></div>
+<pre class="code was"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln">a = b</span><span class="ln l2">b = a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre>
+<pre class="code" data-file="solutions/01_swap.py" data-change="3"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln l2">a, b = b, a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre></div>
   <p class="abs say only1" style="left:1020px;right:96px;top:240px">想要的是 5 3。<br>真的能换过来吗？</p>
-  <p class="abs step s2" style="left:1020px;right:96px;top:230px;font:800 100px var(--code);color:var(--clay-soft)">5 5</p>
-  <p class="abs say step s2" style="left:96px;top:790px;width:1728px">第 3 行 a 变成 5，原来的 3 就被盖掉了。第 4 行 b = a，拿到的也是 5。<br>就像两杯饮料互换，直接倒过去会混在一起，得先找个空杯子。</p>
+  <p class="abs only2" style="left:1020px;right:96px;top:230px;font:800 100px var(--code);color:var(--clay-soft)">5 5</p>
+  <p class="abs step s3" style="left:1020px;right:96px;top:230px;font:800 100px var(--code);color:var(--mint)">5 3</p>
+  <p class="abs say step s3" style="left:1020px;right:96px;top:400px">列表里的两个位置也能这样换：</p>
+  <p class="abs step s3" style="left:1020px;right:96px;top:470px;font:400 40px/1.5 var(--code)">a[0], a[1] = a[1], a[0]</p>
+  <a class="ide step s3" style="left:1020px;top:600px">▶ 在 IDE 打开</a>
+  <p class="abs say only2" style="left:96px;top:790px;width:1728px">第 3 行 a 变成 5，原来的 3 就被盖掉了。第 4 行 b = a，拿到的也是 5。<br>就像两杯饮料互换，直接倒过去会混在一起，得先找个空杯子。</p>
+  <p class="abs say step s3" style="left:96px;top:790px;width:1728px">Python 一行就能交换。a, b = b, a：先把右边的 b 和 a 都看好，<br>再同时放进左边，谁也不会被盖掉，不用找空杯子。</p>
   <div class="foot"></div>
 </section>
 
-<!-- swap -->
-<section id="page-4" class="slide" aria-label="一行交换">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">Python 一行就能交换</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">swap.py</div>
-<pre class="code" data-file="solutions/01_swap.py"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln">a, b = b, a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre></div>
-  <p class="abs say" style="left:96px;top:690px;width:960px;color:var(--paper)">a, b = b, a：先把右边的 b 和 a 都看好，再同时放进左边。谁也不会被盖掉。</p>
-  <a class="ide" style="left:96px;top:900px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
-    <div class="box out" style="display:block"><i>屏幕上</i><b style="font-size:100px;display:block">5 3</b></div>
-    <p class="say" style="margin-top:60px">列表里的两个位置也能这样换：</p>
-    <p style="font:400 40px/1.5 var(--code);margin-top:16px">a[0], a[1] =<br>a[1], a[0]</p>
-  </div>
-</section>
-
 <!-- quiz: swap in a list -->
-<section id="page-5" class="slide" aria-label="小测：列表里换位置">
+<section id="page-4" class="slide" aria-label="小测：列表里换位置">
   <h2 class="t r">小测：运行这两行以后，a 是什么？</h2>
   <pre class="abs r d1" style="left:96px;top:200px;font:400 48px/1.5 var(--code)">a = [4, 1, 3]
 a[0], a[1] = a[1], a[0]</pre>
@@ -505,7 +503,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- one pass -->
-<section id="page-6" class="slide" aria-label="一轮比较" data-steps="3" data-at="3" data-chapter="一轮">
+<section id="page-5" class="slide" aria-label="一轮比较" data-steps="3" data-at="3" data-chapter="一轮">
   <div class="night" style="width:1310px"></div>
   <h2 class="t" style="color:var(--paper)">从头到尾比一轮</h2>
   <div class="editor" style="left:96px;top:200px;width:1170px;--fs:44px"><div class="tab">one_pass.py</div>
@@ -518,7 +516,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- quiz: after one pass -->
-<section id="page-7" class="slide" aria-label="小测：一轮之后">
+<section id="page-6" class="slide" aria-label="小测：一轮之后">
   <h2 class="t r">小测：比完一轮，哪一个一定站对了位置？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="最小的 1 只往前挪了一格，还没到最前面。"><i>1</i>最小的在最前</button>
@@ -531,7 +529,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- worked example: bubble sort -->
-<section id="page-8" class="slide" aria-label="例题：冒泡排序" data-steps="4" data-at="4" data-chapter="冒泡排序">
+<section id="page-7" class="slide" aria-label="例题：冒泡排序" data-steps="4" data-at="4" data-chapter="冒泡排序">
   <div class="night" style="width:1440px"></div>
   <h2 class="t" style="color:var(--paper);top:40px">例题：一轮轮比，直到排好</h2>
   <div class="editor" style="left:96px;top:175px;width:1300px;--fs:44px"><div class="tab">bubble.py</div>
@@ -545,7 +543,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- quiz: rounds -->
-<section id="page-9" class="slide" aria-label="小测：要几轮">
+<section id="page-8" class="slide" aria-label="小测：要几轮">
   <h2 class="t r">小测：用例题排 10 个数，外层循环要转几轮？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="一轮只能保证最大的那个站好，10 个数一轮不够。"><i>1</i>1 轮</button>
@@ -558,7 +556,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- your turn: descending -->
-<section id="page-10" class="slide" aria-label="改成从大到小">
+<section id="page-9" class="slide" aria-label="改成从大到小">
   <div class="band r"><b>动手<br>改一改</b><span>只改一个符号。</span></div>
   <div class="turn">
     <h2 class="r d1">从大到小排</h2>
@@ -572,7 +570,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- errors -->
-<section id="page-11" class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section id="page-10" class="slide" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
   <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
@@ -585,7 +583,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- bug hunt -->
-<section id="page-12" class="slide dark" aria-label="找错：超出了列表">
+<section id="page-11" class="slide dark" aria-label="找错：超出了列表">
   <h2 class="t r">找错：报 IndexError，j + 1 超出了列表</h2>
   <div class="editor r d1" style="left:96px;top:200px;width:1300px;--fs:44px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="4" data-yes="找到了！j 能走到 3，a[j + 1] 就是 a[4]，4 个数的列表没有下标 4。改成 range(n - 1 - r)。" data-no="这一行没问题。报错说下标超出了范围，看看 j 最大会走到几。"><span class="ln">a = [<span class="m">5</span>, <span class="m">2</span>, <span class="m">4</span>, <span class="m">1</span>]</span><span class="ln">n = <span class="f">len</span>(a)</span><span class="ln"><span class="k">for</span> r <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">        <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln">            a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln"><span class="f">print</span>(a)</span></pre></div>
@@ -595,7 +593,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- challenge -->
-<section id="page-13" class="slide clay" aria-label="排队换了几次" data-chapter="挑战">
+<section id="page-12" class="slide clay" aria-label="排队换了几次" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">排队换了几次</h2>
   <p class="abs say r d2" style="left:96px;top:420px;width:1060px">体育课按身高从矮到高排队，每次只能让挨着的两个人换位置。第一行读入人数 n（1 到 20 的整数），接下来 n 行，每行一个身高（1 到 300 的整数）。<br>用冒泡排序排好，输出两行：排好的列表；一共换了几次。一样高的两个人不用换，不算一次。</p>
@@ -611,7 +609,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- hints -->
-<section id="page-14" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-13" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>读入和排序都可以照例题写。去掉每轮的 print，排好以后再输出一次列表。</span></p>
@@ -622,7 +620,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- creative project -->
-<section id="page-15" class="slide" aria-label="造一个排序小程序" data-chapter="小项目">
+<section id="page-14" class="slide" aria-label="造一个排序小程序" data-chapter="小项目">
   <h2 class="t r">造一个你的排序小程序</h2>
   <p class="abs say r d1" style="left:96px;top:200px">不用 sorted，自己排。排什么，你自己定。</p>
   <div class="later" style="top:320px">
@@ -636,7 +634,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- share -->
-<section id="page-16" class="slide" aria-label="和同桌换着玩">
+<section id="page-15" class="slide" aria-label="和同桌换着玩">
   <h2 class="t r">和同桌换着玩</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>换着运行</b><span>给同桌的程序一组乱的数，看排得对不对</span></div>
@@ -648,7 +646,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- review -->
-<section id="page-17" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-16" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p style="font-weight:700"><i>Q1</i><span>怎样交换两个变量？<em class="step s2" style="font-style:normal;font-weight:400">　a, b = b, a，一行同时换。</em></span></p>
@@ -660,7 +658,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-18" class="slide" aria-label="速查卡">
+<section id="page-17" class="slide" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1" style="grid-template-columns:860px 1fr"><code>a, b = b, a</code><span>一行交换，谁也不会被盖掉</span></div>
@@ -673,7 +671,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- later -->
-<section id="page-19" class="slide" aria-label="后面再学">
+<section id="page-18" class="slide" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>选择排序</code><span>每轮找出最小的，放到最前面</span></div>
@@ -685,7 +683,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-20" class="slide dark thanks" aria-label="谢谢">
+<section id="page-19" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
@@ -944,7 +942,11 @@ class SlidePresentation {
   updateQuickIde() {
     const slide = this.slides[this.index];
     const quick = document.getElementById('ide-quick');
-    const onPage = slide.querySelector('a.ide');
+    // The button follows the step: the IDE link the page shows now, else the one it ends with.
+    const at = Number(slide.dataset.at || 1), links = [...slide.querySelectorAll('a.ide')];
+    const from = (a, re) => Number([...a.classList].find(c => re.test(c))?.replace(/\D/g, '') || 0);
+    const shown = a => from(a, /^only\d$/) ? from(a, /^only\d$/) === at : from(a, /^s\d$/) <= at;
+    const onPage = links.find(shown) || links.find(a => !from(a, /^only\d$/)) || links[0];
     const code = this.codeOf(slide);
     quick.href = onPage ? onPage.href : code ? IDE.url(code, IDE.load()) : IDE.url(IDE.config.blank, IDE.load());
     quick.textContent = onPage || code ? '▶ 本页代码进 IDE' : '▶ 打开空白 IDE';
@@ -1027,7 +1029,7 @@ class SlidePresentation {
     // Full-width digits and leading zeros are the same number, so those alone are tidied.
     const problem = slot => {
       if (slot.dataset.kind === 'text') {
-        if (/["\r\n]/.test(slot.value)) return 'quote';
+        if (/["'“”‘’\r\n]/.test(slot.value)) return 'quote';
         if (slot.value.includes('\\')) return 'slash';
         return Array.from(slot.value).length > 12 ? 'long' : null;
       }
@@ -1042,7 +1044,7 @@ class SlidePresentation {
     // Short enough to read from the back of the room; red means the page cannot use it, amber only that a box is empty.
     const tips = {
       letters: '这里只能填数字，比如 7。', negative: '负数这里算不了，到 IDE 里试。', decimal: '小数这里算不了，到 IDE 里试。',
-      big: '最大只能填 9999。', quote: '英文引号 " 用不了，换成中文引号 “ ”。', slash: '反斜杠 \\ 这里用不了，到 IDE 里试。',
+      big: '最大只能填 9999。', quote: '两边的引号已经写好了，框里只填字。', slash: '反斜杠 \\ 这里用不了，到 IDE 里试。',
       long: '最多 12 个字，删掉几个吧。', empty: '框里空着，填上就有结果。'
     };
     this.liveSlots = [...this.stage.querySelectorAll('.slot')];
@@ -1131,6 +1133,11 @@ class SlidePresentation {
           then.setAttribute('aria-hidden', 'true');
           then.append(...olds[row.from].childNodes);
           line.append(now, then);
+          const indent = text => text.length - text.trimStart().length;
+          if (now.textContent.trim() === then.textContent.trim()) {
+            line.classList.add('indent');  // only moved: the old line slides over instead of fading into the new one
+            line.style.setProperty('--shift', indent(now.textContent) - indent(then.textContent));
+          }
         }
         return line;
       }));
@@ -1141,13 +1148,15 @@ class SlidePresentation {
       return {slide, pre};
     });
   }
-  /* Lines in both versions are kept (longest common run); the rest of each gap is matched to an old line that reads
-     about the same once spaces are trimmed, such as print(i) indented further, or else counted as added or removed. */
+  /* Lines that read the same once the indent is trimmed are kept (longest common run): unchanged, or only moved
+     right or left, as when a loop is wrapped around them. The rest of each gap is matched to an old line that reads
+     about the same, such as print(i) becoming print(i * 2), or else counted as added or removed. */
   diffLines(a, b) {
     const n = a.length, m = b.length;
+    const same = (i, j) => a[i].trim() === b[j].trim();
     const common = Array.from({length: n + 1}, () => new Array(m + 1).fill(0));
     for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) {
-      common[i][j] = a[i] === b[j] ? common[i + 1][j + 1] + 1 : Math.max(common[i + 1][j], common[i][j + 1]);
+      common[i][j] = same(i, j) ? common[i + 1][j + 1] + 1 : Math.max(common[i + 1][j], common[i][j + 1]);
     }
     const alike = (x, y) => {
       x = x.trim(); y = y.trim();
@@ -1173,7 +1182,7 @@ class SlidePresentation {
     };
     let i = 0, j = 0;
     while (i < n || j < m) {
-      if (i < n && j < m && a[i] === b[j]) { flush(); rows.push({kind: 'same', to: j}); i++; j++; }
+      if (i < n && j < m && same(i, j)) { flush(); rows.push(a[i] === b[j] ? {kind: 'same', to: j} : {kind: 'edit', from: i, to: j}); i++; j++; }
       else if (j < m && (i === n || common[i][j + 1] >= common[i + 1][j])) add.push(j++);
       else cut.push(i++);
     }
@@ -1226,7 +1235,7 @@ class SlidePresentation {
   }
   move(delta) {
     const slide = this.slides[this.index], at = Number(slide.dataset.at || 1), next = at + delta;
-    if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.syncChanges(true); this.label(); return; }
+    if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.syncChanges(true); this.updateQuickIde(); this.label(); return; }
     if (this.index + delta >= 0 && this.index + delta < this.slides.length) this.show(this.index + delta, delta < 0);
   }
   key(e) {

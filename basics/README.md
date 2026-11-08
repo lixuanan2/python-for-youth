@@ -36,8 +36,8 @@ IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”
 | [01](dist/01-input-output/index.html) | 输入输出 | 28 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [02](dist/02-variables/index.html) | 变量与数据类型 | 28 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [03](dist/03-arithmetic/index.html) | 算术运算 | 28 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [04](dist/04-conditions/index.html) | 条件判断 | 25 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [05](dist/05-logic/index.html) | 逻辑运算 | 28 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [04](dist/04-conditions/index.html) | 条件判断 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [05](dist/05-logic/index.html) | 逻辑运算 | 27 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [06](dist/06-for-loop/index.html) | for 循环 | 31 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [07](dist/07-while-loop/index.html) | while 循环 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [08](dist/08-loop-tally/index.html) | 累加和计数 | 24 | macOS Chrome 已验证，Windows 教室待试讲 |
@@ -56,11 +56,11 @@ IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”
 | [21](dist/21-random-games/index.html) | 随机数与小游戏 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [22](dist/22-try-except/index.html) | 接住报错：try 和 except | 21 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [23](dist/23-recursion/index.html) | 递归入门 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [24](dist/24-bubble-sort/index.html) | 冒泡排序 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [24](dist/24-bubble-sort/index.html) | 冒泡排序 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [25](dist/25-enumeration/index.html) | 枚举：把可能都试一遍 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [26](dist/26-binary-search/index.html) | 二分查找 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [27](dist/27-break-continue/index.html) | break 和 continue | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
-| [28](dist/28-f-strings/index.html) | f-string 格式化输出 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [27](dist/27-break-continue/index.html) | break 和 continue | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
+| [28](dist/28-f-strings/index.html) | f-string 格式化输出 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [29](dist/29-sets/index.html) | 集合 | 18 | macOS Chrome 已验证，Windows 教室待试讲 |
 | [30](dist/30-tuples/index.html) | 元组 | 19 | macOS Chrome 已验证，Windows 教室待试讲 |
 
