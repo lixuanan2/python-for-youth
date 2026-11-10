@@ -1,0 +1,6 @@
+# Made by prepare.py and jupyter lite build; never committed.
+.cache/
+static/
+pypi/
+_output/
+.jupyterlite.doit.db

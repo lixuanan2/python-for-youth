@@ -843,7 +843,7 @@ dialog p{color:var(--muted);font-size:15px}
 /* === IDE LINKS: the platform and its options come from site.json === */
 const LANGUAGE = 'python';
 const IDE = {
-  config: {"name": "JupyterLite", "base": "https://jupyterlite.github.io/demo/repl/index.html", "codeParam": "code", "blank": "# 在这里写代码\n", "fixed": {"kernel": "python", "toolbar": "1", "showBanner": "0", "clearCellsOnExecute": "1", "hideCodeInput": "1", "clearCodeContentOnExecute": "0"}, "settings": [{"param": "theme", "label": "主题", "options": [["JupyterLab Dark", "深色"], ["JupyterLab Light", "浅色"]]}, {"param": "promptCellPosition", "label": "布局", "options": [["left", "代码在左，结果在右"], ["top", "代码在上，结果在下"]]}, {"param": "execute", "label": "打开后自动运行", "options": [["0", "不运行，学生自己点"], ["1", "立刻运行"]]}]},
+  config: {"name": "JupyterLite", "base": "https://lixuanan2.github.io/python-for-youth/ide/repl/index.html", "codeParam": "code", "blank": "# 在这里写代码\n", "fixed": {"kernel": "python", "toolbar": "1", "showBanner": "0", "clearCellsOnExecute": "1", "hideCodeInput": "1", "clearCodeContentOnExecute": "0"}, "settings": [{"param": "theme", "label": "主题", "options": [["JupyterLab Dark", "深色"], ["JupyterLab Light", "浅色"]]}, {"param": "promptCellPosition", "label": "布局", "options": [["left", "代码在左，结果在右"], ["top", "代码在上，结果在下"]]}, {"param": "execute", "label": "打开后自动运行", "options": [["0", "不运行，学生自己点"], ["1", "立刻运行"]]}]},
   defaults() {
     return Object.fromEntries(this.config.settings.map(s => [s.param, s.options[0][0]]));
   },

@@ -36,7 +36,7 @@ node tools/check_browser.mjs    # 真实 Chrome 逐页检查和交互测试
 - 一律用相对路径：课件、文档和给老师的命令都不写绝对路径。给命令时说明要在 `basics/` 里运行。
 - 改课只改 `lessons/` 和 `template/`，再用 `--pdf` 重建，让 PDF 跟上页面。
 - 课件离线可用：样式、脚本和字体都内联，不用 CDN 和在线字体。只有 IDE 和官方文档链接需要联网。
-- IDE 地址只写在 `site.json` 的 `ide` 里，换平台只改这一处。
+- IDE 地址只写在 `site.json` 的 `ide` 里，换平台只改这一处。现在用的是本仓库自己发布的 JupyterLite（仓库最外层的 `ide/`，网址 `https://lixuanan2.github.io/python-for-youth/ide/repl/index.html`）。它出问题时，把 `ide.base` 换回公开演示站 `https://jupyterlite.github.io/demo/repl/index.html`，重新构建就行。
 - 程序、页面说法和答案都要过 `tools/check.py`。页面上新写的输出或报错要加进 `claims.json`。
 - 小改写和独立迁移的答案不进 `dist/`。`dist/` 里没有 `solutions/`、`tests/`。这只减少学生接触，不是权限控制。
 - 一次做一节课，先把设计给老师确认再写。见仓库最外层的 `.claude/skills/python-lesson`。

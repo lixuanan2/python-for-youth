@@ -65,13 +65,29 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      # The home page sits at the top; each module's dist/ goes under its own folder name.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      # The course IDE: pinned JupyterLite with Pyodide inside, so students' browsers load nothing from a CDN.
+      - uses: actions/cache@v4
+        with:
+          path: ide/.cache
+          key: ide-${{ hashFiles('ide/prepare.py') }}
+      - name: Build the IDE
+        working-directory: ide
+        run: |
+          python -m pip install -q -r requirements.txt
+          python prepare.py
+          jupyter lite build
+      # The home page sits at the top; each module's dist/ goes under its own folder name, the IDE under ide/.
       - name: Assemble the site
         run: |
           mkdir -p _site/fonts
           cp home/index.html _site/
           cp basics/vendor/fonts/*.woff2 basics/vendor/fonts/JetBrainsMono-OFL.txt _site/fonts/
           cp -R basics/dist _site/basics
+          cp -R ide/_output _site/ide
+          du -sh _site _site/ide
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site

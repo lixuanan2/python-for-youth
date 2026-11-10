@@ -27,7 +27,7 @@
 
 上课时把整个 `dist/` 复制到教室电脑，里面有课件和起始程序，没有答案。IDE 按钮要联网，第一次打开要等十几秒，其余功能离线可用。
 
-IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”时会关掉它要用的功能，表现是点了运行右边一直空白。教室电脑用 Edge 的话，先在 Edge 设置里搜“增强的安全性”，在“例外”里添加 `jupyterlite.github.io`；或者改用 Chrome。C++ 的 IDE 在服务器上编译，不受这个影响。
+IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”时会关掉它要用的功能，表现是点了运行右边一直空白。教室电脑用 Edge 的话，先在 Edge 设置里搜“增强的安全性”，在“例外”里添加 `lixuanan2.github.io`；或者改用 Chrome。C++ 的 IDE 在服务器上编译，不受这个影响。
 
 ## 课程
 
@@ -108,4 +108,4 @@ AGENTS.md   这个模块的规则
 
 - 固定舞台样式来自 [Frontend Slides](https://github.com/zarazhangrui/frontend-slides)（MIT）。
 - 字体 [JetBrains Mono](https://www.jetbrains.com/lp/mono/)（SIL OFL 1.1）。
-- 在线 IDE 使用 [JupyterLite](https://jupyterlite.readthedocs.io/) 的公开演示站，学生代码在浏览器里运行，但会放在打开的链接地址中。
+- 在线 IDE 是本仓库发布的 [JupyterLite](https://jupyterlite.readthedocs.io/)（BSD-3-Clause），Python 是一起发布的 [Pyodide](https://pyodide.org/)（MPL-2.0），打开时不从别的网站下载。学生代码在浏览器里运行，但会放在打开的链接地址中。
