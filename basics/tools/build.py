@@ -160,14 +160,10 @@ def brief_header(task, comment):
     return ''.join(f'{comment} {line}'.rstrip() + '\n' for line in lines)
 
 
-def starter_text(lesson, name, where='ide'):
-    """A starter file as students get it. where: 'ide' for IDE links and the starter page, 'file' for the download.
-    site.json "briefs" says where the header goes: "everywhere" (default), "online" (not in downloads), "off"."""
+def starter_text(lesson, name):
+    """A starter file as students get it, in IDE links, on the starter page and as a download."""
     folder = ROOT / 'lessons' / lesson['id']
     body = (folder / name).read_text(encoding='utf-8')
-    mode = site().get('briefs', 'everywhere')
-    if mode == 'off' or (mode == 'online' and where == 'file'):
-        return body
     task = next((t for t in json.loads((folder / 'tasks.json').read_text(encoding='utf-8')) if t['starter'] == name and t.get('brief')), None)
     header = brief_header(task, '#' if site()['language'] == 'python' else '//') if task else ''
     return header + ('\n' + body.lstrip('\n') if header and body.strip() else body)
@@ -275,6 +271,14 @@ def render_starter(lesson):
     return page
 
 
+def file_encoding(path):
+    """Downloaded starter files use site.json "starter_encoding": "utf-8" (default), "utf-8-sig" (UTF-8 with a BOM,
+    which Windows editors such as Dev-C++ 6 read as UTF-8 for sure) or "gbk" (for an editor that only reads the
+    Chinese Windows code page). Everything else is UTF-8; IDE links carry text, so no encoding reaches the IDE."""
+    starter = path.parent.name == 'starter' and path.name != 'index.html'
+    return site().get('starter_encoding', 'utf-8') if starter else 'utf-8'
+
+
 def outputs():
     """Everything in dist/ that comes from a template, as {path: text}."""
     files = {DIST / 'index.html': render_index(course())}
@@ -283,7 +287,7 @@ def outputs():
         files[DIST / lesson['id'] / 'starter' / 'index.html'] = render_starter(lesson)
         for file, _ in starters(lesson):
             name = file.relative_to(ROOT / 'lessons' / lesson['id']).as_posix()
-            files[DIST / lesson['id'] / name] = starter_text(lesson, name, 'file')
+            files[DIST / lesson['id'] / name] = starter_text(lesson, name)
     return files
 
 
@@ -324,7 +328,7 @@ def main():
         shutil.copytree(ROOT / 'lessons' / lesson['id'] / 'starter', DIST / lesson['id'] / 'starter', dirs_exist_ok=True)
     for path, text in outputs().items():
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(text, encoding='utf-8', newline='\n')
+        path.write_text(text, encoding=file_encoding(path), newline='\n')
     print(f'Built {len(lessons())} lesson(s) into dist/')
     if args.pdf:
         chrome = args.chrome or next((c for c in CHROME if Path(c).is_file()), None)

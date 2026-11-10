@@ -223,7 +223,7 @@ def check_briefs(lesson, folder, tasks, sections):
     for file, _ in builder.starters(lesson):
         name = file.relative_to(folder).as_posix()
         built = builder.DIST / lesson['id'] / name
-        assert built.read_text(encoding='utf-8') == builder.starter_text(lesson, name, 'file'), f'Rebuild dist: {lesson["id"]}/{name}'
+        assert built.read_bytes() == builder.starter_text(lesson, name).encode(builder.file_encoding(built)), f'Rebuild dist: {lesson["id"]}/{name}'
 
 
 def check_ide(text, folder):
