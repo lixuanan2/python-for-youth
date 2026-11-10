@@ -19,6 +19,10 @@ ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('builder', ROOT / 'tools/build.py')
 builder = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(builder)
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import traces  # noqa: E402  (next to this file, like algo.py)
+
+TRACES = []  # (lesson, trace pages checked, [(page, why not)])
 TEXT_FILES = {'.html', '.py', '.cpp', '.h', '.txt', '.md', '.json', '.js', '.css', '.csv'}
 HIDDEN_ROLES = ['学生小改写', '独立迁移']  # Students write these, so the answers must stay out of dist/.
 
@@ -288,6 +292,11 @@ def check_deck(lesson, folder):
     check_ide(text, folder)
     changes = check_changes(text, folder)
     algos = check_algos(text)
+    claims = json.loads((folder / 'tests/claims.json').read_text(encoding='utf-8'))
+    traced, untraced, wrong = traces.check_deck(text, claims, LANGUAGE)
+    assert not wrong, f'{folder.name}: a trace page lights lines out of step with a real run\n' + \
+        '\n'.join(f'  page {n}: {note}' for n, note in wrong)
+    TRACES.append((folder.name, traced, untraced))
     for file, code, lines in deck.shown:
         want = (folder / file).read_text(encoding='utf-8').strip()
         if lines:
@@ -390,7 +399,12 @@ def main():
     stale = [lesson['id'] for lesson in builder.stale_pdfs()]
     assert not stale, f'PDF older than its deck, run python3 tools/build.py --pdf: {", ".join(stale)}'
     docs = check_docs()
-    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {algos} algorithm demos, {links} index and starter links, {docs} document links.')
+    traced = sum(t for _, t, _ in TRACES)
+    untraced = [(name, n, note) for name, _, skipped in TRACES for n, note in skipped]
+    if '--traces' in sys.argv:
+        for name, n, note in untraced:
+            print(f'not traced: {name} page {n}: {note}')
+    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {algos} algorithm demos, {traced} trace pages ({len(untraced)} not checkable, see --traces), {links} index and starter links, {docs} document links.')
 
 
 if __name__ == '__main__':

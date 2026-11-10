@@ -103,7 +103,7 @@ print(100)</pre></div>
   <h2 class="t" style="color:var(--paper)">例题：从 1 数到 n</h2>
   <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">one_to_n.py</div>
 <pre class="code was" data-file="solutions/03_range_two.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">6</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre>
-<pre class="code" data-change="2" data-file="solutions/04_one_to_n.py"><span class="ln l2">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln l3 l4 l5">    <span class="f">print</span>(i)</span></pre></div>
+<pre class="code" data-stdin="3&#10;" data-change="2" data-file="solutions/04_one_to_n.py"><span class="ln l2">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln l3 l4 l5">    <span class="f">print</span>(i)</span></pre></div>
   <p class="abs say only1" style="left:96px;top:620px;width:1040px;color:var(--paper)">上一页的程序只能数到 5。想数到输入的数，改两处：先读入 n，终点写成 n + 1。</p>
   <p class="abs say only2" style="left:96px;top:620px;width:1040px;color:var(--paper)">输入 3。终点不算在内，所以要写 n + 1，也就是 range(1, 4)。</p>
   <p class="abs say only3" style="left:96px;top:620px;width:1040px;color:var(--paper)">i 拿到 1，输出 1。</p>
@@ -266,7 +266,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">循环里放 if：一个一个筛</h2>
   <div class="editor" style="left:96px;top:210px;width:1040px;--fs:44px"><div class="tab">even.py</div>
-<pre class="code" data-file="solutions/09_even.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln l1 l2 l3 l4">    <span class="k">if</span> i % <span class="m">2</span> == <span class="m">0</span>:</span><span class="ln l2 l4">        <span class="f">print</span>(i)</span></pre></div>
+<pre class="code" data-stdin="4&#10;" data-file="solutions/09_even.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln l1 l2 l3 l4">    <span class="k">if</span> i % <span class="m">2</span> == <span class="m">0</span>:</span><span class="ln l2 l4">        <span class="f">print</span>(i)</span></pre></div>
   <p class="abs say only1" style="left:96px;top:630px;width:1040px;color:var(--paper)">输入 4。i 是 1，1 % 2 是 1，条件不成立，跳过。</p>
   <p class="abs say only2" style="left:96px;top:630px;width:1040px;color:var(--paper)">i 是 2，2 % 2 是 0，条件成立，输出 2。</p>
   <p class="abs say only3" style="left:96px;top:630px;width:1040px;color:var(--paper)">i 是 3，3 % 2 是 1，跳过。</p>

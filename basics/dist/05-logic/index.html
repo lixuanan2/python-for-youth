@@ -520,7 +520,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">and：两个都成立才算</h2>
   <div class="editor" style="left:96px;top:210px;width:1040px;--fs:44px"><div class="tab">ride.py</div>
-<pre class="code" data-file="solutions/01_ride.py"><span class="ln l1">height = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2 l3"><span class="k">if</span> height &gt;= <span class="m">120</span> <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以玩"</span>)</span><span class="ln l4"><span class="k">else</span>:</span><span class="ln l4">    <span class="f">print</span>(<span class="s">"下次再来"</span>)</span></pre></div>
+<pre class="code" data-stdin="130&#10;6&#10;" data-file="solutions/01_ride.py"><span class="ln l1">height = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2 l3"><span class="k">if</span> height &gt;= <span class="m">120</span> <span class="k">and</span> age &gt;= <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"可以玩"</span>)</span><span class="ln l4"><span class="k">else</span>:</span><span class="ln l4">    <span class="f">print</span>(<span class="s">"下次再来"</span>)</span></pre></div>
   <p class="abs say only1" style="left:96px;top:770px;width:1040px;color:var(--paper)">输入身高 130，年龄 6。这是两行输入。</p>
   <p class="abs say only2" style="left:96px;top:770px;width:1040px;color:var(--paper)">先看左边：130 &gt;= 120 成立。</p>
   <p class="abs say only3" style="left:96px;top:770px;width:1040px;color:var(--paper)">再看右边：6 &gt;= 8 不成立。</p>
@@ -621,7 +621,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">or：有一个成立就算</h2>
   <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">weekend.py</div>
-<pre class="code" data-file="solutions/04_weekend.py"><span class="ln l1">day = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">if</span> day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span>:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"周末"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"上学"</span>)</span></pre></div>
+<pre class="code" data-stdin="7&#10;" data-file="solutions/04_weekend.py"><span class="ln l1">day = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">if</span> day == <span class="m">6</span> <span class="k">or</span> day == <span class="m">7</span>:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"周末"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"上学"</span>)</span></pre></div>
   <p class="abs say only1" style="left:96px;top:766px;width:1040px;color:var(--paper)">用 1 到 7 表示星期几。输入 7，放进 day。</p>
   <p class="abs say only2" style="left:96px;top:766px;width:1040px;color:var(--paper)">7 == 6 不成立，但 7 == 7 成立。</p>
   <p class="abs say only3" style="left:96px;top:766px;width:1040px;color:var(--paper)">有一个成立就够了，走 if 这条路。</p>
@@ -680,7 +680,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="night" style="width:1230px"></div>
   <h2 class="t" style="color:var(--paper)">not：把真假翻过来</h2>
   <div class="editor" style="left:96px;top:210px;width:1040px;--fs:44px"><div class="tab">ticket.py</div>
-<pre class="code" data-file="solutions/06_ticket.py"><span class="ln">age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">is_child = age &lt; <span class="m">12</span></span><span class="ln l2"><span class="k">if</span> <span class="k">not</span> is_child:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"成人票"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"儿童票"</span>)</span></pre></div>
+<pre class="code" data-stdin="20&#10;" data-file="solutions/06_ticket.py"><span class="ln">age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">is_child = age &lt; <span class="m">12</span></span><span class="ln l2"><span class="k">if</span> <span class="k">not</span> is_child:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"成人票"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"儿童票"</span>)</span></pre></div>
   <p class="abs say only1" style="left:96px;top:770px;width:1040px;color:var(--paper)">比较的结果也能放进盒子。输入 20，20 &lt; 12 是 False。</p>
   <p class="abs say only2" style="left:96px;top:770px;width:1040px;color:var(--paper)">not 像把牌子翻个面，False 翻过来是 True。</p>
   <p class="abs say only3" style="left:96px;top:770px;width:1040px;color:var(--paper)">条件成立，输出成人票。</p>

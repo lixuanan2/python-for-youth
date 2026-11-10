@@ -29,8 +29,10 @@ MAX_STEPS = 60
 # simple values in scope (whole numbers, words, lists of them) and what it has printed so far.
 TRACER = r'''
 import io, json, sys
-code, stdin = json.loads(sys.stdin.read())
+code, stdin, lines = json.loads(sys.stdin.read())
 sys.stdin = io.StringIO(stdin)
+import random
+random.seed(0)
 out = io.StringIO()
 events = []
 def simple(v):
@@ -45,14 +47,21 @@ def trace(frame, event, arg):
         return None
     if event == 'line':
         note(frame, frame.f_lineno)
+    elif event == 'call' and lines and frame.f_code.co_name != '<module>':
+        note(frame, frame.f_code.co_firstlineno)  # a call runs the def line again, as a page lights it
     elif event == 'return' and frame.f_back is not None and frame.f_back.f_code.co_filename != '<algo>':
         note(frame, None)
+    elif event == 'return' and lines and frame.f_back is not None:
+        note(frame.f_back, frame.f_back.f_lineno)  # the calling line goes on once the call comes back
     return trace
 real = sys.stdout
 sys.stdout = out
 sys.settrace(trace)
 try:
     exec(compile(code, '<algo>', 'exec'), {'__name__': '__main__'})
+except BaseException:
+    if not lines:
+        raise
 finally:
     sys.settrace(None)
     sys.stdout = real
@@ -60,9 +69,11 @@ print(json.dumps(events, ensure_ascii=False))
 ''' % MAX_EVENTS
 
 
-def run(code, stdin):
-    """Every line the program reaches, in order: [line, values, printed so far]; the last entry is the end (line None)."""
-    result = subprocess.run([sys.executable, '-I', '-X', 'utf8', '-c', TRACER], input=json.dumps([code, stdin]).encode(),
+def run(code, stdin, lines=False):
+    """Every line the program reaches, in order: [line, values, printed so far]; the last entry is the end (line None).
+    With lines, calls count as their def line and a program that stops on an error or loops forever still gives
+    the lines it reached."""
+    result = subprocess.run([sys.executable, '-I', '-X', 'utf8', '-c', TRACER], input=json.dumps([code, stdin, lines]).encode(),
                             capture_output=True, timeout=20)
     assert result.returncode == 0, result.stderr.decode(errors='replace')
     return json.loads(result.stdout)
@@ -97,7 +108,13 @@ template <class T, size_t N> static void algo_val_(const T (&a)[N]) {
     for (size_t i = 0; i < N; i++) { if (i) std::cout << ','; algo_val_(a[i]); }
     std::cout << ']';
 }
-static int algo_line_(int line) { std::cout << "\x02{\"l\":" << line << ",\"v\":{"; algo_first_ = true; return 0; }
+static int algo_count_ = 0;
+static int algo_line_(int line) {
+    if (++algo_count_ > %d) { std::cout << std::flush; std::_Exit(0); }
+    std::cout << "\x02{\"l\":" << line << ",\"v\":{";
+    algo_first_ = true;
+    return 0;
+}
 template <class T> static int algo_put_(const char *name, const T &x) {
     if (!algo_first_) std::cout << ',';
     algo_first_ = false;
@@ -107,8 +124,9 @@ template <class T> static int algo_put_(const char *name, const T &x) {
     return 0;
 }
 static int algo_end_() { std::cout << "}}\x03"; return 0; }
+#include <cstdlib>
 #line 1
-'''
+''' % MAX_EVENTS
 CPP_TYPE = r'(?:const\s+)?(?:unsigned\s+)?(?:long\s+long|long|int|short|bool|char|string|double|float|size_t|vector\s*<[^;]*?>)'
 
 
@@ -184,6 +202,116 @@ def instrument(code):
     return CPP_HELPERS + '\n'.join(out) + '\n'
 
 
+def masked(line):
+    """The line with the inside of strings and characters blanked and a // comment removed, same length."""
+    out, quote, k = list(line), None, 0
+    while k < len(line):
+        ch = line[k]
+        if quote:
+            if ch == '\\':
+                out[k] = ' '
+                if k + 1 < len(line):
+                    out[k + 1] = ' '
+                k += 2
+                continue
+            if ch == quote:
+                quote = None
+            else:
+                out[k] = ' '
+        elif ch in '"\'':
+            quote = ch
+        elif line.startswith('//', k):
+            return ''.join(out[:k]) + ' ' * (len(line) - k)
+        k += 1
+    return ''.join(out)
+
+
+def closing(text, start):
+    """The index of the bracket that closes the one at start."""
+    depth = 0
+    for k in range(start, len(text)):
+        depth += text[k] == '('
+        depth -= text[k] == ')'
+        if depth == 0:
+            return k
+    return -1
+
+
+def instrument_lines(code):
+    """For a trace page: a record of each line as it runs, in every function, and of each check of a loop.
+
+    Records go before each statement, into the test of for, while and else if (so a loop line is recorded each
+    time it is checked, like Python), and right after a function's { (a call reaches its header line)."""
+    lines = code.split('\n')
+    out, depth, previous, header, inside = list(lines), 0, '', None, False
+    record = lambda n: f'algo_line_({n}), algo_end_()'
+    for i, line in enumerate(lines):
+        text = masked(line)
+        bare = text.strip()
+        stripped = line.strip()
+        indent = line[:len(line) - len(line.lstrip())]
+        opening = depth
+        if opening == 0 and re.match(r'(?!(?:if|for|while|switch|return|else)\b)[\w:<>,*&\s]+?\b\w+\s*\([^;]*\)\s*(?:const\s*)?\{?$', bare) \
+                and not bare.startswith(('#', 'using', 'typedef', 'struct', 'class')):
+            header = i
+        if header is not None and '{' in bare and opening == 0:
+            k = text.index('{')
+            out[i] = line[:k + 1] + ' ' + record(header + 1) + '; ' + line[k + 1:]
+            header, inside = None, True
+        elif inside and opening >= 1 and stripped:  # only in function bodies, not in a struct or an array's { }
+            loop = re.match(r'(for|while)\s*\(', bare)
+            elif_ = re.match(r'\}\s*else\s+if\s*\(', bare)
+            braceless = re.match(r'(?:for|while|if)\b.*\)$|(?:\}\s*)?else$', previous)
+            if loop or elif_:
+                start = text.index('(', text.index(loop.group(1) if loop else 'if'))
+                end = closing(text, start)
+                inside = line[start + 1:end]
+                parts = [k for k, ch in enumerate(masked(inside)) if ch == ';'] if loop and loop.group(1) == 'for' else []
+                if len(parts) == 2:
+                    test = inside[parts[0] + 1:parts[1]].strip() or 'true'
+                    inside = inside[:parts[0] + 1] + f' ({record(i + 1)}, ({test}));' + inside[parts[1] + 1:]
+                    out[i] = line[:start + 1] + inside + line[end:]
+                elif loop and loop.group(1) == 'for':  # for (x : list): recorded at the top of each pass
+                    if bare.endswith('{'):
+                        out[i] = line.rstrip() + ' ' + record(i + 1) + ';'
+                else:
+                    out[i] = line[:start + 1] + f'({record(i + 1)}, ({inside}))' + line[end:]
+            elif not re.match(r'[{}#]|//|else\b|case\b|default\b', stripped) and (
+                    not previous or previous[-1] in ';{}' or braceless):
+                body = record(i + 1) + '; ' + stripped
+                out[i] = indent + ('{ ' + body + ' }' if braceless else body)
+        depth += bare.count('{') - bare.count('}')
+        if depth == 0:
+            inside = False
+        if bare:
+            previous = bare
+    return CPP_HELPERS + '\n'.join(out) + '\n'
+
+
+def line_runs(code, stdin, language):
+    """The lines a program reaches, in order, with the simple values in scope before each (Python only).
+
+    For trace pages: the run goes on through an error or an endless loop, and C++ records every function."""
+    if language == 'python':
+        events = run(code, stdin, lines=True)
+        return [(e[0], e[1]) for e in events if e[0] is not None]
+    with tempfile.TemporaryDirectory() as folder:
+        exe = Path(folder) / ('trace.exe' if os.name == 'nt' else 'trace')
+        built = subprocess.run([compiler(), '-std=c++11', '-Wno-error=parentheses', '-x', 'c++', '-', '-o', str(exe)], input=instrument_lines(code).encode(),
+                               capture_output=True, timeout=60)
+        assert built.returncode == 0, 'the traced C++ program does not compile:\n' + built.stderr.decode(errors='replace')
+        try:
+            result = subprocess.run([str(exe)], input=stdin.encode(), capture_output=True, timeout=10)
+            text = result.stdout.decode('utf-8', errors='replace')
+        except subprocess.TimeoutExpired as late:
+            text = (late.stdout or b'').decode('utf-8', errors='replace')
+    found = []
+    for piece in text.split('\x02')[1:]:
+        if '\x03' in piece:
+            found.append((json.loads(piece.split('\x03', 1)[0])['l'], {}))
+    return found
+
+
 def compiler():
     found = os.environ.get('CXX') or shutil.which('clang++') or shutil.which('g++')
     assert found, 'No C++ compiler found for the algorithm demo'
@@ -194,7 +322,7 @@ def run_cpp(code, stdin):
     """Compile the traced copy, run it, and read its trace calls back as events."""
     with tempfile.TemporaryDirectory() as folder:
         exe = Path(folder) / ('demo.exe' if os.name == 'nt' else 'demo')
-        built = subprocess.run([compiler(), '-std=c++11', '-x', 'c++', '-', '-o', str(exe)], input=instrument(code).encode(),
+        built = subprocess.run([compiler(), '-std=c++11', '-Wno-error=parentheses', '-x', 'c++', '-', '-o', str(exe)], input=instrument(code).encode(),
                                capture_output=True, timeout=60)
         assert built.returncode == 0, 'the traced C++ program does not compile:\n' + built.stderr.decode(errors='replace')
         result = subprocess.run([str(exe)], input=stdin.encode(), capture_output=True, timeout=10)

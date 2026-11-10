@@ -36,6 +36,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 | 编辑器 | `.editor` + `.tab` + `pre.code data-file` + `.ln` |
 | 语法高亮 | `.f` 函数，`.k` 关键字，`.s` 字符串，`.m` 数字 |
 | 分步揭晓 | 页面加 `data-steps="3" data-at="3"`，元素加 `.step .s2`、`.only1`，行加 `.l1` |
+| 逐步追踪 | 代码行加 `.l1 .l2 …`，第几步亮哪几行。`check.py` 用真实运行核对（Python 用 settrace，C++ 插记录后编译运行）：每一步亮的行要在运行里连着出现，各步按顺序往后走；同一行可以连着讲两步（先看 and 左边，再看右边）。整个函数一起亮算“定义”，只核对 def 那一行；`else:`、单独的括号、`#include` 不算。写成 `<i>i</i><b>2</b>` 或 `<i>i = 2</i>` 的框（Python）核对这一步里 i 真的是 2，也就核对了是循环的第几遍。程序要读输入时在 `pre.code` 加 `data-stdin="3&#10;5&#10;"`，按页面上说的输入写；没写就用这页 claims 里同一程序的输入，几个输入可以中途换下一个（先输入 12，再输入 十二）。只是指给学生看、不按运行顺序的一步（“input 写了两次”）写 `data-point="4"`，只核对这些行确实会运行。页面只摘几行时要有 `data-file` 加 `data-lines`（或 `data-full`），不然没法核对。`python3 tools/check.py --traces` 列出没法核对的追踪页和原因 |
 | 选择小测 | `.quiz data-right="序号"`，选项加 `data-fb`，后面放 `.fb` |
 | 点行找错 | `pre.code.pick data-bug data-yes data-no`，后面放 `.fb` |
 | 拨开关 | `.gate data-op="and/or/not"`，里面放 `button`（写 True 或 False）和 `b`，结果由脚本算 |
