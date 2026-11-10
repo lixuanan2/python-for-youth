@@ -1,7 +1,7 @@
 {
   "01-input-output": {
-    "deck": "d0979a52c8bb08d7d6b53245b912fc0a16bac2b487a2a305c2768cc06d961ef2",
-    "pdf": "c283f33befb9c5a72dd3af88107da7cafd81c0da34ca9607d0b96aaf81992d36"
+    "deck": "26f7a951f9f7533a91f6d01533bf528bab733a7e863b71e9453f4d77dd2df9b2",
+    "pdf": "980e91cf661449e2325551dd8e5659c0add470a45509b8b63ba2ef5f7fc0b6e9"
   },
   "02-variables": {
     "deck": "0428f310950379b0e3d267c6d192610fa54b7224f38cc787ec692b9e8c5b3949",
@@ -24,8 +24,8 @@
     "pdf": "7d8f5f1c4e6785955bc99debd6bf11d82bde651f17bfd07f0514e56e9e44bddf"
   },
   "07-while-loop": {
-    "deck": "db1fc7d50ed7e1e9f2961014db27de30727129c405ed3ee3b7fbb31e2cfa4db5",
-    "pdf": "aa97977981cdc39148e3dbdb9571bcabd0036e597d908532e931c3ca402eece5"
+    "deck": "b292eb14ca4cef25cbb3d7204b3f422c82a646420a18ebc85284a5976494b6f9",
+    "pdf": "ba839a1e09917eb19b1f6da99925261868d6e1a3dcffe98aafd731d1e0eeecb2"
   },
   "08-loop-tally": {
     "deck": "f7aae83749fcd4f95b2acfe247da4947503595ee3680f5a07098e2ee6a533e60",
