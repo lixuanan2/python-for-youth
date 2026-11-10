@@ -607,7 +607,7 @@ dialog p{color:var(--muted);font-size:15px}
 ……（同样三步）</pre></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/03_check_more.py</p>
   </div>
-  <a class="ide r d3" data-code="def check():&#10;    print(&quot;1. 检查电源&quot;)&#10;    print(&quot;2. 检查屏幕&quot;)&#10;print(&quot;开机前：&quot;)&#10;check()&#10;print(&quot;关机前：&quot;)&#10;check()&#10;" style="left:610px;top:960px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【检查再加一步】&#10;# 在检查步骤的最后加上“3. 检查网线”。开机前和关机前都要检查三步。&#10;# 运行后应该输出（一共 8 行）：&#10;#   开机前：&#10;#   ……&#10;#   3. 检查网线&#10;# 提示：只改一处，两次调用都跟着变。&#10;# ↓ 在下面这段程序上改&#10;&#10;def check():&#10;    print(&quot;1. 检查电源&quot;)&#10;    print(&quot;2. 检查屏幕&quot;)&#10;print(&quot;开机前：&quot;)&#10;check()&#10;print(&quot;关机前：&quot;)&#10;check()&#10;" style="left:610px;top:960px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- predict: call before define -->
@@ -650,7 +650,7 @@ dialog p{color:var(--muted);font-size:15px}
 祝你生日快乐</pre></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_birthday.py</p>
   </div>
-  <a class="ide r d3" data-code="def hello():&#10;    print(&quot;你好！&quot;)&#10;    print(&quot;欢迎来上课&quot;)&#10;hello()&#10;hello()&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【用函数唱生日歌】&#10;# 把 hello 改成一个叫 happy 的函数，它输出“祝你生日快乐”。&#10;#   用它唱出下面四句，不同的那一句直接 print。&#10;# 运行后应该输出（一共 4 行）：&#10;#   祝你生日快乐&#10;#   ……&#10;#   祝你生日快乐&#10;# 提示：把重复的那一句做成函数，换个名字。&#10;# ↓ 在下面这段程序上改&#10;&#10;def hello():&#10;    print(&quot;你好！&quot;)&#10;    print(&quot;欢迎来上课&quot;)&#10;hello()&#10;hello()&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: no parentheses -->
@@ -706,7 +706,7 @@ dialog p{color:var(--muted);font-size:15px}
 2
 1
 发射！</pre></div>
-  <a class="ide r d3" data-code="# 读入练习次数 n（1 到 5 的整数）&#10;# 每次先输出“第 k 次”，再倒数 3、2、1，最后输出“发射！”&#10;# 倒数的部分写成一个函数，在循环里调用它&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【发射练习】&#10;# 读入练习次数 n（1 到 5 的整数）。每次先输出“第 k 次”，再倒数 3、&#10;#   2、1，最后输出“发射！”。&#10;# 倒数的部分写成一个函数，在循环里调用它。&#10;# 例如输入：2&#10;# 应该输出（一共 10 行）：&#10;#   第 1 次&#10;#   ……&#10;#   发射！&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -731,7 +731,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="r d2"><code>选你喜欢的</code><span>儿歌的副歌、班级口号、游戏开场、广播体操口令。</span></div>
     <div class="r d3"><code>还想更厉害</code><span>定义两个函数搭配着用，或者在循环里调用函数。</span></div>
   </div>
-  <a class="ide r d3" data-code="# 我的函数：给一段常用的话起个名字，想用就叫它&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <a class="ide r d3" data-code="# 【造一个你的函数】&#10;# 给一段常常要说的话起个名字，想用就叫它。说什么，你自己定。&#10;# 先做到：定义一个函数，至少调用两次，中间穿插别的话。&#10;# 选你喜欢的：儿歌的副歌、班级口号、游戏开场、广播体操口令。&#10;# 还想更厉害：定义两个函数搭配着用，或者在循环里调用函数。&#10;# ↓ 从这里开始造&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>

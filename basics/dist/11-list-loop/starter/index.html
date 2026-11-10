@@ -84,8 +84,18 @@ for s in scores:
         count += 1
 print(count)</pre></details></li>
     <li class="file"><div><h2><a href="04_failed.py" download="04_failed.py">04_failed.py</a></h2><p>课件第 9 页：把不及格的分数一行一个输出。</p></div>
-      <nav aria-label="04_failed.py"><a href="04_failed.py" download="04_failed.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=n%20%3D%20int(input())%0Ascores%20%3D%20%5B%5D%0Afor%20i%20in%20range(n)%3A%0A%20%20%20%20scores.append(int(input()))%0Acount%20%3D%200%0Afor%20s%20in%20scores%3A%0A%20%20%20%20if%20s%20%3E%3D%2060%3A%0A%20%20%20%20%20%20%20%20count%20%2B%3D%201%0Aprint(count)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-9">看第 9 页</a></nav>
-      <details><summary>看代码</summary><pre>n = int(input())
+      <nav aria-label="04_failed.py"><a href="04_failed.py" download="04_failed.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%8A%8A%E4%B8%8D%E5%8F%8A%E6%A0%BC%E7%9A%84%E5%88%86%E6%95%B0%E5%88%97%E5%87%BA%E6%9D%A5%E3%80%91%0A%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%881%20%E5%88%B0%20100%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%0A%23%20%20%20%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%200%20%E5%88%B0%20100%20%E7%9A%84%E6%95%B4%E6%95%B0%E5%88%86%E6%95%B0%E3%80%82%0A%23%20%20%20%E6%8A%8A%E4%B8%8D%E5%88%B0%2060%20%E5%88%86%E7%9A%84%E5%88%86%E6%95%B0%E6%8C%89%E5%8E%9F%E6%9D%A5%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%BE%93%E5%87%BA%EF%BC%8C%E4%B8%80%E8%A1%8C%E4%B8%80%E4%B8%AA%EF%BC%9B%0A%23%20%20%20%E4%B8%80%E4%B8%AA%E4%B9%9F%E6%B2%A1%E6%9C%89%E5%B0%B1%E4%BB%80%E4%B9%88%E4%B9%9F%E4%B8%8D%E8%BE%93%E5%87%BA%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A4%E3%80%8180%E3%80%8159%E3%80%8160%E3%80%8130%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A59%E3%80%8130%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E4%B8%8D%E7%94%A8%E6%95%B0%E4%BA%86%EF%BC%8C%E7%A2%B0%E5%88%B0%E5%B0%B1%E7%9B%B4%E6%8E%A5%E8%BE%93%E5%87%BA%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0An%20%3D%20int(input())%0Ascores%20%3D%20%5B%5D%0Afor%20i%20in%20range(n)%3A%0A%20%20%20%20scores.append(int(input()))%0Acount%20%3D%200%0Afor%20s%20in%20scores%3A%0A%20%20%20%20if%20s%20%3E%3D%2060%3A%0A%20%20%20%20%20%20%20%20count%20%2B%3D%201%0Aprint(count)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-9">看第 9 页</a></nav>
+      <details><summary>看代码</summary><pre># 【把不及格的分数列出来】
+# 第一行读入人数 n（1 到 100 的整数），接下来 n 行，
+#   每行一个 0 到 100 的整数分数。
+#   把不到 60 分的分数按原来的顺序输出，一行一个；
+#   一个也没有就什么也不输出。
+# 例如输入（每个一行）：4、80、59、60、30
+# 应该输出（每个一行）：59、30
+# 提示：不用数了，碰到就直接输出。
+# ↓ 在下面这段程序上改
+
+n = int(input())
 scores = []
 for i in range(n):
     scores.append(int(input()))
@@ -95,8 +105,16 @@ for s in scores:
         count += 1
 print(count)</pre></details></li>
     <li class="file"><div><h2><a href="05_add_five.py" download="05_add_five.py">05_add_five.py</a></h2><p>课件第 11 页：用下标给每个人加5分。</p></div>
-      <nav aria-label="05_add_five.py"><a href="05_add_five.py" download="05_add_five.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=n%20%3D%20int(input())%0Ascores%20%3D%20%5B%5D%0Afor%20i%20in%20range(n)%3A%0A%20%20%20%20scores.append(int(input()))%0Acount%20%3D%200%0Afor%20s%20in%20scores%3A%0A%20%20%20%20if%20s%20%3E%3D%2060%3A%0A%20%20%20%20%20%20%20%20count%20%2B%3D%201%0Aprint(count)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-11">看第 11 页</a></nav>
-      <details><summary>看代码</summary><pre>n = int(input())
+      <nav aria-label="05_add_five.py"><a href="05_add_five.py" download="05_add_five.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E5%85%A8%E7%8F%AD%E6%AF%8F%E4%BA%BA%E5%8A%A0%205%20%E5%88%86%E3%80%91%0A%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%881%20%E5%88%B0%20100%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%0A%23%20%20%20%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%200%20%E5%88%B0%2095%20%E7%9A%84%E6%95%B4%E6%95%B0%E5%88%86%E6%95%B0%E3%80%82%E6%AF%8F%E4%BA%BA%E5%8A%A0%205%20%E5%88%86%EF%BC%8C%E6%9C%80%E5%90%8E%E8%BE%93%E5%87%BA%E6%95%B4%E4%B8%AA%E5%88%97%E8%A1%A8%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A3%E3%80%8180%E3%80%8195%E3%80%8170%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A%5B85%2C%20100%2C%2075%5D%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E6%8D%A2%E6%88%90%E7%94%A8%E4%B8%8B%E6%A0%87%E9%81%8D%E5%8E%86%EF%BC%8C%E6%8A%8A%E5%8A%A0%E5%88%86%E6%94%BE%E5%9B%9E%E5%88%97%E8%A1%A8%E9%87%8C%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0An%20%3D%20int(input())%0Ascores%20%3D%20%5B%5D%0Afor%20i%20in%20range(n)%3A%0A%20%20%20%20scores.append(int(input()))%0Acount%20%3D%200%0Afor%20s%20in%20scores%3A%0A%20%20%20%20if%20s%20%3E%3D%2060%3A%0A%20%20%20%20%20%20%20%20count%20%2B%3D%201%0Aprint(count)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-11">看第 11 页</a></nav>
+      <details><summary>看代码</summary><pre># 【全班每人加 5 分】
+# 第一行读入人数 n（1 到 100 的整数），接下来 n 行，
+#   每行一个 0 到 95 的整数分数。每人加 5 分，最后输出整个列表。
+# 例如输入（每个一行）：3、80、95、70
+# 应该输出：[85, 100, 75]
+# 提示：换成用下标遍历，把加分放回列表里。
+# ↓ 在下面这段程序上改
+
+n = int(input())
 scores = []
 for i in range(n):
     scores.append(int(input()))
@@ -106,13 +124,23 @@ for s in scores:
         count += 1
 print(count)</pre></details></li>
     <li class="file"><div><h2><a href="06_above_average.py" download="06_above_average.py">06_above_average.py</a></h2><p>课件第 15 页：先算平均分，再看一遍，数高于平均分的人。</p></div>
-      <nav aria-label="06_above_average.py"><a href="06_above_average.py" download="06_above_average.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%881%20%E5%88%B0%20100%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%0A%23%20%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%200%20%E5%88%B0%20100%20%E7%9A%84%E6%95%B4%E6%95%B0%E5%88%86%E6%95%B0%0A%23%20%E8%BE%93%E5%87%BA%E5%88%86%E6%95%B0%E4%B8%A5%E6%A0%BC%E9%AB%98%E4%BA%8E%E5%B9%B3%E5%9D%87%E5%88%86%E7%9A%84%E4%BA%BA%E6%95%B0%EF%BC%8C%E4%B8%80%E6%A0%B7%E9%AB%98%E7%9A%84%E4%B8%8D%E7%AE%97%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-15">看第 15 页</a></nav>
-      <details><summary>看代码</summary><pre># 第一行读入人数 n（1 到 100 的整数）
-# 接下来 n 行，每行一个 0 到 100 的整数分数
-# 输出分数严格高于平均分的人数，一样高的不算</pre></details></li>
+      <nav aria-label="06_above_average.py"><a href="06_above_average.py" download="06_above_average.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E9%AB%98%E4%BA%8E%E5%B9%B3%E5%9D%87%E5%88%86%E3%80%91%0A%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%881%20%E5%88%B0%20100%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%0A%23%20%20%20%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%200%20%E5%88%B0%20100%20%E7%9A%84%E6%95%B4%E6%95%B0%E5%88%86%E6%95%B0%E3%80%82%0A%23%20%E8%BE%93%E5%87%BA%E5%88%86%E6%95%B0%E4%B8%A5%E6%A0%BC%E9%AB%98%E4%BA%8E%E5%B9%B3%E5%9D%87%E5%88%86%E7%9A%84%E4%BA%BA%E6%95%B0%EF%BC%8C%E5%92%8C%E5%B9%B3%E5%9D%87%E5%88%86%E4%B8%80%E6%A0%B7%E7%9A%84%E4%B8%8D%E7%AE%97%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A4%E3%80%8180%E3%80%8190%E3%80%8170%E3%80%8160%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A2%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E5%86%99%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-15">看第 15 页</a></nav>
+      <details><summary>看代码</summary><pre># 【高于平均分】
+# 第一行读入人数 n（1 到 100 的整数），接下来 n 行，
+#   每行一个 0 到 100 的整数分数。
+# 输出分数严格高于平均分的人数，和平均分一样的不算。
+# 例如输入（每个一行）：4、80、90、70、60
+# 应该输出：2
+# ↓ 从这里开始写</pre></details></li>
     <li class="file"><div><h2><a href="07_roll_call.py" download="07_roll_call.py">07_roll_call.py</a></h2><p>课件第 17 页：做一个自己的点名器。</p></div>
-      <nav aria-label="07_roll_call.py"><a href="07_roll_call.py" download="07_roll_call.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E6%88%91%E7%9A%84%E7%82%B9%E5%90%8D%E5%99%A8%EF%BC%9A%E5%85%88%E6%8A%8A%E5%90%8D%E5%AD%97%E9%83%BD%E5%AD%98%E8%B5%B7%E6%9D%A5%EF%BC%8C%E5%86%8D%E4%B8%80%E4%B8%AA%E4%B8%80%E4%B8%AA%E5%8F%AB%E5%88%B0%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-17">看第 17 页</a></nav>
-      <details><summary>看代码</summary><pre># 我的点名器：先把名字都存起来，再一个一个叫到</pre></details></li>
+      <nav aria-label="07_roll_call.py"><a href="07_roll_call.py" download="07_roll_call.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E9%80%A0%E4%B8%80%E4%B8%AA%E4%BD%A0%E7%9A%84%E7%82%B9%E5%90%8D%E5%99%A8%E3%80%91%0A%23%20%E7%A8%8B%E5%BA%8F%E5%85%88%E6%8A%8A%E5%90%8D%E5%AD%97%E9%83%BD%E8%AE%B0%E4%B8%8B%E6%9D%A5%EF%BC%8C%E5%86%8D%E4%B8%80%E4%B8%AA%E4%B8%80%E4%B8%AA%E5%8F%AB%E5%88%B0%E3%80%82%E5%8F%AB%E8%B0%81%E3%80%81%E6%80%8E%E4%B9%88%E5%8F%AB%EF%BC%8C%E4%BD%A0%E8%87%AA%E5%B7%B1%E5%AE%9A%E3%80%82%0A%23%20%E5%85%88%E5%81%9A%E5%88%B0%EF%BC%9A%E8%AF%BB%E5%85%A5%E5%87%A0%E4%B8%AA%E5%90%8D%E5%AD%97%E5%AD%98%E8%BF%9B%E5%88%97%E8%A1%A8%EF%BC%8C%E5%86%8D%E4%B8%80%E4%B8%AA%E4%B8%80%E4%B8%AA%E8%AF%B4%E4%B8%80%E5%8F%A5%E8%AF%9D%E3%80%82%0A%23%20%E9%80%89%E4%BD%A0%E5%96%9C%E6%AC%A2%E7%9A%84%EF%BC%9A%E7%82%B9%E5%90%8D%E3%80%81%E4%BB%8B%E7%BB%8D%E9%98%9F%E5%91%98%E3%80%81%E7%BB%99%E6%AF%8F%E4%B8%AA%E5%AE%A0%E7%89%A9%E6%89%93%E6%8B%9B%E5%91%BC%E3%80%81%E5%BF%B5%E5%87%BA%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95%E3%80%82%0A%23%20%E8%BF%98%E6%83%B3%E6%9B%B4%E5%8E%89%E5%AE%B3%EF%BC%9A%E7%BB%99%E6%AF%8F%E4%B8%80%E4%B8%AA%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%9C%80%E5%90%8E%E8%AF%B4%E4%B8%80%E5%85%B1%E5%87%A0%E4%B8%AA%EF%BC%9B%0A%23%20%20%20%E6%88%96%E8%80%85%E5%8F%AA%E5%8F%AB%E5%90%8D%E5%AD%97%E6%9C%80%E9%95%BF%E7%9A%84%E9%82%A3%E4%B8%AA%E3%80%82%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E9%80%A0%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-17">看第 17 页</a></nav>
+      <details><summary>看代码</summary><pre># 【造一个你的点名器】
+# 程序先把名字都记下来，再一个一个叫到。叫谁、怎么叫，你自己定。
+# 先做到：读入几个名字存进列表，再一个一个说一句话。
+# 选你喜欢的：点名、介绍队员、给每个宠物打招呼、念出购物清单。
+# 还想更厉害：给每一个编号，最后说一共几个；
+#   或者只叫名字最长的那个。
+# ↓ 从这里开始造</pre></details></li>
   </ol>
 </main>
 

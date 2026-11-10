@@ -599,7 +599,7 @@ b = {2, 3, 4}</pre>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>例题那句，第三行</small><pre>cats dogs i like</pre></div><div><small>b a b，第三行</small><pre>a b</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 13 课的 join 能把列表连成一行。教室电脑：打开 starter/05_repeat.py</p>
   </div>
-  <a class="ide r d3" data-code="words = input().split()&#10;print(len(words), &quot;个词&quot;)&#10;print(len(set(words)), &quot;个不同的词&quot;)&#10;# 再加一行：把不同的词从小到大排好，用空格连成一行输出&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【把不同的词列出来】&#10;# 在例题上改：最后再输出一行，把不同的词从小到大排好，&#10;#   用一个空格连起来。输入一行英文，词和词之间用空格隔开。&#10;# 例如输入：i like cats i like dogs&#10;# 应该输出：&#10;#   6 个词&#10;#   4 个不同的词&#10;#   cats dogs i like&#10;# 提示：再加一行输出。&#10;# ↓ 在下面这段程序上改&#10;&#10;words = input().split()&#10;print(len(words), &quot;个词&quot;)&#10;print(len(set(words)), &quot;个不同的词&quot;)&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -633,7 +633,7 @@ b = {2, 3, 4}</pre>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:520px"><small>依次输入</small><pre style="font-size:40px;white-space:pre">Amy Bob Cat Dan
 Bob Amy Bob</pre><small style="margin-top:14px">输出</small><pre style="font-size:40px;white-space:pre">到了 2 人
 没到：Cat Dan</pre></div>
-  <a class="ide r d3" data-code="# 第一行：全班名单，名字之间用空格隔开（1 到 50 个名字，不重复）&#10;# 第二行：签到记录，名字之间用空格隔开，有人签了好几次，也可能一个都没有&#10;# 签到记录里只会出现全班名单里的名字&#10;# 输出第一行：到了 几 人&#10;# 输出第二行：没到的人从小到大排好，写成“没到：A B”；都到了就输出“全到了”&#10;" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【谁没来？】&#10;# 第一行是全班名单（1 到 50 人），&#10;#   第二行是签到记录（0 到 200 个名字），名字都用空格隔开。&#10;#   有人签了好几次，也可能没人签。签到的都在名单里。&#10;# 输出两行：第一行“到了 几 人”；&#10;#   第二行把没到的人从小到大排好（和 sorted 排的一样），&#10;#   写成“没到：A B”，都到了就写“全到了”。&#10;# 例如输入（每个一行）：Amy Bob Cat Dan、Bob Amy Bob&#10;# 应该输出：&#10;#   到了 2 人&#10;#   没到：Cat Dan&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:886px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -658,7 +658,7 @@ Bob Amy Bob</pre><small style="margin-top:14px">输出</small><pre style="font-s
     <div class="r d2"><code>选你喜欢的</code><span>你和同桌都喜欢的爱好；两首诗里都出现的字；抽奖时不让同一个人中两次。</span></div>
     <div class="r d3"><code>还想更厉害</code><span>三个人的爱好，找出三个人都喜欢的，再找只有一个人喜欢的。</span></div>
   </div>
-  <a class="ide r d3" data-code="# 我的集合小程序&#10;# 想一想：哪里有重复要去掉？哪里要找“都有的”或“只有一边有的”？&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <a class="ide r d3" data-code="# 【造一个你的集合小程序】&#10;# 找一件要“去掉重复”或者“找相同”的事。&#10;# 先做到：输入一串数字，输出一共有几个不同的数。&#10;# 选你喜欢的：你和同桌都喜欢的爱好；两首诗里都出现的字；&#10;#   抽奖时不让同一个人中两次。&#10;# 还想更厉害：三个人的爱好，找出三个人都喜欢的，&#10;#   再找只有一个人喜欢的。&#10;# ↓ 从这里开始造&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>

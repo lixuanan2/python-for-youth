@@ -601,7 +601,7 @@ for i in range(1, 4):
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 100，输出</small><pre>5050</pre></div><div><small>输入 0，输出</small><pre>0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/02_gauss.py</p>
   </div>
-  <a class="ide r d3" data-code="total = 0&#10;for i in range(1, 4):&#10;    total = total + i&#10;print(total)&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【从 1 加到 n】&#10;# 读入一个 0 到 10000 的整数 n，输出 1 + 2 + … + n 的和。&#10;#   相传数学家高斯小时候很快就算出了 1 加到 100。程序比他还快。&#10;# 例如输入：100&#10;# 应该输出：5050&#10;# 提示：读入 n，再改 range，用上 +=。&#10;# ↓ 在下面这段程序上改&#10;&#10;total = 0&#10;for i in range(1, 4):&#10;    total = total + i&#10;print(total)&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- worked example: total score -->
@@ -635,7 +635,7 @@ for i in range(1, 4):
 70</pre></div><div><small>输出</small><pre style="line-height:1.2">80.0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/04_average.py</p>
   </div>
-  <a class="ide r d3" data-code="n = int(input())&#10;total = 0&#10;for i in range(n):&#10;    score = int(input())&#10;    total += score&#10;print(total)&#10;" style="left:610px;top:930px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【改成输出平均分】&#10;# 第一行读入人数 n（1 到 100 的整数），接下来 n 行，&#10;#   每行一个 0 到 100 的整数分数。&#10;# 例如输入（每个一行）：3、80、90、70&#10;# 应该输出：80.0&#10;# 提示：只要改最后一行。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;total = 0&#10;for i in range(n):&#10;    score = int(input())&#10;    total += score&#10;print(total)&#10;" style="left:610px;top:930px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- counter with trace -->
@@ -691,7 +691,7 @@ for i in range(1, 4):
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 5 行</small><pre style="font-size:44px">4、80、59、60、30</pre></div><div><small>输出</small><pre>2</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/06_count_pass.py</p>
   </div>
-  <a class="ide r d3" data-code="n = int(input())&#10;total = 0&#10;for i in range(n):&#10;    score = int(input())&#10;    total += score&#10;print(total)&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【数一数几个人及格】&#10;# 第一行读入人数 n（0 到 100 的整数），接下来 n 行，&#10;#   每行一个 0 到 100 的整数分数。60 分及以上算及格，&#10;#   输出及格人数。&#10;# 例如输入（每个一行）：4、80、59、60、30&#10;# 应该输出：2&#10;# 提示：把累加换成计数，再加一个判断。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;total = 0&#10;for i in range(n):&#10;    score = int(input())&#10;    total += score&#10;print(total)&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -726,7 +726,7 @@ for i in range(1, 4):
 10
 3
 0</pre><small style="margin-top:20px">输出</small><pre style="font-size:44px">存了 3 次，一共 18 元</pre></div>
-  <a class="ide r d3" data-code="# 每行读入一个数：这次存了多少元（1 到 1000 的整数）&#10;# 读到 0 就停，0 不算一次&#10;# 输出：存了 3 次，一共 18 元&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【存钱罐】&#10;# 每行读入这次存了多少元（1 到 1000 的整数），读到 0 就停，&#10;#   0 不算一次。&#10;# 输出一共存了几次，一共多少元。&#10;# 第一行就是 0 的话，输出“存了 0 次，一共 0 元”。&#10;# 例如输入（每个一行）：5、10、3、0&#10;# 应该输出：存了 3 次，一共 18 元&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -751,7 +751,7 @@ for i in range(1, 4):
     <div class="r d2"><code>选你喜欢的</code><span>零花钱、每天步数、游戏得分、读书页数，什么都行。</span></div>
     <div class="r d3"><code>还想更厉害</code><span>同时算总和和次数，再算平均，数一数有几次超过目标。</span></div>
   </div>
-  <a class="ide r d3" data-code="# 我的小账本：一笔一笔记，最后算总账&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <a class="ide r d3" data-code="# 【造一个你的小账本】&#10;# 程序一笔一笔地记，最后告诉你总账。记什么，你自己定。&#10;# 先做到：读入几个数，输出它们的总和，再说一句话。&#10;# 选你喜欢的：零花钱、每天步数、游戏得分、读书页数，什么都行。&#10;# 还想更厉害：同时算总和和次数，再算平均，数一数有几次超过目标。&#10;# ↓ 从这里开始造&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>

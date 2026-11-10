@@ -87,8 +87,16 @@ for r in range(n - 1):
             a[j], a[j + 1] = a[j + 1], a[j]
     print(a)</pre></details></li>
     <li class="file"><div><h2><a href="04_bubble_down.py" download="04_bubble_down.py">04_bubble_down.py</a></h2><p>课件第 9 页：改成从大到小排。</p></div>
-      <nav aria-label="04_bubble_down.py"><a href="04_bubble_down.py" download="04_bubble_down.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=n%20%3D%20int(input())%0Aa%20%3D%20%5B%5D%0Afor%20k%20in%20range(n)%3A%0A%20%20%20%20a.append(int(input()))%0Afor%20r%20in%20range(n%20-%201)%3A%0A%20%20%20%20for%20j%20in%20range(n%20-%201%20-%20r)%3A%0A%20%20%20%20%20%20%20%20if%20a%5Bj%5D%20%3E%20a%5Bj%20%2B%201%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20a%5Bj%5D%2C%20a%5Bj%20%2B%201%5D%20%3D%20a%5Bj%20%2B%201%5D%2C%20a%5Bj%5D%0A%20%20%20%20print(a)%0A%23%20%E6%94%B9%E6%88%90%E4%BB%8E%E5%A4%A7%E5%88%B0%E5%B0%8F%E6%8E%92%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-9">看第 9 页</a></nav>
-      <details><summary>看代码</summary><pre>n = int(input())
+      <nav aria-label="04_bubble_down.py"><a href="04_bubble_down.py" download="04_bubble_down.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E4%BB%8E%E5%A4%A7%E5%88%B0%E5%B0%8F%E6%8E%92%E3%80%91%0A%23%20%E5%9C%A8%E4%BE%8B%E9%A2%98%E4%B8%8A%E6%94%B9%EF%BC%8C%E8%AE%A9%E5%A4%A7%E7%9A%84%E6%8E%92%E5%89%8D%E9%9D%A2%E3%80%82%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%20n%EF%BC%882%20%E5%88%B0%2010%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%EF%BC%8C%0A%23%20%20%20%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E6%95%B4%E6%95%B0%E3%80%82%E5%92%8C%E4%BE%8B%E9%A2%98%E4%B8%80%E6%A0%B7%EF%BC%8C%E6%AF%8F%E8%BD%AE%E8%BE%93%E5%87%BA%E4%B8%80%E6%AC%A1%E5%88%97%E8%A1%A8%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A4%E3%80%811%E3%80%812%E3%80%813%E3%80%814%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A%5B2%2C%203%2C%204%2C%201%5D%20%2F%20%5B3%2C%204%2C%202%2C%201%5D%20%2F%20%5B4%2C%203%2C%202%2C%201%5D%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E5%8F%AA%E6%94%B9%E4%B8%80%E4%B8%AA%E7%AC%A6%E5%8F%B7%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0An%20%3D%20int(input())%0Aa%20%3D%20%5B%5D%0Afor%20k%20in%20range(n)%3A%0A%20%20%20%20a.append(int(input()))%0Afor%20r%20in%20range(n%20-%201)%3A%0A%20%20%20%20for%20j%20in%20range(n%20-%201%20-%20r)%3A%0A%20%20%20%20%20%20%20%20if%20a%5Bj%5D%20%3E%20a%5Bj%20%2B%201%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20a%5Bj%5D%2C%20a%5Bj%20%2B%201%5D%20%3D%20a%5Bj%20%2B%201%5D%2C%20a%5Bj%5D%0A%20%20%20%20print(a)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-9">看第 9 页</a></nav>
+      <details><summary>看代码</summary><pre># 【从大到小排】
+# 在例题上改，让大的排前面。第一行读入 n（2 到 10 的整数），
+#   接下来 n 行每行一个整数。和例题一样，每轮输出一次列表。
+# 例如输入（每个一行）：4、1、2、3、4
+# 应该输出（每个一行）：[2, 3, 4, 1] / [3, 4, 2, 1] / [4, 3, 2, 1]
+# 提示：只改一个符号。
+# ↓ 在下面这段程序上改
+
+n = int(input())
 a = []
 for k in range(n):
     a.append(int(input()))
@@ -96,17 +104,28 @@ for r in range(n - 1):
     for j in range(n - 1 - r):
         if a[j] &gt; a[j + 1]:
             a[j], a[j + 1] = a[j + 1], a[j]
-    print(a)
-# 改成从大到小排</pre></details></li>
+    print(a)</pre></details></li>
     <li class="file"><div><h2><a href="05_count_swaps.py" download="05_count_swaps.py">05_count_swaps.py</a></h2><p>课件第 12 页：冒泡排序并数出交换次数。</p></div>
-      <nav aria-label="05_count_swaps.py"><a href="05_count_swaps.py" download="05_count_swaps.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%881%20%E5%88%B0%2020%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E8%BA%AB%E9%AB%98%EF%BC%88%E6%95%B4%E6%95%B0%EF%BC%89%0A%23%20%E7%94%A8%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E4%BB%8E%E7%9F%AE%E5%88%B0%E9%AB%98%E6%8E%92%E5%A5%BD%EF%BC%8C%E6%AF%8F%E6%AC%A1%E5%8F%AA%E8%83%BD%E4%BA%A4%E6%8D%A2%E7%9B%B8%E9%82%BB%E7%9A%84%E4%B8%A4%E4%B8%AA%0A%23%20%E8%BE%93%E5%87%BA%E4%B8%A4%E8%A1%8C%EF%BC%9A%E6%8E%92%E5%A5%BD%E7%9A%84%E5%88%97%E8%A1%A8%EF%BC%9B%E4%B8%80%E5%85%B1%E4%BA%A4%E6%8D%A2%E4%BA%86%E5%87%A0%E6%AC%A1%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-12">看第 12 页</a></nav>
-      <details><summary>看代码</summary><pre># 第一行读入人数 n（1 到 20 的整数），接下来 n 行，每行一个身高（整数）
-# 用冒泡排序从矮到高排好，每次只能交换相邻的两个
-# 输出两行：排好的列表；一共交换了几次</pre></details></li>
+      <nav aria-label="05_count_swaps.py"><a href="05_count_swaps.py" download="05_count_swaps.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%8E%92%E9%98%9F%E6%8D%A2%E4%BA%86%E5%87%A0%E6%AC%A1%E3%80%91%0A%23%20%E4%BD%93%E8%82%B2%E8%AF%BE%E6%8C%89%E8%BA%AB%E9%AB%98%E4%BB%8E%E7%9F%AE%E5%88%B0%E9%AB%98%E6%8E%92%E9%98%9F%EF%BC%8C%E6%AF%8F%E6%AC%A1%E5%8F%AA%E8%83%BD%E8%AE%A9%E6%8C%A8%E7%9D%80%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BA%BA%E6%8D%A2%E4%BD%8D%E7%BD%AE%E3%80%82%0A%23%20%20%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%881%20%E5%88%B0%2020%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%0A%23%20%20%20%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E8%BA%AB%E9%AB%98%EF%BC%881%20%E5%88%B0%20300%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%E3%80%82%0A%23%20%E7%94%A8%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E6%8E%92%E5%A5%BD%EF%BC%8C%E8%BE%93%E5%87%BA%E4%B8%A4%E8%A1%8C%EF%BC%9A%E6%8E%92%E5%A5%BD%E7%9A%84%E5%88%97%E8%A1%A8%EF%BC%9B%E4%B8%80%E5%85%B1%E6%8D%A2%E4%BA%86%E5%87%A0%E6%AC%A1%E3%80%82%0A%23%20%20%20%E4%B8%80%E6%A0%B7%E9%AB%98%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%BA%BA%E4%B8%8D%E7%94%A8%E6%8D%A2%EF%BC%8C%E4%B8%8D%E7%AE%97%E4%B8%80%E6%AC%A1%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A4%E3%80%815%E3%80%812%E3%80%814%E3%80%811%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A%5B1%2C%202%2C%204%2C%205%5D%20%2F%205%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E5%86%99%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-12">看第 12 页</a></nav>
+      <details><summary>看代码</summary><pre># 【排队换了几次】
+# 体育课按身高从矮到高排队，每次只能让挨着的两个人换位置。
+#   第一行读入人数 n（1 到 20 的整数），接下来 n 行，
+#   每行一个身高（1 到 300 的整数）。
+# 用冒泡排序排好，输出两行：排好的列表；一共换了几次。
+#   一样高的两个人不用换，不算一次。
+# 例如输入（每个一行）：4、5、2、4、1
+# 应该输出（每个一行）：[1, 2, 4, 5] / 5
+# ↓ 从这里开始写</pre></details></li>
     <li class="file"><div><h2><a href="06_my_sort.py" download="06_my_sort.py">06_my_sort.py</a></h2><p>课件第 14 页：做一个自己的排序小程序。</p></div>
-      <nav aria-label="06_my_sort.py"><a href="06_my_sort.py" download="06_my_sort.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E6%88%91%E7%9A%84%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%B0%8F%E7%A8%8B%E5%BA%8F%0A%23%20%E7%9B%B8%E9%82%BB%E4%B8%A4%E4%B8%AA%E6%AF%94%E4%B8%80%E6%AF%94%EF%BC%8C%E9%A1%BA%E5%BA%8F%E4%B8%8D%E5%AF%B9%E5%B0%B1%E6%8D%A2%E4%B8%80%E6%8D%A2%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-14">看第 14 页</a></nav>
-      <details><summary>看代码</summary><pre># 我的冒泡排序小程序
-# 相邻两个比一比，顺序不对就换一换</pre></details></li>
+      <nav aria-label="06_my_sort.py"><a href="06_my_sort.py" download="06_my_sort.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E9%80%A0%E4%B8%80%E4%B8%AA%E4%BD%A0%E7%9A%84%E6%8E%92%E5%BA%8F%E5%B0%8F%E7%A8%8B%E5%BA%8F%E3%80%91%0A%23%20%E4%B8%8D%E7%94%A8%20sorted%EF%BC%8C%E8%87%AA%E5%B7%B1%E6%8E%92%E3%80%82%E6%8E%92%E4%BB%80%E4%B9%88%EF%BC%8C%E4%BD%A0%E8%87%AA%E5%B7%B1%E5%AE%9A%E3%80%82%0A%23%20%E5%85%88%E5%81%9A%E5%88%B0%EF%BC%9A%E6%8A%8A%E4%BD%A0%E5%96%9C%E6%AC%A2%E7%9A%84%E5%87%A0%E4%B8%AA%E6%95%B0%E5%86%99%E8%BF%9B%E5%88%97%E8%A1%A8%EF%BC%8C%E7%94%A8%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E6%8E%92%E5%A5%BD%E5%86%8D%E8%BE%93%E5%87%BA%E3%80%82%0A%23%20%E9%80%89%E4%BD%A0%E5%96%9C%E6%AC%A2%E7%9A%84%EF%BC%9A%E7%BB%99%E6%88%90%E7%BB%A9%E4%BB%8E%E9%AB%98%E5%88%B0%E4%BD%8E%E6%8E%92%E3%80%81%E7%BB%99%E8%8B%B1%E6%96%87%E5%8D%95%E8%AF%8D%E6%8C%89%E5%AD%97%E6%AF%8D%E6%8E%92%E3%80%81%0A%23%20%20%20%E6%AF%8F%E8%BD%AE%E9%83%BD%E8%BE%93%E5%87%BA%E7%9C%8B%E6%B3%A1%E6%B3%A1%E5%BE%80%E5%90%8E%E5%86%92%E3%80%82%0A%23%20%E8%BF%98%E6%83%B3%E6%9B%B4%E5%8E%89%E5%AE%B3%EF%BC%9A%E6%9F%90%E4%B8%80%E8%BD%AE%E4%B8%80%E6%AC%A1%E4%B9%9F%E6%B2%A1%E6%8D%A2%EF%BC%8C%E8%AF%B4%E6%98%8E%E5%B7%B2%E7%BB%8F%E6%8E%92%E5%A5%BD%E4%BA%86%EF%BC%8C%E6%8F%90%E5%89%8D%E5%81%9C%E4%B8%8B%EF%BC%9B%0A%23%20%20%20%E6%95%B0%E4%B8%80%E6%95%B0%E7%9C%81%E4%BA%86%E5%87%A0%E8%BD%AE%E3%80%82%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E9%80%A0%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-14">看第 14 页</a></nav>
+      <details><summary>看代码</summary><pre># 【造一个你的排序小程序】
+# 不用 sorted，自己排。排什么，你自己定。
+# 先做到：把你喜欢的几个数写进列表，用冒泡排序排好再输出。
+# 选你喜欢的：给成绩从高到低排、给英文单词按字母排、
+#   每轮都输出看泡泡往后冒。
+# 还想更厉害：某一轮一次也没换，说明已经排好了，提前停下；
+#   数一数省了几轮。
+# ↓ 从这里开始造</pre></details></li>
   </ol>
 </main>
 

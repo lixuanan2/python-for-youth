@@ -80,8 +80,18 @@ footer{padding-top:24px;padding-bottom:56px;color:var(--muted);font-size:15px}
 for i in range(1, n + 1):
     print(i)</pre></details></li>
     <li class="file"><div><h2><a href="05_times_table.py" download="05_times_table.py">05_times_table.py</a></h2><p>课件第 11 页：改成乘法口诀。</p></div>
-      <nav aria-label="05_times_table.py"><a href="05_times_table.py" download="05_times_table.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=n%20%3D%20int(input())%0Afor%20i%20in%20range(1%2C%20n%20%2B%201)%3A%0A%20%20%20%20print(i)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-11">看第 11 页</a></nav>
-      <details><summary>看代码</summary><pre>n = int(input())
+      <nav aria-label="05_times_table.py"><a href="05_times_table.py" download="05_times_table.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E8%BE%93%E5%87%BA%E4%B8%80%E5%88%97%E4%B9%98%E6%B3%95%E5%8F%A3%E8%AF%80%E3%80%91%0A%23%20%E8%AF%BB%E5%85%A5%E4%B8%80%E4%B8%AA%201%20%E5%88%B0%209%20%E7%9A%84%E6%95%B4%E6%95%B0%20n%EF%BC%8C%E8%BE%93%E5%87%BA%209%20%E8%A1%8C%EF%BC%8C%E8%AE%A9%20i%20%E4%BB%8E%201%20%E8%B5%B0%E5%88%B0%209%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%9A1%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E4%B8%80%E5%85%B1%209%20%E8%A1%8C%EF%BC%89%EF%BC%9A%0A%23%20%20%201%20x%201%20%3D%201%0A%23%20%20%20%E2%80%A6%E2%80%A6%0A%23%20%20%201%20x%209%20%3D%209%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9Ai%20%E4%B8%8D%E5%85%89%E8%83%BD%E8%BE%93%E5%87%BA%EF%BC%8C%E8%BF%98%E8%83%BD%E6%8B%BF%E6%9D%A5%E7%AE%97%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0An%20%3D%20int(input())%0Afor%20i%20in%20range(1%2C%20n%20%2B%201)%3A%0A%20%20%20%20print(i)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-11">看第 11 页</a></nav>
+      <details><summary>看代码</summary><pre># 【输出一列乘法口诀】
+# 读入一个 1 到 9 的整数 n，输出 9 行，让 i 从 1 走到 9。
+# 例如输入：1
+# 应该输出（一共 9 行）：
+#   1 x 1 = 1
+#   ……
+#   1 x 9 = 9
+# 提示：i 不光能输出，还能拿来算。
+# ↓ 在下面这段程序上改
+
+n = int(input())
 for i in range(1, n + 1):
     print(i)</pre></details></li>
     <li class="file"><div><h2><a href="06_step.py" download="06_step.py">06_step.py</a></h2><p>课件第 12 页：用步长跳着数。</p></div>
@@ -94,8 +104,16 @@ for i in range(1, n + 1):
     print(i)
 print(&quot;发射！&quot;)</pre></details></li>
     <li class="file"><div><h2><a href="08_countdown.py" download="08_countdown.py">08_countdown.py</a></h2><p>课件第 16 页：改成从n倒数。</p></div>
-      <nav aria-label="08_countdown.py"><a href="08_countdown.py" download="08_countdown.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=for%20i%20in%20range(3%2C%200%2C%20-1)%3A%0A%20%20%20%20print(i)%0Aprint(%22%E5%8F%91%E5%B0%84%EF%BC%81%22)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-16">看第 16 页</a></nav>
-      <details><summary>看代码</summary><pre>for i in range(3, 0, -1):
+      <nav aria-label="08_countdown.py"><a href="08_countdown.py" download="08_countdown.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E8%87%AA%E5%B7%B1%E5%AE%9A%E5%80%92%E8%AE%A1%E6%97%B6%E3%80%91%0A%23%20%E8%AF%BB%E5%85%A5%E4%B8%80%E4%B8%AA%201%20%E5%88%B0%20100%20%E7%9A%84%E6%95%B4%E6%95%B0%20n%EF%BC%8C%E4%BB%8E%20n%20%E5%80%92%E6%95%B0%E5%88%B0%201%EF%BC%8C%E6%AF%8F%E4%B8%AA%E6%95%B0%E5%8D%A0%E4%B8%80%E8%A1%8C%EF%BC%8C%0A%23%20%20%20%E6%9C%80%E5%90%8E%E8%BE%93%E5%87%BA%E5%8F%91%E5%B0%84%EF%BC%81%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%9A3%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A3%E3%80%812%E3%80%811%E3%80%81%E5%8F%91%E5%B0%84%EF%BC%81%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E8%B5%B7%E7%82%B9%E4%B8%8D%E5%86%8D%E6%98%AF%E5%9B%BA%E5%AE%9A%E7%9A%84%203%20%E4%BA%86%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0Afor%20i%20in%20range(3%2C%200%2C%20-1)%3A%0A%20%20%20%20print(i)%0Aprint(%22%E5%8F%91%E5%B0%84%EF%BC%81%22)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-16">看第 16 页</a></nav>
+      <details><summary>看代码</summary><pre># 【自己定倒计时】
+# 读入一个 1 到 100 的整数 n，从 n 倒数到 1，每个数占一行，
+#   最后输出发射！
+# 例如输入：3
+# 应该输出（每个一行）：3、2、1、发射！
+# 提示：起点不再是固定的 3 了。
+# ↓ 在下面这段程序上改
+
+for i in range(3, 0, -1):
     print(i)
 print(&quot;发射！&quot;)</pre></details></li>
     <li class="file"><div><h2><a href="09_even.py" download="09_even.py">09_even.py</a></h2><p>课件第 19 页：循环枚举，判断筛选。</p></div>
@@ -105,19 +123,36 @@ for i in range(1, n + 1):
     if i % 2 == 0:
         print(i)</pre></details></li>
     <li class="file"><div><h2><a href="10_multiples.py" download="10_multiples.py">10_multiples.py</a></h2><p>课件第 21 页：改成筛选3的倍数。</p></div>
-      <nav aria-label="10_multiples.py"><a href="10_multiples.py" download="10_multiples.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=n%20%3D%20int(input())%0Afor%20i%20in%20range(1%2C%20n%20%2B%201)%3A%0A%20%20%20%20if%20i%20%25%202%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20print(i)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-21">看第 21 页</a></nav>
-      <details><summary>看代码</summary><pre>n = int(input())
+      <nav aria-label="10_multiples.py"><a href="10_multiples.py" download="10_multiples.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%8C%91%E5%87%BA%203%20%E7%9A%84%E5%80%8D%E6%95%B0%E3%80%91%0A%23%20%E8%AF%BB%E5%85%A5%E4%B8%80%E4%B8%AA%201%20%E5%88%B0%201000%20%E7%9A%84%E6%95%B4%E6%95%B0%20n%EF%BC%8C%E8%BE%93%E5%87%BA%201%20%E5%88%B0%20n%20%E9%87%8C%E6%89%80%E6%9C%89%203%20%E7%9A%84%E5%80%8D%E6%95%B0%EF%BC%8C%0A%23%20%20%20%E6%AF%8F%E4%B8%AA%E6%95%B0%E5%8D%A0%E4%B8%80%E8%A1%8C%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%9A10%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A3%E3%80%816%E3%80%819%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E5%8F%AA%E8%A6%81%E6%94%B9%E4%B8%80%E4%B8%AA%E5%9C%B0%E6%96%B9%E3%80%82%E6%83%B3%E6%83%B3%E6%98%AF%E5%93%AA%E4%B8%80%E4%B8%AA%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0An%20%3D%20int(input())%0Afor%20i%20in%20range(1%2C%20n%20%2B%201)%3A%0A%20%20%20%20if%20i%20%25%202%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20print(i)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-21">看第 21 页</a></nav>
+      <details><summary>看代码</summary><pre># 【挑出 3 的倍数】
+# 读入一个 1 到 1000 的整数 n，输出 1 到 n 里所有 3 的倍数，
+#   每个数占一行。
+# 例如输入：10
+# 应该输出（每个一行）：3、6、9
+# 提示：只要改一个地方。想想是哪一个。
+# ↓ 在下面这段程序上改
+
+n = int(input())
 for i in range(1, n + 1):
     if i % 2 == 0:
         print(i)</pre></details></li>
     <li class="file"><div><h2><a href="11_pass_seven.py" download="11_pass_seven.py">11_pass_seven.py</a></h2><p>课件第 24 页：拍七：循环里判断7的倍数或个位是7。</p></div>
-      <nav aria-label="11_pass_seven.py"><a href="11_pass_seven.py" download="11_pass_seven.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E8%AF%BB%E5%85%A5%20n%EF%BC%881%20%E5%88%B0%201000%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%0A%23%20%E4%BB%8E%201%20%E6%95%B0%E5%88%B0%20n%EF%BC%8C%E6%AF%8F%E4%B8%AA%E6%95%B0%E5%8D%A0%E4%B8%80%E8%A1%8C%0A%23%20%E6%98%AF%207%20%E7%9A%84%E5%80%8D%E6%95%B0%E6%88%96%E4%B8%AA%E4%BD%8D%E6%98%AF%207%EF%BC%8C%E5%B0%B1%E8%BE%93%E5%87%BA%EF%BC%9A%E8%BF%87%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-24">看第 24 页</a></nav>
-      <details><summary>看代码</summary><pre># 读入 n（1 到 1000 的整数）
-# 从 1 数到 n，每个数占一行
-# 是 7 的倍数或个位是 7，就输出：过</pre></details></li>
+      <nav aria-label="11_pass_seven.py"><a href="11_pass_seven.py" download="11_pass_seven.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%8B%8D%E4%B8%83%E3%80%91%0A%23%20%E8%AF%BB%E5%85%A5%20n%EF%BC%881%20%E5%88%B0%201000%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%EF%BC%8C%E4%BB%8E%201%20%E6%95%B0%E5%88%B0%20n%EF%BC%8C%E6%AF%8F%E4%B8%AA%E6%95%B0%E5%8D%A0%E4%B8%80%E8%A1%8C%E3%80%82%0A%23%20%E7%A2%B0%E5%88%B0%207%20%E7%9A%84%E5%80%8D%E6%95%B0%EF%BC%8C%E6%88%96%E8%80%85%E4%B8%AA%E4%BD%8D%E6%98%AF%207%20%E7%9A%84%E6%95%B0%EF%BC%8C%E4%B8%8D%E8%AF%B4%E8%BF%99%E4%B8%AA%E6%95%B0%EF%BC%8C%E6%94%B9%E8%AF%B4%E2%80%9C%E8%BF%87%E2%80%9D%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%9A8%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A1%E3%80%812%E3%80%813%E3%80%814%E3%80%815%E3%80%816%E3%80%81%E8%BF%87%E3%80%818%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E5%86%99%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-24">看第 24 页</a></nav>
+      <details><summary>看代码</summary><pre># 【拍七】
+# 读入 n（1 到 1000 的整数），从 1 数到 n，每个数占一行。
+# 碰到 7 的倍数，或者个位是 7 的数，不说这个数，改说“过”。
+# 例如输入：8
+# 应该输出（每个一行）：1、2、3、4、5、6、过、8
+# ↓ 从这里开始写</pre></details></li>
     <li class="file"><div><h2><a href="12_frog.py" download="12_frog.py">12_frog.py</a></h2><p>课件第 26 页：写一首会数数的儿歌。</p></div>
-      <nav aria-label="12_frog.py"><a href="12_frog.py" download="12_frog.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E6%88%91%E7%9A%84%E6%95%B0%E6%95%B0%E5%84%BF%E6%AD%8C%EF%BC%9A%E7%94%A8%20for%20%E9%87%8D%E5%A4%8D%E5%94%B1%EF%BC%8C%E6%AF%8F%E4%B8%80%E9%81%8D%E9%83%BD%E4%B8%8D%E5%A4%AA%E4%B8%80%E6%A0%B7%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-26">看第 26 页</a></nav>
-      <details><summary>看代码</summary><pre># 我的数数儿歌：用 for 重复唱，每一遍都不太一样</pre></details></li>
+      <nav aria-label="12_frog.py"><a href="12_frog.py" download="12_frog.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E9%80%A0%E4%B8%80%E9%A6%96%E4%BC%9A%E6%95%B0%E6%95%B0%E7%9A%84%E5%84%BF%E6%AD%8C%E3%80%91%0A%23%20%E8%AE%A9%E7%A8%8B%E5%BA%8F%E4%B8%80%E9%81%8D%E4%B8%80%E9%81%8D%E5%9C%B0%E5%94%B1%EF%BC%8C%E6%AF%8F%E4%B8%80%E9%81%8D%E9%83%BD%E4%B8%8D%E5%A4%AA%E4%B8%80%E6%A0%B7%E3%80%82%E5%94%B1%E4%BB%80%E4%B9%88%EF%BC%8C%E4%BD%A0%E8%87%AA%E5%B7%B1%E5%AE%9A%E3%80%82%0A%23%20%E5%85%88%E5%81%9A%E5%88%B0%EF%BC%9A%E8%AF%BB%E5%85%A5%E4%B8%80%E4%B8%AA%E6%AC%A1%E6%95%B0%EF%BC%8C%E7%94%A8%20for%20%E9%87%8D%E5%A4%8D%E4%B8%80%E5%8F%A5%E8%AF%9D%EF%BC%8C%E5%8F%A5%E5%AD%90%E9%87%8C%E5%B8%A6%E4%B8%8A%20i%E3%80%82%0A%23%20%E9%80%89%E4%BD%A0%E5%96%9C%E6%AC%A2%E7%9A%84%EF%BC%9A%E9%9D%92%E8%9B%99%E5%84%BF%E6%AD%8C%E3%80%81%E9%97%AF%E5%85%B3%E5%80%92%E8%AE%A1%E6%97%B6%E3%80%81%E4%B9%98%E6%B3%95%E5%A4%A7%E6%8C%91%E6%88%98%EF%BC%8C%E4%BB%80%E4%B9%88%E9%83%BD%E8%A1%8C%E3%80%82%0A%23%20%E8%BF%98%E6%83%B3%E6%9B%B4%E5%8E%89%E5%AE%B3%EF%BC%9A%E7%94%A8%20if%20%E8%AE%A9%E6%9F%90%E5%87%A0%E9%81%8D%E4%B8%8D%E4%B8%80%E6%A0%B7%E3%80%82%E6%96%87%E5%AD%97%E4%B9%98%E6%95%B4%E6%95%B0%E5%B0%B1%E6%98%AF%E9%87%8D%E5%A4%8D%E5%87%A0%E9%81%8D%EF%BC%8C%0A%23%20%20%20%E8%AF%95%E8%AF%95%20print(%22*%22%20*%20i)%E3%80%82%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E9%80%A0%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-26">看第 26 页</a></nav>
+      <details><summary>看代码</summary><pre># 【造一首会数数的儿歌】
+# 让程序一遍一遍地唱，每一遍都不太一样。唱什么，你自己定。
+# 先做到：读入一个次数，用 for 重复一句话，句子里带上 i。
+# 选你喜欢的：青蛙儿歌、闯关倒计时、乘法大挑战，什么都行。
+# 还想更厉害：用 if 让某几遍不一样。文字乘整数就是重复几遍，
+#   试试 print(&quot;*&quot; * i)。
+# ↓ 从这里开始造</pre></details></li>
   </ol>
 </main>
 

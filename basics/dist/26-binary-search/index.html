@@ -600,7 +600,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>秘密数 42</small><pre>猜了 7 次</pre></div><div><small>秘密数 50</small><pre>猜了 1 次</pre></div><div><small>秘密数 100</small><pre>猜了 7 次</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">把 1 到 100 都试一试，看看有没有超过 7 次的。教室电脑：打开 starter/03_guess_count.py</p>
   </div>
-  <a class="ide r d3" data-code="secret = int(input())&#10;lo = 1&#10;hi = 100&#10;guess = 0&#10;while guess != secret:&#10;    guess = (lo + hi) // 2&#10;    print(guess)&#10;    if guess &lt; secret:&#10;        lo = guess + 1&#10;    elif guess &gt; secret:&#10;        hi = guess - 1&#10;# 再数一数猜了几次，最后输出“猜了 几 次”&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【最后说出猜了几次】&#10;# 在例题上改：每猜一次，计数加 1。猜中以后，&#10;#   再输出一行“猜了 几 次”。秘密数是 1 到 100 的整数。&#10;# 例如输入：42&#10;# 应该输出（每个一行）：50、25、37、43、40、41、42、猜了 7 次&#10;# 提示：加一个计数器。&#10;# ↓ 在下面这段程序上改&#10;&#10;secret = int(input())&#10;lo = 1&#10;hi = 100&#10;guess = 0&#10;while guess != secret:&#10;    guess = (lo + hi) // 2&#10;    print(guess)&#10;    if guess &lt; secret:&#10;        lo = guess + 1&#10;    elif guess &gt; secret:&#10;        hi = guess - 1&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -641,7 +641,7 @@ dialog p{color:var(--muted);font-size:15px}
 66
 42</pre><small style="margin-top:10px">输出</small><pre style="font-size:36px;white-space:pre">5
 2</pre></div>
-  <a class="ide r d3" data-code="# 第一行读入 n（1 到 100 的整数），接下来 n 行是从小到大排好的整数&#10;# 最后一行读入要找的数&#10;# 用二分查找：每次看中间那个数，去掉不可能的一半&#10;# 输出两行：它的下标（找不到就输出 -1）；一共看了几个数&#10;" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【在排好的数里找】&#10;# 图书馆的书按编号从小到大排好了。&#10;#   第一行读入 n（1 到 100 的整数），接下来 n 行是排好的编号，&#10;#   最后一行是要找的编号，都是 0 到 10000 的整数。&#10;# 用二分查找，输出两行：它的下标，找不到就输出 -1；&#10;#   一共看了几个数。&#10;# 编号各不相同。每次看中间 (lo + hi) // 2 那个，看一次算一次。&#10;# 例如输入（每个一行）：8、3、8、15、21、30、42、57、66、42&#10;# 应该输出（每个一行）：5、2&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:886px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -666,7 +666,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="r d2"><code>选你喜欢的</code><span>翻书找页码：每次翻到中间，说往前翻还是往后翻；猜同桌的身高。</span></div>
     <div class="r d3"><code>还想更厉害</code><span>你心里想一个数，程序每猜一次就问你，你输入“大了”或“小了”。</span></div>
   </div>
-  <a class="ide r d3" data-code="# 我的“每次砍一半”小程序&#10;# 想好：从哪里到哪里？怎样知道往哪边找？&#10;# 要找的东西一定要在范围里，范围外的先拦下来&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <a class="ide r d3" data-code="# 【造一个“每次砍一半”的小程序】&#10;# 找一件能对半排除的事，让程序来找。&#10;# 先做到：把例题的范围改成 1 到 1000，看看电脑最多要猜几次。&#10;# 选你喜欢的：翻书找页码：每次翻到中间，说往前翻还是往后翻；&#10;#   猜同桌的身高。&#10;# 还想更厉害：你心里想一个数，程序每猜一次就问你，&#10;#   你输入“大了”或“小了”。&#10;# ↓ 从这里开始造&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么；要找的东西一定在范围里，范围外的先拦下来。</p>
   <div class="foot"></div>
 </section>

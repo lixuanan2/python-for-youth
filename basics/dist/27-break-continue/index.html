@@ -608,7 +608,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 5、8、-3、0</small><pre>10</pre></div><div><small>第一个就是 0</small><pre>0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">输入要先变成整数，总和从 0 开始。教室电脑：打开 starter/05_sum_until_zero.py</p>
   </div>
-  <a class="ide r d3" data-code="while True:&#10;    word = input()&#10;    if word == &quot;再见&quot;:&#10;        break&#10;    print(&quot;你说&quot;, word)&#10;print(&quot;拜拜&quot;)&#10;# 改成：每行读入一个整数，读到 0 就停&#10;# 停下以后输出前面所有数的和（0 不算）&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【读到 0 就停，算总和】&#10;# 在例题上改：每行读入一个整数，读到 0 就停。&#10;#   停下以后输出前面所有数的和，0 不算。不知道一共几个数，&#10;#   所以用 while True。&#10;# 例如输入（每个一行）：5、8、-3、0&#10;# 应该输出：10&#10;# 提示：把聊天程序改成记账。&#10;# ↓ 在下面这段程序上改&#10;&#10;while True:&#10;    word = input()&#10;    if word == &quot;再见&quot;:&#10;        break&#10;    print(&quot;你说&quot;, word)&#10;print(&quot;拜拜&quot;)&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -645,7 +645,7 @@ dialog p{color:var(--muted);font-size:15px}
 85
 -1</pre><small style="margin-top:14px">输出</small><pre style="font-size:44px;white-space:pre">有效 3 个
 平均 85.0</pre></div>
-  <a class="ide r d3" data-code="# 不停读入分数，每行一个整数，读到 -1 就结束&#10;# 不在 0 到 100 之间的分数是写错了，跳过不算&#10;# 有有效分数时输出两行：“有效 几 个”和“平均 多少”（保留 1 位小数，用 round）&#10;# 一个有效分数也没有，就输出“没有有效分数”&#10;" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【整理成绩单】&#10;# 不停读入分数，每行一个整数，读到 -1 就结束。&#10;#   不在 0 到 100 之间的是写错了，跳过不算。&#10;# 输出两行：“有效 几 个”和“平均 多少”，&#10;#   平均分用 round 保留 1 位小数。一个有效分数也没有，&#10;#   就输出“没有有效分数”。&#10;# 例如输入（每个一行）：90、80、120、85、-1&#10;# 应该输出（每个一行）：有效 3 个、平均 85.0&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:886px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -670,7 +670,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="r d2"><code>选你喜欢的</code><span>密码锁：最多试 3 次；点菜机：说“结账”才算总价；跳过不爱吃的菜。</span></div>
     <div class="r d3"><code>还想更厉害</code><span>把第 21 课的猜数字改成 while True，再数一数猜了几次。</span></div>
   </div>
-  <a class="ide r d3" data-code="# 我的 break 和 continue 小程序&#10;# 想好：什么时候该停下（break）？什么时候该跳过这一次（continue）？&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <a class="ide r d3" data-code="# 【造一个“知道什么时候停”的小程序】&#10;# 用 break 让它在该停的时候停，用 continue 跳过不要的。&#10;# 先做到：改一改聊天程序：换一句结束的话，再换一种回答。&#10;# 选你喜欢的：密码锁：最多试 3 次；点菜机：说“结账”才算总价；&#10;#   跳过不爱吃的菜。&#10;# 还想更厉害：把第 21 课的猜数字改成 while True，&#10;#   再数一数猜了几次。&#10;# ↓ 从这里开始造&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>

@@ -614,7 +614,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 35 和 94</small><pre>鸡 23 兔 12</pre></div><div><small>输入 10 和 21</small><pre>没有答案</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 22 课的 done 记着“输对了没有”，这里也可以记着“找到过没有”。教室电脑：打开 starter/03_cage_none.py</p>
   </div>
-  <a class="ide r d3" data-code="heads = int(input())&#10;feet = int(input())&#10;for c in range(heads + 1):&#10;    r = heads - c&#10;    if c * 2 + r * 4 == feet:&#10;        print(&quot;鸡&quot;, c, &quot;兔&quot;, r)&#10;# 一个答案也没有时，输出“没有答案”&#10;# 提示：用一个变量记住“找到过没有”&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【没有答案时说一声】&#10;# 脚数是单数，或者太多太少，就怎么也凑不上。在例题上改：&#10;#   一种答案也没有时，输出“没有答案”。输入还是两行：头数和脚数。&#10;# 例如输入（每个一行）：10、21&#10;# 应该输出：没有答案&#10;# 提示：一个也没找到时，说一声。&#10;# 提示：用一个变量记住“找到过没有”。&#10;# ↓ 在下面这段程序上改&#10;&#10;heads = int(input())&#10;feet = int(input())&#10;for c in range(heads + 1):&#10;    r = heads - c&#10;    if c * 2 + r * 4 == feet:&#10;        print(&quot;鸡&quot;, c, &quot;兔&quot;, r)&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -649,7 +649,7 @@ dialog p{color:var(--muted);font-size:15px}
 公鸡 4 母鸡 18 小鸡 78
 公鸡 8 母鸡 11 小鸡 81
 公鸡 12 母鸡 4 小鸡 84</pre></div>
-  <a class="ide r d3" data-code="# 公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只&#10;# 读入 n（1 到 300 的整数）：用 n 元正好买 n 只鸡&#10;# 小鸡要整 3 只整 3 只地买&#10;# 每种买法输出一行，比如：公鸡 4 母鸡 18 小鸡 78&#10;# 公鸡从少到多，一样多时母鸡从少到多；一种也没有就输出“没有答案”&#10;" style="left:96px;top:890px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【百钱买百鸡】&#10;# 一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，&#10;#   小鸡 1 元 3 只。读入 n（1 到 300 的整数），&#10;#   用 n 元正好买 n 只鸡，小鸡要整 3 只地买。&#10;# 每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。&#10;#   一种也没有就输出“没有答案”。&#10;# 例如输入：100&#10;# 应该输出（一共 4 行）：&#10;#   公鸡 0 母鸡 25 小鸡 75&#10;#   ……&#10;#   公鸡 12 母鸡 4 小鸡 84&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:890px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:896px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -674,7 +674,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="r d2"><code>选你喜欢的</code><span>三位数里百位和个位一样、各位加起来是 10 的；两个数和是 20、积是 96。</span></div>
     <div class="r d3"><code>还想更厉害</code><span>数一数一共试了几次，再想办法缩小范围，少试几次。</span></div>
   </div>
-  <a class="ide r d3" data-code="# 我的“一个个试”小程序&#10;# 先想好：答案可能在哪个范围？怎样判断试对了？&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <a class="ide r d3" data-code="# 【造一个“挨个试”的小程序】&#10;# 自己出一道题，让程序挨个试出答案。&#10;# 先做到：找出 1 到 100 里你的幸运数，比如个位是 7、&#10;#   又是 3 的倍数。&#10;# 选你喜欢的：三位数里百位和个位一样、各位加起来是 10 的；&#10;#   两个数和是 20、积是 96。&#10;# 还想更厉害：数一数一共试了几次，再想办法缩小范围，少试几次。&#10;# ↓ 从这里开始造&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>

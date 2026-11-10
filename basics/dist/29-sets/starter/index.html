@@ -86,22 +86,45 @@ print(sorted(a - b))</pre></details></li>
 print(len(words), &quot;个词&quot;)
 print(len(set(words)), &quot;个不同的词&quot;)</pre></details></li>
     <li class="file"><div><h2><a href="05_repeat.py" download="05_repeat.py">05_repeat.py</a></h2><p>课件第 9 页：再把不同的词排好输出。</p></div>
-      <nav aria-label="05_repeat.py"><a href="05_repeat.py" download="05_repeat.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=words%20%3D%20input().split()%0Aprint(len(words)%2C%20%22%E4%B8%AA%E8%AF%8D%22)%0Aprint(len(set(words))%2C%20%22%E4%B8%AA%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%8D%22)%0A%23%20%E5%86%8D%E5%8A%A0%E4%B8%80%E8%A1%8C%EF%BC%9A%E6%8A%8A%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%8D%E4%BB%8E%E5%B0%8F%E5%88%B0%E5%A4%A7%E6%8E%92%E5%A5%BD%EF%BC%8C%E7%94%A8%E7%A9%BA%E6%A0%BC%E8%BF%9E%E6%88%90%E4%B8%80%E8%A1%8C%E8%BE%93%E5%87%BA%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-9">看第 9 页</a></nav>
-      <details><summary>看代码</summary><pre>words = input().split()
+      <nav aria-label="05_repeat.py"><a href="05_repeat.py" download="05_repeat.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%8A%8A%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%8D%E5%88%97%E5%87%BA%E6%9D%A5%E3%80%91%0A%23%20%E5%9C%A8%E4%BE%8B%E9%A2%98%E4%B8%8A%E6%94%B9%EF%BC%9A%E6%9C%80%E5%90%8E%E5%86%8D%E8%BE%93%E5%87%BA%E4%B8%80%E8%A1%8C%EF%BC%8C%E6%8A%8A%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%8D%E4%BB%8E%E5%B0%8F%E5%88%B0%E5%A4%A7%E6%8E%92%E5%A5%BD%EF%BC%8C%0A%23%20%20%20%E7%94%A8%E4%B8%80%E4%B8%AA%E7%A9%BA%E6%A0%BC%E8%BF%9E%E8%B5%B7%E6%9D%A5%E3%80%82%E8%BE%93%E5%85%A5%E4%B8%80%E8%A1%8C%E8%8B%B1%E6%96%87%EF%BC%8C%E8%AF%8D%E5%92%8C%E8%AF%8D%E4%B9%8B%E9%97%B4%E7%94%A8%E7%A9%BA%E6%A0%BC%E9%9A%94%E5%BC%80%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%9Ai%20like%20cats%20i%20like%20dogs%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A%0A%23%20%20%206%20%E4%B8%AA%E8%AF%8D%0A%23%20%20%204%20%E4%B8%AA%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%8D%0A%23%20%20%20cats%20dogs%20i%20like%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E5%86%8D%E5%8A%A0%E4%B8%80%E8%A1%8C%E8%BE%93%E5%87%BA%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0Awords%20%3D%20input().split()%0Aprint(len(words)%2C%20%22%E4%B8%AA%E8%AF%8D%22)%0Aprint(len(set(words))%2C%20%22%E4%B8%AA%E4%B8%8D%E5%90%8C%E7%9A%84%E8%AF%8D%22)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-9">看第 9 页</a></nav>
+      <details><summary>看代码</summary><pre># 【把不同的词列出来】
+# 在例题上改：最后再输出一行，把不同的词从小到大排好，
+#   用一个空格连起来。输入一行英文，词和词之间用空格隔开。
+# 例如输入：i like cats i like dogs
+# 应该输出：
+#   6 个词
+#   4 个不同的词
+#   cats dogs i like
+# 提示：再加一行输出。
+# ↓ 在下面这段程序上改
+
+words = input().split()
 print(len(words), &quot;个词&quot;)
-print(len(set(words)), &quot;个不同的词&quot;)
-# 再加一行：把不同的词从小到大排好，用空格连成一行输出</pre></details></li>
+print(len(set(words)), &quot;个不同的词&quot;)</pre></details></li>
     <li class="file"><div><h2><a href="06_attendance.py" download="06_attendance.py">06_attendance.py</a></h2><p>课件第 12 页：签到表去重，找出没到的人。</p></div>
-      <nav aria-label="06_attendance.py"><a href="06_attendance.py" download="06_attendance.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%EF%BC%9A%E5%85%A8%E7%8F%AD%E5%90%8D%E5%8D%95%EF%BC%8C%E5%90%8D%E5%AD%97%E4%B9%8B%E9%97%B4%E7%94%A8%E7%A9%BA%E6%A0%BC%E9%9A%94%E5%BC%80%EF%BC%881%20%E5%88%B0%2050%20%E4%B8%AA%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%8D%E9%87%8D%E5%A4%8D%EF%BC%89%0A%23%20%E7%AC%AC%E4%BA%8C%E8%A1%8C%EF%BC%9A%E7%AD%BE%E5%88%B0%E8%AE%B0%E5%BD%95%EF%BC%8C%E5%90%8D%E5%AD%97%E4%B9%8B%E9%97%B4%E7%94%A8%E7%A9%BA%E6%A0%BC%E9%9A%94%E5%BC%80%EF%BC%8C%E6%9C%89%E4%BA%BA%E7%AD%BE%E4%BA%86%E5%A5%BD%E5%87%A0%E6%AC%A1%EF%BC%8C%E4%B9%9F%E5%8F%AF%E8%83%BD%E4%B8%80%E4%B8%AA%E9%83%BD%E6%B2%A1%E6%9C%89%0A%23%20%E7%AD%BE%E5%88%B0%E8%AE%B0%E5%BD%95%E9%87%8C%E5%8F%AA%E4%BC%9A%E5%87%BA%E7%8E%B0%E5%85%A8%E7%8F%AD%E5%90%8D%E5%8D%95%E9%87%8C%E7%9A%84%E5%90%8D%E5%AD%97%0A%23%20%E8%BE%93%E5%87%BA%E7%AC%AC%E4%B8%80%E8%A1%8C%EF%BC%9A%E5%88%B0%E4%BA%86%20%E5%87%A0%20%E4%BA%BA%0A%23%20%E8%BE%93%E5%87%BA%E7%AC%AC%E4%BA%8C%E8%A1%8C%EF%BC%9A%E6%B2%A1%E5%88%B0%E7%9A%84%E4%BA%BA%E4%BB%8E%E5%B0%8F%E5%88%B0%E5%A4%A7%E6%8E%92%E5%A5%BD%EF%BC%8C%E5%86%99%E6%88%90%E2%80%9C%E6%B2%A1%E5%88%B0%EF%BC%9AA%20B%E2%80%9D%EF%BC%9B%E9%83%BD%E5%88%B0%E4%BA%86%E5%B0%B1%E8%BE%93%E5%87%BA%E2%80%9C%E5%85%A8%E5%88%B0%E4%BA%86%E2%80%9D%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-12">看第 12 页</a></nav>
-      <details><summary>看代码</summary><pre># 第一行：全班名单，名字之间用空格隔开（1 到 50 个名字，不重复）
-# 第二行：签到记录，名字之间用空格隔开，有人签了好几次，也可能一个都没有
-# 签到记录里只会出现全班名单里的名字
-# 输出第一行：到了 几 人
-# 输出第二行：没到的人从小到大排好，写成“没到：A B”；都到了就输出“全到了”</pre></details></li>
+      <nav aria-label="06_attendance.py"><a href="06_attendance.py" download="06_attendance.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E8%B0%81%E6%B2%A1%E6%9D%A5%EF%BC%9F%E3%80%91%0A%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E6%98%AF%E5%85%A8%E7%8F%AD%E5%90%8D%E5%8D%95%EF%BC%881%20%E5%88%B0%2050%20%E4%BA%BA%EF%BC%89%EF%BC%8C%0A%23%20%20%20%E7%AC%AC%E4%BA%8C%E8%A1%8C%E6%98%AF%E7%AD%BE%E5%88%B0%E8%AE%B0%E5%BD%95%EF%BC%880%20%E5%88%B0%20200%20%E4%B8%AA%E5%90%8D%E5%AD%97%EF%BC%89%EF%BC%8C%E5%90%8D%E5%AD%97%E9%83%BD%E7%94%A8%E7%A9%BA%E6%A0%BC%E9%9A%94%E5%BC%80%E3%80%82%0A%23%20%20%20%E6%9C%89%E4%BA%BA%E7%AD%BE%E4%BA%86%E5%A5%BD%E5%87%A0%E6%AC%A1%EF%BC%8C%E4%B9%9F%E5%8F%AF%E8%83%BD%E6%B2%A1%E4%BA%BA%E7%AD%BE%E3%80%82%E7%AD%BE%E5%88%B0%E7%9A%84%E9%83%BD%E5%9C%A8%E5%90%8D%E5%8D%95%E9%87%8C%E3%80%82%0A%23%20%E8%BE%93%E5%87%BA%E4%B8%A4%E8%A1%8C%EF%BC%9A%E7%AC%AC%E4%B8%80%E8%A1%8C%E2%80%9C%E5%88%B0%E4%BA%86%20%E5%87%A0%20%E4%BA%BA%E2%80%9D%EF%BC%9B%0A%23%20%20%20%E7%AC%AC%E4%BA%8C%E8%A1%8C%E6%8A%8A%E6%B2%A1%E5%88%B0%E7%9A%84%E4%BA%BA%E4%BB%8E%E5%B0%8F%E5%88%B0%E5%A4%A7%E6%8E%92%E5%A5%BD%EF%BC%88%E5%92%8C%20sorted%20%E6%8E%92%E7%9A%84%E4%B8%80%E6%A0%B7%EF%BC%89%EF%BC%8C%0A%23%20%20%20%E5%86%99%E6%88%90%E2%80%9C%E6%B2%A1%E5%88%B0%EF%BC%9AA%20B%E2%80%9D%EF%BC%8C%E9%83%BD%E5%88%B0%E4%BA%86%E5%B0%B1%E5%86%99%E2%80%9C%E5%85%A8%E5%88%B0%E4%BA%86%E2%80%9D%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9AAmy%20Bob%20Cat%20Dan%E3%80%81Bob%20Amy%20Bob%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A%0A%23%20%20%20%E5%88%B0%E4%BA%86%202%20%E4%BA%BA%0A%23%20%20%20%E6%B2%A1%E5%88%B0%EF%BC%9ACat%20Dan%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E5%86%99%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-12">看第 12 页</a></nav>
+      <details><summary>看代码</summary><pre># 【谁没来？】
+# 第一行是全班名单（1 到 50 人），
+#   第二行是签到记录（0 到 200 个名字），名字都用空格隔开。
+#   有人签了好几次，也可能没人签。签到的都在名单里。
+# 输出两行：第一行“到了 几 人”；
+#   第二行把没到的人从小到大排好（和 sorted 排的一样），
+#   写成“没到：A B”，都到了就写“全到了”。
+# 例如输入（每个一行）：Amy Bob Cat Dan、Bob Amy Bob
+# 应该输出：
+#   到了 2 人
+#   没到：Cat Dan
+# ↓ 从这里开始写</pre></details></li>
     <li class="file"><div><h2><a href="07_my_set.py" download="07_my_set.py">07_my_set.py</a></h2><p>课件第 14 页：做一个自己的集合小程序。</p></div>
-      <nav aria-label="07_my_set.py"><a href="07_my_set.py" download="07_my_set.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E6%88%91%E7%9A%84%E9%9B%86%E5%90%88%E5%B0%8F%E7%A8%8B%E5%BA%8F%0A%23%20%E6%83%B3%E4%B8%80%E6%83%B3%EF%BC%9A%E5%93%AA%E9%87%8C%E6%9C%89%E9%87%8D%E5%A4%8D%E8%A6%81%E5%8E%BB%E6%8E%89%EF%BC%9F%E5%93%AA%E9%87%8C%E8%A6%81%E6%89%BE%E2%80%9C%E9%83%BD%E6%9C%89%E7%9A%84%E2%80%9D%E6%88%96%E2%80%9C%E5%8F%AA%E6%9C%89%E4%B8%80%E8%BE%B9%E6%9C%89%E7%9A%84%E2%80%9D%EF%BC%9F%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-14">看第 14 页</a></nav>
-      <details><summary>看代码</summary><pre># 我的集合小程序
-# 想一想：哪里有重复要去掉？哪里要找“都有的”或“只有一边有的”？</pre></details></li>
+      <nav aria-label="07_my_set.py"><a href="07_my_set.py" download="07_my_set.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E9%80%A0%E4%B8%80%E4%B8%AA%E4%BD%A0%E7%9A%84%E9%9B%86%E5%90%88%E5%B0%8F%E7%A8%8B%E5%BA%8F%E3%80%91%0A%23%20%E6%89%BE%E4%B8%80%E4%BB%B6%E8%A6%81%E2%80%9C%E5%8E%BB%E6%8E%89%E9%87%8D%E5%A4%8D%E2%80%9D%E6%88%96%E8%80%85%E2%80%9C%E6%89%BE%E7%9B%B8%E5%90%8C%E2%80%9D%E7%9A%84%E4%BA%8B%E3%80%82%0A%23%20%E5%85%88%E5%81%9A%E5%88%B0%EF%BC%9A%E8%BE%93%E5%85%A5%E4%B8%80%E4%B8%B2%E6%95%B0%E5%AD%97%EF%BC%8C%E8%BE%93%E5%87%BA%E4%B8%80%E5%85%B1%E6%9C%89%E5%87%A0%E4%B8%AA%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E3%80%82%0A%23%20%E9%80%89%E4%BD%A0%E5%96%9C%E6%AC%A2%E7%9A%84%EF%BC%9A%E4%BD%A0%E5%92%8C%E5%90%8C%E6%A1%8C%E9%83%BD%E5%96%9C%E6%AC%A2%E7%9A%84%E7%88%B1%E5%A5%BD%EF%BC%9B%E4%B8%A4%E9%A6%96%E8%AF%97%E9%87%8C%E9%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%AD%97%EF%BC%9B%0A%23%20%20%20%E6%8A%BD%E5%A5%96%E6%97%B6%E4%B8%8D%E8%AE%A9%E5%90%8C%E4%B8%80%E4%B8%AA%E4%BA%BA%E4%B8%AD%E4%B8%A4%E6%AC%A1%E3%80%82%0A%23%20%E8%BF%98%E6%83%B3%E6%9B%B4%E5%8E%89%E5%AE%B3%EF%BC%9A%E4%B8%89%E4%B8%AA%E4%BA%BA%E7%9A%84%E7%88%B1%E5%A5%BD%EF%BC%8C%E6%89%BE%E5%87%BA%E4%B8%89%E4%B8%AA%E4%BA%BA%E9%83%BD%E5%96%9C%E6%AC%A2%E7%9A%84%EF%BC%8C%0A%23%20%20%20%E5%86%8D%E6%89%BE%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E4%BA%BA%E5%96%9C%E6%AC%A2%E7%9A%84%E3%80%82%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E9%80%A0%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-14">看第 14 页</a></nav>
+      <details><summary>看代码</summary><pre># 【造一个你的集合小程序】
+# 找一件要“去掉重复”或者“找相同”的事。
+# 先做到：输入一串数字，输出一共有几个不同的数。
+# 选你喜欢的：你和同桌都喜欢的爱好；两首诗里都出现的字；
+#   抽奖时不让同一个人中两次。
+# 还想更厉害：三个人的爱好，找出三个人都喜欢的，
+#   再找只有一个人喜欢的。
+# ↓ 从这里开始造</pre></details></li>
   </ol>
 </main>
 

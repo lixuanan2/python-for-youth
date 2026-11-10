@@ -9,4 +9,3 @@ while guess != secret:
         lo = guess + 1
     elif guess > secret:
         hi = guess - 1
-# 再数一数猜了几次，最后输出“猜了 几 次”

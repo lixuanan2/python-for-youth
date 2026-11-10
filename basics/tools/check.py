@@ -189,6 +189,43 @@ def check_algos(text):
     return count
 
 
+def check_briefs(lesson, folder, tasks, sections):
+    """The task told at the top of a starter (tasks.json "brief") must match its page, its tested program and no more."""
+    comment = '#' if LANGUAGE == 'python' else '//'
+    for task in tasks:
+        where = f'{folder.name} task {task["id"]}'
+        if task['role'] not in builder.BRIEF_ROLES:
+            assert 'brief' not in task, f'{where}: only practice students write gets a brief'
+            continue
+        brief = task.get('brief')
+        assert brief and brief.get('title') and brief.get('goal'), f'{where}: practice needs a brief with a title and a goal'
+        header = builder.brief_header(task, comment)
+        assert len(header.splitlines()) <= builder.BRIEF_LINES, f'{where}: the brief is longer than {builder.BRIEF_LINES} lines'
+        # Courseware never labels work: 作业 as a topic (作业还剩几页) is fine, as a label it is not.
+        assert not re.search(r'必做|选做|课后作业|作业[：:]', header), f'{where}: no 必做, 选做 or 作业 labels in a brief'
+        # The page is where the task is taught: the title, every number and every quoted word of the brief are on it.
+        page = squash(html.unescape(re.sub(r'<[^>]+>', '', sections[task['page'] - 1])))
+        told = ' '.join([brief['title']] + brief['goal'])
+        for fact in [brief['title']] + re.findall(r'-?\d+(?:\.\d+)?', told) + re.findall(r'“([^”]+)”', told):
+            assert squash(fact) in page, f'{where}: the brief says {fact}, page {task["page"]} does not'
+        # The sample is what the real program does.
+        solution = (folder / task['solution']).read_text(encoding='utf-8')
+        if brief.get('sample', task['role'] != '创作项目'):
+            given, want = brief.get('input', task['sample_input']), brief.get('output', task['sample_output'])
+            result = run(solution, given)
+            assert result.stdout.decode().replace('\r\n', '\n') == want, f'{where}: the brief sample is not what {task["solution"]} prints'
+        # No answer: no line of the solution that the starter does not already have.
+        starter = (folder / task['starter']).read_text(encoding='utf-8')
+        for line in solution.split('\n'):
+            key = line.strip()
+            if len(squash(key)) >= 8 and not key.startswith(comment) and key not in starter:
+                assert key not in header, f'{where}: the brief gives away {key}'
+    for file, _ in builder.starters(lesson):
+        name = file.relative_to(folder).as_posix()
+        built = builder.DIST / lesson['id'] / name
+        assert built.read_text(encoding='utf-8') == builder.starter_text(lesson, name, 'file'), f'Rebuild dist: {lesson["id"]}/{name}'
+
+
 def check_ide(text, folder):
     """What a page sends to the IDE must be a whole program, so the student can press Run."""
     claims = json.loads((folder / 'tests/claims.json').read_text(encoding='utf-8'))
@@ -307,6 +344,7 @@ def check_deck(lesson, folder):
     attributes = [unquote(html.unescape(v)) for v in re.findall(r'="([^"]*)"', text)]
     shown = squash(html.unescape(re.sub(r'<[^>]+>', '', text)) + ''.join(attributes))
     tasks = json.loads((folder / 'tasks.json').read_text(encoding='utf-8'))
+    check_briefs(lesson, folder, tasks, re.findall(r'<section id="page-\d+".*?</section>', text, re.S))
     for task in tasks:
         assert 1 <= task['page'] <= pages, f'Bad page: {task["id"]}'
         assert (folder / task['starter']).is_file() and (folder / task['solution']).is_file()

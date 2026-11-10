@@ -638,7 +638,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
 4</pre></div><div><small>输出</small><pre style="line-height:1.2">14</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/04_perimeter.py</p>
   </div>
-  <a class="ide r d3" data-code="def area(w, h):&#10;    return w * h&#10;w = int(input())&#10;h = int(input())&#10;print(area(w, h))&#10;" style="left:610px;top:920px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【写一个周长函数】&#10;# 起始程序里有面积函数。把它改成 perimeter(w, h)，&#10;#   返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，&#10;#   都是 0 到 100 的整数，输出周长。&#10;# 例如输入（每个一行）：3、4&#10;# 应该输出：14&#10;# 提示：换个名字，换个算法，别的不用动。&#10;# ↓ 在下面这段程序上改&#10;&#10;def area(w, h):&#10;    return w * h&#10;w = int(input())&#10;h = int(input())&#10;print(area(w, h))&#10;" style="left:610px;top:920px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: missing argument -->
@@ -680,7 +680,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>输入 95</small><pre>优秀</pre></div><div><small>输入 60</small><pre>及格</pre></div><div><small>输入 59</small><pre>不及格</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/06_grade.py</p>
   </div>
-  <a class="ide r d3" data-code="def bigger(a, b):&#10;    if a &gt; b:&#10;        return a&#10;    return b&#10;print(bigger(3, 8))&#10;print(bigger(9, 2))&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【写一个成绩等级函数】&#10;# 写 grade(score)：90 分及以上返回“优秀”，60 分及以上返回“及格”，&#10;#   其余返回“不及格”。读入一个 0 到 100 的整数分数，输出等级。&#10;# 例如输入：95&#10;# 应该输出：优秀&#10;# 提示：一个参数，三种结果，碰到 return 就结束。&#10;# ↓ 在下面这段程序上改&#10;&#10;def bigger(a, b):&#10;    if a &gt; b:&#10;        return a&#10;    return b&#10;print(bigger(3, 8))&#10;print(bigger(9, 2))&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -714,7 +714,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
   <div class="slip tilt2 r d3" style="right:110px;top:200px;width:440px"><small>依次输入</small><pre>3
 9
 5</pre><small style="margin-top:20px">输出</small><pre>9</pre></div>
-  <a class="ide r d3" data-code="# 分三行读入三个整数（-1000 到 1000）&#10;# 输出最大的那个&#10;# 先写一个 bigger(a, b) 函数，返回两个数里大的那个，再用它比出三个数里最大的&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【三个数比大小】&#10;# 分三行读入三个整数（-1000 到 1000），输出最大的那个。&#10;# 先写 bigger(a, b)，返回两个数里大的那个，&#10;#   再只用它比出三个数里最大的，不再写别的 if。&#10;# 例如输入（每个一行）：3、9、5&#10;# 应该输出：9&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -739,7 +739,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
     <div class="r d2"><code>选你喜欢的</code><span>打折计算、零花钱几周攒够、跑步用时、作业还剩几页。</span></div>
     <div class="r d3"><code>还想更厉害</code><span>写两个函数，把一个的结果交给另一个；或者在函数里用 if。</span></div>
   </div>
-  <a class="ide r d3" data-code="# 我的工具函数：给它数据，它算出结果交回来&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <a class="ide r d3" data-code="# 【造一个你的工具函数】&#10;# 给它数据，它算好交回来，你拿结果做别的事。算什么，你自己定。&#10;# 先做到：写一个带参数、有 return 的函数，调用两次，输出结果。&#10;# 选你喜欢的：打折计算、零花钱几周攒够、跑步用时、作业还剩几页。&#10;# 还想更厉害：写两个函数，把一个的结果交给另一个；&#10;#   或者在函数里用 if。&#10;# ↓ 从这里开始造&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>

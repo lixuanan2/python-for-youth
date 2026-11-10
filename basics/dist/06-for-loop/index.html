@@ -650,7 +650,7 @@ print(100)</pre></div>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 7，第一行</small><pre>7 x 1 = 7</pre></div><div><small>最后一行</small><pre>7 x 9 = 63</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_times_table.py</p>
   </div>
-  <a class="ide r d3" data-code="n = int(input())&#10;for i in range(1, n + 1):&#10;    print(i)&#10;" style="left:610px;top:800px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【输出一列乘法口诀】&#10;# 读入一个 1 到 9 的整数 n，输出 9 行，让 i 从 1 走到 9。&#10;# 例如输入：1&#10;# 应该输出（一共 9 行）：&#10;#   1 x 1 = 1&#10;#   ……&#10;#   1 x 9 = 9&#10;# 提示：i 不光能输出，还能拿来算。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;for i in range(1, n + 1):&#10;    print(i)&#10;" style="left:610px;top:800px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- step -->
@@ -722,7 +722,7 @@ print(100)</pre></div>
 发射！</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/08_countdown.py</p>
   </div>
-  <a class="ide r d3" data-code="for i in range(3, 0, -1):&#10;    print(i)&#10;print(&quot;发射！&quot;)&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【自己定倒计时】&#10;# 读入一个 1 到 100 的整数 n，从 n 倒数到 1，每个数占一行，&#10;#   最后输出发射！&#10;# 例如输入：3&#10;# 应该输出（每个一行）：3、2、1、发射！&#10;# 提示：起点不再是固定的 3 了。&#10;# ↓ 在下面这段程序上改&#10;&#10;for i in range(3, 0, -1):&#10;    print(i)&#10;print(&quot;发射！&quot;)&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- predict: indentation -->
@@ -803,7 +803,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 9</pre></div><div><small>输入 3，输出</small><pre>3</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/10_multiples.py</p>
   </div>
-  <a class="ide r d3" data-code="n = int(input())&#10;for i in range(1, n + 1):&#10;    if i % 2 == 0:&#10;        print(i)&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【挑出 3 的倍数】&#10;# 读入一个 1 到 1000 的整数 n，输出 1 到 n 里所有 3 的倍数，&#10;#   每个数占一行。&#10;# 例如输入：10&#10;# 应该输出（每个一行）：3、6、9&#10;# 提示：只要改一个地方。想想是哪一个。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;for i in range(1, n + 1):&#10;    if i % 2 == 0:&#10;        print(i)&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -836,7 +836,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   <p class="abs say r d2" style="left:96px;top:480px;width:1728px">读入 n（1 到 1000 的整数），从 1 数到 n，每个数占一行。<br>碰到 7 的倍数，或者个位是 7 的数，不说这个数，改说“过”。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入 8，输出（每个占一行）</small><pre style="font-size:48px">1 2 3 4
 5 6 过 8</pre></div>
-  <a class="ide r d3" data-code="# 读入 n（1 到 1000 的整数）&#10;# 从 1 数到 n，每个数占一行&#10;# 是 7 的倍数或个位是 7，就输出：过&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【拍七】&#10;# 读入 n（1 到 1000 的整数），从 1 数到 n，每个数占一行。&#10;# 碰到 7 的倍数，或者个位是 7 的数，不说这个数，改说“过”。&#10;# 例如输入：8&#10;# 应该输出（每个一行）：1、2、3、4、5、6、过、8&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -861,7 +861,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
     <div class="r d2"><code>选你喜欢的</code><span>青蛙儿歌、闯关倒计时、乘法大挑战，什么都行。</span></div>
     <div class="r d3"><code>还想更厉害</code><span>用 if 让某几遍不一样。文字乘整数就是重复几遍，试试 print("*" * i)。</span></div>
   </div>
-  <a class="ide r d3" data-code="# 我的数数儿歌：用 for 重复唱，每一遍都不太一样&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <a class="ide r d3" data-code="# 【造一首会数数的儿歌】&#10;# 让程序一遍一遍地唱，每一遍都不太一样。唱什么，你自己定。&#10;# 先做到：读入一个次数，用 for 重复一句话，句子里带上 i。&#10;# 选你喜欢的：青蛙儿歌、闯关倒计时、乘法大挑战，什么都行。&#10;# 还想更厉害：用 if 让某几遍不一样。文字乘整数就是重复几遍，&#10;#   试试 print(&quot;*&quot; * i)。&#10;# ↓ 从这里开始造&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>

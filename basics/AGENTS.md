@@ -12,7 +12,7 @@
 
 下面的路径都从 `basics/` 算起。
 
-- `lessons/<编号-英文名>/slides.html`：一节课的页面，只写 `<section>`。这是页面正文的唯一来源。题目的条件（输入、范围、输出格式、样例）改了，要同时核对这节课的 `tasks.json`、`solutions/`、`starter/` 和 `tests/`，让它们和页面说的一致。
+- `lessons/<编号-英文名>/slides.html`：一节课的页面，只写 `<section>`。这是页面正文的唯一来源。题目的条件（输入、范围、输出格式、样例）改了，要同时核对这节课的 `tasks.json`（包括 IDE 里题目注释用的 `brief`）、`solutions/`、`starter/` 和 `tests/`，让它们和页面说的一致。
 - `lessons/<…>/tasks.json`、`starter/`、`solutions/`、`tests/`：题目、起始程序、答案和测试。`tests/claims.json` 记录页面说过的输出和报错。
 - `template/`：所有课共用的外壳、样式和脚本。缩略图、时间轴、章节跳转都在这里。
 - `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。

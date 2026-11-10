@@ -76,26 +76,46 @@ for c in range(heads + 1):
     if c * 2 + r * 4 == feet:
         print(&quot;鸡&quot;, c, &quot;兔&quot;, r)</pre></details></li>
     <li class="file"><div><h2><a href="03_cage_none.py" download="03_cage_none.py">03_cage_none.py</a></h2><p>课件第 10 页：没有答案时输出“没有答案”。</p></div>
-      <nav aria-label="03_cage_none.py"><a href="03_cage_none.py" download="03_cage_none.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=heads%20%3D%20int(input())%0Afeet%20%3D%20int(input())%0Afor%20c%20in%20range(heads%20%2B%201)%3A%0A%20%20%20%20r%20%3D%20heads%20-%20c%0A%20%20%20%20if%20c%20*%202%20%2B%20r%20*%204%20%3D%3D%20feet%3A%0A%20%20%20%20%20%20%20%20print(%22%E9%B8%A1%22%2C%20c%2C%20%22%E5%85%94%22%2C%20r)%0A%23%20%E4%B8%80%E4%B8%AA%E7%AD%94%E6%A1%88%E4%B9%9F%E6%B2%A1%E6%9C%89%E6%97%B6%EF%BC%8C%E8%BE%93%E5%87%BA%E2%80%9C%E6%B2%A1%E6%9C%89%E7%AD%94%E6%A1%88%E2%80%9D%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E7%94%A8%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%E8%AE%B0%E4%BD%8F%E2%80%9C%E6%89%BE%E5%88%B0%E8%BF%87%E6%B2%A1%E6%9C%89%E2%80%9D%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-10">看第 10 页</a></nav>
-      <details><summary>看代码</summary><pre>heads = int(input())
+      <nav aria-label="03_cage_none.py"><a href="03_cage_none.py" download="03_cage_none.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%B2%A1%E6%9C%89%E7%AD%94%E6%A1%88%E6%97%B6%E8%AF%B4%E4%B8%80%E5%A3%B0%E3%80%91%0A%23%20%E8%84%9A%E6%95%B0%E6%98%AF%E5%8D%95%E6%95%B0%EF%BC%8C%E6%88%96%E8%80%85%E5%A4%AA%E5%A4%9A%E5%A4%AA%E5%B0%91%EF%BC%8C%E5%B0%B1%E6%80%8E%E4%B9%88%E4%B9%9F%E5%87%91%E4%B8%8D%E4%B8%8A%E3%80%82%E5%9C%A8%E4%BE%8B%E9%A2%98%E4%B8%8A%E6%94%B9%EF%BC%9A%0A%23%20%20%20%E4%B8%80%E7%A7%8D%E7%AD%94%E6%A1%88%E4%B9%9F%E6%B2%A1%E6%9C%89%E6%97%B6%EF%BC%8C%E8%BE%93%E5%87%BA%E2%80%9C%E6%B2%A1%E6%9C%89%E7%AD%94%E6%A1%88%E2%80%9D%E3%80%82%E8%BE%93%E5%85%A5%E8%BF%98%E6%98%AF%E4%B8%A4%E8%A1%8C%EF%BC%9A%E5%A4%B4%E6%95%B0%E5%92%8C%E8%84%9A%E6%95%B0%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A10%E3%80%8121%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A%E6%B2%A1%E6%9C%89%E7%AD%94%E6%A1%88%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%B9%9F%E6%B2%A1%E6%89%BE%E5%88%B0%E6%97%B6%EF%BC%8C%E8%AF%B4%E4%B8%80%E5%A3%B0%E3%80%82%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E7%94%A8%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%E8%AE%B0%E4%BD%8F%E2%80%9C%E6%89%BE%E5%88%B0%E8%BF%87%E6%B2%A1%E6%9C%89%E2%80%9D%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0Aheads%20%3D%20int(input())%0Afeet%20%3D%20int(input())%0Afor%20c%20in%20range(heads%20%2B%201)%3A%0A%20%20%20%20r%20%3D%20heads%20-%20c%0A%20%20%20%20if%20c%20*%202%20%2B%20r%20*%204%20%3D%3D%20feet%3A%0A%20%20%20%20%20%20%20%20print(%22%E9%B8%A1%22%2C%20c%2C%20%22%E5%85%94%22%2C%20r)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-10">看第 10 页</a></nav>
+      <details><summary>看代码</summary><pre># 【没有答案时说一声】
+# 脚数是单数，或者太多太少，就怎么也凑不上。在例题上改：
+#   一种答案也没有时，输出“没有答案”。输入还是两行：头数和脚数。
+# 例如输入（每个一行）：10、21
+# 应该输出：没有答案
+# 提示：一个也没找到时，说一声。
+# 提示：用一个变量记住“找到过没有”。
+# ↓ 在下面这段程序上改
+
+heads = int(input())
 feet = int(input())
 for c in range(heads + 1):
     r = heads - c
     if c * 2 + r * 4 == feet:
-        print(&quot;鸡&quot;, c, &quot;兔&quot;, r)
-# 一个答案也没有时，输出“没有答案”
-# 提示：用一个变量记住“找到过没有”</pre></details></li>
+        print(&quot;鸡&quot;, c, &quot;兔&quot;, r)</pre></details></li>
     <li class="file"><div><h2><a href="04_hundred.py" download="04_hundred.py">04_hundred.py</a></h2><p>课件第 13 页：百钱买百鸡。</p></div>
-      <nav aria-label="04_hundred.py"><a href="04_hundred.py" download="04_hundred.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E5%85%AC%E9%B8%A1%205%20%E5%85%83%E4%B8%80%E5%8F%AA%EF%BC%8C%E6%AF%8D%E9%B8%A1%203%20%E5%85%83%E4%B8%80%E5%8F%AA%EF%BC%8C%E5%B0%8F%E9%B8%A1%201%20%E5%85%83%203%20%E5%8F%AA%0A%23%20%E8%AF%BB%E5%85%A5%20n%EF%BC%881%20%E5%88%B0%20300%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%EF%BC%9A%E7%94%A8%20n%20%E5%85%83%E6%AD%A3%E5%A5%BD%E4%B9%B0%20n%20%E5%8F%AA%E9%B8%A1%0A%23%20%E5%B0%8F%E9%B8%A1%E8%A6%81%E6%95%B4%203%20%E5%8F%AA%E6%95%B4%203%20%E5%8F%AA%E5%9C%B0%E4%B9%B0%0A%23%20%E6%AF%8F%E7%A7%8D%E4%B9%B0%E6%B3%95%E8%BE%93%E5%87%BA%E4%B8%80%E8%A1%8C%EF%BC%8C%E6%AF%94%E5%A6%82%EF%BC%9A%E5%85%AC%E9%B8%A1%204%20%E6%AF%8D%E9%B8%A1%2018%20%E5%B0%8F%E9%B8%A1%2078%0A%23%20%E5%85%AC%E9%B8%A1%E4%BB%8E%E5%B0%91%E5%88%B0%E5%A4%9A%EF%BC%8C%E4%B8%80%E6%A0%B7%E5%A4%9A%E6%97%B6%E6%AF%8D%E9%B8%A1%E4%BB%8E%E5%B0%91%E5%88%B0%E5%A4%9A%EF%BC%9B%E4%B8%80%E7%A7%8D%E4%B9%9F%E6%B2%A1%E6%9C%89%E5%B0%B1%E8%BE%93%E5%87%BA%E2%80%9C%E6%B2%A1%E6%9C%89%E7%AD%94%E6%A1%88%E2%80%9D%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-13">看第 13 页</a></nav>
-      <details><summary>看代码</summary><pre># 公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只
-# 读入 n（1 到 300 的整数）：用 n 元正好买 n 只鸡
-# 小鸡要整 3 只整 3 只地买
-# 每种买法输出一行，比如：公鸡 4 母鸡 18 小鸡 78
-# 公鸡从少到多，一样多时母鸡从少到多；一种也没有就输出“没有答案”</pre></details></li>
+      <nav aria-label="04_hundred.py"><a href="04_hundred.py" download="04_hundred.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E7%99%BE%E9%92%B1%E4%B9%B0%E7%99%BE%E9%B8%A1%E3%80%91%0A%23%20%E4%B8%80%E9%81%93%E4%B8%80%E5%8D%83%E5%A4%9A%E5%B9%B4%E5%89%8D%E7%9A%84%E5%8F%A4%E9%A2%98%EF%BC%9A%E5%85%AC%E9%B8%A1%205%20%E5%85%83%E4%B8%80%E5%8F%AA%EF%BC%8C%E6%AF%8D%E9%B8%A1%203%20%E5%85%83%E4%B8%80%E5%8F%AA%EF%BC%8C%0A%23%20%20%20%E5%B0%8F%E9%B8%A1%201%20%E5%85%83%203%20%E5%8F%AA%E3%80%82%E8%AF%BB%E5%85%A5%20n%EF%BC%881%20%E5%88%B0%20300%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%89%EF%BC%8C%0A%23%20%20%20%E7%94%A8%20n%20%E5%85%83%E6%AD%A3%E5%A5%BD%E4%B9%B0%20n%20%E5%8F%AA%E9%B8%A1%EF%BC%8C%E5%B0%8F%E9%B8%A1%E8%A6%81%E6%95%B4%203%20%E5%8F%AA%E5%9C%B0%E4%B9%B0%E3%80%82%0A%23%20%E6%AF%8F%E7%A7%8D%E4%B9%B0%E6%B3%95%E8%BE%93%E5%87%BA%E4%B8%80%E8%A1%8C%EF%BC%8C%E5%85%AC%E9%B8%A1%E4%BB%8E%E5%B0%91%E5%88%B0%E5%A4%9A%EF%BC%8C%E5%85%AC%E9%B8%A1%E4%B8%80%E6%A0%B7%E6%97%B6%E6%AF%8D%E9%B8%A1%E4%BB%8E%E5%B0%91%E5%88%B0%E5%A4%9A%E3%80%82%0A%23%20%20%20%E4%B8%80%E7%A7%8D%E4%B9%9F%E6%B2%A1%E6%9C%89%E5%B0%B1%E8%BE%93%E5%87%BA%E2%80%9C%E6%B2%A1%E6%9C%89%E7%AD%94%E6%A1%88%E2%80%9D%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%9A100%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E4%B8%80%E5%85%B1%204%20%E8%A1%8C%EF%BC%89%EF%BC%9A%0A%23%20%20%20%E5%85%AC%E9%B8%A1%200%20%E6%AF%8D%E9%B8%A1%2025%20%E5%B0%8F%E9%B8%A1%2075%0A%23%20%20%20%E2%80%A6%E2%80%A6%0A%23%20%20%20%E5%85%AC%E9%B8%A1%2012%20%E6%AF%8D%E9%B8%A1%204%20%E5%B0%8F%E9%B8%A1%2084%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E5%86%99%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-13">看第 13 页</a></nav>
+      <details><summary>看代码</summary><pre># 【百钱买百鸡】
+# 一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，
+#   小鸡 1 元 3 只。读入 n（1 到 300 的整数），
+#   用 n 元正好买 n 只鸡，小鸡要整 3 只地买。
+# 每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。
+#   一种也没有就输出“没有答案”。
+# 例如输入：100
+# 应该输出（一共 4 行）：
+#   公鸡 0 母鸡 25 小鸡 75
+#   ……
+#   公鸡 12 母鸡 4 小鸡 84
+# ↓ 从这里开始写</pre></details></li>
     <li class="file"><div><h2><a href="05_my_search.py" download="05_my_search.py">05_my_search.py</a></h2><p>课件第 15 页：自己出题，让程序挨个试出答案。</p></div>
-      <nav aria-label="05_my_search.py"><a href="05_my_search.py" download="05_my_search.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E6%88%91%E7%9A%84%E2%80%9C%E4%B8%80%E4%B8%AA%E4%B8%AA%E8%AF%95%E2%80%9D%E5%B0%8F%E7%A8%8B%E5%BA%8F%0A%23%20%E5%85%88%E6%83%B3%E5%A5%BD%EF%BC%9A%E7%AD%94%E6%A1%88%E5%8F%AF%E8%83%BD%E5%9C%A8%E5%93%AA%E4%B8%AA%E8%8C%83%E5%9B%B4%EF%BC%9F%E6%80%8E%E6%A0%B7%E5%88%A4%E6%96%AD%E8%AF%95%E5%AF%B9%E4%BA%86%EF%BC%9F%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-15">看第 15 页</a></nav>
-      <details><summary>看代码</summary><pre># 我的“一个个试”小程序
-# 先想好：答案可能在哪个范围？怎样判断试对了？</pre></details></li>
+      <nav aria-label="05_my_search.py"><a href="05_my_search.py" download="05_my_search.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E9%80%A0%E4%B8%80%E4%B8%AA%E2%80%9C%E6%8C%A8%E4%B8%AA%E8%AF%95%E2%80%9D%E7%9A%84%E5%B0%8F%E7%A8%8B%E5%BA%8F%E3%80%91%0A%23%20%E8%87%AA%E5%B7%B1%E5%87%BA%E4%B8%80%E9%81%93%E9%A2%98%EF%BC%8C%E8%AE%A9%E7%A8%8B%E5%BA%8F%E6%8C%A8%E4%B8%AA%E8%AF%95%E5%87%BA%E7%AD%94%E6%A1%88%E3%80%82%0A%23%20%E5%85%88%E5%81%9A%E5%88%B0%EF%BC%9A%E6%89%BE%E5%87%BA%201%20%E5%88%B0%20100%20%E9%87%8C%E4%BD%A0%E7%9A%84%E5%B9%B8%E8%BF%90%E6%95%B0%EF%BC%8C%E6%AF%94%E5%A6%82%E4%B8%AA%E4%BD%8D%E6%98%AF%207%E3%80%81%0A%23%20%20%20%E5%8F%88%E6%98%AF%203%20%E7%9A%84%E5%80%8D%E6%95%B0%E3%80%82%0A%23%20%E9%80%89%E4%BD%A0%E5%96%9C%E6%AC%A2%E7%9A%84%EF%BC%9A%E4%B8%89%E4%BD%8D%E6%95%B0%E9%87%8C%E7%99%BE%E4%BD%8D%E5%92%8C%E4%B8%AA%E4%BD%8D%E4%B8%80%E6%A0%B7%E3%80%81%E5%90%84%E4%BD%8D%E5%8A%A0%E8%B5%B7%E6%9D%A5%E6%98%AF%2010%20%E7%9A%84%EF%BC%9B%0A%23%20%20%20%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%92%8C%E6%98%AF%2020%E3%80%81%E7%A7%AF%E6%98%AF%2096%E3%80%82%0A%23%20%E8%BF%98%E6%83%B3%E6%9B%B4%E5%8E%89%E5%AE%B3%EF%BC%9A%E6%95%B0%E4%B8%80%E6%95%B0%E4%B8%80%E5%85%B1%E8%AF%95%E4%BA%86%E5%87%A0%E6%AC%A1%EF%BC%8C%E5%86%8D%E6%83%B3%E5%8A%9E%E6%B3%95%E7%BC%A9%E5%B0%8F%E8%8C%83%E5%9B%B4%EF%BC%8C%E5%B0%91%E8%AF%95%E5%87%A0%E6%AC%A1%E3%80%82%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E9%80%A0%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-15">看第 15 页</a></nav>
+      <details><summary>看代码</summary><pre># 【造一个“挨个试”的小程序】
+# 自己出一道题，让程序挨个试出答案。
+# 先做到：找出 1 到 100 里你的幸运数，比如个位是 7、
+#   又是 3 的倍数。
+# 选你喜欢的：三位数里百位和个位一样、各位加起来是 10 的；
+#   两个数和是 20、积是 96。
+# 还想更厉害：数一数一共试了几次，再想办法缩小范围，少试几次。
+# ↓ 从这里开始造</pre></details></li>
   </ol>
 </main>
 

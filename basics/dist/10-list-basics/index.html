@@ -685,7 +685,7 @@ out of range</pre></div>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1.4fr"><div><small>依次输入</small><pre style="font-size:44px">3、80、95、70、2</pre></div><div><small>输出</small><pre style="font-size:44px">[80, 100, 70]</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_bonus.py</p>
   </div>
-  <a class="ide r d3" data-code="n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;k = int(input())&#10;print(scores[k - 1])&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【给第 k 个人加 5 分】&#10;# 第一行读入人数 n（1 到 100 的整数），接下来 n 行，&#10;#   每行一个 0 到 95 的整数分数，最后一行读入 k（1 到 n）。&#10;#   给第 k 个人加 5 分，输出整个列表。&#10;# 例如输入（每个一行）：3、80、95、70、2&#10;# 应该输出：[80, 100, 70]&#10;# 提示：取出来、加上、放回去，最后输出整个列表。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;k = int(input())&#10;print(scores[k - 1])&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: len after append -->
@@ -738,7 +738,7 @@ out of range</pre></div>
 40
 50
 2</pre><small style="margin-top:14px">输出</small><pre style="font-size:48px">20 40</pre></div>
-  <a class="ide r d3" data-code="# 第一行读入个数 n（1 到 100 的整数）&#10;# 接下来 n 行，每行一个 0 到 100 的整数&#10;# 最后一行读入 k（1 到 n 的整数）&#10;# 输出从前往后数第 k 个和从后往前数第 k 个，例如 20 40&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【从两头数】&#10;# 第一行读入个数 n（1 到 100 的整数），接下来 n 行，&#10;#   每行一个 0 到 100 的整数，最后一行读入 k（1 到 n）。&#10;# 输出从前往后数第 k 个和从后往前数第 k 个，中间空一格。&#10;# 例如输入（每个一行）：5、10、20、30、40、50、2&#10;# 应该输出：20 40&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -763,7 +763,7 @@ out of range</pre></div>
     <div class="r d2"><code>选你喜欢的</code><span>愿望单、要带的文具、喜欢的歌、想去的地方。</span></div>
     <div class="r d3"><code>还想更厉害</code><span>再读一个 k，说出第 k 样和最后一样，或者改掉其中一样。</span></div>
   </div>
-  <a class="ide r d3" data-code="# 我的清单：一样一样记下来，再挑出想要的那一个&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <a class="ide r d3" data-code="# 【造一个你的清单】&#10;# 程序把你说的一样一样记下来，再挑出想要的那一个。记什么，&#10;#   你自己定。&#10;# 先做到：读入几样东西存进列表，说出一共几样和第一样。&#10;# 选你喜欢的：愿望单、要带的文具、喜欢的歌、想去的地方。&#10;# 还想更厉害：再读一个 k，说出第 k 样和最后一样，&#10;#   或者改掉其中一样。&#10;# ↓ 从这里开始造&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>

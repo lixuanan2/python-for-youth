@@ -87,8 +87,17 @@ s1 = area(w1, h1)
 s2 = area(w2, h2)
 print(s1 + s2)</pre></details></li>
     <li class="file"><div><h2><a href="04_perimeter.py" download="04_perimeter.py">04_perimeter.py</a></h2><p>课件第 10 页：改成周长函数。</p></div>
-      <nav aria-label="04_perimeter.py"><a href="04_perimeter.py" download="04_perimeter.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=def%20area(w%2C%20h)%3A%0A%20%20%20%20return%20w%20*%20h%0Aw%20%3D%20int(input())%0Ah%20%3D%20int(input())%0Aprint(area(w%2C%20h))%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-10">看第 10 页</a></nav>
-      <details><summary>看代码</summary><pre>def area(w, h):
+      <nav aria-label="04_perimeter.py"><a href="04_perimeter.py" download="04_perimeter.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E5%86%99%E4%B8%80%E4%B8%AA%E5%91%A8%E9%95%BF%E5%87%BD%E6%95%B0%E3%80%91%0A%23%20%E8%B5%B7%E5%A7%8B%E7%A8%8B%E5%BA%8F%E9%87%8C%E6%9C%89%E9%9D%A2%E7%A7%AF%E5%87%BD%E6%95%B0%E3%80%82%E6%8A%8A%E5%AE%83%E6%94%B9%E6%88%90%20perimeter(w%2C%20h)%EF%BC%8C%0A%23%20%20%20%E8%BF%94%E5%9B%9E%E9%95%BF%E6%96%B9%E5%BD%A2%E7%9A%84%E5%91%A8%E9%95%BF%EF%BC%88%E9%95%BF%E5%8A%A0%E5%AE%BD%EF%BC%8C%E5%86%8D%E4%B9%98%202%EF%BC%89%E3%80%82%E5%88%86%E4%B8%A4%E8%A1%8C%E8%AF%BB%E5%85%A5%E9%95%BF%E5%92%8C%E5%AE%BD%EF%BC%8C%0A%23%20%20%20%E9%83%BD%E6%98%AF%200%20%E5%88%B0%20100%20%E7%9A%84%E6%95%B4%E6%95%B0%EF%BC%8C%E8%BE%93%E5%87%BA%E5%91%A8%E9%95%BF%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A3%E3%80%814%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A14%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E6%8D%A2%E4%B8%AA%E5%90%8D%E5%AD%97%EF%BC%8C%E6%8D%A2%E4%B8%AA%E7%AE%97%E6%B3%95%EF%BC%8C%E5%88%AB%E7%9A%84%E4%B8%8D%E7%94%A8%E5%8A%A8%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0Adef%20area(w%2C%20h)%3A%0A%20%20%20%20return%20w%20*%20h%0Aw%20%3D%20int(input())%0Ah%20%3D%20int(input())%0Aprint(area(w%2C%20h))%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-10">看第 10 页</a></nav>
+      <details><summary>看代码</summary><pre># 【写一个周长函数】
+# 起始程序里有面积函数。把它改成 perimeter(w, h)，
+#   返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，
+#   都是 0 到 100 的整数，输出周长。
+# 例如输入（每个一行）：3、4
+# 应该输出：14
+# 提示：换个名字，换个算法，别的不用动。
+# ↓ 在下面这段程序上改
+
+def area(w, h):
     return w * h
 w = int(input())
 h = int(input())
@@ -102,21 +111,39 @@ print(area(w, h))</pre></details></li>
 print(bigger(3, 8))
 print(bigger(9, 2))</pre></details></li>
     <li class="file"><div><h2><a href="06_grade.py" download="06_grade.py">06_grade.py</a></h2><p>课件第 13 页：写一个成绩等级函数。</p></div>
-      <nav aria-label="06_grade.py"><a href="06_grade.py" download="06_grade.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=def%20bigger(a%2C%20b)%3A%0A%20%20%20%20if%20a%20%3E%20b%3A%0A%20%20%20%20%20%20%20%20return%20a%0A%20%20%20%20return%20b%0Aprint(bigger(3%2C%208))%0Aprint(bigger(9%2C%202))%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-13">看第 13 页</a></nav>
-      <details><summary>看代码</summary><pre>def bigger(a, b):
+      <nav aria-label="06_grade.py"><a href="06_grade.py" download="06_grade.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E5%86%99%E4%B8%80%E4%B8%AA%E6%88%90%E7%BB%A9%E7%AD%89%E7%BA%A7%E5%87%BD%E6%95%B0%E3%80%91%0A%23%20%E5%86%99%20grade(score)%EF%BC%9A90%20%E5%88%86%E5%8F%8A%E4%BB%A5%E4%B8%8A%E8%BF%94%E5%9B%9E%E2%80%9C%E4%BC%98%E7%A7%80%E2%80%9D%EF%BC%8C60%20%E5%88%86%E5%8F%8A%E4%BB%A5%E4%B8%8A%E8%BF%94%E5%9B%9E%E2%80%9C%E5%8F%8A%E6%A0%BC%E2%80%9D%EF%BC%8C%0A%23%20%20%20%E5%85%B6%E4%BD%99%E8%BF%94%E5%9B%9E%E2%80%9C%E4%B8%8D%E5%8F%8A%E6%A0%BC%E2%80%9D%E3%80%82%E8%AF%BB%E5%85%A5%E4%B8%80%E4%B8%AA%200%20%E5%88%B0%20100%20%E7%9A%84%E6%95%B4%E6%95%B0%E5%88%86%E6%95%B0%EF%BC%8C%E8%BE%93%E5%87%BA%E7%AD%89%E7%BA%A7%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%9A95%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A%E4%BC%98%E7%A7%80%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0%EF%BC%8C%E4%B8%89%E7%A7%8D%E7%BB%93%E6%9E%9C%EF%BC%8C%E7%A2%B0%E5%88%B0%20return%20%E5%B0%B1%E7%BB%93%E6%9D%9F%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0Adef%20bigger(a%2C%20b)%3A%0A%20%20%20%20if%20a%20%3E%20b%3A%0A%20%20%20%20%20%20%20%20return%20a%0A%20%20%20%20return%20b%0Aprint(bigger(3%2C%208))%0Aprint(bigger(9%2C%202))%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-13">看第 13 页</a></nav>
+      <details><summary>看代码</summary><pre># 【写一个成绩等级函数】
+# 写 grade(score)：90 分及以上返回“优秀”，60 分及以上返回“及格”，
+#   其余返回“不及格”。读入一个 0 到 100 的整数分数，输出等级。
+# 例如输入：95
+# 应该输出：优秀
+# 提示：一个参数，三种结果，碰到 return 就结束。
+# ↓ 在下面这段程序上改
+
+def bigger(a, b):
     if a &gt; b:
         return a
     return b
 print(bigger(3, 8))
 print(bigger(9, 2))</pre></details></li>
     <li class="file"><div><h2><a href="07_max3.py" download="07_max3.py">07_max3.py</a></h2><p>课件第 16 页：把返回值再交给函数，比出三个数里最大的。</p></div>
-      <nav aria-label="07_max3.py"><a href="07_max3.py" download="07_max3.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E5%88%86%E4%B8%89%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%B8%89%E4%B8%AA%E6%95%B4%E6%95%B0%EF%BC%88-1000%20%E5%88%B0%201000%EF%BC%89%0A%23%20%E8%BE%93%E5%87%BA%E6%9C%80%E5%A4%A7%E7%9A%84%E9%82%A3%E4%B8%AA%0A%23%20%E5%85%88%E5%86%99%E4%B8%80%E4%B8%AA%20bigger(a%2C%20b)%20%E5%87%BD%E6%95%B0%EF%BC%8C%E8%BF%94%E5%9B%9E%E4%B8%A4%E4%B8%AA%E6%95%B0%E9%87%8C%E5%A4%A7%E7%9A%84%E9%82%A3%E4%B8%AA%EF%BC%8C%E5%86%8D%E7%94%A8%E5%AE%83%E6%AF%94%E5%87%BA%E4%B8%89%E4%B8%AA%E6%95%B0%E9%87%8C%E6%9C%80%E5%A4%A7%E7%9A%84%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-16">看第 16 页</a></nav>
-      <details><summary>看代码</summary><pre># 分三行读入三个整数（-1000 到 1000）
-# 输出最大的那个
-# 先写一个 bigger(a, b) 函数，返回两个数里大的那个，再用它比出三个数里最大的</pre></details></li>
+      <nav aria-label="07_max3.py"><a href="07_max3.py" download="07_max3.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E4%B8%89%E4%B8%AA%E6%95%B0%E6%AF%94%E5%A4%A7%E5%B0%8F%E3%80%91%0A%23%20%E5%88%86%E4%B8%89%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%B8%89%E4%B8%AA%E6%95%B4%E6%95%B0%EF%BC%88-1000%20%E5%88%B0%201000%EF%BC%89%EF%BC%8C%E8%BE%93%E5%87%BA%E6%9C%80%E5%A4%A7%E7%9A%84%E9%82%A3%E4%B8%AA%E3%80%82%0A%23%20%E5%85%88%E5%86%99%20bigger(a%2C%20b)%EF%BC%8C%E8%BF%94%E5%9B%9E%E4%B8%A4%E4%B8%AA%E6%95%B0%E9%87%8C%E5%A4%A7%E7%9A%84%E9%82%A3%E4%B8%AA%EF%BC%8C%0A%23%20%20%20%E5%86%8D%E5%8F%AA%E7%94%A8%E5%AE%83%E6%AF%94%E5%87%BA%E4%B8%89%E4%B8%AA%E6%95%B0%E9%87%8C%E6%9C%80%E5%A4%A7%E7%9A%84%EF%BC%8C%E4%B8%8D%E5%86%8D%E5%86%99%E5%88%AB%E7%9A%84%20if%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A3%E3%80%819%E3%80%815%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A9%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E5%86%99%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-16">看第 16 页</a></nav>
+      <details><summary>看代码</summary><pre># 【三个数比大小】
+# 分三行读入三个整数（-1000 到 1000），输出最大的那个。
+# 先写 bigger(a, b)，返回两个数里大的那个，
+#   再只用它比出三个数里最大的，不再写别的 if。
+# 例如输入（每个一行）：3、9、5
+# 应该输出：9
+# ↓ 从这里开始写</pre></details></li>
     <li class="file"><div><h2><a href="08_my_tool.py" download="08_my_tool.py">08_my_tool.py</a></h2><p>课件第 18 页：做一个自己的工具函数。</p></div>
-      <nav aria-label="08_my_tool.py"><a href="08_my_tool.py" download="08_my_tool.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E6%88%91%E7%9A%84%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0%EF%BC%9A%E7%BB%99%E5%AE%83%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%AE%83%E7%AE%97%E5%87%BA%E7%BB%93%E6%9E%9C%E4%BA%A4%E5%9B%9E%E6%9D%A5%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-18">看第 18 页</a></nav>
-      <details><summary>看代码</summary><pre># 我的工具函数：给它数据，它算出结果交回来</pre></details></li>
+      <nav aria-label="08_my_tool.py"><a href="08_my_tool.py" download="08_my_tool.py">下载</a><a href="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E9%80%A0%E4%B8%80%E4%B8%AA%E4%BD%A0%E7%9A%84%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0%E3%80%91%0A%23%20%E7%BB%99%E5%AE%83%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%AE%83%E7%AE%97%E5%A5%BD%E4%BA%A4%E5%9B%9E%E6%9D%A5%EF%BC%8C%E4%BD%A0%E6%8B%BF%E7%BB%93%E6%9E%9C%E5%81%9A%E5%88%AB%E7%9A%84%E4%BA%8B%E3%80%82%E7%AE%97%E4%BB%80%E4%B9%88%EF%BC%8C%E4%BD%A0%E8%87%AA%E5%B7%B1%E5%AE%9A%E3%80%82%0A%23%20%E5%85%88%E5%81%9A%E5%88%B0%EF%BC%9A%E5%86%99%E4%B8%80%E4%B8%AA%E5%B8%A6%E5%8F%82%E6%95%B0%E3%80%81%E6%9C%89%20return%20%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E8%B0%83%E7%94%A8%E4%B8%A4%E6%AC%A1%EF%BC%8C%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E3%80%82%0A%23%20%E9%80%89%E4%BD%A0%E5%96%9C%E6%AC%A2%E7%9A%84%EF%BC%9A%E6%89%93%E6%8A%98%E8%AE%A1%E7%AE%97%E3%80%81%E9%9B%B6%E8%8A%B1%E9%92%B1%E5%87%A0%E5%91%A8%E6%94%92%E5%A4%9F%E3%80%81%E8%B7%91%E6%AD%A5%E7%94%A8%E6%97%B6%E3%80%81%E4%BD%9C%E4%B8%9A%E8%BF%98%E5%89%A9%E5%87%A0%E9%A1%B5%E3%80%82%0A%23%20%E8%BF%98%E6%83%B3%E6%9B%B4%E5%8E%89%E5%AE%B3%EF%BC%9A%E5%86%99%E4%B8%A4%E4%B8%AA%E5%87%BD%E6%95%B0%EF%BC%8C%E6%8A%8A%E4%B8%80%E4%B8%AA%E7%9A%84%E7%BB%93%E6%9E%9C%E4%BA%A4%E7%BB%99%E5%8F%A6%E4%B8%80%E4%B8%AA%EF%BC%9B%0A%23%20%20%20%E6%88%96%E8%80%85%E5%9C%A8%E5%87%BD%E6%95%B0%E9%87%8C%E7%94%A8%20if%E3%80%82%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E9%80%A0%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-18">看第 18 页</a></nav>
+      <details><summary>看代码</summary><pre># 【造一个你的工具函数】
+# 给它数据，它算好交回来，你拿结果做别的事。算什么，你自己定。
+# 先做到：写一个带参数、有 return 的函数，调用两次，输出结果。
+# 选你喜欢的：打折计算、零花钱几周攒够、跑步用时、作业还剩几页。
+# 还想更厉害：写两个函数，把一个的结果交给另一个；
+#   或者在函数里用 if。
+# ↓ 从这里开始造</pre></details></li>
   </ol>
 </main>
 

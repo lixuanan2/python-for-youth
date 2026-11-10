@@ -616,7 +616,7 @@ print(b, a)</pre>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 4、90、85、77、96，第三行</small><pre>平均 87.0</pre></div><div><small>输入 1、60，第三行</small><pre>平均 60.0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">交回几个，拆的时候左边就写几个名字。教室电脑：打开 starter/05_stats_avg.py</p>
   </div>
-  <a class="ide r d3" data-code="def low_high(nums):&#10;    return min(nums), max(nums)&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;low, high = low_high(scores)&#10;print(&quot;最低&quot;, low, &quot;最高&quot;, high)&#10;print(&quot;相差&quot;, high - low)&#10;# 让函数再交回第三个值：平均分（用 round 保留 1 位小数）&#10;# 最后多输出一行：平均 多少&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【再交回平均分】&#10;# 在例题上改：函数改成一次交回三个值：最低、最高、平均分，&#10;#   平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。&#10;#   输入和例题一样，n 是 1 到 50 的整数。&#10;# 例如输入（每个一行）：4、90、85、77、96&#10;# 应该输出：&#10;#   最低 77 最高 96&#10;#   相差 19&#10;#   平均 87.0&#10;# 提示：让函数多交回一个。&#10;# ↓ 在下面这段程序上改&#10;&#10;def low_high(nums):&#10;    return min(nums), max(nums)&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;low, high = low_high(scores)&#10;print(&quot;最低&quot;, low, &quot;最高&quot;, high)&#10;print(&quot;相差&quot;, high - low)&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -652,7 +652,7 @@ print(b, a)</pre>
 -1 2
 5 0</pre><small style="margin-top:14px">输出</small><pre style="font-size:44px;white-space:pre">(-1, 2)
 3 步</pre></div>
-  <a class="ide r d3" data-code="# 第一行读入宝藏个数 n（1 到 50 的整数）&#10;# 接下来 n 行，每行两个整数 x 和 y，用空格隔开，是一个宝藏的位置&#10;# 你站在 (0, 0)，只能横着走或竖着走，走到 (x, y) 要 |x| + |y| 步&#10;# 找出最近的宝藏，一样近时选先出现的&#10;# 输出两行：它的位置，比如 (1, -2)；还有“几 步”&#10;" style="left:96px;top:890px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【最近的宝藏】&#10;# 你站在 (0, 0)，只能横着或竖着走，走到 (x, y) 要 |x| + |y| 步。&#10;#   第一行读入宝藏个数 n（1 到 50），&#10;#   接下来 n 行每行两个整数 x 和 y（-100 到 100），用空格隔开。&#10;# 找出最近的宝藏，一样近时选先出现的。输出两行：它的位置，&#10;#   写成 (1, -2) 的样子；还有“几 步”。&#10;# 例如输入（每个一行）：3、3 4、-1 2、5 0&#10;# 应该输出（每个一行）：(-1, 2) / 3 步&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:890px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:896px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>
@@ -677,7 +677,7 @@ print(b, a)</pre>
     <div class="r d2"><code>选你喜欢的</code><span>朋友生日表：名字、月、日；地图上的地点：名字和坐标；单词和意思。</span></div>
     <div class="r d3"><code>还想更厉害</code><span>读入生日表，找出这个月过生日的人；或者算两个点之间要走几步。</span></div>
   </div>
-  <a class="ide r d3" data-code="# 我的元组小程序&#10;# 想一想：哪些东西总是成对、成组出现？比如名字和分数、月和日、横坐标和纵坐标&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
+  <a class="ide r d3" data-code="# 【造一个你的元组小程序】&#10;# 找一些总是成对、成组出现的东西，打成一包。&#10;# 先做到：写一个函数，一次交回两个结果，比如一个数的两倍和一半。&#10;# 选你喜欢的：朋友生日表：名字、月、日；地图上的地点：名字和坐标；&#10;#   单词和意思。&#10;# 还想更厉害：读入生日表，找出这个月过生日的人；&#10;#   或者算两个点之间要走几步。&#10;# ↓ 从这里开始造&#10;" style="left:96px;top:850px">▶ 在 IDE 开始造</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px;color:var(--muted)">没有标准答案。先说清它要做什么，再试两组输入，一组试边界。</p>
   <div class="foot"></div>
 </section>
