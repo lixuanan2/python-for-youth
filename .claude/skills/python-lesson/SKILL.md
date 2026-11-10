@@ -24,7 +24,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 - `solutions/`：答案，每个都要有测试。
 - `starter/`：起始程序。小改写放例题代码，挑战和小项目空着（或只放 `import`）。题目不写进这里：构建时按 `tasks.json` 的 `brief` 在开头加一段注释，IDE 按钮、下载的文件和起始程序页都带上。
 - `tests/contracts.json`：普通和边界数据。
-- `tests/claims.json`：页面上说过的输出和报错，含小测的每个选项。
+- `tests/claims.json`：页面上说过的输出和报错，含小测的每个选项。`error` 和 `warning` 可以写一句、几行的列表，C++ 也可以按编译器分开写（`{"gcc": …, "clang": …}`，本机编译器那一项要出现在真实输出里）。只有 `warning` 的程序要能编译，不用加 `"ide": true`。C++ 页面的报错框（`div.tb`）里，含 `error:`、`warning:`、`note:` 或 `generated.` 的每一行（去掉开头的 `main.cpp:` 和末尾的 …）都要等于这一页某条 claim 的 `error` 或 `warning`（`clang` 那一项，在线 IDE 用 clang），`check.py` 会查；Python 的报错框暂时不查。
 - `tasks.json`：题目、角色（语法小演示、基础例题、学生小改写、独立迁移、创作项目）和页码。学生自己写的三种（小改写、独立迁移、创作项目）要有 `brief`，这是 IDE 里题目注释的唯一来源：`title` 和页面标题一样；`goal` 一到三句，照页面上的题目写（输入、范围、输出格式）；`hint` 一句提示，可省；`more` 再补几行（小项目写“先做到：…”“还想更厉害：…”）。样例用 `sample_input`、`sample_output`，页面上的例子不一样时可在 `brief` 里写 `input`、`output`；小项目没有样例。生成的注释最多 12 行。`check.py` 核对：标题、每个数字和引号里的词在那一页出现，样例是答案真的输出，注释里没有答案里的代码，不写“必做”“选做”这类标签，`dist` 里的起始程序是最新的。注释一律用中文。下载的起始程序用 `site.json` 的 `"starter_encoding"` 存：`"utf-8"`（默认）、`"utf-8-sig"`（带 BOM 的 UTF-8，C++ 课用，Windows 上的编辑器认得出是 UTF-8）或 `"gbk"`（只认中文 Windows 编码的老编辑器才用）；IDE 按钮带的是文字，和编码无关。
 
 ## 3. 写页面

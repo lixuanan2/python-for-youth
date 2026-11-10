@@ -39,13 +39,27 @@ def find_compiler():
     return compiler
 
 
-def error_text(claim):
-    """Compilers word errors differently, so a C++ claim may give the text for each one."""
-    want = claim['error']
-    if isinstance(want, str):
-        return want
+# The compiler the online IDE uses, whose wording the pages show: cpp.sh compiles with clang.
+IDE_COMPILER = {'cpp': 'clang'}
+# Which lines of an error box (div.tb) are the IDE's own words and must equal a claim on that page, and what the IDE
+# puts in front of them. A language without an entry is not checked yet; Python's tracebacks could opt in here.
+BOX_LINES = {'cpp': (re.compile(r'error:|warning:|note:|generated\.'), 'main.cpp:')}
+
+
+def texts(value, compiler=None):
+    """The lines a claim's "error" or "warning" promises: a string, a list of lines, or one of those per compiler
+    ({"gcc": …, "clang": …}). compiler picks the entry; a compiler without one promises nothing."""
+    if isinstance(value, dict):
+        value = value.get(compiler)
+    if value is None:
+        return []
+    return [value] if isinstance(value, str) else list(value)
+
+
+def local_compiler():
+    """The entry of a per-compiler claim that this machine's compiler should print."""
     version = subprocess.run([find_compiler(), '--version'], capture_output=True, text=True).stdout
-    return want['clang' if 'clang' in version else 'gcc']
+    return 'clang' if 'clang' in version else 'gcc'
 
 
 def compile_cpp(source):
@@ -151,7 +165,7 @@ def check_changes(text, folder):
                 # A page that shows only some lines (C++ often does) gives the whole program in data-full.
                 whole = {code, (full or '').strip()} - {''}
                 if not file:  # with data-file, check_deck compares the page with that tested file
-                    assert any(c['page'] == number and c['code'].strip() in whole and ('stdout' in c or 'error' in c) for c in claims), \
+                    assert any(c['page'] == number and c['code'].strip() in whole and ('stdout' in c or 'error' in c or 'warning' in c) for c in claims), \
                         f'{where}: a version of the code change without data-file needs a claim with its output in tests/claims.json'
             count += 1
     return count
@@ -299,23 +313,72 @@ def check_programs(folder):
     return len(scripts), len(cases)
 
 
+def plain(stderr):
+    # GCC prints curly quotes in a UTF-8 locale and straight ones elsewhere, such as on Windows.
+    return stderr.decode(errors='replace').replace('‘', "'").replace('’', "'")
+
+
 def check_claims(folder):
-    """Outputs and errors the slides promise must happen in real Python."""
+    """Outputs, errors and warnings the slides promise must happen in a real run."""
     claims = json.loads((folder / 'tests/claims.json').read_text(encoding='utf-8'))
+    compiler = local_compiler() if LANGUAGE == 'cpp' else None
     for claim in claims:
+        if 'warning' in claim:
+            # A warning does not stop the program: it must compile, and the compiler must say it.
+            if LANGUAGE == 'cpp':
+                built = compile_cpp(claim['code'])[1]
+                assert built.returncode == 0, f'A warning claim must compile: {claim}\n{plain(built.stderr)}'
+                said = plain(built.stderr)
+            else:
+                assert compiles(claim['code']), f'A warning claim must compile: {claim}'
+                said = plain(run(claim['code'], claim.get('stdin', '')).stderr)
+            for line in texts(claim['warning'], compiler):
+                assert line in said, f'Warning not printed: {line}\n{claim}\n{said}'
         if 'stdout' not in claim and 'error' not in claim:
+            if 'warning' in claim:
+                continue  # it compiled and gave its warning; that is all the page shows
             # A program that never stops, given to the IDE as it is: it only has to compile.
-            assert claim.get('ide'), f'Claim without stdout or error: {claim}'
+            assert claim.get('ide'), f'Claim without stdout, error or warning: {claim}'
             assert compiles(claim['code']), f'IDE program does not compile: {claim}'
             continue
         result = run(claim['code'], claim.get('stdin', ''))
         if 'error' in claim:
-            # GCC prints curly quotes in a UTF-8 locale and straight ones elsewhere, such as on Windows.
-            stderr = result.stderr.decode(errors='replace').replace('‘', "'").replace('’', "'")
-            assert result.returncode != 0 and error_text(claim) in stderr, f'Claim failed: {claim}\n{stderr}'
+            stderr = plain(result.stderr)
+            assert result.returncode != 0, f'Claim failed, the program did not stop with an error: {claim}'
+            for line in texts(claim['error'], compiler):
+                assert line in stderr, f'Claim failed: {line}\n{claim}\n{stderr}'
         else:
             assert result.returncode == 0 and result.stdout.decode().replace('\r\n', '\n') == claim['stdout'], f'Claim failed: {claim}'
     return len(claims)
+
+
+def box_line(text, prefix):
+    """A line as an error box shows it and as a claim gives it: no file name in front, no … at the end, single spaces."""
+    text = text.strip()
+    if prefix and text.startswith(prefix):
+        text = text[len(prefix):]
+    text = re.sub(r'\s*…$', '', text)
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+def check_boxes(text, claims, folder):
+    """Each IDE line in an error box (div.tb) must be the text of an error or warning claim on that page, so the page
+    shows what the IDE really prints. Returns how many lines were checked."""
+    if LANGUAGE not in BOX_LINES:
+        return 0
+    pattern, prefix = BOX_LINES[LANGUAGE]
+    checked = 0
+    for number, section in enumerate(re.findall(r'<section id="page-\d+".*?</section>', text, re.S), 1):
+        want = {box_line(line, prefix) for c in claims if c['page'] == number
+                for key in ('error', 'warning') for line in texts(c.get(key), IDE_COMPILER.get(LANGUAGE))}
+        for box in re.findall(r'<div class="tb\b[^"]*"[^>]*>(.*?)</div>', section, re.S):
+            for part in re.split(r'<br\s*/?>|\n', box):
+                shown = box_line(html.unescape(re.sub(r'<[^>]+>', '', part)), prefix)
+                if pattern.search(shown):
+                    checked += 1
+                    assert shown in want, f'{folder.name} page {number}: the error box shows a line no claim on that page gives:\n  {shown}\n' \
+                        f'  claims there: {sorted(want) or "none"}'
+    return checked
 
 
 def check_deck(lesson, folder):
@@ -330,6 +393,7 @@ def check_deck(lesson, folder):
     changes = check_changes(text, folder)
     algos = check_algos(text)
     claims = json.loads((folder / 'tests/claims.json').read_text(encoding='utf-8'))
+    boxes = check_boxes(text, claims, folder)
     traced, untraced, wrong = traces.check_deck(text, claims, LANGUAGE)
     assert not wrong, f'{folder.name}: a trace page lights lines out of step with a real run\n' + \
         '\n'.join(f'  page {n}: {note}' for n, note in wrong)
@@ -367,7 +431,7 @@ def check_deck(lesson, folder):
         if not parts.scheme and parts.path:
             assert (built.parent / unquote(parts.path)).is_file(), f'Broken link: {link}'
     assert '<a class="ide' in text, 'Deck has no IDE link'
-    return pages, changes, algos
+    return pages, changes, algos, boxes
 
 
 def squash(text):
@@ -423,15 +487,15 @@ def check_docs():
 
 
 def main():
-    scripts = cases = claims = pages = changes = algos = 0
+    scripts = cases = claims = pages = changes = algos = boxes = 0
     lessons = builder.lessons()
     for lesson in lessons:
         folder = ROOT / 'lessons' / lesson['id']
         s, c = check_programs(folder)
         scripts += s; cases += c
         claims += check_claims(folder)
-        p, c, a = check_deck(lesson, folder)
-        algos += a
+        p, c, a, b = check_deck(lesson, folder)
+        algos += a; boxes += b
         pages += p; changes += c
     links = check_dist()
     stale = [lesson['id'] for lesson in builder.stale_pdfs()]
@@ -442,7 +506,7 @@ def main():
     if '--traces' in sys.argv:
         for name, n, note in untraced:
             print(f'not traced: {name} page {n}: {note}')
-    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {algos} algorithm demos, {traced} trace pages ({len(untraced)} not checkable, see --traces), {links} index and starter links, {docs} document links.')
+    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {algos} algorithm demos, {boxes} error-box lines, {traced} trace pages ({len(untraced)} not checkable, see --traces), {links} index and starter links, {docs} document links.')
 
 
 if __name__ == '__main__':
