@@ -683,9 +683,8 @@ out of range</pre></div>
     <h2 class="r d1">给第 k 个人加 5 分</h2>
     <p class="say r d1">第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 95 的整数分数，最后一行读入 k（1 到 n）。给第 k 个人加 5 分，输出整个列表。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1.4fr"><div><small>依次输入</small><pre style="font-size:44px">3、80、95、70、2</pre></div><div><small>输出</small><pre style="font-size:44px">[80, 100, 70]</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">教室电脑：打开 starter/05_bonus.py</p>
   </div>
-  <a class="ide r d3" data-code="# 【给第 k 个人加 5 分】&#10;# 第一行读入人数 n（1 到 100 的整数），接下来 n 行，&#10;#   每行一个 0 到 95 的整数分数，最后一行读入 k（1 到 n）。&#10;#   给第 k 个人加 5 分，输出整个列表。&#10;# 例如输入（每个一行）：3、80、95、70、2&#10;# 应该输出：[80, 100, 70]&#10;# 提示：取出来、加上、放回去，最后输出整个列表。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;k = int(input())&#10;print(scores[k - 1])&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【给第 k 个人加 5 分】&#10;# 第一行读入人数 n（1 到 100 的整数），接下来 n 行，&#10;#   每行一个 0 到 95 的整数分数，最后一行读入 k（1 到 n）。&#10;#   给第 k 个人加 5 分，输出整个列表。&#10;# 例如输入（每个一行）：3、80、95、70、2&#10;# 应该输出：[80, 100, 70]&#10;# 提示：取出来、加上、放回去，最后输出整个列表。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;k = int(input())&#10;print(scores[k - 1])&#10;" style="left:610px;top:830px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: len after append -->

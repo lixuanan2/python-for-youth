@@ -614,9 +614,9 @@ print(b, a)</pre>
     <h2 class="r d1">再交回平均分</h2>
     <p class="say r d1">在例题上改：函数改成一次交回三个值：最低、最高、平均分，平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。输入和例题一样，n 是 1 到 50 的整数。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 4、90、85、77、96，第三行</small><pre>平均 87.0</pre></div><div><small>输入 1、60，第三行</small><pre>平均 60.0</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">交回几个，拆的时候左边就写几个名字。教室电脑：打开 starter/05_stats_avg.py</p>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">交回几个，拆的时候左边就写几个名字。</p>
   </div>
-  <a class="ide r d3" data-code="# 【再交回平均分】&#10;# 在例题上改：函数改成一次交回三个值：最低、最高、平均分，&#10;#   平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。&#10;#   输入和例题一样，n 是 1 到 50 的整数。&#10;# 例如输入（每个一行）：4、90、85、77、96&#10;# 应该输出：&#10;#   最低 77 最高 96&#10;#   相差 19&#10;#   平均 87.0&#10;# 提示：让函数多交回一个。&#10;# ↓ 在下面这段程序上改&#10;&#10;def low_high(nums):&#10;    return min(nums), max(nums)&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;low, high = low_high(scores)&#10;print(&quot;最低&quot;, low, &quot;最高&quot;, high)&#10;print(&quot;相差&quot;, high - low)&#10;" style="left:610px;top:900px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【再交回平均分】&#10;# 在例题上改：函数改成一次交回三个值：最低、最高、平均分，&#10;#   平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。&#10;#   输入和例题一样，n 是 1 到 50 的整数。&#10;# 例如输入（每个一行）：4、90、85、77、96&#10;# 应该输出：&#10;#   最低 77 最高 96&#10;#   相差 19&#10;#   平均 87.0&#10;# 提示：让函数多交回一个。&#10;# ↓ 在下面这段程序上改&#10;&#10;def low_high(nums):&#10;    return min(nums), max(nums)&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;low, high = low_high(scores)&#10;print(&quot;最低&quot;, low, &quot;最高&quot;, high)&#10;print(&quot;相差&quot;, high - low)&#10;" style="left:610px;top:850px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->

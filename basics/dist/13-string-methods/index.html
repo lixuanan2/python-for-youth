@@ -648,7 +648,7 @@ dialog p{color:var(--muted);font-size:15px}
     <h2 class="r d1">把逗号换成顿号</h2>
     <p class="say r d1">读入一行用英文逗号隔开的词，没有空格。把它们用中文顿号“、”连起来，输出一行。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入</small><pre style="font-size:48px">苹果,香蕉,橙子</pre></div><div><small>输出</small><pre style="font-size:48px">苹果、香蕉、橙子</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">只有一个词时，就输出它自己。教室电脑：打开 starter/06_joiner.py</p>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">只有一个词时，就输出它自己。</p>
   </div>
   <a class="ide r d3" data-code="# 【把逗号换成顿号】&#10;# 读入一行用英文逗号隔开的词，没有空格。把它们用中文顿号“、&#10;#   ”连起来，输出一行。&#10;# 例如输入：苹果,香蕉,橙子&#10;# 应该输出：苹果、香蕉、橙子&#10;# 提示：切开以后，用 join 拼回去。&#10;# ↓ 在下面这段程序上改&#10;&#10;line = input()&#10;for name in line.split(&quot;,&quot;):&#10;    print(name.strip())&#10;" style="left:610px;top:820px">▶ 在 IDE 开始改</a>
 </section>

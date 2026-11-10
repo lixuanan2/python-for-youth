@@ -603,7 +603,7 @@ dialog p{color:var(--muted);font-size:15px}
     <h2 class="r d1">掷 n 次，有几个 6</h2>
     <p class="say r d1">第一行读入种子，第二行读入次数 n（0 到 1000 的整数）。用这个种子掷 n 次骰子，输出一共掷出了几次 6。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>种子 1，掷 10 次</small><pre>1</pre></div><div><small>种子 3，掷 600 次</small><pre>95</pre></div><div><small>掷 0 次</small><pre>0</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">掷 600 次，6 大约出现 100 次。教室电脑：打开 starter/03_count_six.py</p>
+    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">掷 600 次，6 大约出现 100 次。</p>
   </div>
   <a class="ide r d3" data-code="# 【掷 n 次，有几个 6】&#10;# 第一行读入种子，第二行读入次数 n（0 到 1000 的整数）。&#10;#   用这个种子掷 n 次骰子，输出一共掷出了几次 6。&#10;# 例如输入（每个一行）：1、10&#10;# 应该输出：1&#10;# 提示：不猜了，用循环掷很多次，数一数。&#10;# ↓ 在下面这段程序上改&#10;&#10;import random&#10;random.seed(int(input()))&#10;secret = random.randint(1, 100)&#10;guess = int(input())&#10;while guess != secret:&#10;    if guess &gt; secret:&#10;        print(&quot;大了&quot;)&#10;    else:&#10;        print(&quot;小了&quot;)&#10;    guess = int(input())&#10;print(&quot;猜中了！&quot;)&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
 </section>
