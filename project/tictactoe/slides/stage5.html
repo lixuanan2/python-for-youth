@@ -1,0 +1,45 @@
+<!-- @cover -->
+
+<!-- @review -->
+
+<!-- quiz: where should the computer go -->
+<section class="slide" aria-label="小测：电脑该下哪一格" data-chapter="一起想">
+  <h2 class="t r">小测：轮到 X，电脑该下哪一格？</h2>
+  <div class="abs r d1" style="left:96px;top:240px"><div class="ttt small"><i class="x">X</i><i class="x">X</i><i>2</i><i class="o">O</i><i class="o">O</i><i>5</i><i>6</i><i>7</i><i>8</i></div></div>
+  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="0">
+    <button type="button" data-fb="答对了！下在 2，X 连成 0 1 2 就赢了。能赢就先赢。"><i>1</i>2 号格</button>
+    <button type="button" data-fb="5 能堵住 O，可是 X 自己下 2 就赢了。能赢就先赢，赢不了再堵。"><i>2</i>5 号格</button>
+    <button type="button" data-fb="6 不能赢，也堵不住 O。"><i>3</i>6 号格</button>
+    <button type="button" data-fb="8 不能赢，也堵不住 O。"><i>4</i>8 号格</button>
+  </div>
+  <p class="fb" style="left:96px;right:1000px;top:690px" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<!-- think: try every empty cell -->
+<section class="slide dark" aria-label="一起想：每个空格都试一试">
+  <h2 class="t r">一起想：每个空格都试一试</h2>
+  <div class="editor r d1" style="left:96px;top:220px;width:980px;--fs:44px"><div class="tab">demo.py</div>
+<pre class="code" data-demo>board = "XX.OO...."
+for i in range(9):
+    if board[i] == '.':
+        print(i, "是空格")</pre></div>
+  <div class="slip tilt r d2" style="left:1160px;top:230px;width:420px"><small>屏幕上</small><pre data-out>2 是空格
+5 是空格
+6 是空格
+7 是空格
+8 是空格</pre></div>
+  <p class="abs say r d3" style="left:96px;top:680px;width:980px">电脑也这样一格一格试：先找能让自己赢的，再找能堵住对方的，都没有就下编号最小的空格。</p>
+  <a class="ide r d3" style="left:96px;top:900px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
+<!-- @spec -->
+
+<!-- @folder -->
+
+<!-- @run -->
+
+<!-- @play -->
+
+<!-- @tell -->

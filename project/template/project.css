@@ -1,0 +1,33 @@
+/* === PROJECT PAGES: added after the basics theme; only what project slides need === */
+.needs{position:absolute;left:96px;right:96px;top:240px;display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.need{display:block;background:var(--sand);color:var(--ink);text-decoration:none;padding:28px 36px 30px;border-left:10px solid var(--clay)}
+.need b{display:block;font:700 44px var(--code)}
+.need span{display:block;margin-top:8px;font:400 34px/1.45 var(--text);color:var(--muted)}
+.need:hover{background:#e9e6dc}
+.sig{position:absolute;left:96px;right:96px;top:215px;background:var(--night);color:#f4f2ec;padding:22px 40px 28px;border-radius:14px}
+.sig small{display:block;font:400 26px var(--text);color:#9c998f;margin-bottom:6px}
+.sig code{font:700 52px/1.3 var(--code)}
+.spec{position:absolute;left:96px;width:1010px;top:420px;list-style:none}
+.spec li{font:400 33px/1.45 var(--text);padding:12px 0 14px;border-top:3px solid var(--line)}
+.spec.wide{top:230px;width:auto;right:96px}
+.spec.wide li{font-size:40px;padding:22px 0 24px}
+.spec code,.examples code,.files span code{font-family:var(--code)}
+.examples{position:absolute;left:1160px;right:96px;top:420px;background:var(--sand);padding:22px 32px 26px}
+.examples small{display:block;font:400 28px var(--text);color:var(--muted);margin-bottom:6px}
+.examples ul{list-style:none}
+.examples li{font:400 29px/1.45 var(--text);padding:10px 0;border-top:2px solid var(--line)}
+.examples li:first-child{border-top:0}
+.examples li code{display:block;font:700 30px/1.4 var(--code);color:var(--clay)}
+.files{position:absolute;left:96px;right:96px;top:230px}
+.files div{display:grid;grid-template-columns:520px 140px 1fr;align-items:baseline;border-top:4px solid var(--ink);padding:20px 0 22px}
+.files code{font:700 44px var(--code)}
+.files b{font:700 36px var(--text);color:var(--muted)}
+.files .mine code,.files .mine b{color:var(--clay)}
+.files span{font:400 36px/1.45 var(--text)}
+.dl{position:absolute;left:1180px;top:850px;background:var(--sand);color:var(--ink);font:700 32px var(--text);text-decoration:none;padding:14px 28px 16px;border-radius:12px;border:3px solid var(--line)}
+.ttt{display:grid;grid-template-columns:repeat(3,150px);grid-auto-rows:150px;gap:8px;background:var(--ink);padding:8px;width:max-content}
+.ttt i{display:grid;place-items:center;background:var(--paper);font:400 40px var(--code);font-style:normal;color:var(--ghost)}
+.ttt i.x{font:800 96px var(--code);color:var(--clay)}
+.ttt i.o{font:800 96px var(--code);color:var(--olive)}
+.ttt.small{grid-template-columns:repeat(3,96px);grid-auto-rows:96px;gap:6px;padding:6px}
+.ttt.small i{font-size:30px}.ttt.small i.x,.ttt.small i.o{font-size:64px}

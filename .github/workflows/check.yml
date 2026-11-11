@@ -23,6 +23,29 @@ jobs:
         working-directory: basics
         run: python tools/check.py
 
+  # The project module: dist/ current and without answers, then every stage the way a student meets it: the starter's
+  # tests fail cleanly, the answers pass, the front end plays. On Windows too, where students run it, with the
+  # console's own encoding: the student programs get no UTF-8 help from here.
+  project:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-latest, python: '3.14'}
+          - {os: windows-latest, python: '3.12'}
+          - {os: windows-latest, python: '3.14'}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: project
+        working-directory: project
+        run: |
+          python tools/check.py
+          python tools/verify.py
+
   # Every page in real Chrome: layout, quizzes, yellow boxes run against real Python, IDE links.
   browser:
     runs-on: ubuntu-latest
@@ -42,15 +65,20 @@ jobs:
       - name: basics
         working-directory: basics
         run: node tools/check_browser.mjs
+      - name: project
+        working-directory: project
+        run: node tools/check_browser.mjs
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: browser-screenshots
-          path: basics/.preview
+          path: |
+            basics/.preview
+            project/.preview
           include-hidden-files: true
 
   deploy:
-    needs: [check, browser]
+    needs: [check, project, browser]
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
@@ -86,6 +114,7 @@ jobs:
           cp home/index.html _site/
           cp basics/vendor/fonts/*.woff2 basics/vendor/fonts/JetBrainsMono-OFL.txt _site/fonts/
           cp -R basics/dist _site/basics
+          cp -R project/dist _site/project
           cp -R ide/_output _site/ide
           du -sh _site _site/ide
       - uses: actions/upload-pages-artifact@v4

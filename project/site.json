@@ -1,0 +1,7 @@
+{
+  "title": "项目课",
+  "language": "python",
+  "projects": ["tictactoe"],
+  "basics": "https://lixuanan2.github.io/python-for-youth/basics/",
+  "footer": "项目代码在学生自己的电脑上写和运行；起始程序由老师下载，用 U 盘发给学生。"
+}
