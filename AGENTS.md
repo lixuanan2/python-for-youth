@@ -7,8 +7,10 @@
 | 文件夹 | 页面上叫 | 说明 | 网址 |
 | --- | --- | --- | --- |
 | `basics/` | 基础课件 | [basics/AGENTS.md](basics/AGENTS.md) | `https://lixuanan2.github.io/python-for-youth/basics/` |
+| `project/` | 项目课（规划中） | [project/AGENTS.md](project/AGENTS.md) | 还没有 |
 
 - 做课、改课先读 `basics/AGENTS.md`，命令都在 `basics/` 里运行。教学要求在 `basics/PROMPT.md`。
+- 项目课和基础课件不同：代码在学生自己的电脑上写和运行，老师给素材、前端和测试，学生只写后端逻辑。还没有课，不进 CI、宣传 README 和首页。
 - 每个模块自带模板、工具和字体（`template/`、`tools/`、`vendor/`），不和别的模块共用。以后的模块要不要共用，等老师定了再改。
 
 ## 跨课程的规则
