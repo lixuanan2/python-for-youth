@@ -4,8 +4,9 @@ Free, open Python courseware in Chinese for upper-primary and middle-school stud
 
 这是一套给小学高年级和初中生的 Python 课件，免费、开源。每节课是一个网页，老师拿来上课，学生也能照着自学。
 
-- 在线看：<https://lixuanan2.github.io/python-for-youth/>
-- 第一课：<https://lixuanan2.github.io/python-for-youth/basics/01-input-output/>
+[![打开基础课件](.github/assets/button-basics.svg)](https://lixuanan2.github.io/python-for-youth/basics/)
+
+需要更多课程，见总仓库 [youth-coding-courses](https://github.com/lixuanan2/youth-coding-courses)。
 
 ## 适合谁
 
@@ -38,7 +39,7 @@ Free, open Python courseware in Chinese for upper-primary and middle-school stud
 
 ## 用 Edge 的话
 
-IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”时会关掉它要用的功能，表现是点了运行右边一直空白。在 Edge 设置里搜“增强的安全性”，在“例外”里添加 `jupyterlite.github.io` 就好了；或者改用 Chrome。
+IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”时会关掉它要用的功能，表现是点了运行右边一直空白。在 Edge 设置里搜“增强的安全性”，在“例外”里添加 `lixuanan2.github.io` 就好了；或者改用 Chrome。
 
 ## 想合作或交流
 

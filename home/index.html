@@ -33,8 +33,8 @@ h1{font:800 clamp(42px,6vw,76px)/1.14 var(--text);letter-spacing:-1px}
 .actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center}
 .start{display:inline-block;background:var(--mint);color:#16261a;font:700 21px var(--code);text-decoration:none;padding:14px 28px 16px;border-radius:12px;box-shadow:0 6px 0 #5f8f6a}
 .start:hover{filter:brightness(1.06)}.start:active{transform:translateY(4px);box-shadow:0 2px 0 #5f8f6a}
-.second{font:700 18px var(--code);color:var(--paper);text-decoration:none;padding:12px 20px 13px;border:2px solid #77746b;border-radius:12px}
-.second:hover{border-color:var(--amber);color:var(--amber)}
+.more{margin-top:22px;font-size:18px;color:#d9d6cc}
+.more a{color:var(--amber)}
 .editor{background:var(--panel);border-radius:14px;overflow:hidden;box-shadow:0 24px 50px #0006}
 .tab{padding:10px 22px;font:400 15px var(--code);color:#cfccc3;background:#232220;border-bottom:3px solid var(--clay)}
 .editor pre{font:400 clamp(17px,2vw,24px)/1.8 var(--code);padding:20px 24px;color:#f4f2ec;overflow-x:auto}
@@ -106,8 +106,8 @@ footer a{color:var(--ink)}
     <p class="lead">这是一套给小学高年级和初中生的 Python 课件，免费、开源。每节课是一个网页，老师拿来上课，学生也能照着自学。</p>
     <div class="actions">
       <a class="start" href="basics/">▶ 打开基础课件</a>
-      <a class="second" href="basics/01-input-output/">直接看第一课</a>
     </div>
+    <p class="more">需要更多课程，见总仓库 <a href="https://github.com/lixuanan2/youth-coding-courses">youth-coding-courses</a>。</p>
   </div>
   <div class="editor">
     <div class="tab">hello.py</div>
@@ -166,7 +166,7 @@ footer a{color:var(--ink)}
 
   <section>
     <h2>用 Edge 的话</h2>
-    <p class="edge">IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”时会关掉它要用的功能，表现是点了运行右边一直空白。在 Edge 设置里搜“增强的安全性”，在“例外”里添加 <code>jupyterlite.github.io</code> 就好了；或者改用 Chrome。</p>
+    <p class="edge">IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”时会关掉它要用的功能，表现是点了运行右边一直空白。在 Edge 设置里搜“增强的安全性”，在“例外”里添加 <code>lixuanan2.github.io</code> 就好了；或者改用 Chrome。</p>
   </section>
 
   <section>
