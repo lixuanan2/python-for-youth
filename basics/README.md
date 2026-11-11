@@ -73,8 +73,10 @@ IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”
 ```sh
 python3 tools/build.py --pdf
 python3 tools/check.py
-node tools/check_browser.mjs
+node tools/check_browser.mjs --changed
 ```
+
+浏览器检查不带参数会查全部 30 节课，要 15 到 20 分钟；`--changed` 只查上次在这台电脑上通过后改过的课，写课的编号（如 `06-for-loop`）只查那几节，`--status` 列出每节课要不要查。推送后 GitHub 上的 CI 每次都查全部。
 
 `--pdf` 用 Chrome 把页面变了的课重新打印成 PDF，改了课件正文或模板都要带上。[pdf.json](pdf.json) 记着每份 PDF 照哪一版页面打印，PDF 跟不上页面时 `check.py` 会报错。没装 Chrome 时怎么办，见 [CONTRIBUTING.md](../CONTRIBUTING.md)。
 

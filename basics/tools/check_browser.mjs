@@ -1,11 +1,75 @@
 // Real Chrome over CDP on file://: render every page and step, then exercise each interaction.
-// Run from the repository root: node tools/check_browser.mjs
+// Run in basics/:
+//   node tools/check_browser.mjs                 every lesson (CI always runs this)
+//   node tools/check_browser.mjs 06-for-loop …   only these lessons
+//   node tools/check_browser.mjs --changed       only lessons changed since they last passed here
+//   node tools/check_browser.mjs --status        when each lesson last changed and passed; runs nothing
+// A lesson that passes gets its fingerprint written to .check-state.json (not in Git: CI on main is the proof).
 // Screenshots land in .preview/. Set CHROME_PATH if Chrome is not in a usual place.
 import assert from 'node:assert/strict';
 import {execFileSync, spawn} from 'node:child_process';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+
+/* === WHICH LESSONS: arguments, and the local record of what passed === */
+const RECORD = '.check-state.json';
+const allLessons = JSON.parse(fs.readFileSync('course.json', 'utf8')).filter(l => l.id);
+const files = dir => fs.readdirSync(dir, {withFileTypes: true}).sort((a, b) => a.name < b.name ? -1 : 1)
+  .flatMap(e => e.isDirectory() ? files(path.join(dir, e.name)) : [path.join(dir, e.name)]);
+// Everything that decides how a lesson renders and what this check does with it: its built pages and starters, the
+// course index, the shared template and this file. A change to template/ or to this file touches every lesson.
+const SHARED = [path.join('dist', 'index.html'), ...files('template'), path.join('tools', 'check_browser.mjs')];
+const fingerprint = id => {
+  const hash = crypto.createHash('sha256');
+  for (const file of [...files(path.join('dist', id)).filter(f => !f.endsWith('.pdf')), ...SHARED]) {
+    hash.update(file.split(path.sep).join('/') + '\0');
+    hash.update(fs.readFileSync(file));
+  }
+  return hash.digest('hex');
+};
+const readRecord = () => { try { return JSON.parse(fs.readFileSync(RECORD, 'utf8')); } catch { return {}; } };
+const git = (...args) => { try { return execFileSync('git', args, {encoding: 'utf8'}).trim(); } catch { return ''; } };
+const args = process.argv.slice(2);
+const known = new Set(allLessons.map(l => l.id));
+const unknown = args.filter(a => !a.startsWith('--') && !known.has(a));
+assert(!unknown.length, `No such lesson: ${unknown.join(', ')}. Lessons are: ${[...known].join(' ')}`);
+const badFlag = args.filter(a => a.startsWith('--') && !['--changed', '--status'].includes(a));
+assert(!badFlag.length, `Unknown option: ${badFlag.join(', ')}`);
+const record = readRecord();
+const needs = id => record[id]?.hash !== fingerprint(id);
+if (args.includes('--status')) {
+  const rows = allLessons.map(({id}) => {
+    const where = [`lessons/${id}`, `dist/${id}`];
+    const dirty = git('status', '--porcelain', '--', ...where);
+    const changed = dirty ? '未提交的改动' : (git('log', '-1', '--format=%cd', '--date=format:%Y-%m-%d %H:%M', '--', ...where) || '没有提交');
+    const local = iso => { const d = new Date(iso), two = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${two(d.getMonth() + 1)}-${two(d.getDate())} ${two(d.getHours())}:${two(d.getMinutes())}`; };
+    const passed = record[id] ? `${local(record[id].passed)}（${record[id].commit}）` : '没查过';
+    const now = !record[id] ? '要查（还没查过）' : needs(id) ? '要查（改过了）' : '不用';
+    return [id, changed, passed, now];
+  });
+  const head = ['课', '最近改动', '本机浏览器检查通过', '现在'];
+  const width = text => [...text].reduce((n, ch) => n + (ch.charCodeAt(0) > 0x2e7f ? 2 : 1), 0);
+  const cols = head.map((h, i) => Math.max(...[h, ...rows.map(r => r[i])].map(width)));
+  for (const row of [head, ...rows]) console.log(row.map((c, i) => c + ' '.repeat(cols[i] - width(c))).join('  ').trimEnd());
+  console.log('本机记录只在这台电脑上，不进 Git；main 上 CI 的完整检查通过才算数。');
+  process.exit(0);
+}
+const chosen = args.filter(a => !a.startsWith('--'));
+const targets = args.includes('--changed') ? allLessons.filter(l => needs(l.id) || chosen.includes(l.id))
+  : chosen.length ? allLessons.filter(l => chosen.includes(l.id)) : allLessons;
+if (!targets.length) {
+  console.log('Nothing changed since the last local pass: no lesson to check. CI still runs every lesson.');
+  process.exit(0);
+}
+console.log(`Checking ${targets.length === allLessons.length ? 'every lesson' : targets.map(l => l.id).join(' ')}`);
+const pass = id => {
+  if (process.env.CI) return;  // CI runs everything every time and keeps no record
+  const now = readRecord();
+  now[id] = {hash: fingerprint(id), passed: new Date().toISOString(), commit: git('rev-parse', '--short', 'HEAD') + (git('status', '--porcelain', '--', `lessons/${id}`, `dist/${id}`, 'template', 'tools') ? '+改动' : '')};
+  fs.writeFileSync(RECORD, JSON.stringify(now, null, 1) + '\n');
+};
 
 const chrome = [process.env.CHROME_PATH, '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   'C:/Program Files/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find(p => p && fs.existsSync(p));
@@ -436,9 +500,7 @@ async function checkChange(change, dir) {
 try {
   await send('Page.enable');
   await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
-  const lessons = JSON.parse(fs.readFileSync('course.json', 'utf8'));
-  // LESSON=09-max-min checks one lesson while working on it; run without it before committing.
-  for (const lesson of lessons.filter(l => l.id && (!process.env.LESSON || l.id === process.env.LESSON))) {
+  for (const lesson of targets) {
     const dir = path.join('.preview', lesson.id);
     fs.rmSync(dir, {recursive: true, force: true});
     fs.mkdirSync(dir, {recursive: true});
@@ -483,6 +545,7 @@ try {
     const deckShot = await send('Page.captureScreenshot', {format: 'png'});
     fs.writeFileSync(path.join('.preview', 'deck-phone.png'), Buffer.from(deckShot.data, 'base64'));
     await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
+    pass(lesson.id);
     console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; thumbnails, timeline, chapters and jump work; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.gates.length} logic switches, ${changes.length} code changes, ${algos.length} algorithm demos, ${result.links} IDE links.`);
   }
 } finally {

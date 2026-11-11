@@ -28,8 +28,12 @@
 python3 tools/build.py          # 生成 dist/，PDF 过期时提醒
 python3 tools/build.py --pdf    # 同时用 Chrome 重新打印页面变了的课的 PDF
 python3 tools/check.py          # 程序、答案、页面说法、路径、PDF 是否过期、整个仓库的文档链接
-node tools/check_browser.mjs    # 真实 Chrome 逐页检查和交互测试
+node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查，只查上次在本机通过后改过的课
 ```
+
+`check_browser.mjs` 不带参数是全部 30 节课（要 15 到 20 分钟，CI 每次都这样跑）；写课的编号只查那几节，比如 `node tools/check_browser.mjs 06-for-loop 14-functions`，编号写错会直接报错；`--status` 列出每节课最近什么时候改过、本机什么时候查过、现在要不要查。一节课在本机查通过，就把它的指纹记进 `.check-state.json`：指纹算的是 `dist/<课>/`（PDF 除外）、`dist/index.html`、整个 `template/` 和 `check_browser.mjs` 本身，所以改了模板或这个检查，所有课都会变成“要查”。这个记录只在本机，不进 Git，不能手写；真正算数的是推送后 `main` 上 CI 的完整检查。
+
+本机的顺序：`build.py --pdf` → `check.py` → `check_browser.mjs --changed` → 推送 → 等 CI 和 Pages 都通过再汇报。
 
 ## 规则
 
