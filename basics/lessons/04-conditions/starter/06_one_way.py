@@ -1,2 +1,5 @@
-# 按本知识点任务独立编写；Python 3，统一4个空格缩进。
-pass
+x = 10
+if x > 5:
+    print("大于 5")
+elif x > 8:
+    print("大于 8")

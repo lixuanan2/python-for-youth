@@ -638,7 +638,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 abc、3.5、12</small><pre>输错了 2 次</pre></div><div><small>一次输对 12</small><pre>输错了 0 次</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 8 课的计数器：先设 0，再一次次加 1。</p>
   </div>
-  <a class="ide r d3" data-code="# 【最后说出输错了几次】&#10;# 在例题上改：每输错一次，计数加 1。输对以后，先说“明年你 …… 岁”，&#10;#   再输出一行“输错了 几 次”。&#10;# 例如输入（每个一行）：abc、3.5、12&#10;# 应该输出（一共 4 行）：&#10;#   不是整数，再输一次&#10;#   ……&#10;#   输错了 2 次&#10;# 提示：在例题上加一个计数器。&#10;# ↓ 在下面这段程序上改&#10;&#10;done = False&#10;while not done:&#10;    try:&#10;        age = int(input())&#10;        done = True&#10;    except ValueError:&#10;        print(&quot;不是整数，再输一次&quot;)&#10;print(&quot;明年你&quot;, age + 1, &quot;岁&quot;)&#10;" style="left:610px;top:810px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【最后说出输错了几次】&#10;# 在例题上改：每输错一次，计数加 1。输对以后，先说明年你多少岁，&#10;#   再输出一行“输错了 几 次”。&#10;# 例如输入（每个一行）：abc、3.5、12&#10;# 应该输出（一共 4 行，这里用 / 隔开）：&#10;#   不是整数，再输一次 / 不是整数，再输一次 / 明年你 13 岁&#10;#   输错了 2 次&#10;# 提示：在例题上加一个计数器。&#10;# ↓ 在下面这段程序上改&#10;&#10;done = False&#10;while not done:&#10;    try:&#10;        age = int(input())&#10;        done = True&#10;    except ValueError:&#10;        print(&quot;不是整数，再输一次&quot;)&#10;print(&quot;明年你&quot;, age + 1, &quot;岁&quot;)&#10;" style="left:610px;top:810px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: how many rounds -->
@@ -689,7 +689,7 @@ dialog p{color:var(--muted);font-size:15px}
 4.5
 7</pre><small style="margin-top:14px">输出</small><pre style="font-size:40px;white-space:pre">和是 16
 不是整数的有 2 行</pre></div>
-  <a class="ide r d3" data-code="# 【乱糟糟的账本】&#10;# 零花钱账本里，有人把钱数写成了“五元”。&#10;#   第一行读入行数 n（0 到 20 的整数），接下来 n 行，&#10;#   每行可能是整数，也可能是别的字。&#10;# 把整数加起来，再数一数有几行不是整数。输出两行：&#10;#   “和是 ……”和“不是整数的有 …… 行”。&#10;# 例如输入（每个一行）：5、12、苹果、-3、4.5、7&#10;# 应该输出：&#10;#   和是 16&#10;#   不是整数的有 2 行&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【乱糟糟的账本】&#10;# 零花钱账本里，有人把钱数写成了“五元”。&#10;#   第一行读入行数 n（0 到 20 的整数），接下来 n 行，&#10;#   每行可能是整数，也可能是别的字。&#10;# 把整数加起来，再数一数有几行不是整数。输出两行：先说和是多少，&#10;#   再说不是整数的有几行。&#10;# 例如输入（每个一行）：5、12、苹果、-3、4.5、7&#10;# 应该输出：&#10;#   和是 16&#10;#   不是整数的有 2 行&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:886px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>

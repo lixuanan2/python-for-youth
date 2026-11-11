@@ -1,2 +1,4 @@
-# 按本知识点任务独立编写；Python 3，统一4个空格缩进。
-pass
+score = int(input())
+if score >= 60:
+    print("及格")
+print("考完了")

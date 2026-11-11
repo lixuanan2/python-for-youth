@@ -1,2 +1,4 @@
-# 按本知识点任务独立编写；Python 3，统一4个空格缩进。
-pass
+print(7 + 2)
+print(7 - 2)
+print(7 * 2)
+print(7 / 2)

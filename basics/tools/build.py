@@ -140,7 +140,18 @@ def sample_lines(task, brief):
     elif len(want) <= 3:
         lines += [f'{head}：'] + ['  ' + w for w in want]
     else:
-        lines += [f'{head}（一共 {len(want)} 行）：', '  ' + want[0], '  ……', '  ' + want[-1]]
+        # Every line, so the sample never reads like text is missing: side by side when that saves room.
+        rows = ['  ']
+        for k, w in enumerate(want):
+            piece = w if k == 0 else ' / ' + w
+            if rows[-1].strip() and columns(rows[-1] + piece) > WIDTH:
+                rows.append('  ')
+                piece = w
+            rows[-1] += piece
+        if len(rows) < len(want):
+            lines += [f'{head}（一共 {len(want)} 行，这里用 / 隔开）：'] + rows
+        else:
+            lines += [f'{head}（一共 {len(want)} 行）：'] + ['  ' + w for w in want]
     return lines
 
 

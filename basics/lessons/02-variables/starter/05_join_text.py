@@ -1,2 +1,3 @@
-# 按本知识点任务独立编写；Python 3，统一4个空格缩进。
-pass
+age = 12
+print("我今年", age, "岁")
+print("我今年" + str(age) + "岁")

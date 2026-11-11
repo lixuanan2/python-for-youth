@@ -1,2 +1,8 @@
-# 按本知识点任务独立编写；Python 3，统一4个空格缩进。
-pass
+age = 12
+price = 2.5
+letter = "A"
+ready = True
+print(age)
+print(price)
+print(letter)
+print(ready)

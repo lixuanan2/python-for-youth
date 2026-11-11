@@ -1,2 +1,5 @@
-# 按本知识点任务独立编写；Python 3，统一4个空格缩进。
-pass
+word = input()
+if word == "Python":
+    print("暗号正确")
+else:
+    print("再想想")

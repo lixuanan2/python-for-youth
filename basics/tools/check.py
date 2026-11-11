@@ -25,6 +25,13 @@ import traces  # noqa: E402  (next to this file, like algo.py)
 TRACES = []  # (lesson, trace pages checked, [(page, why not)])
 TEXT_FILES = {'.html', '.py', '.cpp', '.h', '.txt', '.md', '.json', '.js', '.css', '.csv'}
 HIDDEN_ROLES = ['学生小改写', '独立迁移']  # Students write these, so the answers must stay out of dist/.
+# Starters students open to run or change a program must hold it; only 独立迁移 and 创作项目 may start empty.
+EMPTY_ROLES = ['独立迁移', '创作项目']
+# Lines that do not count as a program: comments, blank, and a language's empty frame.
+FRAME = {'python': re.compile(r'(#.*|pass|import [\w., ]+|from \w+ import [\w., *]+)?$'),
+         'cpp': re.compile(r'(//.*|#include\s*<\w+>|using namespace std;|int main\(\)\s*\{|return 0;|[{}])?$')}
+# Old filler that once stood in for a program; it speaks to the teacher, not the student.
+PLACEHOLDERS = ['按本知识点任务独立编写']
 
 
 LANGUAGE = builder.site()['language']
@@ -215,6 +222,10 @@ def check_briefs(lesson, folder, tasks, sections):
         assert brief and brief.get('title') and brief.get('goal'), f'{where}: practice needs a brief with a title and a goal'
         header = builder.brief_header(task, comment)
         assert len(header.splitlines()) <= builder.BRIEF_LINES, f'{where}: the brief is longer than {builder.BRIEF_LINES} lines'
+        # Nothing may read like missing text: the sample shows every output line, and the task says what it means.
+        # Only the sample input may hold dots, as data (a map like .#..).
+        for line in header.splitlines():
+            assert line.startswith(comment + ' 例如输入') or not re.search(r'……|\.\.\.', line), f'{where}: the brief leaves something out: {line}'
         # Courseware never labels work: 作业 as a topic (作业还剩几页) is fine, as a label it is not.
         assert not re.search(r'必做|选做|课后作业|作业[：:]', header), f'{where}: no 必做, 选做 or 作业 labels in a brief'
         # The page is where the task is taught: the title, every number and every quoted word of the brief are on it.
@@ -234,8 +245,14 @@ def check_briefs(lesson, folder, tasks, sections):
             key = line.strip()
             if len(squash(key)) >= 8 and not key.startswith(comment) and key not in starter:
                 assert key not in header, f'{where}: the brief gives away {key}'
-    for file, _ in builder.starters(lesson):
+    for file, task in builder.starters(lesson):
         name = file.relative_to(folder).as_posix()
+        body = file.read_text(encoding='utf-8')
+        for filler in PLACEHOLDERS:
+            assert filler not in body, f'{folder.name}/{name}: placeholder text instead of a program: {filler}'
+        if not task or task['role'] not in EMPTY_ROLES:
+            assert any(not FRAME[LANGUAGE].match(line.strip()) for line in body.split('\n')), \
+                f'{folder.name}/{name}: the starter has no program, but students open it to run or change one'
         built = builder.DIST / lesson['id'] / name
         assert built.read_bytes() == builder.starter_text(lesson, name).encode(builder.file_encoding(built)), f'Rebuild dist: {lesson["id"]}/{name}'
 
