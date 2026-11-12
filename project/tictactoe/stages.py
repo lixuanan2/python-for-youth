@@ -71,7 +71,7 @@ STAGES = [
         "minutes": "约半节课",
         "minutes_cpp": "约半节到 1 节课：先讲补页“改 string 的一格”（约 10 分钟），再写函数",
         "needs_py": ["12-string-basics 字符串基础（切片）", "15-params-return 参数与返回值"],
-        "needs_cpp": ["16-string string 字符串入门", "17-function 函数定义与调用", "18-scope 函数参数与作用域（参数是副本）", "补页：改 string 的一格（extra-string-cell.md）"],
+        "needs_cpp": ["16-string string 字符串入门", "17-function 函数定义与调用", "18-scope 函数参数与作用域（参数是副本）"],
         "goal": "写一个函数，在棋盘的某一格放上一个棋子，还回去新的棋盘。",
         "functions": [
             {

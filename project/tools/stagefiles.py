@@ -3,7 +3,18 @@
 Shared by Python and C++ (language "python" or "cpp"); a project gives its data in <project>/stages.py and its
 front end and helpers in <project>/templates/. Nothing here writes to disk: build.py and verify.py do.
 """
+import json
+import re
 from pathlib import Path
+
+BASICS_COURSE = Path(__file__).resolve().parents[2] / "basics" / "course.json"
+
+
+def lesson_name(folder):
+    """第 15 课 参数与返回值: the number in front of the basics folder name and the title from basics/course.json."""
+    titles = {item["id"]: item["title"] for item in json.loads(BASICS_COURSE.read_text(encoding="utf-8")) if "id" in item}
+    return "第 %d 课 %s" % (int(re.match(r"\d+", folder).group()), titles[folder])
+
 
 PROVIDED_MARK = "===== 老师写好的：前几关的参考答案，不用改 ====="
 ANSWER_MARK = "===== 参考答案 ====="
@@ -242,8 +253,8 @@ def dev_doc(proj, language):
     last = len(proj.STAGES)
     L = ["# %s：开发文档（%s）" % (proj.PROJECT["title"], "Python" if py else "C++"), ""]
     L += ["## 我们要做什么", "", proj.PROJECT["lead"], ""]
-    if not py:  # the C++ course asked for this line; the Python document does not have it yet
-        L += ["**开始之前**：先学完基础课件的 `%s`，才能做第 1 关。每关还要先学完哪几课，见下面的表。" % proj.PROJECT["start"][language], ""]
+    start = proj.PROJECT["start"][language]
+    L += ["**开始之前**：先学完基础课件的%s（`%s`），才能做第 1 关。每关还要先学完哪几课，见下面的表。" % (lesson_name(start), start), ""]
     L += ["```"] + proj.BOARD_PICTURE + ["```", ""]
     L += ["## 一关一关来", "", "| 关 | 做什么 | 要写的函数 | 要先学完 |", "| --- | --- | --- | --- |"]
     for st in proj.STAGES:
