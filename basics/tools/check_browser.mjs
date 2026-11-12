@@ -1,74 +1,169 @@
 // Real Chrome over CDP on file://: render every page and step, then exercise each interaction.
 // Run in basics/:
-//   node tools/check_browser.mjs                 every lesson (CI always runs this)
+//   node tools/check_browser.mjs                 every lesson (CI does this weekly and when the template changes)
 //   node tools/check_browser.mjs 06-for-loop …   only these lessons
-//   node tools/check_browser.mjs --changed       only lessons changed since they last passed here
+//   node tools/check_browser.mjs --changed       lessons changed since they last passed here, and --sample if the template changed
+//   node tools/check_browser.mjs --sample        three lessons that stand for all: the shortest, the longest title, the most widgets
+//   node tools/check_browser.mjs --shard 2/4     the second quarter of the lessons chosen (CI splits a full check this way)
 //   node tools/check_browser.mjs --status        when each lesson last changed and passed; runs nothing
-// A lesson that passes gets its fingerprint written to .check-state.json (not in Git: CI on main is the proof).
-// Screenshots land in .preview/. Set CHROME_PATH if Chrome is not in a usual place.
+// A lesson that passes gets its fingerprint written to .check-state.json and its screenshots kept in .check-shots/ (neither in
+// Git: CI on main is the proof). Each run lists the screens that look different from the last pass in .preview/changed.txt,
+// so only those need a look. Screenshots land in .preview/. Set CHROME_PATH if Chrome is not in a usual place.
 import assert from 'node:assert/strict';
 import {execFileSync, spawn} from 'node:child_process';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import zlib from 'node:zlib';
 
 /* === WHICH LESSONS: arguments, and the local record of what passed === */
-const RECORD = '.check-state.json';
+const RECORD = '.check-state.json', SHOTS = '.check-shots', SHARED_KEY = '(template)';
 const allLessons = JSON.parse(fs.readFileSync('course.json', 'utf8')).filter(l => l.id);
 const files = dir => fs.readdirSync(dir, {withFileTypes: true}).sort((a, b) => a.name < b.name ? -1 : 1)
   .flatMap(e => e.isDirectory() ? files(path.join(dir, e.name)) : [path.join(dir, e.name)]);
-// Everything that decides how a lesson renders and what this check does with it: its built pages and starters, the
-// course index, the shared template and this file. A change to template/ or to this file touches every lesson.
+// What decides how every lesson renders and what this check does with it: the course index, the shared template and this
+// file. A lesson's own fingerprint is its built pages and starters; a change here is checked on the sample, and in full by CI.
 const SHARED = [path.join('dist', 'index.html'), ...files('template'), path.join('tools', 'check_browser.mjs')];
-const fingerprint = id => {
+const digest = list => {
   const hash = crypto.createHash('sha256');
-  for (const file of [...files(path.join('dist', id)).filter(f => !f.endsWith('.pdf')), ...SHARED]) {
+  for (const file of list) {
     hash.update(file.split(path.sep).join('/') + '\0');
     hash.update(fs.readFileSync(file));
   }
   return hash.digest('hex');
 };
+const fingerprint = id => digest(files(path.join('dist', id)).filter(f => !f.endsWith('.pdf')));
+const sharedPrint = () => digest(SHARED);
 const readRecord = () => { try { return JSON.parse(fs.readFileSync(RECORD, 'utf8')); } catch { return {}; } };
 const git = (...args) => { try { return execFileSync('git', args, {encoding: 'utf8'}).trim(); } catch { return ''; } };
 const args = process.argv.slice(2);
+const shardAt = args.indexOf('--shard');
+const shard = shardAt < 0 ? null : (args[shardAt + 1] || '').match(/^(\d+)\/(\d+)$/);
+assert(shardAt < 0 || (shard && +shard[1] >= 1 && +shard[1] <= +shard[2]), 'Write the shard as K/N, for example --shard 2/4');
+const words = args.filter((a, i) => !(shardAt >= 0 && i === shardAt + 1));
 const known = new Set(allLessons.map(l => l.id));
-const unknown = args.filter(a => !a.startsWith('--') && !known.has(a));
+const unknown = words.filter(a => !a.startsWith('--') && !known.has(a));
 assert(!unknown.length, `No such lesson: ${unknown.join(', ')}. Lessons are: ${[...known].join(' ')}`);
-const badFlag = args.filter(a => a.startsWith('--') && !['--changed', '--status'].includes(a));
+const badFlag = words.filter(a => a.startsWith('--') && !['--changed', '--status', '--sample', '--shard'].includes(a));
 assert(!badFlag.length, `Unknown option: ${badFlag.join(', ')}`);
 const record = readRecord();
 const needs = id => record[id]?.hash !== fingerprint(id);
-if (args.includes('--status')) {
-  const rows = allLessons.map(({id}) => {
-    const where = [`lessons/${id}`, `dist/${id}`];
+const sharedNeeds = () => record[SHARED_KEY]?.hash !== sharedPrint();
+
+// The sample: the lesson with the fewest pages, the one with the longest title (the status bar's longest label) and the one
+// with the most widgets (quizzes, bug hunts, logic switches, yellow boxes, code changes, algorithm demos). Worked out from
+// the built pages each time, so it follows the course as lessons are added.
+const sample = (() => {
+  const built = id => fs.readFileSync(path.join('dist', id, 'index.html'), 'utf8');
+  const pages = id => built(id).match(/<section id="page-/g).length;
+  const widgets = id => (built(id).match(/class="(?:quiz|pick|gate|slot|algo)\b|class="code was\b/g) || []).length;
+  const picked = [];
+  for (const score of [l => -pages(l.id), l => [...l.title].length, l => widgets(l.id)]) {
+    const left = allLessons.filter(l => !picked.includes(l));
+    picked.push(left.reduce((best, l) => score(l) > score(best) ? l : best));
+  }
+  return allLessons.filter(l => picked.includes(l));
+})();
+
+if (words.includes('--status')) {
+  const local = iso => { const d = new Date(iso), two = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${two(d.getMonth() + 1)}-${two(d.getDate())} ${two(d.getHours())}:${two(d.getMinutes())}`; };
+  const row = (name, key, where, now) => {
     const dirty = git('status', '--porcelain', '--', ...where);
     const changed = dirty ? '未提交的改动' : (git('log', '-1', '--format=%cd', '--date=format:%Y-%m-%d %H:%M', '--', ...where) || '没有提交');
-    const local = iso => { const d = new Date(iso), two = n => String(n).padStart(2, '0'); return `${d.getFullYear()}-${two(d.getMonth() + 1)}-${two(d.getDate())} ${two(d.getHours())}:${two(d.getMinutes())}`; };
-    const passed = record[id] ? `${local(record[id].passed)}（${record[id].commit}）` : '没查过';
-    const now = !record[id] ? '要查（还没查过）' : needs(id) ? '要查（改过了）' : '不用';
-    return [id, changed, passed, now];
-  });
+    const passed = record[key] ? `${local(record[key].passed)}（${record[key].commit}）` : '没查过';
+    return [name, changed, passed, now];
+  };
+  const rows = allLessons.map(({id}) => row(id, id, [`lessons/${id}`, `dist/${id}`], !record[id] ? '要查（还没查过）' : needs(id) ? '要查（改过了）' : '不用'));
+  rows.push(row('模板和检查', SHARED_KEY, ['template', 'dist/index.html', 'tools/check_browser.mjs'],
+    sharedNeeds() ? `要查 --sample（${sample.map(l => l.id).join(' ')}）` : '不用'));
   const head = ['课', '最近改动', '本机浏览器检查通过', '现在'];
   const width = text => [...text].reduce((n, ch) => n + (ch.charCodeAt(0) > 0x2e7f ? 2 : 1), 0);
   const cols = head.map((h, i) => Math.max(...[h, ...rows.map(r => r[i])].map(width)));
-  for (const row of [head, ...rows]) console.log(row.map((c, i) => c + ' '.repeat(cols[i] - width(c))).join('  ').trimEnd());
+  for (const r of [head, ...rows]) console.log(r.map((c, i) => c + ' '.repeat(cols[i] - width(c))).join('  ').trimEnd());
   console.log('本机记录只在这台电脑上，不进 Git；main 上 CI 的完整检查通过才算数。');
   process.exit(0);
 }
-const chosen = args.filter(a => !a.startsWith('--'));
-const targets = args.includes('--changed') ? allLessons.filter(l => needs(l.id) || chosen.includes(l.id))
-  : chosen.length ? allLessons.filter(l => chosen.includes(l.id)) : allLessons;
+const chosen = words.filter(a => !a.startsWith('--'));
+const wanted = l => chosen.includes(l.id) || (words.includes('--sample') && sample.includes(l))
+  || (words.includes('--changed') && (needs(l.id) || (sharedNeeds() && sample.includes(l))));
+const picked = chosen.length || words.includes('--sample') || words.includes('--changed') ? allLessons.filter(wanted) : allLessons;
+const targets = shard ? picked.filter((_, i) => i % +shard[2] === +shard[1] - 1) : picked;
 if (!targets.length) {
-  console.log('Nothing changed since the last local pass: no lesson to check. CI still runs every lesson.');
+  console.log(shard ? `Shard ${shard[0]} has no lesson.` : 'Nothing changed since the last local pass: no lesson to check. CI still checks what changed.');
   process.exit(0);
 }
-console.log(`Checking ${targets.length === allLessons.length ? 'every lesson' : targets.map(l => l.id).join(' ')}`);
+const scope = shard ? `shard ${shard[0]}: ${targets.map(l => l.id).join(' ')}`
+  : targets.length === allLessons.length ? 'every lesson' : targets.map(l => l.id).join(' ');
+const commit = () => git('rev-parse', '--short', 'HEAD');
 const pass = id => {
-  if (process.env.CI) return;  // CI runs everything every time and keeps no record
+  if (process.env.CI) return;  // CI keeps no record
   const now = readRecord();
-  now[id] = {hash: fingerprint(id), passed: new Date().toISOString(), commit: git('rev-parse', '--short', 'HEAD') + (git('status', '--porcelain', '--', `lessons/${id}`, `dist/${id}`, 'template', 'tools') ? '+改动' : '')};
+  now[id] = {hash: fingerprint(id), passed: new Date().toISOString(), commit: commit() + (git('status', '--porcelain', '--', `lessons/${id}`, `dist/${id}`, 'template', 'tools') ? '+改动' : '')};
   fs.writeFileSync(RECORD, JSON.stringify(now, null, 1) + '\n');
+};
+// The template counts as checked here once every sample lesson passed with it.
+const passShared = () => {
+  if (process.env.CI || !sample.every(l => targets.includes(l))) return;
+  const now = readRecord();
+  now[SHARED_KEY] = {hash: sharedPrint(), passed: new Date().toISOString(), commit: commit() + (git('status', '--porcelain', '--', 'template', 'tools', 'dist/index.html') ? '+改动' : '')};
+  fs.writeFileSync(RECORD, JSON.stringify(now, null, 1) + '\n');
+};
+
+// Chrome compresses the same picture differently from run to run, so screens are compared by their pixels, not their bytes.
+const pixels = file => {
+  const buf = fs.readFileSync(file), idat = [];
+  let pos = 8, width = 0, height = 0, type = 2;
+  while (pos < buf.length) {
+    const len = buf.readUInt32BE(pos), kind = buf.toString('latin1', pos + 4, pos + 8), data = buf.subarray(pos + 8, pos + 8 + len);
+    if (kind === 'IHDR') { width = data.readUInt32BE(0); height = data.readUInt32BE(4); type = data[9]; }
+    if (kind === 'IDAT') idat.push(data);
+    pos += 12 + len;
+  }
+  const bpp = {0: 1, 2: 3, 4: 2, 6: 4}[type], stride = width * bpp, raw = zlib.inflateSync(Buffer.concat(idat)), out = Buffer.alloc(stride * height);
+  for (let y = 0; y < height; y++) {
+    const filter = raw[y * (stride + 1)], row = y * (stride + 1) + 1, o = y * stride;
+    for (let x = 0; x < stride; x++) {
+      const a = x >= bpp ? out[o + x - bpp] : 0, b = y ? out[o - stride + x] : 0, c = x >= bpp && y ? out[o - stride + x - bpp] : 0;
+      const p = a + b - c, pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c);
+      out[o + x] = (raw[row + x] + [0, a, b, (a + b) >> 1, pa <= pb && pa <= pc ? a : pb <= pc ? b : c][filter]) & 255;
+    }
+  }
+  return {width, height, bpp, data: out};
+};
+// Text edges may come out one shade apart between runs; a real change moves far more than 3 steps of 255. The thumbnail
+// rail on the left is left out: its edge sits on a fraction of a pixel and its scroll position varies, and every thumbnail
+// is a copy of a page that is compared full size anyway.
+let railWidth = 0;
+const samePicture = (x, y, rail = railWidth) => {
+  try {
+    const a = pixels(x), b = pixels(y);
+    if (a.width !== b.width || a.height !== b.height || a.bpp !== b.bpp) return false;
+    const skip = rail * a.bpp, stride = a.width * a.bpp;
+    for (let row = 0; row < a.data.length; row += stride)
+      for (let i = row + skip; i < row + stride; i++) if (Math.abs(a.data[i] - b.data[i]) > 3) return false;
+    return true;
+  } catch { return false; }
+};
+const measureRail = async () => {
+  railWidth = await run(`(() => { const r = document.getElementById('thumbs'); return r && document.body.classList.contains('thumbs-open') ? Math.ceil(r.getBoundingClientRect().right * devicePixelRatio) + 2 : 0; })()`);
+};
+// Screens against the last pass: same pixels, same picture. Returns the screens that changed, appeared or went away, then keeps this pass as the new baseline.
+const compareShots = id => {
+  if (process.env.CI) return [];
+  const now = path.join('.preview', id), then = path.join(SHOTS, id);
+  const names = dir => fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith('.png')).sort() : [];
+  const before = new Set(names(then)), after = names(now);
+  const out = [];
+  for (const name of after) {
+    if (!before.has(name)) out.push(`${id}/${name} 新的`);
+    else if (!samePicture(path.join(now, name), path.join(then, name))) out.push(`${id}/${name} 变了`);
+  }
+  for (const name of before) if (!after.includes(name)) out.push(`${id}/${name} 没了`);
+  fs.rmSync(then, {recursive: true, force: true});
+  fs.mkdirSync(then, {recursive: true});
+  for (const name of after) fs.copyFileSync(path.join(now, name), path.join(then, name));
+  return out;
 };
 
 const chrome = [process.env.CHROME_PATH, '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
@@ -497,20 +592,27 @@ async function checkChange(change, dir) {
   assert.deepEqual((await run(CHANGE_STATE)).shown, change.before, `${where}: after printing the page is not back where it was`);
 }
 
+const sum = {pages: 0, screens: 0, quizzes: 0, picks: 0, gates: 0, changes: 0, algos: 0, links: 0}, changedShots = [];
 try {
   await send('Page.enable');
+  // Locally, scrollbars fade in and out with timing and would mark screens as changed; on macOS they take no room anyway.
+  if (!process.env.CI) await send('Emulation.setScrollbarsHidden', {hidden: true});
   await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
   for (const lesson of targets) {
+   try {
     const dir = path.join('.preview', lesson.id);
     fs.rmSync(dir, {recursive: true, force: true});
     fs.mkdirSync(dir, {recursive: true});
     await open('file://' + encodeURI(path.resolve('dist', lesson.id, 'index.html')));
     assert.equal(await run('location.protocol'), 'file:');
+    await measureRail();
     const total = await run(`document.querySelectorAll('#deckStage .slide').length`);
     const problems = [];
     let shots = 0;
     for (;;) {
       shots++;
+      // Entry motion finishes first, so a screen is the same picture every run.
+      await run(`Promise.all(document.getAnimations().filter(a => isFinite(a.effect.getComputedTiming().endTime)).map(a => a.finished.catch(() => {}))).then(() => true)`);
       const label = await run(`document.getElementById('counter').textContent`);
       const found = await run(OVERFLOW);
       if (found.length) problems.push(`${label}: ${found.join(' | ')}`);
@@ -546,8 +648,19 @@ try {
     fs.writeFileSync(path.join('.preview', 'deck-phone.png'), Buffer.from(deckShot.data, 'base64'));
     await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
     pass(lesson.id);
-    console.log(`PASS: ${lesson.id}: ${total} pages, ${shots} screens, no overflow; thumbnails, timeline, chapters and jump work; ${result.quizzes.length} quizzes, ${result.picks.length} bug hunts, ${result.gates.length} logic switches, ${changes.length} code changes, ${algos.length} algorithm demos, ${result.links} IDE links.`);
+    changedShots.push(...compareShots(lesson.id));
+    for (const [k, n] of Object.entries({pages: total, screens: shots, quizzes: result.quizzes.length, picks: result.picks.length,
+      gates: result.gates.length, changes: changes.length, algos: algos.length, links: result.links})) sum[k] += n;
+   } catch (error) {
+    error.message = `${lesson.id}: ${error.message}`;
+    throw error;
+   }
   }
+  passShared();
+  // One line when everything passed; the screens to look at are listed in a file, not here.
+  if (!process.env.CI) fs.writeFileSync(path.join('.preview', 'changed.txt'), changedShots.join('\n') + (changedShots.length ? '\n' : ''));
+  const look = process.env.CI ? '' : changedShots.length ? `; ${changedShots.length} screens differ from the last pass, see .preview/changed.txt` : '; no screen differs from the last pass';
+  console.log(`PASS: ${scope}: ${targets.length} lesson(s), ${sum.pages} pages, ${sum.screens} screens, no overflow; ${sum.quizzes} quizzes, ${sum.picks} bug hunts, ${sum.gates} logic switches, ${sum.changes} code changes, ${sum.algos} algorithm demos, ${sum.links} IDE links${look}.`);
 } finally {
   ws.close();
   proc.kill();

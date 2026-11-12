@@ -1,10 +1,15 @@
 # Check every module, then publish the site from main only when every check has passed.
+# check.py and the project checks run every time. Chrome checks only what the change can affect (see .github/browser_plan.py):
+# nothing for README or home page edits, the changed lessons or projects, or everything split over four runners. The weekly
+# run and a manual run check everything.
 name: check
 on:
   push:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * 1'
 permissions:
   contents: read
 jobs:
@@ -46,32 +51,69 @@ jobs:
           python tools/check.py
           python tools/verify.py
 
-  # Every page in real Chrome: layout, quizzes, yellow boxes run against real Python, IDE links.
-  browser:
+  # What the browser job checks, from the files this push or pull request changed.
+  plan:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - id: plan
+        env:
+          BASE: ${{ github.event_name == 'push' && github.event.before || github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
+        run: |
+          if [ -n "$BASE" ]; then git fetch -q --depth=1 origin "$BASE" || true; fi
+          matrix=$(python3 .github/browser_plan.py "$BASE")
+          echo "$matrix"
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+
+  # Pages in real Chrome: layout, quizzes, yellow boxes run against real Python, IDE links. With nothing to check the job
+  # still succeeds, so deploy runs.
+  browser:
+    needs: plan
+    name: browser (${{ matrix.name }})
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    runs-on: ubuntu-latest
+    env:
+      BASICS: ${{ matrix.basics }}
+      SHARD: ${{ matrix.shard }}
+      PROJECTS: ${{ matrix.project }}
+      WORK: ${{ matrix.basics != '' || matrix.project != '' }}
+    steps:
+      - if: env.WORK != 'true'
+        run: echo "No page can look different after this change, so there is nothing to open in Chrome."
+      - if: env.WORK == 'true'
+        uses: actions/checkout@v4
+      - if: env.WORK == 'true'
+        uses: actions/setup-python@v5
         with:
           python-version: '3.14'
-      - uses: actions/setup-node@v4
+      - if: env.WORK == 'true'
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Chinese fonts and the Chrome sandbox
+        if: env.WORK == 'true'
         run: |
           sudo apt-get update -q
           sudo apt-get install -yq fonts-noto-cjk
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 || true
       - name: basics
+        if: env.BASICS != ''
         working-directory: basics
-        run: node tools/check_browser.mjs
+        run: |
+          if [ "$BASICS" = all ]; then node tools/check_browser.mjs --shard "$SHARD"; else node tools/check_browser.mjs $BASICS; fi
       - name: project
+        if: env.PROJECTS != ''
         working-directory: project
-        run: node tools/check_browser.mjs
+        run: |
+          if [ "$PROJECTS" = all ]; then node tools/check_browser.mjs; else node tools/check_browser.mjs $PROJECTS; fi
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: browser-screenshots
+          name: browser-screenshots-${{ strategy.job-index }}
           path: |
             basics/.preview
             project/.preview
@@ -79,7 +121,7 @@ jobs:
 
   deploy:
     needs: [check, project, browser]
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: read
