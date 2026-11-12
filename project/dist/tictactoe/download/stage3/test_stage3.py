@@ -3,6 +3,14 @@
 # 最后一行是 OK：全部通过。最后一行是 FAILED：往上找 FAIL 的那几条，看中文说明和 AssertionError 后面的“你的 != 应该的”。
 
 import unittest
+import sys
+
+for stream in (sys.stdout, sys.stderr):  # 有的电脑的控制台显示不了中文，换成 UTF-8；学生不用管
+    try:
+        "中文".encode(stream.encoding or "ascii")
+    except (LookupError, UnicodeEncodeError):
+        stream.reconfigure(encoding="utf-8")
+
 from tictactoe import line_owner, winner
 
 

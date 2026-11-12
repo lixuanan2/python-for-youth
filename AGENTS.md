@@ -7,11 +7,11 @@
 | 文件夹 | 页面上叫 | 说明 | 网址 |
 | --- | --- | --- | --- |
 | `basics/` | 基础课件 | [basics/AGENTS.md](basics/AGENTS.md) | `https://lixuanan2.github.io/python-for-youth/basics/` |
-| `project/` | 项目课（规划中） | [project/AGENTS.md](project/AGENTS.md) | 还没有 |
+| `project/` | 项目课 | [project/AGENTS.md](project/AGENTS.md) | `https://lixuanan2.github.io/python-for-youth/project/` |
 
 - 做课、改课先读 `basics/AGENTS.md`，命令都在 `basics/` 里运行。教学要求在 `basics/PROMPT.md`。
-- 项目课和基础课件不同：代码在学生自己的电脑上写和运行，老师给素材、前端和测试，学生只写后端逻辑。还没有课，不进 CI、宣传 README 和首页。
-- 每个模块自带模板、工具和字体（`template/`、`tools/`、`vendor/`），不和别的模块共用。以后的模块要不要共用，等老师定了再改。
+- 项目课和基础课件不同：代码在学生自己的电脑上写和运行，老师给素材、前端和测试，学生只写后端逻辑。第一个项目是井字棋。做项目课不改 `basics/`，命令在 `project/` 里运行。
+- `basics/` 自带模板、工具和字体（`template/`、`tools/`、`vendor/`）。`project/` 有自己的工具，课件直接读 `basics/` 的模板、字体和 IDE 设置，只读不改，自己的样式放 `project/template/`。
 
 ## 跨课程的规则
 
@@ -28,7 +28,7 @@
 
 - `README.md`：宣传门面，写给老师、机构和逛 GitHub 的人。最上面两三句英文，正文中文。改了要同步 `home/index.html`，两者内容一致。
 - `home/index.html`：网站首页 `https://lixuanan2.github.io/python-for-youth/`，手写，不经过构建。用到的字体由发布网站的那一步从 `basics/vendor/fonts/` 复制到网站的 `fonts/`。
-- `.github/workflows/check.yml` 先在各模块文件夹里跑检查：`check` 在 Ubuntu 和 Windows 上跑 `tools/check.py`，`browser` 在 Ubuntu 的 Chrome 里跑 `tools/check_browser.mjs`。两项都通过后，`deploy` 才把 `home/` 和各模块的 `dist/` 组装成网站发布：首页在最外层，`basics/dist/` 放到 `/basics/`。`deploy` 还按 `ide/` 构建课程用的 IDE，放到 `/ide/`。只有 `main` 上的推送和手动运行会发布，PR 只检查。
+- `.github/workflows/check.yml` 先在各模块文件夹里跑检查：`check` 在 Ubuntu 和 Windows 上跑 `tools/check.py`，`browser` 在 Ubuntu 的 Chrome 里跑 `tools/check_browser.mjs`。两项都通过后，`deploy` 才把 `home/` 和各模块的 `dist/` 组装成网站发布：首页在最外层，`basics/dist/` 放到 `/basics/`。`deploy` 还按 `ide/` 构建课程用的 IDE，放到 `/ide/`；`project/dist/` 放到 `/project/`。`project` 这一项在 Ubuntu 和 Windows 上跑项目课的检查。只有 `main` 上的推送和手动运行会发布，PR 只检查。
 - `ide/`：课程用的在线 IDE，是固定版本的 JupyterLite，Python（Pyodide）一起发布，学生打开时不从 CDN 下载。只提交版本和配置：`requirements.txt` 定 JupyterLite 的版本，`prepare.py` 定 Pyodide 的版本，下载并核对哈希，只留内核启动要用的包。构建结果不进 Git，由 `deploy` 生成。本机试：在 `ide/` 里 `pip install -r requirements.txt`、`python prepare.py`、`jupyter lite build`，再用任意静态服务器打开 `_output/repl/index.html`。
 - `CONTRIBUTING.md`、`LICENSE.md`、`.github/` 的模板管整个仓库。
 - 联系方式只写 GitHub Discussions，不公开邮箱。

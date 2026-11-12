@@ -1,4 +1,4 @@
-// Real Chrome over CDP on file://: every screen of every stage deck, the quizzes, the IDE links, and the map on a phone.
+// Real Chrome over CDP on file://: every screen of each project's deck, the quizzes, the IDE links, and the map on a phone.
 // Run in project/ after build.py: node tools/check_browser.mjs
 // Screenshots land in .preview/. Set CHROME_PATH if Chrome is not in a usual place.
 import assert from 'node:assert/strict';
@@ -57,8 +57,7 @@ const OVERFLOW = `(() => {
 try {
   await send('Page.enable');
   for (const name of site.projects) {
-    const stages = fs.readdirSync(path.join('dist', name)).filter(d => /^stage\d+$/.test(d)).sort();
-    for (const stage of stages) {
+    for (const stage of ['slides']) {
       const dir = path.join('.preview', name, stage);
       fs.rmSync(dir, {recursive: true, force: true});
       fs.mkdirSync(dir, {recursive: true});
@@ -95,8 +94,8 @@ try {
       assert.equal(result.bad, 0, `${name}/${stage}: an IDE link carries no code`);
       console.log(`PASS: ${name}/${stage}: ${total} pages, ${screens} screens, no overflow; ${result.quizzes.length} quiz(zes), ${result.ide} IDE links.`);
     }
-    // The map and the module index are read on phones too: nothing may scroll sideways.
-    for (const page of [path.join('dist', name, 'index.html'), path.join('dist', 'index.html')]) {
+    // The map, the development document and the module index are read on phones too: nothing may scroll sideways.
+    for (const page of [path.join('dist', name, 'index.html'), path.join('dist', name, 'guide.html'), path.join('dist', 'index.html')]) {
       await send('Emulation.setDeviceMetricsOverride', {width: 390, height: 844, deviceScaleFactor: 1, mobile: true});
       await open(page);
       assert(await run('document.documentElement.scrollWidth <= innerWidth'), `${page} scrolls sideways on a phone`);

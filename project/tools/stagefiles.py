@@ -131,6 +131,8 @@ def py_test(proj, st):
         "# 最后一行是 OK：全部通过。最后一行是 FAILED：往上找 FAIL 的那几条，看中文说明和 AssertionError 后面的“你的 != 应该的”。",
         "",
         "import unittest",
+    ] + PY_CONSOLE + [
+        "",
         "from %s import %s" % (proj.PROJECT["module"], ", ".join(fn_names(st))),
         "",
         "",
@@ -209,45 +211,60 @@ def spec(fn, language):
     return sig, plain, examples
 
 
-def guide(proj, st, language):
-    n = st["id"]
+# Teacher files print Chinese. Through a pipe on a Windows whose code page cannot hold it (an English Windows, or an
+# editor that reads the output without setting PYTHONIOENCODING), print fails with UnicodeEncodeError. These lines
+# switch only such a stream to UTF-8; consoles and Chinese Windows keep what they have.
+PY_CONSOLE = [
+    "import sys",
+    "",
+    "for stream in (sys.stdout, sys.stderr):  # 有的电脑的控制台显示不了中文，换成 UTF-8；学生不用管",
+    "    try:",
+    "        \"中文\".encode(stream.encoding or \"ascii\")",
+    "    except (LookupError, UnicodeEncodeError):",
+    "        stream.reconfigure(encoding=\"utf-8\")",
+]
+
+
+def stage_challenge(proj, n, py):
+    ch = proj.CHALLENGES[n]
+    if ch.startswith("PY: "):
+        ch = ch.split("|")[0][4:] if py else ch.split("|")[1][5:]
+    return ch
+
+
+def dev_doc(proj, language):
+    """The project's development document, the main thing students read: what we build, the stages in order, and
+    for each stage its goal, the functions with their exact names and contracts, examples, the basics lessons it
+    needs and how to run its tests. One file; every stage folder ships the same copy as guide.md."""
     py = language == "python"
-    me, test, play = names(language, proj, n)
-    L = ["# 第 %d 关：%s（%s）" % (n, st["title"], "Python" if py else "C++"), ""]
-    L += ["## 这一关做什么", "", st["goal"], ""]
-    L += ["## 要先学完", ""]
-    for folder, about in needs(st, language):
-        L.append("- %s %s" % (folder, about))
-    if not py and n == 2:
-        L += ["", "**先看补页** `extra-string-cell.md`：string 的一格怎么改。"]
-    L += ["", "## 大约要多久", "", st.get("minutes_cpp", st["minutes"]) if not py else st["minutes"], ""]
-    L += ["## 要写的函数（名字、参数必须照写）", ""]
-    for fn in st["functions"]:
-        sig, plain, examples = spec(fn, language)
-        L += ["### `%s`" % fn["name"], "", "```%s" % ("python" if py else "cpp"), sig, "```", ""]
-        L += ["- " + s for s in plain]
-        if examples:
-            L += ["", "例子：", ""] + ["- `%s`%s" % e for e in examples]
-        L.append("")
-    L += ["## 文件夹里有什么", "", "| 文件 | 谁写 | 做什么 |", "| --- | --- | --- |"]
-    L.append("| `%s` | **你** | 只改最下面“第 %d 关：你来写”的部分%s |" % (me, n, "；上面是前几关的参考答案，可以看、不用改" if n > 1 else ""))
-    L.append("| `%s` | 老师 | 检查你写对没有 |" % test)
+    lang = "python" if py else "cpp"
+    me, test1, play = names(language, proj, 1)
+    last = len(proj.STAGES)
+    L = ["# %s：开发文档（%s）" % (proj.PROJECT["title"], "Python" if py else "C++"), ""]
+    L += ["## 我们要做什么", "", proj.PROJECT["lead"], "", "```"] + proj.BOARD_PICTURE + ["```", ""]
+    L += ["## 一关一关来", "", "| 关 | 做什么 | 要写的函数 | 要先学完 |", "| --- | --- | --- | --- |"]
+    for st in proj.STAGES:
+        L.append("| %d | %s | %s | %s |" % (st["id"], st["title"], "、".join("`%s`" % f for f in fn_names(st)),
+                                           "、".join(f for f, _ in needs(st, language))))
+    L += ["", "函数名和参数必须照这份文档写，一个字母也不能改：老师的测试按这些名字检查。", ""]
+    L += ["## 每关的文件夹", "", "每关一个文件夹（`stage1` 到 `stage%d`），老师用 U 盘发。打开哪一关，就用编辑器打开那一个文件夹。" % last, ""]
+    L += ["| 文件 | 谁写 | 做什么 |", "| --- | --- | --- |",
+          "| `%s` | **你** | 只改最下面“第 N 关：你来写”的部分；上面是前几关的参考答案，可以看、不用改 |" % me,
+          "| `test_stageN.%s` | 老师 | 检查你写对没有 |" % ("py" if py else "cpp")]
     if not py:
         L.append("| `check.h` | 老师 | 测试用的小工具 |")
-    L.append("| `%s` | 老师 | 测试全过以后用来玩 |" % play)
-    if not py and n == 2:
-        L.append("| `extra-string-cell.md` | 老师 | 补页：改 string 的一格 |")
-    L += ["| `guide.md` | 老师 | 就是这一页 |", "", "## 怎么运行测试", ""]
+    L += ["| `%s` | 老师 | 测试全过以后用来玩 |" % play, "| `guide.md` | 老师 | 就是这份开发文档 |", ""]
+    L += ["## 怎么运行测试", ""]
     if py:
         L += [
-            "任选一种：",
+            "任选一种（下面的 N 换成第几关）：",
             "",
-            "- **PyCharm**：File → Open，选这个 `stage%d` 文件夹。左边右键 `%s` → Run。" % (n, test),
-            "- **VS Code**：File → Open Folder，选这个文件夹。打开 `%s`，点右上角的 ▶（Run Python File）。要先装好 Python 扩展。" % test,
-            "- **IDLE**：打开 `%s`，按 F5。" % test,
-            "- **命令行**：在这个文件夹的地址栏里输入 `cmd` 回车，再输入 `python %s`（不行就试 `py %s`）。" % (test, test),
+            "- **PyCharm**：File → Open，选 `stageN` 文件夹。左边右键 `test_stageN.py` → Run。",
+            "- **VS Code**：File → Open Folder，选这个文件夹。打开 `test_stageN.py`，点右上角的 ▶（Run Python File）。要先装好 Python 扩展。",
+            "- **IDLE**：打开 `test_stageN.py`，按 F5。",
+            "- **命令行**：在这个文件夹的地址栏里输入 `cmd` 回车，再输入 `python test_stageN.py`（不行就试 `py test_stageN.py`）。",
             "",
-            "怎么看结果：每条测试一行，后面是 `ok` 或 `FAIL`。最后一行是 `OK` 就是全部通过；是 `FAILED (failures=3)` 就是有 3 条没通过，往上找 `FAIL`，看中文说明和 `AssertionError` 后面“你的 != 应该的”。",
+            "怎么看结果：每条测试两行，第二行后面是 `ok` 或 `FAIL`。最后一行是 `OK` 就是全部通过；是 `FAILED (failures=3)` 就是有 3 条没通过，往上找 `FAIL`，看中文说明和 `AssertionError` 后面“你的 != 应该的”。",
             "",
             "如果出现 `ImportError` 或 `NameError`：多半是函数名写错了，或者 `%s` 不在同一个文件夹里。" % me,
             "",
@@ -255,23 +272,35 @@ def guide(proj, st, language):
         ]
     else:
         L += [
-            "任选一种：",
+            "任选一种（下面的 N 换成第几关）：",
             "",
-            "- **Dev-C++**：文件 → 打开，选 `%s`，按 F11（编译运行）。要打开的是 `%s`，**不是** `%s`（它没有 main，单独编译会出错）。改完 `%s` 先保存，再回到 `%s` 按 F11。" % (test, test, me, me, test),
-            "- **VS Code**：File → Open Folder，选这个文件夹。打开 `%s`，点右上角的 ▶（Run C/C++ File）。要先装好 C/C++ 扩展和 MinGW 编译器。" % test,
-            "- **命令行**：在这个文件夹里输入 `g++ %s -o %s`，再输入 `%s`。" % (test, test[:-4], test[:-4]),
+            "- **Dev-C++**：文件 → 打开，选 `test_stageN.cpp`，按 F11（编译运行）。要打开的是测试文件，**不是** `%s`（它没有 main，单独编译会出错）。改完 `%s` 先保存，再回到测试文件按 F11。" % (me, me),
+            "- **VS Code**：File → Open Folder，选这个文件夹。打开 `test_stageN.cpp`，点右上角的 ▶（Run C/C++ File）。要先装好 C/C++ 扩展和 MinGW 编译器。",
+            "- **命令行**：在这个文件夹里输入 `g++ test_stageN.cpp -o test_stageN`，再输入 `test_stageN`。",
             "",
             "怎么看结果：每条一行，`[对]` 或 `[错]`；错的会写“应该是”和“你的是”。最后一行“通过 几 / 几”。",
             "",
             "如果编译出错，说找不到某个函数：多半是函数名写错了，或者 `%s` 不在同一个文件夹里。如果中文显示成乱码，告诉老师（教室电脑的设置问题，不是你写错了）。" % me,
         ]
-    L += ["", "## 测试全过以后", ""]
-    L.append("运行 `%s`（和运行测试的方法一样）。" % play if py else "打开 `%s` 按 F11。" % play)
-    L.append(proj.PLAY_NOTES[n])
-    ch = proj.CHALLENGES[n]
-    if ch.startswith("PY: "):
-        ch = ch.split("|")[0][4:] if py else ch.split("|")[1][5:]
-    L += ["", "## 做完了？想一想", "", ch, ""]
+    L.append("")
+    for st in proj.STAGES:
+        n = st["id"]
+        L += ["## 第 %d 关：%s" % (n, st["title"]), "", st["goal"], ""]
+        L += ["- **要先学完**：" + "、".join("%s（%s）" % (f, a) if a else f for f, a in needs(st, language)),
+              "- **大约要多久**：" + (st.get("minutes_cpp", st["minutes"]) if not py else st["minutes"]),
+              "- **文件夹**：`stage%d`，测试是 `%s`" % (n, names(language, proj, n)[1])]
+        if not py and n == 2:
+            L.append("- **先看补页** `extra-string-cell.md`：string 的一格怎么改。")
+        L.append("")
+        for fn in st["functions"]:
+            sig, plain, examples = spec(fn, language)
+            L += ["### `%s`" % fn["name"], "", "```%s" % lang, sig, "```", ""]
+            L += ["- " + line for line in plain]
+            if examples:
+                L += ["", "例子：", ""] + ["- `%s`%s" % e for e in examples]
+            L.append("")
+        L += ["**测试全过以后**：运行 `%s`。%s" % (play, proj.PLAY_NOTES[n]), ""]
+        L += ["**做完了？想一想**：" + stage_challenge(proj, n, py), ""]
     return "\n".join(L)
 
 
@@ -283,7 +312,7 @@ def stage_files(proj, folder, st, language):
     files = {me: student_file(proj, st, language),
              test: py_test(proj, st) if language == "python" else cpp_test(proj, st),
              play: (templates / play).read_text(encoding="utf-8").replace("@STAGE@", str(n)),
-             "guide.md": guide(proj, st, language)}
+             "guide.md": dev_doc(proj, language)}
     if language == "cpp":
         files["check.h"] = (templates / "check.h").read_text(encoding="utf-8")
         for extra in st.get("extra_cpp", []):

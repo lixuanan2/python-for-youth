@@ -49,6 +49,13 @@ th{font-weight:700}
 .plain{padding-left:1.4em}
 .plain li{margin-top:8px}
 footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);font-size:15px}
+.doc{max-width:900px}
+.doc h1{font-size:44px;margin-top:10px}
+.doc h2{margin-top:44px}
+.doc h3{font:700 22px var(--code);margin-top:26px}
+.doc p,.doc ul,.doc table{margin-top:12px}
+.doc ul{padding-left:1.4em}
+.doc pre{margin-top:12px;background:var(--night);color:var(--paper);padding:16px 20px;border-radius:10px;font:400 16px/1.5 var(--code);overflow-x:auto}
 @media (max-width:760px){
   h1{font-size:42px}
   .route>li{grid-template-columns:44px minmax(0,1fr)}
@@ -64,24 +71,25 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
   <h1>井字棋</h1>
   <p class="lead">两个人轮流在 3×3 的格子里下 X 和 O，先连成一条线的赢。分 5 关，一关写一两个函数，最后能和电脑下。</p>
   <p class="lead small">从基础课件 <a href="https://lixuanan2.github.io/python-for-youth/basics/15-params-return/index.html">15-params-return</a> 学完就能开始。代码在自己的电脑上写和运行，编辑器不限（PyCharm、VS Code 都行）。</p>
-  <div class="actions"><a class="start" href="stage1/index.html">▶ 从第 1 关开始</a><a class="second" href="download/tictactoe-all.zip" download>⬇ 下载全部 5 关（zip）</a></div>
+  <div class="actions"><a class="start" href="guide.html">▶ 打开开发文档</a><a class="second" href="slides/index.html">放映课件</a><a class="second" href="download/tictactoe-all.zip" download>⬇ 下载全部 5 关（zip）</a></div>
 </div></header>
 <main>
   <section><h2>项目地图</h2><ol class="route"><li><div class="n">1</div><div><h3>这一格能下吗</h3><p>写一个函数，判断棋盘上的某一格现在能不能下棋。</p><p class="fns">要写：<code>can_put</code></p><p class="needs">先学完：<a href="https://lixuanan2.github.io/python-for-youth/basics/04-conditions/index.html">04-conditions</a><a href="https://lixuanan2.github.io/python-for-youth/basics/05-logic/index.html">05-logic</a><a href="https://lixuanan2.github.io/python-for-youth/basics/12-string-basics/index.html">12-string-basics</a><a href="https://lixuanan2.github.io/python-for-youth/basics/15-params-return/index.html">15-params-return</a></p></div>
-<nav aria-label="第 1 关"><a class="go" href="stage1/index.html">放映课件</a><a href="download/tictactoe-stage1.zip" download>下载 zip</a><a href="download/stage1/guide.md">引导文档</a></nav></li>
+<nav aria-label="第 1 关"><a class="go" href="guide.html#stage-1">开发文档</a><a href="slides/index.html#page-3">放映这一关</a><a href="download/tictactoe-stage1.zip" download>下载 zip</a></nav></li>
 <li><div class="n">2</div><div><h3>下一步棋</h3><p>写一个函数，在棋盘的某一格放上一个棋子，还回去新的棋盘。</p><p class="fns">要写：<code>put</code></p><p class="needs">先学完：<a href="https://lixuanan2.github.io/python-for-youth/basics/12-string-basics/index.html">12-string-basics</a><a href="https://lixuanan2.github.io/python-for-youth/basics/15-params-return/index.html">15-params-return</a></p></div>
-<nav aria-label="第 2 关"><a class="go" href="stage2/index.html">放映课件</a><a href="download/tictactoe-stage2.zip" download>下载 zip</a><a href="download/stage2/guide.md">引导文档</a></nav></li>
+<nav aria-label="第 2 关"><a class="go" href="guide.html#stage-2">开发文档</a><a href="slides/index.html#page-7">放映这一关</a><a href="download/tictactoe-stage2.zip" download>下载 zip</a></nav></li>
 <li><div class="n">3</div><div><h3>谁赢了</h3><p>先写一个查“一条线”的小函数，再用它查全部 8 条线，找出赢家。</p><p class="fns">要写：<code>line_owner</code><code>winner</code></p><p class="needs">先学完：<a href="https://lixuanan2.github.io/python-for-youth/basics/05-logic/index.html">05-logic</a><a href="https://lixuanan2.github.io/python-for-youth/basics/10-list-basics/index.html">10-list-basics</a><a href="https://lixuanan2.github.io/python-for-youth/basics/11-list-loop/index.html">11-list-loop</a><a href="https://lixuanan2.github.io/python-for-youth/basics/15-params-return/index.html">15-params-return</a></p></div>
-<nav aria-label="第 3 关"><a class="go" href="stage3/index.html">放映课件</a><a href="download/tictactoe-stage3.zip" download>下载 zip</a><a href="download/stage3/guide.md">引导文档</a></nav></li>
+<nav aria-label="第 3 关"><a class="go" href="guide.html#stage-3">开发文档</a><a href="slides/index.html#page-11">放映这一关</a><a href="download/tictactoe-stage3.zip" download>下载 zip</a></nav></li>
 <li><div class="n">4</div><div><h3>下满没有、轮到谁</h3><p>写两个小函数：棋盘下满了没有；现在轮到谁下。</p><p class="fns">要写：<code>is_full</code><code>turn</code></p><p class="needs">先学完：<a href="https://lixuanan2.github.io/python-for-youth/basics/08-loop-tally/index.html">08-loop-tally</a><a href="https://lixuanan2.github.io/python-for-youth/basics/13-string-methods/index.html">13-string-methods</a><a href="https://lixuanan2.github.io/python-for-youth/basics/15-params-return/index.html">15-params-return</a></p></div>
-<nav aria-label="第 4 关"><a class="go" href="stage4/index.html">放映课件</a><a href="download/tictactoe-stage4.zip" download>下载 zip</a><a href="download/stage4/guide.md">引导文档</a></nav></li>
+<nav aria-label="第 4 关"><a class="go" href="guide.html#stage-4">开发文档</a><a href="slides/index.html#page-17">放映这一关</a><a href="download/tictactoe-stage4.zip" download>下载 zip</a></nav></li>
 <li><div class="n">5</div><div><h3>电脑来下</h3><p>让电脑下棋：能赢就赢，该堵就堵，不然下第一个空格。</p><p class="fns">要写：<code>computer_move</code></p><p class="needs">先学完：<a href="https://lixuanan2.github.io/python-for-youth/basics/06-for-loop/index.html">06-for-loop</a><a href="https://lixuanan2.github.io/python-for-youth/basics/04-conditions/index.html">04-conditions</a><a href="https://lixuanan2.github.io/python-for-youth/basics/15-params-return/index.html">15-params-return</a></p></div>
-<nav aria-label="第 5 关"><a class="go" href="stage5/index.html">放映课件</a><a href="download/tictactoe-stage5.zip" download>下载 zip</a><a href="download/stage5/guide.md">引导文档</a></nav></li></ol></section>
+<nav aria-label="第 5 关"><a class="go" href="guide.html#stage-5">开发文档</a><a href="slides/index.html#page-22">放映这一关</a><a href="download/tictactoe-stage5.zip" download>下载 zip</a></nav></li></ol></section>
   <section><h2>函数一览</h2><p>名字必须照写：老师的测试按这些名字检查。</p>
     <table><thead><tr><th>函数</th><th>关</th><th>给它</th><th>还给你</th></tr></thead><tbody><tr><td><code>can_put</code></td><td>1</td><td>棋盘 board（9 个字符），格子编号 i</td><td>第 i 格能不能下，能就是 True，不能就是 False</td></tr><tr><td><code>put</code></td><td>2</td><td>棋盘 board、格子编号 i（可以放心：0 到 8，而且是空格）、棋子 who（'X' 或 'O'）</td><td>下完以后的新棋盘，还是 9 个字符</td></tr><tr><td><code>line_owner</code></td><td>3</td><td>棋盘，和一条线上的三个格子编号 a、b、c</td><td>三格都是 'X' 就还 'X'，三格都是 'O' 就还 'O'，不然还 '.'</td></tr><tr><td><code>winner</code></td><td>3</td><td>棋盘</td><td>赢的一方 'X' 或 'O'；没人赢就还 '.'</td></tr><tr><td><code>is_full</code></td><td>4</td><td>棋盘</td><td>9 格都下满了吗（一个 '.' 都没有了）</td></tr><tr><td><code>turn</code></td><td>4</td><td>棋盘（可以放心：X 先下，两人轮流）</td><td>现在轮到谁下，'X' 或 'O'</td></tr><tr><td><code>computer_move</code></td><td>5</td><td>还没下完、也还没人赢的棋盘。电脑下的是 turn(board) 那一方</td><td>电脑要下的格子编号 0 到 8</td></tr></tbody></table></section>
   <section><h2>给老师：准备 U 盘</h2><ol class="plain">
     <li>下载全部关卡的 zip，在电脑上解压。</li>
     <li>把解压出来的 <code>stage1</code> 到 <code>stage5</code> 文件夹拷进 U 盘。拷文件夹本身，不要只拷 zip：在 zip 里直接运行会找不到同一个文件夹里的文件。</li>
+    <li>每个文件夹里都有开发文档 <code>guide.md</code>，和这个网站上的开发文档一样。</li>
     <li>参考答案不在下载包里，在仓库的 <code>project/tictactoe/answers/</code>，不要拷给学生。</li>
     <li>学生用编辑器打开某一关的文件夹，改 <code>tictactoe.py</code>，运行 <code>test_stageN</code> 检查，全过以后运行 <code>play.py</code> 玩。</li>
   </ol></section>

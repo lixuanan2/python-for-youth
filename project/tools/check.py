@@ -2,11 +2,13 @@
 
 Run in project/ after build.py: python3 tools/check.py   (then tools/verify.py checks the stages themselves)
 """
+import ast
 import html
 import json
 import re
 import subprocess
 import sys
+import zipfile
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -28,23 +30,22 @@ def check_current():
     files, projects = build.outputs()
     for path, data in files.items():
         assert path.is_file() and path.read_bytes() == data, "Rebuild: python3 tools/build.py (%s)" % path.relative_to(ROOT)
-    decks = {}
-    for name, proj in projects:
-        for st in proj.STAGES:
-            path = DIST / name / ("stage%d" % st["id"]) / "index.html"
-            decks[path] = build.render_deck(proj, name, st)
-            assert path.is_file() and path.read_text(encoding="utf-8") == decks[path], "Rebuild: python3 tools/build.py (%s)" % path.relative_to(ROOT)
-    made = set(files) | set(decks)
-    extra = [p for p in DIST.rglob("*") if p.is_file() and p not in made]
+    extra = [p for p in DIST.rglob("*") if p.is_file() and p not in files]
     assert not extra, "Files in dist/ that the build does not make: %s" % [str(p.relative_to(ROOT)) for p in extra]
+    decks = {path: data.decode("utf-8") for path, data in files.items() if path.parent.name == "slides"}
     return projects, decks
 
 
 def check_no_answers(projects):
-    """Students get no answer: no answers folder in dist/, and no line of a stage's own answer in what it ships."""
+    """Students get no answer: no answers folder in dist/, and no line of a stage's answer anywhere in dist/ except
+    the folders of later stages, which hand earlier answers over on purpose."""
     assert not list(DIST.rglob("answers")), "An answers folder is in dist/"
     for name, proj in projects:
         shipped = [(p, p.read_text(encoding="utf-8")) for p in (DIST / name).rglob("*") if p.suffix in (".py", ".h", ".cpp", ".md", ".html")]
+        zipped = [(p, z) for p in (DIST / name).rglob("*.zip") for z in [zipfile.ZipFile(p)]]
+        for path, z in zipped:  # a zip holds exactly the stage folders next to it
+            for item in z.namelist():
+                assert z.read(item) == (DIST / name / "download" / item).read_bytes(), "%s: %s differs from the folder" % (path.name, item)
         for st in proj.STAGES:
             for fn in st["functions"]:
                 body = fn["py_body"] if LANGUAGE == "python" else fn["cpp_body"]
@@ -56,10 +57,29 @@ def check_no_answers(projects):
                         stage = re.search(r"stage(\d+)", str(path.relative_to(DIST)))
                         if stage and int(stage.group(1)) > st["id"]:
                             continue  # later stages hand over earlier answers on purpose
-                        if path.suffix == ".html" and stage is None:
-                            continue
                         assert key not in given and html.escape(key) not in given, \
                             "Stage %d answer line in %s: %s" % (st["id"], path.relative_to(ROOT), key)
+
+
+ALLOWED_IMPORTS = {"unittest", "sys"}  # standard library only; students install nothing
+
+
+def check_plain(projects):
+    """Answers, tests and front ends stay plain: standard library only, and every answer function short."""
+    for name, proj in projects:
+        files = list((DIST / name / "download").rglob("*.py")) + list((ROOT / name / "answers").rglob("*.py"))
+        for path in files if LANGUAGE == "python" else []:
+            for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
+                found = [a.name for a in node.names] if isinstance(node, ast.Import) else [node.module] if isinstance(node, ast.ImportFrom) else []
+                for module in found:
+                    assert module.split(".")[0] in ALLOWED_IMPORTS | {proj.PROJECT["module"]}, "%s imports %s: standard library only" % (path.relative_to(ROOT), module)
+        for st in proj.STAGES:
+            for fn in st["functions"]:
+                body = fn["py_body"] if LANGUAGE == "python" else fn["cpp_body"]
+                assert len(body) <= ANSWER_LINES, "%s %s: the answer is %d lines; keep it short and at the students' level" % (name, fn["name"], len(body))
+
+
+ANSWER_LINES = 20
 
 
 def check_needs(projects):
@@ -124,6 +144,7 @@ def check_pages(decks):
 def main():
     projects, decks = check_current()
     check_no_answers(projects)
+    check_plain(projects)
     check_needs(projects)
     demos = check_demos(decks)
     links = check_pages(decks)

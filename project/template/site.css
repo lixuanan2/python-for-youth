@@ -38,6 +38,13 @@ th{font-weight:700}
 .plain{padding-left:1.4em}
 .plain li{margin-top:8px}
 footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);font-size:15px}
+.doc{max-width:900px}
+.doc h1{font-size:44px;margin-top:10px}
+.doc h2{margin-top:44px}
+.doc h3{font:700 22px var(--code);margin-top:26px}
+.doc p,.doc ul,.doc table{margin-top:12px}
+.doc ul{padding-left:1.4em}
+.doc pre{margin-top:12px;background:var(--night);color:var(--paper);padding:16px 20px;border-radius:10px;font:400 16px/1.5 var(--code);overflow-x:auto}
 @media (max-width:760px){
   h1{font-size:42px}
   .route>li{grid-template-columns:44px minmax(0,1fr)}

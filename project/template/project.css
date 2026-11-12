@@ -31,3 +31,8 @@
 .ttt i.o{font:800 96px var(--code);color:var(--olive)}
 .ttt.small{grid-template-columns:repeat(3,96px);grid-auto-rows:96px;gap:6px;padding:6px}
 .ttt.small i{font-size:30px}.ttt.small i.x,.ttt.small i.o{font-size:64px}
+.route .fn{font:700 36px var(--code);color:var(--clay)}
+.route span{font-size:40px}
+.dark .need{background:#2f2e2b;color:var(--paper)}
+.dark .need span{color:var(--ghost)}
+.sheet3.route div{padding:14px 0 16px}

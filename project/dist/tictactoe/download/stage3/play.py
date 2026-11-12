@@ -7,7 +7,15 @@
 #   第 4 关：用你的 turn、is_full 管轮流和平局
 #   第 5 关：可以和电脑下
 
+import sys
+
 import tictactoe as t
+
+for stream in (sys.stdout, sys.stderr):  # 有的电脑的控制台显示不了中文，换成 UTF-8；学生不用管
+    try:
+        "中文".encode(stream.encoding or "ascii")
+    except (LookupError, UnicodeEncodeError):
+        stream.reconfigure(encoding="utf-8")
 
 STAGE = 3
 
