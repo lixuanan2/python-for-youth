@@ -175,7 +175,7 @@ const proc = spawn(chrome, ['--headless=new', '--remote-debugging-port=0', `--us
 
 // Port 0 lets Chrome pick a free port, so two checks can run at once without meeting.
 let target;
-for (let i = 0; i < 75 && !target; i++) {
+for (let i = 0; i < 300 && !target; i++) {  // up to a minute: a fresh CI runner can be slow to start Chrome
   try {
     const port = fs.readFileSync(path.join(profile, 'DevToolsActivePort'), 'utf8').split('\n')[0];
     target = (await (await fetch(`http://127.0.0.1:${port}/json`)).json()).find(t => t.type === 'page');

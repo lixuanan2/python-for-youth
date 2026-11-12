@@ -23,7 +23,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'project-check-'));
 const proc = spawn(chrome, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${profile}`, '--no-first-run', '--window-size=1920,1080', 'about:blank'], {stdio: 'ignore'});
 let target;
-for (let i = 0; i < 75 && !target; i++) {
+for (let i = 0; i < 300 && !target; i++) {  // up to a minute: a fresh CI runner can be slow to start Chrome
   try {
     const port = fs.readFileSync(path.join(profile, 'DevToolsActivePort'), 'utf8').split('\n')[0];
     target = (await (await fetch(`http://127.0.0.1:${port}/json`)).json()).find(t => t.type === 'page');
