@@ -26,7 +26,7 @@ h2.t::before{content:"# ";color:var(--clay)}
 
 /* Status bar instead of a progress bar. */
 .foot{position:absolute;left:96px;right:96px;bottom:36px;display:flex;justify-content:space-between;font:400 24px var(--code);color:var(--ghost)}
-.foot::before{content:var(--file)}
+.foot::before{content:var(--lesson)}
 .foot::after{content:"Ln " counter(page)}
 .clay .foot,.olive .foot{color:#ffffffb0}
 

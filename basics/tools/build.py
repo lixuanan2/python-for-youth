@@ -198,10 +198,25 @@ def attach_code(slides, lesson):
     return re.sub(r'data-file="([^"]+)"( data-lines="[^"]+")', lambda m: f'data-file="{m.group(1)}"{m.group(2)} data-full="{source(m.group(1))}"', slides)
 
 
+def lesson_number(item, previous):
+    """第几课: the number in front of the id, so both halves of a split lesson (05a, 05b) are lesson 5; a planned lesson with no id comes next."""
+    found = re.match(r'\d+', item.get('id', ''))
+    return int(found.group()) if found else previous + 1
+
+
+def lesson_label(lesson):
+    """The left of the status bar on every page: 第 7 课 while 循环. A split lesson's title already says 上集 or 下集."""
+    return f'第 {lesson_number(lesson, 0)} 课 {lesson["title"]}'
+
+
+def css_string(text):
+    return '"' + text.replace('\\', '\\\\').replace('"', '\\"').replace('<', '\\3c ') + '"'
+
+
 def render(lesson):
     css = '\n'.join([font_face(w) for w in (400, 700, 800)] + [read('vendor/viewport.css'), read('template/theme.css')])
     page = read('template/page.html')
-    fields = dict(title=html.escape(lesson['title']), file=lesson['file'], css=css,
+    fields = dict(title=html.escape(lesson['title']), lesson=css_string(lesson_label(lesson)), css=css,
                   site=html.escape(site()['title']),
                   slides=algo.embed(attach_code(number_slides(read(f'lessons/{lesson["id"]}/slides.html').rstrip() + '\n' + thanks_slide(lesson)), lesson), site()['language']).rstrip(),
                   script=read('template/deck.js').replace('{{ide}}', json.dumps(site()['ide'], ensure_ascii=False)).replace('{{language}}', site()['language']).rstrip())
@@ -223,7 +238,7 @@ def render_index(items):
     counted = [item for item in items if not item.get('sample')]
     number = 0
     for item in items:
-        number += not item.get('sample')
+        number = number if item.get('sample') else lesson_number(item, number)
         stages.setdefault(item['stage'], []).append(stop(number, item))
     route = '\n'.join(f'  <section class="stage"><h3>{html.escape(name)}</h3><ol class="stops">{"".join(rows)}</ol></section>' for name, rows in stages.items())
     info, hero = site(), site()['hero']

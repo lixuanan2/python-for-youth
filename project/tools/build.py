@@ -230,7 +230,7 @@ def render_deck(proj, name):
                      (ROOT / "template" / "project.css").read_text(encoding="utf-8")])
     script = basics_read("template/deck.js").replace("{{ide}}", json.dumps(BASICS_SITE["ide"], ensure_ascii=False)).replace("{{language}}", LANGUAGE)
     page = basics_read("template/page.html")
-    fields = dict(title=esc(proj.PROJECT["title"]), file=sf.names(LANGUAGE, proj, 1)[0], css=css, site=esc(SITE["title"]),
+    fields = dict(title=esc(proj.PROJECT["title"]), lesson=json.dumps("项目 " + proj.PROJECT["title"], ensure_ascii=False), css=css, site=esc(SITE["title"]),
                   slides=slides(proj, name).rstrip(), script=script.rstrip())
     for key, value in fields.items():
         page = page.replace("{{" + key + "}}", value)

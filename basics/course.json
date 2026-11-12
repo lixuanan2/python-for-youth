@@ -3,210 +3,180 @@
     "id": "01-input-output",
     "tag": "LESSON 01",
     "title": "输入输出",
-    "file": "lesson_01.py",
     "stage": "基础"
   },
   {
     "id": "02-variables",
     "tag": "LESSON 02",
     "title": "变量与数据类型",
-    "file": "lesson_02.py",
     "stage": "基础"
   },
   {
     "id": "03-arithmetic",
     "tag": "LESSON 03",
     "title": "算术运算",
-    "file": "lesson_03.py",
     "stage": "基础"
   },
   {
     "id": "04-conditions",
     "tag": "LESSON 04",
     "title": "条件判断",
-    "file": "lesson_04.py",
     "stage": "判断"
   },
   {
     "id": "05-logic",
     "tag": "LESSON 05",
     "title": "逻辑运算",
-    "file": "lesson_05.py",
     "stage": "判断"
   },
   {
     "id": "06-for-loop",
     "tag": "LESSON 06",
     "title": "for 循环",
-    "file": "lesson_06.py",
     "stage": "循环"
   },
   {
     "id": "07-while-loop",
     "tag": "LESSON 07",
     "title": "while 循环",
-    "file": "lesson_07.py",
     "stage": "循环"
   },
   {
     "id": "08-loop-tally",
     "tag": "LESSON 08",
     "title": "累加和计数",
-    "file": "lesson_08.py",
     "stage": "循环"
   },
   {
     "id": "09-max-min",
     "tag": "LESSON 09",
     "title": "最大值和最小值",
-    "file": "lesson_09.py",
     "stage": "循环"
   },
   {
     "id": "10-list-basics",
     "tag": "LESSON 10",
     "title": "列表基础",
-    "file": "lesson_10.py",
     "stage": "列表和字符串"
   },
   {
     "id": "11-list-loop",
     "tag": "LESSON 11",
     "title": "列表遍历",
-    "file": "lesson_11.py",
     "stage": "列表和字符串"
   },
   {
     "id": "12-string-basics",
     "tag": "LESSON 12",
     "title": "字符串基础",
-    "file": "lesson_12.py",
     "stage": "列表和字符串"
   },
   {
     "id": "13-string-methods",
     "tag": "LESSON 13",
     "title": "字符串常用方法",
-    "file": "lesson_13.py",
     "stage": "列表和字符串"
   },
   {
     "id": "14-functions",
     "tag": "LESSON 14",
     "title": "函数定义与调用",
-    "file": "lesson_14.py",
     "stage": "函数"
   },
   {
     "id": "15-params-return",
     "tag": "LESSON 15",
     "title": "参数与返回值",
-    "file": "lesson_15.py",
     "stage": "函数"
   },
   {
     "id": "16-math-functions",
     "tag": "LESSON 16",
     "title": "常用数学函数",
-    "file": "lesson_16.py",
     "stage": "函数"
   },
   {
     "id": "17-dict-basics",
     "tag": "LESSON 17",
     "title": "字典基础",
-    "file": "lesson_17.py",
     "stage": "字典"
   },
   {
     "id": "18-nested-loops",
     "tag": "LESSON 18",
     "title": "嵌套循环与图形",
-    "file": "lesson_18.py",
     "stage": "进阶"
   },
   {
     "id": "19-list-tools",
     "tag": "LESSON 19",
     "title": "列表常用操作",
-    "file": "lesson_19.py",
     "stage": "进阶"
   },
   {
     "id": "20-2d-lists",
     "tag": "LESSON 20",
     "title": "二维列表",
-    "file": "lesson_20.py",
     "stage": "进阶"
   },
   {
     "id": "21-random-games",
     "tag": "LESSON 21",
     "title": "随机数与小游戏",
-    "file": "lesson_21.py",
     "stage": "进阶"
   },
   {
     "id": "22-try-except",
     "tag": "LESSON 22",
     "title": "接住报错：try 和 except",
-    "file": "lesson_22.py",
     "stage": "进阶"
   },
   {
     "id": "23-recursion",
     "tag": "LESSON 23",
     "title": "递归入门",
-    "file": "lesson_23.py",
     "stage": "算法入门"
   },
   {
     "id": "24-bubble-sort",
     "tag": "LESSON 24",
     "title": "冒泡排序",
-    "file": "lesson_24.py",
     "stage": "算法入门"
   },
   {
     "id": "25-enumeration",
     "tag": "LESSON 25",
     "title": "枚举：把可能都试一遍",
-    "file": "lesson_25.py",
     "stage": "算法入门"
   },
   {
     "id": "26-binary-search",
     "tag": "LESSON 26",
     "title": "二分查找",
-    "file": "lesson_26.py",
     "stage": "算法入门"
   },
   {
     "id": "27-break-continue",
     "tag": "LESSON 27",
     "title": "break 和 continue",
-    "file": "lesson_27.py",
     "stage": "语法进阶"
   },
   {
     "id": "28-f-strings",
     "tag": "LESSON 28",
     "title": "f-string 格式化输出",
-    "file": "lesson_28.py",
     "stage": "语法进阶"
   },
   {
     "id": "29-sets",
     "tag": "LESSON 29",
     "title": "集合",
-    "file": "lesson_29.py",
     "stage": "语法进阶"
   },
   {
     "id": "30-tuples",
     "tag": "LESSON 30",
     "title": "元组",
-    "file": "lesson_30.py",
     "stage": "语法进阶"
   }
 ]
