@@ -32,6 +32,8 @@ h1{font:800 clamp(42px,6vw,76px)/1.14 var(--text);letter-spacing:-1px}
 .lead{margin-top:18px;font-size:21px;color:#d9d6cc;max-width:30em}
 .actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center}
 .start{display:inline-block;background:var(--mint);color:#16261a;font:700 21px var(--code);text-decoration:none;padding:14px 28px 16px;border-radius:12px;box-shadow:0 6px 0 #5f8f6a}
+.start.project{background:var(--amber);color:#2a1d05;box-shadow:0 6px 0 #b98a35}
+.start.project:active{box-shadow:0 2px 0 #b98a35}
 .start:hover{filter:brightness(1.06)}.start:active{transform:translateY(4px);box-shadow:0 2px 0 #5f8f6a}
 .more{margin-top:22px;font-size:18px;color:#d9d6cc}
 .more a{color:var(--amber)}
@@ -106,6 +108,7 @@ footer a{color:var(--ink)}
     <p class="lead">这是一套给小学高年级和初中生的 Python 课件，免费、开源。每节课是一个网页，老师拿来上课，学生也能照着自学。</p>
     <div class="actions">
       <a class="start" href="basics/">▶ 打开基础课件</a>
+      <a class="start project" href="project/">▶ 打开项目课</a>
     </div>
     <p class="more">需要更多课程，见总仓库 <a href="https://github.com/lixuanan2/youth-coding-courses">youth-coding-courses</a>。</p>
   </div>
@@ -161,7 +164,14 @@ footer a{color:var(--ink)}
       </div>
       <nav aria-label="基础课件"><a href="basics/">课程目录</a><a href="basics/01-input-output/">第一课</a><a href="https://github.com/lixuanan2/python-for-youth/tree/main/basics">说明和源文件</a></nav>
     </div>
-    <p class="later">以后会继续加别的模块，比如项目课。</p>
+    <div class="module">
+      <div>
+        <h3>项目课<small>井字棋 5 关</small></h3>
+        <p>学完一部分基础课，在自己的电脑上分关卡做一个小项目：老师给好画面和测试，学生只写程序的逻辑，测试全过就进下一关。</p>
+      </div>
+      <nav aria-label="项目课"><a href="project/">项目列表</a><a href="project/tictactoe/guide.html">井字棋开发文档</a><a href="https://github.com/lixuanan2/python-for-youth/tree/main/project">说明和源文件</a></nav>
+    </div>
+    <p class="later">以后会继续加别的项目。</p>
   </section>
 
   <section>
