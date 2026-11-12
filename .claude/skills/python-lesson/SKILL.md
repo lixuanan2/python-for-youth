@@ -62,7 +62,7 @@ python3 tools/check.py
 node tools/check_browser.mjs --changed
 ```
 
-`--pdf` 只重新打印页面变了的课，并更新 `pdf.json`；PDF 跟不上页面时 `check.py` 会报错。`--changed` 只查上次在本机通过后改过的课，改了模板或检查本身会自动查全部；`--status` 看哪些课要查。推送后 CI 会把全部课再查一遍，CI 和 Pages 都通过才算完成。然后看 `.preview/` 里的截图，每页和每个分步都要看。自动检查量不出丑不丑。
+`--pdf` 只重新打印页面变了的课，并更新 `pdf.json`；PDF 跟不上页面时 `check.py` 会报错。`--changed` 只查上次在本机通过后改过的课；改了模板或检查本身，不再全跑，只加三节代表课（`--sample`）；`--status` 看哪些课要查。全部通过时只打一行。然后看截图：`.preview/changed.txt` 列出和上次本机通过时画面不一样的页和分步，只看清单里的。自动检查量不出丑不丑。推送后 CI 按改动查：只改了这节课就只查这节，改了模板就全量；CI 和 Pages 都通过才算完成。
 
 ## 5. 交给老师
 

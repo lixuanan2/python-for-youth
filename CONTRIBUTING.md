@@ -30,8 +30,10 @@
 cd basics
 python3 tools/build.py --pdf
 python3 tools/check.py
-node tools/check_browser.mjs
+node tools/check_browser.mjs 06-for-loop
 ```
+
+最后一行在真实 Chrome 里逐页打开你改过的课，把 `06-for-loop` 换成那节课的文件夹名；改了 `basics/template/` 就换成 `--sample`，查三节代表课。全部课交给 GitHub 上的检查。
 
 `--pdf` 会用 Chrome 把页面变了的课重新打印成 PDF。改了课件正文或模板都要带上它：`basics/pdf.json` 记着每份 PDF 是照哪一版页面打印的，`check.py` 发现 PDF 跟不上页面就会报错，GitHub 上的检查也会拦住。没装 Chrome 的话，只运行 `python3 tools/build.py` 也行，在 PR 里说一声，由维护者补打 PDF。
 

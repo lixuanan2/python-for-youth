@@ -28,12 +28,30 @@
 python3 tools/build.py          # 生成 dist/，PDF 过期时提醒
 python3 tools/build.py --pdf    # 同时用 Chrome 重新打印页面变了的课的 PDF
 python3 tools/check.py          # 程序、答案、页面说法、路径、PDF 是否过期、整个仓库的文档链接
-node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查，只查上次在本机通过后改过的课
+node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查：改过的课，改了模板再加三节代表课
 ```
 
-`check_browser.mjs` 不带参数是全部 30 节课（要 15 到 20 分钟，CI 每次都这样跑）；写课的编号只查那几节，比如 `node tools/check_browser.mjs 06-for-loop 14-functions`，编号写错会直接报错；`--status` 列出每节课最近什么时候改过、本机什么时候查过、现在要不要查。一节课在本机查通过，就把它的指纹记进 `.check-state.json`：指纹算的是 `dist/<课>/`（PDF 除外）、`dist/index.html`、整个 `template/` 和 `check_browser.mjs` 本身，所以改了模板或这个检查，所有课都会变成“要查”。这个记录只在本机，不进 Git，不能手写；真正算数的是推送后 `main` 上 CI 的完整检查。
+`check_browser.mjs` 的几种用法：
 
-本机的顺序：`build.py --pdf` → `check.py` → `check_browser.mjs --changed` → 推送 → 等 CI 和 Pages 都通过再汇报。
+- `--changed`：上次在本机通过后改过的课。改了共用的部分（`template/`、`dist/index.html`、`check_browser.mjs` 本身），不再全跑，只加上 `--sample` 的三节课。
+- `--sample`：三节代表课，最短的、课名最长的（左下角的字最长）、组件最多的（小测、找错、开关、黄色框、代码变化、算法演示），按现在的课自动挑。
+- 写课的编号只查那几节，比如 `node tools/check_browser.mjs 06-for-loop 14-functions`，编号写错会直接报错。
+- 不带参数是全部 30 节课，要 15 到 20 分钟。本机一般不这样跑，交给 CI。
+- `--shard 2/4`：只查第 2 份（按顺序轮流分成 4 份），CI 全量时分 4 台机器并行用。
+- `--status`：每节课最近什么时候改过、本机什么时候查过、现在要不要查，最后一行是模板。
+
+一节课在本机查通过，就把它的指纹记进 `.check-state.json`（`dist/<课>/`，PDF 除外），三节代表课都通过了再记下模板的指纹。这个记录只在本机，不进 Git，不能手写；真正算数的是推送后 CI 的检查。
+
+全部通过时只打一行汇总，失败才打详细内容，开头写着是哪节课。截图在 `.preview/`。每次通过后，截图和上次在本机通过时的比（上次的存在 `.check-shots/`，不进 Git），画面变了的页列在 `.preview/changed.txt`，**只看清单里的截图**。比的是像素，左边的缩略图栏不比；偶尔会有一两页误报（比如斜着的便签），看一眼就知道。
+
+本机的顺序：`build.py --pdf` → `check.py` → `check_browser.mjs --changed` → 看 `.preview/changed.txt` 列出的截图 → 推送 → 等 CI 和 Pages 都通过再汇报。
+
+推送后 CI 按改动决定浏览器查什么（规则在仓库最外层的 `.github/browser_plan.py`）：
+
+- 只改了 `README.md`、`home/`、`.github/assets/` 或说明文字：不开浏览器，`check.py` 和发布照常。
+- 只改了某几节课（`lessons/<课>/`、`dist/<课>/`）：只查这几节。
+- 改了 `template/`、`vendor/`、`course.json`、`site.json`、`dist/index.html`，`tools/` 里的 `build.py`、`algo.py`、`check_browser.mjs`，或者工作流本身：全部 30 节，分 4 台机器并行。
+- 每周一自动全量查一次；在 GitHub 上手动运行也是全量。
 
 ## 规则
 
