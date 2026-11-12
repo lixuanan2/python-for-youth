@@ -22,6 +22,7 @@ import html
 import importlib.util
 import io
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -96,6 +97,12 @@ def map_slide(proj):
 ''' % (esc(proj.PROJECT["title"]), esc(proj.PROJECT["title"]), esc(proj.PROJECT["title"]), len(proj.STAGES), rows)
 
 
+EDITORS = {"python": "PyCharm、VS Code", "cpp": "Dev-C++、VS Code"}
+# Step 2 and step 3 of the run page: how to run a test file and how to read its last line, per language.
+RUN_STEPS = {"python": ("运行 test_stageN：PyCharm 右键 → Run，VS Code 点 ▶", "OK 就是全过；FAILED 就往上找 FAIL"),
+             "cpp": ("编译运行 test_stageN.cpp：Dev-C++ 按 F11", "“通过 8 / 8”就是全过；没全过就往上找 [错]")}
+
+
 def run_slide(proj, result):
     failures, excerpt = result
     test = sf.names(LANGUAGE, proj, 1)[1]
@@ -105,13 +112,13 @@ def run_slide(proj, result):
   <h2 class="t r">每关写完，就运行测试</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>打开文件夹</b><span>用编辑器打开这一关的 stageN 文件夹</span></div>
-    <div class="r d2"><i>2</i><b>运行测试</b><span>运行 test_stageN：PyCharm 右键 → Run，VS Code 点 ▶</span></div>
-    <div class="r d3"><i>3</i><b>看最后一行</b><span>OK 就是全过；FAILED 就往上找 FAIL</span></div>
+    <div class="r d2"><i>2</i><b>运行测试</b><span>%s</span></div>
+    <div class="r d3"><i>3</i><b>看最后一行</b><span>%s</span></div>
   </div>
   <div class="slip r d3" style="left:96px;top:690px;width:1728px"><small>第 1 关还没写就运行 %s，是这样的（%d 条没过；中间省掉了一些行）</small><pre style="font-size:28px;line-height:1.45">%s</pre></div>
   <div class="foot"></div>
 </section>
-''' % (esc(test), failures, esc("\n".join(excerpt)))
+''' % (RUN_STEPS[LANGUAGE] + (esc(test), failures, esc("\n".join(excerpt))))
 
 
 def stage_title(proj, st):
@@ -172,11 +179,26 @@ def thanks(proj):
 ''' % (esc(proj.PROJECT["title"]), len(proj.STAGES))
 
 
+def cpp_starter_result(proj, folder, st, test):
+    """C++: compile the untouched starter with its test (g++, or CXX) and keep the first [错] with its two lines and the end."""
+    with tempfile.TemporaryDirectory() as scratch:
+        for file, text in sf.stage_files(proj, folder, st, LANGUAGE).items():
+            (Path(scratch) / file).write_text(text, encoding="utf-8", newline="\n")
+        exe = Path(scratch) / ("test.exe" if os.name == "nt" else "test")
+        built = subprocess.run([os.environ.get("CXX", "g++"), test, "-o", str(exe)], cwd=scratch, capture_output=True, timeout=120)
+        assert built.returncode == 0, "stage %d: the starter does not compile\n%s" % (st["id"], built.stderr.decode("utf-8", "replace")[-500:])
+        out = subprocess.run([str(exe)], cwd=scratch, capture_output=True, timeout=60).stdout.decode("utf-8")
+    lines = out.replace("\r\n", "\n").splitlines()
+    wrong = [k for k, line in enumerate(lines) if line.startswith("[错]")]
+    assert wrong, "stage %d: the starter's tests do not fail\n%s" % (st["id"], out[-500:])
+    return len(wrong), lines[wrong[0]:wrong[0] + 3] + lines[-2:]
+
+
 def starter_result(proj, folder, st):
     """How many tests the untouched starter fails, and real lines of what the student sees, from a scratch copy."""
-    if LANGUAGE != "python":
-        return 0, []
     test = sf.names(LANGUAGE, proj, st["id"])[1]
+    if LANGUAGE == "cpp":
+        return cpp_starter_result(proj, folder, st, test)
     with tempfile.TemporaryDirectory() as scratch:
         for file, text in sf.stage_files(proj, folder, st, LANGUAGE).items():
             (Path(scratch) / file).write_text(text, encoding="utf-8", newline="\n")
@@ -334,7 +356,7 @@ def render_map(proj, name, pages):
   <nav class="crumbs"><a href="../index.html">← 项目课</a></nav>
   <h1>%s</h1>
   <p class="lead">%s</p>
-  <p class="lead small">从基础课件 <a href="%s%s/index.html">%s</a> 学完就能开始。代码在自己的电脑上写和运行，编辑器不限（PyCharm、VS Code 都行）。</p>
+  <p class="lead small">从基础课件 <a href="%s%s/index.html">%s</a> 学完就能开始。代码在自己的电脑上写和运行，编辑器不限（%s 都行）。</p>
   <div class="actions"><a class="start" href="guide.html">▶ 打开开发文档</a><a class="second" href="slides/index.html">放映课件</a><a class="second" href="download/%s-all.zip" download>⬇ 下载全部 %d 关（zip）</a></div>
 </div></header>
 <main>
@@ -350,7 +372,7 @@ def render_map(proj, name, pages):
   </ol></section>
 </main>
 ''' % (esc(proj.PROJECT["title"]), esc(proj.PROJECT["lead"]), esc(SITE["basics"]), esc(proj.PROJECT["start"][LANGUAGE]), esc(proj.PROJECT["start"][LANGUAGE]),
-       name, len(proj.STAGES), "\n".join(stages), table, len(proj.STAGES), name, esc(me[0]), esc(me[2]))
+       EDITORS[LANGUAGE], name, len(proj.STAGES), "\n".join(stages), table, len(proj.STAGES), name, esc(me[0]), esc(me[2]))
     return page_shell("%s · %s" % (proj.PROJECT["title"], SITE["title"]), body)
 
 

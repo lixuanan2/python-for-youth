@@ -241,7 +241,10 @@ def dev_doc(proj, language):
     me, test1, play = names(language, proj, 1)
     last = len(proj.STAGES)
     L = ["# %s：开发文档（%s）" % (proj.PROJECT["title"], "Python" if py else "C++"), ""]
-    L += ["## 我们要做什么", "", proj.PROJECT["lead"], "", "```"] + proj.BOARD_PICTURE + ["```", ""]
+    L += ["## 我们要做什么", "", proj.PROJECT["lead"], ""]
+    if not py:  # the C++ course asked for this line; the Python document does not have it yet
+        L += ["**开始之前**：先学完基础课件的 `%s`，才能做第 1 关。每关还要先学完哪几课，见下面的表。" % proj.PROJECT["start"][language], ""]
+    L += ["```"] + proj.BOARD_PICTURE + ["```", ""]
     L += ["## 一关一关来", "", "| 关 | 做什么 | 要写的函数 | 要先学完 |", "| --- | --- | --- | --- |"]
     for st in proj.STAGES:
         L.append("| %d | %s | %s | %s |" % (st["id"], st["title"], "、".join("`%s`" % f for f in fn_names(st)),
@@ -289,9 +292,11 @@ def dev_doc(proj, language):
         L += ["- **要先学完**：" + "、".join("%s（%s）" % (f, a) if a else f for f, a in needs(st, language)),
               "- **大约要多久**：" + (st.get("minutes_cpp", st["minutes"]) if not py else st["minutes"]),
               "- **文件夹**：`stage%d`，测试是 `%s`" % (n, names(language, proj, n)[1])]
-        if not py and n == 2:
-            L.append("- **先看补页** `extra-string-cell.md`：string 的一格怎么改。")
+        if not py:
+            L += ["- **先看补页** `%s`" % extra for extra in st.get("extra_cpp", [])]
         L.append("")
+        if not py and st.get("note_cpp"):
+            L += st["note_cpp"] + [""]
         for fn in st["functions"]:
             sig, plain, examples = spec(fn, language)
             L += ["### `%s`" % fn["name"], "", "```%s" % lang, sig, "```", ""]

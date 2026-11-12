@@ -156,8 +156,9 @@ try {
           buttons[Number(q.dataset.right)].click();
           return buttons[Number(q.dataset.right)].className === 'yes';
         });
+        // Each IDE names its own parameter (JupyterLite code=, cpp.sh source=); any non-empty one carries the program.
         const ide = [...stage.querySelectorAll('a.ide')];
-        const bad = ide.filter(a => !a.href.startsWith('https://') || a.target !== '_blank' || !new URL(a.href).searchParams.get('code')).length;
+        const bad = ide.filter(a => !a.href.startsWith('https://') || a.target !== '_blank' || ![...new URL(a.href).searchParams.values()].some(v => v.trim())).length;
         return {quizzes, ide: ide.length, bad};
       })()`);
       assert(result.quizzes.every(Boolean), `${name}/${stage}: a quiz does not mark its right answer`);

@@ -5,9 +5,11 @@ Run in project/ after build.py: python3 tools/check.py   (then tools/verify.py c
 import ast
 import html
 import json
+import os
 import re
 import subprocess
 import sys
+import tempfile
 import zipfile
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -46,16 +48,23 @@ def check_no_answers(projects):
         for path, z in zipped:  # a zip holds exactly the stage folders next to it
             for item in z.namelist():
                 assert z.read(item) == (DIST / name / "download" / item).read_bytes(), "%s: %s differs from the folder" % (path.name, item)
+        handed = {}  # line -> the first stage whose answer has it; from the next stage on it is handed over
+        for st in proj.STAGES:
+            for fn in st["functions"]:
+                for line in fn["py_body"] if LANGUAGE == "python" else fn["cpp_body"]:
+                    handed.setdefault(line.strip(), st["id"])
         for st in proj.STAGES:
             for fn in st["functions"]:
                 body = fn["py_body"] if LANGUAGE == "python" else fn["cpp_body"]
                 for line in body:
                     key = line.strip()
-                    if len(key) < 12 or key in ("return False", "return True", "return board", "return '.'", "return -1"):
+                    first = handed[key]  # a C++ loop head such as for (int i = 0; i < 9; i++) { recurs in later answers
+                    if len(key) < 12 or key in ("return False", "return True", "return board", "return '.'", "return -1",
+                                                 "return false;", "return true;", "return board;", "return '.';", "return -1;", "return 'X';", "return 'O';"):
                         continue
                     for path, given in shipped:
                         stage = re.search(r"stage(\d+)", str(path.relative_to(DIST)))
-                        if stage and int(stage.group(1)) > st["id"]:
+                        if stage and int(stage.group(1)) > first:
                             continue  # later stages hand over earlier answers on purpose
                         assert key not in given and html.escape(key) not in given, \
                             "Stage %d answer line in %s: %s" % (st["id"], path.relative_to(ROOT), key)
@@ -75,7 +84,8 @@ def check_plain(projects):
                     assert module.split(".")[0] in ALLOWED_IMPORTS | {proj.PROJECT["module"]}, "%s imports %s: standard library only" % (path.relative_to(ROOT), module)
         for st in proj.STAGES:
             for fn in st["functions"]:
-                body = fn["py_body"] if LANGUAGE == "python" else fn["cpp_body"]
+                # A C++ line that only closes a brace is not a step of the answer, so it does not count.
+                body = fn["py_body"] if LANGUAGE == "python" else [line for line in fn["cpp_body"] if line.strip() != "}"]
                 assert len(body) <= ANSWER_LINES, "%s %s: the answer is %d lines; keep it short and at the students' level" % (name, fn["name"], len(body))
 
 
@@ -92,6 +102,18 @@ def check_needs(projects):
                 assert folder in lessons, "%s stage %d needs %s, which basics does not have" % (name, st["id"], folder)
 
 
+def run_demo(code):
+    """Run a demo as the online IDE would: Python as it is, C++ compiled first (a compile error is the error)."""
+    if LANGUAGE == "python":
+        return subprocess.run([sys.executable, "-I", "-X", "utf8", "-c", code], capture_output=True, timeout=10)
+    with tempfile.TemporaryDirectory() as scratch:
+        exe = Path(scratch) / ("demo.exe" if os.name == "nt" else "demo")
+        built = subprocess.run([os.environ.get("CXX", "g++"), "-std=c++11", "-x", "c++", "-", "-o", str(exe)], input=code.encode(), capture_output=True, timeout=60)
+        if built.returncode:
+            return built
+        return subprocess.run([str(exe)], capture_output=True, timeout=10)
+
+
 def check_demos(decks):
     """A demo prints what its page says it prints, or stops with the error its quiz is about."""
     count = 0
@@ -99,7 +121,12 @@ def check_demos(decks):
         for n, section in enumerate(re.findall(r"<section id=\"page-\d+\".*?</section>", page, re.S), 1):
             for attrs, body in re.findall(r'<pre class="code"([^>]*\bdata-demo\b[^>]*)>(.*?)</pre>', section, re.S):
                 code = "\n".join(text_of(line) for line in re.findall(r'<span class="ln">(.*?)</span>(?=<span class="ln">|$)', body, re.S))
-                result = subprocess.run([sys.executable, "-I", "-X", "utf8", "-c", code], capture_output=True, timeout=10)
+                full = re.search(r'data-full="([^"]*)"', attrs)
+                if full:  # a page that shows only some lines gives the whole program, which the IDE gets
+                    whole = html.unescape(full.group(1))
+                    assert all(line in whole.splitlines() for line in code.splitlines()), "%s page %d: the shown lines are not in data-full" % (path.relative_to(ROOT), n)
+                    code = whole
+                result = run_demo(code)
                 error = re.search(r'data-error="(\w+)"', attrs)
                 where = "%s page %d" % (path.relative_to(ROOT), n)
                 if error:
