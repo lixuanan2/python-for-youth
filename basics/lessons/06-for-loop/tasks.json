@@ -151,7 +151,7 @@
   {
     "id": "10",
     "role": "创作项目",
-    "page": 26,
+    "page": 27,
     "starter": "starter/12_frog.py",
     "solution": "solutions/12_frog_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

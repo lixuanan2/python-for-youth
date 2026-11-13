@@ -213,12 +213,78 @@ def css_string(text):
     return '"' + text.replace('\\', '\\\\').replace('"', '\\"').replace('<', '\\3c ') + '"'
 
 
+KEYWORDS = {'python': r'\b(?:def|return|if|elif|else|for|while|in|and|or|not|is|True|False|None|import|from|as|break|continue|try|except|pass|global|lambda)\b',
+            'cpp': r'(?:#include|\b(?:int|long|double|float|char|bool|void|string|auto|const|struct|return|if|else|for|while|do|break|continue|true|false|using|namespace)\b)'}
+TOKEN = r'(?P<s>\'[^\']*\'|"[^"]*")|(?P<m>\b\d+(?:\.\d+)?\b)|(?P<f>\b\w+(?=\())|(?P<k>%s)'
+
+
+def highlight(code):
+    """Program text as an editor shows it: one .ln per line, coloured with the classes the slides use."""
+    token = re.compile(TOKEN % KEYWORDS[site()['language']])
+
+    def line(text):
+        out, at = [], 0
+        for m in token.finditer(text):
+            out.append(html.escape(text[at:m.start()], quote=False))
+            out.append(f'<span class="{m.lastgroup}">{html.escape(m.group(), quote=False)}</span>')
+            at = m.end()
+        return '<span class="ln">' + ''.join(out) + html.escape(text[at:], quote=False) + '</span>'
+    return ''.join(line(text) for text in code.split('\n'))
+
+
+# <!-- @answer 04 | 一两句讲解 --> or <!-- @answer 02 lines 5-14 | … --> in slides.html: the reference answer of a challenge
+# (tasks.json role 独立迁移), straight from its tested solution. The page opens covered; the teacher turns the next step to show it.
+ANSWER = re.compile(r'<!-- @answer (\S+)(?: lines (\d+)-(\d+))? \| (.+?) -->')
+GUTTER = 156  # an editor's line numbers and padding, in px
+
+
+def answer_page(match, lesson):
+    tasks = {t['id']: t for t in json.loads(read(f'lessons/{lesson["id"]}/tasks.json'))}
+    task_id, first, last, say = match.groups()
+    task = tasks.get(task_id)
+    assert task and task['role'] == '独立迁移', f'{lesson["id"]}: @answer {task_id} is not a challenge (独立迁移) in tasks.json'
+    code = read(f'lessons/{lesson["id"]}/{task["solution"]}').strip()
+    lines = code.split('\n')
+    shown = lines[int(first) - 1:int(last)] if first else lines
+    widest = max(sum(1 if ord(ch) > 0x2e7f else 0.6 for ch in l) / 0.6 for l in shown)  # Chinese is twice as wide as code
+    font = lambda width, height: min(44, int((width - GUTTER) / (0.6 * widest)), int(height / (1.55 * len(shown))))
+    # The explanation sits in a column on the right; a program with long lines takes the full width and the
+    # explanation goes under it in one line.
+    if font(1180, 650) >= 34:
+        size, width = font(1180, 650), 1180
+        aside = f'  <p class="abs say step s2" style="left:1340px;top:220px;width:484px">{say}</p>\n' \
+                '  <a class="ide step s2" style="left:1340px;top:860px">▶ 在 IDE 打开</a>\n'
+    else:
+        size, width = font(1728, 540), 1728
+        assert len(re.sub(r'<[^>]+>', '', say)) <= 30, f'{lesson["id"]}: under a wide answer the explanation has one line; keep it to 30 characters'
+        aside = f'  <p class="abs say step s2" style="left:96px;top:890px;width:1300px">{say}</p>\n' \
+                '  <a class="ide step s2" style="left:1480px;top:880px">▶ 在 IDE 打开</a>\n'
+    assert size >= 26, f'{lesson["id"]}: the answer to {task_id} needs a font of {size}px; show its key lines with "lines A-B"'
+    title = html.escape(task['brief']['title'])
+    tab = html.escape(re.sub(r'^\d+[a-z]?_', '', task['solution'].split('/')[-1]))
+    picked = f' data-lines="{first}-{last}"' if first else ''
+    return (f'<section class="slide dark" aria-label="参考答案：{title}" data-answer="{task_id}" data-steps="2" data-at="2">\n'
+            f'  <h2 class="t">参考答案：{title}</h2>\n'
+            '  <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center">'
+            '<p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p>'
+            '<p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>\n'
+            f'  <div class="editor step s2" style="left:96px;top:200px;width:{width}px;--fs:{size}px"><div class="tab">{tab}</div>\n'
+            f'<pre class="code" data-file="{task["solution"]}"{picked}>{highlight(chr(10).join(shown))}</pre></div>\n'
+            + aside +
+            '  <div class="foot"></div>\n'
+            '</section>')
+
+
+def answer_pages(slides, lesson):
+    return ANSWER.sub(lambda m: answer_page(m, lesson), slides)
+
+
 def render(lesson):
     css = '\n'.join([font_face(w) for w in (400, 700, 800)] + [read('vendor/viewport.css'), read('template/theme.css')])
     page = read('template/page.html')
     fields = dict(title=html.escape(lesson['title']), lesson=css_string(lesson_label(lesson)), css=css,
                   site=html.escape(site()['title']),
-                  slides=algo.embed(attach_code(number_slides(read(f'lessons/{lesson["id"]}/slides.html').rstrip() + '\n' + thanks_slide(lesson)), lesson), site()['language']).rstrip(),
+                  slides=algo.embed(attach_code(number_slides(answer_pages(read(f'lessons/{lesson["id"]}/slides.html').rstrip(), lesson) + '\n' + thanks_slide(lesson)), lesson), site()['language']).rstrip(),
                   script=read('template/deck.js').replace('{{ide}}', json.dumps(site()['ide'], ensure_ascii=False)).replace('{{language}}', site()['language']).rstrip())
     for key, value in fields.items():
         page = page.replace('{{' + key + '}}', value)

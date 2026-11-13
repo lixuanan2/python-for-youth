@@ -122,7 +122,7 @@
   {
     "id": "08",
     "role": "创作项目",
-    "page": 22,
+    "page": 23,
     "starter": "starter/10_gatekeeper.py",
     "solution": "solutions/10_gatekeeper_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

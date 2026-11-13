@@ -108,7 +108,7 @@
   {
     "id": "05",
     "role": "创作项目",
-    "page": 19,
+    "page": 20,
     "starter": "starter/08_ledger.py",
     "solution": "solutions/08_ledger_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

@@ -60,7 +60,7 @@ node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查：改过的
 - 课件离线可用：样式、脚本和字体都内联，不用 CDN 和在线字体。只有 IDE 和官方文档链接需要联网。
 - IDE 地址只写在 `site.json` 的 `ide` 里，换平台只改这一处。现在用的是本仓库自己发布的 JupyterLite（仓库最外层的 `ide/`，网址 `https://lixuanan2.github.io/python-for-youth/ide/repl/index.html`）。它出问题时，把 `ide.base` 换回公开演示站 `https://jupyterlite.github.io/demo/repl/index.html`，重新构建就行。
 - 程序、页面说法和答案都要过 `tools/check.py`。页面上新写的输出或报错要加进 `claims.json`。
-- 小改写和独立迁移的答案不进 `dist/`。`dist/` 里没有 `solutions/`、`tests/`。这只减少学生接触，不是权限控制。
+- 小改写的答案不进 `dist/`；独立迁移（挑战）的答案只出现在它自己的参考答案页上，进页先盖着，老师讲的时候翻开（老师 2026-11-13 要的）。`dist/` 里没有 `solutions/`、`tests/`。这只减少学生接触，不是权限控制：网上的课件和 PDF 学生也能翻到答案页。
 - 一次做一节课，先把设计给老师确认再写。见仓库最外层的 `.claude/skills/python-lesson`。
 - 新模块沿用现有组件。确实需要新组件时写进 `template/theme.css`，并检查已有课程。
 - 公开仓库和部署只由老师决定，不自动做。真实学生记录不进 Git，也不写进 Issue、PR 和评论。

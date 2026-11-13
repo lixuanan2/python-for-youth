@@ -71,7 +71,7 @@
   {
     "id": "03",
     "role": "创作项目",
-    "page": 17,
+    "page": 18,
     "starter": "starter/06_my_program.py",
     "solution": "solutions/06_price_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

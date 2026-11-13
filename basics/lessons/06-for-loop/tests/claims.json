@@ -117,7 +117,7 @@
     "stdout": "False\nTrue\n"
   },
   {
-    "page": 26,
+    "page": 27,
     "code": "print(\"*\" * 3)",
     "stdout": "***\n"
   }

@@ -24,7 +24,7 @@ import traces  # noqa: E402  (next to this file, like algo.py)
 
 TRACES = []  # (lesson, trace pages checked, [(page, why not)])
 TEXT_FILES = {'.html', '.py', '.cpp', '.h', '.txt', '.md', '.json', '.js', '.css', '.csv'}
-HIDDEN_ROLES = ['学生小改写', '独立迁移']  # Students write these, so the answers must stay out of dist/.
+HIDDEN_ROLES = ['学生小改写', '独立迁移']  # Students write these, so the answers stay out of dist/, except a challenge's own answer page.
 # Starters students open to run or change a program must hold it; only 独立迁移 and 创作项目 may start empty.
 EMPTY_ROLES = ['独立迁移', '创作项目']
 # Lines that do not count as a program: comments, blank, and a language's empty frame.
@@ -422,17 +422,37 @@ def check_deck(lesson, folder):
             want = '\n'.join(want.split('\n')[first - 1:last]).strip()
         assert code.strip() == want, f'Slide code differs from {file}'
     pages = text.count('<section id="page-')
-    attributes = [unquote(html.unescape(v)) for v in re.findall(r'="([^"]*)"', text)]
-    shown = squash(html.unescape(re.sub(r'<[^>]+>', '', text)) + ''.join(attributes))
     tasks = json.loads((folder / 'tasks.json').read_text(encoding='utf-8'))
-    check_briefs(lesson, folder, tasks, re.findall(r'<section id="page-\d+".*?</section>', text, re.S))
+    sections = re.findall(r'<section id="page-\d+".*?</section>', text, re.S)
+    check_briefs(lesson, folder, tasks, sections)
+    # Each challenge (独立迁移) has one reference-answer page, right after it or after its hint page, and its answer may
+    # show there only. Every other answer students write stays off the slides.
+    answer_at = {}
+    for n, section in enumerate(sections, 1):
+        found = re.search(r'data-answer="([^"]+)"', section)
+        if found:
+            assert found.group(1) not in answer_at, f'{folder.name}: two answer pages for task {found.group(1)}'
+            answer_at[found.group(1)] = n
+    for task in tasks:
+        if task['role'] != '独立迁移':
+            assert task['id'] not in answer_at, f'{folder.name}: only a challenge (独立迁移) gets an answer page, not task {task["id"]}'
+            continue
+        n = answer_at.get(task['id'])
+        assert n, f'{folder.name}: challenge {task["id"]} needs its answer page: <!-- @answer {task["id"]} | … --> after its hint page'
+        between = sections[task['page']:n - 1]
+        assert n > task['page'] and all('aria-label="提示"' in b for b in between) and len(between) <= 1, \
+            f'{folder.name}: the answer to {task["id"]} goes right after the challenge (page {task["page"]}) or its hint page, not on page {n}'
     for task in tasks:
         assert 1 <= task['page'] <= pages, f'Bad page: {task["id"]}'
         assert (folder / task['starter']).is_file() and (folder / task['solution']).is_file()
         if task['role'] in HIDDEN_ROLES:
+            own = sections[answer_at[task['id']] - 1] if task['id'] in answer_at else ''
+            text_now = text.replace(own, '') if own else text
+            attributes = [unquote(html.unescape(v)) for v in re.findall(r'="([^"]*)"', text_now)]
+            shown = squash(html.unescape(re.sub(r'<[^>]+>', '', text_now)) + ''.join(attributes))
             answer = (folder / task['solution']).read_text(encoding='utf-8').strip()
             escaped = html.escape(answer, quote=True).replace('\n', '&#10;')
-            assert answer not in text and escaped not in text, f'Answer shown on slides: {task["solution"]}'
+            assert answer not in text_now and escaped not in text_now, f'Answer shown on slides: {task["solution"]}'
             # Spaces and line breaks may differ on a page, so compare with all whitespace removed,
             # in the visible text, in every attribute (IDE links carry code) and in every file given to students.
             key = squash(answer)

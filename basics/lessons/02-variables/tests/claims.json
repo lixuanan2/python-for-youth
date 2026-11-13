@@ -110,7 +110,7 @@
     "stdout": "10\n"
   },
   {
-    "page": 26,
+    "page": 27,
     "code": "print(str(12) + \"3\")",
     "stdout": "123\n"
   },

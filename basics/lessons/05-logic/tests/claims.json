@@ -91,7 +91,7 @@
     "stdout": "没中\n"
   },
   {
-    "page": 26,
+    "page": 27,
     "code": "score = 89\nprint(60 <= score < 90)\nscore = 90\nprint(60 <= score < 90)",
     "stdout": "True\nFalse\n"
   }

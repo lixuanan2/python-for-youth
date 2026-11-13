@@ -82,7 +82,7 @@
   {
     "id": "03",
     "role": "创作项目",
-    "page": 15,
+    "page": 16,
     "starter": "starter/07_my_tuple.py",
     "solution": "solutions/07_birthday_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

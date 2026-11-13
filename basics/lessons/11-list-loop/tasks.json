@@ -89,7 +89,7 @@
   {
     "id": "04",
     "role": "创作项目",
-    "page": 17,
+    "page": 18,
     "starter": "starter/07_roll_call.py",
     "solution": "solutions/07_roll_call_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

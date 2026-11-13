@@ -111,7 +111,7 @@
   {
     "id": "06b",
     "role": "独立迁移",
-    "page": 22,
+    "page": 23,
     "starter": "starter/09_seconds.py",
     "solution": "solutions/09_seconds.py",
     "scope": "总秒数为0到100000的整数，一行输入",
@@ -128,7 +128,7 @@
   {
     "id": "07",
     "role": "创作项目",
-    "page": 23,
+    "page": 25,
     "starter": "starter/08_calculator.py",
     "solution": "solutions/08_calculator_example.py",
     "scope": "主题自选，没有标准答案；这里只是一份参考",

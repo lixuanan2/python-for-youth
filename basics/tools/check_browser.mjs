@@ -652,6 +652,7 @@ try {
     for (const [k, n] of Object.entries({pages: total, screens: shots, quizzes: result.quizzes.length, picks: result.picks.length,
       gates: result.gates.length, changes: changes.length, algos: algos.length, links: result.links})) sum[k] += n;
    } catch (error) {
+    console.error(`FAIL: ${lesson.id}`);
     error.message = `${lesson.id}: ${error.message}`;
     throw error;
    }

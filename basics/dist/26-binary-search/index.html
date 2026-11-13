@@ -657,8 +657,18 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
+<section id="page-14" class="slide dark" aria-label="参考答案：在排好的数里找" data-answer="02" data-steps="2" data-at="2">
+  <h2 class="t">参考答案：在排好的数里找</h2>
+  <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
+  <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">find.py</div>
+<pre class="code" data-file="solutions/04_find.py" data-lines="10-18" data-full="n = int(input())&#10;a = []&#10;for k in range(n):&#10;    a.append(int(input()))&#10;target = int(input())&#10;lo = 0&#10;hi = n - 1&#10;pos = -1&#10;looks = 0&#10;while lo &lt;= hi and pos == -1:&#10;    mid = (lo + hi) // 2&#10;    looks += 1&#10;    if a[mid] == target:&#10;        pos = mid&#10;    elif a[mid] &lt; target:&#10;        lo = mid + 1&#10;    else:&#10;        hi = mid - 1&#10;print(pos)&#10;print(looks)&#10;"><span class="ln"><span class="k">while</span> lo &lt;= hi <span class="k">and</span> pos == -<span class="m">1</span>:</span><span class="ln">    mid = (lo + hi) // <span class="m">2</span></span><span class="ln">    looks += <span class="m">1</span></span><span class="ln">    <span class="k">if</span> a[mid] == target:</span><span class="ln">        pos = mid</span><span class="ln">    <span class="k">elif</span> a[mid] &lt; target:</span><span class="ln">        lo = mid + <span class="m">1</span></span><span class="ln">    <span class="k">else</span>:</span><span class="ln">        hi = mid - <span class="m">1</span></span></pre></div>
+  <p class="abs say step s2" style="left:1340px;top:220px;width:484px">每看一个中间的数就记一次；比目标小去右半边，比目标大去左半边。</p>
+  <a class="ide step s2" style="left:1340px;top:860px">▶ 在 IDE 打开</a>
+  <div class="foot"></div>
+</section>
+
 <!-- creative project -->
-<section id="page-14" class="slide" aria-label="造一个砍一半的小程序" data-chapter="小项目">
+<section id="page-15" class="slide" aria-label="造一个砍一半的小程序" data-chapter="小项目">
   <h2 class="t r">造一个“每次砍一半”的小程序</h2>
   <p class="abs say r d1" style="left:96px;top:200px">找一件能对半排除的事，让程序来找。</p>
   <div class="later" style="top:320px">
@@ -672,7 +682,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- share -->
-<section id="page-15" class="slide" aria-label="和同桌换着玩">
+<section id="page-16" class="slide" aria-label="和同桌换着玩">
   <h2 class="t r">和同桌换着玩</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>比一比</b><span>你用嘴猜，同桌的程序来猜，看谁次数少</span></div>
@@ -684,7 +694,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-16" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-17" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
   <div class="hints" style="top:290px">
     <p style="font-weight:700"><i>Q1</i><span>二分查找为什么快？<em class="step s2" style="font-style:normal;font-weight:400">　每次去掉一半，1 到 100 最多 7 次。</em></span></p>
@@ -696,7 +706,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- cheat sheet -->
-<section id="page-17" class="slide" aria-label="速查卡">
+<section id="page-18" class="slide" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1" style="grid-template-columns:860px 1fr"><code>mid = (lo + hi) // 2</code><span>取中间，用整除</span></div>
@@ -709,7 +719,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-18" class="slide" aria-label="后面再学">
+<section id="page-19" class="slide" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>二分答案</code><span>答案不在列表里，也能对半猜，比如开平方</span></div>
@@ -721,7 +731,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-19" class="slide dark thanks" aria-label="谢谢">
+<section id="page-20" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
