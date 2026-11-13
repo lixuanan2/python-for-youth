@@ -1,5 +1,22 @@
 <!-- @map -->
 
+<!-- the finished game first: what five stages add up to -->
+<section class="slide" aria-label="先看成品">
+  <h2 class="t r">先看成品：做完 5 关，就能这样下棋</h2>
+  <div class="slip r d1" style="left:96px;top:200px;width:900px;background:var(--night);color:#f4f2ec"><small style="color:var(--ghost)">play.py：终端版，每关都有</small><pre style="font-size:32px;line-height:1.35">X 下哪一格（0-8，q 退出）：3
+ X | O | O
+---+---+---
+ X | X | 5
+---+---+---
+ X | 7 | O
+
+X 赢了！
+比分：X 1   O 0   平局 0</pre></div>
+  <img class="abs r d2" src="web.png" alt="网页版：X 赢了" style="left:1190px;top:180px;height:780px;box-shadow:0 16px 36px #0003">
+  <p class="abs say r d3" style="left:96px;top:760px;width:960px">右边是网页版 <code>play_web.py</code>（第 5 关才有）。两个画面背后，都是你要写的同一组函数。</p>
+  <div class="foot"></div>
+</section>
+
 <!-- @run -->
 
 <!-- @stage 1 -->
@@ -36,6 +53,8 @@ print(board[9])</pre></div>
   <div class="foot"></div>
 </section>
 
+<!-- @answers 1 -->
+
 <!-- @stage 2 -->
 
 <!-- quiz: strings cannot change -->
@@ -70,6 +89,8 @@ cut</pre></div>
   <a class="ide r d3" style="left:96px;top:900px">▶ 在 IDE 打开</a>
   <div class="foot"></div>
 </section>
+
+<!-- @answers 2 -->
 
 <!-- @stage 3 -->
 
@@ -116,6 +137,8 @@ print(found)</pre></div>
   <div class="foot"></div>
 </section>
 
+<!-- @answers 3 -->
+
 <!-- @stage 4 -->
 
 <!-- think: count -->
@@ -147,6 +170,8 @@ print(board.count('.'))</pre></div>
   <p class="fb" style="left:96px;right:1000px;top:690px" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
+
+<!-- @answers 4 -->
 
 <!-- @stage 5 -->
 
@@ -181,6 +206,8 @@ for i in range(9):
   <a class="ide r d3" style="left:96px;top:900px">▶ 在 IDE 打开</a>
   <div class="foot"></div>
 </section>
+
+<!-- @answers 5 -->
 
 <!-- two front ends, one set of functions -->
 <section class="slide" aria-label="同一组函数，两个画面">

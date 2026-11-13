@@ -27,6 +27,7 @@ STAGES = [
         "functions": [
             {
                 "name": "can_put",
+                "say": "先查 i 在不在 0 到 8，再看 board[i] 是不是 '.'。顺序反了，i 是 9 时就会出错。",
                 "py_sig": "def can_put(board, i):",
                 "cpp_sig": "bool can_put(string board, int i) {",
                 "doc": [
@@ -76,6 +77,7 @@ STAGES = [
         "functions": [
             {
                 "name": "put",
+                "say": "字符串不能只改一个字，就用切片拼一个新的：前面 board[:i]、棋子 who、后面 board[i + 1:]。",
                 "py_sig": "def put(board, i, who):",
                 "cpp_sig": "string put(string board, int i, char who) {",
                 "doc": [
@@ -115,6 +117,7 @@ STAGES = [
         "functions": [
             {
                 "name": "line_owner",
+                "say": "三格一样、而且不是 '.'，就还那一格的棋子；不然还 '.'。",
                 "py_sig": "def line_owner(board, a, b, c):",
                 "cpp_sig": "char line_owner(string board, int a, int b, int c) {",
                 "doc": [
@@ -140,6 +143,7 @@ STAGES = [
             },
             {
                 "name": "winner",
+                "say": "8 条线的结果放进一个列表，找出不是 '.' 的那个；都是 '.' 就是没人赢。",
                 "py_sig": "def winner(board):",
                 "cpp_sig": "char winner(string board) {",
                 "doc": [
@@ -208,6 +212,7 @@ STAGES = [
         "functions": [
             {
                 "name": "is_full",
+                "say": "数一数还有几个 '.'，一个都没有就下满了。",
                 "py_sig": "def is_full(board):",
                 "cpp_sig": "bool is_full(string board) {",
                 "doc": [
@@ -233,6 +238,7 @@ STAGES = [
             },
             {
                 "name": "turn",
+                "say": "X 先下：X 和 O 一样多就轮到 X，不然就轮到 O。",
                 "py_sig": "def turn(board):",
                 "cpp_sig": "char turn(string board) {",
                 "doc": [
@@ -298,6 +304,9 @@ STAGES = [
         "functions": [
             {
                 "name": "computer_move",
+                "say": "试一格就是 can_put、put、winner 连着用。move 一直是 -1，说明还没找到。",
+                # The answer page reveals the body in three groups of lines, one rule at a time.
+                "reveal": [("能赢就赢", 9), ("该堵就堵", 4), ("下第一个空格", 4)],
                 "py_sig": "def computer_move(board):",
                 "cpp_sig": "int computer_move(string board) {",
                 "doc": [

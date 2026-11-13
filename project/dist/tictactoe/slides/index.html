@@ -544,8 +544,25 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
+<!-- the finished game first: what five stages add up to -->
+<section id="page-2" class="slide" aria-label="先看成品">
+  <h2 class="t r">先看成品：做完 5 关，就能这样下棋</h2>
+  <div class="slip r d1" style="left:96px;top:200px;width:900px;background:var(--night);color:#f4f2ec"><small style="color:var(--ghost)">play.py：终端版，每关都有</small><pre style="font-size:32px;line-height:1.35">X 下哪一格（0-8，q 退出）：3
+ X | O | O
+---+---+---
+ X | X | 5
+---+---+---
+ X | 7 | O
+
+X 赢了！
+比分：X 1   O 0   平局 0</pre></div>
+  <img class="abs r d2" src="web.png" alt="网页版：X 赢了" style="left:1190px;top:180px;height:780px;box-shadow:0 16px 36px #0003">
+  <p class="abs say r d3" style="left:96px;top:760px;width:960px">右边是网页版 <code>play_web.py</code>（第 5 关才有）。两个画面背后，都是你要写的同一组函数。</p>
+  <div class="foot"></div>
+</section>
+
 <!-- run the tests (made by tools/build.py) -->
-<section id="page-2" class="slide" aria-label="运行测试" data-chapter="测试">
+<section id="page-3" class="slide" aria-label="运行测试" data-chapter="测试">
   <h2 class="t r">每关写完，就运行测试</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>打开文件夹</b><span>用编辑器打开这一关的 stageN 文件夹</span></div>
@@ -560,7 +577,7 @@ FAILED (failures=4)</pre></div>
 </section>
 
 <!-- stage 1 (made by tools/build.py) -->
-<section id="page-3" class="slide dark" data-stage="1" aria-label="第 1 关：这一格能下吗" data-chapter="第 1 关">
+<section id="page-4" class="slide dark" data-stage="1" aria-label="第 1 关：这一格能下吗" data-chapter="第 1 关">
   <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--ghost)"># 井字棋 · 第 1 关 / 共 5 关</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 110px/1.2 var(--text)">这一格能下吗</h2>
   <p class="abs r d1" style="left:96px;top:330px;width:1728px;font:700 44px/1.5 var(--text)">写一个函数，判断棋盘上的某一格现在能不能下棋。</p>
@@ -570,7 +587,7 @@ FAILED (failures=4)</pre></div>
 </section>
 
 <!-- spec: can_put (made by tools/build.py) -->
-<section id="page-4" class="slide" aria-label="要写的函数：can_put">
+<section id="page-5" class="slide" aria-label="要写的函数：can_put">
   <h2 class="t r">要写的函数：<span style="font-family:var(--code)">can_put</span></h2>
   <div class="sig r d1"><small>名字和参数必须照写，测试按这个名字检查</small><code>def can_put(board, i):</code></div>
   <ul class="spec r d2"><li>给它：棋盘 board（9 个字符），格子编号 i</li><li>还给你：第 i 格能不能下，能就是 True，不能就是 False</li><li>能下要同时满足两条：i 在 0 到 8 之间；board[i] 是 '.'</li><li>注意：先查 i 在不在 0 到 8，再看 board[i]，不然会超出字符串</li></ul>
@@ -579,7 +596,7 @@ FAILED (failures=4)</pre></div>
 </section>
 
 <!-- think: look at one cell -->
-<section id="page-5" class="slide dark" aria-label="一起想：看一格">
+<section id="page-6" class="slide dark" aria-label="一起想：看一格">
   <h2 class="t r">一起想：棋盘上的一格怎么看？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:980px;--fs:46px"><div class="tab">demo.py</div>
 <pre class="code" data-demo><span class="ln">board = <span class="s">&quot;X...O....&quot;</span></span><span class="ln"><span class="f">print</span>(board[<span class="m">0</span>])</span><span class="ln"><span class="f">print</span>(board[<span class="m">4</span>] == <span class="s">'.'</span>)</span><span class="ln"><span class="f">print</span>(board[<span class="m">5</span>] == <span class="s">'.'</span>)</span></pre></div>
@@ -592,7 +609,7 @@ True</pre></div>
 </section>
 
 <!-- quiz: index out of range -->
-<section id="page-6" class="slide" aria-label="小测：没有第 9 格">
+<section id="page-7" class="slide" aria-label="小测：没有第 9 格">
   <h2 class="t r">小测：没有第 9 格，会怎样？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:48px"><div class="tab">会怎样？</div>
 <pre class="code" data-demo data-error="IndexError"><span class="ln">board = <span class="s">&quot;.........&quot;</span></span><span class="ln"><span class="f">print</span>(board[<span class="m">9</span>])</span></pre></div>
@@ -606,8 +623,18 @@ True</pre></div>
   <div class="foot"></div>
 </section>
 
+<!-- answer: can_put (made by tools/build.py) -->
+<section id="page-8" class="slide dark" aria-label="参考答案：can_put" data-answer="can_put" data-steps="2" data-at="2">
+  <h2 class="t">参考答案：<span style="font-family:var(--code)">can_put</span></h2>
+  <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
+  <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">tictactoe.py</div>
+<pre class="code"><span class="ln step s2"><span class="k">def</span> <span class="f">can_put</span>(board, i):</span><span class="ln step s2">    <span class="k">if</span> i &lt; <span class="m">0</span> <span class="k">or</span> i &gt; <span class="m">8</span>:</span><span class="ln step s2">        <span class="k">return</span> <span class="k">False</span></span><span class="ln step s2">    <span class="k">return</span> board[i] == <span class="s">'.'</span></span></pre></div>
+  <div class="abs" style="left:1340px;top:220px;width:484px"><p class="say step s2" style="color:var(--ghost);font-size:34px">先查 i 在不在 0 到 8，再看 board[i] 是不是 '.'。顺序反了，i 是 9 时就会出错。</p></div>
+  <div class="foot"></div>
+</section>
+
 <!-- stage 2 (made by tools/build.py) -->
-<section id="page-7" class="slide dark" data-stage="2" aria-label="第 2 关：下一步棋" data-chapter="第 2 关">
+<section id="page-9" class="slide dark" data-stage="2" aria-label="第 2 关：下一步棋" data-chapter="第 2 关">
   <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--ghost)"># 井字棋 · 第 2 关 / 共 5 关</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 110px/1.2 var(--text)">下一步棋</h2>
   <p class="abs r d1" style="left:96px;top:330px;width:1728px;font:700 44px/1.5 var(--text)">写一个函数，在棋盘的某一格放上一个棋子，还回去新的棋盘。</p>
@@ -617,7 +644,7 @@ True</pre></div>
 </section>
 
 <!-- spec: put (made by tools/build.py) -->
-<section id="page-8" class="slide" aria-label="要写的函数：put">
+<section id="page-10" class="slide" aria-label="要写的函数：put">
   <h2 class="t r">要写的函数：<span style="font-family:var(--code)">put</span></h2>
   <div class="sig r d1"><small>名字和参数必须照写，测试按这个名字检查</small><code>def put(board, i, who):</code></div>
   <ul class="spec r d2"><li>给它：棋盘 board、格子编号 i（可以放心：0 到 8，而且是空格）、棋子 who（'X' 或 'O'）</li><li>还给你：下完以后的新棋盘，还是 9 个字符</li><li>提示：字符串不能直接改一个字。用第 12 课的切片，把第 i 格前面的部分、who、第 i 格后面的部分拼起来</li></ul>
@@ -626,7 +653,7 @@ True</pre></div>
 </section>
 
 <!-- quiz: strings cannot change -->
-<section id="page-9" class="slide" aria-label="小测：字符串能改一个字吗">
+<section id="page-11" class="slide" aria-label="小测：字符串能改一个字吗">
   <h2 class="t r">小测：字符串能直接改一个字吗？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:48px"><div class="tab">会怎样？</div>
 <pre class="code" data-demo data-error="TypeError"><span class="ln">board = <span class="s">&quot;.........&quot;</span></span><span class="ln">board[<span class="m">4</span>] = <span class="s">'X'</span></span><span class="ln"><span class="f">print</span>(board)</span></pre></div>
@@ -641,7 +668,7 @@ True</pre></div>
 </section>
 
 <!-- think: slices -->
-<section id="page-10" class="slide dark" aria-label="一起想：拼出新的">
+<section id="page-12" class="slide dark" aria-label="一起想：拼出新的">
   <h2 class="t r">一起想：把一个字换掉，拼出新的</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:980px;--fs:40px"><div class="tab">demo.py</div>
 <pre class="code" data-demo><span class="ln">word = <span class="s">&quot;cat&quot;</span></span><span class="ln"><span class="f">print</span>(word[:<span class="m">1</span>])</span><span class="ln"><span class="f">print</span>(word[<span class="m">2</span>:])</span><span class="ln"><span class="f">print</span>(word[:<span class="m">1</span>] + <span class="s">&quot;u&quot;</span> + word[<span class="m">2</span>:])</span></pre></div>
@@ -653,8 +680,18 @@ cut</pre></div>
   <div class="foot"></div>
 </section>
 
+<!-- answer: put (made by tools/build.py) -->
+<section id="page-13" class="slide dark" aria-label="参考答案：put" data-answer="put" data-steps="2" data-at="2">
+  <h2 class="t">参考答案：<span style="font-family:var(--code)">put</span></h2>
+  <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
+  <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:40px"><div class="tab">tictactoe.py</div>
+<pre class="code"><span class="ln step s2"><span class="k">def</span> <span class="f">put</span>(board, i, who):</span><span class="ln step s2">    <span class="k">return</span> board[:i] + who + board[i + <span class="m">1</span>:]</span></pre></div>
+  <div class="abs" style="left:1340px;top:220px;width:484px"><p class="say step s2" style="color:var(--ghost);font-size:34px">字符串不能只改一个字，就用切片拼一个新的：前面 board[:i]、棋子 who、后面 board[i + 1:]。</p></div>
+  <div class="foot"></div>
+</section>
+
 <!-- stage 3 (made by tools/build.py) -->
-<section id="page-11" class="slide dark" data-stage="3" aria-label="第 3 关：谁赢了" data-chapter="第 3 关">
+<section id="page-14" class="slide dark" data-stage="3" aria-label="第 3 关：谁赢了" data-chapter="第 3 关">
   <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--ghost)"># 井字棋 · 第 3 关 / 共 5 关</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 110px/1.2 var(--text)">谁赢了</h2>
   <p class="abs r d1" style="left:96px;top:330px;width:1728px;font:700 44px/1.5 var(--text)">先写一个查“一条线”的小函数，再用它查全部 8 条线，找出赢家。</p>
@@ -664,7 +701,7 @@ cut</pre></div>
 </section>
 
 <!-- spec: line_owner (made by tools/build.py) -->
-<section id="page-12" class="slide" aria-label="要写的函数：line_owner">
+<section id="page-15" class="slide" aria-label="要写的函数：line_owner">
   <h2 class="t r">要写的函数：<span style="font-family:var(--code)">line_owner</span></h2>
   <div class="sig r d1"><small>名字和参数必须照写，测试按这个名字检查</small><code>def line_owner(board, a, b, c):</code></div>
   <ul class="spec r d2"><li>给它：棋盘，和一条线上的三个格子编号 a、b、c</li><li>还给你：三格都是 'X' 就还 'X'，三格都是 'O' 就还 'O'，不然还 '.'</li></ul>
@@ -673,7 +710,7 @@ cut</pre></div>
 </section>
 
 <!-- spec: winner (made by tools/build.py) -->
-<section id="page-13" class="slide" aria-label="要写的函数：winner">
+<section id="page-16" class="slide" aria-label="要写的函数：winner">
   <h2 class="t r">要写的函数：<span style="font-family:var(--code)">winner</span></h2>
   <div class="sig r d1"><small>名字和参数必须照写，测试按这个名字检查</small><code>def winner(board):</code></div>
   <ul class="spec r d2"><li>给它：棋盘</li><li>还给你：赢的一方 'X' 或 'O'；没人赢就还 '.'</li><li>一共 8 条线：横 0 1 2、3 4 5、6 7 8；竖 0 3 6、1 4 7、2 5 8；斜 0 4 8、2 4 6</li><li>提示：把 8 条线的 line_owner 结果放进一个列表，再找出不是 '.' 的那个</li></ul>
@@ -682,7 +719,7 @@ cut</pre></div>
 </section>
 
 <!-- think: eight lines -->
-<section id="page-14" class="slide" aria-label="一起想：8 条线">
+<section id="page-17" class="slide" aria-label="一起想：8 条线">
   <h2 class="t r">一起想：一共有几条线能赢？</h2>
   <div class="abs r d1" style="left:96px;top:230px"><div class="ttt"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i></div></div>
   <div class="sheet3" style="left:700px;top:230px">
@@ -695,7 +732,7 @@ cut</pre></div>
 </section>
 
 <!-- quiz: three empty cells -->
-<section id="page-15" class="slide" aria-label="小测：三格都是空的">
+<section id="page-18" class="slide" aria-label="小测：三格都是空的">
   <h2 class="t r">小测：三格都是 '.'，算谁占了这条线？</h2>
   <div class="abs r d1" style="left:96px;top:240px"><div class="ttt small"><i></i><i></i><i></i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i></div></div>
   <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="2">
@@ -709,7 +746,7 @@ cut</pre></div>
 </section>
 
 <!-- think: find the one that is not a dot -->
-<section id="page-16" class="slide dark" aria-label="一起想：找出不是点的那个">
+<section id="page-19" class="slide dark" aria-label="一起想：找出不是点的那个">
   <h2 class="t r">一起想：一排结果里，找出不是 '.' 的</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:980px;--fs:44px"><div class="tab">demo.py</div>
 <pre class="code" data-demo><span class="ln">results = [<span class="s">'.'</span>, <span class="s">'.'</span>, <span class="s">'O'</span>, <span class="s">'.'</span>]</span><span class="ln">found = <span class="s">'.'</span></span><span class="ln"><span class="k">for</span> r <span class="k">in</span> results:</span><span class="ln">    <span class="k">if</span> r != <span class="s">'.'</span>:</span><span class="ln">        found = r</span><span class="ln"><span class="f">print</span>(found)</span></pre></div>
@@ -719,8 +756,28 @@ cut</pre></div>
   <div class="foot"></div>
 </section>
 
+<!-- answer: line_owner (made by tools/build.py) -->
+<section id="page-20" class="slide dark" aria-label="参考答案：line_owner" data-answer="line_owner" data-steps="2" data-at="2">
+  <h2 class="t">参考答案：<span style="font-family:var(--code)">line_owner</span></h2>
+  <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
+  <div class="editor step s2" style="left:96px;top:200px;width:1728px;--fs:35px"><div class="tab">tictactoe.py</div>
+<pre class="code"><span class="ln step s2"><span class="k">def</span> <span class="f">line_owner</span>(board, a, b, c):</span><span class="ln step s2">    <span class="k">if</span> board[a] != <span class="s">'.'</span> <span class="k">and</span> board[a] == board[b] <span class="k">and</span> board[b] == board[c]:</span><span class="ln step s2">        <span class="k">return</span> board[a]</span><span class="ln step s2">    <span class="k">return</span> <span class="s">'.'</span></span></pre></div>
+  <div class="abs" style="left:96px;top:880px;width:1728px"><p class="say step s2" style="color:var(--ghost);font-size:34px">三格一样、而且不是 '.'，就还那一格的棋子；不然还 '.'。</p></div>
+  <div class="foot"></div>
+</section>
+
+<!-- answer: winner (made by tools/build.py) -->
+<section id="page-21" class="slide dark" aria-label="参考答案：winner" data-answer="winner" data-steps="2" data-at="2">
+  <h2 class="t">参考答案：<span style="font-family:var(--code)">winner</span></h2>
+  <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
+  <div class="editor step s2" style="left:96px;top:200px;width:1728px;--fs:34px"><div class="tab">tictactoe.py</div>
+<pre class="code"><span class="ln step s2"><span class="k">def</span> <span class="f">winner</span>(board):</span><span class="ln step s2">    owners = [<span class="f">line_owner</span>(board, <span class="m">0</span>, <span class="m">1</span>, <span class="m">2</span>), <span class="f">line_owner</span>(board, <span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span>),</span><span class="ln step s2">              <span class="f">line_owner</span>(board, <span class="m">6</span>, <span class="m">7</span>, <span class="m">8</span>), <span class="f">line_owner</span>(board, <span class="m">0</span>, <span class="m">3</span>, <span class="m">6</span>),</span><span class="ln step s2">              <span class="f">line_owner</span>(board, <span class="m">1</span>, <span class="m">4</span>, <span class="m">7</span>), <span class="f">line_owner</span>(board, <span class="m">2</span>, <span class="m">5</span>, <span class="m">8</span>),</span><span class="ln step s2">              <span class="f">line_owner</span>(board, <span class="m">0</span>, <span class="m">4</span>, <span class="m">8</span>), <span class="f">line_owner</span>(board, <span class="m">2</span>, <span class="m">4</span>, <span class="m">6</span>)]</span><span class="ln step s2">    result = <span class="s">'.'</span></span><span class="ln step s2">    <span class="k">for</span> w <span class="k">in</span> owners:</span><span class="ln step s2">        <span class="k">if</span> w != <span class="s">'.'</span>:</span><span class="ln step s2">            result = w</span><span class="ln step s2">    <span class="k">return</span> result</span></pre></div>
+  <div class="abs" style="left:96px;top:880px;width:1728px"><p class="say step s2" style="color:var(--ghost);font-size:34px">8 条线的结果放进一个列表，找出不是 '.' 的那个；都是 '.' 就是没人赢。</p></div>
+  <div class="foot"></div>
+</section>
+
 <!-- stage 4 (made by tools/build.py) -->
-<section id="page-17" class="slide dark" data-stage="4" aria-label="第 4 关：下满没有、轮到谁" data-chapter="第 4 关">
+<section id="page-22" class="slide dark" data-stage="4" aria-label="第 4 关：下满没有、轮到谁" data-chapter="第 4 关">
   <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--ghost)"># 井字棋 · 第 4 关 / 共 5 关</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 110px/1.2 var(--text)">下满没有、轮到谁</h2>
   <p class="abs r d1" style="left:96px;top:330px;width:1728px;font:700 44px/1.5 var(--text)">写两个小函数：棋盘下满了没有；现在轮到谁下。</p>
@@ -730,7 +787,7 @@ cut</pre></div>
 </section>
 
 <!-- spec: is_full (made by tools/build.py) -->
-<section id="page-18" class="slide" aria-label="要写的函数：is_full">
+<section id="page-23" class="slide" aria-label="要写的函数：is_full">
   <h2 class="t r">要写的函数：<span style="font-family:var(--code)">is_full</span></h2>
   <div class="sig r d1"><small>名字和参数必须照写，测试按这个名字检查</small><code>def is_full(board):</code></div>
   <ul class="spec r d2"><li>给它：棋盘</li><li>还给你：9 格都下满了吗（一个 '.' 都没有了）</li></ul>
@@ -739,7 +796,7 @@ cut</pre></div>
 </section>
 
 <!-- spec: turn (made by tools/build.py) -->
-<section id="page-19" class="slide" aria-label="要写的函数：turn">
+<section id="page-24" class="slide" aria-label="要写的函数：turn">
   <h2 class="t r">要写的函数：<span style="font-family:var(--code)">turn</span></h2>
   <div class="sig r d1"><small>名字和参数必须照写，测试按这个名字检查</small><code>def turn(board):</code></div>
   <ul class="spec r d2"><li>给它：棋盘（可以放心：X 先下，两人轮流）</li><li>还给你：现在轮到谁下，'X' 或 'O'</li><li>X 和 O 一样多，轮到 X；X 比 O 多一个，轮到 O</li></ul>
@@ -748,7 +805,7 @@ cut</pre></div>
 </section>
 
 <!-- think: count -->
-<section id="page-20" class="slide dark" aria-label="一起想：数一数">
+<section id="page-25" class="slide dark" aria-label="一起想：数一数">
   <h2 class="t r">一起想：棋盘上各有几个？</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:980px;--fs:46px"><div class="tab">demo.py</div>
 <pre class="code" data-demo><span class="ln">board = <span class="s">&quot;XOX.O....&quot;</span></span><span class="ln"><span class="f">print</span>(board.<span class="f">count</span>(<span class="s">'X'</span>))</span><span class="ln"><span class="f">print</span>(board.<span class="f">count</span>(<span class="s">'O'</span>))</span><span class="ln"><span class="f">print</span>(board.<span class="f">count</span>(<span class="s">'.'</span>))</span></pre></div>
@@ -761,7 +818,7 @@ cut</pre></div>
 </section>
 
 <!-- quiz: whose turn -->
-<section id="page-21" class="slide" aria-label="小测：轮到谁">
+<section id="page-26" class="slide" aria-label="小测：轮到谁">
   <h2 class="t r">小测：X 有 3 个，O 有 2 个，轮到谁？</h2>
   <div class="abs r d1" style="left:96px;top:240px"><div class="ttt small"><i class="x">X</i><i class="o">O</i><i class="x">X</i><i>3</i><i class="o">O</i><i>5</i><i class="x">X</i><i>7</i><i>8</i></div></div>
   <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="1">
@@ -774,8 +831,28 @@ cut</pre></div>
   <div class="foot"></div>
 </section>
 
+<!-- answer: is_full (made by tools/build.py) -->
+<section id="page-27" class="slide dark" aria-label="参考答案：is_full" data-answer="is_full" data-steps="2" data-at="2">
+  <h2 class="t">参考答案：<span style="font-family:var(--code)">is_full</span></h2>
+  <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
+  <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">tictactoe.py</div>
+<pre class="code"><span class="ln step s2"><span class="k">def</span> <span class="f">is_full</span>(board):</span><span class="ln step s2">    <span class="k">return</span> board.<span class="f">count</span>(<span class="s">'.'</span>) == <span class="m">0</span></span></pre></div>
+  <div class="abs" style="left:1340px;top:220px;width:484px"><p class="say step s2" style="color:var(--ghost);font-size:34px">数一数还有几个 '.'，一个都没有就下满了。</p></div>
+  <div class="foot"></div>
+</section>
+
+<!-- answer: turn (made by tools/build.py) -->
+<section id="page-28" class="slide dark" aria-label="参考答案：turn" data-answer="turn" data-steps="2" data-at="2">
+  <h2 class="t">参考答案：<span style="font-family:var(--code)">turn</span></h2>
+  <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
+  <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:38px"><div class="tab">tictactoe.py</div>
+<pre class="code"><span class="ln step s2"><span class="k">def</span> <span class="f">turn</span>(board):</span><span class="ln step s2">    <span class="k">if</span> board.<span class="f">count</span>(<span class="s">'X'</span>) == board.<span class="f">count</span>(<span class="s">'O'</span>):</span><span class="ln step s2">        <span class="k">return</span> <span class="s">'X'</span></span><span class="ln step s2">    <span class="k">return</span> <span class="s">'O'</span></span></pre></div>
+  <div class="abs" style="left:1340px;top:220px;width:484px"><p class="say step s2" style="color:var(--ghost);font-size:34px">X 先下：X 和 O 一样多就轮到 X，不然就轮到 O。</p></div>
+  <div class="foot"></div>
+</section>
+
 <!-- stage 5 (made by tools/build.py) -->
-<section id="page-22" class="slide dark" data-stage="5" aria-label="第 5 关：电脑来下" data-chapter="第 5 关">
+<section id="page-29" class="slide dark" data-stage="5" aria-label="第 5 关：电脑来下" data-chapter="第 5 关">
   <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--ghost)"># 井字棋 · 第 5 关 / 共 5 关</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 110px/1.2 var(--text)">电脑来下</h2>
   <p class="abs r d1" style="left:96px;top:330px;width:1728px;font:700 44px/1.5 var(--text)">让电脑下棋：能赢就赢，该堵就堵，不然下第一个空格。</p>
@@ -785,7 +862,7 @@ cut</pre></div>
 </section>
 
 <!-- spec: computer_move (made by tools/build.py) -->
-<section id="page-23" class="slide" aria-label="要写的函数：computer_move">
+<section id="page-30" class="slide" aria-label="要写的函数：computer_move">
   <h2 class="t r">要写的函数：<span style="font-family:var(--code)">computer_move</span></h2>
   <div class="sig r d1"><small>名字和参数必须照写，测试按这个名字检查</small><code>def computer_move(board):</code></div>
   <ul class="spec r d2"><li>给它：还没下完、也还没人赢的棋盘。电脑下的是 turn(board) 那一方</li><li>还给你：电脑要下的格子编号 0 到 8</li><li>按顺序想：</li><li>1. 有没有一格，我下了就赢？有就下那里（有好几格，选编号最小的）</li><li>2. 有没有一格，对方下了就赢？有就堵住那里（同样选编号最小的）</li><li>3. 都没有，就下编号最小的空格</li></ul>
@@ -794,14 +871,14 @@ cut</pre></div>
 </section>
 
 <!-- spec hints: computer_move (made by tools/build.py) -->
-<section id="page-24" class="slide" aria-label="computer_move 的提示">
+<section id="page-31" class="slide" aria-label="computer_move 的提示">
   <h2 class="t r"><span style="font-family:var(--code)">computer_move</span> 的提示</h2>
   <ul class="spec wide r d1"><li>试一格 = can_put 看能不能下，put 下一下，winner 看看谁赢。试完不用“拿走”，因为 put 还回去的是新棋盘</li><li>没学 break，可以先让答案等于 -1，找到了再改；已经找到就不再改</li></ul>
   <div class="foot"></div>
 </section>
 
 <!-- quiz: where should the computer go -->
-<section id="page-25" class="slide" aria-label="小测：电脑该下哪一格">
+<section id="page-32" class="slide" aria-label="小测：电脑该下哪一格">
   <h2 class="t r">小测：轮到 X，电脑该下哪一格？</h2>
   <div class="abs r d1" style="left:96px;top:240px"><div class="ttt small"><i class="x">X</i><i class="x">X</i><i>2</i><i class="o">O</i><i class="o">O</i><i>5</i><i>6</i><i>7</i><i>8</i></div></div>
   <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="0">
@@ -815,7 +892,7 @@ cut</pre></div>
 </section>
 
 <!-- think: try every empty cell -->
-<section id="page-26" class="slide dark" aria-label="一起想：每个空格都试一试">
+<section id="page-33" class="slide dark" aria-label="一起想：每个空格都试一试">
   <h2 class="t r">一起想：每个空格都试一试</h2>
   <div class="editor r d1" style="left:96px;top:220px;width:980px;--fs:44px"><div class="tab">demo.py</div>
 <pre class="code" data-demo><span class="ln">board = <span class="s">&quot;XX.OO....&quot;</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">9</span>):</span><span class="ln">    <span class="k">if</span> board[i] == <span class="s">'.'</span>:</span><span class="ln">        <span class="f">print</span>(i, <span class="s">&quot;是空格&quot;</span>)</span></pre></div>
@@ -829,8 +906,18 @@ cut</pre></div>
   <div class="foot"></div>
 </section>
 
+<!-- answer: computer_move (made by tools/build.py) -->
+<section id="page-34" class="slide dark" aria-label="参考答案：computer_move" data-answer="computer_move" data-steps="4" data-at="4">
+  <h2 class="t">参考答案：<span style="font-family:var(--code)">computer_move</span></h2>
+  <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
+  <div class="editor step s2" style="left:96px;top:180px;width:1180px;--fs:24px"><div class="tab">tictactoe.py</div>
+<pre class="code"><span class="ln step s2"><span class="k">def</span> <span class="f">computer_move</span>(board):</span><span class="ln step s2">    me = <span class="f">turn</span>(board)</span><span class="ln step s2">    other = <span class="s">'X'</span></span><span class="ln step s2">    <span class="k">if</span> me == <span class="s">'X'</span>:</span><span class="ln step s2">        other = <span class="s">'O'</span></span><span class="ln step s2">    move = -<span class="m">1</span></span><span class="ln step s2">    <span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">9</span>):</span><span class="ln step s2">        <span class="k">if</span> move == -<span class="m">1</span> <span class="k">and</span> <span class="f">can_put</span>(board, i):</span><span class="ln step s2">            <span class="k">if</span> <span class="f">winner</span>(<span class="f">put</span>(board, i, me)) == me:</span><span class="ln step s2">                move = i</span><span class="ln step s3">    <span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">9</span>):</span><span class="ln step s3">        <span class="k">if</span> move == -<span class="m">1</span> <span class="k">and</span> <span class="f">can_put</span>(board, i):</span><span class="ln step s3">            <span class="k">if</span> <span class="f">winner</span>(<span class="f">put</span>(board, i, other)) == other:</span><span class="ln step s3">                move = i</span><span class="ln step s4">    <span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">9</span>):</span><span class="ln step s4">        <span class="k">if</span> move == -<span class="m">1</span> <span class="k">and</span> <span class="f">can_put</span>(board, i):</span><span class="ln step s4">            move = i</span><span class="ln step s4">    <span class="k">return</span> move</span></pre></div>
+  <div class="abs" style="left:1340px;top:220px;width:484px"><p class="say step s2" style="margin-bottom:18px"><b>1</b>　能赢就赢</p><p class="say step s3" style="margin-bottom:18px"><b>2</b>　该堵就堵</p><p class="say step s4" style="margin-bottom:18px"><b>3</b>　下第一个空格</p><p class="say step s4" style="color:var(--ghost);font-size:34px">试一格就是 can_put、put、winner 连着用。move 一直是 -1，说明还没找到。</p></div>
+  <div class="foot"></div>
+</section>
+
 <!-- two front ends, one set of functions -->
-<section id="page-27" class="slide" aria-label="同一组函数，两个画面">
+<section id="page-35" class="slide" aria-label="同一组函数，两个画面">
   <h2 class="t r">同一组函数，两个画面</h2>
   <div class="slip r d1" style="left:96px;top:220px;width:780px"><small>play.py：终端里打字</small><pre style="font-size:32px"> X | O | 2
 ---+---+---
@@ -846,7 +933,7 @@ X 下哪一格（0-8）：</pre></div>
 </section>
 
 <!-- made by tools/build.py -->
-<section id="page-28" class="slide dark thanks" aria-label="谢谢">
+<section id="page-36" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 200px/1.2 var(--text)">一关一关来！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">井字棋的 5 关都在开发文档里，测试全过就进下一关。</p>
   <a class="go-next r d2" style="top:620px" href="../index.html">回到项目地图</a>

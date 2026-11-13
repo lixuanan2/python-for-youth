@@ -236,10 +236,51 @@ def highlight(code):
     return "".join(line(l) for l in html.unescape(code).split("\n"))
 
 
+# <!-- @answers N --> in slides.html: after a stage is taught and done, one page per function with its reference answer,
+# straight from stages.py (the same source as answers/). It opens covered; the teacher turns the next step to show it.
+# A function with "reveal" shows its body a group of lines at a time, each with its rule.
+def answer_pages(proj, st):
+    lang = "py" if LANGUAGE == "python" else "cpp"
+    pages = []
+    for fn in st["functions"]:
+        body = fn[lang + "_body"] + ([] if lang == "py" else ["}"])
+        groups = fn.get("reveal") or [("", len(body))]
+        assert sum(n for _, n in groups) == len(fn[lang + "_body"]), "%s: reveal must cover the answer's lines" % fn["name"]
+        step = [2] + [2 + k for k, (_, n) in enumerate(groups) for _ in range(n)] + ([1 + len(groups)] if lang == "cpp" else [])
+        code = [fn[lang + "_sig"]] + body
+        widest = max(len(line) for line in code)
+        # Beside a column for the rules when the lines are short; full width with the words underneath when they are long.
+        size, width, top = min(44, int(1024 / (0.6 * widest)), int(650 / (1.55 * len(code)))), 1180, 200
+        side = "left:1340px;top:220px;width:484px"
+        if fn.get("reveal"):  # a long answer shown a rule at a time: every line of the editor's height counts
+            size, top = min(44, int(1024 / (0.6 * widest)), int(690 / (1.55 * len(code)))), 180
+            assert size >= 24, "%s: the answer is too long for one page" % fn["name"]
+        elif size < 30:
+            size, width, side = min(44, int(1572 / (0.6 * widest)), int(530 / (1.55 * len(code)))), 1728, "left:96px;top:880px;width:1728px"
+        assert size >= 24, "%s: the answer is too long for one page" % fn["name"]
+        lines = "".join(highlight(line).replace('<span class="ln">', '<span class="ln step s%d">' % k, 1) for line, k in zip(code, step))
+        rules = "".join('<p class="say step s%d" style="margin-bottom:18px"><b>%d</b>　%s</p>' % (2 + k, k + 1, esc(label))
+                        for k, (label, _) in enumerate(groups) if label)
+        pages.append('''
+<!-- answer: %s (made by tools/build.py) -->
+<section class="slide dark" aria-label="参考答案：%s" data-answer="%s" data-steps="%d" data-at="%d">
+  <h2 class="t">参考答案：<span style="font-family:var(--code)">%s</span></h2>
+  <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
+  <div class="editor step s2" style="left:96px;top:%dpx;width:%dpx;--fs:%dpx"><div class="tab">%s</div>
+<pre class="code">%s</pre></div>
+  <div class="abs" style="%s">%s<p class="say step s%d" style="color:var(--ghost);font-size:34px">%s</p></div>
+  <div class="foot"></div>
+</section>
+''' % (fn["name"], esc(fn["name"]), fn["name"], len(groups) + 1, len(groups) + 1, esc(fn["name"]), top, width, size,
+       esc(sf.names(LANGUAGE, proj, st["id"])[0]), lines, side, rules, 1 + len(groups), code_text(fn["say"])))
+    return "".join(pages)
+
+
 def slides(proj, name):
     text = (ROOT / name / "slides.html").read_text(encoding="utf-8")
     made = {"map": map_slide(proj), "run": run_slide(proj, starter_result(proj, ROOT / name, proj.STAGES[0]))}
     made.update({"stage %d" % st["id"]: stage_title(proj, st) + "".join(spec_pages(fn) for fn in st["functions"]) for st in proj.STAGES})
+    made.update({"answers %d" % st["id"]: answer_pages(proj, st) for st in proj.STAGES})
     for key, page in made.items():
         assert text.count("<!-- @%s -->" % key) == 1, "%s: slides.html needs <!-- @%s --> once" % (name, key)
         text = text.replace("<!-- @%s -->" % key, page.strip())
@@ -452,6 +493,8 @@ def outputs():
         files[DIST / name / "download" / ("%s-all.zip" % name)] = zip_bytes(folders)
         deck = render_deck(proj, name)
         files[DIST / name / "slides" / "index.html"] = deck.encode("utf-8")
+        for picture in sorted((ROOT / name / "slide-images").glob("*.png")):  # pictures the deck shows, next to it
+            files[DIST / name / "slides" / picture.name] = picture.read_bytes()
         files[DIST / name / "guide.html"] = render_guide(proj, name).encode("utf-8")
         files[DIST / name / "index.html"] = render_map(proj, name, stage_pages(deck)).encode("utf-8")
     files[DIST / "index.html"] = render_index(projects).encode("utf-8")

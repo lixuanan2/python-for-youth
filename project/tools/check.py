@@ -34,7 +34,7 @@ def check_current():
         assert path.is_file() and path.read_bytes() == data, "Rebuild: python3 tools/build.py (%s)" % path.relative_to(ROOT)
     extra = [p for p in DIST.rglob("*") if p.is_file() and p not in files]
     assert not extra, "Files in dist/ that the build does not make: %s" % [str(p.relative_to(ROOT)) for p in extra]
-    decks = {path: data.decode("utf-8") for path, data in files.items() if path.parent.name == "slides"}
+    decks = {path: data.decode("utf-8") for path, data in files.items() if path.parent.name == "slides" and path.suffix == ".html"}
     return projects, decks
 
 
@@ -43,7 +43,20 @@ def check_no_answers(projects):
     the folders of later stages, which hand earlier answers over on purpose."""
     assert not list(DIST.rglob("answers")), "An answers folder is in dist/"
     for name, proj in projects:
+        # The deck shows each answer on that function's own answer page (covered until the teacher turns it), after
+        # its stage is taught; anywhere else in dist/ an answer line is a leak.
+        deck = (DIST / name / "slides" / "index.html").read_text(encoding="utf-8")
+        sections = re.findall(r'<section id="page-\d+".*?</section>', deck, re.S)
+        stage_at = {int(m.group(1)): k for k, sec in enumerate(sections) for m in [re.search(r'data-stage="(\d+)"', sec)] if m}
+        for st in proj.STAGES:
+            for fn in st["functions"]:
+                at = [k for k, sec in enumerate(sections) if 'data-answer="%s"' % fn["name"] in sec]
+                after = stage_at.get(st["id"] + 1, len(sections))
+                assert len(at) == 1 and stage_at[st["id"]] < at[0] < after, \
+                    "%s: %s needs one answer page (<!-- @answers %d -->) at the end of stage %d" % (name, fn["name"], st["id"], st["id"])
         shipped = [(p, p.read_text(encoding="utf-8")) for p in (DIST / name).rglob("*") if p.suffix in (".py", ".h", ".cpp", ".md", ".html")]
+        shipped = [(p, re.sub(r'<section id="page-\d+"[^>]*data-answer=.*?</section>', "", text, flags=re.S) if p.parent.name == "slides" else text)
+                   for p, text in shipped]
         zipped = [(p, z) for p in (DIST / name).rglob("*.zip") for z in [zipfile.ZipFile(p)]]
         for path, z in zipped:  # a zip holds exactly the stage folders next to it
             for item in z.namelist():
@@ -153,9 +166,9 @@ def check_pages(decks):
             right = int(re.search(r'data-right="(\d+)"', quiz).group(1))  # counted from 0, as deck.js reads it
             feedback = re.findall(r'<button[^>]*data-fb="([^"]*)"', quiz)
             assert feedback[right].startswith("答对了"), "%s: the quiz marks button %d right, but its feedback is %s" % (path.relative_to(ROOT), right + 1, feedback[right])
-        for href in re.findall(r'href="([^"]+)"', page):
+        for href in re.findall(r'(?:href|src)="([^"]+)"', page):
             parts = urlsplit(html.unescape(href))
-            if parts.scheme or not parts.path:
+            if parts.scheme or not parts.path or "'" in href:  # a quote means a script builds it, not a link
                 continue
             target = (path.parent / unquote(parts.path)).resolve()
             if target.is_dir():
