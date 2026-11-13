@@ -89,7 +89,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 <p>函数名和参数必须照这份文档写，一个字母也不能改：老师的测试按这些名字检查。</p>
 <h2>每关的文件夹</h2>
 <p>每关一个文件夹（<code>stage1</code> 到 <code>stage5</code>），老师用 U 盘发。打开哪一关，就用编辑器打开那一个文件夹。</p>
-<table><thead><tr><th>文件</th><th>谁写</th><th>做什么</th></tr></thead><tbody><tr><td><code>tictactoe.py</code></td><td><b>你</b></td><td>只改最下面“第 N 关：你来写”的部分；上面是前几关的参考答案，可以看、不用改</td></tr><tr><td><code>test_stageN.py</code></td><td>老师</td><td>检查你写对没有</td></tr><tr><td><code>play.py</code></td><td>老师</td><td>测试全过以后用来玩</td></tr><tr><td><code>play_window.py</code>、<code>assets/</code></td><td>老师</td><td>第 5 关才有：窗口版前端和它用的图片（棋盘、棋子）</td></tr><tr><td><code>guide.md</code></td><td>老师</td><td>就是这份开发文档</td></tr></tbody></table>
+<table><thead><tr><th>文件</th><th>谁写</th><th>做什么</th></tr></thead><tbody><tr><td><code>tictactoe.py</code></td><td><b>你</b></td><td>只改最下面“第 N 关：你来写”的部分；上面是前几关的参考答案，可以看、不用改</td></tr><tr><td><code>test_stageN.py</code></td><td>老师</td><td>检查你写对没有</td></tr><tr><td><code>play.py</code></td><td>老师</td><td>测试全过以后用来玩</td></tr><tr><td><code>play_web.py</code>、<code>web/</code></td><td>老师</td><td>第 5 关才有：网页版前端，在浏览器里下棋；<code>web/</code> 是它的网页和图片</td></tr><tr><td><code>guide.md</code></td><td>老师</td><td>就是这份开发文档</td></tr></tbody></table>
 <h2>怎么运行测试</h2>
 <p>任选一种（下面的 N 换成第几关）：</p>
 <ul><li><b>PyCharm</b>：File → Open，选 <code>stageN</code> 文件夹。左边右键 <code>test_stageN.py</code> → Run。</li><li><b>VS Code</b>：File → Open Folder，选这个文件夹。打开 <code>test_stageN.py</code>，点右上角的 ▶（Run Python File）。要先装好 Python 扩展。</li><li><b>IDLE</b>：打开 <code>test_stageN.py</code>，按 F5。</li><li><b>命令行</b>：在这个文件夹的地址栏里输入 <code>cmd</code> 回车，再输入 <code>python test_stageN.py</code>（不行就试 <code>py test_stageN.py</code>）。</li></ul>
@@ -155,7 +155,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 <p>例子：</p>
 <ul><li><code>computer_move(&quot;XX.OO....&quot;) 还 2</code>：轮到 X，X 下 2 就赢</li><li><code>computer_move(&quot;XX..O....&quot;) 还 2</code>：轮到 O，O 要堵住 2</li><li><code>computer_move(&quot;X........&quot;) 还 1</code>：没有要赢、要堵的，下第一个空格</li></ul>
 <p><b>测试全过以后</b>：运行 <code>play.py</code>。选 2 或 3 就可以和电脑下！试试能不能赢它。</p>
-<p><b>换一个画面</b>：这一关的文件夹里还有 <code>play_window.py</code>，是老师写的窗口版前端：点格子就能下，也能选和电脑下，棋盘和棋子是 <code>assets</code> 文件夹里的图片。<code>play.py</code>（终端）和 <code>play_window.py</code>（窗口）都是老师的前端，用的都是你写的这几个函数：<code>can_put</code>、<code>put</code>、<code>winner</code>、<code>is_full</code>、<code>turn</code>、<code>computer_move</code>。所以换一个画面，你的代码一行都不用改。</p>
+<p><b>换一个画面</b>：<code>play.py</code> 是终端版，<code>play_web.py</code> 是网页版：运行它，浏览器会打开一个网页，点格子就能下，也能和电脑下（棋盘和棋子是 <code>web/assets</code> 里的图片）。这两个都是老师的前端，用的都是你写的同一组函数：<code>can_put</code>、<code>put</code>、<code>winner</code>、<code>is_full</code>、<code>turn</code>、<code>computer_move</code>。所以换个画面，你的代码一行都不用改。</p>
 <p><b>做完了？想一想</b>：让电脑在“要赢”“要堵”都没有的时候，先抢中间的 4 号格。电脑会不会更难打败？（改完以后测试最后几条会不通过，这是正常的，想完改回来。）</p>
 </main>
 <footer>项目代码在学生自己的电脑上写和运行；起始程序由老师下载，用 U 盘发给学生。</footer>

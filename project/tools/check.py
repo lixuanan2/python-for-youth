@@ -70,7 +70,7 @@ def check_no_answers(projects):
                             "Stage %d answer line in %s: %s" % (st["id"], path.relative_to(ROOT), key)
 
 
-ALLOWED_IMPORTS = {"unittest", "sys", "os", "tkinter"}  # standard library only; students install nothing
+ALLOWED_IMPORTS = {"unittest", "sys", "os", "json", "threading", "traceback", "webbrowser", "http", "urllib"}  # standard library only; students install nothing
 
 
 def check_plain(projects):

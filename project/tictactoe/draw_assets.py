@@ -1,15 +1,15 @@
-"""Draw the pictures the window front end uses: the board and the two pieces, in the course's colours.
+"""Draw the pictures the web front end uses: the board and the two pieces, in the course's colours.
 
-Run in project/: python3 tictactoe/draw_assets.py   (writes tictactoe/templates/assets/, then build.py ships them in stage 5)
+Run in project/: python3 tictactoe/draw_assets.py   (writes tictactoe/templates/web/assets/, then build.py ships them in stage 5)
 Standard library only, so nothing here is anyone else's picture. A teacher can replace the PNGs with their own: the
-window front end only needs the same file names, a 330 x 330 board (three cells of 110) and pieces up to 110 x 110.
+page only needs the same file names; it shows the board at 330 x 330 and each piece filling its cell.
 """
 import math
 import struct
 import zlib
 from pathlib import Path
 
-OUT = Path(__file__).resolve().parent / "templates" / "assets"
+OUT = Path(__file__).resolve().parent / "templates" / "web" / "assets"
 CELL = 110
 SAND, LINE, CLAY, OLIVE = (0xF0, 0xEE, 0xE6), (0x3D, 0x3A, 0x35), (0xC6, 0x61, 0x3F), (0x5B, 0x6F, 0x45)
 
@@ -61,7 +61,7 @@ def main():
     png(OUT / "x.png", CELL, CELL, cross)
     png(OUT / "o.png", CELL, CELL, ring)
     for f in sorted(OUT.glob("*.png")):
-        print("%s  %d bytes" % (f.relative_to(OUT.parent.parent.parent), f.stat().st_size))
+        print("%s  %d bytes" % (f.relative_to(OUT.parents[3]), f.stat().st_size))
 
 
 if __name__ == "__main__":

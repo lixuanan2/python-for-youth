@@ -241,39 +241,30 @@ def check_play(name, proj):
 
 
 
-def check_window(name, proj):
-    """A window front end (play_window.py) checks itself without a mouse: with the answer every way of playing ends
-    in a win or a draw; with the untouched starter it shows the hint instead of crashing. It needs tkinter and a screen
-    (CI gives Linux a virtual one with xvfb-run)."""
-    stages = [st["id"] for st in proj.STAGES if (stage_dir(name, st["id"]) / "play_window.py").exists()]
+def check_web(name, proj):
+    """The web front end (play_web.py) checks itself without a browser: it starts its server on 127.0.0.1 and plays
+    through the same interface the page uses. With the answer every way of playing ends; with the untouched starter
+    it answers with the hint instead of crashing."""
+    stages = [st["id"] for st in proj.STAGES if (stage_dir(name, st["id"]) / "play_web.py").exists()]
     if not stages or LANGUAGE != "python":
         return
-    print("窗口前端 play_window（--selftest）")
-    try:
-        import tkinter  # noqa: F401
-    except ImportError:
-        if os.environ.get("CI"):
-            bad("这个 Python 没有 tkinter，窗口前端没法自检")
-        else:
-            print("  跳过：这台电脑的 %s 没有 tkinter（换一个带 tkinter 的 Python 运行，或者交给 CI）" % sys.executable)
-        return
+    print("网页前端 play_web（--selftest）")
     for n in stages:
         d = temp_copy(name, proj, n)
         use_answer(name, proj, n, d)
-        code, out = run([sys.executable, "play_window.py", "--selftest"], d)
+        code, out = run([sys.executable, "play_web.py", "--selftest"], d)
         if code == 0 and "自检通过" in out and "Traceback" not in out:
-            good("第 %d 关 play_window 配参考答案：%s" % (n, out.strip().splitlines()[-1]))
+            good("第 %d 关 play_web 配参考答案：%s" % (n, out.strip().splitlines()[-1]))
         else:
-            bad("第 %d 关 play_window 配参考答案：返回码 %s\n%s" % (n, code, out[-600:]))
+            bad("第 %d 关 play_web 配参考答案：返回码 %s\n%s" % (n, code, out[-600:]))
         shutil.rmtree(d)
         d = temp_copy(name, proj, n)
-        code, out = run([sys.executable, "play_window.py", "--selftest"], d)
+        code, out = run([sys.executable, "play_web.py", "--selftest"], d)
         if code != 0 and "test_stage%d.py 全部通过" % n in out and "Traceback" not in out:
-            good("第 %d 关 play_window 配起始程序：给出提示，没有崩溃" % n)
+            good("第 %d 关 play_web 配起始程序：给出提示，没有崩溃" % n)
         else:
-            bad("第 %d 关 play_window 配起始程序：返回码 %s\n%s" % (n, code, out[-600:]))
+            bad("第 %d 关 play_web 配起始程序：返回码 %s\n%s" % (n, code, out[-600:]))
         shutil.rmtree(d)
-
 
 def main():
     for name in SITE["projects"]:
@@ -282,7 +273,7 @@ def main():
             (check_python if LANGUAGE == "python" else check_cpp)(name, proj, st["id"])
         check_handover(name, proj)
         check_play(name, proj)
-        check_window(name, proj)
+        check_web(name, proj)
     print()
     if problems:
         print("有 %d 个问题：" % len(problems))

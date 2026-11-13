@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>井字棋</title>
+<!-- 老师的网页版前端（第 5 关）。由 play_web.py 打开；输赢、轮到谁都由学生写的函数决定，这里只负责画出来和收点击。
+     图片在 assets/：board.png 棋盘，x.png、o.png 棋子。换成自己的图片，文件名不变就行。 -->
+<style>
+:root{--paper:#faf9f5;--sand:#f0eee6;--ink:#141413;--muted:#6b6a64;--clay:#c6613f;--olive:#5b6f45;--red:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;background:var(--sand);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif}
+main{margin:32px 16px;padding:28px 32px 24px;background:var(--paper);box-shadow:0 12px 30px #0002;border-radius:14px;text-align:center}
+h1{margin:0 0 16px;font-size:30px}
+.modes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.modes button{font:inherit;font-size:17px;padding:8px 16px;border:2px solid var(--ink);border-radius:10px;background:#fff;cursor:pointer}
+.modes button.on{background:var(--ink);color:#fff}
+.board{position:relative;width:330px;height:330px;margin:0 auto;background:url(assets/board.png) center/100% 100%;
+  display:grid;grid-template-columns:repeat(3,1fr)}
+.board button{border:0;background:transparent;padding:0;cursor:pointer;display:grid;place-items:center}
+.board button:hover:empty{background:#c6613f14}
+.board img{width:100%;height:100%;display:block}
+#say{font-size:22px;font-weight:700;margin:18px 0 6px;min-height:1.4em}
+#score{color:var(--muted);font-size:17px}
+#trouble{display:none;margin-top:16px;max-width:420px;padding:12px 16px;border-left:6px solid var(--red);background:#fdecea;color:var(--red);text-align:left}
+#trouble code{display:block;margin-top:6px;white-space:pre-wrap;word-break:break-all;color:var(--ink)}
+</style>
+</head>
+<body>
+<main>
+  <h1>井字棋</h1>
+  <div class="modes">
+    <button type="button" data-computer="." class="on">两个人下</button>
+    <button type="button" data-computer="O">你先下（X）</button>
+    <button type="button" data-computer="X">电脑先下</button>
+  </div>
+  <div class="board" id="board"></div>
+  <p id="say">正在连接 play_web.py……</p>
+  <p id="score"></p>
+  <div id="trouble"><b id="hint"></b><code id="detail"></code></div>
+</main>
+<script>
+// 只负责显示和点击：棋盘发给 play_web.py，它调用学生的函数，回来什么就画什么。
+const boardBox = document.getElementById('board');
+const cells = [];
+for (let i = 0; i < 9; i++) {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.setAttribute('aria-label', (i + 1) + ' 号格');
+  b.onclick = () => click(i);
+  boardBox.appendChild(b);
+  cells.push(b);
+}
+const game = {board: '.........', computer: '.', turn: 'X', over: true, busy: false};
+const score = {X: 0, O: 0, '.': 0};
+
+async function api(path, body) {
+  game.busy = true;
+  try {
+    const r = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)});
+    return await r.json();
+  } catch (e) {
+    return {ok: false, error: '连不上 play_web.py。', detail: '先运行 play_web.py，再用它打开的网页下棋（它开着的时候不要关终端）。'};
+  } finally {
+    game.busy = false;
+  }
+}
+function say(text) { document.getElementById('say').textContent = text; }
+function draw() {
+  cells.forEach((c, i) => {
+    const v = game.board[i];
+    c.innerHTML = v === 'X' || v === 'O' ? '<img src="assets/' + v.toLowerCase() + '.png" alt="' + v + '">' : '';
+  });
+  document.getElementById('score').textContent = '比分　X ' + score.X + '　O ' + score.O + '　平局 ' + score['.'];
+}
+function trouble(got) {
+  game.over = true;
+  say('出错了');
+  document.getElementById('hint').textContent = got.error;
+  document.getElementById('detail').textContent = got.detail || '';
+  document.getElementById('trouble').style.display = 'block';
+}
+async function show(got) {
+  if (!got.ok) {
+    if (got.error) trouble(got); else say(got.message);
+    return;
+  }
+  game.board = got.board;
+  game.turn = got.turn;
+  if (got.winner === 'X' || got.winner === 'O') {
+    game.over = true;
+    score[got.winner]++;
+    say(got.winner + ' 赢了！点上面的按钮再来一局。');
+  } else if (got.full) {
+    game.over = true;
+    score['.']++;
+    say('平局！点上面的按钮再来一局。');
+  } else if (got.turn === game.computer) {
+    say('电脑在想……');
+    setTimeout(async () => show(await api('/api/computer', {board: game.board})), 400);
+  } else {
+    say('轮到 ' + got.turn + '：点一个空格');
+  }
+  draw();
+}
+async function newGame(computer) {
+  game.computer = computer;
+  game.over = false;
+  document.getElementById('trouble').style.display = 'none';
+  document.querySelectorAll('.modes button').forEach(b => b.classList.toggle('on', b.dataset.computer === computer));
+  show(await api('/api/new', {}));
+}
+async function click(i) {
+  if (game.over || game.busy || game.turn === game.computer) return;
+  show(await api('/api/move', {board: game.board, cell: i}));
+}
+document.querySelectorAll('.modes button').forEach(b => { b.onclick = () => newGame(b.dataset.computer); });
+newGame('.');
+</script>
+</body>
+</html>
