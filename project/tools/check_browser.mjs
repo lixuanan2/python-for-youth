@@ -180,6 +180,7 @@ try {
     }
     changedShots.push(...compareShots(name));
    } catch (error) {
+    console.error(`FAIL: ${name}`);
     error.message = `${name}: ${error.message}`;
     throw error;
    }
