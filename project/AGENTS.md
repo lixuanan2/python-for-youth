@@ -20,7 +20,8 @@
 - `site.json`：语言、有哪些项目、基础课件的网址、页脚。
 - `<项目>/stages.py`：每关的函数（名字、函数头、说明、占位、参考答案）、测试用例、要先学完哪几课，还有整个项目的标题、介绍、前端能玩什么、“想一想”、前端的试玩按键。改内容只改这里。
 - `<项目>/slides.html`：课件里手写的页，每关只有“一起想”的在线 IDE 演示和小测。`<!-- @map -->`、`<!-- @run -->`、`<!-- @stage N -->` 的位置由构建按 `stages.py` 生成项目地图、怎么运行测试、第 N 关的开头和要写的函数这几页。演示代码写在 `<pre class="code" data-demo>` 里，输出写在同一页的 `<pre data-out>`；故意出错的写 `data-error="IndexError"`。小测的 `data-right` 从 0 数，那一项的反馈以“答对了”开头。
-- `<项目>/templates/`：老师的前端（`play.py`）。
+- `<项目>/templates/`：老师的前端。`play.py` 是终端版，每关都有；某一关另外要发的文件（窗口版前端 `play_window.py` 和它的图片 `assets/`）在 `stages.py` 那一关的 `extra_py` 里列出，C++ 用 `extra_cpp`。
+- `<项目>/draw_assets.py`：用标准库画 `templates/assets/` 里的棋盘和棋子（不用别人的图）。老师换自己的图片时文件名不变就行，不用运行它。
 - `<项目>/answers/`：参考答案，构建生成，提交进仓库，给老师看，不进 `dist/`。
 - `template/`：项目课共用的样式（`project.css` 给课件，`site.css` 给项目地图、开发文档和首页）。
 - `tools/`：`build.py` 生成，`check.py` 和 `verify.py` 检查，`check_browser.mjs` 在 Chrome 里看课件和网页，`stagefiles.py` 生成每关的文件和开发文档。
@@ -30,7 +31,7 @@
 
 - **开发文档是主要的东西**：像大学项目的题目说明，一个项目一份，写清做什么、一共几关、每关的目标、要写的函数（名字、给什么、还什么、例子）、要先学完哪几课、怎么运行测试。由 `stages.py` 生成，每关的文件夹里都有同一份 `guide.md`，网站上是 `guide.html`。
 - **课件只给老师在大屏幕上讲**：项目地图、怎么运行测试、每关一页开头、要写的函数，再加“一起想”的在线 IDE 演示和小测。每个项目一份课件，不给每关做一大套。
-- **参考答案简洁**：照学生的水平写，短、好读，只用标准库，不用高级的包。测试只用 `unittest`，前端只用普通的 Python。`check.py` 查：发出去的 `.py` 只能 import `unittest`、`sys` 和项目自己的模块；每个答案函数不超过 20 行。`verify.py` 查答案只用到学过的语法。
+- **参考答案简洁**：照学生的水平写，短、好读，只用标准库，不用高级的包。测试只用 `unittest`，前端只用普通的 Python。`check.py` 查：发出去的 `.py` 只能 import `unittest`、`sys`、`os`、`tkinter` 和项目自己的模块；每个答案函数不超过 20 行。`verify.py` 查答案只用到学过的语法。
 - **中文显示**：测试和前端开头有几行，控制台显示不了中文时换成 UTF-8（Windows 英文系统、或者编辑器不设编码时会这样）；中文 Windows 的控制台照原样。
 
 ## 命令
@@ -40,13 +41,13 @@
 ```sh
 python3 tools/build.py          # 生成 dist/ 和 answers/
 python3 tools/check.py          # dist 是不是最新、有没有答案、演示输出、小测、链接
-python3 tools/verify.py         # 每关：起始程序测试干净地不过、答案全过、只用学过的、前端能玩
+python3 tools/verify.py         # 每关：起始程序测试干净地不过、答案全过、只用学过的、前端能玩，窗口前端自检
 node tools/check_browser.mjs    # 真实 Chrome 逐页看课件，截图在 .preview/；后面写项目名只查那几个
 ```
 
 `check.py` 和 `check_browser.mjs` 全部通过时只打一行，失败才打详细内容。`check_browser.mjs` 每次通过后，把截图和上次在本机通过时的比（存在 `.check-shots/`，不进 Git），画面变了的页列在 `.preview/changed.txt`，只看清单里的截图。
 
-CI 在 Ubuntu 和 Windows（Python 3.12、3.14）上跑 `check.py` 和 `verify.py`，每次都跑。浏览器按改动决定（规则在仓库最外层的 `.github/browser_plan.py`）：只改了某个项目的文件夹（`<项目>/`、`dist/<项目>/`），只查那个项目；改了 `template/`、`site.json`、`dist/index.html`、`tools/` 里的 `build.py`、`stagefiles.py`、`check_browser.mjs`，或者 basics 的模板、字体、`site.json`，查全部项目；只改了 `check.py`、`verify.py` 或说明，不开浏览器。都过了才发布到 `/project/`。
+CI 在 Ubuntu 和 Windows（Python 3.12、3.14）上跑 `check.py` 和 `verify.py`，每次都跑。窗口前端用 `play_window.py --selftest` 自检（不用鼠标，按顺序点格子，配答案要下完一局，配起始程序要给出提示、不崩溃），要有 tkinter 和屏幕：Ubuntu 用 `xvfb-run` 给一个虚拟屏幕。本机的 Python 没有 tkinter 时（比如 Homebrew 的 Python 没装 `python-tk`），`verify.py` 跳过这一项并说明，交给 CI。浏览器按改动决定（规则在仓库最外层的 `.github/browser_plan.py`）：只改了某个项目的文件夹（`<项目>/`、`dist/<项目>/`），只查那个项目；改了 `template/`、`site.json`、`dist/index.html`、`tools/` 里的 `build.py`、`stagefiles.py`、`check_browser.mjs`，或者 basics 的模板、字体、`site.json`，查全部项目；只改了 `check.py`、`verify.py` 或说明，不开浏览器。都过了才发布到 `/project/`。
 
 ## 和基础课件的不同
 

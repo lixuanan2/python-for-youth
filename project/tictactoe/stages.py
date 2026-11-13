@@ -288,6 +288,13 @@ STAGES = [
         "needs_py": ["06-for-loop for 循环", "04-conditions 条件判断", "15-params-return 参数与返回值（用前面写好的函数）"],
         "needs_cpp": ["06-for-loop for 循环", "03-if-else 比较与 if/else", "17-function 函数定义与调用（用前面写好的函数）"],
         "goal": "让电脑下棋：能赢就赢，该堵就堵，不然下第一个空格。",
+        # The window front end and its pictures, from templates/; the same functions drive play.py and this.
+        "extra_py": ["play_window.py", "assets/board.png", "assets/o.png", "assets/x.png"],
+        "after_py": [
+            "**换一个画面**：这一关的文件夹里还有 `play_window.py`，是老师写的窗口版前端：点格子就能下，也能选和电脑下，棋盘和棋子是 `assets` 文件夹里的图片。"
+            "`play.py`（终端）和 `play_window.py`（窗口）都是老师的前端，用的都是你写的这几个函数：`can_put`、`put`、`winner`、`is_full`、`turn`、`computer_move`。"
+            "所以换一个画面，你的代码一行都不用改。",
+        ],
         "functions": [
             {
                 "name": "computer_move",
@@ -393,6 +400,9 @@ BOARD_PICTURE = [
 ]
 
 # 测试全过以后，前端能玩什么
+# Extra rows for the file table in the development document: (file, what it is for).
+FILES_PY = [("`play_window.py`、`assets/`", "第 5 关才有：窗口版前端和它用的图片（棋盘、棋子）")]
+
 PLAY_NOTES = {
     1: "第 1 关能做的不多：输入格子编号，看你的 `can_put` 怎么说。",
     2: "两个人可以轮流下了，但程序还不会判断输赢。",

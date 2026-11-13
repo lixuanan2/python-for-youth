@@ -181,3 +181,19 @@ for i in range(9):
   <a class="ide r d3" style="left:96px;top:900px">▶ 在 IDE 打开</a>
   <div class="foot"></div>
 </section>
+
+<!-- two front ends, one set of functions -->
+<section class="slide" aria-label="同一组函数，两个画面">
+  <h2 class="t r">同一组函数，两个画面</h2>
+  <div class="slip r d1" style="left:96px;top:220px;width:780px"><small>play.py：终端里打字</small><pre style="font-size:32px"> X | O | 2
+---+---+---
+ 3 | X | 5
+---+---+---
+ 6 | 7 | 8
+X 下哪一格（0-8）：</pre></div>
+  <div class="slip r d1" style="left:1044px;top:220px;width:780px"><small>play_window.py：窗口里点格子（图片在 assets）</small><div class="ttt small" style="margin:8px auto 0"><i class="x">X</i><i class="o">O</i><i></i><i></i><i class="x">X</i><i></i><i></i><i></i><i></i></div></div>
+  <p class="abs r d2" style="left:96px;top:650px;width:1728px;text-align:center;font:700 34px var(--code);color:var(--clay)">↓ 都只调用 ↓</p>
+  <div class="slip r d2" style="left:96px;top:720px;width:1728px"><small>tictactoe.py：你写的</small><pre style="font-size:40px">can_put  put  winner  is_full  turn  computer_move</pre></div>
+  <p class="abs say r d3" style="left:96px;top:900px;width:1728px">换一个画面，你的代码一行都不用改。</p>
+  <div class="foot"></div>
+</section>

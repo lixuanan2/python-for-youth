@@ -829,8 +829,24 @@ cut</pre></div>
   <div class="foot"></div>
 </section>
 
+<!-- two front ends, one set of functions -->
+<section id="page-27" class="slide" aria-label="同一组函数，两个画面">
+  <h2 class="t r">同一组函数，两个画面</h2>
+  <div class="slip r d1" style="left:96px;top:220px;width:780px"><small>play.py：终端里打字</small><pre style="font-size:32px"> X | O | 2
+---+---+---
+ 3 | X | 5
+---+---+---
+ 6 | 7 | 8
+X 下哪一格（0-8）：</pre></div>
+  <div class="slip r d1" style="left:1044px;top:220px;width:780px"><small>play_window.py：窗口里点格子（图片在 assets）</small><div class="ttt small" style="margin:8px auto 0"><i class="x">X</i><i class="o">O</i><i></i><i></i><i class="x">X</i><i></i><i></i><i></i><i></i></div></div>
+  <p class="abs r d2" style="left:96px;top:650px;width:1728px;text-align:center;font:700 34px var(--code);color:var(--clay)">↓ 都只调用 ↓</p>
+  <div class="slip r d2" style="left:96px;top:720px;width:1728px"><small>tictactoe.py：你写的</small><pre style="font-size:40px">can_put  put  winner  is_full  turn  computer_move</pre></div>
+  <p class="abs say r d3" style="left:96px;top:900px;width:1728px">换一个画面，你的代码一行都不用改。</p>
+  <div class="foot"></div>
+</section>
+
 <!-- made by tools/build.py -->
-<section id="page-27" class="slide dark thanks" aria-label="谢谢">
+<section id="page-28" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 200px/1.2 var(--text)">一关一关来！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">井字棋的 5 关都在开发文档里，测试全过就进下一关。</p>
   <a class="go-next r d2" style="top:620px" href="../index.html">回到项目地图</a>

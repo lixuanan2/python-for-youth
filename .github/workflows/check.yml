@@ -45,11 +45,20 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+      # The window front end (play_window.py) checks itself with tkinter, which needs a screen: Linux gets a virtual one.
       - name: project
+        if: runner.os != 'Linux'
         working-directory: project
         run: |
           python tools/check.py
           python tools/verify.py
+      - name: project, with a virtual screen
+        if: runner.os == 'Linux'
+        working-directory: project
+        run: |
+          command -v xvfb-run || (sudo apt-get update -q && sudo apt-get install -yq xvfb)
+          python tools/check.py
+          xvfb-run -a python tools/verify.py
 
   # What the browser job checks, from the files this push or pull request changed.
   plan:

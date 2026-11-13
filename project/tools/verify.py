@@ -67,8 +67,7 @@ def answer_path(name, proj, n):
 
 def temp_copy(name, proj, n):
     d = Path(tempfile.mkdtemp(prefix="%s-%d-" % (name, n)))
-    for f in stage_dir(name, n).iterdir():
-        shutil.copy(f, d)
+    shutil.copytree(stage_dir(name, n), d, dirs_exist_ok=True)
     for k in range(1, n):  # earlier tests too: the answer must not break what came before
         shutil.copy(stage_dir(name, k) / sf.names(LANGUAGE, proj, k)[1], d)
     return d
@@ -241,6 +240,41 @@ def check_play(name, proj):
     shutil.rmtree(d)
 
 
+
+def check_window(name, proj):
+    """A window front end (play_window.py) checks itself without a mouse: with the answer every way of playing ends
+    in a win or a draw; with the untouched starter it shows the hint instead of crashing. It needs tkinter and a screen
+    (CI gives Linux a virtual one with xvfb-run)."""
+    stages = [st["id"] for st in proj.STAGES if (stage_dir(name, st["id"]) / "play_window.py").exists()]
+    if not stages or LANGUAGE != "python":
+        return
+    print("窗口前端 play_window（--selftest）")
+    try:
+        import tkinter  # noqa: F401
+    except ImportError:
+        if os.environ.get("CI"):
+            bad("这个 Python 没有 tkinter，窗口前端没法自检")
+        else:
+            print("  跳过：这台电脑的 %s 没有 tkinter（换一个带 tkinter 的 Python 运行，或者交给 CI）" % sys.executable)
+        return
+    for n in stages:
+        d = temp_copy(name, proj, n)
+        use_answer(name, proj, n, d)
+        code, out = run([sys.executable, "play_window.py", "--selftest"], d)
+        if code == 0 and "自检通过" in out and "Traceback" not in out:
+            good("第 %d 关 play_window 配参考答案：%s" % (n, out.strip().splitlines()[-1]))
+        else:
+            bad("第 %d 关 play_window 配参考答案：返回码 %s\n%s" % (n, code, out[-600:]))
+        shutil.rmtree(d)
+        d = temp_copy(name, proj, n)
+        code, out = run([sys.executable, "play_window.py", "--selftest"], d)
+        if code != 0 and "test_stage%d.py 全部通过" % n in out and "Traceback" not in out:
+            good("第 %d 关 play_window 配起始程序：给出提示，没有崩溃" % n)
+        else:
+            bad("第 %d 关 play_window 配起始程序：返回码 %s\n%s" % (n, code, out[-600:]))
+        shutil.rmtree(d)
+
+
 def main():
     for name in SITE["projects"]:
         proj = load(name)
@@ -248,6 +282,7 @@ def main():
             (check_python if LANGUAGE == "python" else check_cpp)(name, proj, st["id"])
         check_handover(name, proj)
         check_play(name, proj)
+        check_window(name, proj)
     print()
     if problems:
         print("有 %d 个问题：" % len(problems))

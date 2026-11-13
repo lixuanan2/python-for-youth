@@ -179,11 +179,18 @@ def thanks(proj):
 ''' % (esc(proj.PROJECT["title"]), len(proj.STAGES))
 
 
+def write_stage(files, folder):
+    """Put one stage's files in a folder, as students get them (pictures go in their own subfolder)."""
+    for file, data in files.items():
+        path = Path(folder) / file
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(sf.as_bytes(data))
+
+
 def cpp_starter_result(proj, folder, st, test):
     """C++: compile the untouched starter with its test (g++, or CXX) and keep the first [错] with its two lines and the end."""
     with tempfile.TemporaryDirectory() as scratch:
-        for file, text in sf.stage_files(proj, folder, st, LANGUAGE).items():
-            (Path(scratch) / file).write_text(text, encoding="utf-8", newline="\n")
+        write_stage(sf.stage_files(proj, folder, st, LANGUAGE), scratch)
         exe = Path(scratch) / ("test.exe" if os.name == "nt" else "test")
         built = subprocess.run([os.environ.get("CXX", "g++"), test, "-o", str(exe)], cwd=scratch, capture_output=True, timeout=120)
         assert built.returncode == 0, "stage %d: the starter does not compile\n%s" % (st["id"], built.stderr.decode("utf-8", "replace")[-500:])
@@ -200,8 +207,7 @@ def starter_result(proj, folder, st):
     if LANGUAGE == "cpp":
         return cpp_starter_result(proj, folder, st, test)
     with tempfile.TemporaryDirectory() as scratch:
-        for file, text in sf.stage_files(proj, folder, st, LANGUAGE).items():
-            (Path(scratch) / file).write_text(text, encoding="utf-8", newline="\n")
+        write_stage(sf.stage_files(proj, folder, st, LANGUAGE), scratch)
         out = subprocess.run([sys.executable, "-B", "-X", "utf8", test], cwd=scratch, capture_output=True, timeout=60).stderr.decode("utf-8")
     found = re.search(r"FAILED \(failures=(\d+)\)", out)
     assert found, "stage %d: the starter's tests do not fail cleanly\n%s" % (st["id"], out[-500:])
@@ -424,7 +430,7 @@ def zip_bytes(folders):
             for file in sorted(files):
                 info = zipfile.ZipInfo("%s/%s" % (folder, file), ZIP_TIME)
                 info.external_attr = 0o644 << 16
-                z.writestr(info, files[file].encode("utf-8"))
+                z.writestr(info, sf.as_bytes(files[file]))
     return out.getvalue()
 
 
@@ -439,8 +445,8 @@ def outputs():
             n = st["id"]
             stage = sf.stage_files(proj, ROOT / name, st, LANGUAGE)
             folders["stage%d" % n] = stage
-            for file, text in stage.items():
-                files[DIST / name / "download" / ("stage%d" % n) / file] = text.encode("utf-8")
+            for file, data in stage.items():
+                files[DIST / name / "download" / ("stage%d" % n) / file] = sf.as_bytes(data)
             files[DIST / name / "download" / ("%s-stage%d.zip" % (name, n))] = zip_bytes({"stage%d" % n: stage})
             files[ROOT / name / "answers" / ("stage%d" % n) / sf.names(LANGUAGE, proj, n)[0]] = sf.answer_file(proj, st, LANGUAGE).encode("utf-8")
         files[DIST / name / "download" / ("%s-all.zip" % name)] = zip_bytes(folders)

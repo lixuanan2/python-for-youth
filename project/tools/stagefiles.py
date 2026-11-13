@@ -267,7 +267,9 @@ def dev_doc(proj, language):
           "| `test_stageN.%s` | 老师 | 检查你写对没有 |" % ("py" if py else "cpp")]
     if not py:
         L.append("| `check.h` | 老师 | 测试用的小工具 |")
-    L += ["| `%s` | 老师 | 测试全过以后用来玩 |" % play, "| `guide.md` | 老师 | 就是这份开发文档 |", ""]
+    L += ["| `%s` | 老师 | 测试全过以后用来玩 |" % play]
+    L += ["| %s | 老师 | %s |" % row for row in getattr(proj, "FILES_PY" if py else "FILES_CPP", [])]
+    L += ["| `guide.md` | 老师 | 就是这份开发文档 |", ""]
     L += ["## 怎么运行测试", ""]
     if py:
         L += [
@@ -316,6 +318,7 @@ def dev_doc(proj, language):
                 L += ["", "例子：", ""] + ["- `%s`%s" % e for e in examples]
             L.append("")
         L += ["**测试全过以后**：运行 `%s`。%s" % (play, proj.PLAY_NOTES[n]), ""]
+        L += [line for text in st.get("after_py" if py else "after_cpp", []) for line in (text, "")]
         L += ["**做完了？想一想**：" + stage_challenge(proj, n, py), ""]
     return "\n".join(L)
 
@@ -331,6 +334,16 @@ def stage_files(proj, folder, st, language):
              "guide.md": dev_doc(proj, language)}
     if language == "cpp":
         files["check.h"] = (templates / "check.h").read_text(encoding="utf-8")
-        for extra in st.get("extra_cpp", []):
-            files[extra] = (templates / extra).read_text(encoding="utf-8")
+    # Extra files for one stage, from templates/: a page to read first, another front end, its pictures (bytes).
+    for extra in st.get("extra_py" if language == "python" else "extra_cpp", []):
+        source = templates / extra
+        files[extra] = source.read_bytes() if source.suffix in BINARY else source.read_text(encoding="utf-8").replace("@STAGE@", str(n))
     return files
+
+
+BINARY = (".png", ".gif", ".wav")
+
+
+def as_bytes(data):
+    """A stage file as it goes on disk or into a zip: text in UTF-8, pictures as they are."""
+    return data if isinstance(data, bytes) else data.encode("utf-8")
