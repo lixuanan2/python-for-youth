@@ -246,8 +246,9 @@ def answer_page(match, lesson):
     code = read(f'lessons/{lesson["id"]}/{task["solution"]}').strip()
     lines = code.split('\n')
     shown = lines[int(first) - 1:int(last)] if first else lines
-    widest = max(sum(1 if ord(ch) > 0x2e7f else 0.6 for ch in l) / 0.6 for l in shown)  # Chinese is twice as wide as code
-    font = lambda width, height: min(44, int((width - GUTTER) / (0.6 * widest)), int(height / (1.55 * len(shown))))
+    # Width in tenths of the font size: a code character is 6, a Chinese one 10. Whole numbers, so every Python agrees.
+    widest = max(sum(10 if ord(ch) > 0x2e7f else 6 for ch in l) for l in shown)
+    font = lambda width, height: min(44, (width - GUTTER) * 10 // widest, height * 100 // (155 * len(shown)))
     # The explanation sits in a column on the right; a program with long lines takes the full width and the
     # explanation goes under it in one line.
     if font(1180, 650) >= 34:
