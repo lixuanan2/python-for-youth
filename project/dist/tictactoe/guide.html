@@ -151,7 +151,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 <ul><li><b>要先学完</b>：06-for-loop（for 循环）、04-conditions（条件判断）、15-params-return（参数与返回值（用前面写好的函数））</li><li><b>大约要多久</b>：约 1 到 1.5 节课；做完就能和电脑下</li><li><b>文件夹</b>：<code>stage5</code>，测试是 <code>test_stage5.py</code></li></ul>
 <h3><code>computer_move</code></h3>
 <pre>def computer_move(board):</pre>
-<ul><li>给它：还没下完、也还没人赢的棋盘。电脑下的是 turn(board) 那一方</li><li>还给你：电脑要下的格子编号 0 到 8</li><li>按顺序想：</li><li>1. 有没有一格，我下了就赢？有就下那里（有好几格，选编号最小的）</li><li>2. 有没有一格，对方下了就赢？有就堵住那里（同样选编号最小的）</li><li>3. 都没有，就下编号最小的空格</li><li>提示：试一格 = can_put 看能不能下，put 下一下，winner 看看谁赢。试完不用“拿走”，因为 put 还回去的是新棋盘</li><li>提示：没学 break，可以先让答案等于 -1，找到了再改；已经找到就不再改</li></ul>
+<ul><li>给它：没下完、也没人赢的棋盘。电脑替 turn(board) 那一方下</li><li>还给你：电脑要下的格子编号 0 到 8</li><li>按顺序想：</li><li>1. 有我下了就赢的格子，就下那里（有几格就选编号最小的）</li><li>2. 有对方下了就赢的格子，就堵住那里（也选编号最小的）</li><li>3. 都没有，就下编号最小的空格</li><li>提示：试一格 = can_put 看能不能下，put 下一下，winner 看看谁赢。试完不用“拿走”，因为 put 还回去的是新棋盘</li><li>提示：没学 break，可以先让答案等于 -1，找到了再改；已经找到就不再改</li></ul>
 <p>例子：</p>
 <ul><li><code>computer_move(&quot;XX.OO....&quot;) 还 2</code>：轮到 X，X 下 2 就赢</li><li><code>computer_move(&quot;XX..O....&quot;) 还 2</code>：轮到 O，O 要堵住 2</li><li><code>computer_move(&quot;X........&quot;) 还 1</code>：没有要赢、要堵的，下第一个空格</li></ul>
 <p><b>测试全过以后</b>：运行 <code>play.py</code>。选 2 或 3 就可以和电脑下！试试能不能赢它。</p>
