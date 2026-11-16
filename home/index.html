@@ -80,6 +80,9 @@ h2::before{content:"# ";color:var(--clay)}
 .stages{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
 .stages span{font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:2px 12px}
 .later{margin-top:14px;color:var(--muted)}
+.demo{grid-column:1/-1;margin:6px 0 0}
+.demo video{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:10px;background:var(--ink)}
+.demo p{margin-top:8px}
 
 /* === NOTES === */
 .edge{margin-top:22px;background:#fdf3dc;border-left:8px solid var(--amber);padding:20px 26px}
@@ -170,6 +173,10 @@ footer a{color:var(--ink)}
         <p>学完一部分基础课，在自己的电脑上分关卡做一个小项目：老师给好画面和测试，学生只写程序的逻辑，测试全过就进下一关。</p>
       </div>
       <nav aria-label="项目课"><a href="project/">项目列表</a><a href="project/tictactoe/guide.html">井字棋开发文档</a><a href="https://github.com/lixuanan2/python-for-youth/tree/main/project">说明和源文件</a></nav>
+      <figure class="demo">
+        <video controls playsinline preload="none" poster="media/tictactoe-demo.jpg" width="1920" height="1080"><source src="media/tictactoe-demo.mp4" type="video/mp4">你的浏览器播放不了这段视频，可以<a href="media/tictactoe-demo.mp4">直接打开</a>。</video>
+        <p>井字棋项目课 22 秒演示（有声音）：老师给画面，学生写函数，一关一关测试，最后在网页上和电脑下一盘。</p>
+      </figure>
     </div>
     <p class="later">以后会继续加别的项目。</p>
   </section>

@@ -36,6 +36,10 @@ Free, open Python courseware in Chinese for upper-primary and middle-school stud
 | [基础课件](basics/README.md) | 从输入输出、变量讲起，经过判断、循环、列表、字符串、函数、字典，到递归、排序、二分查找这些算法入门 | 30 节已完成，[在线看](https://lixuanan2.github.io/python-for-youth/basics/) |
 | [项目课](https://lixuanan2.github.io/python-for-youth/project/) | 学完一部分基础课，在自己的电脑上分关卡做一个小项目：老师给好画面和测试，学生只写程序的逻辑，测试全过就进下一关 | 井字棋 5 关，[在线看](https://lixuanan2.github.io/python-for-youth/project/) |
 
+[![井字棋项目课演示：老师给画面和素材，学生写函数，5 关做完，在网页上和电脑下一盘](home/media/tictactoe-demo.gif)](https://lixuanan2.github.io/python-for-youth/media/tictactoe-demo.mp4)
+
+井字棋项目课 22 秒演示：老师给画面，学生写函数，一关一关测试，最后在网页上和电脑下一盘。点动画看[带声音的视频](https://lixuanan2.github.io/python-for-youth/media/tictactoe-demo.mp4)。
+
 以后会继续加别的项目。
 
 ## 用 Edge 的话

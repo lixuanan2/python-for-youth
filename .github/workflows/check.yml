@@ -153,7 +153,7 @@ jobs:
       - name: Assemble the site
         run: |
           mkdir -p _site/fonts
-          cp home/index.html _site/
+          cp -R home/. _site/
           cp basics/vendor/fonts/*.woff2 basics/vendor/fonts/JetBrainsMono-OFL.txt _site/fonts/
           cp -R basics/dist _site/basics
           cp -R project/dist _site/project

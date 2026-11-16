@@ -10,3 +10,6 @@
 *.out text eol=lf
 *.mjs text eol=lf
 *.zip binary
+*.gif binary
+*.jpg binary
+*.mp4 binary
