@@ -72,13 +72,15 @@ for i in range(n - 1):
 <!-- quiz: n - 1 -->
 <section class="slide" aria-label="小测：循环转几遍">
   <h2 class="t r">小测：一共输入 5 个分数，循环转几遍？</h2>
-  <div class="quiz r d1" data-right="1">
+  <div class="quiz side r d1" data-right="1">
     <button type="button" data-fb="5 个分数里，第一个在循环前已经读过了。"><i>1</i>5 遍</button>
     <button type="button" data-fb="答对了！第一个先上台，剩下 4 个，range(n - 1) 正好转 4 遍。"><i>2</i>4 遍</button>
     <button type="button" data-fb="range(n - 1) 比 n 还少一遍，不会是 6。"><i>3</i>6 遍</button>
     <button type="button" data-fb="for 循环会把剩下的每一个都读一遍，不是只读一个。"><i>4</i>1 遍</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:44px"><div class="tab">一共 5 个分数</div>
+<pre class="code"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">best = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    x = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="k">if</span> x &gt; best:</span><span class="ln">        best = x</span><span class="ln"><span class="f">print</span>(best)</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -102,7 +104,7 @@ for i in range(n - 1):
   <div class="band r"><b>动手<br>改一改</b><span>改一个符号，再给变量起个好懂的名字。</span></div>
   <div class="turn">
     <h2 class="r d1">改成找最低分</h2>
-    <p class="say r d1">第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。输出最低分。</p>
+    <p class="say r d1">第一行读入人数 n<span class="aside">（1 到 100 的整数）</span>，接下来 n 行，每行一个 <span class="aside">0 到 100 的</span>整数分数。输出最低分。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">3
 80
 95
@@ -151,7 +153,7 @@ for i in range(n - 1):
   <div class="band r"><b>动手<br>改一改</b><span>再请一个变量帮忙，记住擂主是第几个出场的。</span></div>
   <div class="turn">
     <h2 class="r d1">最高分是第几个？</h2>
-    <p class="say r d1">第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。输出两个数：最高分是第几个出场的，最高分是多少。一样高时算先出场的。</p>
+    <p class="say r d1">第一行读入人数 n<span class="aside">（1 到 100 的整数）</span>，接下来 n 行，每行一个 <span class="aside">0 到 100 的</span>整数分数。输出两个数：最高分是第几个出场的，最高分是多少。<b>一样高时算先出场的</b>。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">3
 80
 95
@@ -162,14 +164,16 @@ for i in range(n - 1):
 
 <!-- quiz: only one number -->
 <section class="slide" aria-label="小测：只有一个数">
-  <h2 class="t r">小测：打擂台程序依次输入 1 和 77，输出什么？</h2>
-  <div class="quiz r d1" data-right="0">
+  <h2 class="t r">小测：依次输入 1 和 77，输出什么？</h2>
+  <div class="quiz side r d1" data-right="0">
     <button type="button" data-fb="答对了！range(0) 一遍也不转，台上只有 77，最后输出它。"><i>1</i>77</button>
     <button type="button" data-fb="best 是读进来的 77，不是 0。"><i>2</i>0</button>
     <button type="button" data-fb="print 在循环后面，循环一遍不转也会运行。"><i>3</i>什么也不输出</button>
     <button type="button" data-fb="range(0) 不会报错，只是一遍也不转。"><i>4</i>报错</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:44px"><div class="tab">依次输入 1 和 77</div>
+<pre class="code"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">best = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    x = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="k">if</span> x &gt; best:</span><span class="ln">        best = x</span><span class="ln"><span class="f">print</span>(best)</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -200,7 +204,7 @@ for i in range(n - 1):
 <section class="slide clay" aria-label="温差" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">温差</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">第一行读入天数 n（1 到 100 的整数），接下来 n 行，每行一个 -50 到 50 的整数气温。<br>输出这几天里最热和最冷差了几度。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">第一行读入天数 n<span class="aside">（1 到 100 的整数）</span>，接下来 n 行，每行一个 <span class="aside">-50 到 50 的</span>整数气温。<br>输出这几天里最热和最冷差了几度。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:150px;width:520px"><small>依次输入</small><pre>4
 3
 -2

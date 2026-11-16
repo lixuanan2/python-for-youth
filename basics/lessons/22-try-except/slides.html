@@ -60,13 +60,15 @@
 <!-- quiz: which input goes to except -->
 <section class="slide" aria-label="小测：哪个会走到 except">
   <h2 class="t r">小测：输入哪个，会走到 except？</h2>
-  <div class="quiz r d1" data-right="3">
+  <div class="quiz side r d1" data-right="3">
     <button type="button" data-fb="12 是整数，int() 能转换，输出“明年你 13 岁”。"><i>1</i>12</button>
     <button type="button" data-fb="负数也是整数，int() 能转换，输出“明年你 -2 岁”。"><i>2</i>-3</button>
     <button type="button" data-fb="前面的 0 不碍事，int(&quot;007&quot;) 就是 7，输出“明年你 8 岁”。"><i>3</i>007</button>
     <button type="button" data-fb="答对了！第 3 课学过，int() 转换不了小数的样子，报 ValueError，被 except 接住。"><i>4</i>3.5</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:40px"><div class="tab">输入一个</div>
+<pre class="code"><span class="ln"><span class="k">try</span>:</span><span class="ln">    age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span><span class="ln"><span class="k">except</span> ValueError:</span><span class="ln">    <span class="f">print</span>(<span class="s">"请输入整数"</span>)</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -101,13 +103,15 @@
 <!-- quiz: first line wrong -->
 <section class="slide" aria-label="小测：先输入 abc 再输入 0">
   <h2 class="t r">小测：先输入 abc，再输入 0，输出什么？</h2>
-  <div class="quiz r d1" data-right="0">
+  <div class="quiz side r d1" data-right="0">
     <button type="button" data-fb="答对了！第 2 行就出错，直接跳到 except ValueError。b 那一行没运行，0 根本没被读进来。"><i>1</i>要输入整数</button>
     <button type="button" data-fb="还没走到除法。第一个数就转换不了，程序已经跳走了。"><i>2</i>除数不能是 0</button>
     <button type="button" data-fb="一出错就跳到一个对得上的 except，只会运行其中一个。"><i>3</i>两句都输出</button>
     <button type="button" data-fb="ValueError 有 except 接住，不会红字报错。"><i>4</i>红字报错</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:40px"><div class="tab">先输入 abc，再输入 0</div>
+<pre class="code"><span class="ln"><span class="k">try</span>:</span><span class="ln">    a = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    b = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="f">print</span>(a // b)</span><span class="ln"><span class="k">except</span> ValueError:</span><span class="ln">    <span class="f">print</span>(<span class="s">"要输入整数"</span>)</span><span class="ln"><span class="k">except</span> ZeroDivisionError:</span><span class="ln">    <span class="f">print</span>(<span class="s">"除数不能是 0"</span>)</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -145,14 +149,16 @@
 
 <!-- quiz: how many rounds -->
 <section class="slide" aria-label="小测：循环走了几圈">
-  <h2 class="t r">小测：例题里第一次就输入 12，循环走了几圈？</h2>
-  <div class="quiz r d1" data-right="1">
+  <h2 class="t r">小测：第一次就输入 12，循环走了几圈？</h2>
+  <div class="quiz side r d1" data-right="1">
     <button type="button" data-fb="一开始 done 是 False，not done 成立，至少会进去一次。"><i>1</i>0 圈</button>
     <button type="button" data-fb="答对了！进去一次，转换成功，done 变成 True，下一次检查就不进去了。"><i>2</i>1 圈</button>
     <button type="button" data-fb="没有出错，done 第一圈就变成 True，不会再问。"><i>3</i>2 圈</button>
     <button type="button" data-fb="done 变成 True 以后，not done 不成立，循环就停了。"><i>4</i>一直转下去</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:40px"><div class="tab">第一次就输入 12</div>
+<pre class="code"><span class="ln">done = <span class="k">False</span></span><span class="ln"><span class="k">while</span> <span class="k">not</span> done:</span><span class="ln">    <span class="k">try</span>:</span><span class="ln">        age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">        done = <span class="k">True</span></span><span class="ln">    <span class="k">except</span> ValueError:</span><span class="ln">        <span class="f">print</span>(<span class="s">"不是整数，再输一次"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -183,7 +189,7 @@
 <section class="slide clay" aria-label="乱糟糟的账本" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">乱糟糟的账本</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">零花钱账本里，有人把钱数写成了“五元”。第一行读入行数 n（0 到 20 的整数），接下来 n 行，每行可能是整数，也可能是别的字。<br>把整数加起来，再数一数有几行不是整数。输出两行：“和是 ……”和“不是整数的有 …… 行”。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">零花钱账本里，有人把钱数写成了“五元”。第一行读入行数 n<span class="aside">（0 到 20 的整数）</span>，接下来 n 行，每行可能是整数，也可能是别的字。<br>把整数加起来，再数一数有几行不是整数。输出两行：“和是 ……”和“不是整数的有 …… 行”。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:560px"><small>依次输入</small><pre style="font-size:44px">5
 12
 苹果

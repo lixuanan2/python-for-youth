@@ -26,8 +26,8 @@
   },
   {
     "page": 9,
-    "ide": true,
-    "code": "score = 60\nif score > 60:\n    print(\"及格\")\nelse:\n    print(\"继续加油\")",
+    "code": "score = int(input())\nif score > 60:\n    print(\"及格\")\nelse:\n    print(\"继续加油\")\n",
+    "stdin": "60\n",
     "stdout": "继续加油\n"
   },
   {

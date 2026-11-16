@@ -168,6 +168,11 @@ h2.t::before{content:"# ";color:var(--clay)}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
+/* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
+.aside{color:var(--muted);font-weight:400}
+.dark .aside{color:#9a968c}
+.clay .aside{color:#f6d3c4}
+.olive .aside{color:#d4dcc8}
 .kbd{display:inline-block;padding:0 14px 2px;border:3px solid currentColor;border-bottom-width:7px;border-radius:10px;font:700 .8em var(--code)}
 
 /* Status bar instead of a progress bar. */
@@ -286,6 +291,15 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+/* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
+   under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
+.quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
+.quiz.side button{font-size:40px;padding:18px 28px}
+.quiz.side button i{margin-right:14px}
+.fb.side{right:auto;width:600px;top:680px;font-size:36px}
+.editor.side{left:760px;right:96px;top:220px}
+.ln.mod{background:#54462b;box-shadow:inset 10px 0 var(--amber)}
+.orig{margin-left:1.4em;font:400 .62em var(--text);color:#a8a59b;white-space:nowrap}
 .fb:empty::before{content:attr(data-empty);color:var(--ghost)}
 
 /* === TRACEBACK === */
@@ -472,6 +486,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .row a.go{background:var(--mint);border-color:var(--mint);color:#16261a;font-weight:700}
 .row a.go:hover{background:#c0e3c5}
 #blank{position:fixed;inset:0;background:#000;z-index:1100}
+.row button.on{background:var(--clay);border-color:var(--clay);color:#fff}
+/* Pen: one canvas per page, at the stage's own 1920 x 1080. It only takes the pointer while the pen is out. */
+.ink{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none;z-index:900;pointer-events:none}
+.pen .slide.active>.ink{pointer-events:auto;cursor:crosshair;touch-action:none}
 #blank[hidden],.bubble[hidden]{display:none}
 @media(max-width:1180px){.chips{visibility:hidden}}
 @media(max-width:760px){.row{flex-wrap:wrap}.chips,#counter,#ide-open,#toggle-thumbs{display:none}}
@@ -487,7 +505,7 @@ dialog p{color:var(--muted);font-size:15px}
 @media print{
   @page{size:1920px 1080px;margin:0}
   *{print-color-adjust:exact;-webkit-print-color-adjust:exact;animation:none!important}
-  .ide,.thumbs,#blank{display:none!important}
+  .ide,.thumbs,#blank,.ink{display:none!important}
   .tag,.slip{box-shadow:none}
 }
 
@@ -646,7 +664,7 @@ print(100)</pre></div>
   <div class="band r"><b>动手<br>改一改</b><span>i 不光能输出，还能拿来算。</span></div>
   <div class="turn">
     <h2 class="r d1">输出一列乘法口诀</h2>
-    <p class="say r d1">读入一个 1 到 9 的整数 n，输出 9 行，让 i 从 1 走到 9。</p>
+    <p class="say r d1">读入一个 <span class="aside">1 到 9 的</span>整数 n，输出 9 行，让 i 从 1 走到 9。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 7，第一行</small><pre>7 x 1 = 7</pre></div><div><small>最后一行</small><pre>7 x 9 = 63</pre></div></div>
   </div>
   <a class="ide r d3" data-code="# 【输出一列乘法口诀】&#10;# 读入一个 1 到 9 的整数 n，输出 9 行，让 i 从 1 走到 9。&#10;# 例如输入：1&#10;# 应该输出（一共 9 行，这里用 / 隔开）：&#10;#   1 x 1 = 1 / 1 x 2 = 2 / 1 x 3 = 3 / 1 x 4 = 4 / 1 x 5 = 5&#10;#   1 x 6 = 6 / 1 x 7 = 7 / 1 x 8 = 8 / 1 x 9 = 9&#10;# 提示：i 不光能输出，还能拿来算。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;for i in range(1, n + 1):&#10;    print(i)&#10;" style="left:610px;top:730px">▶ 在 IDE 开始改</a>
@@ -714,7 +732,7 @@ print(100)</pre></div>
   <div class="band r"><b>动手<br>改一改</b><span>起点不再是固定的 3 了。</span></div>
   <div class="turn">
     <h2 class="r d1">自己定倒计时</h2>
-    <p class="say r d1">读入一个 1 到 100 的整数 n，从 n 倒数到 1，每个数占一行，最后输出发射！</p>
+    <p class="say r d1">读入一个 <span class="aside">1 到 100 的</span>整数 n，从 n 倒数到 1，每个数占一行，最后输出发射！</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 2，输出</small><pre>2
 1
 发射！</pre></div><div><small>输入 1，输出</small><pre>1
@@ -779,14 +797,16 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 
 <!-- quiz: runs vs outputs -->
 <section id="page-20" class="slide" aria-label="小测：循环几遍，输出几个">
-  <h2 class="t r">小测：刚才输入 4，循环几遍？输出几个数？</h2>
-  <div class="quiz r d1" data-right="0">
+  <h2 class="t r">小测：输入 4，循环几遍？输出几个数？</h2>
+  <div class="quiz side r d1" data-right="0">
     <button type="button" data-fb="答对了！i 从 1 走到 4，循环 4 遍，每遍都判断一次，只有 2 和 4 输出。"><i>1</i>4 遍，2 个</button>
     <button type="button" data-fb="只有 2 遍输出了，但 1 和 3 也走过一遍，循环一共 4 遍。"><i>2</i>2 遍，2 个</button>
     <button type="button" data-fb="4 遍没错，可是 1 和 3 被跳过了，没有输出。"><i>3</i>4 遍，4 个</button>
     <button type="button" data-fb="再数一遍：i 取了 1、2、3、4，输出的是 2 和 4。"><i>4</i>2 遍，4 个</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:44px"><div class="tab">输入 4</div>
+<pre class="code"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="k">if</span> i % <span class="m">2</span> == <span class="m">0</span>:</span><span class="ln">        <span class="f">print</span>(i)</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -795,7 +815,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   <div class="band r"><b>动手<br>改一改</b><span>只要改一个地方。想想是哪一个。</span></div>
   <div class="turn">
     <h2 class="r d1">挑出 3 的倍数</h2>
-    <p class="say r d1">读入一个 1 到 1000 的整数 n，输出 1 到 n 里所有 3 的倍数，每个数占一行。</p>
+    <p class="say r d1">读入一个 <span class="aside">1 到 1000 的</span>整数 n，输出 1 到 n 里所有 3 的倍数，每个数占一行。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 10，输出</small><pre>3
 6
 9</pre></div><div><small>输入 3，输出</small><pre>3</pre></div></div>
@@ -830,7 +850,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 <section id="page-24" class="slide clay" aria-label="拍七" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">拍七</h2>
-  <p class="abs say r d2" style="left:96px;top:480px;width:1728px">读入 n（1 到 1000 的整数），从 1 数到 n，每个数占一行。<br>碰到 7 的倍数，或者个位是 7 的数，不说这个数，改说“过”。</p>
+  <p class="abs say r d2" style="left:96px;top:480px;width:1728px">读入 n<span class="aside">（1 到 1000 的整数）</span>，从 1 数到 n，每个数占一行。<br>碰到 7 的倍数，或者<b>个位是 7</b> 的数，不说这个数，改说“过”。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入 8，输出（每个占一行）</small><pre style="font-size:48px">1 2 3 4
 5 6 过 8</pre></div>
   <a class="ide r d3" data-code="# 【拍七】&#10;# 读入 n（1 到 1000 的整数），从 1 数到 n，每个数占一行。&#10;# 碰到 7 的倍数，或者个位是 7 的数，不说这个数，改说“过”。&#10;# 例如输入：8&#10;# 应该输出（每个一行）：1、2、3、4、5、6、过、8&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
@@ -945,6 +965,8 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
     <div class="chips" id="chips"></div>
     <a class="go" id="ide-quick" target="_blank" rel="noopener noreferrer" title="带着这一页的代码打开 IDE（R）">▶ 打开 IDE</a>
     <button id="ide-open" type="button" title="IDE 设置（I）">IDE 设置</button>
+    <button id="pen" type="button" title="画笔：在屏幕上圈画（D），Esc 收起">画笔</button>
+    <button id="pen-clear" type="button" title="擦掉这一页的笔迹（C）" hidden>擦掉</button>
     <button id="full" type="button" title="全屏（F）">全屏</button>
     <button id="help" type="button" title="快捷键（?）" aria-label="快捷键">?</button>
   </div>
@@ -970,6 +992,8 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
     <dt>I</dt><dd>IDE 设置</dd>
     <dt>F</dt><dd>全屏，全屏时动一下鼠标显示控制条</dd>
     <dt>B</dt><dd>黑屏，让学生看你，按任意键回来</dd>
+    <dt>D</dt><dd>画笔：在屏幕上圈代码、画箭头，这时点击不翻页，方向键照常；Esc 收起</dd>
+    <dt>C</dt><dd>擦掉这一页的笔迹（笔迹翻回来还在，刷新就没了）</dd>
     <dt>1–4</dt><dd>小测选答案</dd>
     <dt>P</dt><dd>算法演示：播放或暂停</dd>
     <dt>, 和 .</dt><dd>算法演示：上一步、下一步（键上印着 &lt; &gt;）</dd>
@@ -1231,13 +1255,20 @@ class SlidePresentation {
       document.body.classList.toggle('full', Boolean(document.fullscreenElement));
       this.scale();
     });
+    // A click turns the page, but not one that selects text, drags, or only clears a selection, and never while the pen is out.
+    const selected = () => Boolean(String(getSelection()).trim());
+    let down = null;
+    this.stage.addEventListener('pointerdown', e => { down = {x: e.clientX, y: e.clientY, selected: selected()}; });
     this.stage.addEventListener('click', e => {
-      if (e.target.closest('a,button,.pick,pre,.tb,.live-out')) return;
+      if (this.pen || e.target.closest('a,button,.pick,pre,.tb,.live-out')) return;
+      if (down && (down.selected || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6)) return;
+      if (selected()) return;
       this.move(e.clientX < innerWidth / 3 ? -1 : 1);
     });
     let startX = null;
     this.stage.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
     this.stage.addEventListener('touchend', e => {
+      if (this.pen) return;
       const dx = e.changedTouches[0].clientX - startX;
       if (Math.abs(dx) > 50) this.move(dx < 0 ? 1 : -1);
     });
@@ -1262,6 +1293,7 @@ class SlidePresentation {
     this.setupBugHunt();
     this.setupGates();
     this.setupLive();
+    this.setupPen();
     this.toggleThumbs(this.thumbsPreference());
     this.fromHash();
   }
@@ -1368,7 +1400,7 @@ class SlidePresentation {
   lineText(line) {
     const slots = [...line.querySelectorAll('.slot')];
     const copy = line.cloneNode(true);
-    copy.querySelectorAll('.then').forEach(old => old.remove());
+    copy.querySelectorAll('.then,.orig').forEach(old => old.remove());
     copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(this.slotCode(slots[i])));
     return copy.textContent;
   }
@@ -1424,6 +1456,66 @@ class SlidePresentation {
     button.onclick = () => this.settings.showModal();
     document.getElementById('ide-close').onclick = () => this.settings.close();
     this.linkIde();
+  }
+
+  /* --- pen: the teacher circles code and draws arrows on the big screen; each page keeps its ink until the reload --- */
+  setupPen() {
+    this.pen = false;
+    const button = document.getElementById('pen'), clear = document.getElementById('pen-clear');
+    // Keep focus off these buttons, so space and a clicker still turn the page instead of pressing them again.
+    [button, clear].forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
+    button.onclick = () => this.togglePen();
+    clear.onclick = () => this.clearInk();
+    let line = null;
+    this.stage.addEventListener('pointerdown', e => {
+      if (!this.pen || !e.target.matches('canvas.ink') || e.button > 0) return;
+      e.preventDefault();
+      const canvas = e.target, box = canvas.getBoundingClientRect();
+      const at = ev => [(ev.clientX - box.left) * 1920 / box.width, (ev.clientY - box.top) * 1080 / box.height];
+      const pen = canvas.getContext('2d');
+      Object.assign(pen, {strokeStyle: '#c6613f', lineWidth: 6, lineCap: 'round', lineJoin: 'round'});
+      try { canvas.setPointerCapture(e.pointerId); } catch {}  // keep drawing when the pointer leaves the canvas
+      line = {pen, at, last: at(e), id: e.pointerId};
+      pen.beginPath();
+      pen.arc(...line.last, 3, 0, 2 * Math.PI);
+      pen.fillStyle = '#c6613f';
+      pen.fill();
+    });
+    this.stage.addEventListener('pointermove', e => {
+      if (!line || e.pointerId !== line.id) return;
+      const next = line.at(e);
+      line.pen.beginPath();
+      line.pen.moveTo(...line.last);
+      line.pen.lineTo(...next);
+      line.pen.stroke();
+      line.last = next;
+    });
+    const stop = e => { if (line && e.pointerId === line.id) line = null; };
+    this.stage.addEventListener('pointerup', stop);
+    this.stage.addEventListener('pointercancel', stop);
+  }
+  ink(slide) {
+    let canvas = slide.querySelector(':scope > canvas.ink');
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      canvas.className = 'ink';
+      canvas.width = 1920;
+      canvas.height = 1080;
+      canvas.setAttribute('aria-hidden', 'true');
+      slide.appendChild(canvas);
+    }
+    return canvas;
+  }
+  togglePen(on = !this.pen) {
+    this.pen = on;
+    document.body.classList.toggle('pen', on);
+    document.getElementById('pen').classList.toggle('on', on);
+    document.getElementById('pen-clear').hidden = !on;
+    if (on) this.ink(this.slides[this.index]);
+  }
+  clearInk() {
+    const canvas = this.slides[this.index].querySelector(':scope > canvas.ink');
+    canvas?.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
   }
 
   /* --- classroom interactions --- */
@@ -1669,6 +1761,7 @@ class SlidePresentation {
     const slide = this.slides[this.index];
     slide.classList.add('active', 'visible');
     if (document.activeElement.matches('.slot')) document.activeElement.blur();
+    if (this.pen) this.ink(slide);
     if (slide.dataset.steps) slide.dataset.at = atEnd ? slide.dataset.steps : 1;
     this.syncChanges(false);
     history.replaceState(null, '', '#page-' + (this.index + 1));
@@ -1698,6 +1791,7 @@ class SlidePresentation {
     if (e.ctrlKey || e.metaKey || e.altKey || this.settings.open || this.help.open) return;
     if (e.target.closest('select')) return;
     if (!this.blank.hidden) { this.blank.hidden = true; e.preventDefault(); return; }
+    if (e.key === 'Escape' && this.pen) { this.togglePen(false); return; }
     if (e.target.matches('.slot')) {
       if (['Enter', 'Escape'].includes(e.key)) e.target.blur();
       if (!['PageDown', 'PageUp'].includes(e.key)) return;
@@ -1712,6 +1806,8 @@ class SlidePresentation {
       t: () => document.getElementById('toggle-thumbs').click(),
       r: () => document.getElementById('ide-quick').click(),
       b: () => { this.blank.hidden = false; },
+      d: () => this.togglePen(),
+      c: () => this.clearInk(),
       g: () => { e.preventDefault(); this.jump.select(); }
     };
     if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(k)) { e.preventDefault(); this.move(e.shiftKey ? -1 : 1); }

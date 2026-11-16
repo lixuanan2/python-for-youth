@@ -91,13 +91,15 @@
 <!-- quiz: continue to break -->
 <section class="slide" aria-label="小测：换成 break">
   <h2 class="t r">小测：continue 换成 break，输出什么？</h2>
-  <div class="quiz r d1" data-right="0">
+  <div class="quiz side r d1" data-right="0">
     <button type="button" data-fb="答对了！i 是 3 时 break，整个循环结束，只输出了 1 和 2。"><i>1</i>1 2</button>
     <button type="button" data-fb="这是 continue 的结果。break 会让整个循环结束。"><i>2</i>1 2 4 5 7 8 10</button>
     <button type="button" data-fb="是 3 的倍数时才进 if，进了 if 就不会运行 print。"><i>3</i>3 6 9</button>
     <button type="button" data-fb="1 和 2 在遇到 break 之前就已经输出了。"><i>4</i>什么也不输出</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:44px"><div class="tab">skip.py</div>
+<pre class="code"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">11</span>):</span><span class="ln">    <span class="k">if</span> i % <span class="m">3</span> == <span class="m">0</span>:</span><span class="ln mod">        <span class="k">break</span><span class="orig">原来是 continue</span></span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -106,7 +108,7 @@
   <div class="band r"><b>动手<br>改一改</b><span>把聊天程序改成记账。</span></div>
   <div class="turn">
     <h2 class="r d1">读到 0 就停，算总和</h2>
-    <p class="say r d1">在例题上改：每行读入一个整数，读到 0 就停。停下以后输出前面所有数的和，0 不算。不知道一共几个数，所以用 while True。</p>
+    <p class="say r d1">在例题上改：每行读入一个整数，读到 0 就停。停下以后输出前面所有数的和，<b>0 不算</b>。不知道一共几个数，所以用 while True。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 5、8、-3、0</small><pre>10</pre></div><div><small>第一个就是 0</small><pre>0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">输入要先变成整数，总和从 0 开始。</p>
   </div>
@@ -140,7 +142,7 @@
 <section class="slide clay" aria-label="整理成绩单" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">整理成绩单</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">不停读入分数，每行一个整数，读到 -1 就结束。不在 0 到 100 之间的是写错了，跳过不算。<br>输出两行：“有效 几 个”和“平均 多少”，平均分用 round 保留 1 位小数。一个有效分数也没有，就输出“没有有效分数”。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">不停读入分数，每行一个整数，读到 -1 就结束。不在 0 到 100 之间的是写错了，<b>跳过不算</b>。<br>输出两行：“有效 几 个”和“平均 多少”，平均分用 round 保留 1 位小数。一个有效分数也没有，就输出“没有有效分数”。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:480px"><small>依次输入</small><pre style="font-size:44px">90
 80
 120

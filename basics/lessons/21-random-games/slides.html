@@ -103,7 +103,7 @@
   <div class="band r"><b>动手<br>改一改</b><span>不猜了，用循环掷很多次，数一数。</span></div>
   <div class="turn">
     <h2 class="r d1">掷 n 次，有几个 6</h2>
-    <p class="say r d1">第一行读入种子，第二行读入次数 n（0 到 1000 的整数）。用这个种子掷 n 次骰子，输出一共掷出了几次 6。</p>
+    <p class="say r d1">第一行读入种子，第二行读入次数 n<span class="aside">（0 到 1000 的整数）</span>。用这个种子掷 n 次骰子，输出一共掷出了几次 6。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>种子 1，掷 10 次</small><pre>1</pre></div><div><small>种子 3，掷 600 次</small><pre>95</pre></div><div><small>掷 0 次</small><pre>0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">掷 600 次，6 大约出现 100 次。</p>
   </div>
@@ -112,14 +112,16 @@
 
 <!-- quiz: same seed -->
 <section class="slide" aria-label="小测：同一个种子">
-  <h2 class="t r">小测：种子都是 7，两次掷的结果呢？</h2>
-  <div class="quiz r d1" data-right="0">
+  <h2 class="t r">小测：种子都是 7，运行两次，结果呢？</h2>
+  <div class="quiz side r d1" data-right="0">
     <button type="button" data-fb="答对了！种子一样，挑出的数就一样。"><i>1</i>一定一样</button>
     <button type="button" data-fb="设了一样的种子，就不会不一样。"><i>2</i>一定不一样</button>
     <button type="button" data-fb="种子一样，结果是定好的，不用碰运气。"><i>3</i>说不准</button>
     <button type="button" data-fb="seed 设种子不会报错。"><i>4</i>报错</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:44px"><div class="tab">运行两次</div>
+<pre class="code"><span class="ln"><span class="k">import</span> random</span><span class="ln">random.<span class="f">seed</span>(<span class="m">7</span>)</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -150,7 +152,7 @@
 <section class="slide clay" aria-label="石头剪刀布" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">石头剪刀布</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:960px">第一行读入种子（0 到 1000 的整数），第二行读入你出的：石头、剪刀或布。电脑用 random.choice(["石头", "剪刀", "布"]) 出一个，列表照这个顺序写，结果才和样例一样。<br>先输出“电脑出 ……”，再输出你的结果：赢、输或平。石头赢剪刀，剪刀赢布，布赢石头。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:960px">第一行读入种子<span class="aside">（0 到 1000 的整数）</span>，第二行读入你出的：石头、剪刀或布。电脑用 random.choice(["石头", "剪刀", "布"]) 出一个，<b>列表照这个顺序写</b>，结果才和样例一样。<br>先输出“电脑出 ……”，再输出你的结果：赢、输或平。石头赢剪刀，剪刀赢布，布赢石头。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:540px"><small>依次输入</small><pre>7
 石头</pre><small style="margin-top:14px">输出</small><pre style="font-size:48px;white-space:pre">电脑出 剪刀
 赢</pre></div>

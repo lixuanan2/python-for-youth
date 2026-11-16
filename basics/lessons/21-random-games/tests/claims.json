@@ -26,6 +26,11 @@
     "stdout": "True\n"
   },
   {
+    "page": 10,
+    "code": "import random\nrandom.seed(7)\nprint(random.randint(1, 100))\nprint(random.randint(1, 100))\n",
+    "stdout": "42\n20\n"
+  },
+  {
     "page": 11,
     "code": "import random\nprint(random.randint(6))",
     "error": "TypeError"

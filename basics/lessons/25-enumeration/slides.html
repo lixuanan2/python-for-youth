@@ -96,14 +96,16 @@
 
 <!-- quiz: how many tries -->
 <section class="slide" aria-label="小测：试了几次">
-  <h2 class="t r">小测：35 个头时，例题的循环一共试了几次？</h2>
-  <div class="quiz r d1" data-right="1">
+  <h2 class="t r">小测：35 个头、94 只脚，循环一共试了几次？</h2>
+  <div class="quiz side r d1" data-right="1">
     <button type="button" data-fb="鸡可以是 0 只，也可以是 35 只。从 0 数到 35，比 35 多一个。"><i>1</i>35 次</button>
     <button type="button" data-fb="答对了！range(heads + 1) 是 0 到 35，一共 36 个。"><i>2</i>36 次</button>
     <button type="button" data-fb="试的是鸡的只数，跟脚数 94 没关系。"><i>3</i>94 次</button>
     <button type="button" data-fb="找到答案后循环没有停，会一直试到最后。"><i>4</i>24 次</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:42px"><div class="tab">输入 35 和 94</div>
+<pre class="code"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads + <span class="m">1</span>):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -146,7 +148,7 @@
 <section class="slide clay" aria-label="百钱买百鸡" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">百钱买百鸡</h2>
-  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只。读入 n（1 到 300 的整数），用 n 元正好买 n 只鸡，小鸡要整 3 只地买。<br>每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。一种也没有就输出“没有答案”。</p>
+  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只。读入 n<span class="aside">（1 到 300 的整数）</span>，用 n 元正好买 n 只鸡，<b>小鸡要整 3 只地买</b>。<br>每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。一种也没有就输出“没有答案”。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:560px"><small>输入</small><pre>100</pre><small style="margin-top:14px">输出</small><pre style="font-size:38px;white-space:pre">公鸡 0 母鸡 25 小鸡 75
 公鸡 4 母鸡 18 小鸡 78
 公鸡 8 母鸡 11 小鸡 81

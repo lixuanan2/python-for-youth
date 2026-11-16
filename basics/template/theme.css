@@ -22,6 +22,11 @@ h2.t::before{content:"# ";color:var(--clay)}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
+/* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
+.aside{color:var(--muted);font-weight:400}
+.dark .aside{color:#9a968c}
+.clay .aside{color:#f6d3c4}
+.olive .aside{color:#d4dcc8}
 .kbd{display:inline-block;padding:0 14px 2px;border:3px solid currentColor;border-bottom-width:7px;border-radius:10px;font:700 .8em var(--code)}
 
 /* Status bar instead of a progress bar. */
@@ -140,6 +145,15 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+/* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
+   under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
+.quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
+.quiz.side button{font-size:40px;padding:18px 28px}
+.quiz.side button i{margin-right:14px}
+.fb.side{right:auto;width:600px;top:680px;font-size:36px}
+.editor.side{left:760px;right:96px;top:220px}
+.ln.mod{background:#54462b;box-shadow:inset 10px 0 var(--amber)}
+.orig{margin-left:1.4em;font:400 .62em var(--text);color:#a8a59b;white-space:nowrap}
 .fb:empty::before{content:attr(data-empty);color:var(--ghost)}
 
 /* === TRACEBACK === */
@@ -326,6 +340,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .row a.go{background:var(--mint);border-color:var(--mint);color:#16261a;font-weight:700}
 .row a.go:hover{background:#c0e3c5}
 #blank{position:fixed;inset:0;background:#000;z-index:1100}
+.row button.on{background:var(--clay);border-color:var(--clay);color:#fff}
+/* Pen: one canvas per page, at the stage's own 1920 x 1080. It only takes the pointer while the pen is out. */
+.ink{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none;z-index:900;pointer-events:none}
+.pen .slide.active>.ink{pointer-events:auto;cursor:crosshair;touch-action:none}
 #blank[hidden],.bubble[hidden]{display:none}
 @media(max-width:1180px){.chips{visibility:hidden}}
 @media(max-width:760px){.row{flex-wrap:wrap}.chips,#counter,#ide-open,#toggle-thumbs{display:none}}
@@ -341,6 +359,6 @@ dialog p{color:var(--muted);font-size:15px}
 @media print{
   @page{size:1920px 1080px;margin:0}
   *{print-color-adjust:exact;-webkit-print-color-adjust:exact;animation:none!important}
-  .ide,.thumbs,#blank{display:none!important}
+  .ide,.thumbs,#blank,.ink{display:none!important}
   .tag,.slip{box-shadow:none}
 }

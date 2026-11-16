@@ -18,6 +18,12 @@
     "stdout": "-3\n"
   },
   {
+    "page": 6,
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        best = x\nprint(best)\n",
+    "stdin": "5\n80\n95\n70\n88\n60\n",
+    "stdout": "95\n"
+  },
+  {
     "page": 7,
     "code": "best = 80\nx = 95\nprint(x > best)",
     "stdout": "True\n"

@@ -106,14 +106,14 @@
 
 <!-- quiz: boundary -->
 <section class="slide" aria-label="小测：边界">
-  <h2 class="t r">小测：把条件写成这样，60 分输出什么？</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:44px"><div class="tab">输入 60</div>
-<pre class="code"><span class="ln"><span class="k">if</span> score &gt; <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"继续加油"</span>)</span></pre></div>
-  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="1">
+  <h2 class="t r">小测：&gt;= 改成 &gt;，输入 60 输出什么？</h2>
+  <div class="quiz side r d1" data-right="1">
     <button type="button" data-fb="&gt; 不包含相等，60 &gt; 60 不成立。"><i>1</i>及格</button>
     <button type="button" data-fb="答对了！所以及格线要写 &gt;= 60。写完判断，一定要试一试边界上的数。"><i>2</i>继续加油</button>
   </div>
-  <p class="fb" style="top:690px" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:44px"><div class="tab">输入 60</div>
+<pre class="code"><span class="ln">score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln mod"><span class="k">if</span> score &gt; <span class="m">60</span>:<span class="orig">原来是 &gt;=</span></span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"继续加油"</span>)</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -122,7 +122,7 @@
   <div class="band r"><b>动手<br>改一改</b><span>还记得吗？余数是 0 就是偶数。</span></div>
   <div class="turn">
     <h2 class="r d1">改成判断奇偶</h2>
-    <p class="say r d1">读入一个 -1000 到 1000 的整数，输出它是偶数还是奇数。</p>
+    <p class="say r d1">读入一个 <span class="aside">-1000 到 1000 的</span>整数，输出它是偶数还是奇数。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 7，输出</small><pre>奇数</pre></div><div><small>输入 0，输出</small><pre>偶数</pre></div></div>
   </div>
   <a class="ide r d3" data-code-file="starter/03_odd_even.py" style="left:610px;top:730px">▶ 在 IDE 开始改</a>
@@ -179,7 +179,7 @@
   <div class="band r"><b>动手<br>改一改</b><span>elif 可以写很多个，想想新的一档放在哪。</span></div>
   <div class="turn">
     <h2 class="r d1">再加一档“良好”</h2>
-    <p class="say r d1">分数是 0 到 100 的整数，75 分到 89 分输出良好。</p>
+    <p class="say r d1">分数是 <span class="aside">0 到 100 的</span>整数，75 分到 89 分输出良好。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 75，输出</small><pre>良好</pre></div><div><small>输入 74，输出</small><pre>及格</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">写完用 59、60、74、75、89、90 各试一次，这些数都紧贴分界线。</p>
   </div>
@@ -213,7 +213,7 @@
 <section class="slide clay" aria-label="快递运费" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">快递<br>运费</h2>
-  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入重量（1 到 100 的整数，单位公斤）。前 3 公斤一共 10 元，超过 3 公斤的部分每公斤加 2 元。</p>
+  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入重量<span class="aside">（1 到 100 的整数，单位公斤）</span>。前 3 公斤一共 10 元，<b>超过 3 公斤的部分</b>每公斤加 2 元。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入</small><pre>5</pre><small style="margin-top:26px">输出</small><pre>运费 14 元</pre></div>
   <a class="ide r d3" data-code-file="starter/08_shipping.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>

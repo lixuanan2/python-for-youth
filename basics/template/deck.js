@@ -250,13 +250,20 @@ class SlidePresentation {
       document.body.classList.toggle('full', Boolean(document.fullscreenElement));
       this.scale();
     });
+    // A click turns the page, but not one that selects text, drags, or only clears a selection, and never while the pen is out.
+    const selected = () => Boolean(String(getSelection()).trim());
+    let down = null;
+    this.stage.addEventListener('pointerdown', e => { down = {x: e.clientX, y: e.clientY, selected: selected()}; });
     this.stage.addEventListener('click', e => {
-      if (e.target.closest('a,button,.pick,pre,.tb,.live-out')) return;
+      if (this.pen || e.target.closest('a,button,.pick,pre,.tb,.live-out')) return;
+      if (down && (down.selected || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6)) return;
+      if (selected()) return;
       this.move(e.clientX < innerWidth / 3 ? -1 : 1);
     });
     let startX = null;
     this.stage.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
     this.stage.addEventListener('touchend', e => {
+      if (this.pen) return;
       const dx = e.changedTouches[0].clientX - startX;
       if (Math.abs(dx) > 50) this.move(dx < 0 ? 1 : -1);
     });
@@ -281,6 +288,7 @@ class SlidePresentation {
     this.setupBugHunt();
     this.setupGates();
     this.setupLive();
+    this.setupPen();
     this.toggleThumbs(this.thumbsPreference());
     this.fromHash();
   }
@@ -387,7 +395,7 @@ class SlidePresentation {
   lineText(line) {
     const slots = [...line.querySelectorAll('.slot')];
     const copy = line.cloneNode(true);
-    copy.querySelectorAll('.then').forEach(old => old.remove());
+    copy.querySelectorAll('.then,.orig').forEach(old => old.remove());
     copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(this.slotCode(slots[i])));
     return copy.textContent;
   }
@@ -443,6 +451,66 @@ class SlidePresentation {
     button.onclick = () => this.settings.showModal();
     document.getElementById('ide-close').onclick = () => this.settings.close();
     this.linkIde();
+  }
+
+  /* --- pen: the teacher circles code and draws arrows on the big screen; each page keeps its ink until the reload --- */
+  setupPen() {
+    this.pen = false;
+    const button = document.getElementById('pen'), clear = document.getElementById('pen-clear');
+    // Keep focus off these buttons, so space and a clicker still turn the page instead of pressing them again.
+    [button, clear].forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
+    button.onclick = () => this.togglePen();
+    clear.onclick = () => this.clearInk();
+    let line = null;
+    this.stage.addEventListener('pointerdown', e => {
+      if (!this.pen || !e.target.matches('canvas.ink') || e.button > 0) return;
+      e.preventDefault();
+      const canvas = e.target, box = canvas.getBoundingClientRect();
+      const at = ev => [(ev.clientX - box.left) * 1920 / box.width, (ev.clientY - box.top) * 1080 / box.height];
+      const pen = canvas.getContext('2d');
+      Object.assign(pen, {strokeStyle: '#c6613f', lineWidth: 6, lineCap: 'round', lineJoin: 'round'});
+      try { canvas.setPointerCapture(e.pointerId); } catch {}  // keep drawing when the pointer leaves the canvas
+      line = {pen, at, last: at(e), id: e.pointerId};
+      pen.beginPath();
+      pen.arc(...line.last, 3, 0, 2 * Math.PI);
+      pen.fillStyle = '#c6613f';
+      pen.fill();
+    });
+    this.stage.addEventListener('pointermove', e => {
+      if (!line || e.pointerId !== line.id) return;
+      const next = line.at(e);
+      line.pen.beginPath();
+      line.pen.moveTo(...line.last);
+      line.pen.lineTo(...next);
+      line.pen.stroke();
+      line.last = next;
+    });
+    const stop = e => { if (line && e.pointerId === line.id) line = null; };
+    this.stage.addEventListener('pointerup', stop);
+    this.stage.addEventListener('pointercancel', stop);
+  }
+  ink(slide) {
+    let canvas = slide.querySelector(':scope > canvas.ink');
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      canvas.className = 'ink';
+      canvas.width = 1920;
+      canvas.height = 1080;
+      canvas.setAttribute('aria-hidden', 'true');
+      slide.appendChild(canvas);
+    }
+    return canvas;
+  }
+  togglePen(on = !this.pen) {
+    this.pen = on;
+    document.body.classList.toggle('pen', on);
+    document.getElementById('pen').classList.toggle('on', on);
+    document.getElementById('pen-clear').hidden = !on;
+    if (on) this.ink(this.slides[this.index]);
+  }
+  clearInk() {
+    const canvas = this.slides[this.index].querySelector(':scope > canvas.ink');
+    canvas?.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
   }
 
   /* --- classroom interactions --- */
@@ -688,6 +756,7 @@ class SlidePresentation {
     const slide = this.slides[this.index];
     slide.classList.add('active', 'visible');
     if (document.activeElement.matches('.slot')) document.activeElement.blur();
+    if (this.pen) this.ink(slide);
     if (slide.dataset.steps) slide.dataset.at = atEnd ? slide.dataset.steps : 1;
     this.syncChanges(false);
     history.replaceState(null, '', '#page-' + (this.index + 1));
@@ -717,6 +786,7 @@ class SlidePresentation {
     if (e.ctrlKey || e.metaKey || e.altKey || this.settings.open || this.help.open) return;
     if (e.target.closest('select')) return;
     if (!this.blank.hidden) { this.blank.hidden = true; e.preventDefault(); return; }
+    if (e.key === 'Escape' && this.pen) { this.togglePen(false); return; }
     if (e.target.matches('.slot')) {
       if (['Enter', 'Escape'].includes(e.key)) e.target.blur();
       if (!['PageDown', 'PageUp'].includes(e.key)) return;
@@ -731,6 +801,8 @@ class SlidePresentation {
       t: () => document.getElementById('toggle-thumbs').click(),
       r: () => document.getElementById('ide-quick').click(),
       b: () => { this.blank.hidden = false; },
+      d: () => this.togglePen(),
+      c: () => this.clearInk(),
       g: () => { e.preventDefault(); this.jump.select(); }
     };
     if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(k)) { e.preventDefault(); this.move(e.shiftKey ? -1 : 1); }

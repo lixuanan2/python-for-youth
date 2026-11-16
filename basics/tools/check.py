@@ -105,7 +105,7 @@ class Pages(HTMLParser):
 
     def __init__(self, text):
         super().__init__()
-        self.pages, self.lines = [], None
+        self.pages, self.lines, self.orig = [], None, False
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
@@ -131,6 +131,8 @@ class Pages(HTMLParser):
                 page['full'] = attrs.get('data-full')
         if self.lines is not None and tag == 'span' and 'ln' in classes:
             self.lines.append('')
+        if tag == 'span' and 'orig' in classes:
+            self.orig = True  # "原来是 continue" after a changed line: a note, not code
         if self.lines is not None and tag == 'input' and 'slot' in classes and self.lines:
             assert self.lines is page['lines'] and not page['changes'], 'A code change cannot hold yellow boxes'
             page['slots'] += 1
@@ -139,10 +141,12 @@ class Pages(HTMLParser):
             page['button'], page['code'] = True, attrs.get('data-code')
 
     def handle_data(self, data):
-        if self.lines:
+        if self.lines and not self.orig:
             self.lines[-1] += data
 
     def handle_endtag(self, tag):
+        if tag == 'span' and self.orig:
+            self.orig = False
         if tag == 'pre' and self.lines is not None:
             page = self.pages[-1]
             change = page['changes'][-1] if page['changes'] else None

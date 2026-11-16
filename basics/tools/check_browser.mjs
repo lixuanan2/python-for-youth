@@ -342,6 +342,35 @@ const INTERACT = `(async () => {
   const lastPage = [...stage.querySelectorAll('.slide')].at(-1);
   shell.thanksLast = lastPage.classList.contains('thanks') && lastPage.querySelector('.gh-link')?.href.startsWith('https://') && lastPage.querySelector('.gh-link').target === '_blank' && Boolean(lastPage.querySelector('.go-next'));
   shell.noLigatures = [document.body, ...stage.querySelectorAll('pre.code')].every(e => getComputedStyle(e).fontVariantLigatures === 'none');
+  // Selecting text or dragging does not turn the page. The pen draws, keeps clicks from turning the page, leaves the arrows
+  // working, keeps each page's ink, clears it with C and goes away with Esc.
+  show(0);
+  const at = () => document.getElementById('counter').textContent.split(' ')[0], first = at();
+  const active = () => stage.querySelector('.slide.active');
+  const press = key => document.body.dispatchEvent(new KeyboardEvent('keydown', {key, bubbles: true}));
+  const fire = (target, type, x, y) => target.dispatchEvent(new (type.startsWith('pointer') ? PointerEvent : MouseEvent)(type, {bubbles: true, clientX: x, clientY: y, pointerId: 7, button: 0}));
+  const area = active().getBoundingClientRect(), mid = [area.left + area.width * .6, area.top + area.height * .6];
+  const range = document.createRange();
+  range.selectNodeContents(active().querySelector('h1,h2,p') || active());
+  getSelection().removeAllRanges(); getSelection().addRange(range);
+  fire(active(), 'pointerdown', ...mid); fire(active(), 'click', ...mid);
+  shell.selectionKeepsPage = at() === first;
+  getSelection().removeAllRanges();
+  fire(active(), 'pointerdown', ...mid); fire(active(), 'click', mid[0] + 40, mid[1]);
+  shell.dragKeepsPage = at() === first;
+  press('d');
+  const ink = active().querySelector(':scope > canvas.ink');
+  const inked = () => { const d = ink.getContext('2d').getImageData(0, 0, 1920, 1080).data; let n = 0; for (let i = 3; i < d.length; i += 4) n += d[i] > 0; return n; };
+  fire(ink, 'pointerdown', ...mid); fire(ink, 'pointermove', mid[0] + 80, mid[1] + 30); fire(ink, 'pointerup', mid[0] + 80, mid[1] + 30); fire(ink, 'click', mid[0] + 80, mid[1] + 30);
+  shell.penDraws = inked() > 50 && at() === first;
+  press('ArrowRight');
+  shell.penArrowTurns = at() !== first;
+  press('ArrowLeft');
+  shell.penInkStays = at() === first && inked() > 50;
+  press('c');
+  shell.penClears = inked() === 0;
+  press('Escape');
+  shell.penOff = !document.body.classList.contains('pen') && getComputedStyle(ink).pointerEvents === 'none' && document.getElementById('pen-clear').hidden;
   shell.ids = new Set([...document.querySelectorAll('[id]')].map(e => e.id)).size === document.querySelectorAll('[id]').length;
   return {
     shell,

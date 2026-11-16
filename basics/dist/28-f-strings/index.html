@@ -168,6 +168,11 @@ h2.t::before{content:"# ";color:var(--clay)}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
+/* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
+.aside{color:var(--muted);font-weight:400}
+.dark .aside{color:#9a968c}
+.clay .aside{color:#f6d3c4}
+.olive .aside{color:#d4dcc8}
 .kbd{display:inline-block;padding:0 14px 2px;border:3px solid currentColor;border-bottom-width:7px;border-radius:10px;font:700 .8em var(--code)}
 
 /* Status bar instead of a progress bar. */
@@ -286,6 +291,15 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+/* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
+   under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
+.quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
+.quiz.side button{font-size:40px;padding:18px 28px}
+.quiz.side button i{margin-right:14px}
+.fb.side{right:auto;width:600px;top:680px;font-size:36px}
+.editor.side{left:760px;right:96px;top:220px}
+.ln.mod{background:#54462b;box-shadow:inset 10px 0 var(--amber)}
+.orig{margin-left:1.4em;font:400 .62em var(--text);color:#a8a59b;white-space:nowrap}
 .fb:empty::before{content:attr(data-empty);color:var(--ghost)}
 
 /* === TRACEBACK === */
@@ -472,6 +486,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .row a.go{background:var(--mint);border-color:var(--mint);color:#16261a;font-weight:700}
 .row a.go:hover{background:#c0e3c5}
 #blank{position:fixed;inset:0;background:#000;z-index:1100}
+.row button.on{background:var(--clay);border-color:var(--clay);color:#fff}
+/* Pen: one canvas per page, at the stage's own 1920 x 1080. It only takes the pointer while the pen is out. */
+.ink{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none;z-index:900;pointer-events:none}
+.pen .slide.active>.ink{pointer-events:auto;cursor:crosshair;touch-action:none}
 #blank[hidden],.bubble[hidden]{display:none}
 @media(max-width:1180px){.chips{visibility:hidden}}
 @media(max-width:760px){.row{flex-wrap:wrap}.chips,#counter,#ide-open,#toggle-thumbs{display:none}}
@@ -487,7 +505,7 @@ dialog p{color:var(--muted);font-size:15px}
 @media print{
   @page{size:1920px 1080px;margin:0}
   *{print-color-adjust:exact;-webkit-print-color-adjust:exact;animation:none!important}
-  .ide,.thumbs,#blank{display:none!important}
+  .ide,.thumbs,#blank,.ink{display:none!important}
   .tag,.slip{box-shadow:none}
 }
 
@@ -638,7 +656,7 @@ print(f"{price:.2f}")</pre>
 <section id="page-12" class="slide clay" aria-label="电子钟" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">电子钟</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">读入从零点开始过了多少秒（0 到 86399 的整数），像电子钟那样显示成 时:分:秒。<br>每一段都显示两位，不够两位前面补 0。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">读入从零点开始过了多少秒<span class="aside">（0 到 86399 的整数）</span>，像电子钟那样显示成 时:分:秒。<br>每一段都显示两位，<b>不够两位前面补 0</b>。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:520px"><small>输入</small><pre>3909</pre><small style="margin-top:14px">输出</small><pre style="font-size:60px">01:05:09</pre><small style="margin-top:14px">输入 86399</small><pre style="font-size:60px">23:59:59</pre></div>
   <a class="ide r d3" data-code="# 【电子钟】&#10;# 读入从零点开始过了多少秒（0 到 86399 的整数），&#10;#   像电子钟那样显示成 时:分:秒。&#10;# 每一段都显示两位，不够两位前面补 0。&#10;# 例如输入：3909&#10;# 应该输出：01:05:09&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
@@ -752,6 +770,8 @@ print(f"{price:.2f}")</pre>
     <div class="chips" id="chips"></div>
     <a class="go" id="ide-quick" target="_blank" rel="noopener noreferrer" title="带着这一页的代码打开 IDE（R）">▶ 打开 IDE</a>
     <button id="ide-open" type="button" title="IDE 设置（I）">IDE 设置</button>
+    <button id="pen" type="button" title="画笔：在屏幕上圈画（D），Esc 收起">画笔</button>
+    <button id="pen-clear" type="button" title="擦掉这一页的笔迹（C）" hidden>擦掉</button>
     <button id="full" type="button" title="全屏（F）">全屏</button>
     <button id="help" type="button" title="快捷键（?）" aria-label="快捷键">?</button>
   </div>
@@ -777,6 +797,8 @@ print(f"{price:.2f}")</pre>
     <dt>I</dt><dd>IDE 设置</dd>
     <dt>F</dt><dd>全屏，全屏时动一下鼠标显示控制条</dd>
     <dt>B</dt><dd>黑屏，让学生看你，按任意键回来</dd>
+    <dt>D</dt><dd>画笔：在屏幕上圈代码、画箭头，这时点击不翻页，方向键照常；Esc 收起</dd>
+    <dt>C</dt><dd>擦掉这一页的笔迹（笔迹翻回来还在，刷新就没了）</dd>
     <dt>1–4</dt><dd>小测选答案</dd>
     <dt>P</dt><dd>算法演示：播放或暂停</dd>
     <dt>, 和 .</dt><dd>算法演示：上一步、下一步（键上印着 &lt; &gt;）</dd>
@@ -1038,13 +1060,20 @@ class SlidePresentation {
       document.body.classList.toggle('full', Boolean(document.fullscreenElement));
       this.scale();
     });
+    // A click turns the page, but not one that selects text, drags, or only clears a selection, and never while the pen is out.
+    const selected = () => Boolean(String(getSelection()).trim());
+    let down = null;
+    this.stage.addEventListener('pointerdown', e => { down = {x: e.clientX, y: e.clientY, selected: selected()}; });
     this.stage.addEventListener('click', e => {
-      if (e.target.closest('a,button,.pick,pre,.tb,.live-out')) return;
+      if (this.pen || e.target.closest('a,button,.pick,pre,.tb,.live-out')) return;
+      if (down && (down.selected || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6)) return;
+      if (selected()) return;
       this.move(e.clientX < innerWidth / 3 ? -1 : 1);
     });
     let startX = null;
     this.stage.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive: true});
     this.stage.addEventListener('touchend', e => {
+      if (this.pen) return;
       const dx = e.changedTouches[0].clientX - startX;
       if (Math.abs(dx) > 50) this.move(dx < 0 ? 1 : -1);
     });
@@ -1069,6 +1098,7 @@ class SlidePresentation {
     this.setupBugHunt();
     this.setupGates();
     this.setupLive();
+    this.setupPen();
     this.toggleThumbs(this.thumbsPreference());
     this.fromHash();
   }
@@ -1175,7 +1205,7 @@ class SlidePresentation {
   lineText(line) {
     const slots = [...line.querySelectorAll('.slot')];
     const copy = line.cloneNode(true);
-    copy.querySelectorAll('.then').forEach(old => old.remove());
+    copy.querySelectorAll('.then,.orig').forEach(old => old.remove());
     copy.querySelectorAll('.slot').forEach((slot, i) => slot.replaceWith(this.slotCode(slots[i])));
     return copy.textContent;
   }
@@ -1231,6 +1261,66 @@ class SlidePresentation {
     button.onclick = () => this.settings.showModal();
     document.getElementById('ide-close').onclick = () => this.settings.close();
     this.linkIde();
+  }
+
+  /* --- pen: the teacher circles code and draws arrows on the big screen; each page keeps its ink until the reload --- */
+  setupPen() {
+    this.pen = false;
+    const button = document.getElementById('pen'), clear = document.getElementById('pen-clear');
+    // Keep focus off these buttons, so space and a clicker still turn the page instead of pressing them again.
+    [button, clear].forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
+    button.onclick = () => this.togglePen();
+    clear.onclick = () => this.clearInk();
+    let line = null;
+    this.stage.addEventListener('pointerdown', e => {
+      if (!this.pen || !e.target.matches('canvas.ink') || e.button > 0) return;
+      e.preventDefault();
+      const canvas = e.target, box = canvas.getBoundingClientRect();
+      const at = ev => [(ev.clientX - box.left) * 1920 / box.width, (ev.clientY - box.top) * 1080 / box.height];
+      const pen = canvas.getContext('2d');
+      Object.assign(pen, {strokeStyle: '#c6613f', lineWidth: 6, lineCap: 'round', lineJoin: 'round'});
+      try { canvas.setPointerCapture(e.pointerId); } catch {}  // keep drawing when the pointer leaves the canvas
+      line = {pen, at, last: at(e), id: e.pointerId};
+      pen.beginPath();
+      pen.arc(...line.last, 3, 0, 2 * Math.PI);
+      pen.fillStyle = '#c6613f';
+      pen.fill();
+    });
+    this.stage.addEventListener('pointermove', e => {
+      if (!line || e.pointerId !== line.id) return;
+      const next = line.at(e);
+      line.pen.beginPath();
+      line.pen.moveTo(...line.last);
+      line.pen.lineTo(...next);
+      line.pen.stroke();
+      line.last = next;
+    });
+    const stop = e => { if (line && e.pointerId === line.id) line = null; };
+    this.stage.addEventListener('pointerup', stop);
+    this.stage.addEventListener('pointercancel', stop);
+  }
+  ink(slide) {
+    let canvas = slide.querySelector(':scope > canvas.ink');
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      canvas.className = 'ink';
+      canvas.width = 1920;
+      canvas.height = 1080;
+      canvas.setAttribute('aria-hidden', 'true');
+      slide.appendChild(canvas);
+    }
+    return canvas;
+  }
+  togglePen(on = !this.pen) {
+    this.pen = on;
+    document.body.classList.toggle('pen', on);
+    document.getElementById('pen').classList.toggle('on', on);
+    document.getElementById('pen-clear').hidden = !on;
+    if (on) this.ink(this.slides[this.index]);
+  }
+  clearInk() {
+    const canvas = this.slides[this.index].querySelector(':scope > canvas.ink');
+    canvas?.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
   }
 
   /* --- classroom interactions --- */
@@ -1476,6 +1566,7 @@ class SlidePresentation {
     const slide = this.slides[this.index];
     slide.classList.add('active', 'visible');
     if (document.activeElement.matches('.slot')) document.activeElement.blur();
+    if (this.pen) this.ink(slide);
     if (slide.dataset.steps) slide.dataset.at = atEnd ? slide.dataset.steps : 1;
     this.syncChanges(false);
     history.replaceState(null, '', '#page-' + (this.index + 1));
@@ -1505,6 +1596,7 @@ class SlidePresentation {
     if (e.ctrlKey || e.metaKey || e.altKey || this.settings.open || this.help.open) return;
     if (e.target.closest('select')) return;
     if (!this.blank.hidden) { this.blank.hidden = true; e.preventDefault(); return; }
+    if (e.key === 'Escape' && this.pen) { this.togglePen(false); return; }
     if (e.target.matches('.slot')) {
       if (['Enter', 'Escape'].includes(e.key)) e.target.blur();
       if (!['PageDown', 'PageUp'].includes(e.key)) return;
@@ -1519,6 +1611,8 @@ class SlidePresentation {
       t: () => document.getElementById('toggle-thumbs').click(),
       r: () => document.getElementById('ide-quick').click(),
       b: () => { this.blank.hidden = false; },
+      d: () => this.togglePen(),
+      c: () => this.clearInk(),
       g: () => { e.preventDefault(); this.jump.select(); }
     };
     if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(k)) { e.preventDefault(); this.move(e.shiftKey ? -1 : 1); }

@@ -36,6 +36,12 @@
     "stdout": "36\n"
   },
   {
+    "page": 9,
+    "code": "heads = int(input())\nfeet = int(input())\nfor c in range(heads + 1):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)\n",
+    "stdin": "35\n94\n",
+    "stdout": "鸡 23 兔 12\n"
+  },
+  {
     "page": 10,
     "code": "heads = int(input())\nfeet = int(input())\nfound = False\nfor c in range(heads + 1):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)\n        found = True\nif not found:\n    print(\"没有答案\")\n",
     "stdin": "35\n94\n",

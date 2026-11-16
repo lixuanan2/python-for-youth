@@ -37,6 +37,12 @@
     "stdout": "9\n"
   },
   {
+    "page": 8,
+    "code": "n = int(input())\na = []\nfor k in range(n):\n    a.append(int(input()))\nfor r in range(n - 1):\n    for j in range(n - 1 - r):\n        if a[j] > a[j + 1]:\n            a[j], a[j + 1] = a[j + 1], a[j]\n    print(a)\n",
+    "stdin": "10\n5\n2\n9\n1\n7\n3\n8\n6\n4\n10\n",
+    "stdout": "[2, 5, 1, 7, 3, 8, 6, 4, 9, 10]\n[2, 1, 5, 3, 7, 6, 4, 8, 9, 10]\n[1, 2, 3, 5, 6, 4, 7, 8, 9, 10]\n[1, 2, 3, 5, 4, 6, 7, 8, 9, 10]\n[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n"
+  },
+  {
     "page": 9,
     "code": "n = int(input())\na = []\nfor k in range(n):\n    a.append(int(input()))\nfor r in range(n - 1):\n    for j in range(n - 1 - r):\n        if a[j] < a[j + 1]:\n            a[j], a[j + 1] = a[j + 1], a[j]\n    print(a)\n",
     "stdin": "4\n1\n2\n3\n4\n",

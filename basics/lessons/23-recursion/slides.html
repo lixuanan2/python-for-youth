@@ -44,13 +44,15 @@
 <!-- quiz: countdown(0) -->
 <section class="slide" aria-label="小测：countdown(0) 输出什么">
   <h2 class="t r">小测：改成 countdown(0)，输出什么？</h2>
-  <div class="quiz r d1" data-right="0">
+  <div class="quiz side r d1" data-right="0">
     <button type="button" data-fb="答对了！一进去 n == 0 就成立，直接输出“发射！”，不再调用自己。"><i>1</i>发射！</button>
     <button type="button" data-fb="print(n) 在 else 里。n == 0 时走的是 if，不输出 0。"><i>2</i>先 0，再 发射！</button>
     <button type="button" data-fb="n == 0 成立，会运行 if 下面的 print。"><i>3</i>什么也不输出</button>
     <button type="button" data-fb="0 正好是出口，一次就停，不会报错。"><i>4</i>报错</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:42px"><div class="tab">countdown.py</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">countdown</span>(n):</span><span class="ln">    <span class="k">if</span> n == <span class="m">0</span>:</span><span class="ln">        <span class="f">print</span>(<span class="s">"发射！"</span>)</span><span class="ln">    <span class="k">else</span>:</span><span class="ln">        <span class="f">print</span>(n)</span><span class="ln">        <span class="f">countdown</span>(n - <span class="m">1</span>)</span><span class="ln mod"><span class="f">countdown</span>(<span class="m">0</span>)<span class="orig">原来是 countdown(3)</span></span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -87,14 +89,16 @@
 
 <!-- quiz: total(5) -->
 <section class="slide" aria-label="小测：total(5) 是多少">
-  <h2 class="t r">小测：例题里输入 5，输出多少？</h2>
-  <div class="quiz r d1" data-right="2">
+  <h2 class="t r">小测：输入 5，输出多少？</h2>
+  <div class="quiz side r d1" data-right="2">
     <button type="button" data-fb="5 只是第一层。它还要加上 total(4) 交回来的结果。"><i>1</i>5</button>
     <button type="button" data-fb="10 是 total(4)。输入 5，还要再加上 5。"><i>2</i>10</button>
     <button type="button" data-fb="答对了！5 + total(4)，total(4) 是 10，合起来是 15。"><i>3</i>15</button>
     <button type="button" data-fb="120 是 1 乘到 5。例题用的是加号。"><i>4</i>120</button>
   </div>
-  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="editor side r d2" style="--fs:42px"><div class="tab">输入 5</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">total</span>(n):</span><span class="ln">    <span class="k">if</span> n == <span class="m">1</span>:</span><span class="ln">        <span class="k">return</span> <span class="m">1</span></span><span class="ln">    <span class="k">return</span> n + <span class="f">total</span>(n - <span class="m">1</span>)</span><span class="ln"><span class="f">print</span>(<span class="f">total</span>(<span class="f">int</span>(<span class="f">input</span>())))</span></pre></div>
   <div class="foot"></div>
 </section>
 
@@ -103,7 +107,7 @@
   <div class="band r"><b>动手<br>改一改</b><span>把加法换成乘法。</span></div>
   <div class="turn">
     <h2 class="r d1">从 1 乘到 n</h2>
-    <p class="say r d1">读入 n（1 到 10 的整数），输出 1 × 2 × 3 × … × n。这个数叫 n 的阶乘。在例题上改，想一想出口还是 1 吗。</p>
+    <p class="say r d1">读入 n<span class="aside">（1 到 10 的整数）</span>，输出 1 × 2 × 3 × … × n。这个数叫 n 的阶乘。在例题上改，想一想出口还是 1 吗。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>输入 4</small><pre>24</pre></div><div><small>输入 1</small><pre>1</pre></div><div><small>输入 10</small><pre>3628800</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">Python 里乘号写 *。</p>
   </div>
@@ -137,7 +141,7 @@
 <section class="slide clay" aria-label="数字加起来" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">数字加起来</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">读入一个正整数 n（1 到 999999999），用递归把它的每一位数字加起来，输出结果。<br>比如 2026：2 + 0 + 2 + 6 = 10。不许把 n 变成字符串，只用数和递归。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">读入一个正整数 n<span class="aside">（1 到 999999999）</span>，用递归把它的每一位数字加起来，输出结果。<br>比如 2026：2 + 0 + 2 + 6 = 10。<b>不许把 n 变成字符串</b>，只用数和递归。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:480px"><small>输入</small><pre>2026</pre><small style="margin-top:14px">输出</small><pre>10</pre></div>
   <a class="ide r d3" data-code-file="starter/04_digit_sum.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">试试 7 和 10。先自己写，卡住了再翻下一页。</p>
