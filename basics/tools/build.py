@@ -98,8 +98,8 @@ def thanks_slide(lesson):
 
 
 # Practice the students write themselves: their starter opens with the task told again, so the IDE alone is enough.
-BRIEF_ROLES = ('学生小改写', '独立迁移', '创作项目')
-START = {'学生小改写': '在下面这段程序上改', '独立迁移': '从这里开始写', '创作项目': '从这里开始造'}
+BRIEF_ROLES = ('学生小改写', '独立迁移')
+START = {'学生小改写': '在下面这段程序上改', '独立迁移': '从这里开始写'}
 BRIEF_LINES = 12  # about one screen of the IDE above the code
 WIDTH = 64  # columns, a Chinese character counting two
 
@@ -163,7 +163,7 @@ def brief_header(task, comment):
     lines = [f'【{brief["title"]}】']
     for sentence in brief['goal']:
         lines += wrap(sentence)
-    if brief.get('sample', task['role'] != '创作项目'):
+    if brief.get('sample', True):
         lines += sample_lines(task, brief)
     for extra in ([f'提示：{brief["hint"]}'] if brief.get('hint') else []) + brief.get('more', []):
         lines += wrap(extra)
@@ -296,7 +296,7 @@ def stop(number, item):
     if 'id' not in item:
         return f'<li class="stop" data-n="{number}">{html.escape(item["title"])}</li>'
     target = item['id']
-    return f'''<li class="ready"><div><h4>{html.escape(item["title"])}</h4><p>{item.get("note") or f'第 {number} 课'}，{read(f"lessons/{target}/slides.html").count("<section") + 1} 页，含小测、动手题和小项目</p></div>
+    return f'''<li class="ready"><div><h4>{html.escape(item["title"])}</h4><p>{item.get("note") or f'第 {number} 课'}，{read(f"lessons/{target}/slides.html").count("<section") + 1} 页，含小测、动手题和挑战</p></div>
 <nav aria-label="{html.escape(item["title"])}"><a href="{target}/index.html">放映课件</a><a href="{target}/slides.pdf" target="_blank" rel="noopener noreferrer">PDF</a><a href="{target}/starter/index.html">起始程序</a></nav></li>'''
 
 
@@ -384,6 +384,13 @@ def outputs():
     return files
 
 
+def stale_starters(lesson):
+    """Files in dist/<lesson>/starter/ the lesson no longer has."""
+    keep = {'index.html'} | {file.name for file, _ in starters(lesson)} | {f.name for f in (ROOT / 'lessons' / lesson['id'] / 'starter').glob('*')}
+    folder = DIST / lesson['id'] / 'starter'
+    return sorted(f for f in folder.glob('*') if f.is_file() and f.name not in keep) if folder.is_dir() else []
+
+
 def digest(data):
     return hashlib.sha256(data.encode('utf-8') if isinstance(data, str) else data).hexdigest()
 
@@ -419,6 +426,8 @@ def main():
     args = parser.parse_args()
     for lesson in lessons():
         shutil.copytree(ROOT / 'lessons' / lesson['id'] / 'starter', DIST / lesson['id'] / 'starter', dirs_exist_ok=True)
+        for old in stale_starters(lesson):  # a starter taken out of the lesson goes from dist/ too
+            old.unlink()
     for path, text in outputs().items():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding=file_encoding(path), newline='\n')

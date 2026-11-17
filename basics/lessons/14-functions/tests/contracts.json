@@ -38,10 +38,5 @@
     "source": "solutions/06_launch.py",
     "input": "tests/case-08.in",
     "expected": "tests/case-08.out"
-  },
-  {
-    "source": "solutions/07_song_example.py",
-    "input": "tests/case-09.in",
-    "expected": "tests/case-09.out"
   }
 ]

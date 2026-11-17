@@ -113,10 +113,5 @@
     "source": "solutions/07_savings.py",
     "input": "tests/case-23.in",
     "expected": "tests/case-23.out"
-  },
-  {
-    "source": "solutions/08_ledger_example.py",
-    "input": "tests/case-24.in",
-    "expected": "tests/case-24.out"
   }
 ]

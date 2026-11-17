@@ -25,8 +25,9 @@ import traces  # noqa: E402  (next to this file, like algo.py)
 TRACES = []  # (lesson, trace pages checked, [(page, why not)])
 TEXT_FILES = {'.html', '.py', '.cpp', '.h', '.txt', '.md', '.json', '.js', '.css', '.csv'}
 HIDDEN_ROLES = ['学生小改写', '独立迁移']  # Students write these, so the answers stay out of dist/, except a challenge's own answer page.
-# Starters students open to run or change a program must hold it; only 独立迁移 and 创作项目 may start empty.
-EMPTY_ROLES = ['独立迁移', '创作项目']
+# Starters students open to run or change a program must hold it; only 独立迁移 may start empty.
+EMPTY_ROLES = ['独立迁移']
+ROLES = ['语法小演示', '基础例题', '学生小改写', '独立迁移']  # tasks.json roles; lessons have no open mini-project any more
 # Lines that do not count as a program: comments, blank, and a language's empty frame.
 FRAME = {'python': re.compile(r'(#.*|pass|import [\w., ]+|from \w+ import [\w., *]+)?$'),
          'cpp': re.compile(r'(//.*|#include\s*<\w+>|using namespace std;|int main\(\)\s*\{|return 0;|[{}])?$')}
@@ -219,6 +220,7 @@ def check_briefs(lesson, folder, tasks, sections):
     comment = '#' if LANGUAGE == 'python' else '//'
     for task in tasks:
         where = f'{folder.name} task {task["id"]}'
+        assert task['role'] in ROLES, f'{where}: role {task["role"]} is not one of {ROLES}'
         if task['role'] not in builder.BRIEF_ROLES:
             assert 'brief' not in task, f'{where}: only practice students write gets a brief'
             continue
@@ -239,7 +241,7 @@ def check_briefs(lesson, folder, tasks, sections):
             assert squash(fact) in page, f'{where}: the brief says {fact}, page {task["page"]} does not'
         # The sample is what the real program does.
         solution = (folder / task['solution']).read_text(encoding='utf-8')
-        if brief.get('sample', task['role'] != '创作项目'):
+        if brief.get('sample', True):
             given, want = brief.get('input', task['sample_input']), brief.get('output', task['sample_output'])
             result = run(solution, given)
             assert result.stdout.decode().replace('\r\n', '\n') == want, f'{where}: the brief sample is not what {task["solution"]} prints'
@@ -489,6 +491,8 @@ def check_dist():
     for lesson in builder.lessons():
         page = builder.DIST / lesson['id'] / 'starter' / 'index.html'
         assert page.is_file() and page.read_text(encoding='utf-8') == builder.render_starter(lesson), f'Rebuild dist starter page: {lesson["id"]}'
+        stale = builder.stale_starters(lesson)
+        assert not stale, f'Rebuild dist: {lesson["id"]} still has starters the lesson took out: {[f.name for f in stale]}'
         links += local_links(page)
     return len(links)
 

@@ -78,10 +78,5 @@
     "source": "solutions/06_big_square.py",
     "input": "tests/case-16.in",
     "expected": "tests/case-16.out"
-  },
-  {
-    "source": "solutions/07_bus_example.py",
-    "input": "tests/case-17.in",
-    "expected": "tests/case-17.out"
   }
 ]

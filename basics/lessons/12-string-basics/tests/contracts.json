@@ -98,10 +98,5 @@
     "source": "solutions/08_reverse.py",
     "input": "tests/case-20.in",
     "expected": "tests/case-20.out"
-  },
-  {
-    "source": "solutions/09_name_example.py",
-    "input": "tests/case-21.in",
-    "expected": "tests/case-21.out"
   }
 ]

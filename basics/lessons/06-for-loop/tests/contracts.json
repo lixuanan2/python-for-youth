@@ -123,10 +123,5 @@
     "source": "solutions/11_pass_seven.py",
     "input": "tests/case-25.in",
     "expected": "tests/case-25.out"
-  },
-  {
-    "source": "solutions/12_frog_example.py",
-    "input": "tests/case-26.in",
-    "expected": "tests/case-26.out"
   }
 ]

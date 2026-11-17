@@ -80,11 +80,6 @@
     "expected": "tests/case-16.out"
   },
   {
-    "source": "solutions/08_calculator_example.py",
-    "input": "tests/case-17.in",
-    "expected": "tests/case-17.out"
-  },
-  {
     "source": "solutions/09_seconds.py",
     "input": "tests/case-18.in",
     "expected": "tests/case-18.out"

@@ -129,7 +129,7 @@
     "error": "NameError: name 'inptu' is not defined"
   },
   {
-    "page": 21,
+    "page": 19,
     "code": "int(\"abc\")",
     "error": "ValueError"
   }

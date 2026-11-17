@@ -165,26 +165,6 @@
     "expected": "tests/case-33.out"
   },
   {
-    "source": "solutions/10_gatekeeper_example.py",
-    "input": "tests/case-43.in",
-    "expected": "tests/case-43.out"
-  },
-  {
-    "source": "solutions/10_gatekeeper_example.py",
-    "input": "tests/case-44.in",
-    "expected": "tests/case-44.out"
-  },
-  {
-    "source": "solutions/10_gatekeeper_example.py",
-    "input": "tests/case-45.in",
-    "expected": "tests/case-45.out"
-  },
-  {
-    "source": "solutions/10_gatekeeper_example.py",
-    "input": "tests/case-46.in",
-    "expected": "tests/case-46.out"
-  },
-  {
     "source": "solutions/09_award.py",
     "input": "tests/case-47.in",
     "expected": "tests/case-47.out"

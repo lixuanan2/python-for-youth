@@ -63,10 +63,5 @@
     "source": "solutions/04_rps.py",
     "input": "tests/case-13.in",
     "expected": "tests/case-13.out"
-  },
-  {
-    "source": "solutions/05_quiz_example.py",
-    "input": "tests/case-14.in",
-    "expected": "tests/case-14.out"
   }
 ]

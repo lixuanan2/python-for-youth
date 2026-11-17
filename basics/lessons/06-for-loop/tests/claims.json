@@ -121,10 +121,5 @@
     "page": 25,
     "code": "for i in (71, 77):\n    print(i % 7 == 0 or i % 10 == 7)",
     "stdout": "False\nTrue\n"
-  },
-  {
-    "page": 27,
-    "code": "print(\"*\" * 3)",
-    "stdout": "***\n"
   }
 ]

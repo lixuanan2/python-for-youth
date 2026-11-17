@@ -53,10 +53,5 @@
     "source": "solutions/04_digit_sum.py",
     "input": "tests/case-11.in",
     "expected": "tests/case-11.out"
-  },
-  {
-    "source": "solutions/05_triangle_example.py",
-    "input": "tests/case-12.in",
-    "expected": "tests/case-12.out"
   }
 ]

@@ -88,15 +88,5 @@
     "source": "solutions/06_reverse_digits.py",
     "input": "tests/case-18.in",
     "expected": "tests/case-18.out"
-  },
-  {
-    "source": "solutions/07_game_example.py",
-    "input": "tests/case-19.in",
-    "expected": "tests/case-19.out"
-  },
-  {
-    "source": "solutions/07_game_example.py",
-    "input": "tests/case-20.in",
-    "expected": "tests/case-20.out"
   }
 ]

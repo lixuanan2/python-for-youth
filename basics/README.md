@@ -98,7 +98,7 @@ AGENTS.md   这个模块的规则
 
 ## 教学设计
 
-每节课按“讲一点、练一点”推进，最后留一个没有标准答案的小项目，再和同桌互相试玩、改一版。课堂结构以 [PROMPT.md](PROMPT.md) 为准；设计时参考过 MIT Media Lab 的[创意学习](https://www.media.mit.edu/groups/lifelong-kindergarten/overview/)。
+每节课按“讲一点、练一点”推进，最后自己挑战一道新题，卡住了有一条一条的提示，做完再翻参考答案。课堂结构以 [PROMPT.md](PROMPT.md) 为准；设计时参考过 MIT Media Lab 的[创意学习](https://www.media.mit.edu/groups/lifelong-kindergarten/overview/)。
 
 ## 参与
 

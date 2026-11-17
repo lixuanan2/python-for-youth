@@ -58,10 +58,5 @@
     "source": "solutions/06_treasure.py",
     "input": "tests/case-12.in",
     "expected": "tests/case-12.out"
-  },
-  {
-    "source": "solutions/07_seats_example.py",
-    "input": "tests/case-13.in",
-    "expected": "tests/case-13.out"
   }
 ]

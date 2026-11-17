@@ -73,10 +73,5 @@
     "source": "solutions/06_above_average.py",
     "input": "tests/case-15.in",
     "expected": "tests/case-15.out"
-  },
-  {
-    "source": "solutions/07_roll_call_example.py",
-    "input": "tests/case-16.in",
-    "expected": "tests/case-16.out"
   }
 ]

@@ -88,10 +88,5 @@
     "source": "solutions/07_next_year.py",
     "input": "tests/case-18.in",
     "expected": "tests/case-18.out"
-  },
-  {
-    "source": "solutions/08_my_bot_example.py",
-    "input": "tests/case-19.in",
-    "expected": "tests/case-19.out"
   }
 ]

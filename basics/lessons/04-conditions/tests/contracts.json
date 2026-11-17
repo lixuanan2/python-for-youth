@@ -135,21 +135,6 @@
     "expected": "tests/case-27.out"
   },
   {
-    "source": "solutions/09_judge_example.py",
-    "input": "tests/case-28.in",
-    "expected": "tests/case-28.out"
-  },
-  {
-    "source": "solutions/09_judge_example.py",
-    "input": "tests/case-29.in",
-    "expected": "tests/case-29.out"
-  },
-  {
-    "source": "solutions/09_judge_example.py",
-    "input": "tests/case-30.in",
-    "expected": "tests/case-30.out"
-  },
-  {
     "source": "solutions/06b_two_ifs.py",
     "input": "tests/case-31.in",
     "expected": "tests/case-31.out"

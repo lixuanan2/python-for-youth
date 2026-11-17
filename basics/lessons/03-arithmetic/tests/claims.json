@@ -102,17 +102,17 @@
     "stdout": "125.0\n85.0\n"
   },
   {
-    "page": 28,
+    "page": 26,
     "code": "print(3 * 4)",
     "stdout": "12\n"
   },
   {
-    "page": 29,
+    "page": 27,
     "code": "print(2 ** 3)",
     "stdout": "8\n"
   },
   {
-    "page": 29,
+    "page": 27,
     "code": "print(round(2.5))",
     "stdout": "2\n"
   }

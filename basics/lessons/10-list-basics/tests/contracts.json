@@ -63,15 +63,5 @@
     "source": "solutions/06_two_ends.py",
     "input": "tests/case-13.in",
     "expected": "tests/case-13.out"
-  },
-  {
-    "source": "solutions/07_wish_example.py",
-    "input": "tests/case-14.in",
-    "expected": "tests/case-14.out"
-  },
-  {
-    "source": "solutions/07_wish_example.py",
-    "input": "tests/case-15.in",
-    "expected": "tests/case-15.out"
   }
 ]

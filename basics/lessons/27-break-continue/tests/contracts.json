@@ -73,15 +73,5 @@
     "source": "solutions/06_scores.py",
     "input": "tests/case-15.in",
     "expected": "tests/case-15.out"
-  },
-  {
-    "source": "solutions/07_lock_example.py",
-    "input": "tests/case-16.in",
-    "expected": "tests/case-16.out"
-  },
-  {
-    "source": "solutions/07_lock_example.py",
-    "input": "tests/case-17.in",
-    "expected": "tests/case-17.out"
   }
 ]

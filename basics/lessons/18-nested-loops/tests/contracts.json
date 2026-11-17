@@ -58,10 +58,5 @@
     "source": "solutions/07_hollow.py",
     "input": "tests/case-12.in",
     "expected": "tests/case-12.out"
-  },
-  {
-    "source": "solutions/08_ladder_example.py",
-    "input": "tests/case-13.in",
-    "expected": "tests/case-13.out"
   }
 ]

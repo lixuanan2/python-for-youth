@@ -83,10 +83,5 @@
     "source": "solutions/07_max3.py",
     "input": "tests/case-17.in",
     "expected": "tests/case-17.out"
-  },
-  {
-    "source": "solutions/08_sale_example.py",
-    "input": "tests/case-18.in",
-    "expected": "tests/case-18.out"
   }
 ]
