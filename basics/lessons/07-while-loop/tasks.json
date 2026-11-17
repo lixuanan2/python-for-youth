@@ -16,7 +16,7 @@
     "page": 7,
     "starter": "starter/02_while_n.py",
     "solution": "solutions/02_while_n.py",
-    "scope": "n为0到1000的整数",
+    "scope": "n为整数",
     "sample_input": "3\n",
     "sample_output": "1\n2\n3\n",
     "description": "用while重写1到n，与for对照。"
@@ -27,14 +27,14 @@
     "page": 9,
     "starter": "starter/03_countdown.py",
     "solution": "solutions/03_countdown.py",
-    "scope": "n为1到100的整数",
+    "scope": "n为整数",
     "sample_input": "3\n",
     "sample_output": "3\n2\n1\n发射！\n",
     "description": "用while倒计时。",
     "brief": {
       "title": "用 while 倒计时",
       "goal": [
-        "读入一个 1 到 100 的整数 n，从 n 倒数到 1，每个数占一行，最后输出发射！"
+        "读入一个整数 n，从 n 倒数到 1，每个数占一行，最后输出发射！"
       ],
       "hint": "三件事都要改：开始值、条件和更新。"
     }
@@ -45,7 +45,7 @@
     "page": 12,
     "starter": "starter/04_guess.py",
     "solution": "solutions/04_guess.py",
-    "scope": "每行一个1到100的整数，最后一行是7",
+    "scope": "每行一个整数，最后一行是7",
     "sample_input": "3\n9\n7\n",
     "sample_output": "不对，再猜\n不对，再猜\n猜对了\n",
     "description": "次数由输入决定的循环。"
@@ -56,14 +56,14 @@
     "page": 14,
     "starter": "starter/05_guess_hint.py",
     "solution": "solutions/05_guess_hint.py",
-    "scope": "每行一个1到100的整数，最后一行是7",
+    "scope": "每行一个整数，最后一行是7",
     "sample_input": "50\n3\n7\n",
     "sample_output": "大了\n小了\n猜对了\n",
     "description": "在循环里提示猜大猜小。",
     "brief": {
       "title": "提示大了还是小了",
       "goal": [
-        "答案还是 7。每行读入一个 1 到 100 的整数，猜大了输出大了，猜小了输出小了，猜中才结束。"
+        "答案还是 7。每行读入一个整数，猜大了输出大了，猜小了输出小了，猜中才结束。"
       ],
       "hint": "while 里面也能放 if，缩进要跟上。"
     }
@@ -74,14 +74,14 @@
     "page": 17,
     "starter": "starter/06_reverse_digits.py",
     "solution": "solutions/06_reverse_digits.py",
-    "scope": "n为1到1000000的整数",
+    "scope": "n为正整数",
     "sample_input": "123\n",
     "sample_output": "3\n2\n1\n",
     "description": "用取余和整除一位一位输出。",
     "brief": {
       "title": "反着念数字",
       "goal": [
-        "读入 n（1 到 1000000 的整数），从个位开始，一位一位地输出，每位占一行。",
+        "读入一个正整数 n，从个位开始，一位一位地输出，每位占一行。",
         "输入 100，就输出 0、0、1 三行。"
       ]
     }

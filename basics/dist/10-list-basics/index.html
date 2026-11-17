@@ -699,10 +699,10 @@ out of range</pre></div>
   <div class="band r"><b>动手<br>改一改</b><span>取出来、加上、放回去，最后输出整个列表。</span></div>
   <div class="turn">
     <h2 class="r d1">给第 k 个人加 5 分</h2>
-    <p class="say r d1">第一行读入人数 n<span class="aside">（1 到 100 的整数）</span>，接下来 n 行，每行一个 <span class="aside">0 到 95 的</span>整数分数，最后一行读入 k<span class="aside">（1 到 n）</span>。给第 k 个人加 5 分，输出整个列表。</p>
+    <p class="say r d1">第一行读入人数 n，接下来 n 行，每行一个整数分数，最后一行读入 k，k 在 1 到 n 之间。给第 k 个人加 5 分，输出整个列表。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1.4fr"><div><small>依次输入</small><pre style="font-size:44px">3、80、95、70、2</pre></div><div><small>输出</small><pre style="font-size:44px">[80, 100, 70]</pre></div></div>
   </div>
-  <a class="ide r d3" data-code="# 【给第 k 个人加 5 分】&#10;# 第一行读入人数 n（1 到 100 的整数），接下来 n 行，&#10;#   每行一个 0 到 95 的整数分数，最后一行读入 k（1 到 n）。&#10;#   给第 k 个人加 5 分，输出整个列表。&#10;# 例如输入（每个一行）：3、80、95、70、2&#10;# 应该输出：[80, 100, 70]&#10;# 提示：取出来、加上、放回去，最后输出整个列表。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;k = int(input())&#10;print(scores[k - 1])&#10;" style="left:610px;top:830px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【给第 k 个人加 5 分】&#10;# 第一行读入人数 n，接下来 n 行，每行一个整数分数，&#10;#   最后一行读入 k，k 在 1 到 n 之间。给第 k 个人加 5 分，&#10;#   输出整个列表。&#10;# 例如输入（每个一行）：3、80、95、70、2&#10;# 应该输出：[80, 100, 70]&#10;# 提示：取出来、加上、放回去，最后输出整个列表。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;k = int(input())&#10;print(scores[k - 1])&#10;" style="left:610px;top:830px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: len after append -->
@@ -747,7 +747,7 @@ out of range</pre></div>
 <section id="page-18" class="slide clay" aria-label="从两头数" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">从两头数</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">第一行读入个数 n<span class="aside">（1 到 100 的整数）</span>，接下来 n 行，每行一个 <span class="aside">0 到 100 的</span>整数，最后一行读入 k<span class="aside">（1 到 n）</span>。<br>输出从前往后数第 k 个和<b>从后往前数第 k 个</b>，中间空一格。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">第一行读入个数 n，接下来 n 行，每行一个整数，最后一行读入 k，k 在 1 到 n 之间。<br>输出从前往后数第 k 个和<b>从后往前数第 k 个</b>，中间空一格。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:150px;width:520px"><small>依次输入</small><pre style="font-size:48px">5
 10
 20
@@ -755,7 +755,7 @@ out of range</pre></div>
 40
 50
 2</pre><small style="margin-top:14px">输出</small><pre style="font-size:48px">20 40</pre></div>
-  <a class="ide r d3" data-code="# 【从两头数】&#10;# 第一行读入个数 n（1 到 100 的整数），接下来 n 行，&#10;#   每行一个 0 到 100 的整数，最后一行读入 k（1 到 n）。&#10;# 输出从前往后数第 k 个和从后往前数第 k 个，中间空一格。&#10;# 例如输入（每个一行）：5、10、20、30、40、50、2&#10;# 应该输出：20 40&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【从两头数】&#10;# 第一行读入个数 n，接下来 n 行，每行一个整数，最后一行读入 k，&#10;#   k 在 1 到 n 之间。&#10;# 输出从前往后数第 k 个和从后往前数第 k 个，中间空一格。&#10;# 例如输入（每个一行）：5、10、20、30、40、50、2&#10;# 应该输出：20 40&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>

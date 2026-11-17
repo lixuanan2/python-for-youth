@@ -648,12 +648,12 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
   <div class="band r"><b>动手<br>改一改</b><span>先从大到小排好，再用下标编名次。</span></div>
   <div class="turn">
     <h2 class="r d1">排一张名次表</h2>
-    <p class="say r d1">第一行读入人数 n<span class="aside">（1 到 100 的整数）</span>，接下来 n 行，每行一个 <span class="aside">0 到 100 的</span>整数分数。从高到低输出名次和分数，一行一个，<b>分数一样也各占一个名次</b>。</p>
+    <p class="say r d1">第一行读入人数 n，接下来 n 行，每行一个整数分数。从高到低输出名次和分数，一行一个，<b>分数一样也各占一个名次</b>。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="font-size:44px">3、80、95、70</pre></div><div><small>输出</small><pre style="line-height:1.2">1 95
 2 80
 3 70</pre></div></div>
   </div>
-  <a class="ide r d3" data-code="# 【排一张名次表】&#10;# 第一行读入人数 n（1 到 100 的整数），接下来 n 行，&#10;#   每行一个 0 到 100 的整数分数。从高到低输出名次和分数，&#10;#   一行一个，分数一样也各占一个名次。&#10;# 例如输入（每个一行）：3、80、95、70&#10;# 应该输出（每个一行）：1 95、2 80、3 70&#10;# 提示：先从大到小排好，再用下标编名次。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;print(&quot;总分&quot;, sum(scores))&#10;print(&quot;最高&quot;, max(scores))&#10;print(&quot;最低&quot;, min(scores))&#10;" style="left:610px;top:890px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【排一张名次表】&#10;# 第一行读入人数 n，接下来 n 行，每行一个整数分数。&#10;#   从高到低输出名次和分数，一行一个，分数一样也各占一个名次。&#10;# 例如输入（每个一行）：3、80、95、70&#10;# 应该输出（每个一行）：1 95、2 80、3 70&#10;# 提示：先从大到小排好，再用下标编名次。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;print(&quot;总分&quot;, sum(scores))&#10;print(&quot;最高&quot;, max(scores))&#10;print(&quot;最低&quot;, min(scores))&#10;" style="left:610px;top:890px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: in -->
@@ -711,14 +711,14 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
 <section id="page-15" class="slide clay" aria-label="比赛评分" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">比赛评分</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:960px">第一行读入评委人数 n<span class="aside">（3 到 20 的整数）</span>，接下来 n 行，每行一个 <span class="aside">0 到 10 的</span>整数分数。<br>去掉一个最高分、一个最低分，输出剩下分数的平均分。<br>最高分或最低分有好几个，<b>也只去掉一个</b>。直接输出算出来的平均分，比如 8.0、2.5。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:960px">第一行读入评委人数 n，至少 3 人，接下来 n 行，每行一个整数分数。<br>去掉一个最高分、一个最低分，输出剩下分数的平均分。<br>最高分或最低分有好几个，<b>也只去掉一个</b>。直接输出算出来的平均分，比如 8.0、2.5。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:150px;width:440px"><small>依次输入</small><pre>5
 9
 7
 8
 10
 6</pre><small style="margin-top:14px">输出</small><pre>8.0</pre></div>
-  <a class="ide r d3" data-code="# 【比赛评分】&#10;# 第一行读入评委人数 n（3 到 20 的整数），接下来 n 行，&#10;#   每行一个 0 到 10 的整数分数。&#10;# 去掉一个最高分、一个最低分，输出剩下分数的平均分。&#10;# 最高分或最低分有好几个，也只去掉一个。直接输出算出来的平均分，&#10;#   比如 8.0、2.5。&#10;# 例如输入（每个一行）：5、9、7、8、10、6&#10;# 应该输出：8.0&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【比赛评分】&#10;# 第一行读入评委人数 n，至少 3 人，接下来 n 行，每行一个整数分数。&#10;# 去掉一个最高分、一个最低分，输出剩下分数的平均分。&#10;# 最高分或最低分有好几个，也只去掉一个。直接输出算出来的平均分，&#10;#   比如 8.0、2.5。&#10;# 例如输入（每个一行）：5、9、7、8、10、6&#10;# 应该输出：8.0&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>

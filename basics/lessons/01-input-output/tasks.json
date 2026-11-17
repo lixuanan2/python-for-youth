@@ -56,7 +56,7 @@
     "page": 15,
     "starter": "starter/04_sum.py",
     "solution": "solutions/04_sum.py",
-    "scope": "a、b为-1000到1000的整数，分两行输入",
+    "scope": "a、b为整数，分两行输入",
     "sample_input": "3\n4\n",
     "sample_output": "7\n",
     "description": "用int转换后输出两数之和。"
@@ -67,14 +67,14 @@
     "page": 17,
     "starter": "starter/06_sum_three.py",
     "solution": "solutions/06_sum_three.py",
-    "scope": "三个-1000到1000的整数，分三行输入",
+    "scope": "三个整数，分三行输入",
     "sample_input": "1\n2\n3\n",
     "sample_output": "6\n",
     "description": "在两数求和基础上改成三数求和。",
     "brief": {
       "title": "改成三个数求和",
       "goal": [
-        "再读入一个整数 c，输出三个数的和。三个数都是 -1000 到 1000 的整数，各占一行。"
+        "再读入一个整数 c，输出三个数的和。三个数都是整数，各占一行。"
       ],
       "hint": "照着前两行，再读入一个数。"
     }
@@ -85,14 +85,14 @@
     "page": 21,
     "starter": "starter/07_next_year.py",
     "solution": "solutions/07_next_year.py",
-    "scope": "第一行名字；第二行0到150的整数年龄",
+    "scope": "第一行名字；第二行整数年龄",
     "sample_input": "Ming\n10\n",
     "sample_output": "Ming 明年 11 岁\n",
     "description": "读入名字和年龄，输出一句话说明明年几岁。",
     "brief": {
       "title": "明年几岁？",
       "goal": [
-        "写一个程序：第一行读入名字，第二行读入今年的年龄（0 到 150 的整数），输出这个人明年几岁。"
+        "写一个程序：第一行读入名字，第二行读入今年的年龄，输出这个人明年几岁。"
       ]
     }
   },

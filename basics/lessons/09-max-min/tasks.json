@@ -5,7 +5,7 @@
     "page": 3,
     "starter": "starter/01_max.py",
     "solution": "solutions/01_max.py",
-    "scope": "第一行个数n为1到100；接下来n行每行一个0到100的整数",
+    "scope": "第一行个数n至少为1；接下来n行每行一个整数",
     "sample_input": "3\n80\n95\n70\n",
     "sample_output": "95\n",
     "description": "打擂台：第一个数先上台，后面的更大就换。"
@@ -16,14 +16,14 @@
     "page": 8,
     "starter": "starter/02_min.py",
     "solution": "solutions/02_min.py",
-    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数",
+    "scope": "第一行人数n至少为1；接下来n行每行一个整数",
     "sample_input": "3\n80\n95\n70\n",
     "sample_output": "70\n",
     "description": "改成找最低分。",
     "brief": {
       "title": "改成找最低分",
       "goal": [
-        "第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。输出最低分。"
+        "第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。输出最低分。"
       ],
       "hint": "改一个符号，再给变量起个好懂的名字。"
     }
@@ -34,7 +34,7 @@
     "page": 9,
     "starter": "starter/03_winner.py",
     "solution": "solutions/03_winner.py",
-    "scope": "第一行人数n为1到100；接下来每人两行，名字一行，0到100的整数分数一行",
+    "scope": "第一行人数n至少为1；接下来每人两行，名字一行，整数分数一行",
     "sample_input": "3\n小明\n80\n小红\n95\n小刚\n70\n",
     "sample_output": "小红 95\n",
     "description": "换擂主时把名字一起换。"
@@ -45,14 +45,14 @@
     "page": 11,
     "starter": "starter/04_position.py",
     "solution": "solutions/04_position.py",
-    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数；一样高算先出场的",
+    "scope": "第一行人数n至少为1；接下来n行每行一个整数；一样高算先出场的",
     "sample_input": "3\n80\n95\n70\n",
     "sample_output": "2 95\n",
     "description": "再记住最高分是第几个出场的。",
     "brief": {
       "title": "最高分是第几个？",
       "goal": [
-        "第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。输出两个数：最高分是第几个出场的，最高分是多少。一样高时算先出场的。"
+        "第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。输出两个数：最高分是第几个出场的，最高分是多少。一样高时算先出场的。"
       ],
       "hint": "再请一个变量帮忙，记住擂主是第几个出场的。"
     }
@@ -63,14 +63,14 @@
     "page": 15,
     "starter": "starter/05_temp_range.py",
     "solution": "solutions/05_temp_range.py",
-    "scope": "第一行天数n为1到100；接下来n行每行一个-50到50的整数",
+    "scope": "第一行天数n至少为1；接下来n行每行一个整数",
     "sample_input": "4\n3\n-2\n8\n-5\n",
     "sample_output": "13\n",
     "description": "同时守住最大和最小，算温差。",
     "brief": {
       "title": "温差",
       "goal": [
-        "第一行读入天数 n（1 到 100 的整数），接下来 n 行，每行一个 -50 到 50 的整数气温。",
+        "第一行读入天数 n，至少 1 天，接下来 n 行，每行一个整数气温。",
         "输出这几天里最热和最冷差了几度。"
       ]
     }

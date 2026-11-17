@@ -16,7 +16,7 @@
     "page": 7,
     "starter": "starter/02_total.py",
     "solution": "solutions/02_total.py",
-    "scope": "一行，n为1到100的整数",
+    "scope": "一行，n为正整数",
     "sample_input": "4\n",
     "sample_output": "10\n",
     "description": "用递归从 1 加到 n。"
@@ -27,14 +27,14 @@
     "page": 9,
     "starter": "starter/03_factorial.py",
     "solution": "solutions/03_factorial.py",
-    "scope": "一行，n为1到10的整数",
+    "scope": "一行，n为正整数",
     "sample_input": "4\n",
     "sample_output": "24\n",
     "description": "把加法改成乘法，算阶乘。",
     "brief": {
       "title": "从 1 乘到 n",
       "goal": [
-        "读入 n（1 到 10 的整数），输出 1 × 2 × 3 × … × n。这个数叫 n 的阶乘。在例题上改，想一想出口还是 1 吗。"
+        "读入一个正整数 n，输出 1 × 2 × 3 × … × n。这个数叫 n 的阶乘。在例题上改，想一想出口还是 1 吗。"
       ],
       "hint": "把加法换成乘法。"
     }
@@ -45,14 +45,14 @@
     "page": 12,
     "starter": "starter/04_digit_sum.py",
     "solution": "solutions/04_digit_sum.py",
-    "scope": "一行，n为1到999999999的整数",
+    "scope": "一行，n为正整数",
     "sample_input": "2026\n",
     "sample_output": "10\n",
     "description": "用递归把各位数字加起来。",
     "brief": {
       "title": "数字加起来",
       "goal": [
-        "读入一个正整数 n（1 到 999999999），用递归把它的每一位数字加起来，输出结果。",
+        "读入一个正整数 n，用递归把它的每一位数字加起来，输出结果。",
         "比如 2026：2 + 0 + 2 + 6 = 10。不许把 n 变成字符串，只用数和递归。"
       ],
       "more": [

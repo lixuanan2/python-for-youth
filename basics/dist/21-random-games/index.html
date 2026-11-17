@@ -619,11 +619,11 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="band r"><b>动手<br>改一改</b><span>不猜了，用循环掷很多次，数一数。</span></div>
   <div class="turn">
     <h2 class="r d1">掷 n 次，有几个 6</h2>
-    <p class="say r d1">第一行读入种子，第二行读入次数 n<span class="aside">（0 到 1000 的整数）</span>。用这个种子掷 n 次骰子，输出一共掷出了几次 6。</p>
+    <p class="say r d1">第一行读入种子，第二行读入次数 n。用这个种子掷 n 次骰子，输出一共掷出了几次 6。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>种子 1，掷 10 次</small><pre>1</pre></div><div><small>种子 3，掷 600 次</small><pre>95</pre></div><div><small>掷 0 次</small><pre>0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">掷 600 次，6 大约出现 100 次。</p>
   </div>
-  <a class="ide r d3" data-code="# 【掷 n 次，有几个 6】&#10;# 第一行读入种子，第二行读入次数 n（0 到 1000 的整数）。&#10;#   用这个种子掷 n 次骰子，输出一共掷出了几次 6。&#10;# 例如输入（每个一行）：1、10&#10;# 应该输出：1&#10;# 提示：不猜了，用循环掷很多次，数一数。&#10;# ↓ 在下面这段程序上改&#10;&#10;import random&#10;random.seed(int(input()))&#10;secret = random.randint(1, 100)&#10;guess = int(input())&#10;while guess != secret:&#10;    if guess &gt; secret:&#10;        print(&quot;大了&quot;)&#10;    else:&#10;        print(&quot;小了&quot;)&#10;    guess = int(input())&#10;print(&quot;猜中了！&quot;)&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【掷 n 次，有几个 6】&#10;# 第一行读入种子，第二行读入次数 n。用这个种子掷 n 次骰子，&#10;#   输出一共掷出了几次 6。&#10;# 例如输入（每个一行）：1、10&#10;# 应该输出：1&#10;# 提示：不猜了，用循环掷很多次，数一数。&#10;# ↓ 在下面这段程序上改&#10;&#10;import random&#10;random.seed(int(input()))&#10;secret = random.randint(1, 100)&#10;guess = int(input())&#10;while guess != secret:&#10;    if guess &gt; secret:&#10;        print(&quot;大了&quot;)&#10;    else:&#10;        print(&quot;小了&quot;)&#10;    guess = int(input())&#10;print(&quot;猜中了！&quot;)&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: same seed -->
@@ -668,11 +668,11 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-13" class="slide clay" aria-label="石头剪刀布" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">石头剪刀布</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:960px">第一行读入种子<span class="aside">（0 到 1000 的整数）</span>，第二行读入你出的：石头、剪刀或布。电脑用 random.choice(["石头", "剪刀", "布"]) 出一个，<b>列表照这个顺序写</b>，结果才和样例一样。<br>先输出“电脑出 ……”，再输出你的结果：赢、输或平。石头赢剪刀，剪刀赢布，布赢石头。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:960px">第一行读入种子，第二行读入你出的：石头、剪刀或布。电脑用 random.choice(["石头", "剪刀", "布"]) 出一个，<b>列表照这个顺序写</b>，结果才和样例一样。<br>先输出“电脑出 ……”，再输出你的结果：赢、输或平。石头赢剪刀，剪刀赢布，布赢石头。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:540px"><small>依次输入</small><pre>7
 石头</pre><small style="margin-top:14px">输出</small><pre style="font-size:48px;white-space:pre">电脑出 剪刀
 赢</pre></div>
-  <a class="ide r d3" data-code="# 【石头剪刀布】&#10;# 第一行读入种子（0 到 1000 的整数），第二行读入你出的：石头、&#10;#   剪刀或布。&#10;#   电脑用 random.choice([&quot;石头&quot;, &quot;剪刀&quot;, &quot;布&quot;]) 出一个，&#10;#   列表照这个顺序写，结果才和样例一样。&#10;# 先输出电脑出的是什么，再输出你的结果：赢、输或平。石头赢剪刀，&#10;#   剪刀赢布，布赢石头。&#10;# 例如输入（每个一行）：7、石头&#10;# 应该输出（每个一行）：电脑出 剪刀、赢&#10;# ↓ 从这里开始写&#10;&#10;import random&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【石头剪刀布】&#10;# 第一行读入种子，第二行读入你出的：石头、剪刀或布。&#10;#   电脑用 random.choice([&quot;石头&quot;, &quot;剪刀&quot;, &quot;布&quot;]) 出一个，&#10;#   列表照这个顺序写，结果才和样例一样。&#10;# 先输出电脑出的是什么，再输出你的结果：赢、输或平。石头赢剪刀，&#10;#   剪刀赢布，布赢石头。&#10;# 例如输入（每个一行）：7、石头&#10;# 应该输出（每个一行）：电脑出 剪刀、赢&#10;# ↓ 从这里开始写&#10;&#10;import random&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>

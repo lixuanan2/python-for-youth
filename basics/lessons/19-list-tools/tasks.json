@@ -38,7 +38,7 @@
     "page": 9,
     "starter": "starter/04_report.py",
     "solution": "solutions/04_report.py",
-    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数",
+    "scope": "第一行人数n至少为1；接下来n行每行一个整数",
     "sample_input": "3\n80\n95\n70\n",
     "sample_output": "总分 245\n最高 95\n最低 70\n",
     "description": "一句一个工具，做成绩小报告。"
@@ -49,14 +49,14 @@
     "page": 10,
     "starter": "starter/05_ranking.py",
     "solution": "solutions/05_ranking.py",
-    "scope": "第一行人数n为1到100；接下来n行每行一个0到100的整数",
+    "scope": "第一行人数n；接下来n行每行一个整数",
     "sample_input": "3\n80\n95\n70\n",
     "sample_output": "1 95\n2 80\n3 70\n",
     "description": "从高到低输出名次表。",
     "brief": {
       "title": "排一张名次表",
       "goal": [
-        "第一行读入人数 n（1 到 100 的整数），接下来 n 行，每行一个 0 到 100 的整数分数。从高到低输出名次和分数，一行一个，分数一样也各占一个名次。"
+        "第一行读入人数 n，接下来 n 行，每行一个整数分数。从高到低输出名次和分数，一行一个，分数一样也各占一个名次。"
       ],
       "hint": "先从大到小排好，再用下标编名次。"
     }
@@ -67,14 +67,14 @@
     "page": 15,
     "starter": "starter/06_judge.py",
     "solution": "solutions/06_judge.py",
-    "scope": "第一行评委人数n为3到20；接下来n行每行一个0到10的整数",
+    "scope": "第一行评委人数n至少为3；接下来n行每行一个整数",
     "sample_input": "5\n9\n7\n8\n10\n6\n",
     "sample_output": "8.0\n",
     "description": "去掉最高分和最低分再算平均。",
     "brief": {
       "title": "比赛评分",
       "goal": [
-        "第一行读入评委人数 n（3 到 20 的整数），接下来 n 行，每行一个 0 到 10 的整数分数。",
+        "第一行读入评委人数 n，至少 3 人，接下来 n 行，每行一个整数分数。",
         "去掉一个最高分、一个最低分，输出剩下分数的平均分。",
         "最高分或最低分有好几个，也只去掉一个。直接输出算出来的平均分，比如 8.0、2.5。"
       ]

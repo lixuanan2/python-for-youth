@@ -16,7 +16,7 @@
     "page": 7,
     "starter": "starter/02_ends.py",
     "solution": "solutions/02_ends.py",
-    "scope": "一行1到50个字的文字",
+    "scope": "一行文字，至少1个字",
     "sample_input": "hello\n",
     "sample_output": "h o\n",
     "description": "输出第一个字和最后一个字。"
@@ -38,14 +38,14 @@
     "page": 11,
     "starter": "starter/04_two_two.py",
     "solution": "solutions/04_two_two.py",
-    "scope": "一行2到50个字的文字",
+    "scope": "一行文字",
     "sample_input": "Python\n",
     "sample_output": "Py on\n",
     "description": "输出前两个字和后两个字。",
     "brief": {
       "title": "前两个字和后两个字",
       "goal": [
-        "读入一行文字（2 到 50 个字）。输出它的前两个字和后两个字，中间空一格。"
+        "读入一行文字。输出它的前两个字和后两个字，中间空一格。"
       ],
       "hint": "把下标换成切片。"
     }
@@ -67,7 +67,7 @@
     "page": 13,
     "starter": "starter/06_count_a.py",
     "solution": "solutions/06_count_a.py",
-    "scope": "一行1到50个英文字母，区分大小写",
+    "scope": "一行英文字母，区分大小写",
     "sample_input": "banana\n",
     "sample_output": "3\n",
     "description": "数一数有几个小写a。"
@@ -78,14 +78,14 @@
     "page": 14,
     "starter": "starter/07_count_char.py",
     "solution": "solutions/07_count_char.py",
-    "scope": "第一行一个字，可以是空格；第二行1到50个字的文字；区分大小写",
+    "scope": "第一行一个字，可以是空格；第二行一句话；区分大小写",
     "sample_input": "a\na cat and a dog\n",
     "sample_output": "4\n",
     "description": "先读入要数的字，再读入一句话。",
     "brief": {
       "title": "数一数这个字出现几次",
       "goal": [
-        "第一行读入一个字（可以是空格），第二行读入一句话（1 到 50 个字）。输出这个字在这句话里出现了几次，大写和小写算不同的字。"
+        "第一行读入一个字（可以是空格），第二行读入一句话。输出这个字在这句话里出现了几次，大写和小写算不同的字。"
       ],
       "hint": "要数的字不写死，先读进来。"
     }
@@ -96,14 +96,14 @@
     "page": 18,
     "starter": "starter/08_reverse.py",
     "solution": "solutions/08_reverse.py",
-    "scope": "一行1到50个字的文字，可以有空格",
+    "scope": "一行文字，可以有空格",
     "sample_input": "hello\n",
     "sample_output": "olleh\n",
     "description": "倒着输出一行文字。",
     "brief": {
       "title": "倒着念",
       "goal": [
-        "读入一行文字（1 到 50 个字，可以有空格）。",
+        "读入一行文字（可以有空格）。",
         "把它倒过来输出：最后一个字在最前面，第一个字在最后面，空格也要保留。"
       ]
     }

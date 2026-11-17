@@ -114,7 +114,7 @@ print(b, a)</pre>
   <div class="band r"><b>动手<br>改一改</b><span>让函数多交回一个。</span></div>
   <div class="turn">
     <h2 class="r d1">再交回平均分</h2>
-    <p class="say r d1">在例题上改：函数改成一次交回三个值：最低、最高、平均分，平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。输入和例题一样，n 是 <span class="aside">1 到 50 的</span>整数。</p>
+    <p class="say r d1">在例题上改：函数改成一次交回三个值：最低、最高、平均分，平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。输入和例题一样，n 至少是 1。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 4、90、85、77、96，第三行</small><pre>平均 87.0</pre></div><div><small>输入 1、60，第三行</small><pre>平均 60.0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">交回几个，拆的时候左边就写几个名字。</p>
   </div>
@@ -148,7 +148,7 @@ print(b, a)</pre>
 <section class="slide clay" aria-label="最近的宝藏" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">最近的宝藏</h2>
-  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">你站在 (0, 0)，只能横着或竖着走，走到 (x, y) 要 |x| + |y| 步。第一行读入宝藏个数 n<span class="aside">（1 到 50）</span>，接下来 n 行每行两个整数 x 和 y<span class="aside">（-100 到 100）</span>，用空格隔开。<br>找出最近的宝藏，<b>一样近时选先出现的</b>。输出两行：它的位置，写成 (1, -2) 的样子；还有“几 步”。</p>
+  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">你站在 (0, 0)，只能横着或竖着走，走到 (x, y) 要 |x| + |y| 步。第一行读入宝藏个数 n，至少 1 个，接下来 n 行每行两个整数 x 和 y，用空格隔开。<br>找出最近的宝藏，<b>一样近时选先出现的</b>。输出两行：它的位置，写成 (1, -2) 的样子；还有“几 步”。</p>
   <div class="slip tilt2 r d3" style="right:100px;top:200px;width:460px"><small>依次输入</small><pre style="font-size:44px;white-space:pre">3
 3 4
 -1 2

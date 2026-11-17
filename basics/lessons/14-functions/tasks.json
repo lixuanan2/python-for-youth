@@ -74,14 +74,14 @@
     "page": 15,
     "starter": "starter/06_launch.py",
     "solution": "solutions/06_launch.py",
-    "scope": "一行练习次数n为1到5的整数",
+    "scope": "一行练习次数n为整数",
     "sample_input": "2\n",
     "sample_output": "第 1 次\n3\n2\n1\n发射！\n第 2 次\n3\n2\n1\n发射！\n",
     "description": "在循环里调用函数。",
     "brief": {
       "title": "发射练习",
       "goal": [
-        "读入练习次数 n（1 到 5 的整数）。每次先输出“第 k 次”，再倒数 3、2、1，最后输出“发射！”。",
+        "读入练习次数 n。每次先输出“第 k 次”，再倒数 3、2、1，最后输出“发射！”。",
         "倒数的部分写成一个函数，在循环里调用它。"
       ]
     }

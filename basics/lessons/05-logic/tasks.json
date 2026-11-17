@@ -16,7 +16,7 @@
     "page": 6,
     "starter": "starter/02_range.py",
     "solution": "solutions/02_range.py",
-    "scope": "score为0到100的整数",
+    "scope": "score为整数",
     "sample_input": "60\n",
     "sample_output": "True\n",
     "description": "用and写出一个范围，解释为什么含60不含90。"
@@ -27,14 +27,14 @@
     "page": 9,
     "starter": "starter/03_two_digit.py",
     "solution": "solutions/03_two_digit.py",
-    "scope": "n为1到1000的整数",
+    "scope": "n为整数",
     "sample_input": "10\n",
     "sample_output": "True\n",
     "description": "改成判断是不是两位数。",
     "brief": {
       "title": "判断是不是两位数",
       "goal": [
-        "读入一个 1 到 1000 的整数。是两位数输出 True，不是输出 False。"
+        "读入一个整数。是两位数输出 True，不是输出 False。"
       ],
       "hint": "先想好范围的两头，再动手改。"
     }
@@ -56,14 +56,14 @@
     "page": 13,
     "starter": "starter/05_half_price.py",
     "solution": "solutions/05_half_price.py",
-    "scope": "age为0到120的整数",
+    "scope": "age为整数",
     "sample_input": "60\n",
     "sample_output": "半价\n",
     "description": "改成判断半价票。",
     "brief": {
       "title": "电影票半价",
       "goal": [
-        "读入年龄（0 到 120 的整数）。不满 12 岁或者满 60 岁输出半价，其他人输出全价。"
+        "读入年龄。不满 12 岁或者满 60 岁输出半价，其他人输出全价。"
       ],
       "hint": "两种人都半价。这时候该用 and 还是 or？"
     }
@@ -74,7 +74,7 @@
     "page": 14,
     "starter": "starter/06_ticket.py",
     "solution": "solutions/06_ticket.py",
-    "scope": "age为0到120的整数",
+    "scope": "age为整数",
     "sample_input": "20\n",
     "sample_output": "成人票\n",
     "description": "把比较结果放进变量，再用not取反。"
@@ -107,14 +107,14 @@
     "page": 20,
     "starter": "starter/09_award.py",
     "solution": "solutions/09_award.py",
-    "scope": "两行，语文和数学成绩均为0到100的整数",
+    "scope": "两行，语文和数学成绩均为整数",
     "sample_input": "90\n60\n",
     "sample_output": "获奖\n",
     "description": "把规则分组，组合and、or和括号。",
     "brief": {
       "title": "小奖状",
       "goal": [
-        "分两行读入语文和数学成绩，都是 0 到 100 的整数。",
+        "分两行读入语文和数学成绩，都是整数。",
         "至少有一门满 90 分，并且两门都满 60 分，就输出获奖，否则输出继续努力。"
       ]
     }

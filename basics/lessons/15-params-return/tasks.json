@@ -27,7 +27,7 @@
     "page": 9,
     "starter": "starter/03_rooms.py",
     "solution": "solutions/03_rooms.py",
-    "scope": "分四行读入两个房间的长和宽，都是0到100的整数",
+    "scope": "分四行读入两个房间的长和宽，都是整数",
     "sample_input": "3\n4\n2\n5\n",
     "sample_output": "22\n",
     "description": "调用两次，把返回值加起来。"
@@ -38,14 +38,14 @@
     "page": 10,
     "starter": "starter/04_perimeter.py",
     "solution": "solutions/04_perimeter.py",
-    "scope": "分两行读入长和宽，都是0到100的整数",
+    "scope": "分两行读入长和宽，都是整数",
     "sample_input": "3\n4\n",
     "sample_output": "14\n",
     "description": "改成周长函数。",
     "brief": {
       "title": "写一个周长函数",
       "goal": [
-        "起始程序里有面积函数。把它改成 perimeter(w, h)，返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，都是 0 到 100 的整数，输出周长。"
+        "起始程序里有面积函数。把它改成 perimeter(w, h)，返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，都是整数，输出周长。"
       ],
       "hint": "换个名字，换个算法，别的不用动。"
     }
@@ -85,14 +85,14 @@
     "page": 16,
     "starter": "starter/07_max3.py",
     "solution": "solutions/07_max3.py",
-    "scope": "分三行读入三个-1000到1000的整数",
+    "scope": "分三行读入三个整数",
     "sample_input": "3\n9\n5\n",
     "sample_output": "9\n",
     "description": "把返回值再交给函数，比出三个数里最大的。",
     "brief": {
       "title": "三个数比大小",
       "goal": [
-        "分三行读入三个整数（-1000 到 1000），输出最大的那个。",
+        "分三行读入三个整数，输出最大的那个。",
         "先写 bigger(a, b)，返回两个数里大的那个，再只用它比出三个数里最大的，不再写别的 if。"
       ]
     }

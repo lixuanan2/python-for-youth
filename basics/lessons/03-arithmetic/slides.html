@@ -134,7 +134,7 @@
   <div class="band r"><b>动手<br>改一改</b><span>print 里用逗号隔开，就能把文字和数字放在一起。</span></div>
   <div class="turn">
     <h2 class="r d1">让程序说清楚</h2>
-    <p class="say r d1">分糖程序只输出两个数，别人看不懂。改成输出一句话。分两行读入：糖是 <span class="aside">0 到 1000 颗</span>，人数是 <span class="aside">1 到 100</span>。</p>
+    <p class="say r d1">分糖程序只输出两个数，别人看不懂。改成输出一句话。分两行读入糖的颗数和人数，人数至少是 1。</p>
     <div class="sheet r d2"><small>输入 7 和 2，运行后要看到</small><pre>每人 3 颗，剩 1 颗</pre></div>
   </div>
   <a class="ide r d3" data-code-file="starter/03_candy_sentence.py" style="left:610px;top:730px">▶ 在 IDE 开始改</a>
@@ -212,7 +212,7 @@
   <div class="band r"><b>动手<br>改一改</b><span>周长是长加宽，再乘 2。想想哪里要加括号。</span></div>
   <div class="turn">
     <h2 class="r d1">把面积改成周长</h2>
-    <p class="say r d1">地毯边上要贴边条，改一行程序，算出长方形的周长。长和宽是 <span class="aside">0.5 到 1000 的</span>数，分两行读入。</p>
+    <p class="say r d1">地毯边上要贴边条，改一行程序，算出长方形的周长。长和宽可能有小数，分两行读入。</p>
     <div class="sheet r d2"><small>输入 2.5 和 4，运行后要看到</small><pre>13.0</pre></div>
   </div>
   <a class="ide r d3" data-code-file="starter/06_perimeter.py" style="left:610px;top:730px">▶ 在 IDE 开始改</a>
@@ -245,7 +245,7 @@
 <section class="slide clay" aria-label="温度换算" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">温度<br>换算</h2>
-  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入一个摄氏度（<span class="aside">-100 到 100</span>，可能有小数），输出华氏度。公式：华氏度 = 摄氏度 × 9 ÷ 5 + 32。<br>直接输出算出来的数：输入 0，输出 32.0。</p>
+  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入一个摄氏度（可能有小数），输出华氏度。公式：华氏度 = 摄氏度 × 9 ÷ 5 + 32。<br>直接输出算出来的数：输入 0，输出 32.0。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入一行</small><pre>36.5</pre><small style="margin-top:26px">输出</small><pre>97.7</pre></div>
   <a class="ide r d3" data-code-file="starter/07_temperature.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
@@ -269,7 +269,7 @@
 <section class="slide clay" aria-label="秒数换算">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 再挑战一题</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">秒数<br>换算</h2>
-  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入总秒数（0 到 100000 的整数），输出是几分几秒。写完用 59、60、61 各试一次。</p>
+  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入总秒数，输出是几分几秒。写完用 59、60、61 各试一次。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入一行</small><pre>125</pre><small style="margin-top:26px">输出</small><pre>2 分 5 秒</pre></div>
   <a class="ide r d3" data-code-file="starter/09_seconds.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <div class="foot"></div>

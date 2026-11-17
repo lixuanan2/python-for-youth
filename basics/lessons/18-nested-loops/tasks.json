@@ -38,14 +38,14 @@
     "page": 10,
     "starter": "starter/04_square.py",
     "solution": "solutions/04_square.py",
-    "scope": "一行边长n为0到20的整数",
+    "scope": "一行边长n为整数",
     "sample_input": "3\n",
     "sample_output": "***\n***\n***\n",
     "description": "读入n，画n行n列的正方形。",
     "brief": {
       "title": "画 n × n 的正方形",
       "goal": [
-        "读入边长 n（0 到 20 的整数），画 n 行，每行 n 颗星。n 是 0 就什么也不画。"
+        "读入边长 n，画 n 行，每行 n 颗星。n 是 0 就什么也不画。"
       ],
       "hint": "先读入 n，再把两个固定的数换掉。"
     }
@@ -67,14 +67,14 @@
     "page": 12,
     "starter": "starter/06_down_triangle.py",
     "solution": "solutions/06_down_triangle.py",
-    "scope": "一行n为1到20的整数",
+    "scope": "一行n为整数",
     "sample_input": "4\n",
     "sample_output": "****\n***\n**\n*\n",
     "description": "画倒三角。",
     "brief": {
       "title": "画倒三角",
       "goal": [
-        "读入 n（1 到 20 的整数）。第一行画 n 颗星，每往下一行少一颗，最后一行 1 颗。"
+        "读入一个整数 n。第一行画 n 颗星，每往下一行少一颗，最后一行 1 颗。"
       ],
       "hint": "外层倒着数，内层跟着它。"
     }
@@ -85,14 +85,14 @@
     "page": 16,
     "starter": "starter/07_hollow.py",
     "solution": "solutions/07_hollow.py",
-    "scope": "一行边长n为2到20的整数",
+    "scope": "一行边长n为整数",
     "sample_input": "4\n",
     "sample_output": "****\n*  *\n*  *\n****\n",
     "description": "内层循环里加判断，画空心正方形。",
     "brief": {
       "title": "空心正方形",
       "goal": [
-        "读入边长 n（2 到 20 的整数）。画一个 n 行 n 列的空心正方形：四条边上是 *，里面是空格。"
+        "读入边长 n。画一个 n 行 n 列的空心正方形：四条边上是 *，里面是空格。"
       ]
     }
   },

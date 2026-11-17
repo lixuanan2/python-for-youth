@@ -89,14 +89,14 @@
     "page": 21,
     "starter": "starter/06_piggy_bank.py",
     "solution": "solutions/06_piggy_bank.py",
-    "scope": "三行整数，均为0到10000",
+    "scope": "三行整数",
     "sample_input": "20\n10\n5\n",
     "sample_output": "还剩 25 元\n",
     "description": "用一个变量记账，输出余额。",
     "brief": {
       "title": "压岁钱账本",
       "goal": [
-        "三行分别读入现有的钱、存入的钱和花掉的钱，都是 0 到 10000 的整数，花掉的不会超过手里的钱。用一个变量 money 记账，输出还剩多少。"
+        "三行分别读入现有的钱、存入的钱和花掉的钱，都是整数。用一个变量 money 记账，输出还剩多少。"
       ]
     }
   },

@@ -27,7 +27,7 @@
     "page": 7,
     "starter": "starter/03_bubble.py",
     "solution": "solutions/03_bubble.py",
-    "scope": "第一行n为2到10的整数；接下来n行，每行一个整数",
+    "scope": "第一行n为整数；接下来n行，每行一个整数",
     "sample_input": "4\n5\n2\n4\n1\n",
     "sample_output": "[2, 4, 1, 5]\n[2, 1, 4, 5]\n[1, 2, 4, 5]\n",
     "description": "冒泡排序，每轮输出一次。"
@@ -38,14 +38,14 @@
     "page": 9,
     "starter": "starter/04_bubble_down.py",
     "solution": "solutions/04_bubble_down.py",
-    "scope": "第一行n为2到10的整数；接下来n行，每行一个整数",
+    "scope": "第一行n为整数；接下来n行，每行一个整数",
     "sample_input": "4\n1\n2\n3\n4\n",
     "sample_output": "[2, 3, 4, 1]\n[3, 4, 2, 1]\n[4, 3, 2, 1]\n",
     "description": "改成从大到小排。",
     "brief": {
       "title": "从大到小排",
       "goal": [
-        "在例题上改，让大的排前面。第一行读入 n（2 到 10 的整数），接下来 n 行每行一个整数。和例题一样，每轮输出一次列表。"
+        "在例题上改，让大的排前面。第一行读入 n，接下来 n 行每行一个整数。和例题一样，每轮输出一次列表。"
       ],
       "hint": "只改一个符号。"
     }
@@ -56,14 +56,14 @@
     "page": 12,
     "starter": "starter/05_count_swaps.py",
     "solution": "solutions/05_count_swaps.py",
-    "scope": "第一行n为1到20的整数；接下来n行，每行一个整数身高",
+    "scope": "第一行n为整数；接下来n行，每行一个整数身高",
     "sample_input": "4\n5\n2\n4\n1\n",
     "sample_output": "[1, 2, 4, 5]\n5\n",
     "description": "冒泡排序并数出交换次数。",
     "brief": {
       "title": "排队换了几次",
       "goal": [
-        "体育课按身高从矮到高排队，每次只能让挨着的两个人换位置。第一行读入人数 n（1 到 20 的整数），接下来 n 行，每行一个身高（1 到 300 的整数）。",
+        "体育课按身高从矮到高排队，每次只能让挨着的两个人换位置。第一行读入人数 n，接下来 n 行，每行一个整数身高。",
         "用冒泡排序排好，输出两行：排好的列表；一共换了几次。一样高的两个人不用换，不算一次。"
       ]
     }

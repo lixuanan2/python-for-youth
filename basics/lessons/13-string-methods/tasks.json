@@ -78,14 +78,14 @@
     "page": 16,
     "starter": "starter/07_tidy_words.py",
     "solution": "solutions/07_tidy_words.py",
-    "scope": "一行1到80个字符的英文单词，用空格或连字符隔开，至少有一个单词",
+    "scope": "一行英文单词，用空格或连字符隔开",
     "sample_input": "red--green  blue-  pink\n",
     "sample_output": "red green blue pink\n",
     "description": "把空格和连字符混着的分隔整理成一个空格。",
     "brief": {
       "title": "整理单词",
       "goal": [
-        "读入一行英文单词（整行 1 到 80 个字符，至少有一个单词），单词之间用空格或连字符 - 隔开，可能连着好几个，两头也可能有。",
+        "读入一行英文单词，单词之间用空格或连字符 - 隔开，可能连着好几个，两头也可能有。",
         "整理成单词之间只隔一个空格、两头没有空格，输出一行。"
       ]
     }

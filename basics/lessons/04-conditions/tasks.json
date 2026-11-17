@@ -5,7 +5,7 @@
     "page": 7,
     "starter": "starter/01_if.py",
     "solution": "solutions/01_if.py",
-    "scope": "score为0到100的整数",
+    "scope": "score为整数",
     "sample_input": "50\n",
     "sample_output": "考完了\n",
     "description": "观察条件不成立时跳过缩进的行。"
@@ -16,7 +16,7 @@
     "page": 8,
     "starter": "starter/02_pass.py",
     "solution": "solutions/02_pass.py",
-    "scope": "score为0到100的整数",
+    "scope": "score为整数",
     "sample_input": "59\n",
     "sample_output": "继续加油\n",
     "description": "用if和else判断是否及格。"
@@ -27,14 +27,14 @@
     "page": 10,
     "starter": "starter/03_odd_even.py",
     "solution": "solutions/03_odd_even.py",
-    "scope": "n为-1000到1000的整数",
+    "scope": "n为整数",
     "sample_input": "7\n",
     "sample_output": "奇数\n",
     "description": "改成判断奇偶。",
     "brief": {
       "title": "改成判断奇偶",
       "goal": [
-        "读入一个 -1000 到 1000 的整数，输出它是偶数还是奇数。"
+        "读入一个整数，输出它是偶数还是奇数。"
       ],
       "hint": "还记得吗？余数是 0 就是偶数。"
     }
@@ -107,14 +107,14 @@
     "page": 17,
     "starter": "starter/08_shipping.py",
     "solution": "solutions/08_shipping.py",
-    "scope": "重量为1到100的整数",
+    "scope": "重量为整数",
     "sample_input": "5\n",
     "sample_output": "运费 14 元\n",
     "description": "超过3公斤才加价，用判断分开两种算法。",
     "brief": {
       "title": "快递运费",
       "goal": [
-        "读入重量（1 到 100 的整数，单位公斤）。前 3 公斤一共 10 元，超过 3 公斤的部分每公斤加 2 元。"
+        "读入重量（整数，单位公斤）。前 3 公斤一共 10 元，超过 3 公斤的部分每公斤加 2 元。"
       ]
     }
   },

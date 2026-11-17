@@ -16,7 +16,7 @@
     "page": 8,
     "starter": "starter/02_cage.py",
     "solution": "solutions/02_cage.py",
-    "scope": "第一行头数、第二行脚数，都是0到1000的整数",
+    "scope": "第一行头数、第二行脚数，都是整数",
     "sample_input": "35\n94\n",
     "sample_output": "鸡 23 兔 12\n",
     "description": "鸡兔同笼。"
@@ -27,7 +27,7 @@
     "page": 10,
     "starter": "starter/03_cage_none.py",
     "solution": "solutions/03_cage_none.py",
-    "scope": "第一行头数、第二行脚数，都是0到1000的整数",
+    "scope": "第一行头数、第二行脚数，都是整数",
     "sample_input": "10\n21\n",
     "sample_output": "没有答案\n",
     "description": "没有答案时输出“没有答案”。",
@@ -48,14 +48,14 @@
     "page": 13,
     "starter": "starter/04_hundred.py",
     "solution": "solutions/04_hundred.py",
-    "scope": "一行，n为1到300的整数",
+    "scope": "一行，n为整数",
     "sample_input": "100\n",
     "sample_output": "公鸡 0 母鸡 25 小鸡 75\n公鸡 4 母鸡 18 小鸡 78\n公鸡 8 母鸡 11 小鸡 81\n公鸡 12 母鸡 4 小鸡 84\n",
     "description": "百钱买百鸡。",
     "brief": {
       "title": "百钱买百鸡",
       "goal": [
-        "一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只。读入 n（1 到 300 的整数），用 n 元正好买 n 只鸡，小鸡要整 3 只地买。",
+        "一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只。读入一个整数 n，用 n 元正好买 n 只鸡，小鸡要整 3 只地买。",
         "每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。一种也没有就输出“没有答案”。"
       ]
     }

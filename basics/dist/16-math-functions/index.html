@@ -652,10 +652,10 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="band r"><b>动手<br>改一改</b><span>换一个取整的方向。</span></div>
   <div class="turn">
     <h2 class="r d1">只数装满的箱子</h2>
-    <p class="say r d1">分两行读入东西的个数 n<span class="aside">（0 到 10000 的整数）</span>和每箱装几个 k<span class="aside">（1 到 100 的整数）</span>。输出能装满几箱，<b>剩下装不满的不算</b>。</p>
+    <p class="say r d1">分两行读入东西的个数 n 和每箱装几个 k，k 至少是 1。输出能装满几箱，<b>剩下装不满的不算</b>。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>输入 23 和 5</small><pre>4</pre></div><div><small>输入 20 和 5</small><pre>4</pre></div><div><small>输入 4 和 5</small><pre>0</pre></div></div>
   </div>
-  <a class="ide r d3" data-code="# 【只数装满的箱子】&#10;# 分两行读入东西的个数 n（0 到 10000 的整数）和每箱装几个 k（1 到 100 的整数）。&#10;#   输出能装满几箱，剩下装不满的不算。&#10;# 例如输入（每个一行）：23、5&#10;# 应该输出：4&#10;# 提示：换一个取整的方向。&#10;# ↓ 在下面这段程序上改&#10;&#10;import math&#10;n = int(input())&#10;k = int(input())&#10;print(math.ceil(n / k))&#10;" style="left:610px;top:790px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【只数装满的箱子】&#10;# 分两行读入东西的个数 n 和每箱装几个 k，k 至少是 1。&#10;#   输出能装满几箱，剩下装不满的不算。&#10;# 例如输入（每个一行）：23、5&#10;# 应该输出：4&#10;# 提示：换一个取整的方向。&#10;# ↓ 在下面这段程序上改&#10;&#10;import math&#10;n = int(input())&#10;k = int(input())&#10;print(math.ceil(n / k))&#10;" style="left:610px;top:790px">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: abs -->
@@ -713,9 +713,9 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-16" class="slide clay" aria-label="最大的正方形" data-chapter="挑战">
   <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
   <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">拼正方形</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">读入方块数 n<span class="aside">（0 到 10000 的整数）</span>。用这些方块拼一个实心正方形，每行每列一样多，可以有剩下的。<br>输出最大的正方形每边有几块。</p>
+  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">读入方块数 n，n 不是负数。用这些方块拼一个实心正方形，每行每列一样多，可以有剩下的。<br>输出最大的正方形每边有几块。</p>
   <div class="slip tilt2 r d3" style="right:110px;top:200px;width:520px"><small>输入 17</small><pre>4</pre><small style="margin-top:14px">输入 16</small><pre>4</pre><small style="margin-top:14px">输入 15</small><pre>3</pre></div>
-  <a class="ide r d3" data-code="# 【拼正方形】&#10;# 读入方块数 n（0 到 10000 的整数）。用这些方块拼一个实心正方形，&#10;#   每行每列一样多，可以有剩下的。&#10;# 输出最大的正方形每边有几块。&#10;# 例如输入：17&#10;# 应该输出：4&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
+  <a class="ide r d3" data-code="# 【拼正方形】&#10;# 读入方块数 n，n 不是负数。用这些方块拼一个实心正方形，&#10;#   每行每列一样多，可以有剩下的。&#10;# 输出最大的正方形每边有几块。&#10;# 例如输入：17&#10;# 应该输出：4&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
   <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
   <div class="foot"></div>
 </section>

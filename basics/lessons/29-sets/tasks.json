@@ -38,7 +38,7 @@
     "page": 8,
     "starter": "starter/04_words.py",
     "solution": "solutions/04_words.py",
-    "scope": "一行英文，1到100个词，用空格隔开",
+    "scope": "一行英文，用空格隔开",
     "sample_input": "i like cats i like dogs\n",
     "sample_output": "6 个词\n4 个不同的词\n",
     "description": "数一句话里有几个不同的词。"
@@ -49,7 +49,7 @@
     "page": 9,
     "starter": "starter/05_repeat.py",
     "solution": "solutions/05_repeat.py",
-    "scope": "一行英文，1到100个词，用空格隔开",
+    "scope": "一行英文，用空格隔开",
     "sample_input": "i like cats i like dogs\n",
     "sample_output": "6 个词\n4 个不同的词\ncats dogs i like\n",
     "description": "再把不同的词排好输出。",
@@ -67,14 +67,14 @@
     "page": 12,
     "starter": "starter/06_attendance.py",
     "solution": "solutions/06_attendance.py",
-    "scope": "第一行全班名单1到50个名字；第二行签到记录0到200个名字，都在名单里；用空格隔开",
+    "scope": "第一行全班名单；第二行签到记录，可能为空；用空格隔开",
     "sample_input": "Amy Bob Cat Dan\nBob Amy Bob\n",
     "sample_output": "到了 2 人\n没到：Cat Dan\n",
     "description": "签到表去重，找出没到的人。",
     "brief": {
       "title": "谁没来？",
       "goal": [
-        "第一行是全班名单（1 到 50 人），第二行是签到记录（0 到 200 个名字），名字都用空格隔开。有人签了好几次，也可能没人签。签到的都在名单里。",
+        "第一行是全班名单，第二行是签到记录，名字都用空格隔开。有人签了好几次，也可能没人签。",
         "输出两行：第一行“到了 几 人”；第二行把没到的人从小到大排好（和 sorted 排的一样），写成“没到：A B”，都到了就写“全到了”。"
       ]
     }
