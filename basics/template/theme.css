@@ -23,10 +23,10 @@ h2.t::before{content:"# ";color:var(--clay)}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
-.aside{color:var(--muted);font-weight:400}
-.dark .aside{color:#9a968c}
+.aside{color:#8a887f;font-weight:400}
+.dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
-.olive .aside{color:#d4dcc8}
+.olive .aside{color:#c5cfb8}
 .kbd{display:inline-block;padding:0 14px 2px;border:3px solid currentColor;border-bottom-width:7px;border-radius:10px;font:700 .8em var(--code)}
 
 /* Status bar instead of a progress bar. */
