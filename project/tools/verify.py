@@ -241,17 +241,29 @@ def check_play(name, proj):
 
 
 
+def build_api(n, d):
+    """C++: play_web.py talks to api, built from api.cpp the way a student builds it (plain g++, C++98 clean)."""
+    if LANGUAGE == "python":
+        return
+    code, out, exe = compile_cpp("api.cpp", d)
+    if code != 0 or out.strip():
+        bad("第 %d 关 api.cpp 编译不干净：%s" % (n, out[:300]))
+        return
+    shutil.copy(exe, d / ("api.exe" if os.name == "nt" else "api"))
+
+
 def check_web(name, proj):
     """The web front end (play_web.py) checks itself without a browser: it starts its server on 127.0.0.1 and plays
     through the same interface the page uses. With the answer every way of playing ends; with the untouched starter
     it answers with the hint instead of crashing."""
     stages = [st["id"] for st in proj.STAGES if (stage_dir(name, st["id"]) / "play_web.py").exists()]
-    if not stages or LANGUAGE != "python":
+    if not stages:
         return
     print("网页前端 play_web（--selftest）")
     for n in stages:
         d = temp_copy(name, proj, n)
         use_answer(name, proj, n, d)
+        build_api(n, d)
         code, out = run([sys.executable, "play_web.py", "--selftest"], d)
         if code == 0 and "自检通过" in out and "Traceback" not in out:
             good("第 %d 关 play_web 配参考答案：%s" % (n, out.strip().splitlines()[-1]))
@@ -259,8 +271,9 @@ def check_web(name, proj):
             bad("第 %d 关 play_web 配参考答案：返回码 %s\n%s" % (n, code, out[-600:]))
         shutil.rmtree(d)
         d = temp_copy(name, proj, n)
+        build_api(n, d)
         code, out = run([sys.executable, "play_web.py", "--selftest"], d)
-        if code != 0 and "test_stage%d.py 全部通过" % n in out and "Traceback" not in out:
+        if code != 0 and "test_stage%d.%s 全部通过" % (n, sf.short(LANGUAGE)) in out and "Traceback" not in out:
             good("第 %d 关 play_web 配起始程序：给出提示，没有崩溃" % n)
         else:
             bad("第 %d 关 play_web 配起始程序：返回码 %s\n%s" % (n, code, out[-600:]))
