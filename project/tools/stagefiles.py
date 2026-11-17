@@ -318,6 +318,8 @@ def dev_doc(proj, language):
                 L += ["", "例子：", ""] + ["- `%s`%s" % e for e in examples]
             L.append("")
         L += ["**测试全过以后**：运行 `%s`。%s" % (play, proj.PLAY_NOTES[n]), ""]
+        if py and "play_web.py" in st.get("extra_py", []) and n in getattr(proj, "WEB_NOTES", {}):
+            L += ["**网页版**：运行 `play_web.py`，浏览器会打开一个网页。%s" % proj.WEB_NOTES[n], ""]
         L += [line for text in st.get("after_py" if py else "after_cpp", []) for line in (text, "")]
         L += ["**做完了？想一想**：" + stage_challenge(proj, n, py), ""]
     return "\n".join(L)

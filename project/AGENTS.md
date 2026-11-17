@@ -20,7 +20,7 @@
 - `site.json`：语言、有哪些项目、基础课件的网址、页脚。
 - `<项目>/stages.py`：每关的函数（名字、函数头、说明、占位、参考答案、答案页上的一句讲解 `say`，长的答案可以写 `reveal` 分几步揭晓）、测试用例、要先学完哪几课，还有整个项目的标题、介绍、前端能玩什么、“想一想”、前端的试玩按键。改内容只改这里。
 - `<项目>/slides.html`：课件里手写的页，每关只有“一起想”的在线 IDE 演示和小测。`<!-- @map -->`、`<!-- @run -->`、`<!-- @stage N -->`、`<!-- @answers N -->` 的位置由构建按 `stages.py` 生成项目地图、怎么运行测试、第 N 关的开头和要写的函数、第 N 关每个函数的参考答案这几页。演示代码写在 `<pre class="code" data-demo>` 里，输出写在同一页的 `<pre data-out>`；故意出错的写 `data-error="IndexError"`。小测的 `data-right` 从 0 数，那一项的反馈以“答对了”开头。
-- `<项目>/templates/`：老师的前端。`play.py` 是终端版，每关都有；某一关另外要发的文件（网页版前端 `play_web.py` 和它的网页、图片 `web/`）在 `stages.py` 那一关的 `extra_py` 里列出，C++ 用 `extra_cpp`。
+- `<项目>/templates/`：老师的前端。`play.py` 是终端版，每关都有；另外要发的文件（网页版前端 `play_web.py` 和它的网页、图片 `web/`）在 `stages.py` 每一关的 `extra_py` 里列出，C++ 用 `extra_cpp`。井字棋的网页版每关都发：网页只调用这一关和前几关的函数，后面几关的东西显示成灰色的“第 N 关解锁”，右边列出每个函数最近一次还了什么，学生一眼看出这一关写的函数让网页多了什么。每关多了什么写在 `stages.py` 的 `WEB_NOTES`，开发文档接在“测试全过以后”后面。
 - `<项目>/draw_assets.py`：用标准库画 `templates/web/assets/` 里的棋盘和棋子（不用别人的图）。老师换自己的图片时文件名不变就行，不用运行它。
 - `<项目>/slide-images/`：课件里用的图片（比如“先看成品”的网页版截图），构建复制到 `dist/<项目>/slides/`。
 - `<项目>/answers/`：参考答案，构建生成，提交进仓库，给老师看，不进 `dist/` 的下载包。
@@ -49,7 +49,7 @@ node tools/check_browser.mjs    # 真实 Chrome 逐页看课件，截图在 .pre
 
 `check.py` 和 `check_browser.mjs` 全部通过时只打一行，失败才打详细内容。`check_browser.mjs` 每次通过后，把截图和上次在本机通过时的比（存在 `.check-shots/`，不进 Git），画面变了的页列在 `.preview/changed.txt`，只看清单里的截图。
 
-CI 在 Ubuntu 和 Windows（Python 3.12、3.14）上跑 `check.py` 和 `verify.py`，每次都跑。网页前端用 `play_web.py --selftest` 自检：不开浏览器，在 127.0.0.1 上起服务器，照网页用的接口下完几局；配答案要下完，配起始程序要回提示、不崩溃。浏览器按改动决定（规则在仓库最外层的 `.github/browser_plan.py`）：只改了某个项目的文件夹（`<项目>/`、`dist/<项目>/`），只查那个项目；改了 `template/`、`site.json`、`dist/index.html`、`tools/` 里的 `build.py`、`stagefiles.py`、`check_browser.mjs`，或者 basics 的模板、字体、`site.json`，查全部项目；只改了 `check.py`、`verify.py` 或说明，不开浏览器。都过了才发布到 `/project/`。
+CI 在 Ubuntu 和 Windows（Python 3.12、3.14）上跑 `check.py` 和 `verify.py`，每次都跑。网页前端用 `play_web.py --selftest` 自检，每关都跑：不开浏览器，在 127.0.0.1 上起服务器，照网页用的接口试这一关有的东西（第 1 关问每一格能不能下，第 2 关起两个人下、下满，第 3 关起谁赢了，第 5 关和电脑下完）；配答案都要对，配起始程序要回提示、不崩溃。浏览器按改动决定（规则在仓库最外层的 `.github/browser_plan.py`）：只改了某个项目的文件夹（`<项目>/`、`dist/<项目>/`），只查那个项目；改了 `template/`、`site.json`、`dist/index.html`、`tools/` 里的 `build.py`、`stagefiles.py`、`check_browser.mjs`，或者 basics 的模板、字体、`site.json`，查全部项目；只改了 `check.py`、`verify.py` 或说明，不开浏览器。都过了才发布到 `/project/`。
 
 ## 和基础课件的不同
 

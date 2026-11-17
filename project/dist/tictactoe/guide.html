@@ -89,7 +89,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 <p>函数名和参数必须照这份文档写，一个字母也不能改：老师的测试按这些名字检查。</p>
 <h2>每关的文件夹</h2>
 <p>每关一个文件夹（<code>stage1</code> 到 <code>stage5</code>），老师用 U 盘发。打开哪一关，就用编辑器打开那一个文件夹。</p>
-<table><thead><tr><th>文件</th><th>谁写</th><th>做什么</th></tr></thead><tbody><tr><td><code>tictactoe.py</code></td><td><b>你</b></td><td>只改最下面“第 N 关：你来写”的部分；上面是前几关的参考答案，可以看、不用改</td></tr><tr><td><code>test_stageN.py</code></td><td>老师</td><td>检查你写对没有</td></tr><tr><td><code>play.py</code></td><td>老师</td><td>测试全过以后用来玩</td></tr><tr><td><code>play_web.py</code>、<code>web/</code></td><td>老师</td><td>第 5 关才有：网页版前端，在浏览器里下棋；<code>web/</code> 是它的网页和图片</td></tr><tr><td><code>guide.md</code></td><td>老师</td><td>就是这份开发文档</td></tr></tbody></table>
+<table><thead><tr><th>文件</th><th>谁写</th><th>做什么</th></tr></thead><tbody><tr><td><code>tictactoe.py</code></td><td><b>你</b></td><td>只改最下面“第 N 关：你来写”的部分；上面是前几关的参考答案，可以看、不用改</td></tr><tr><td><code>test_stageN.py</code></td><td>老师</td><td>检查你写对没有</td></tr><tr><td><code>play.py</code></td><td>老师</td><td>测试全过以后用来玩</td></tr><tr><td><code>play_web.py</code>、<code>web/</code></td><td>老师</td><td>网页版前端，每关都有：在浏览器里看你的函数做了什么，每做完一关多一样东西；<code>web/</code> 是它的网页和图片</td></tr><tr><td><code>guide.md</code></td><td>老师</td><td>就是这份开发文档</td></tr></tbody></table>
 <h2>怎么运行测试</h2>
 <p>任选一种（下面的 N 换成第几关）：</p>
 <ul><li><b>PyCharm</b>：File → Open，选 <code>stageN</code> 文件夹。左边右键 <code>test_stageN.py</code> → Run。</li><li><b>VS Code</b>：File → Open Folder，选这个文件夹。打开 <code>test_stageN.py</code>，点右上角的 ▶（Run Python File）。要先装好 Python 扩展。</li><li><b>IDLE</b>：打开 <code>test_stageN.py</code>，按 F5。</li><li><b>命令行</b>：在这个文件夹的地址栏里输入 <code>cmd</code> 回车，再输入 <code>python test_stageN.py</code>（不行就试 <code>py test_stageN.py</code>）。</li></ul>
@@ -105,6 +105,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 <p>例子：</p>
 <ul><li><code>can_put(&quot;.........&quot;, 4) 还 True</code></li><li><code>can_put(&quot;X........&quot;, 0) 还 False</code>：已经有子了</li><li><code>can_put(&quot;.........&quot;, 9) 还 False</code>：没有第 9 格</li></ul>
 <p><b>测试全过以后</b>：运行 <code>play.py</code>。第 1 关能做的不多：输入格子编号，看你的 <code>can_put</code> 怎么说。</p>
+<p><b>网页版</b>：运行 <code>play_web.py</code>，浏览器会打开一个网页。每一格都标出你的 <code>can_put</code> 说能不能下（✓ 能下，✗ 不能下），还能试试棋盘外面的 -1 号、9 号格。右边列着你的函数，每调用一次就写出它还了什么；后面几关的是灰的，写着“第 N 关解锁”。网页和 <code>play.py</code> 用的是同一组函数，换个画面，你的代码一行都不用改。棋盘和棋子是 <code>web/assets</code> 里的图片。</p>
 <p><b>做完了？想一想</b>：如果不先查 i 在不在 0 到 8，直接看 board[i]，输入 9 会发生什么？在 play 里试试（Python 会报错，C++ 结果是乱的）。</p>
 <h2 id="stage-2">第 2 关：下一步棋</h2>
 <p>写一个函数，在棋盘的某一格放上一个棋子，还回去新的棋盘。</p>
@@ -115,6 +116,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 <p>例子：</p>
 <ul><li><code>put(&quot;.........&quot;, 4, 'X') 还 &quot;....X....&quot;</code></li><li><code>put(&quot;X........&quot;, 8, 'O') 还 &quot;X.......O&quot;</code></li></ul>
 <p><b>测试全过以后</b>：运行 <code>play.py</code>。两个人可以轮流下了，但程序还不会判断输赢。</p>
+<p><b>网页版</b>：运行 <code>play_web.py</code>，浏览器会打开一个网页。点格子就能下棋，棋子是你的 <code>put</code> 放上去的。两个人轮流下，还不会判断输赢。</p>
 <p><b>做完了？想一想</b>：不用切片，能不能用一个 for 循环，一格一格拼出新棋盘？</p>
 <h2 id="stage-3">第 3 关：谁赢了</h2>
 <p>先写一个查“一条线”的小函数，再用它查全部 8 条线，找出赢家。</p>
@@ -130,6 +132,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 <p>例子：</p>
 <ul><li><code>winner(&quot;OOO.X.X..&quot;) 还 'O'</code></li><li><code>winner(&quot;X...X...X&quot;) 还 'X'</code></li><li><code>winner(&quot;XOXXOOOXX&quot;) 还 '.'</code>：下满了，平局</li></ul>
 <p><b>测试全过以后</b>：运行 <code>play.py</code>。两个人可以对战了，有人连成一条线就结束。</p>
+<p><b>网页版</b>：运行 <code>play_web.py</code>，浏览器会打开一个网页。连成一条线就赢：<code>winner</code> 说谁赢了，<code>line_owner</code> 找出那条线，网页让它亮起来，还会记比分。</p>
 <p><b>做完了？想一想</b>：如果棋盘上 X 和 O 都连成了一条线（真实对局不会这样），你的 winner 会还谁？为什么？</p>
 <h2 id="stage-4">第 4 关：下满没有、轮到谁</h2>
 <p>写两个小函数：棋盘下满了没有；现在轮到谁下。</p>
@@ -145,6 +148,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 <p>例子：</p>
 <ul><li><code>turn(&quot;.........&quot;) 还 'X'</code></li><li><code>turn(&quot;X........&quot;) 还 'O'</code></li><li><code>turn(&quot;XO.......&quot;) 还 'X'</code></li></ul>
 <p><b>测试全过以后</b>：运行 <code>play.py</code>。轮到谁、下满没有，都用你自己写的函数来管了。</p>
+<p><b>网页版</b>：运行 <code>play_web.py</code>，浏览器会打开一个网页。“轮到 X”“平局”改由你的 <code>turn</code> 和 <code>is_full</code> 说了算。</p>
 <p><b>做完了？想一想</b>：如果有人偷偷连下两步，X 比 O 多两个，你的 turn 会还什么？要不要管这种情况？</p>
 <h2 id="stage-5">第 5 关：电脑来下</h2>
 <p>让电脑下棋：能赢就赢，该堵就堵，不然下第一个空格。</p>
@@ -155,7 +159,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 <p>例子：</p>
 <ul><li><code>computer_move(&quot;XX.OO....&quot;) 还 2</code>：轮到 X，X 下 2 就赢</li><li><code>computer_move(&quot;XX..O....&quot;) 还 2</code>：轮到 O，O 要堵住 2</li><li><code>computer_move(&quot;X........&quot;) 还 1</code>：没有要赢、要堵的，下第一个空格</li></ul>
 <p><b>测试全过以后</b>：运行 <code>play.py</code>。选 2 或 3 就可以和电脑下！试试能不能赢它。</p>
-<p><b>换一个画面</b>：<code>play.py</code> 是终端版，<code>play_web.py</code> 是网页版：运行它，浏览器会打开一个网页，点格子就能下，也能和电脑下（棋盘和棋子是 <code>web/assets</code> 里的图片）。这两个都是老师的前端，用的都是你写的同一组函数：<code>can_put</code>、<code>put</code>、<code>winner</code>、<code>is_full</code>、<code>turn</code>、<code>computer_move</code>。所以换个画面，你的代码一行都不用改。</p>
+<p><b>网页版</b>：运行 <code>play_web.py</code>，浏览器会打开一个网页。“你先下”“电脑先下”两个按钮解锁了：电脑的每一步都是你的 <code>computer_move</code> 选的。</p>
 <p><b>做完了？想一想</b>：让电脑在“要赢”“要堵”都没有的时候，先抢中间的 4 号格。电脑会不会更难打败？（改完以后测试最后几条会不通过，这是正常的，想完改回来。）</p>
 </main>
 <footer>项目代码在学生自己的电脑上写和运行；起始程序由老师下载，用 U 盘发给学生。</footer>

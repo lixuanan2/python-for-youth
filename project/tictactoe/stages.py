@@ -15,11 +15,16 @@ def ch(c):
     return ("c", c)
 
 
+# 网页版前端：每关都发，从 templates/ 来；网页只用到这一关和前面几关的函数，后面的显示“第 N 关解锁”
+WEB_PY = ["play_web.py", "web/index.html", "web/assets/board.png", "web/assets/o.png", "web/assets/x.png"]
+
+
 STAGES = [
     # ------------------------------------------------------------ 第 1 关
     {
         "id": 1,
         "title": "这一格能下吗",
+        "extra_py": WEB_PY,
         "minutes": "约 1 节课（45 分钟）：其中 15 分钟认识项目、文件夹和怎么运行测试",
         "needs_py": ["04-conditions 条件判断", "05-logic 逻辑运算", "12-string-basics 字符串基础（下标）", "15-params-return 参数与返回值"],
         "needs_cpp": ["03-if-else 比较与 if/else", "05-logic 逻辑运算与复合条件", "16-string string 字符串入门（下标）", "17-function 函数定义与调用"],
@@ -69,6 +74,7 @@ STAGES = [
     {
         "id": 2,
         "title": "下一步棋",
+        "extra_py": WEB_PY,
         "minutes": "约半节课",
         "minutes_cpp": "约半节到 1 节课：先讲补页“改 string 的一格”（约 10 分钟），再写函数",
         "needs_py": ["12-string-basics 字符串基础（切片）", "15-params-return 参数与返回值"],
@@ -110,6 +116,7 @@ STAGES = [
     {
         "id": 3,
         "title": "谁赢了",
+        "extra_py": WEB_PY,
         "minutes": "约 1 节课",
         "needs_py": ["05-logic 逻辑运算（and）", "10-list-basics 列表基础", "11-list-loop 列表遍历", "15-params-return 参数与返回值（函数里调用函数）"],
         "needs_cpp": ["05-logic 逻辑运算与复合条件（&&）", "12-array 一维数组入门", "17-function 函数定义与调用（函数里调用函数）"],
@@ -205,6 +212,7 @@ STAGES = [
     {
         "id": 4,
         "title": "下满没有、轮到谁",
+        "extra_py": WEB_PY,
         "minutes": "约半节到 1 节课；做完就能两个人对战",
         "needs_py": ["08-loop-tally 累加和计数", "13-string-methods 字符串常用方法（count）", "15-params-return 参数与返回值"],
         "needs_cpp": ["06-for-loop for 循环", "09-tally 累加和计数", "17-function 函数定义与调用"],
@@ -294,13 +302,7 @@ STAGES = [
         "needs_py": ["06-for-loop for 循环", "04-conditions 条件判断", "15-params-return 参数与返回值（用前面写好的函数）"],
         "needs_cpp": ["06-for-loop for 循环", "03-if-else 比较与 if/else", "17-function 函数定义与调用（用前面写好的函数）"],
         "goal": "让电脑下棋：能赢就赢，该堵就堵，不然下第一个空格。",
-        # The web front end, its page and pictures, from templates/; the same functions drive play.py and this.
-        "extra_py": ["play_web.py", "web/index.html", "web/assets/board.png", "web/assets/o.png", "web/assets/x.png"],
-        "after_py": [
-            "**换一个画面**：`play.py` 是终端版，`play_web.py` 是网页版：运行它，浏览器会打开一个网页，点格子就能下，也能和电脑下（棋盘和棋子是 `web/assets` 里的图片）。"
-            "这两个都是老师的前端，用的都是你写的同一组函数：`can_put`、`put`、`winner`、`is_full`、`turn`、`computer_move`。"
-            "所以换个画面，你的代码一行都不用改。",
-        ],
+        "extra_py": WEB_PY,
         "functions": [
             {
                 "name": "computer_move",
@@ -410,7 +412,7 @@ BOARD_PICTURE = [
 
 # 测试全过以后，前端能玩什么
 # Extra rows for the file table in the development document: (file, what it is for).
-FILES_PY = [("`play_web.py`、`web/`", "第 5 关才有：网页版前端，在浏览器里下棋；`web/` 是它的网页和图片")]
+FILES_PY = [("`play_web.py`、`web/`", "网页版前端，每关都有：在浏览器里看你的函数做了什么，每做完一关多一样东西；`web/` 是它的网页和图片")]
 
 PLAY_NOTES = {
     1: "第 1 关能做的不多：输入格子编号，看你的 `can_put` 怎么说。",
@@ -418,6 +420,17 @@ PLAY_NOTES = {
     3: "两个人可以对战了，有人连成一条线就结束。",
     4: "轮到谁、下满没有，都用你自己写的函数来管了。",
     5: "选 2 或 3 就可以和电脑下！试试能不能赢它。",
+}
+
+# 网页版 play_web.py 每关多了什么（开发文档里接在 PLAY_NOTES 后面）
+WEB_NOTES = {
+    1: "每一格都标出你的 `can_put` 说能不能下（✓ 能下，✗ 不能下），还能试试棋盘外面的 -1 号、9 号格。"
+       "右边列着你的函数，每调用一次就写出它还了什么；后面几关的是灰的，写着“第 N 关解锁”。"
+       "网页和 `play.py` 用的是同一组函数，换个画面，你的代码一行都不用改。棋盘和棋子是 `web/assets` 里的图片。",
+    2: "点格子就能下棋，棋子是你的 `put` 放上去的。两个人轮流下，还不会判断输赢。",
+    3: "连成一条线就赢：`winner` 说谁赢了，`line_owner` 找出那条线，网页让它亮起来，还会记比分。",
+    4: "“轮到 X”“平局”改由你的 `turn` 和 `is_full` 说了算。",
+    5: "“你先下”“电脑先下”两个按钮解锁了：电脑的每一步都是你的 `computer_move` 选的。",
 }
 
 # 做完了想一想（PY: 和 CPP: 用 | 分开时，两门语言各一句）
