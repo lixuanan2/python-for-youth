@@ -340,10 +340,28 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .row a.go{background:var(--mint);border-color:var(--mint);color:#16261a;font-weight:700}
 .row a.go:hover{background:#c0e3c5}
 #blank{position:fixed;inset:0;background:#000;z-index:1100}
-.row button.on{background:var(--clay);border-color:var(--clay);color:#fff}
-/* Pen: one canvas per page, at the stage's own 1920 x 1080. It only takes the pointer while the pen is out. */
-.ink{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none;z-index:900;pointer-events:none}
-.pen .slide.active>.ink{pointer-events:auto;cursor:crosshair;touch-action:none}
+/* Pen and whiteboard: one layer over the stage at its own 1920 x 1080, cleared when the page turns or the pen goes away.
+   The highlighter draws solid on its own canvas and the canvas is see-through, so crossing strokes never get darker. */
+.ink-layer{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:900;pointer-events:none}
+.ink-layer canvas{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none}
+.ink-layer .hl{opacity:.4}
+.ink-layer .paper{position:absolute;inset:0;background:var(--paper);display:none}
+.board-open .ink-layer .paper{display:block}
+.pen .ink-layer{pointer-events:auto;cursor:crosshair;touch-action:none}
+/* The ball fades out like the control bar but stays clickable, so a first tap on a touch screen opens it instead of turning the page. */
+.pen-ball{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:1050;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transition:opacity .25s}
+.pen-ball.show,.pen-ball.open,.pen .pen-ball,.pen-ball:hover,.pen-ball:focus-within{opacity:1}
+.pen-ball button{border:0;cursor:pointer;font:400 15px/1 var(--text);touch-action:manipulation}
+.pen-ball .ball{width:64px;height:64px;border-radius:50%;background:#1f1e1de6;color:#f0eee6;font-size:28px;box-shadow:0 6px 18px #0006}
+.pen .pen-ball .ball{background:var(--clay)}
+.pen-tools{display:none;flex-direction:column;align-items:center;gap:10px;padding:12px 8px;border-radius:34px;background:#1f1e1de6;box-shadow:0 6px 18px #0006}
+.pen-ball.open .pen-tools,.pen .pen-tools{display:flex}
+.pen-tools .swatch{width:38px;height:38px;border-radius:50%;box-shadow:0 0 0 2px #f0eee666}
+.pen-tools .swatch[data-color="0"]{background:#c6613f}.pen-tools .swatch[data-color="1"]{background:#1f4fbf}.pen-tools .swatch[data-color="2"]{background:#ffe100}
+.pen .pen-tools .swatch.on{box-shadow:0 0 0 3px #1f1e1d,0 0 0 6px #fff}
+.pen-tools .word{width:52px;padding:9px 0;border-radius:12px;background:#30302e;color:#f0eee6}
+.pen-tools .word:hover{background:#45413b}
+.pen-tools .word.on{background:var(--clay);color:#fff}
 #blank[hidden],.bubble[hidden]{display:none}
 @media(max-width:1180px){.chips{visibility:hidden}}
 @media(max-width:760px){.row{flex-wrap:wrap}.chips,#counter,#ide-open,#toggle-thumbs{display:none}}
@@ -359,6 +377,6 @@ dialog p{color:var(--muted);font-size:15px}
 @media print{
   @page{size:1920px 1080px;margin:0}
   *{print-color-adjust:exact;-webkit-print-color-adjust:exact;animation:none!important}
-  .ide,.thumbs,#blank,.ink{display:none!important}
+  .ide,.thumbs,#blank,.ink-layer,.pen-ball{display:none!important}
   .tag,.slip{box-shadow:none}
 }

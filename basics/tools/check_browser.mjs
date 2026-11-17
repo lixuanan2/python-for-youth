@@ -342,8 +342,9 @@ const INTERACT = `(async () => {
   const lastPage = [...stage.querySelectorAll('.slide')].at(-1);
   shell.thanksLast = lastPage.classList.contains('thanks') && lastPage.querySelector('.gh-link')?.href.startsWith('https://') && lastPage.querySelector('.gh-link').target === '_blank' && Boolean(lastPage.querySelector('.go-next'));
   shell.noLigatures = [document.body, ...stage.querySelectorAll('pre.code')].every(e => getComputedStyle(e).fontVariantLigatures === 'none');
-  // Selecting text or dragging does not turn the page. The pen draws, keeps clicks from turning the page, leaves the arrows
-  // working, keeps each page's ink, clears it with C and goes away with Esc.
+  // Selecting text or dragging does not turn the page. The pen draws in three colours, keeps clicks and drags from turning the
+  // page, leaves the arrows working and loses its ink when the page turns or the pen goes away; C clears it and keeps the pen.
+  // The ball on the right opens the colours, the whiteboard and 收笔; the whiteboard closes on W, Esc or a page key, staying on the page.
   show(0);
   const at = () => document.getElementById('counter').textContent.split(' ')[0], first = at();
   const active = () => stage.querySelector('.slide.active');
@@ -358,19 +359,46 @@ const INTERACT = `(async () => {
   getSelection().removeAllRanges();
   fire(active(), 'pointerdown', ...mid); fire(active(), 'click', mid[0] + 40, mid[1]);
   shell.dragKeepsPage = at() === first;
+  const layer = stage.querySelector('.ink-layer'), ink = layer.querySelector('canvas.ink'), hl = layer.querySelector('canvas.hl');
+  const ball = document.getElementById('pen-ball'), body = document.body;
+  const inked = canvas => { const d = canvas.getContext('2d').getImageData(0, 0, 1920, 1080).data; let n = 0; for (let i = 3; i < d.length; i += 4) n += d[i] > 0; return n; };
+  const stroke = () => { fire(ink, 'pointerdown', ...mid); fire(ink, 'pointermove', mid[0] + 80, mid[1] + 30); fire(ink, 'pointerup', mid[0] + 80, mid[1] + 30); fire(ink, 'click', mid[0] + 80, mid[1] + 30); };
+  const swatch = () => ball.querySelector('.swatch.on')?.dataset.color;
+  shell.ballNotInThumbs = !document.querySelector('.thumbs .pen-ball, .thumbs .ink-layer');
   press('d');
-  const ink = active().querySelector(':scope > canvas.ink');
-  const inked = () => { const d = ink.getContext('2d').getImageData(0, 0, 1920, 1080).data; let n = 0; for (let i = 3; i < d.length; i += 4) n += d[i] > 0; return n; };
-  fire(ink, 'pointerdown', ...mid); fire(ink, 'pointermove', mid[0] + 80, mid[1] + 30); fire(ink, 'pointerup', mid[0] + 80, mid[1] + 30); fire(ink, 'click', mid[0] + 80, mid[1] + 30);
-  shell.penDraws = inked() > 50 && at() === first;
-  press('ArrowRight');
-  shell.penArrowTurns = at() !== first;
-  press('ArrowLeft');
-  shell.penInkStays = at() === first && inked() > 50;
+  stroke();
+  shell.penDraws = inked(ink) > 50 && at() === first;
+  fire(ink, 'pointerdown', ...mid); fire(ink, 'pointerup', ...mid); fire(ink, 'click', ...mid);
+  shell.penClickKeepsPage = at() === first;
+  press('3');
+  stroke();
+  shell.penHighlights = swatch() === '2' && inked(hl) > 500;
   press('c');
-  shell.penClears = inked() === 0;
+  shell.penClears = inked(ink) === 0 && inked(hl) === 0 && body.classList.contains('pen');
+  press('1'); stroke();
+  press('ArrowRight');
+  shell.penArrowTurns = at() !== first && inked(ink) === 0 && swatch() === '0';
+  press('ArrowLeft');
+  stroke();
   press('Escape');
-  shell.penOff = !document.body.classList.contains('pen') && getComputedStyle(ink).pointerEvents === 'none' && document.getElementById('pen-clear').hidden;
+  shell.penOff = !body.classList.contains('pen') && getComputedStyle(layer).pointerEvents === 'none' && inked(ink) === 0 && getComputedStyle(document.getElementById('pen-tools')).display === 'none';
+  document.getElementById('pen').click();
+  shell.ballOpens = ball.classList.contains('open') && getComputedStyle(document.getElementById('pen-tools')).display !== 'none' && !body.classList.contains('pen');
+  ball.querySelector('.swatch[data-color="1"]').click();
+  shell.ballPicksColor = body.classList.contains('pen') && swatch() === '1';
+  press('w');
+  shell.boardOpens = body.classList.contains('board-open') && getComputedStyle(layer.querySelector('.paper')).display === 'block' && document.getElementById('whiteboard').classList.contains('on');
+  stroke();
+  press('ArrowRight');
+  shell.boardPageKeyCloses = !body.classList.contains('board-open') && at() === first && inked(ink) === 0 && body.classList.contains('pen');
+  press('Escape');
+  press('w');
+  shell.boardPicksPen = body.classList.contains('pen') && body.classList.contains('board-open');
+  press('Escape');
+  shell.boardEscCloses = !body.classList.contains('board-open') && !body.classList.contains('pen');
+  press('1');
+  shell.quizKeysBack = !body.classList.contains('pen');
+  ball.classList.remove('open');
   shell.ids = new Set([...document.querySelectorAll('[id]')].map(e => e.id)).size === document.querySelectorAll('[id]').length;
   return {
     shell,

@@ -453,30 +453,43 @@ class SlidePresentation {
     this.linkIde();
   }
 
-  /* --- pen: the teacher circles code and draws arrows on the big screen; each page keeps its ink until the reload --- */
+  /* --- pen and whiteboard: the teacher circles code, marks a line or works something out on a blank page. Nothing is kept:
+     the ink goes when the page turns or the pen goes away, and there is one whiteboard, cleared when it closes. --- */
   setupPen() {
     this.pen = false;
-    const button = document.getElementById('pen'), clear = document.getElementById('pen-clear');
-    // Keep focus off these buttons, so space and a clicker still turn the page instead of pressing them again.
-    [button, clear].forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
-    button.onclick = () => this.togglePen();
-    clear.onclick = () => this.clearInk();
+    this.board = false;
+    this.color = 0;
+    this.colors = [{stroke: '#c6613f', width: 6}, {stroke: '#1f4fbf', width: 6}, {stroke: '#ffe100', width: 28, hl: true}];
+    const layer = document.createElement('div');
+    layer.className = 'ink-layer';
+    layer.setAttribute('aria-hidden', 'true');
+    layer.innerHTML = '<div class="paper"></div><canvas class="hl" width="1920" height="1080"></canvas><canvas class="ink" width="1920" height="1080"></canvas>';
+    this.stage.append(layer);
+    this.layer = layer;
+    this.ball = document.getElementById('pen-ball');
+    // Keep focus off the ball, so space and a clicker still turn the page instead of pressing it again.
+    this.ball.querySelectorAll('button').forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
+    document.getElementById('pen').onclick = () => this.openTools(!this.ball.classList.contains('open'));
+    this.ball.querySelectorAll('.swatch').forEach(b => { b.onclick = () => this.pickColor(Number(b.dataset.color)); });
+    document.getElementById('whiteboard').onclick = () => this.toggleBoard();
+    document.getElementById('pen-off').onclick = () => this.togglePen(false);
+    document.addEventListener('touchstart', () => this.reveal(), {passive: true});
     let line = null;
-    this.stage.addEventListener('pointerdown', e => {
-      if (!this.pen || !e.target.matches('canvas.ink') || e.button > 0) return;
+    layer.addEventListener('pointerdown', e => {
+      if (!this.pen || e.button > 0) return;
       e.preventDefault();
-      const canvas = e.target, box = canvas.getBoundingClientRect();
+      const look = this.colors[this.color], canvas = layer.querySelector(look.hl ? 'canvas.hl' : 'canvas.ink');
+      const box = layer.getBoundingClientRect();
       const at = ev => [(ev.clientX - box.left) * 1920 / box.width, (ev.clientY - box.top) * 1080 / box.height];
       const pen = canvas.getContext('2d');
-      Object.assign(pen, {strokeStyle: '#c6613f', lineWidth: 6, lineCap: 'round', lineJoin: 'round'});
-      try { canvas.setPointerCapture(e.pointerId); } catch {}  // keep drawing when the pointer leaves the canvas
+      Object.assign(pen, {strokeStyle: look.stroke, fillStyle: look.stroke, lineWidth: look.width, lineCap: 'round', lineJoin: 'round'});
+      try { layer.setPointerCapture(e.pointerId); } catch {}  // keep drawing when the pointer leaves the stage
       line = {pen, at, last: at(e), id: e.pointerId};
       pen.beginPath();
-      pen.arc(...line.last, 3, 0, 2 * Math.PI);
-      pen.fillStyle = '#c6613f';
+      pen.arc(...line.last, look.width / 2, 0, 2 * Math.PI);
       pen.fill();
     });
-    this.stage.addEventListener('pointermove', e => {
+    layer.addEventListener('pointermove', e => {
       if (!line || e.pointerId !== line.id) return;
       const next = line.at(e);
       line.pen.beginPath();
@@ -486,31 +499,49 @@ class SlidePresentation {
       line.last = next;
     });
     const stop = e => { if (line && e.pointerId === line.id) line = null; };
-    this.stage.addEventListener('pointerup', stop);
-    this.stage.addEventListener('pointercancel', stop);
+    layer.addEventListener('pointerup', stop);
+    layer.addEventListener('pointercancel', stop);
+    this.markTools();
   }
-  ink(slide) {
-    let canvas = slide.querySelector(':scope > canvas.ink');
-    if (!canvas) {
-      canvas = document.createElement('canvas');
-      canvas.className = 'ink';
-      canvas.width = 1920;
-      canvas.height = 1080;
-      canvas.setAttribute('aria-hidden', 'true');
-      slide.appendChild(canvas);
-    }
-    return canvas;
+  markTools() {
+    this.ball.querySelectorAll('.swatch').forEach(b => b.classList.toggle('on', Number(b.dataset.color) === this.color));
+    document.getElementById('whiteboard').classList.toggle('on', this.board);
+    document.getElementById('pen').setAttribute('aria-expanded', String(this.ball.classList.contains('open') || this.pen));
+  }
+  openTools(open) {
+    this.ball.classList.toggle('open', open);
+    this.markTools();
+  }
+  pickColor(i) {
+    this.color = i;
+    if (!this.pen) this.togglePen(true);
+    this.markTools();
   }
   togglePen(on = !this.pen) {
     this.pen = on;
     document.body.classList.toggle('pen', on);
-    document.getElementById('pen').classList.toggle('on', on);
-    document.getElementById('pen-clear').hidden = !on;
-    if (on) this.ink(this.slides[this.index]);
+    if (!on) {
+      if (this.board) this.toggleBoard(false);
+      this.clearInk();
+      this.ball.classList.remove('open');
+    }
+    this.markTools();
+  }
+  toggleBoard(on = !this.board) {
+    if (on === this.board) return;
+    this.board = on;
+    document.body.classList.toggle('board-open', on);
+    this.clearInk();
+    if (on) {
+      this.penBefore = this.pen;
+      if (!this.pen) this.togglePen(true);
+    } else if (!this.penBefore) {
+      this.togglePen(false);
+    }
+    this.markTools();
   }
   clearInk() {
-    const canvas = this.slides[this.index].querySelector(':scope > canvas.ink');
-    canvas?.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+    this.layer?.querySelectorAll('canvas').forEach(c => c.getContext('2d').clearRect(0, 0, c.width, c.height));
   }
 
   /* --- classroom interactions --- */
@@ -747,6 +778,8 @@ class SlidePresentation {
     const width = innerWidth - left, height = innerHeight - bottom;
     const f = Math.min(width / 1920, height / 1080);
     this.stage.style.transform = `translate(${left + (width - 1920 * f) / 2}px, ${(height - 1080 * f) / 2}px) scale(${f})`;
+    const ball = document.getElementById('pen-ball');  // on the stage's right edge, halfway down it
+    if (ball) Object.assign(ball.style, {right: (width - 1920 * f) / 2 + 14 + 'px', top: height / 2 + 'px'});
   }
   steps(slide) { return Number(slide.dataset.steps || 1); }
   show(index, atEnd = false) {
@@ -756,7 +789,8 @@ class SlidePresentation {
     const slide = this.slides[this.index];
     slide.classList.add('active', 'visible');
     if (document.activeElement.matches('.slot')) document.activeElement.blur();
-    if (this.pen) this.ink(slide);
+    if (this.board) this.toggleBoard(false);
+    this.clearInk();
     if (slide.dataset.steps) slide.dataset.at = atEnd ? slide.dataset.steps : 1;
     this.syncChanges(false);
     history.replaceState(null, '', '#page-' + (this.index + 1));
@@ -778,6 +812,8 @@ class SlidePresentation {
     this.counter.textContent = `${this.index + 1} / ${this.slides.length}` + (total > 1 ? ` · 第 ${slide.dataset.at} / ${total} 步` : '');
   }
   move(delta) {
+    // With the whiteboard open, a page key only closes it: the teacher is back on the page they were explaining.
+    if (this.board) { this.toggleBoard(false); return; }
     const slide = this.slides[this.index], at = Number(slide.dataset.at || 1), next = at + delta;
     if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.syncChanges(true); this.updateQuickIde(); this.label(); return; }
     if (this.index + delta >= 0 && this.index + delta < this.slides.length) this.show(this.index + delta, delta < 0);
@@ -786,6 +822,7 @@ class SlidePresentation {
     if (e.ctrlKey || e.metaKey || e.altKey || this.settings.open || this.help.open) return;
     if (e.target.closest('select')) return;
     if (!this.blank.hidden) { this.blank.hidden = true; e.preventDefault(); return; }
+    if (e.key === 'Escape' && this.board) { this.toggleBoard(false); return; }
     if (e.key === 'Escape' && this.pen) { this.togglePen(false); return; }
     if (e.target.matches('.slot')) {
       if (['Enter', 'Escape'].includes(e.key)) e.target.blur();
@@ -803,14 +840,18 @@ class SlidePresentation {
       b: () => { this.blank.hidden = false; },
       d: () => this.togglePen(),
       c: () => this.clearInk(),
+      w: () => this.toggleBoard(),
       g: () => { e.preventDefault(); this.jump.select(); }
     };
     if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(k)) { e.preventDefault(); this.move(e.shiftKey ? -1 : 1); }
     else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(k)) { e.preventDefault(); this.move(-1); }
+    else if (['Home', 'End'].includes(k) && this.board) this.toggleBoard(false);
     else if (k === 'Home') this.show(0);
     else if (k === 'End') this.show(this.slides.length - 1);
     else if (k === '?') this.help.showModal();
     else if (actions[k.toLowerCase()]) actions[k.toLowerCase()]();
+    else if (this.pen && /^[1-3]$/.test(k)) this.pickColor(Number(k) - 1);
+    else if (this.pen && k === '4') return;
     else if (/^[1-4]$/.test(k)) this.slides[this.index].querySelectorAll('.quiz button')[Number(k) - 1]?.click();
   }
   fromHash() {
@@ -822,8 +863,9 @@ class SlidePresentation {
   }
   reveal() {
     this.bar.classList.add('show');
+    this.ball?.classList.add('show');
     clearTimeout(this.hide);
-    this.hide = setTimeout(() => this.bar.classList.remove('show'), 2000);
+    this.hide = setTimeout(() => { this.bar.classList.remove('show'); this.ball?.classList.remove('show'); }, 2000);
   }
   finishAll() {
     this.stage.querySelectorAll('.algo').forEach(box => box.player?.pause());
