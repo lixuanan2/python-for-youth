@@ -215,7 +215,8 @@ def css_string(text):
 
 KEYWORDS = {'python': r'\b(?:def|return|if|elif|else|for|while|in|and|or|not|is|True|False|None|import|from|as|break|continue|try|except|pass|global|lambda)\b',
             'cpp': r'(?:#include|\b(?:int|long|double|float|char|bool|void|string|auto|const|struct|return|if|else|for|while|do|break|continue|true|false|using|namespace)\b)'}
-TOKEN = r'(?P<s>\'[^\']*\'|"[^"]*")|(?P<m>\b\d+(?:\.\d+)?\b)|(?P<f>\b\w+(?=\())|(?P<k>%s)'
+# A string may start with f (f-string): the f takes the string's colour, as on the hand-coloured pages.
+TOKEN = r'(?P<s>(?:\bf)?\'[^\']*\'|(?:\bf)?"[^"]*")|(?P<m>\b\d+(?:\.\d+)?\b)|(?P<f>\b\w+(?=\())|(?P<k>%s)'
 
 
 def highlight(code):
@@ -230,6 +231,145 @@ def highlight(code):
             at = m.end()
         return '<span class="ln">' + ''.join(out) + html.escape(text[at:], quote=False) + '</span>'
     return ''.join(line(text) for text in code.split('\n'))
+
+
+# === LAYOUTS: a page with a layout (class lay-walk and so on, template/layouts.css) names its cells and carries no
+# coordinates. Its code boxes, and a free page's, hold plain code and are coloured here. Other pages are built as before.
+# A lesson marked "structured": true in course.json has moved every page over (check.py then wants a layout on each).
+
+def structured(lesson):
+    return bool(lesson.get('structured'))
+
+
+# A page moved over: it names a layout, or it is a free page (class free) that keeps its own left/top.
+LAID_OUT = re.compile(r'<section class="slide[^"]* (?:lay-|free\b)')
+
+
+def uses_layouts(slides):
+    return bool(LAID_OUT.search(slides))
+
+
+def numbers(text):
+    """'2', '2,4', '3-5' or '1,3-4' as a list of numbers."""
+    out = []
+    for part in text.split(','):
+        a, _, b = part.strip().partition('-')
+        out += list(range(int(a), int(b or a) + 1))
+    return out
+
+
+LN_OPEN = re.compile(r'<span class="ln([^"]*)">')
+
+
+def mark_lines(inner, light, mod, where):
+    """data-light="1-2:2 3:3-5": lines 1 and 2 light up on step 2, line 3 on steps 3 to 5 (classes l2, l3 ...).
+    data-mod="2:原来是 >=": line 2 is a changed line, with a grey note of what it was (classes mod and orig)."""
+    lines = len(LN_OPEN.findall(inner))
+    extra, notes = {}, {}
+    for group in (light or '').split():
+        rows, _, steps = group.partition(':')
+        assert steps, f'{where}: data-light needs line:step, like 1-2:2, not {group}'
+        for n in numbers(rows):
+            assert 1 <= n <= lines, f'{where}: data-light names line {n}, the code has {lines}'
+            extra.setdefault(n, []).extend(f'l{k}' for k in numbers(steps))
+    for item in (mod or '').split('|'):
+        if item.strip():
+            row, _, note = item.partition(':')
+            n = int(row)
+            assert 1 <= n <= lines and note.strip(), f'{where}: data-mod needs line:note, like 2:原来是 >=, not {item}'
+            extra.setdefault(n, []).append('mod')
+            notes[n] = note.strip()
+    count = 0
+
+    def opening(match):
+        nonlocal count
+        count += 1
+        classes = match.group(1).split() + [c for c in extra.get(count, []) if c not in match.group(1).split()]
+        return '<span class="' + ' '.join(['ln'] + classes) + '">'
+    inner = LN_OPEN.sub(opening, inner)
+    for n, note in sorted(notes.items(), reverse=True):  # the note goes at the end of its line, before the line closes
+        starts = [m.start() for m in LN_OPEN.finditer(inner)] + [len(inner)]
+        end = inner.rindex('</span>', starts[n - 1], starts[n])
+        inner = inner[:end] + f'<span class="orig">{html.escape(note, quote=False)}</span>' + inner[end:]
+    return inner
+
+
+CODE_BOX = re.compile(r'<pre class="code([^"]*)"([^>]*)>(.*?)</pre>', re.S)
+COLOURED = re.compile(r'<span class="[kmfs]">')
+
+
+def build_code(slides, lesson):
+    """Colour each code box on a page with a layout from its code: written in the page, or from data-file when the box is empty."""
+    def box(match):
+        classes, attrs, inner = match.groups()
+        where = f'{lesson["id"]}: code box {html.unescape(attrs.strip())[:60]}'
+        get = lambda name: (re.search(f' {name}="([^"]*)"', attrs) or [None, None])[1]
+        if '<span class="ln' not in inner:
+            code = html.unescape(inner).strip('\n')
+            if not code.strip() and get('data-file'):
+                code = read(f'lessons/{lesson["id"]}/{get("data-file")}').strip('\n')
+                if get('data-lines'):
+                    first, last = map(int, get('data-lines').split('-'))
+                    code = '\n'.join(code.split('\n')[first - 1:last])
+            assert code.strip(), f'{where}: an empty code box needs data-file'
+            inner = highlight(code)
+        elif 'pick' not in classes.split() and '<input' not in inner:
+            # Two kinds keep colours written by hand: a bug hunt (.pick), whose mistakes must not be coloured as if right,
+            # and a box with yellow boxes (input.slot) in its code.
+            assert not COLOURED.search(inner), f'{where}: write the code without colour spans; the build colours it'
+        light, mod = get('data-light'), get('data-mod')
+        attrs = re.sub(r' data-(?:light|mod)="[^"]*"', '', attrs)
+        inner = mark_lines(inner, html.unescape(light or ''), html.unescape(mod or ''), where)
+        return f'<pre class="code{classes}"{attrs}>{inner}</pre>'
+    return re.sub(r'<section class="slide.*?</section>', lambda page: CODE_BOX.sub(box, page.group()) if LAID_OUT.match(page.group()) else page.group(),
+                  slides, flags=re.S)
+
+
+# Where each layout puts its code box: (width, height for the box, largest font). The build picks the font so the code
+# fits; a page can still set --fs or a width of its own. Keep in step with template/layouts.css.
+# The heights are the room the code may take when the sentences go beside it; with them under it, a long program
+# needs --fs or its sentences moved to the right (check_browser.mjs catches what runs off the page).
+CODE_ROOM = {'walk': (960, 760, 52), 'walk wide': (1060, 760, 52), 'walk narrow': (840, 760, 52),
+             'predict': (1000, 520, 58), 'ask': (800, 600, 48), 'ask bug': (1040, 640, 50), 'try': (1200, 260, 44)}
+EDITOR = re.compile(r'<div class="editor([^"]*)"((?: [\w-]+="[^"]*")*)>(\s*<div class="tab">.*?</div>\s*<pre class="code[^"]*"[^>]*>(.*?)</pre>)', re.S)
+
+
+def code_room(section):
+    found = re.search(r'<section class="slide([^"]*)"', section)
+    names = found.group(1).split() if found else []
+    layout = next((n[4:] for n in names if n.startswith('lay-')), None)
+    if layout == 'walk':
+        layout += next((' ' + n for n in names if n in ('wide', 'narrow')), '')
+    if layout == 'ask' and 'class="code pick' in section:
+        layout = 'ask bug'
+    return CODE_ROOM.get(layout)
+
+
+def fit_code(slides, lesson):
+    """Give each code box a font size that fits its layout, from its line count and longest line."""
+    def section(page):
+        room = code_room(page.group())
+        if not room:
+            return page.group()
+
+        def editor(match):
+            classes, attrs, body, inner = match.groups()
+            if '--fs' in attrs:
+                return match.group()
+            width, height, top = room
+            own = re.search(r'width:\s*(\d+)px', attrs)
+            width = int(own.group(1)) if own else width
+            rows = re.findall(r'<span class="ln[^"]*">(.*?)</span>(?=<span class="ln|$)', inner, re.S)
+            # The grey "原来是 ..." note sits at the end of its line in a smaller font; it does not set the size.
+            lines = [html.unescape(re.sub(r'<[^>]+>', '', re.sub(r'<span class="orig">.*?</span>', '', l))) for l in rows] or ['']
+            widest = max(sum(10 if ord(ch) > 0x2e7f else 6 for ch in l) for l in lines) or 1
+            size = min(top, (width - GUTTER) * 10 // widest, (height - 130) * 100 // (155 * len(lines)))
+            assert size >= 30, f'{lesson["id"]}: a code box needs {size}px to fit its layout; cut lines or give it room'
+            style = re.search(r' style="([^"]*)"', attrs)
+            attrs = re.sub(r' style="[^"]*"', '', attrs) + f' style="{(style.group(1).rstrip(";") + ";") if style else ""}--fs:{size}px"'
+            return f'<div class="editor{classes}"{attrs}>{body}'
+        return EDITOR.sub(editor, page.group())
+    return re.sub(r'<section class="slide.*?</section>', section, slides, flags=re.S)
 
 
 # <!-- @answer 04 | 一两句讲解 --> or <!-- @answer 02 lines 5-14 | … --> in slides.html: the reference answer of a challenge
@@ -281,11 +421,15 @@ def answer_pages(slides, lesson):
 
 
 def render(lesson):
-    css = '\n'.join([font_face(w) for w in (400, 700, 800)] + [read('vendor/viewport.css'), read('template/theme.css')])
+    slides = read(f'lessons/{lesson["id"]}/slides.html').rstrip()
+    sheets = [read('vendor/viewport.css'), read('template/theme.css')] + ([read('template/layouts.css')] if uses_layouts(slides) else [])
+    css = '\n'.join([font_face(w) for w in (400, 700, 800)] + sheets)
     page = read('template/page.html')
+    if uses_layouts(slides):
+        slides = fit_code(build_code(slides, lesson), lesson)
     fields = dict(title=html.escape(lesson['title']), lesson=css_string(lesson_label(lesson)), css=css,
                   site=html.escape(site()['title']),
-                  slides=algo.embed(attach_code(number_slides(answer_pages(read(f'lessons/{lesson["id"]}/slides.html').rstrip(), lesson) + '\n' + thanks_slide(lesson)), lesson), site()['language']).rstrip(),
+                  slides=algo.embed(attach_code(number_slides(answer_pages(slides, lesson) + '\n' + thanks_slide(lesson)), lesson), site()['language']).rstrip(),
                   script=read('template/deck.js').replace('{{ide}}', json.dumps(site()['ide'], ensure_ascii=False)).replace('{{language}}', site()['language']).rstrip())
     for key, value in fields.items():
         page = page.replace('{{' + key + '}}', value)

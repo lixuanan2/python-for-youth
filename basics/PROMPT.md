@@ -76,6 +76,67 @@
 - 颜色表示这页要做什么：米白和深色是听讲，琥珀是动手，陶土红是挑战，橄榄绿是复盘。
 - 正文不小于 32px，代码不小于 44px。
 
+### 版式和格子
+
+课件正在换成“版式”写法（2026-11-18 老师定的）：每一页说清自己是哪种版式、每样东西放进哪个格子，位置由版式决定，页面上不写 `left`、`top` 这些坐标。一页一页地换：写了版式的页按这里的规则构建和检查，没换的页照旧。一节课全部换完，在 `course.json` 给它写 `"structured": true`，从此这节课每一页都要有版式（或是自由页）。
+
+一共 8 种版式，页面的 `<section>` 写成 `class="slide lay-版式名"`：
+
+| 版式 | 用在哪里 | 格子（从上到下、从左到右） |
+| --- | --- | --- |
+| `lay-cover` 封面 | 每节课第一页 | `.kicker` 课号（`# LESSON 15`）、`.cover-row` 两个大字和中间的线、`.headline` 标题、`.say` 一句话 |
+| `lay-notes` 便签 | 开头讲故事的一排便签；加 `.challenge` 是挑战题 | 便签页：`h2.t` 标题、`.notes` 里放 2 到 6 张 `.slip`、`.say` 一段话。挑战题：`.kicker`（`# 自己挑战`）、`h2.big` 大标题、`.say` 题目、一张 `.slip` 写输入和输出（在右边）、`.go` 里放 IDE 按钮和一句话 |
+| `lay-walk` 代码走一遍 | 左边深色栏里讲一段程序，右边看变量和输出 | `h2.t`、`.editor` 代码、`.say` 或 `.turns`（每一步一句）、`a.ide`、`.right` 右栏（变量框 `.box`、输出、黄色框的 `.live-out`、算法演示，也可以把讲解放进来）。深色栏默认宽 1130，加 `.wide` 是 1230，加 `.narrow` 是 1010 |
+| `lay-predict` 猜一猜 | 先猜程序输出什么，翻一步看答案 | `h2.t`、`.editor` 代码（左）、`.answer` 答案（右，一般加 `step s2`；大数字加 `.big`）、`.say` 或 `.turns`、可选的 `a.ide` |
+| `lay-columns` 分栏 | 左右对比、三步、速查卡、三种常见错误、后面再学 | `h2.t`、可选的 `.note`（右上角一行小字）、一个分栏组件（`.vs`、`.steps3`、`.sheet3`、`.ledger`、`.later`、`.verbs`）、最下面的 `.say`。速查卡和三种常见错误的第一栏宽度写在组件上：`style="--key:780px"`，三种常见错误的第二栏用 `--mid` |
+| `lay-try` 动手改一改 | 琥珀色带子的动手页 | `.band` 左边的带子、`.turn` 题目和例子、`a.ide` |
+| `lay-ask` 提问 | 小测、找错 | 有代码：`.editor` 在左，`.quiz`（选项竖排）或找错的 `.say` 在右，`.fb` 在它们下面。没有代码：`.quiz` 四个选项两列，`.fb` 在下面 |
+| `lay-hints` 提示 | 挑战的提示页（陶土红），说得清吗（橄榄绿） | 提示页：`h2.t`、`.hints`。说得清吗：`h2.big`、`.hints.qa`（问题粗体，答案写在 `<em class="step s2">` 里）、`.say`（`only1` 那句“先自己说一说”） |
+
+每个版式的位置写在 `template/layouts.css`，想知道某个格子在哪儿就看那里。
+
+一页这样写（第 15 课“参数”，代码走一遍）：
+
+```html
+<section class="slide lay-walk" aria-label="参数" data-steps="3" data-at="3" data-chapter="参数">
+  <h2 class="t">参数：调用时把数据带进去</h2>
+  <div class="editor"><div class="tab">greet.py</div>
+<pre class="code" data-file="solutions/01_greet.py" data-light="1:1 2:2,3 3:2 4:3"></pre></div>
+  <div class="turns">
+    <p class="say only1">括号里的 name 就是参数，像函数自己的一个变量，现在还是空的。</p>
+    <p class="say only2">调用 greet("小明")，"小明" 被放进 name，函数说“你好 小明”。</p>
+    <p class="say only3">再调用时放进 "小红"。同一个函数，给的不一样，做的就不一样。</p>
+  </div>
+  <a class="ide step s3">▶ 在 IDE 打开</a>
+  <div class="right">
+    <div class="box step"><i>name</i><b>还没有</b></div>
+    <div class="box step s2"><i>第 3 行</i><b>你好 小明</b></div>
+    <div class="box out step s3"><i>第 4 行</i><b>你好 小红</b></div>
+  </div>
+</section>
+```
+
+读法：这是“代码走一遍”；代码来自 `solutions/01_greet.py`；第 1 行在第 1 步亮，第 2 行在第 2、3 步亮，第 3 行在第 2 步亮，第 4 行在第 3 步亮；三句讲解轮流出现在代码下面；右栏是三个变量框。
+
+几步轮流出现的几句话（`only1`、`only2`……）放进一个 `.turns`，它们占同一个位置。
+
+**代码框**
+
+- 代码框里只写代码本身，不写颜色。代码在 `solutions/` 里的，`pre.code` 留空，写 `data-file`；短代码直接写在 `pre.code` 里（`<` 写成 `&lt;`）。构建会上色、加行号。
+- 字号由构建按行数和最长的一行算，放得下就尽量大；要特别指定时在 `.editor` 上写 `style="--fs:44px"`。
+- 第几步亮哪几行：`data-light="行:步"`，几组用空格隔开。行和步都可以写一个数、`1,3` 或 `2-4`。比如 `data-light="1-2:2 3:3-5"`：第 1、2 行在第 2 步亮，第 3 行在第 3 到 5 步亮。
+- 改过的一行：`data-mod="行:说明"`，比如 `data-mod="2:原来是 >="`，这一行标黄，行尾是灰色的说明。几行用 `|` 隔开。
+- 两种代码框照旧手写颜色：找错题（`pre.code.pick`），故意写错的地方不能被上成对的颜色；放了黄色框（`input.slot`）的代码。
+- `data-file`、`data-lines`（只摘几行）、`data-stdin`、`data-change` 照旧。
+
+**放不进版式的页**
+
+- 字特别多或特别少的页，仍用原来的版式，只在页面上改大小：比如讲解写 `style="font-size:34px"`，代码写 `--fs`，框写 `width`。不改位置。
+- 一页里有一样东西版式放不下（比如一张图上的标注），给它加 `class="free"`，它可以写自己的 `left`、`top`，其余的仍由版式放。
+- 整页是一张图解、位置本身就是要讲的内容（IDE 截图上标点、数轴、画出来的下标表），整页写 `class="slide free"`，叫“自由页”，照原来的绝对定位写。自由页尽量少，一节课一两页。
+
+`check.py` 对换过的页检查：只有一个版式；除了自由页和 `.free`，页面上不写 `left`、`top`、`right`、`bottom`；代码框里没有手写的颜色（找错题和黄色框除外）。标了 `structured` 的课还要每页都有版式或是自由页。
+
 ## 硬性要求
 
 - 一律用相对路径，不写绝对路径。
