@@ -614,6 +614,9 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-predict>.answer:not(.turns,.big),.lay-predict>.answer.turns>div:not([class]){display:flex;flex-direction:column;align-items:flex-start;gap:50px}
 .lay-predict .crate{margin-top:92px}
 .lay-predict>.ide{grid-area:ide;justify-self:start;align-self:end}
+/* .under: long sentences go across the page under both the code and the answer, the IDE button under them. */
+.lay-predict.under{grid-template-areas:"code answer" "say say" "ide ide"}
+.lay-predict.under>.ide{align-self:start}
 
 /* 5 columns: two or three things side by side or row by row (.vs, .steps3, .sheet3, .ledger, .later, .verbs), a sentence under them. */
 .lay-columns{display:flex;flex-direction:column;gap:64px;padding:240px 96px 180px}
@@ -642,7 +645,7 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-ask>.fb{grid-area:fb}
 .lay-ask:not(:has(>.editor)){grid-template-columns:1fr;grid-template-areas:"pick" "fb"}
 /* .top: a short program with a long line goes across the page, the four choices in two columns under it. */
-.lay-ask.top{grid-template-columns:1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"code" "pick" "fb"}
+.lay-ask.top{grid-template-columns:1fr;grid-template-rows:max-content auto 1fr;grid-template-areas:"code" "pick" "fb"}
 .lay-ask.top>.editor{width:auto}
 .lay-ask.top>.editor~.quiz{grid-template-columns:1fr 1fr;gap:26px 40px}
 

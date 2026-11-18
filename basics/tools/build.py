@@ -365,6 +365,8 @@ def code_height(section, layout, width, column):
     if not layout.startswith(('walk', 'predict')):
         return column
     rest = outside(section, 'right', 'answer')
+    if layout == 'predict' and re.search(r'<section class="slide[^"]* under\b', section):
+        width = 1728  # .under: the sentences go across the page
 
     def lines(say):
         parts = [html.unescape(re.sub(r'<[^>]+>', '', part)) for part in re.split(r'<br\s*/?>', say)]
