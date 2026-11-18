@@ -575,10 +575,10 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
 .lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
 .lay-notes>.notes>.slip.big{flex:1.2}
-.lay-notes.challenge{display:grid;grid-template-columns:1fr 440px;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
+.lay-notes.challenge{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
 .lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
 .lay-notes.challenge>.say{grid-column:1;max-width:1000px}
-.lay-notes.challenge>.slip{grid-column:2;grid-row:1/4;align-self:start;margin-top:30px}
+.lay-notes.challenge>.slip{grid-column:2;grid-row:1/4;align-self:start;margin-top:30px;min-width:440px}
 .lay-notes.challenge>.go{grid-column:1/-1;grid-row:4;display:flex;align-items:center;gap:60px}
 .lay-notes.challenge>.go .ide{position:relative;left:auto;top:auto}
 .lay-notes.challenge>.go .say{font-size:34px}
@@ -639,6 +639,10 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-ask>.editor~.quiz{grid-template-columns:1fr;gap:16px}
 .lay-ask>.fb{grid-area:fb}
 .lay-ask:not(:has(>.editor)){grid-template-columns:1fr;grid-template-areas:"pick" "fb"}
+/* .top: a short program with a long line goes across the page, the four choices in two columns under it. */
+.lay-ask.top{grid-template-columns:1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"code" "pick" "fb"}
+.lay-ask.top>.editor{width:auto}
+.lay-ask.top>.editor~.quiz{grid-template-columns:1fr 1fr;gap:26px 40px}
 
 /* 8 hints: lines shown one at a time: hints for a challenge (.hints on clay), or questions with their answers (olive). */
 .lay-hints>h2.big{position:absolute;left:96px;top:90px;font:800 130px/1.2 var(--text)}
@@ -939,7 +943,7 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">小奖状</h2>
   <p class="say r d2">分两行读入语文和数学成绩，都是整数。<br>至少有一门满 90 分，并且<b>两门都满 60 分</b>，就输出获奖，否则输出继续努力。</p>
-  <div class="slip tilt2 r d3"><small>输入 90 和 60，输出</small><pre>获奖</pre><small style="margin-top:26px">输入 90 和 59，输出</small><pre>继续努力</pre></div>
+  <div class="slip tilt2 r d3" style="width:560px"><small>输入 90 和 60，输出</small><pre>获奖</pre><small style="margin-top:26px">输入 90 和 59，输出</small><pre>继续努力</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【小奖状】&#10;# 分两行读入语文和数学成绩，都是整数。&#10;# 至少有一门满 90 分，并且两门都满 60 分，就输出获奖，&#10;#   否则输出继续努力。&#10;# 例如输入（每个一行）：90、60&#10;# 应该输出：获奖&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

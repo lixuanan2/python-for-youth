@@ -329,7 +329,7 @@ def build_code(slides, lesson):
 # fits; a page can still set --fs or a width of its own. Keep in step with template/layouts.css.
 # In walk and predict the sentences go under the code, so the height is what the column leaves after them (code_height).
 CODE_ROOM = {'walk': (960, 790, 52), 'walk wide': (1060, 790, 52), 'walk narrow': (840, 790, 52),
-             'predict': (1000, 740, 58), 'ask': (800, 600, 48), 'ask bug': (1040, 640, 50), 'try': (1200, 260, 44)}
+             'predict': (1000, 740, 58), 'ask': (800, 600, 48), 'ask top': (1728, 300, 48), 'ask bug': (1040, 640, 50), 'try': (1200, 260, 44)}
 # An editor may hold two versions of its code (pre.code.was, then the new one shown from data-change); the font fits both.
 EDITOR = re.compile(r'<div class="editor([^"]*)"((?: [\w-]+="[^"]*")*)>(\s*<div class="tab">.*?</div>((?:\s*<pre class="code[^"]*"[^>]*>.*?</pre>)+))', re.S)
 
@@ -342,6 +342,8 @@ def code_room(section):
         layout += next((' ' + n for n in names if n in ('wide', 'narrow')), '')
     if layout == 'ask' and 'class="code pick' in section:
         layout = 'ask bug'
+    elif layout == 'ask' and 'top' in names:
+        layout = 'ask top'
     return CODE_ROOM.get(layout)
 
 
@@ -394,7 +396,8 @@ def fit_code(slides, lesson):
             # The grey "原来是 ..." note sits at the end of its line in a smaller font; it does not set the size.
             widest = max(sum(10 if ord(ch) > 0x2e7f else 6 for ch in l) for lines in versions for l in lines) or 1
             size = min(top, (width - GUTTER) * 10 // widest, (height - 130) * 100 // (155 * max(map(len, versions))))
-            assert size >= 30, f'{lesson["id"]}: a code box needs {size}px to fit its layout; cut lines or give it room'
+            name = (re.search(r'aria-label="([^"]*)"', page.group()) or [None, '?'])[1]
+            assert size >= 30, f'{lesson["id"]} page "{name}": a code box needs {size}px to fit its layout; cut lines or give it room'
             style = re.search(r' style="([^"]*)"', attrs)
             attrs = re.sub(r' style="[^"]*"', '', attrs) + f' style="{(style.group(1).rstrip(";") + ";") if style else ""}--fs:{size}px"'
             return f'<div class="editor{classes}"{attrs}>{body}'

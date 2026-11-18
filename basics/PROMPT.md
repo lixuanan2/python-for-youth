@@ -90,7 +90,7 @@
 | `lay-predict` 猜一猜 | 先猜程序输出什么，翻一步看答案 | `h2.t`、`.editor` 代码（左）、`.say` 或 `.turns`（代码下面）、`.answer` 答案（右；一个大数字写 `<p class="answer big step s2">`，变量框和输出便签放进 `<div class="answer">` 从上往下排；先放大问号 `<p class="qmark only1">?</p>`、翻一步换成答案的，写 `<div class="answer turns">`）、可选的 `a.ide`（右下角） |
 | `lay-columns` 分栏 | 左右对比、三步、速查卡、三种常见错误、后面再学 | `h2.t`、可选的 `.note`（右上角一行小字）、一个分栏组件（`.vs`、`.steps3`、`.sheet3`、`.ledger`、`.later`、`.verbs`）、最下面的 `.say`。速查卡和三种常见错误的第一栏宽度写在组件上：`style="--key:780px"`，三种常见错误的第二栏用 `--mid` |
 | `lay-try` 动手改一改 | 琥珀色带子的动手页 | `.band` 左边的带子、`.turn` 题目和例子、`a.ide` |
-| `lay-ask` 提问 | 小测、找错 | 有代码：`.editor` 在左，`.quiz`（选项竖排）或找错的 `.say` 在右，`.fb` 在它们下面。没有代码：`.quiz` 四个选项两列，`.fb` 在下面 |
+| `lay-ask` 提问 | 小测、找错 | 有代码：`.editor` 在左，`.quiz`（选项竖排）或找错的 `.say` 在右，`.fb` 在它们下面。没有代码：`.quiz` 四个选项两列，`.fb` 在下面。代码很短但一行很长时加 `.top`：代码在上面占满一行，四个选项两列排在下面 |
 | `lay-hints` 提示 | 挑战的提示页（陶土红），说得清吗（橄榄绿） | 提示页：`h2.t`、`.hints`。说得清吗：`h2.big`、`.hints.qa`（问题粗体，答案写在 `<em class="step s2">` 里）、`.say`（`only1` 那句“先自己说一说”） |
 
 每个版式的位置写在 `template/layouts.css`，想知道某个格子在哪儿就看那里。
