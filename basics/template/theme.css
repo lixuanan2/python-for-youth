@@ -345,14 +345,26 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .ink-layer{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:900;pointer-events:none}
 .ink-layer canvas{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none}
 .ink-layer .hl{opacity:.4}
-.ink-layer .paper{position:absolute;inset:0;background:var(--paper);display:none}
-.board-open .ink-layer .paper{display:block}
 .pen .ink-layer{pointer-events:auto;cursor:crosshair;touch-action:none}
+/* Whiteboard: a sand board with a faint 48px grid, floating over the dimmed page, which takes clicks but does nothing. */
+.board-shade{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:950;background:#141413a6;display:none}
+.board{position:absolute;z-index:960;display:none;flex-direction:column;border-radius:14px;overflow:hidden;background:#e9e6db;box-shadow:0 24px 60px #000a;user-select:none;-webkit-user-select:none}
+.board-open .board-shade{display:block}.board-open .board{display:flex}
+.board-bar{flex:none;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 24px;background:#1f1e1d;color:#f0eee6;font:700 22px/1 var(--text);cursor:move;touch-action:none}
+.board-x{width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:#f0eee6;font:400 32px/1 var(--text);cursor:pointer}
+.board-x:hover{background:#45413b}
+.board-paper{position:relative;flex:1;overflow:hidden;cursor:crosshair;touch-action:none;background-color:#e9e6db;
+  background-image:linear-gradient(#1f1e1d12 1px,transparent 1px),linear-gradient(90deg,#1f1e1d12 1px,transparent 1px);background-size:48px 48px}
+.board-paper canvas{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none}
+.board-paper .hl{opacity:.4}
+.board-size{position:absolute;right:0;bottom:0;width:36px;height:36px;cursor:nwse-resize;touch-action:none;
+  background:linear-gradient(135deg,transparent 55%,#1f1e1d55 55%,#1f1e1d55 62%,transparent 62%,transparent 72%,#1f1e1d55 72%,#1f1e1d55 79%,transparent 79%)}
 /* The ball fades out like the control bar but stays clickable, so a first tap on a touch screen opens it instead of turning the page. */
-.pen-ball{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:1050;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transition:opacity .25s}
+.pen-ball{position:fixed;right:14px;top:50%;transform:translateY(calc(32px - 100%));z-index:1050;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transition:opacity .25s}
 .pen-ball.show,.pen-ball.open,.pen .pen-ball,.pen-ball:hover,.pen-ball:focus-within{opacity:1}
 .pen-ball button{border:0;cursor:pointer;font:400 15px/1 var(--text);touch-action:manipulation}
-.pen-ball .ball{width:64px;height:64px;border-radius:50%;background:#1f1e1de6;color:#f0eee6;font-size:28px;box-shadow:0 6px 18px #0006}
+.pen-ball .ball{width:64px;height:64px;border-radius:50%;background:#1f1e1de6;color:#f0eee6;font-size:28px;box-shadow:0 6px 18px #0006;touch-action:none;cursor:grab}
+.pen-ball.dragging{opacity:1;transition:none}.pen-ball.dragging .ball{cursor:grabbing}
 .pen .pen-ball .ball{background:var(--clay)}
 .pen-tools{display:none;flex-direction:column;align-items:center;gap:10px;padding:12px 8px;border-radius:34px;background:#1f1e1de6;box-shadow:0 6px 18px #0006}
 .pen-ball.open .pen-tools,.pen .pen-tools{display:flex}
@@ -377,6 +389,6 @@ dialog p{color:var(--muted);font-size:15px}
 @media print{
   @page{size:1920px 1080px;margin:0}
   *{print-color-adjust:exact;-webkit-print-color-adjust:exact;animation:none!important}
-  .ide,.thumbs,#blank,.ink-layer,.pen-ball{display:none!important}
+  .ide,.thumbs,#blank,.ink-layer,.pen-ball,.board,.board-shade{display:none!important}
   .tag,.slip{box-shadow:none}
 }

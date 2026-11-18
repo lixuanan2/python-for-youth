@@ -491,14 +491,26 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .ink-layer{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:900;pointer-events:none}
 .ink-layer canvas{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none}
 .ink-layer .hl{opacity:.4}
-.ink-layer .paper{position:absolute;inset:0;background:var(--paper);display:none}
-.board-open .ink-layer .paper{display:block}
 .pen .ink-layer{pointer-events:auto;cursor:crosshair;touch-action:none}
+/* Whiteboard: a sand board with a faint 48px grid, floating over the dimmed page, which takes clicks but does nothing. */
+.board-shade{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:950;background:#141413a6;display:none}
+.board{position:absolute;z-index:960;display:none;flex-direction:column;border-radius:14px;overflow:hidden;background:#e9e6db;box-shadow:0 24px 60px #000a;user-select:none;-webkit-user-select:none}
+.board-open .board-shade{display:block}.board-open .board{display:flex}
+.board-bar{flex:none;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 24px;background:#1f1e1d;color:#f0eee6;font:700 22px/1 var(--text);cursor:move;touch-action:none}
+.board-x{width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:#f0eee6;font:400 32px/1 var(--text);cursor:pointer}
+.board-x:hover{background:#45413b}
+.board-paper{position:relative;flex:1;overflow:hidden;cursor:crosshair;touch-action:none;background-color:#e9e6db;
+  background-image:linear-gradient(#1f1e1d12 1px,transparent 1px),linear-gradient(90deg,#1f1e1d12 1px,transparent 1px);background-size:48px 48px}
+.board-paper canvas{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none}
+.board-paper .hl{opacity:.4}
+.board-size{position:absolute;right:0;bottom:0;width:36px;height:36px;cursor:nwse-resize;touch-action:none;
+  background:linear-gradient(135deg,transparent 55%,#1f1e1d55 55%,#1f1e1d55 62%,transparent 62%,transparent 72%,#1f1e1d55 72%,#1f1e1d55 79%,transparent 79%)}
 /* The ball fades out like the control bar but stays clickable, so a first tap on a touch screen opens it instead of turning the page. */
-.pen-ball{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:1050;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transition:opacity .25s}
+.pen-ball{position:fixed;right:14px;top:50%;transform:translateY(calc(32px - 100%));z-index:1050;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transition:opacity .25s}
 .pen-ball.show,.pen-ball.open,.pen .pen-ball,.pen-ball:hover,.pen-ball:focus-within{opacity:1}
 .pen-ball button{border:0;cursor:pointer;font:400 15px/1 var(--text);touch-action:manipulation}
-.pen-ball .ball{width:64px;height:64px;border-radius:50%;background:#1f1e1de6;color:#f0eee6;font-size:28px;box-shadow:0 6px 18px #0006}
+.pen-ball .ball{width:64px;height:64px;border-radius:50%;background:#1f1e1de6;color:#f0eee6;font-size:28px;box-shadow:0 6px 18px #0006;touch-action:none;cursor:grab}
+.pen-ball.dragging{opacity:1;transition:none}.pen-ball.dragging .ball{cursor:grabbing}
 .pen .pen-ball .ball{background:var(--clay)}
 .pen-tools{display:none;flex-direction:column;align-items:center;gap:10px;padding:12px 8px;border-radius:34px;background:#1f1e1de6;box-shadow:0 6px 18px #0006}
 .pen-ball.open .pen-tools,.pen .pen-tools{display:flex}
@@ -523,7 +535,7 @@ dialog p{color:var(--muted);font-size:15px}
 @media print{
   @page{size:1920px 1080px;margin:0}
   *{print-color-adjust:exact;-webkit-print-color-adjust:exact;animation:none!important}
-  .ide,.thumbs,#blank,.ink-layer,.pen-ball{display:none!important}
+  .ide,.thumbs,#blank,.ink-layer,.pen-ball,.board,.board-shade{display:none!important}
   .tag,.slip{box-shadow:none}
 }
 
@@ -826,16 +838,16 @@ dialog p{color:var(--muted);font-size:15px}
 
 <div id="blank" hidden></div>
 
-<!-- Pen and whiteboard: a small ball on the stage's right edge, shown when the mouse moves, like the control bar. -->
+<!-- Pen and whiteboard: a small ball against a side of the stage (drag it to move it), shown when the mouse moves, like the control bar. -->
 <div class="pen-ball" id="pen-ball">
   <div class="pen-tools" id="pen-tools" role="group" aria-label="画笔和白板">
     <button type="button" class="swatch" data-color="0" title="红笔（拿着笔时按 1）" aria-label="红笔"></button>
     <button type="button" class="swatch" data-color="1" title="蓝笔（拿着笔时按 2）" aria-label="蓝笔"></button>
     <button type="button" class="swatch" data-color="2" title="荧光笔：划代码行（拿着笔时按 3）" aria-label="荧光笔"></button>
-    <button type="button" class="word" id="whiteboard" title="白板：盖一张白纸写字（W），再按 W 或 Esc 回来">白板</button>
+    <button type="button" class="word" id="whiteboard" title="白板：在课件上面打开一块板写字（W），再按 W 或 Esc 关掉">白板</button>
     <button type="button" class="word" id="pen-off" title="收笔，笔迹清掉（Esc）">收笔</button>
   </div>
-  <button type="button" class="ball" id="pen" title="画笔和白板（D 拿笔，W 白板）" aria-label="画笔和白板" aria-expanded="false">✎</button>
+  <button type="button" class="ball" id="pen" title="画笔和白板（D 拿笔，W 白板）；拖动可以换位置" aria-label="画笔和白板" aria-expanded="false">✎</button>
 </div>
 
 <dialog id="ide-settings" aria-labelledby="ide-title">
@@ -856,10 +868,10 @@ dialog p{color:var(--muted);font-size:15px}
     <dt>I</dt><dd>IDE 设置</dd>
     <dt>F</dt><dd>全屏，全屏时动一下鼠标显示控制条</dd>
     <dt>B</dt><dd>黑屏，让学生看你，按任意键回来</dd>
-    <dt>D</dt><dd>画笔：拿起或收起（也可以点右边的圆球）。拿着笔时点击不翻页，方向键照常；收笔或翻页，笔迹就清掉</dd>
+    <dt>D</dt><dd>画笔：拿起或收起（也可以点圆球；圆球拖到哪边就贴在哪边，这台电脑记住）。拿着笔时点击不翻页，方向键照常；收笔或翻页，笔迹就清掉</dd>
     <dt>1 2 3</dt><dd>拿着笔时换颜色：红、蓝、荧光笔（划代码行）</dd>
-    <dt>C</dt><dd>擦掉笔迹，笔还拿着</dd>
-    <dt>W</dt><dd>白板：盖一张白纸写字，自动拿起笔；再按 W 或 Esc 回到这一页，白板清掉。白板打开时，翻页键只关白板、不翻页，再按一次才翻</dd>
+    <dt>C</dt><dd>擦掉笔迹，笔还拿着；白板开着时擦白板</dd>
+    <dt>W</dt><dd>白板：在课件上面打开一块带方格的板，自动拿起笔，只在板上写；拖顶上的横栏移动，拖右下角改大小，这台电脑记住。后面的课件变暗、点不动，翻页键照常翻页，白板和写的东西都留着。再按 W、Esc 或 × 关掉，白板清掉</dd>
     <dt>Esc</dt><dd>关白板；没开白板就收笔</dd>
     <dt>1–4</dt><dd>小测选答案（没拿笔时）</dd>
     <dt>P</dt><dd>算法演示：播放或暂停</dd>
@@ -1127,7 +1139,7 @@ class SlidePresentation {
     let down = null;
     this.stage.addEventListener('pointerdown', e => { down = {x: e.clientX, y: e.clientY, selected: selected()}; });
     this.stage.addEventListener('click', e => {
-      if (this.pen || e.target.closest('a,button,.pick,pre,.tb,.live-out')) return;
+      if (this.pen || this.board || e.target.closest('a,button,.pick,pre,.tb,.live-out')) return;
       if (down && (down.selected || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6)) return;
       if (selected()) return;
       this.move(e.clientX < innerWidth / 3 ? -1 : 1);
@@ -1325,43 +1337,68 @@ class SlidePresentation {
     this.linkIde();
   }
 
-  /* --- pen and whiteboard: the teacher circles code, marks a line or works something out on a blank page. Nothing is kept:
-     the ink goes when the page turns or the pen goes away, and there is one whiteboard, cleared when it closes. --- */
+  /* --- pen and whiteboard: the teacher circles code, marks a line or works something out on a board. Ink on the page goes
+     when the page turns or the pen goes away. The whiteboard floats over a dimmed page and stays while pages turn; its
+     ink goes when it closes. Where the board and the ball sit is kept on this computer. --- */
   setupPen() {
     this.pen = false;
     this.board = false;
     this.color = 0;
     this.colors = [{stroke: '#c6613f', width: 6}, {stroke: '#1f4fbf', width: 6}, {stroke: '#ffe100', width: 28, hl: true}];
+    const canvases = '<canvas class="hl" width="1920" height="1080"></canvas><canvas class="ink" width="1920" height="1080"></canvas>';
     const layer = document.createElement('div');
     layer.className = 'ink-layer';
     layer.setAttribute('aria-hidden', 'true');
-    layer.innerHTML = '<div class="paper"></div><canvas class="hl" width="1920" height="1080"></canvas><canvas class="ink" width="1920" height="1080"></canvas>';
-    this.stage.append(layer);
+    layer.innerHTML = canvases;
+    const shade = document.createElement('div');
+    shade.className = 'board-shade';
+    const board = document.createElement('div');
+    board.className = 'board';
+    board.setAttribute('role', 'dialog');
+    board.setAttribute('aria-label', '白板');
+    board.innerHTML = '<div class="board-bar"><span>白板</span><button type="button" class="board-x" title="关掉白板，写的清掉（W 或 Esc）" aria-label="关掉白板">×</button></div>'
+      + '<div class="board-paper">' + canvases + '</div><div class="board-size" title="拖这里改大小"></div>';
+    this.stage.append(layer, shade, board);
     this.layer = layer;
+    this.boardEl = board;
+    this.paper = board.querySelector('.board-paper');
+    // The dimmed page takes every click: no answers, no selecting, no IDE, no page turn.
+    shade.addEventListener('pointerdown', e => e.preventDefault());
+    shade.addEventListener('click', e => e.stopPropagation());
+    board.addEventListener('click', e => e.stopPropagation());
+    board.querySelector('.board-x').onclick = () => this.toggleBoard(false);
     this.ball = document.getElementById('pen-ball');
     // Keep focus off the ball, so space and a clicker still turn the page instead of pressing it again.
     this.ball.querySelectorAll('button').forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
-    document.getElementById('pen').onclick = () => this.openTools(!this.ball.classList.contains('open'));
+    board.querySelectorAll('button').forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
     this.ball.querySelectorAll('.swatch').forEach(b => { b.onclick = () => this.pickColor(Number(b.dataset.color)); });
     document.getElementById('whiteboard').onclick = () => this.toggleBoard();
     document.getElementById('pen-off').onclick = () => this.togglePen(false);
     document.addEventListener('touchstart', () => this.reveal(), {passive: true});
+    this.draws(layer, () => this.pen && !this.board);
+    this.draws(this.paper, () => this.board);
+    this.setupBoardMoves();
+    this.setupBallDrag();
+    this.markTools();
+  }
+  draws(surface, allowed) {
+    // Pointer position in the canvas's own pixels: the surface is drawn at stage size, then scaled with the stage.
     let line = null;
-    layer.addEventListener('pointerdown', e => {
-      if (!this.pen || e.button > 0) return;
+    surface.addEventListener('pointerdown', e => {
+      if (!allowed() || e.button > 0) return;
       e.preventDefault();
-      const look = this.colors[this.color], canvas = layer.querySelector(look.hl ? 'canvas.hl' : 'canvas.ink');
-      const box = layer.getBoundingClientRect();
-      const at = ev => [(ev.clientX - box.left) * 1920 / box.width, (ev.clientY - box.top) * 1080 / box.height];
+      const look = this.colors[this.color], canvas = surface.querySelector(look.hl ? 'canvas.hl' : 'canvas.ink');
+      const box = surface.getBoundingClientRect(), f = box.width / surface.offsetWidth;
+      const at = ev => [(ev.clientX - box.left) / f, (ev.clientY - box.top) / f];
       const pen = canvas.getContext('2d');
       Object.assign(pen, {strokeStyle: look.stroke, fillStyle: look.stroke, lineWidth: look.width, lineCap: 'round', lineJoin: 'round'});
-      try { layer.setPointerCapture(e.pointerId); } catch {}  // keep drawing when the pointer leaves the stage
+      try { surface.setPointerCapture(e.pointerId); } catch {}  // keep drawing when the pointer leaves the surface
       line = {pen, at, last: at(e), id: e.pointerId};
       pen.beginPath();
       pen.arc(...line.last, look.width / 2, 0, 2 * Math.PI);
       pen.fill();
     });
-    layer.addEventListener('pointermove', e => {
+    surface.addEventListener('pointermove', e => {
       if (!line || e.pointerId !== line.id) return;
       const next = line.at(e);
       line.pen.beginPath();
@@ -1371,14 +1408,95 @@ class SlidePresentation {
       line.last = next;
     });
     const stop = e => { if (line && e.pointerId === line.id) line = null; };
-    layer.addEventListener('pointerup', stop);
-    layer.addEventListener('pointercancel', stop);
-    this.markTools();
+    surface.addEventListener('pointerup', stop);
+    surface.addEventListener('pointercancel', stop);
+  }
+  /* The board moves by its top bar and grows from its corner, in stage pixels, never past the stage. */
+  setupBoardMoves() {
+    const W = 1920, H = 1080, MIN = [600, 400];
+    const fit = b => {
+      const w = Math.min(W, Math.max(MIN[0], b.w)), h = Math.min(H, Math.max(MIN[1], b.h));
+      return {w, h, x: Math.min(W - w, Math.max(0, b.x)), y: Math.min(H - h, Math.max(0, b.y))};
+    };
+    let box = {w: 1152, h: 648, x: 384, y: 216};
+    try {
+      const saved = JSON.parse(localStorage.getItem('deck-board') || 'null');
+      if (saved && ['x', 'y', 'w', 'h'].every(k => Number.isFinite(saved[k]))) box = fit(saved);
+    } catch {}
+    const place = () => Object.assign(this.boardEl.style, {left: box.x + 'px', top: box.y + 'px', width: box.w + 'px', height: box.h + 'px'});
+    place();
+    const drag = (handle, change) => {
+      handle.addEventListener('pointerdown', e => {
+        if (e.button > 0 || e.target.closest('button')) return;
+        e.preventDefault();
+        const f = this.stage.getBoundingClientRect().width / W, from = {...box, px: e.clientX, py: e.clientY};
+        try { handle.setPointerCapture(e.pointerId); } catch {}
+        const moved = ev => { box = fit(change(from, (ev.clientX - from.px) / f, (ev.clientY - from.py) / f)); place(); };
+        const done = () => {
+          handle.removeEventListener('pointermove', moved);
+          try { localStorage.setItem('deck-board', JSON.stringify(box)); } catch {}
+        };
+        handle.addEventListener('pointermove', moved);
+        handle.addEventListener('pointerup', done, {once: true});
+        handle.addEventListener('pointercancel', done, {once: true});
+      });
+    };
+    drag(this.boardEl.querySelector('.board-bar'), (b, dx, dy) => ({...b, x: b.x + dx, y: b.y + dy}));
+    // Growing never pushes the board off the stage: the far edge stops at the stage's edge.
+    drag(this.boardEl.querySelector('.board-size'), (b, dx, dy) => ({...b, w: Math.min(W - b.x, b.w + dx), h: Math.min(H - b.y, b.h + dy)}));
+  }
+  /* The ball can be dragged anywhere; let go and it sits against the nearer side of the stage, at the height it was let go.
+     Moving less than 6px from press to release is a tap that opens or closes the tools. */
+  setupBallDrag() {
+    const ball = document.getElementById('pen');
+    this.ballAt = {side: 'right', y: 0.5};
+    try {
+      const saved = JSON.parse(localStorage.getItem('deck-pen-ball') || 'null');
+      if (saved && ['left', 'right'].includes(saved.side) && Number.isFinite(saved.y)) this.ballAt = {side: saved.side, y: Math.min(1, Math.max(0, saved.y))};
+    } catch {}
+    let press = null;
+    ball.addEventListener('pointerdown', e => {
+      if (e.button > 0) return;
+      press = {x: e.clientX, y: e.clientY, id: e.pointerId, moved: false};
+      try { ball.setPointerCapture(e.pointerId); } catch {}
+    });
+    ball.addEventListener('pointermove', e => {
+      if (!press || e.pointerId !== press.id) return;
+      if (!press.moved && Math.hypot(e.clientX - press.x, e.clientY - press.y) < 6) return;
+      press.moved = true;
+      this.ball.classList.add('dragging');
+      // The holder's top is the ball's centre (the tools open above it), so the ball sits under the pointer.
+      Object.assign(this.ball.style, {left: e.clientX - this.ball.offsetWidth / 2 + 'px', right: 'auto', top: e.clientY + 'px'});
+    });
+    const release = e => {
+      if (!press || e.pointerId !== press.id) return;
+      const {moved} = press;
+      press = null;
+      this.ball.classList.remove('dragging');
+      if (!moved) { if (e.type === 'pointerup') this.openTools(!this.ball.classList.contains('open')); return; }
+      const s = this.stage.getBoundingClientRect();
+      this.ballAt = {side: e.clientX < s.left + s.width / 2 ? 'left' : 'right', y: Math.min(1, Math.max(0, (e.clientY - s.top) / s.height))};
+      try { localStorage.setItem('deck-pen-ball', JSON.stringify(this.ballAt)); } catch {}
+      this.placeBall();
+    };
+    ball.addEventListener('pointerup', release);
+    ball.addEventListener('pointercancel', release);
+    // A keyboard press (Enter or space on a focused ball) still opens it; pointer taps are handled on release.
+    ball.addEventListener('click', e => { if (e.detail === 0) this.openTools(!this.ball.classList.contains('open')); });
+  }
+  placeBall() {
+    if (!this.ball || !this.ballAt || this.ball.classList.contains('dragging')) return;
+    // The holder's top is the ball's centre; the tools above it and the ball itself stay on the stage.
+    const s = this.stage.getBoundingClientRect(), r = 32;
+    const y = Math.max(s.top + this.ball.offsetHeight - r, Math.min(s.bottom - r, s.top + this.ballAt.y * s.height));
+    const side = this.ballAt.side === 'left' ? {left: s.left + 14 + 'px', right: 'auto'} : {left: 'auto', right: innerWidth - s.right + 14 + 'px'};
+    Object.assign(this.ball.style, side, {top: y + 'px'});
   }
   markTools() {
     this.ball.querySelectorAll('.swatch').forEach(b => b.classList.toggle('on', Number(b.dataset.color) === this.color));
     document.getElementById('whiteboard').classList.toggle('on', this.board);
     document.getElementById('pen').setAttribute('aria-expanded', String(this.ball.classList.contains('open') || this.pen));
+    this.placeBall();
   }
   openTools(open) {
     this.ball.classList.toggle('open', open);
@@ -1403,17 +1521,22 @@ class SlidePresentation {
     if (on === this.board) return;
     this.board = on;
     document.body.classList.toggle('board-open', on);
-    this.clearInk();
     if (on) {
+      if (document.activeElement.matches('.slot')) document.activeElement.blur();
+      getSelection().removeAllRanges();
       this.penBefore = this.pen;
       if (!this.pen) this.togglePen(true);
-    } else if (!this.penBefore) {
-      this.togglePen(false);
+    } else {
+      this.clearBoard();
+      if (!this.penBefore) this.togglePen(false);
     }
     this.markTools();
   }
   clearInk() {
     this.layer?.querySelectorAll('canvas').forEach(c => c.getContext('2d').clearRect(0, 0, c.width, c.height));
+  }
+  clearBoard() {
+    this.paper?.querySelectorAll('canvas').forEach(c => c.getContext('2d').clearRect(0, 0, c.width, c.height));
   }
 
   /* --- classroom interactions --- */
@@ -1650,8 +1773,7 @@ class SlidePresentation {
     const width = innerWidth - left, height = innerHeight - bottom;
     const f = Math.min(width / 1920, height / 1080);
     this.stage.style.transform = `translate(${left + (width - 1920 * f) / 2}px, ${(height - 1080 * f) / 2}px) scale(${f})`;
-    const ball = document.getElementById('pen-ball');  // on the stage's right edge, halfway down it
-    if (ball) Object.assign(ball.style, {right: (width - 1920 * f) / 2 + 14 + 'px', top: height / 2 + 'px'});
+    this.placeBall?.();  // against the side of the stage it was left on
   }
   steps(slide) { return Number(slide.dataset.steps || 1); }
   show(index, atEnd = false) {
@@ -1661,8 +1783,7 @@ class SlidePresentation {
     const slide = this.slides[this.index];
     slide.classList.add('active', 'visible');
     if (document.activeElement.matches('.slot')) document.activeElement.blur();
-    if (this.board) this.toggleBoard(false);
-    this.clearInk();
+    this.clearInk();  // the page's ink goes; the whiteboard and what is on it stay
     if (slide.dataset.steps) slide.dataset.at = atEnd ? slide.dataset.steps : 1;
     this.syncChanges(false);
     history.replaceState(null, '', '#page-' + (this.index + 1));
@@ -1684,8 +1805,6 @@ class SlidePresentation {
     this.counter.textContent = `${this.index + 1} / ${this.slides.length}` + (total > 1 ? ` · 第 ${slide.dataset.at} / ${total} 步` : '');
   }
   move(delta) {
-    // With the whiteboard open, a page key only closes it: the teacher is back on the page they were explaining.
-    if (this.board) { this.toggleBoard(false); return; }
     const slide = this.slides[this.index], at = Number(slide.dataset.at || 1), next = at + delta;
     if (slide.dataset.steps && next >= 1 && next <= this.steps(slide)) { slide.dataset.at = next; this.syncChanges(true); this.updateQuickIde(); this.label(); return; }
     if (this.index + delta >= 0 && this.index + delta < this.slides.length) this.show(this.index + delta, delta < 0);
@@ -1703,7 +1822,7 @@ class SlidePresentation {
     const k = e.key;
     // Demo keys are letters and the < > keys, so arrows, space and a clicker still turn pages on a demo page.
     const player = this.slides[this.index].querySelector('.algo')?.player;
-    if (player && ALGO_KEYS[k.toLowerCase()]) { e.preventDefault(); player.do(ALGO_KEYS[k.toLowerCase()]); return; }
+    if (player && !this.board && ALGO_KEYS[k.toLowerCase()]) { e.preventDefault(); player.do(ALGO_KEYS[k.toLowerCase()]); return; }
     const actions = {
       f: () => this.fullscreen(),
       i: () => { if (IDE.config.settings.length) this.settings.showModal(); },
@@ -1711,13 +1830,12 @@ class SlidePresentation {
       r: () => document.getElementById('ide-quick').click(),
       b: () => { this.blank.hidden = false; },
       d: () => this.togglePen(),
-      c: () => this.clearInk(),
+      c: () => this.board ? this.clearBoard() : this.clearInk(),
       w: () => this.toggleBoard(),
       g: () => { e.preventDefault(); this.jump.select(); }
     };
     if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(k)) { e.preventDefault(); this.move(e.shiftKey ? -1 : 1); }
     else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(k)) { e.preventDefault(); this.move(-1); }
-    else if (['Home', 'End'].includes(k) && this.board) this.toggleBoard(false);
     else if (k === 'Home') this.show(0);
     else if (k === 'End') this.show(this.slides.length - 1);
     else if (k === '?') this.help.showModal();

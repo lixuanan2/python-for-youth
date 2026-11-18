@@ -344,7 +344,7 @@ const INTERACT = `(async () => {
   shell.noLigatures = [document.body, ...stage.querySelectorAll('pre.code')].every(e => getComputedStyle(e).fontVariantLigatures === 'none');
   // Selecting text or dragging does not turn the page. The pen draws in three colours, keeps clicks and drags from turning the
   // page, leaves the arrows working and loses its ink when the page turns or the pen goes away; C clears it and keeps the pen.
-  // The ball on the right opens the colours, the whiteboard and 收笔; the whiteboard closes on W, Esc or a page key, staying on the page.
+  // The ball opens the colours, the whiteboard and 收笔.
   show(0);
   const at = () => document.getElementById('counter').textContent.split(' ')[0], first = at();
   const active = () => stage.querySelector('.slide.active');
@@ -386,19 +386,60 @@ const INTERACT = `(async () => {
   shell.ballOpens = ball.classList.contains('open') && getComputedStyle(document.getElementById('pen-tools')).display !== 'none' && !body.classList.contains('pen');
   ball.querySelector('.swatch[data-color="1"]').click();
   shell.ballPicksColor = body.classList.contains('pen') && swatch() === '1';
+  // The whiteboard floats over the dimmed page: it moves by its bar, grows from its corner (600×400 at least, never past the
+  // stage), takes the pen, stays with its ink while pages turn, and loses the ink when it closes. The dimmed page takes clicks
+  // and does nothing with them.
   press('w');
-  shell.boardOpens = body.classList.contains('board-open') && getComputedStyle(layer.querySelector('.paper')).display === 'block' && document.getElementById('whiteboard').classList.contains('on');
-  stroke();
+  const board = stage.querySelector('.board'), paper = board.querySelector('.board-paper'), shade = stage.querySelector('.board-shade');
+  const boardInk = paper.querySelector('canvas.ink'), scaleBy = stageBox().width / 1920;
+  shell.boardOpens = body.classList.contains('board-open') && body.classList.contains('pen') && getComputedStyle(board).display === 'flex' && getComputedStyle(shade).display === 'block' && document.getElementById('whiteboard').classList.contains('on');
+  const pull = (handle, dx, dy) => { const r = handle.getBoundingClientRect(), x = r.left + 20, y = r.top + 10; fire(handle, 'pointerdown', x, y); fire(handle, 'pointermove', x + dx, y + dy); fire(handle, 'pointerup', x + dx, y + dy); };
+  const was = {x: board.offsetLeft, y: board.offsetTop};
+  pull(board.querySelector('.board-bar'), -50 * scaleBy, -40 * scaleBy);
+  shell.boardMoves = Math.abs(board.offsetLeft - (was.x - 50)) < 2 && Math.abs(board.offsetTop - (was.y - 40)) < 2;
+  pull(board.querySelector('.board-size'), -2000, -2000);
+  const small = [board.offsetWidth, board.offsetHeight];
+  pull(board.querySelector('.board-size'), 4000, 4000);
+  shell.boardResizes = small[0] === 600 && small[1] === 400 && board.offsetLeft + board.offsetWidth === 1920 && board.offsetTop + board.offsetHeight === 1080;
+  pull(board.querySelector('.board-size'), -500 * scaleBy, -300 * scaleBy);
+  const pb = paper.getBoundingClientRect(), pm = [pb.left + 60, pb.top + 60];
+  fire(paper, 'pointerdown', ...pm); fire(paper, 'pointermove', pm[0] + 80, pm[1] + 30); fire(paper, 'pointerup', pm[0] + 80, pm[1] + 30); fire(paper, 'click', pm[0] + 80, pm[1] + 30);
+  const onBoard = inked(boardInk);
+  shell.boardDraws = onBoard > 50 && inked(ink) === 0 && at() === first;
+  const quizPage = [...stage.querySelectorAll('.slide')].findIndex(s => s.querySelector('.quiz button'));
+  if (quizPage >= 0) {
+    show(quizPage);
+    const q = stage.querySelector('.slide.active .quiz button'), qr = q.getBoundingClientRect(), qx = qr.left + qr.width / 2, qy = qr.top + qr.height / 2;
+    const hit = document.elementFromPoint(qx, qy), sr = stageBox();
+    fire(shade, 'pointerdown', sr.left + 10, sr.bottom - 10); fire(shade, 'click', sr.left + 10, sr.bottom - 10);
+    fire(shade, 'pointerdown', sr.right - 10, sr.top + 10); fire(shade, 'click', sr.right - 10, sr.top + 10);
+    shell.boardShadeBlocks = !hit.closest('.quiz') && (hit === shade || board.contains(hit)) && at() === String(quizPage + 1) && body.classList.contains('board-open');
+  } else shell.boardShadeBlocks = true;
   press('ArrowRight');
-  shell.boardPageKeyCloses = !body.classList.contains('board-open') && at() === first && inked(ink) === 0 && body.classList.contains('pen');
+  shell.boardStaysOnPageTurn = at() !== first && body.classList.contains('board-open') && inked(boardInk) === onBoard;
+  show(0);
+  press('w');
+  shell.boardClosesClean = !body.classList.contains('board-open') && body.classList.contains('pen') && inked(boardInk) === 0 && getComputedStyle(board).display === 'none';
   press('Escape');
   press('w');
   shell.boardPicksPen = body.classList.contains('pen') && body.classList.contains('board-open');
-  press('Escape');
+  board.querySelector('.board-x').click();
+  shell.boardXCloses = !body.classList.contains('board-open') && !body.classList.contains('pen');
+  press('w'); press('Escape');
   shell.boardEscCloses = !body.classList.contains('board-open') && !body.classList.contains('pen');
   press('1');
   shell.quizKeysBack = !body.classList.contains('pen');
   ball.classList.remove('open');
+  // The ball: a press that moves less than 6px opens it; a drag moves it, docks it to the nearer side and is kept.
+  const knob = document.getElementById('pen'), kb = knob.getBoundingClientRect(), kx = kb.left + kb.width / 2, ky = kb.top + kb.height / 2;
+  fire(knob, 'pointerdown', kx, ky); fire(knob, 'pointermove', kx + 3, ky + 2); fire(knob, 'pointerup', kx + 3, ky + 2);
+  shell.ballTapOpens = ball.classList.contains('open');
+  fire(knob, 'pointerdown', kx, ky); fire(knob, 'pointerup', kx, ky);
+  shell.ballTapCloses = !ball.classList.contains('open');
+  const sb = stageBox(), to = [sb.left + 300, sb.top + sb.height * .7];
+  fire(knob, 'pointerdown', kx, ky); fire(knob, 'pointermove', kx - 40, ky); fire(knob, 'pointermove', ...to); fire(knob, 'pointerup', ...to);
+  const nb = knob.getBoundingClientRect();
+  shell.ballDocks = Math.abs(nb.left - (sb.left + 14)) < 2 && Math.abs(nb.top + nb.height / 2 - to[1]) < 2 && !ball.classList.contains('open') && !body.classList.contains('pen') && inked(ink) === 0 && at() === '1';
   shell.ids = new Set([...document.querySelectorAll('[id]')].map(e => e.id)).size === document.querySelectorAll('[id]').length;
   return {
     shell,
@@ -692,6 +733,11 @@ try {
     for (const page of algos) await checkAlgo(page, dir);
     assert(result.changed, 'IDE settings did not change links');
     assert.deepEqual(Object.entries(result.shell).filter(([, ok]) => !ok), [], 'Workspace control failed');
+    // Where the ball was left is kept on this computer: after a reload it is still against the left side, as high as it was.
+    await send('Page.reload');
+    await sleep(1500);
+    assert(await run(`(() => { const s = document.getElementById('deckStage').getBoundingClientRect(), b = document.getElementById('pen').getBoundingClientRect(); return Math.abs(b.left - (s.left + 14)) < 2 && Math.abs(b.top + b.height / 2 - (s.top + s.height * .7)) < 2; })()`), 'Pen ball did not keep its place after a reload');
+    await run(`localStorage.removeItem('deck-pen-ball'); localStorage.removeItem('deck-board'); true`);
     await send('Emulation.setDeviceMetricsOverride', {width: 390, height: 844, deviceScaleFactor: 1, mobile: true});
     await open('file://' + encodeURI(path.resolve('dist', 'index.html')));
     assert(await run('document.documentElement.scrollWidth <= innerWidth'), 'Home page scrolls sideways on a phone');
