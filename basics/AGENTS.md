@@ -15,7 +15,8 @@
 - `lessons/<编号-英文名>/slides.html`：一节课的页面，只写 `<section>`。这是页面正文的唯一来源。题目的条件（输入、范围、输出格式、样例）改了，要同时核对这节课的 `tasks.json`（包括 IDE 里题目注释用的 `brief`）、`solutions/`、`starter/` 和 `tests/`，让它们和页面说的一致。
 - `lessons/<…>/tasks.json`、`starter/`、`solutions/`、`tests/`：题目、起始程序、答案和测试。`tests/claims.json` 记录页面说过的输出和报错。
 - `template/`：所有课共用的外壳、样式和脚本。缩略图、时间轴、章节跳转都在这里。
-- `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。
+- `template/layouts.css`：8 种版式（封面、便签、代码走一遍、猜一猜、分栏、动手、提问、提示）。只有标了 `structured` 的课才用它，构建时内联进那节课。版式怎么写见 [PROMPT.md](PROMPT.md) 的“版式和格子”。
+- `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。已经换成版式写法的课加 `"structured": true`。
 - `site.json`：网站名称、首页文字、语言、IDE 平台和谢谢页的文案、链接。换语言或换 IDE 只改这里。谢谢页加链接就在 `thanks.links` 加一项，图标放 `template/icons/`。
 - `pdf.json`：每份 `dist/<课>/slides.pdf` 照哪一版页面打印、PDF 本身的哈希，由 `build.py --pdf` 写，不要手改。`check.py` 比对它，PDF 跟不上页面就报错。
 - `dist/`：生成结果，提交进仓库，不要手改。每节课的 `starter/index.html` 由 `template/starter.html` 生成，列出这节课的起始程序。GitHub Pages 不列出文件夹内容，所以页面上的链接都要指向具体文件，`tools/check.py` 会查。
@@ -52,6 +53,10 @@ node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查：改过的
 - 只改了某几节课（`lessons/<课>/`、`dist/<课>/`）：只查这几节。
 - 改了 `template/`、`vendor/`、`course.json`、`site.json`、`dist/index.html`，`tools/` 里的 `build.py`、`algo.py`、`check_browser.mjs`，或者工作流本身：全部 30 节，分 4 台机器并行。
 - 每周一自动全量查一次；在 GitHub 上手动运行也是全量。
+
+## 换成版式
+
+2026-11-18 起，课件分批换成版式写法：页面写版式和格子，不写坐标；代码框只写代码，颜色和字号由 `build.py` 生成。在 `structure` 分支上做，一批开一个 PR，CI 全过再合：先合工具（这一批），再换 30 节课的封面和收尾 5 页，然后大约每 5 节课一批，01 放最后。换完一节课就在 `course.json` 给它加 `"structured": true`，`check.py` 从这时起按版式的规则查它。换的时候页面允许和原来有小差别，看着舒服就行。
 
 ## 规则
 

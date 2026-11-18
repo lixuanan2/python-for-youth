@@ -531,6 +531,39 @@ def check_docs():
     return count
 
 
+LAYOUTS = ['cover', 'notes', 'walk', 'predict', 'columns', 'try', 'ask', 'hints']
+
+
+def check_layouts(lesson, folder):
+    """A lesson marked "structured" in course.json is written with layouts: every page names one of the eight layouts, or
+    is a free page (class free); outside free pages nothing carries left/top/right/bottom, and code boxes hold plain
+    code (a bug hunt and a box with yellow boxes keep their colours; build.py stops on any other)."""
+    if not builder.structured(lesson):
+        return 0
+    text = (folder / 'slides.html').read_text(encoding='utf-8')
+    for n, section in enumerate(re.findall(r'<section\b.*?</section>', text, re.S), 1):
+        classes = re.search(r'<section class="([^"]*)"', section).group(1).split()
+        named = [c[4:] for c in classes if c.startswith('lay-')]
+        where = f'{folder.name} page {n} of slides.html'
+        assert 'free' in classes or (len(named) == 1 and named[0] in LAYOUTS), \
+            f'{where}: name one layout ({", ".join("lay-" + l for l in LAYOUTS)}) or make it a free page (class free)'
+        if 'free' in classes:
+            continue
+        # A part a layout cannot hold may keep its own place with class free; its children go with it.
+        kept = section
+        while (found := re.search(r'<(\w+)[^>]*class="[^"]*\bfree\b[^"]*"[^>]*>', kept)):
+            tag, start, depth, at = found.group(1), found.start(), 0, found.start()
+            for m in re.finditer(f'<{tag}\\b|</{tag}>', kept[start:]):
+                depth += -1 if m.group().startswith('</') else 1
+                if depth == 0:
+                    at = start + m.end()
+                    break
+            kept = kept[:start] + kept[at:]
+        placed = re.findall(r'style="[^"]*(?<![\w-])(left|top|right|bottom)\s*:', kept)
+        assert not placed, f'{where}: the layout places its parts; take out {", ".join(sorted(set(placed)))} (or mark the part free)'
+    return 1
+
+
 def main():
     scripts = cases = claims = pages = changes = algos = boxes = 0
     lessons = builder.lessons()
@@ -539,6 +572,7 @@ def main():
         s, c = check_programs(folder)
         scripts += s; cases += c
         claims += check_claims(folder)
+        check_layouts(lesson, folder)
         p, c, a, b = check_deck(lesson, folder)
         algos += a; boxes += b
         pages += p; changes += c

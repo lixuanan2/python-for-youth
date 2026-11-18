@@ -708,7 +708,7 @@ print(f"{price:.2f}")</pre>
   <h2 class="t">参考答案：电子钟</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">clock.py</div>
-<pre class="code" data-file="solutions/05_clock.py"><span class="ln">seconds = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">h = seconds // <span class="m">3600</span></span><span class="ln">m = seconds % <span class="m">3600</span> // <span class="m">60</span></span><span class="ln">s = seconds % <span class="m">60</span></span><span class="ln"><span class="f">print</span>(f<span class="s">"{h:02d}:{m:02d}:{s:02d}"</span>)</span></pre></div>
+<pre class="code" data-file="solutions/05_clock.py"><span class="ln">seconds = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">h = seconds // <span class="m">3600</span></span><span class="ln">m = seconds % <span class="m">3600</span> // <span class="m">60</span></span><span class="ln">s = seconds % <span class="m">60</span></span><span class="ln"><span class="f">print</span>(<span class="s">f"{h:02d}:{m:02d}:{s:02d}"</span>)</span></pre></div>
   <p class="abs say step s2" style="left:1340px;top:220px;width:484px">先算出时、分、秒，再用 <code>:02d</code> 让每段占两位、不够补 0。</p>
   <a class="ide step s2" style="left:1340px;top:860px">▶ 在 IDE 打开</a>
   <div class="foot"></div>
