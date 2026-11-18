@@ -681,102 +681,110 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- the idea -->
-<section id="page-2" class="slide clay" aria-label="像打开套娃">
+<section id="page-2" class="slide clay lay-notes" aria-label="像打开套娃">
   <h2 class="t r">像打开套娃</h2>
-  <div class="slip r d1" style="left:96px;top:290px;width:470px"><small style="font-size:34px">打开一个套娃</small><pre style="font-size:52px">里面还有一个</pre></div>
-  <div class="slip tilt r d2" style="left:640px;top:290px;width:470px"><small style="font-size:34px">打开它</small><pre style="font-size:52px">再小一号</pre></div>
-  <div class="slip r d3" style="left:1184px;top:290px;width:540px"><small style="font-size:34px">打开到最小的那个</small><pre style="font-size:52px">打不开，停</pre></div>
-  <p class="abs say r d3" style="left:96px;right:96px;top:640px">每次做的事都一样：打开。只是套娃一次比一次小，小到最后一个就停下。<br>函数也能这样：在函数里调用自己，每次处理小一点的问题，小到一眼能答就停。这叫递归。</p>
+  <div class="notes">
+    <div class="slip r d1"><small style="font-size:34px">打开一个套娃</small><pre style="font-size:52px">里面还有一个</pre></div>
+    <div class="slip tilt r d2"><small style="font-size:34px">打开它</small><pre style="font-size:52px">再小一号</pre></div>
+    <div class="slip r d3"><small style="font-size:34px">打开到最小的那个</small><pre style="font-size:52px">打不开，停</pre></div>
+  </div>
+  <p class="say r d3">每次做的事都一样：打开。只是套娃一次比一次小，小到最后一个就停下。<br>函数也能这样：在函数里调用自己，每次处理小一点的问题，小到一眼能答就停。这叫递归。</p>
   <div class="foot"></div>
 </section>
 
 <!-- countdown -->
-<section id="page-3" class="slide" aria-label="递归倒数" data-steps="3" data-at="3" data-chapter="递归">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">函数调用自己：倒数发射</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:46px"><div class="tab">countdown.py</div>
+<section id="page-3" class="slide lay-walk" aria-label="递归倒数" data-steps="3" data-at="3" data-chapter="递归">
+  <h2 class="t">函数调用自己：倒数发射</h2>
+  <div class="editor" style="--fs:45px"><div class="tab">countdown.py</div>
 <pre class="code" data-file="solutions/01_countdown.py"><span class="ln"><span class="k">def</span> <span class="f">countdown</span>(n):</span><span class="ln l3">    <span class="k">if</span> n == <span class="m">0</span>:</span><span class="ln l3">        <span class="f">print</span>(<span class="s">"发射！"</span>)</span><span class="ln">    <span class="k">else</span>:</span><span class="ln l1">        <span class="f">print</span>(n)</span><span class="ln l1 l2">        <span class="f">countdown</span>(n - <span class="m">1</span>)</span><span class="ln l1"><span class="f">countdown</span>(<span class="m">3</span>)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:850px;width:960px;color:var(--paper)">countdown(3) 先输出 3，然后第 6 行调用自己：countdown(2)。</p>
-  <p class="abs say only2" style="left:96px;top:850px;width:960px;color:var(--paper)">countdown(2) 输出 2，再调用 countdown(1)……每调用一次，n 小 1。</p>
-  <p class="abs say only3" style="left:96px;top:850px;width:960px;color:var(--paper)">到了 countdown(0)，n == 0 成立，输出“发射！”，不再调用自己，停下。</p>
-  <div class="abs" style="left:1210px;right:96px;top:170px;font:800 80px/1.35 var(--code)">3<br><span class="step s2">2<br>1</span><br><span class="step s3" style="color:var(--clay)">发射！</span></div>
-  <a class="ide step s3" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
+  <div class="turns">
+      <p class="say only1">countdown(3) 先输出 3，然后第 6 行调用自己：countdown(2)。</p>
+      <p class="say only2">countdown(2) 输出 2，再调用 countdown(1)……每调用一次，n 小 1。</p>
+      <p class="say only3">到了 countdown(0)，n == 0 成立，输出“发射！”，不再调用自己，停下。</p>
+    </div>
+  <div class="right">
+    <div style="font:800 80px/1.35 var(--code)">3<br><span class="step s2">2<br>1</span><br><span class="step s3" style="color:var(--clay)">发射！</span></div>
+    <a class="ide step s3">▶ 在 IDE 打开</a>
+  </div>
 </section>
 
 <!-- predict: call first, print later -->
-<section id="page-4" class="slide dark" aria-label="猜一猜：先调用再输出" data-steps="2" data-at="2">
+<section id="page-4" class="slide dark lay-predict" aria-label="猜一猜：先调用再输出" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：先调用自己，再输出，顺序会怎样？</h2>
-  <div class="editor" style="left:96px;top:220px;width:900px;--fs:50px"><div class="tab">up.py</div>
+  <div class="editor" style="--fs:39px"><div class="tab">up.py</div>
 <pre class="code"><span class="ln"><span class="k">def</span> <span class="f">up</span>(n):</span><span class="ln">    <span class="k">if</span> n &gt; <span class="m">0</span>:</span><span class="ln l2">        <span class="f">up</span>(n - <span class="m">1</span>)</span><span class="ln l2">        <span class="f">print</span>(n)</span><span class="ln"><span class="f">up</span>(<span class="m">3</span>)</span></pre></div>
-  <p class="abs say only1" style="left:1100px;right:96px;top:240px">和倒数比，print 和调用自己换了位置。<br>输出 3 2 1，还是 1 2 3？</p>
-  <p class="abs step s2" style="left:1100px;right:96px;top:230px;font:800 80px/1.35 var(--code);color:var(--clay-soft)">1<br>2<br>3</p>
-  <p class="abs say step s2" style="left:96px;top:720px;width:1728px">up(3) 要先等 up(2) 全部做完，才轮到 print(3)。up(2) 又要先等 up(1)……<br>所以最里面的 up(1) 最先输出。到了 up(0)，n &gt; 0 不成立，什么也不做。</p>
+  <div class="answer turns">
+    <p class="say only1">和倒数比，print 和调用自己换了位置。<br>输出 3 2 1，还是 1 2 3？</p>
+    <p class="step s2" style="font:800 80px/1.35 var(--code);color:var(--clay-soft)">1<br>2<br>3</p>
+  </div>
+  <p class="say step s2">up(3) 要先等 up(2) 全部做完，才轮到 print(3)。up(2) 又要先等 up(1)……<br>所以最里面的 up(1) 最先输出。到了 up(0)，n &gt; 0 不成立，什么也不做。</p>
   <div class="foot"></div>
 </section>
 
 <!-- quiz: countdown(0) -->
-<section id="page-5" class="slide" aria-label="小测：countdown(0) 输出什么">
+<section id="page-5" class="slide lay-ask" aria-label="小测：countdown(0) 输出什么">
   <h2 class="t r">小测：改成 countdown(0)，输出什么？</h2>
-  <div class="quiz side r d1" data-right="0">
+  <div class="editor r d2" style="width:1000px;--fs:42px"><div class="tab">countdown.py</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">countdown</span>(n):</span><span class="ln">    <span class="k">if</span> n == <span class="m">0</span>:</span><span class="ln">        <span class="f">print</span>(<span class="s">"发射！"</span>)</span><span class="ln">    <span class="k">else</span>:</span><span class="ln">        <span class="f">print</span>(n)</span><span class="ln">        <span class="f">countdown</span>(n - <span class="m">1</span>)</span><span class="ln mod"><span class="f">countdown</span>(<span class="m">0</span>)<span class="orig">原来是 countdown(3)</span></span></pre></div>
+  <div class="quiz r d1" data-right="0">
     <button type="button" data-fb="答对了！一进去 n == 0 就成立，直接输出“发射！”，不再调用自己。"><i>1</i>发射！</button>
     <button type="button" data-fb="print(n) 在 else 里。n == 0 时走的是 if，不输出 0。"><i>2</i>先 0，再 发射！</button>
     <button type="button" data-fb="n == 0 成立，会运行 if 下面的 print。"><i>3</i>什么也不输出</button>
     <button type="button" data-fb="0 正好是出口，一次就停，不会报错。"><i>4</i>报错</button>
   </div>
-  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
-  <div class="editor side r d2" style="--fs:42px"><div class="tab">countdown.py</div>
-<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">countdown</span>(n):</span><span class="ln">    <span class="k">if</span> n == <span class="m">0</span>:</span><span class="ln">        <span class="f">print</span>(<span class="s">"发射！"</span>)</span><span class="ln">    <span class="k">else</span>:</span><span class="ln">        <span class="f">print</span>(n)</span><span class="ln">        <span class="f">countdown</span>(n - <span class="m">1</span>)</span><span class="ln mod"><span class="f">countdown</span>(<span class="m">0</span>)<span class="orig">原来是 countdown(3)</span></span></pre></div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- two must-haves -->
-<section id="page-6" class="slide dark" aria-label="递归要有两件事" data-chapter="两件事">
+<section id="page-6" class="slide dark lay-columns" aria-label="递归要有两件事" data-chapter="两件事">
   <h2 class="t r">递归要有两件事</h2>
-  <div class="vs r d1" style="top:220px">
+  <div class="vs r d1">
     <div><h3>出口：什么时候停</h3><pre style="font-size:56px">if n == 0:</pre><p class="res" style="font-size:40px;color:var(--paper)">小到一眼能答，就不再调用自己</p></div>
     <div><h3>变小：每次近一步</h3><pre style="font-size:56px">countdown(n - 1)</pre><p class="res" style="font-size:40px;color:var(--paper)">每调用一次，离出口近一点</p></div>
   </div>
-  <p class="abs say r d2" style="left:96px;top:720px;width:1728px">少了哪一件，函数都会一直调用自己。调用的层数太多，Python 就停下，报 RecursionError：递归太深了。<br>写递归，先想好这两件事。</p>
+  <p class="say r d2">少了哪一件，函数都会一直调用自己。调用的层数太多，Python 就停下，报 RecursionError：递归太深了。<br>写递归，先想好这两件事。</p>
   <div class="foot"></div>
 </section>
 
 <!-- worked example: total with return -->
-<section id="page-7" class="slide" aria-label="例题：1 加到 n" data-steps="4" data-at="4" data-chapter="交回结果">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">例题：从 1 加到 n</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:46px"><div class="tab">total.py</div>
+<section id="page-7" class="slide lay-walk" aria-label="例题：1 加到 n" data-steps="4" data-at="4" data-chapter="交回结果">
+  <h2 class="t">例题：从 1 加到 n</h2>
+  <div class="editor" style="--fs:49px"><div class="tab">total.py</div>
 <pre class="code" data-file="solutions/02_total.py"><span class="ln"><span class="k">def</span> <span class="f">total</span>(n):</span><span class="ln l3">    <span class="k">if</span> n == <span class="m">1</span>:</span><span class="ln l3 l4">        <span class="k">return</span> <span class="m">1</span></span><span class="ln l1 l2 l4">    <span class="k">return</span> n + <span class="f">total</span>(n - <span class="m">1</span>)</span><span class="ln l1"><span class="f">print</span>(<span class="f">total</span>(<span class="f">int</span>(<span class="f">input</span>())))</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:730px;width:960px;color:var(--paper)">输入 4。1 加到 4，就是 4 加上“1 加到 3”。“1 加到 3”是个小一号的同样问题。</p>
-  <p class="abs say only2" style="left:96px;top:730px;width:960px;color:var(--paper)">total(3) 又要 total(2)，total(2) 又要 total(1)。每一层都停在这里，等下一层的结果。</p>
-  <p class="abs say only3" style="left:96px;top:730px;width:960px;color:var(--paper)">total(1) 是出口：1 加到 1 就是 1，直接 return 1，不再调用自己。</p>
-  <p class="abs say only4" style="left:96px;top:730px;width:960px;color:var(--paper)">结果一层层交回去：2 + 1 是 3，3 + 3 是 6，4 + 6 是 10。最后输出 10。</p>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+  <div class="turns">
+      <p class="say only1">输入 4。1 加到 4，就是 4 加上“1 加到 3”。“1 加到 3”是个小一号的同样问题。</p>
+      <p class="say only2">total(3) 又要 total(2)，total(2) 又要 total(1)。每一层都停在这里，等下一层的结果。</p>
+      <p class="say only3">total(1) 是出口：1 加到 1 就是 1，直接 return 1，不再调用自己。</p>
+      <p class="say only4">结果一层层交回去：2 + 1 是 3，3 + 3 是 6，4 + 6 是 10。最后输出 10。</p>
+    </div>
+  <div class="right">
     <div class="box"><i style="width:220px;white-space:nowrap">total(4)</i><b style="font:700 46px var(--code)">4 + total(3)</b></div>
     <div class="box step s2"><i style="width:220px;white-space:nowrap">total(3)</i><b style="font:700 46px var(--code)">3 + total(2)</b></div>
     <div class="box step s2"><i style="width:220px;white-space:nowrap">total(2)</i><b style="font:700 46px var(--code)">2 + total(1)</b></div>
     <div class="box step s3"><i style="width:220px;white-space:nowrap">total(1)</i><b style="font:700 52px var(--code);color:var(--clay)">1</b></div>
+    <p class="step s4" style="font:800 52px/1.5 var(--code);color:var(--clay)">1 → 3 → 6 → 10</p>
+    <a class="ide step s4">▶ 在 IDE 打开</a>
   </div>
-  <p class="abs step s4" style="left:1210px;right:96px;top:640px;font:800 52px/1.5 var(--code);color:var(--clay)">1 → 3 → 6 → 10</p>
-  <a class="ide step s4" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
 </section>
 
 <!-- quiz: total(5) -->
-<section id="page-8" class="slide" aria-label="小测：total(5) 是多少">
+<section id="page-8" class="slide lay-ask" aria-label="小测：total(5) 是多少">
   <h2 class="t r">小测：输入 5，输出多少？</h2>
-  <div class="quiz side r d1" data-right="2">
+  <div class="editor r d2" style="width:1000px;--fs:42px"><div class="tab">输入 5</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">total</span>(n):</span><span class="ln">    <span class="k">if</span> n == <span class="m">1</span>:</span><span class="ln">        <span class="k">return</span> <span class="m">1</span></span><span class="ln">    <span class="k">return</span> n + <span class="f">total</span>(n - <span class="m">1</span>)</span><span class="ln"><span class="f">print</span>(<span class="f">total</span>(<span class="f">int</span>(<span class="f">input</span>())))</span></pre></div>
+  <div class="quiz r d1" data-right="2">
     <button type="button" data-fb="5 只是第一层。它还要加上 total(4) 交回来的结果。"><i>1</i>5</button>
     <button type="button" data-fb="10 是 total(4)。输入 5，还要再加上 5。"><i>2</i>10</button>
     <button type="button" data-fb="答对了！5 + total(4)，total(4) 是 10，合起来是 15。"><i>3</i>15</button>
     <button type="button" data-fb="120 是 1 乘到 5。例题用的是加号。"><i>4</i>120</button>
   </div>
-  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
-  <div class="editor side r d2" style="--fs:42px"><div class="tab">输入 5</div>
-<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">total</span>(n):</span><span class="ln">    <span class="k">if</span> n == <span class="m">1</span>:</span><span class="ln">        <span class="k">return</span> <span class="m">1</span></span><span class="ln">    <span class="k">return</span> n + <span class="f">total</span>(n - <span class="m">1</span>)</span><span class="ln"><span class="f">print</span>(<span class="f">total</span>(<span class="f">int</span>(<span class="f">input</span>())))</span></pre></div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- your turn: factorial -->
-<section id="page-9" class="slide" aria-label="改成阶乘">
+<section id="page-9" class="slide lay-try" aria-label="改成阶乘">
   <div class="band r"><b>动手<br>改一改</b><span>把加法换成乘法。</span></div>
   <div class="turn">
     <h2 class="r d1">从 1 乘到 n</h2>
@@ -784,7 +792,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>输入 4</small><pre>24</pre></div><div><small>输入 1</small><pre>1</pre></div><div><small>输入 10</small><pre>3628800</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">Python 里乘号写 *。</p>
   </div>
-  <a class="ide r d3" data-code="# 【从 1 乘到 n】&#10;# 读入一个正整数 n，输出 1 × 2 × 3 × … × n。这个数叫 n 的阶乘。&#10;#   在例题上改，想一想出口还是 1 吗。&#10;# 例如输入：4&#10;# 应该输出：24&#10;# 提示：把加法换成乘法。&#10;# ↓ 在下面这段程序上改&#10;&#10;def total(n):&#10;    if n == 1:&#10;        return 1&#10;    return n + total(n - 1)&#10;print(total(int(input())))&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【从 1 乘到 n】&#10;# 读入一个正整数 n，输出 1 × 2 × 3 × … × n。这个数叫 n 的阶乘。&#10;#   在例题上改，想一想出口还是 1 吗。&#10;# 例如输入：4&#10;# 应该输出：24&#10;# 提示：把加法换成乘法。&#10;# ↓ 在下面这段程序上改&#10;&#10;def total(n):&#10;    if n == 1:&#10;        return 1&#10;    return n + total(n - 1)&#10;print(total(int(input())))&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -801,23 +809,22 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-11" class="slide dark" aria-label="找错：停不下来">
+<section id="page-11" class="slide dark lay-ask" aria-label="找错：停不下来">
   <h2 class="t r">找错：程序报 RecursionError，停不下来了</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:960px;--fs:48px"><div class="tab">bug.py（只阅读）</div>
+  <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="4" data-yes="找到了！total(n) 还是原来的 n，一点没变小，永远到不了出口 n == 1。改成 total(n - 1)。" data-no="这一行没问题。出口写好了，可每次调用，n 有没有离出口近一步？"><span class="ln"><span class="k">def</span> <span class="f">total</span>(n):</span><span class="ln">    <span class="k">if</span> n == <span class="m">1</span>:</span><span class="ln">        <span class="k">return</span> <span class="m">1</span></span><span class="ln">    <span class="k">return</span> n + <span class="f">total</span>(n)</span><span class="ln"><span class="f">print</span>(<span class="f">total</span>(<span class="m">4</span>))</span></pre></div>
-  <p class="abs say r d2" style="left:1150px;top:240px;right:96px">想算 1 加到 4，却一直调用下去。<br>点出让它停不下来的那一行。</p>
-  <p class="fb" style="left:1150px;top:520px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="say r d2">想算 1 加到 4，却一直调用下去。<br>点出让它停不下来的那一行。</p>
+  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-12" class="slide clay" aria-label="数字加起来" data-chapter="挑战">
-  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
-  <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">数字加起来</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">读入一个正整数 n，用递归把它的每一位数字加起来，输出结果。<br>比如 2026：2 + 0 + 2 + 6 = 10。<b>不许把 n 变成字符串</b>，只用数和递归。</p>
-  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:480px"><small>输入</small><pre>2026</pre><small style="margin-top:14px">输出</small><pre>10</pre></div>
-  <a class="ide r d3" data-code="# 【数字加起来】&#10;# 读入一个正整数 n，用递归把它的每一位数字加起来，输出结果。&#10;# 比如 2026：2 + 0 + 2 + 6 = 10。不许把 n 变成字符串，&#10;#   只用数和递归。&#10;# 例如输入：2026&#10;# 应该输出：10&#10;# 要求：不把 n 变成字符串，只用 % 和 //。&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
-  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">试试 7 和 10。先自己写，卡住了再翻下一页。</p>
+<section id="page-12" class="slide clay lay-notes challenge" aria-label="数字加起来" data-chapter="挑战">
+  <p class="kicker r"># 自己挑战</p>
+  <h2 class="big r d1" style="font-size:160px">数字加起来</h2>
+  <p class="say r d2">读入一个正整数 n，用递归把它的每一位数字加起来，输出结果。<br>比如 2026：2 + 0 + 2 + 6 = 10。<b>不许把 n 变成字符串</b>，只用数和递归。</p>
+  <div class="slip tilt2 r d3" style="width:480px"><small>输入</small><pre>2026</pre><small style="margin-top:14px">输出</small><pre>10</pre></div>
+  <div class="go r d3"><a class="ide" data-code="# 【数字加起来】&#10;# 读入一个正整数 n，用递归把它的每一位数字加起来，输出结果。&#10;# 比如 2026：2 + 0 + 2 + 6 = 10。不许把 n 变成字符串，&#10;#   只用数和递归。&#10;# 例如输入：2026&#10;# 应该输出：10&#10;# 要求：不把 n 变成字符串，只用 % 和 //。&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">试试 7 和 10。先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
 

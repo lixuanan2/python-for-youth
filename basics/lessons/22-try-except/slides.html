@@ -8,135 +8,162 @@
 </section>
 
 <!-- the problem -->
-<section class="slide clay" aria-label="一输错程序就停了">
+<section class="slide clay lay-notes" aria-label="一输错程序就停了">
   <h2 class="t r">一输错，程序就停了</h2>
-  <div class="slip r d1" style="left:96px;top:290px;width:600px"><small style="font-size:34px">程序问你几岁，你输入</small><pre style="font-size:60px">十二</pre></div>
-  <div class="slip tilt r d2" style="left:780px;top:290px;width:640px"><small style="font-size:34px">屏幕上</small><pre style="font-size:52px">ValueError</pre></div>
-  <p class="abs say r d3" style="left:96px;right:96px;top:640px">用汉字写的“十二”，int() 转换不了，程序报错，后面的话一句也不说了。<br>用的人难免输错。这节课学 try 和 except：先接住报错，提醒一句，程序接着运行。</p>
+  <div class="notes">
+    <div class="slip r d1"><small style="font-size:34px">程序问你几岁，你输入</small><pre style="font-size:60px">十二</pre></div>
+    <div class="slip tilt r d2"><small style="font-size:34px">屏幕上</small><pre style="font-size:52px">ValueError</pre></div>
+  </div>
+  <p class="say r d3">用汉字写的“十二”，int() 转换不了，程序报错，后面的话一句也不说了。<br>用的人难免输错。这节课学 try 和 except：先接住报错，提醒一句，程序接着运行。</p>
   <div class="foot"></div>
 </section>
 
 <!-- read the error name -->
-<section class="slide" aria-label="报错的名字" data-chapter="报错的名字">
+<section class="slide lay-predict" aria-label="报错的名字" style="--predict-code:1180px" data-chapter="报错的名字">
   <h2 class="t r">先认出报错的名字</h2>
-  <div class="tb r d1" style="width:1180px"><span class="dim">Traceback (most recent call last):</span><br><span class="dim">&nbsp;&nbsp;File "age.py", line 1, in &lt;module&gt;</span><br><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;age = int(input())</span><br><span class="hot">ValueError</span>: invalid literal<br>for int() with base 10: '十二'</div>
-  <div class="abs r d2" style="left:1340px;right:96px;top:240px">
+  <div class="tb r d1" style="grid-area:code"><span class="dim">Traceback (most recent call last):</span><br><span class="dim">&nbsp;&nbsp;File "age.py", line 1, in &lt;module&gt;</span><br><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;age = int(input())</span><br><span class="hot">ValueError</span>: invalid literal<br>for int() with base 10: '十二'</div>
+  <div class="answer r d2" style="padding-top:0">
     <p class="say">第 1 课学过：红字从最后一行读。</p>
     <p class="say" style="margin-top:26px"><b>ValueError</b> 是这种错的名字，意思是“值不对”。</p>
     <p class="say" style="margin-top:26px">'十二' 是它读到的内容。</p>
   </div>
-  <p class="abs say r d3" style="left:96px;top:760px">每种报错都有自己的名字。要接住哪种错，就要先知道它叫什么。<br>int() 转换不了时，报的就是 ValueError。</p>
+  <p class="say r d3">每种报错都有自己的名字。要接住哪种错，就要先知道它叫什么。<br>int() 转换不了时，报的就是 ValueError。</p>
   <div class="foot"></div>
 </section>
 
 <!-- try / except -->
-<section class="slide" aria-label="try 和 except" data-steps="3" data-at="3" data-chapter="try">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">try：先试试，出错就接住</h2>
-  <div class="editor" style="left:96px;top:200px;width:1010px;--fs:44px"><div class="tab">age.py</div>
-<pre class="code" data-file="solutions/01_try.py"><span class="ln l1 l2"><span class="k">try</span>:</span><span class="ln l2">    age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2">    <span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span><span class="ln l3"><span class="k">except</span> ValueError:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"请输入整数"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:720px;width:960px;color:var(--paper)">try 的意思是“试一试”。下面缩进的几行照常运行，就像 if 下面的缩进一样。</p>
-  <p class="abs say only2" style="left:96px;top:720px;width:960px;color:var(--paper)">输入 12，一切顺利：两行都运行，输出“明年你 13 岁”。except 下面的不运行。</p>
-  <p class="abs say only3" style="left:96px;top:720px;width:960px;color:var(--paper)">输入“十二”，int() 报 ValueError。except ValueError 接住它，改为运行这句提醒。</p>
-  <a class="ide step s3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+<section class="slide lay-walk" aria-label="try 和 except" data-steps="3" data-at="3" data-chapter="try">
+  <h2 class="t">try：先试试，出错就接住</h2>
+  <div class="editor"><div class="tab">age.py</div>
+<pre class="code" data-file="solutions/01_try.py" data-light="1:1-2 2-3:2 4-5:3"></pre></div>
+  <div class="turns">
+      <p class="say only1">try 的意思是“试一试”。下面缩进的几行照常运行，就像 if 下面的缩进一样。</p>
+      <p class="say only2">输入 12，一切顺利：两行都运行，输出“明年你 13 岁”。except 下面的不运行。</p>
+      <p class="say only3">输入“十二”，int() 报 ValueError。except ValueError 接住它，改为运行这句提醒。</p>
+    </div>
+  <a class="ide step s3">▶ 在 IDE 打开</a>
+  <div class="right">
     <div class="box out step s2" style="display:block"><i>输入 12</i><b style="font-size:60px;display:block">明年你 13 岁</b></div>
     <div class="box out step s3" style="display:block;margin-top:30px"><i>输入 十二</i><b style="font-size:60px;display:block">请输入整数</b></div>
   </div>
 </section>
 
 <!-- predict: is the line after the error run? -->
-<section class="slide dark" aria-label="猜一猜：出错后面那行还运行吗" data-steps="3" data-at="3">
+<section class="slide dark lay-predict" aria-label="猜一猜：出错后面那行还运行吗" data-steps="3" data-at="3">
   <h2 class="t">猜一猜：输入 abc，第 3 行还运行吗？</h2>
-  <div class="editor" style="left:96px;top:220px;width:1010px;--fs:44px"><div class="tab">age.py</div>
-<pre class="code"><span class="ln"><span class="k">try</span>:</span><span class="ln l2 l3">    age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span><span class="ln l3"><span class="k">except</span> ValueError:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"请输入整数"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:1200px;right:96px;top:240px">第 2 行读到 abc。<br>第 3 行的“明年你”，会不会先说出来？</p>
-  <p class="abs say only2" style="left:1200px;right:96px;top:240px">第 2 行读到 abc，就出错了。<br>接下来会去哪一行？</p>
-  <p class="abs say step s3" style="left:1200px;right:96px;top:240px">从出错的地方直接跳到 except。第 3 行被跳过，一个字也不输出。屏幕上只有“请输入整数”。</p>
-  <p class="abs say step s3" style="left:96px;top:760px;width:1728px">try 里一出错，剩下的几行都不运行。所以要放在一起的，是“出了错就不该做”的几行。</p>
+  <div class="editor"><div class="tab">age.py</div>
+<pre class="code" data-light="2:2-3 4-5:3">try:
+    age = int(input())
+    print("明年你", age + 1, "岁")
+except ValueError:
+    print("请输入整数")</pre></div>
+  <div class="answer turns">
+    <div class="turns">
+      <p class="say only1">第 2 行读到 abc。<br>第 3 行的“明年你”，会不会先说出来？</p>
+      <p class="say only2">第 2 行读到 abc，就出错了。<br>接下来会去哪一行？</p>
+      <p class="say step s3">从出错的地方直接跳到 except。第 3 行被跳过，一个字也不输出。屏幕上只有“请输入整数”。</p>
+    </div>
+  </div>
+  <p class="say step s3">try 里一出错，剩下的几行都不运行。所以要放在一起的，是“出了错就不该做”的几行。</p>
   <div class="foot"></div>
 </section>
 
 <!-- quiz: which input goes to except -->
-<section class="slide" aria-label="小测：哪个会走到 except">
+<section class="slide lay-ask" aria-label="小测：哪个会走到 except">
   <h2 class="t r">小测：输入哪个，会走到 except？</h2>
-  <div class="quiz side r d1" data-right="3">
+  <div class="editor r d2" style="width:1000px;--fs:40px"><div class="tab">输入一个</div>
+<pre class="code">try:
+    age = int(input())
+    print("明年你", age + 1, "岁")
+except ValueError:
+    print("请输入整数")</pre></div>
+  <div class="quiz r d1" data-right="3">
     <button type="button" data-fb="12 是整数，int() 能转换，输出“明年你 13 岁”。"><i>1</i>12</button>
     <button type="button" data-fb="负数也是整数，int() 能转换，输出“明年你 -2 岁”。"><i>2</i>-3</button>
     <button type="button" data-fb="前面的 0 不碍事，int(&quot;007&quot;) 就是 7，输出“明年你 8 岁”。"><i>3</i>007</button>
     <button type="button" data-fb="答对了！第 3 课学过，int() 转换不了小数的样子，报 ValueError，被 except 接住。"><i>4</i>3.5</button>
   </div>
-  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
-  <div class="editor side r d2" style="--fs:40px"><div class="tab">输入一个</div>
-<pre class="code"><span class="ln"><span class="k">try</span>:</span><span class="ln">    age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span><span class="ln"><span class="k">except</span> ValueError:</span><span class="ln">    <span class="f">print</span>(<span class="s">"请输入整数"</span>)</span></pre></div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- live numbers: divide by zero -->
-<section class="slide" aria-label="改一改：除数变成 0">
-  <div class="night" style="width:1010px"></div>
-  <h2 class="t" style="color:var(--paper)">改一改：除数变成 0</h2>
-  <div class="editor" style="left:96px;top:210px;width:830px;--fs:52px"><div class="tab">divide.py</div>
+<section class="slide lay-walk narrow" aria-label="改一改：除数变成 0">
+  <h2 class="t">改一改：除数变成 0</h2>
+  <div class="editor"><div class="tab">divide.py</div>
 <pre class="code"><span class="ln">a = <input class="slot" data-var="a" value="8" inputmode="numeric" autocomplete="off" aria-label="被除数"></span><span class="ln">b = <input class="slot" data-var="b" value="2" inputmode="numeric" autocomplete="off" aria-label="除数"></span><span class="ln"><span class="f">print</span>(a // b)</span></pre></div>
-  <p class="abs say" style="left:96px;top:640px;width:830px;color:var(--paper)">点黄色的数字，改完结果马上变。</p>
-  <a class="ide" style="left:96px;top:850px">▶ 带这两个数进 IDE</a>
-  <div class="live-out">
+  <p class="say">点黄色的数字，改完结果马上变。</p>
+  <a class="ide">▶ 带这两个数进 IDE</a>
+  <div class="right">
+    <div class="live-out">
     <div><i>第 3 行输出</i><b data-eval="a // b">4</b></div>
   </div>
-  <p class="abs say" style="left:1090px;top:480px;width:734px;font-size:38px">先猜再改：b 改成 0，会出现什么？<br>第 3 课见过这种报错。下一页学怎么把它也接住。</p>
+    <p class="say" style="font-size:38px">先猜再改：b 改成 0，会出现什么？<br>第 3 课见过这种报错。下一页学怎么把它也接住。</p>
+  </div>
   <div class="foot"></div>
 </section>
 
 <!-- two kinds of errors -->
-<section class="slide" aria-label="两种报错各接各的" data-steps="3" data-at="3" data-chapter="两种报错">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper);top:40px">两种报错，各接各的</h2>
-  <div class="editor" style="left:96px;top:175px;width:960px;--fs:44px"><div class="tab">divide.py</div>
-<pre class="code" data-file="solutions/02_two_errors.py"><span class="ln l1 l2 l3"><span class="k">try</span>:</span><span class="ln l1 l2 l3">    a = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1 l2 l3">    b = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1 l2">    <span class="f">print</span>(a // b)</span><span class="ln l3"><span class="k">except</span> ValueError:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"要输入整数"</span>)</span><span class="ln l2"><span class="k">except</span> ZeroDivisionError:</span><span class="ln l2">    <span class="f">print</span>(<span class="s">"除数不能是 0"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:1210px;right:96px;top:170px;font-size:34px">输入 8 和 2：没出错，输出 4。两个 except 都不运行。</p>
-  <p class="abs say only2" style="left:1210px;right:96px;top:170px;font-size:34px">输入 8 和 0：除以 0 报 ZeroDivisionError，第 3 课见过。跳过第一个 except，找到名字对上的第二个。</p>
-  <p class="abs say only3" style="left:1210px;right:96px;top:170px;font-size:34px">输入 8 和 abc：第 3 行报 ValueError，第一个 except 就对上了。</p>
-  <div class="abs" style="left:1210px;right:96px;top:500px;font:400 48px/1.6 var(--code);color:var(--clay)"><span class="only1">4</span><span class="only2">除数不能是 0</span><span class="only3">要输入整数</span></div>
-  <a class="ide step s3" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
+<section class="slide lay-walk" aria-label="两种报错各接各的" data-steps="3" data-at="3" data-chapter="两种报错">
+  <h2 class="t">两种报错，各接各的</h2>
+  <div class="editor"><div class="tab">divide.py</div>
+<pre class="code" data-file="solutions/02_two_errors.py" data-light="1-3:1-3 4:1-2 5-6:3 7-8:2"></pre></div>
+  <div class="right">
+    <div class="turns">
+      <p class="say only1" style="font-size:34px">输入 8 和 2：没出错，输出 4。两个 except 都不运行。</p>
+      <p class="say only2" style="font-size:34px">输入 8 和 0：除以 0 报 ZeroDivisionError，第 3 课见过。跳过第一个 except，找到名字对上的第二个。</p>
+      <p class="say only3" style="font-size:34px">输入 8 和 abc：第 3 行报 ValueError，第一个 except 就对上了。</p>
+    </div>
+    <div class="turns" style="font:400 48px/1.6 var(--code);color:var(--clay)"><span class="only1">4</span><span class="only2">除数不能是 0</span><span class="only3">要输入整数</span></div>
+    <a class="ide step s3">▶ 在 IDE 打开</a>
+  </div>
 </section>
 
 <!-- quiz: first line wrong -->
-<section class="slide" aria-label="小测：先输入 abc 再输入 0">
+<section class="slide lay-ask" aria-label="小测：先输入 abc 再输入 0">
   <h2 class="t r">小测：先输入 abc，再输入 0，输出什么？</h2>
-  <div class="quiz side r d1" data-right="0">
+  <div class="editor r d2" style="width:1000px;--fs:40px"><div class="tab">先输入 abc，再输入 0</div>
+<pre class="code">try:
+    a = int(input())
+    b = int(input())
+    print(a // b)
+except ValueError:
+    print("要输入整数")
+except ZeroDivisionError:
+    print("除数不能是 0")</pre></div>
+  <div class="quiz r d1" data-right="0">
     <button type="button" data-fb="答对了！第 2 行就出错，直接跳到 except ValueError。b 那一行没运行，0 根本没被读进来。"><i>1</i>要输入整数</button>
     <button type="button" data-fb="还没走到除法。第一个数就转换不了，程序已经跳走了。"><i>2</i>除数不能是 0</button>
     <button type="button" data-fb="一出错就跳到一个对得上的 except，只会运行其中一个。"><i>3</i>两句都输出</button>
     <button type="button" data-fb="ValueError 有 except 接住，不会红字报错。"><i>4</i>红字报错</button>
   </div>
-  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
-  <div class="editor side r d2" style="--fs:40px"><div class="tab">先输入 abc，再输入 0</div>
-<pre class="code"><span class="ln"><span class="k">try</span>:</span><span class="ln">    a = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    b = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="f">print</span>(a // b)</span><span class="ln"><span class="k">except</span> ValueError:</span><span class="ln">    <span class="f">print</span>(<span class="s">"要输入整数"</span>)</span><span class="ln"><span class="k">except</span> ZeroDivisionError:</span><span class="ln">    <span class="f">print</span>(<span class="s">"除数不能是 0"</span>)</span></pre></div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- worked example: ask until it is right -->
-<section class="slide" aria-label="例题：一直问到输对" data-steps="4" data-at="4" data-chapter="一直问">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper);top:40px">例题：一直问到输对为止</h2>
-  <div class="editor" style="left:96px;top:175px;width:1010px;--fs:44px"><div class="tab">retry.py</div>
-<pre class="code" data-file="solutions/03_retry.py"><span class="ln l1">done = <span class="k">False</span></span><span class="ln l1 l2 l3 l4"><span class="k">while</span> <span class="k">not</span> done:</span><span class="ln">    <span class="k">try</span>:</span><span class="ln l2 l3 l4">        age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l4">        done = <span class="k">True</span></span><span class="ln l2 l3">    <span class="k">except</span> ValueError:</span><span class="ln l2 l3">        <span class="f">print</span>(<span class="s">"不是整数，再输一次"</span>)</span><span class="ln l4"><span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:880px;width:960px;color:var(--paper);font-size:34px">done 记着“输对了没有”。一开始是 False，not done 成立，进入循环。</p>
-  <p class="abs say only2" style="left:96px;top:880px;width:960px;color:var(--paper);font-size:34px">输入 abc：出错，done = True 被跳过。提醒一句，回到 while。</p>
-  <p class="abs say only3" style="left:96px;top:880px;width:960px;color:var(--paper);font-size:34px">输入 3.5：又出错，done 还是 False，再问一次。</p>
-  <p class="abs say only4" style="left:96px;top:880px;width:960px;color:var(--paper);font-size:34px">输入 12：转换成功，done 变成 True，循环结束，说出结果。</p>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+<section class="slide lay-walk" aria-label="例题：一直问到输对" data-steps="4" data-at="4" data-chapter="一直问">
+  <h2 class="t">例题：一直问到输对为止</h2>
+  <div class="editor"><div class="tab">retry.py</div>
+<pre class="code" data-file="solutions/03_retry.py" data-light="1:1 2:1-4 4:2-4 5,8:4 6-7:2-3"></pre></div>
+  <div class="turns">
+      <p class="say only1" style="font-size:34px">done 记着“输对了没有”。一开始是 False，not done 成立，进入循环。</p>
+      <p class="say only2" style="font-size:34px">输入 abc：出错，done = True 被跳过。提醒一句，回到 while。</p>
+      <p class="say only3" style="font-size:34px">输入 3.5：又出错，done 还是 False，再问一次。</p>
+      <p class="say only4" style="font-size:34px">输入 12：转换成功，done 变成 True，循环结束，说出结果。</p>
+    </div>
+  <div class="right">
     <div class="box step"><i style="width:150px">开始</i><b style="font:700 52px var(--text)">done 是 False</b></div>
     <div class="box step s2"><i style="width:150px">abc</i><b style="font:700 52px var(--text)">出错，再问</b></div>
     <div class="box step s3"><i style="width:150px">3.5</i><b style="font:700 52px var(--text)">出错，再问</b></div>
     <div class="box step s4"><i style="width:150px">12</i><b style="font:700 52px var(--text)">done 变成 True</b></div>
+    <div class="step s2" style="font:400 40px/1.5 var(--text);color:var(--clay)">不是整数，再输一次<br><span class="step s3">不是整数，再输一次</span><br><span class="step s4">明年你 13 岁</span></div>
+    <a class="ide step s4">▶ 在 IDE 打开</a>
   </div>
-  <div class="abs step s2" style="left:1210px;right:96px;top:640px;font:400 40px/1.5 var(--text);color:var(--clay)">不是整数，再输一次<br><span class="step s3">不是整数，再输一次</span><br><span class="step s4">明年你 13 岁</span></div>
-  <a class="ide step s4" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
 </section>
 
 <!-- your turn: count the wrong tries -->
-<section class="slide" aria-label="数一数输错了几次">
+<section class="slide lay-try" aria-label="数一数输错了几次">
   <div class="band r"><b>动手<br>改一改</b><span>在例题上加一个计数器。</span></div>
   <div class="turn">
     <h2 class="r d1">最后说出输错了几次</h2>
@@ -144,21 +171,28 @@
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 abc、3.5、12</small><pre>输错了 2 次</pre></div><div><small>一次输对 12</small><pre>输错了 0 次</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 8 课的计数器：先设 0，再一次次加 1。</p>
   </div>
-  <a class="ide r d3" data-code-file="starter/04_retry_count.py" style="left:610px;top:810px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code-file="starter/04_retry_count.py">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: how many rounds -->
-<section class="slide" aria-label="小测：循环走了几圈">
+<section class="slide lay-ask" aria-label="小测：循环走了几圈">
   <h2 class="t r">小测：第一次就输入 12，循环走了几圈？</h2>
-  <div class="quiz side r d1" data-right="1">
+  <div class="editor r d2" style="width:1000px;--fs:40px"><div class="tab">第一次就输入 12</div>
+<pre class="code">done = False
+while not done:
+    try:
+        age = int(input())
+        done = True
+    except ValueError:
+        print("不是整数，再输一次")
+print("明年你", age + 1, "岁")</pre></div>
+  <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="一开始 done 是 False，not done 成立，至少会进去一次。"><i>1</i>0 圈</button>
     <button type="button" data-fb="答对了！进去一次，转换成功，done 变成 True，下一次检查就不进去了。"><i>2</i>1 圈</button>
     <button type="button" data-fb="没有出错，done 第一圈就变成 True，不会再问。"><i>3</i>2 圈</button>
     <button type="button" data-fb="done 变成 True 以后，not done 不成立，循环就停了。"><i>4</i>一直转下去</button>
   </div>
-  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
-  <div class="editor side r d2" style="--fs:40px"><div class="tab">第一次就输入 12</div>
-<pre class="code"><span class="ln">done = <span class="k">False</span></span><span class="ln"><span class="k">while</span> <span class="k">not</span> done:</span><span class="ln">    <span class="k">try</span>:</span><span class="ln">        age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">        done = <span class="k">True</span></span><span class="ln">    <span class="k">except</span> ValueError:</span><span class="ln">        <span class="f">print</span>(<span class="s">"不是整数，再输一次"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span></pre></div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
@@ -176,29 +210,28 @@
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark" aria-label="找错：输对了也说请输入整数">
+<section class="slide dark lay-ask" aria-label="找错：输对了也说请输入整数">
   <h2 class="t r">找错：明明输入 12，怎么也说“请输入整数”？</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:1010px;--fs:44px"><div class="tab">bug.py（只阅读）</div>
+  <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！inptu 是 input 打错了字，本来报 NameError，却被不写名字的 except 接住了。改成 input，再把 except 写成 except ValueError。" data-no="这一行没有写错字。输入 12 本来没问题，是哪一行先出了错？"><span class="ln"><span class="k">try</span>:</span><span class="ln">    age = <span class="f">int</span>(inptu())</span><span class="ln">    <span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span><span class="ln"><span class="k">except</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"请输入整数"</span>)</span></pre></div>
-  <p class="abs say r d2" style="left:1200px;top:240px;right:96px">怎么输入都只说“请输入整数”。<br>点出真正写错的那一行。</p>
-  <p class="fb" style="left:1200px;top:520px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="say r d2">怎么输入都只说“请输入整数”。<br>点出真正写错的那一行。</p>
+  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section class="slide clay" aria-label="乱糟糟的账本" data-chapter="挑战">
-  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
-  <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">乱糟糟的账本</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">零花钱账本里，有人把钱数写成了“五元”。第一行读入行数 n，接下来 n 行，每行可能是整数，也可能是别的字。<br>把整数加起来，再数一数有几行不是整数。输出两行：“和是 ……”和“不是整数的有 …… 行”。</p>
-  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:560px"><small>依次输入</small><pre style="font-size:44px">5
+<section class="slide clay lay-notes challenge" aria-label="乱糟糟的账本" data-chapter="挑战">
+  <p class="kicker r"># 自己挑战</p>
+  <h2 class="big r d1" style="font-size:150px">乱糟糟的账本</h2>
+  <p class="say r d2">零花钱账本里，有人把钱数写成了“五元”。第一行读入行数 n，接下来 n 行，每行可能是整数，也可能是别的字。<br>把整数加起来，再数一数有几行不是整数。输出两行：“和是 ……”和“不是整数的有 …… 行”。</p>
+  <div class="slip tilt2 r d3" style="width:560px"><small>依次输入</small><pre style="font-size:44px">5
 12
 苹果
 -3
 4.5
 7</pre><small style="margin-top:14px">输出</small><pre style="font-size:40px;white-space:pre">和是 16
 不是整数的有 2 行</pre></div>
-  <a class="ide r d3" data-code-file="starter/05_ledger.py" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
-  <p class="abs say r d3" style="left:560px;top:886px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="go r d3"><a class="ide" data-code-file="starter/05_ledger.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
 
