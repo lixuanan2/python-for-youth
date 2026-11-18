@@ -31,7 +31,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 
 只在 `slides.html` 写 `<section class="slide">`。先从 `lessons/01-input-output/slides.html` 找现成写法，组件都在那里。
 
-**换成版式的页**（新写的课一律这样写；`course.json` 里有 `"structured": true` 的课每页都要这样）：每页写 `class="slide lay-版式名"`，东西放进版式的格子里，不写 `left`、`top`；代码框只写代码，第几步亮哪几行写 `data-light`，改过的行写 `data-mod`，颜色和字号由构建生成。8 种版式、每种的格子、一页的完整例子和自由页的规则都在 `basics/PROMPT.md` 的“版式和格子”，写之前先读。下表里写着 `.l1`、`.mod`、`style="left:…"` 的地方，换过版式的页改用 `data-light`、`data-mod` 和格子。
+**版式**（30 节课都已换成版式写法，新写的课也一律这样写，`course.json` 里每节课都有 `"structured": true`）：每页写 `class="slide lay-版式名"`，东西放进版式的格子里，不写 `left`、`top`；代码框只写代码，第几步亮哪几行写 `data-light`，改过的行写 `data-mod`，颜色和字号由构建生成。8 种版式、每种的格子、一页的完整例子和自由页的规则都在 `basics/PROMPT.md` 的“版式和格子”，写之前先读。下表里写着 `.l1`、`.mod`、`style="left:…"` 的地方是组件本身的写法，放进版式时改用 `data-light`、`data-mod` 和格子；只有自由页照原来的绝对定位写。
 
 下表是各个组件：
 
@@ -58,7 +58,7 @@ description: 做或修改 Python 少儿编程课件。老师说“做下一课�
 | 章节跳转 | 每章第一页的 `<section>` 加 `data-chapter="名字"` |
 | 满版颜色 | `.dark` 听讲，`.band` 动手，`.clay` 挑战，`.olive` 复盘 |
 
-没换版式的页用绝对定位，以 1920×1080 为准；换过版式的页位置由版式定。放不下就拆页，不缩小字号。
+位置由版式定，以 1920×1080 为准；只有自由页用绝对定位。讲解太长就分步，放不下就拆页，不缩小字号。
 
 ## 4. 构建和检查
 

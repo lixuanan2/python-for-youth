@@ -3,7 +3,8 @@
     "id": "01-input-output",
     "tag": "LESSON 01",
     "title": "输入输出",
-    "stage": "基础"
+    "stage": "基础",
+    "structured": true
   },
   {
     "id": "02-variables",
@@ -184,24 +185,28 @@
     "id": "27-break-continue",
     "tag": "LESSON 27",
     "title": "break 和 continue",
-    "stage": "语法进阶"
+    "stage": "语法进阶",
+    "structured": true
   },
   {
     "id": "28-f-strings",
     "tag": "LESSON 28",
     "title": "f-string 格式化输出",
-    "stage": "语法进阶"
+    "stage": "语法进阶",
+    "structured": true
   },
   {
     "id": "29-sets",
     "tag": "LESSON 29",
     "title": "集合",
-    "stage": "语法进阶"
+    "stage": "语法进阶",
+    "structured": true
   },
   {
     "id": "30-tuples",
     "tag": "LESSON 30",
     "title": "元组",
-    "stage": "语法进阶"
+    "stage": "语法进阶",
+    "structured": true
   }
 ]
