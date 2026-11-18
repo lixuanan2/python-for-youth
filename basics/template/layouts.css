@@ -11,6 +11,15 @@
 /* One of several sentences shown a step at a time: they share one place and take turns. */
 .slide[class*=" lay-"] .turns{display:grid}
 .slide[class*=" lay-"] .turns>*{grid-area:1/1}
+/* Several sentences that stay, one under another (sentences taking turns may be one of them). */
+.slide[class*=" lay-"] .says{display:flex;flex-direction:column;gap:24px}
+/* A part inside a cell (the right column, the answer, sentences taking turns) follows the cell, whatever place it has alone. */
+.slide[class*=" lay-"] :is(.right,.answer,.turns,.go)>:where(:not(.free)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
+.slide[class*=" lay-"] :is(.right,.answer,.turns,.go) :is(.crate,.slip,.ide,.live-out):where(:not(.free)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
+/* The big question mark that stands where the answer will be. */
+.slide[class*=" lay-"] .qmark{font:800 400px/1 var(--code);color:var(--clay-soft)}
+/* A code box keeps its full height when the page is crowded (a grid would otherwise squeeze a box that hides its overflow). */
+.slide[class*=" lay-"]>.editor{min-height:min-content}
 
 /* 1 cover: the lesson number, two big words joined by a line with a bit of code on it, the title and one sentence. */
 .lay-cover>.kicker{top:96px;font:400 36px var(--code);color:var(--muted)}
@@ -27,10 +36,10 @@
 .lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
 .lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
 .lay-notes>.notes>.slip.big{flex:1.2}
-.lay-notes.challenge{display:grid;grid-template-columns:1fr 440px;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
+.lay-notes.challenge{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
 .lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
 .lay-notes.challenge>.say{grid-column:1;max-width:1000px}
-.lay-notes.challenge>.slip{grid-column:2;grid-row:1/4;align-self:start;margin-top:30px}
+.lay-notes.challenge>.slip{grid-column:2;grid-row:1/4;align-self:start;margin-top:30px;min-width:440px}
 .lay-notes.challenge>.go{grid-column:1/-1;grid-row:4;display:flex;align-items:center;gap:60px}
 .lay-notes.challenge>.go .ide{position:relative;left:auto;top:auto}
 .lay-notes.challenge>.go .say{font-size:34px}
@@ -38,30 +47,37 @@
 /* 3 walk: run through a program. Code on a dark column on the left with what each step does under it; on the right,
    what the program holds or shows (.right: variable boxes, output, a live yellow-box output, an algorithm demo).
    .wide and .narrow change the dark column from 1130px to 1230px or 1010px. */
-.lay-walk{--split:1130px;display:grid;grid-template-columns:calc(var(--split) - 170px) 1fr;grid-template-rows:auto auto 1fr;
+.lay-walk{--split:1130px;display:grid;grid-template-columns:calc(var(--split) - 170px) 1fr;grid-template-rows:max-content auto 1fr;
   grid-template-areas:"code right" "say right" "ide right";column-gap:154px;row-gap:40px;padding:200px 96px 90px;align-items:start;
   background:linear-gradient(90deg,var(--night) var(--split),var(--paper) var(--split))}
 .lay-walk.wide{--split:1230px}.lay-walk.narrow{--split:1010px}
 .lay-walk>h2.t{color:var(--paper)}
 .lay-walk>.editor{grid-area:code}
-.lay-walk>.say,.lay-walk>.turns{grid-area:say;color:var(--paper)}
+.lay-walk>.say,.lay-walk>.turns,.lay-walk>.says{grid-area:say;color:var(--paper)}
 .lay-walk>.ide{grid-area:ide;justify-self:start}
 .lay-walk>.right{grid-area:right;margin-top:-30px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
 .lay-walk>.foot{color:var(--ghost)}
 
-/* 4 predict: guess what a program does. Code on the left, the answer on the right (shown on step 2), a sentence under both. */
-.lay-predict{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"code answer" "say say" "ide ide";
+/* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
+   the IDE button at the bottom on the right. */
+.lay-predict{display:grid;grid-template-columns:1000px 1fr;grid-template-rows:max-content auto 1fr;grid-template-areas:"code answer" "say answer" "say ide";
   column-gap:100px;row-gap:50px;padding:220px 96px 120px;align-items:start}
 .lay-predict>.editor{grid-area:code;width:1000px}
 .lay-predict>.answer{grid-area:answer;padding-top:30px}
 .lay-predict>.answer.big{font:800 130px/1.3 var(--code);color:var(--clay)}
-.lay-predict>.say,.lay-predict>.turns{grid-area:say}
-.lay-predict>.ide{grid-area:ide;justify-self:start}
+.lay-predict>.say,.lay-predict>.turns,.lay-predict>.says{grid-area:say}
+.lay-predict>.answer.turns{grid-area:answer}
+.lay-predict>.answer.turns>*{justify-self:start;align-self:start}
+/* What the program shows, stacked: a box with the variable, then the screen, then maybe the IDE button. */
+.lay-predict>.answer:not(.turns,.big),.lay-predict>.answer.turns>div:not([class]){display:flex;flex-direction:column;align-items:flex-start;gap:50px}
+.lay-predict .crate{margin-top:92px}
+.lay-predict>.ide{grid-area:ide;justify-self:start;align-self:end}
 
 /* 5 columns: two or three things side by side or row by row (.vs, .steps3, .sheet3, .ledger, .later, .verbs), a sentence under them. */
 .lay-columns{display:flex;flex-direction:column;gap:64px;padding:240px 96px 180px}
-.lay-columns>.say,.lay-columns>.turns{margin-top:auto}
+.lay-columns>.say,.lay-columns>.turns,.lay-columns>.says{margin-top:auto}
+.lay-columns>.ide{align-self:flex-start}
 .lay-columns .sheet3>div{grid-template-columns:var(--key,560px) 1fr}
 .lay-columns .ledger>div{grid-template-columns:var(--key,600px) var(--mid,460px) 1fr}
 /* A row that says something in words instead of code. */
@@ -84,6 +100,10 @@
 .lay-ask>.editor~.quiz{grid-template-columns:1fr;gap:16px}
 .lay-ask>.fb{grid-area:fb}
 .lay-ask:not(:has(>.editor)){grid-template-columns:1fr;grid-template-areas:"pick" "fb"}
+/* .top: a short program with a long line goes across the page, the four choices in two columns under it. */
+.lay-ask.top{grid-template-columns:1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"code" "pick" "fb"}
+.lay-ask.top>.editor{width:auto}
+.lay-ask.top>.editor~.quiz{grid-template-columns:1fr 1fr;gap:26px 40px}
 
 /* 8 hints: lines shown one at a time: hints for a challenge (.hints on clay), or questions with their answers (olive). */
 .lay-hints>h2.big{position:absolute;left:96px;top:90px;font:800 130px/1.2 var(--text)}

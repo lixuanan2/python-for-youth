@@ -327,11 +327,11 @@ def build_code(slides, lesson):
 
 # Where each layout puts its code box: (width, height for the box, largest font). The build picks the font so the code
 # fits; a page can still set --fs or a width of its own. Keep in step with template/layouts.css.
-# The heights are the room the code may take when the sentences go beside it; with them under it, a long program
-# needs --fs or its sentences moved to the right (check_browser.mjs catches what runs off the page).
-CODE_ROOM = {'walk': (960, 760, 52), 'walk wide': (1060, 760, 52), 'walk narrow': (840, 760, 52),
-             'predict': (1000, 520, 58), 'ask': (800, 600, 48), 'ask bug': (1040, 640, 50), 'try': (1200, 260, 44)}
-EDITOR = re.compile(r'<div class="editor([^"]*)"((?: [\w-]+="[^"]*")*)>(\s*<div class="tab">.*?</div>\s*<pre class="code[^"]*"[^>]*>(.*?)</pre>)', re.S)
+# In walk and predict the sentences go under the code, so the height is what the column leaves after them (code_height).
+CODE_ROOM = {'walk': (960, 790, 52), 'walk wide': (1060, 790, 52), 'walk narrow': (840, 790, 52),
+             'predict': (1000, 740, 58), 'ask': (800, 600, 48), 'ask top': (1728, 300, 48), 'ask bug': (1040, 640, 50), 'try': (1200, 260, 44)}
+# An editor may hold two versions of its code (pre.code.was, then the new one shown from data-change); the font fits both.
+EDITOR = re.compile(r'<div class="editor([^"]*)"((?: [\w-]+="[^"]*")*)>(\s*<div class="tab">.*?</div>((?:\s*<pre class="code[^"]*"[^>]*>.*?</pre>)+))', re.S)
 
 
 def code_room(section):
@@ -342,7 +342,41 @@ def code_room(section):
         layout += next((' ' + n for n in names if n in ('wide', 'narrow')), '')
     if layout == 'ask' and 'class="code pick' in section:
         layout = 'ask bug'
+    elif layout == 'ask' and 'top' in names:
+        layout = 'ask top'
     return CODE_ROOM.get(layout)
+
+
+def outside(section, *cells):
+    """The page without the named cells (div.right, div.answer): what is left shares the code's column."""
+    for cell in cells:
+        while (found := re.search(f'<div class="{cell}[" ]', section)):
+            depth = 0
+            for m in re.finditer(r'<div\b|</div>', section[found.start():]):
+                depth += -1 if m.group().startswith('</') else 1
+                if depth == 0:
+                    section = section[:found.start()] + section[found.start() + m.end():]
+                    break
+    return section
+
+
+def code_height(section, layout, width, column):
+    """Walk and predict: the column holds the code, a gap, the sentence (one of .turns at a time) and, in walk, the IDE button."""
+    if not layout.startswith(('walk', 'predict')):
+        return column
+    rest = outside(section, 'right', 'answer')
+
+    def lines(say):
+        parts = [html.unescape(re.sub(r'<[^>]+>', '', part)) for part in re.split(r'<br\s*/?>', say)]
+        return sum(-(-sum(10 if ord(ch) > 0x2e7f else 6 for ch in part) * 4 // width) or 1 for part in parts)
+    say = re.compile(r'<p class="say[^"]*"[^>]*>(.*?)</p>', re.S)
+    # Sentences taking turns need the room of the longest; sentences that stay add up, 24px apart.
+    blocks = [max(map(lines, say.findall(turn)), default=0) for turn in re.findall(r'<div class="turns">(.*?)</div>', rest, re.S)]
+    blocks += [lines(text) for text in say.findall(re.sub(r'<div class="turns">.*?</div>', '', rest, flags=re.S))]
+    height = sum(blocks) * 64 + 24 * (len(blocks) - 1) if blocks else 0
+    gap = 40 if layout.startswith('walk') else 50
+    button = 115 if layout.startswith('walk') and '<a class="ide' in rest else 0
+    return column - (gap + height if height else 0) - button
 
 
 def fit_code(slides, lesson):
@@ -351,6 +385,8 @@ def fit_code(slides, lesson):
         room = code_room(page.group())
         if not room:
             return page.group()
+        layout = next(name for name, value in CODE_ROOM.items() if value is room)
+        room = (room[0], code_height(page.group(), layout, room[0], room[1]), room[2])
 
         def editor(match):
             classes, attrs, body, inner = match.groups()
@@ -359,12 +395,14 @@ def fit_code(slides, lesson):
             width, height, top = room
             own = re.search(r'width:\s*(\d+)px', attrs)
             width = int(own.group(1)) if own else width
-            rows = re.findall(r'<span class="ln[^"]*">(.*?)</span>(?=<span class="ln|$)', inner, re.S)
+            versions = [[html.unescape(re.sub(r'<[^>]+>', '', re.sub(r'<span class="orig">.*?</span>', '', l)))
+                         for l in re.findall(r'<span class="ln[^"]*">(.*?)</span>(?=<span class="ln|$)', code, re.S)] or ['']
+                        for code in re.findall(r'<pre[^>]*>(.*?)</pre>', inner, re.S)]
             # The grey "原来是 ..." note sits at the end of its line in a smaller font; it does not set the size.
-            lines = [html.unescape(re.sub(r'<[^>]+>', '', re.sub(r'<span class="orig">.*?</span>', '', l))) for l in rows] or ['']
-            widest = max(sum(10 if ord(ch) > 0x2e7f else 6 for ch in l) for l in lines) or 1
-            size = min(top, (width - GUTTER) * 10 // widest, (height - 130) * 100 // (155 * len(lines)))
-            assert size >= 30, f'{lesson["id"]}: a code box needs {size}px to fit its layout; cut lines or give it room'
+            widest = max(sum(10 if ord(ch) > 0x2e7f else 6 for ch in l) for lines in versions for l in lines) or 1
+            size = min(top, (width - GUTTER) * 10 // widest, (height - 130) * 100 // (155 * max(map(len, versions))))
+            name = (re.search(r'aria-label="([^"]*)"', page.group()) or [None, '?'])[1]
+            assert size >= 30, f'{lesson["id"]} page "{name}": a code box needs {size}px to fit its layout; cut lines or give it room'
             style = re.search(r' style="([^"]*)"', attrs)
             attrs = re.sub(r' style="[^"]*"', '', attrs) + f' style="{(style.group(1).rstrip(";") + ";") if style else ""}--fs:{size}px"'
             return f'<div class="editor{classes}"{attrs}>{body}'
