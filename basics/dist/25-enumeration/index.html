@@ -681,58 +681,64 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- the idea -->
-<section id="page-2" class="slide clay" aria-label="忘了密码锁">
+<section id="page-2" class="slide clay lay-notes" aria-label="忘了密码锁">
   <h2 class="t r">行李箱的密码忘了怎么办？</h2>
-  <div class="slip r d1" style="left:96px;top:290px;width:520px"><small style="font-size:34px">三位数的密码锁</small><pre style="font-size:60px">000 到 999</pre></div>
-  <div class="slip tilt r d2" style="left:700px;top:290px;width:600px"><small style="font-size:34px">一个个拨过去</small><pre style="font-size:60px">总能打开</pre></div>
-  <p class="abs say r d3" style="left:96px;right:96px;top:640px">不知道答案，就把所有可能都试一遍。最多拨 1000 次，一定能找到。<br>人拨很累，计算机试起来飞快。这种办法叫枚举，也叫“穷举”：挨个列出来，一个个检查。</p>
+  <div class="notes">
+    <div class="slip r d1"><small style="font-size:34px">三位数的密码锁</small><pre style="font-size:60px">000 到 999</pre></div>
+    <div class="slip tilt r d2"><small style="font-size:34px">一个个拨过去</small><pre style="font-size:60px">总能打开</pre></div>
+  </div>
+  <p class="say r d3">不知道答案，就把所有可能都试一遍。最多拨 1000 次，一定能找到。<br>人拨很累，计算机试起来飞快。这种办法叫枚举，也叫“穷举”：挨个列出来，一个个检查。</p>
   <div class="foot"></div>
 </section>
 
 <!-- smallest example -->
-<section id="page-3" class="slide" aria-label="哪个数自己乘自己是 144" data-steps="2" data-at="2" data-chapter="枚举">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">哪个数自己乘自己是 144？</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">square.py</div>
+<section id="page-3" class="slide lay-walk" aria-label="哪个数自己乘自己是 144" data-steps="2" data-at="2" data-chapter="枚举">
+  <h2 class="t">哪个数自己乘自己是 144？</h2>
+  <div class="editor" style="--fs:52px"><div class="tab">square.py</div>
 <pre class="code" data-file="solutions/01_square.py"><span class="ln l1"><span class="k">for</span> x <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">145</span>):</span><span class="ln l2">    <span class="k">if</span> x * x == <span class="m">144</span>:</span><span class="ln l2">        <span class="f">print</span>(x)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:630px;width:960px;color:var(--paper)">先定范围：答案一定在 1 到 144 之间。range(1, 145) 把它们一个个交给 x。</p>
-  <p class="abs say only2" style="left:96px;top:630px;width:960px;color:var(--paper)">每个 x 都检查一下：x * x 是 144 吗？是就输出。试到 12 时对上了。</p>
-  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+  <div class="turns">
+      <p class="say only1">先定范围：答案一定在 1 到 144 之间。range(1, 145) 把它们一个个交给 x。</p>
+      <p class="say only2">每个 x 都检查一下：x * x 是 144 吗？是就输出。试到 12 时对上了。</p>
+    </div>
+  <a class="ide step s2">▶ 在 IDE 打开</a>
+  <div class="right">
     <div class="box step"><i style="width:170px">要试</i><b style="font-size:72px">144 次</b></div>
     <div class="box out step s2"><i style="width:170px">屏幕上</i><b style="font-size:100px">12</b></div>
   </div>
 </section>
 
 <!-- live numbers: be the computer -->
-<section id="page-4" class="slide" aria-label="你来当计算机">
-  <div class="night" style="width:1010px"></div>
-  <h2 class="t" style="color:var(--paper)">你来当计算机，试一试</h2>
-  <div class="editor" style="left:96px;top:210px;width:830px;--fs:52px"><div class="tab">try.py</div>
+<section id="page-4" class="slide lay-walk narrow" aria-label="你来当计算机">
+  <h2 class="t">你来当计算机，试一试</h2>
+  <div class="editor" style="--fs:52px"><div class="tab">try.py</div>
 <pre class="code"><span class="ln">x = <input class="slot" data-var="x" value="10" inputmode="numeric" autocomplete="off" aria-label="试的数"></span><span class="ln"><span class="f">print</span>(x * x)</span><span class="ln"><span class="f">print</span>(x * x == <span class="m">144</span>)</span></pre></div>
-  <p class="abs say" style="left:96px;top:640px;width:830px;color:var(--paper)">点黄色的数字，改完结果马上变。</p>
-  <a class="ide" style="left:96px;top:850px">▶ 带这个数进 IDE</a>
-  <div class="live-out">
+  <p class="say">点黄色的数字，改完结果马上变。</p>
+  <a class="ide">▶ 带这个数进 IDE</a>
+  <div class="right">
+    <div class="live-out">
     <div><i>第 2 行：x 乘 x</i><b data-eval="x * x">100</b></div>
     <div><i>第 3 行：对上了吗</i><b data-eval="x * x == 144">False</b></div>
   </div>
-  <p class="abs say" style="left:1090px;top:560px;width:734px;font-size:38px">从 1 开始一个个改，改到几才是 True？<br>你一个个试，就是在做枚举。程序替你试，快得多。</p>
+    <p class="say" style="font-size:38px">从 1 开始一个个改，改到几才是 True？<br>你一个个试，就是在做枚举。程序替你试，快得多。</p>
+  </div>
   <div class="foot"></div>
 </section>
 
 <!-- predict: range too small -->
-<section id="page-5" class="slide dark" aria-label="猜一猜：范围漏了" data-steps="2" data-at="2">
+<section id="page-5" class="slide dark lay-predict" aria-label="猜一猜：范围漏了" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：把范围改成 range(1, 12)，输出什么？</h2>
-  <div class="editor" style="left:96px;top:220px;width:960px;--fs:52px"><div class="tab">square.py</div>
+  <div class="editor" style="--fs:58px"><div class="tab">square.py</div>
 <pre class="code"><span class="ln l2"><span class="k">for</span> x <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">12</span>):</span><span class="ln">    <span class="k">if</span> x * x == <span class="m">144</span>:</span><span class="ln">        <span class="f">print</span>(x)</span></pre></div>
-  <p class="abs say only1" style="left:1160px;right:96px;top:240px">答案 12 还在里面吗？</p>
-  <p class="abs step s2" style="left:1160px;right:96px;top:230px;font:800 72px/1.4 var(--text);color:var(--clay-soft)">什么也<br>不输出</p>
-  <p class="abs say step s2" style="left:96px;top:620px;width:1728px">range(1, 12) 只试到 11，不含 12。答案不在范围里，就一个也找不到，而且不报错。<br>枚举最要紧的是范围：答案可能出现的地方，一个都不能漏。</p>
+  <div class="answer turns">
+    <p class="say only1">答案 12 还在里面吗？</p>
+    <p class="step s2" style="font:800 72px/1.4 var(--text);color:var(--clay-soft)">什么也<br>不输出</p>
+  </div>
+  <p class="say step s2">range(1, 12) 只试到 11，不含 12。答案不在范围里，就一个也找不到，而且不报错。<br>枚举最要紧的是范围：答案可能出现的地方，一个都不能漏。</p>
   <div class="foot"></div>
 </section>
 
 <!-- quiz: the range -->
-<section id="page-6" class="slide" aria-label="小测：1 到 100 怎么写">
+<section id="page-6" class="slide lay-ask" aria-label="小测：1 到 100 怎么写">
   <h2 class="t r">小测：1 到 100 都要试，range 怎么写？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="range 不含终点，这样只试到 99，漏了 100。"><i>1</i>range(1, 100)</button>
@@ -745,19 +751,19 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- three steps -->
-<section id="page-7" class="slide" aria-label="枚举三步">
+<section id="page-7" class="slide lay-columns" aria-label="枚举三步">
   <h2 class="t r">枚举分三步</h2>
   <div class="steps3">
     <div class="r d1"><i>1</i><b>定范围</b><span>答案可能是哪些？一个都不能漏</span></div>
     <div class="r d2"><i>2</i><b>一个个试</b><span>用 for 循环把它们挨个拿出来</span></div>
     <div class="r d3"><i>3</i><b>判断对不对</b><span>用 if 检查，对上了就输出</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:800px">想不出巧办法时，先想想能不能挨个试。题目给的条件，就是第 3 步的判断。</p>
+  <p class="say r d3">想不出巧办法时，先想想能不能挨个试。题目给的条件，就是第 3 步的判断。</p>
   <div class="foot"></div>
 </section>
 
 <!-- worked example: chickens and rabbits -->
-<section id="page-8" class="slide dark" aria-label="例题：鸡兔同笼" data-chapter="鸡兔同笼">
+<section id="page-8" class="slide dark free" aria-label="例题：鸡兔同笼" data-chapter="鸡兔同笼">
   <h2 class="t" style="top:40px">例题：鸡兔同笼</h2>
   <div class="editor" style="left:96px;top:175px;width:960px;--fs:40px"><div class="tab">cage.py</div>
 <pre class="code" data-file="solutions/02_cage.py"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads + <span class="m">1</span>):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
@@ -768,22 +774,22 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: how many tries -->
-<section id="page-9" class="slide" aria-label="小测：试了几次">
+<section id="page-9" class="slide lay-ask" aria-label="小测：试了几次">
   <h2 class="t r">小测：35 个头、94 只脚，循环一共试了几次？</h2>
-  <div class="quiz side r d1" data-right="1">
+  <div class="editor r d2" style="width:1000px;--fs:42px"><div class="tab">输入 35 和 94</div>
+<pre class="code"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads + <span class="m">1</span>):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
+  <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="鸡可以是 0 只，也可以是 35 只。从 0 数到 35，比 35 多一个。"><i>1</i>35 次</button>
     <button type="button" data-fb="答对了！range(heads + 1) 是 0 到 35，一共 36 个。"><i>2</i>36 次</button>
     <button type="button" data-fb="试的是鸡的只数，跟脚数 94 没关系。"><i>3</i>94 次</button>
     <button type="button" data-fb="找到答案后循环没有停，会一直试到最后。"><i>4</i>24 次</button>
   </div>
-  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
-  <div class="editor side r d2" style="--fs:42px"><div class="tab">输入 35 和 94</div>
-<pre class="code"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads + <span class="m">1</span>):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- your turn: no answer -->
-<section id="page-10" class="slide" aria-label="没有答案时说一声">
+<section id="page-10" class="slide lay-try" aria-label="没有答案时说一声">
   <div class="band r"><b>动手<br>改一改</b><span>一个也没找到时，说一声。</span></div>
   <div class="turn">
     <h2 class="r d1">没有答案时说一声</h2>
@@ -791,7 +797,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 35 和 94</small><pre>鸡 23 兔 12</pre></div><div><small>输入 10 和 21</small><pre>没有答案</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 22 课的 done 记着“输对了没有”，这里也可以记着“找到过没有”。</p>
   </div>
-  <a class="ide r d3" data-code="# 【没有答案时说一声】&#10;# 脚数是单数，或者太多太少，就怎么也凑不上。在例题上改：&#10;#   一种答案也没有时，输出“没有答案”。输入还是两行：头数和脚数。&#10;# 例如输入（每个一行）：10、21&#10;# 应该输出：没有答案&#10;# 提示：一个也没找到时，说一声。&#10;# 提示：用一个变量记住“找到过没有”。&#10;# ↓ 在下面这段程序上改&#10;&#10;heads = int(input())&#10;feet = int(input())&#10;for c in range(heads + 1):&#10;    r = heads - c&#10;    if c * 2 + r * 4 == feet:&#10;        print(&quot;鸡&quot;, c, &quot;兔&quot;, r)&#10;" style="left:610px;top:850px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【没有答案时说一声】&#10;# 脚数是单数，或者太多太少，就怎么也凑不上。在例题上改：&#10;#   一种答案也没有时，输出“没有答案”。输入还是两行：头数和脚数。&#10;# 例如输入（每个一行）：10、21&#10;# 应该输出：没有答案&#10;# 提示：一个也没找到时，说一声。&#10;# 提示：用一个变量记住“找到过没有”。&#10;# ↓ 在下面这段程序上改&#10;&#10;heads = int(input())&#10;feet = int(input())&#10;for c in range(heads + 1):&#10;    r = heads - c&#10;    if c * 2 + r * 4 == feet:&#10;        print(&quot;鸡&quot;, c, &quot;兔&quot;, r)&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -808,26 +814,25 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-12" class="slide dark" aria-label="找错：全是鸡却没输出">
+<section id="page-12" class="slide dark lay-ask" aria-label="找错：全是鸡却没输出">
   <h2 class="t r">找错：10 个头 20 只脚，全是鸡，却没输出</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！range(heads) 是 0 到 9，鸡最多试到 9 只，“10 只鸡”这种可能被漏掉了。改成 range(heads + 1)。" data-no="这一行没问题。答案是鸡 10 只，循环试到过 10 吗？"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
-  <p class="abs say r d2" style="left:1180px;top:240px;right:96px">点出该改的那一行。</p>
-  <p class="fb" style="left:1180px;top:400px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="say r d2">点出该改的那一行。</p>
+  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-13" class="slide clay" aria-label="百钱买百鸡" data-chapter="挑战">
-  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
-  <h2 class="abs r d1" style="left:96px;top:170px;font:800 150px/1.2 var(--text)">百钱买百鸡</h2>
-  <p class="abs say r d2" style="left:96px;top:410px;width:1060px">一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只。读入一个整数 n，用 n 元正好买 n 只鸡，<b>小鸡要整 3 只地买</b>。<br>每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。一种也没有就输出“没有答案”。</p>
-  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:560px"><small>输入</small><pre>100</pre><small style="margin-top:14px">输出</small><pre style="font-size:38px;white-space:pre">公鸡 0 母鸡 25 小鸡 75
+<section id="page-13" class="slide clay lay-notes challenge" aria-label="百钱买百鸡" data-chapter="挑战">
+  <p class="kicker r"># 自己挑战</p>
+  <h2 class="big r d1" style="font-size:150px">百钱买百鸡</h2>
+  <p class="say r d2">一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只。读入一个整数 n，用 n 元正好买 n 只鸡，<b>小鸡要整 3 只地买</b>。<br>每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。一种也没有就输出“没有答案”。</p>
+  <div class="slip tilt2 r d3" style="width:560px"><small>输入</small><pre>100</pre><small style="margin-top:14px">输出</small><pre style="font-size:38px;white-space:pre">公鸡 0 母鸡 25 小鸡 75
 公鸡 4 母鸡 18 小鸡 78
 公鸡 8 母鸡 11 小鸡 81
 公鸡 12 母鸡 4 小鸡 84</pre></div>
-  <a class="ide r d3" data-code="# 【百钱买百鸡】&#10;# 一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，&#10;#   小鸡 1 元 3 只。读入一个整数 n，用 n 元正好买 n 只鸡，&#10;#   小鸡要整 3 只地买。&#10;# 每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。&#10;#   一种也没有就输出“没有答案”。&#10;# 例如输入：100&#10;# 应该输出（一共 4 行，这里用 / 隔开）：&#10;#   公鸡 0 母鸡 25 小鸡 75 / 公鸡 4 母鸡 18 小鸡 78&#10;#   公鸡 8 母鸡 11 小鸡 81 / 公鸡 12 母鸡 4 小鸡 84&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:890px">▶ 在 IDE 开始写</a>
-  <p class="abs say r d3" style="left:560px;top:896px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="go r d3"><a class="ide" data-code="# 【百钱买百鸡】&#10;# 一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，&#10;#   小鸡 1 元 3 只。读入一个整数 n，用 n 元正好买 n 只鸡，&#10;#   小鸡要整 3 只地买。&#10;# 每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。&#10;#   一种也没有就输出“没有答案”。&#10;# 例如输入：100&#10;# 应该输出（一共 4 行，这里用 / 隔开）：&#10;#   公鸡 0 母鸡 25 小鸡 75 / 公鸡 4 母鸡 18 小鸡 78&#10;#   公鸡 8 母鸡 11 小鸡 81 / 公鸡 12 母鸡 4 小鸡 84&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
 
