@@ -8,29 +8,32 @@
 </section>
 
 <!-- the problem -->
-<section class="slide clay" aria-label="名字里的字">
+<section class="slide clay lay-notes" aria-label="名字里的字">
   <h2 class="t r">一句话能拆开吗？</h2>
-  <div class="slip r d1" style="left:96px;top:300px;width:220px"><small style="font-size:34px">[0]</small><pre style="font-size:72px">P</pre></div>
-  <div class="slip r d1" style="left:340px;top:300px;width:220px"><small style="font-size:34px">[1]</small><pre style="font-size:72px">y</pre></div>
-  <div class="slip r d2" style="left:584px;top:300px;width:220px"><small style="font-size:34px">[2]</small><pre style="font-size:72px">t</pre></div>
-  <div class="slip r d2" style="left:828px;top:300px;width:220px"><small style="font-size:34px">[3]</small><pre style="font-size:72px">h</pre></div>
-  <div class="slip r d3" style="left:1072px;top:300px;width:220px"><small style="font-size:34px">[4]</small><pre style="font-size:72px">o</pre></div>
-  <div class="slip r d3" style="left:1316px;top:300px;width:220px"><small style="font-size:34px">[5]</small><pre style="font-size:72px">n</pre></div>
-  <p class="abs say r d3" style="left:96px;right:96px;top:620px">引号里的一串字叫“字符串”。它和列表很像：每个字占一个盒子，编号也从 0 开始。<br>列表学过的下标、len、for，字符串都能用。</p>
+  <div class="notes">
+    <div class="slip r d1"><small style="font-size:34px">[0]</small><pre style="font-size:72px">P</pre></div>
+    <div class="slip r d1"><small style="font-size:34px">[1]</small><pre style="font-size:72px">y</pre></div>
+    <div class="slip r d2"><small style="font-size:34px">[2]</small><pre style="font-size:72px">t</pre></div>
+    <div class="slip r d2"><small style="font-size:34px">[3]</small><pre style="font-size:72px">h</pre></div>
+    <div class="slip r d3"><small style="font-size:34px">[4]</small><pre style="font-size:72px">o</pre></div>
+    <div class="slip r d3"><small style="font-size:34px">[5]</small><pre style="font-size:72px">n</pre></div>
+  </div>
+  <p class="say r d3">引号里的一串字叫“字符串”。它和列表很像：每个字占一个盒子，编号也从 0 开始。<br>列表学过的下标、len、for，字符串都能用。</p>
   <div class="foot"></div>
 </section>
 
 <!-- basics -->
-<section class="slide" aria-label="长度和下标" data-steps="3" data-at="3" data-chapter="下标">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">长度和下标</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">basics.py</div>
-<pre class="code" data-file="solutions/01_basics.py"><span class="ln">word = <span class="s">"Python"</span></span><span class="ln l1"><span class="f">print</span>(<span class="f">len</span>(word))</span><span class="ln l2"><span class="f">print</span>(word[<span class="m">0</span>])</span><span class="ln l3"><span class="f">print</span>(word[-<span class="m">1</span>])</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:690px;width:960px;color:var(--paper)">len 数一数有几个字：P、y、t、h、o、n，一共 6 个。</p>
-  <p class="abs say only2" style="left:96px;top:690px;width:960px;color:var(--paper)">下标 0 是第一个字 P。</p>
-  <p class="abs say only3" style="left:96px;top:690px;width:960px;color:var(--paper)">-1 是最后一个字 n。和列表一模一样。</p>
-  <a class="ide step s3" style="left:96px;top:860px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+<section class="slide lay-walk" aria-label="长度和下标" data-steps="3" data-at="3" data-chapter="下标">
+  <h2 class="t">长度和下标</h2>
+  <div class="editor"><div class="tab">basics.py</div>
+<pre class="code" data-file="solutions/01_basics.py" data-light="2:1 3:2 4:3"></pre></div>
+  <div class="turns">
+      <p class="say only1">len 数一数有几个字：P、y、t、h、o、n，一共 6 个。</p>
+      <p class="say only2">下标 0 是第一个字 P。</p>
+      <p class="say only3">-1 是最后一个字 n。和列表一模一样。</p>
+    </div>
+  <a class="ide step s3">▶ 在 IDE 打开</a>
+  <div class="right">
     <div class="box step"><i style="width:190px">len</i><b style="font-size:84px">6</b></div>
     <div class="box step s2"><i style="width:190px">[0]</i><b style="font-size:84px">P</b></div>
     <div class="box out step s3"><i style="width:190px">[-1]</i><b style="font-size:84px">n</b></div>
@@ -38,20 +41,25 @@
 </section>
 
 <!-- predict -->
-<section class="slide dark" aria-label="猜一猜：word[1]" data-steps="2" data-at="2">
+<section class="slide dark lay-predict under" aria-label="猜一猜：word[1]" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：word[1] 是哪个字？</h2>
-  <div class="editor" style="left:96px;top:230px;width:1000px;--fs:58px"><div class="tab">guess.py</div>
-<pre class="code"><span class="ln">word = <span class="s">"Python"</span></span><span class="ln"><span class="f">print</span>(word[<span class="m">1</span>])</span></pre></div>
-  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
-  <p class="abs say only1" style="left:96px;top:560px">先在纸上写下你的答案。</p>
-  <p class="abs step s2" style="left:1300px;top:230px;font:800 260px/1 var(--code);color:var(--clay-soft)">y</p>
-  <p class="abs say step s2" style="left:96px;top:560px;width:1500px">不是 P，是 y。下标从 0 开始，[1] 是第二个字。<br>输出的时候没有引号，引号只是写代码时用来圈住文字的。</p>
-  <a class="ide step s2" style="left:96px;top:760px">▶ 在 IDE 验证</a>
+  <div class="editor"><div class="tab">guess.py</div>
+<pre class="code">word = "Python"
+print(word[1])</pre></div>
+  <div class="answer turns">
+    <p class="qmark only1">?</p>
+    <p class="step s2" style="font:800 260px/1 var(--code);color:var(--clay-soft)">y</p>
+  </div>
+  <div class="turns">
+      <p class="say only1">先在纸上写下你的答案。</p>
+      <p class="say step s2">不是 P，是 y。下标从 0 开始，[1] 是第二个字。<br>输出的时候没有引号，引号只是写代码时用来圈住文字的。</p>
+    </div>
+  <a class="ide step s2">▶ 在 IDE 验证</a>
   <div class="foot"></div>
 </section>
 
 <!-- index table -->
-<section class="slide" aria-label="下标表">
+<section class="slide free" aria-label="下标表">
   <h2 class="t r">"Python" 的两种编号</h2>
   <div class="abs r d1" style="left:96px;right:96px;top:250px;display:grid;grid-template-columns:260px repeat(6,1fr);align-items:baseline;row-gap:36px;font:800 84px var(--code);text-align:center">
     <span style="font:400 40px var(--text);color:var(--muted);text-align:left">字</span><span>P</span><span>y</span><span>t</span><span>h</span><span>o</span><span>n</span>
@@ -63,7 +71,7 @@
 </section>
 
 <!-- quiz -->
-<section class="slide" aria-label="小测：中文的下标">
+<section class="slide lay-ask" aria-label="小测：中文的下标">
   <h2 class="t r">小测：s = "你好世界"，s[2] 是哪个字？</h2>
   <div class="quiz r d1" data-right="2">
     <button type="button" data-fb="好是第 2 个字，下标是 1。"><i>1</i>好</button>
@@ -76,16 +84,17 @@
 </section>
 
 <!-- worked example: first and last -->
-<section class="slide" aria-label="例题：首尾两个字" data-steps="3" data-at="3">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">例题：首尾两个字</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">ends.py</div>
-<pre class="code" data-file="solutions/02_ends.py"><span class="ln l1">word = <span class="f">input</span>()</span><span class="ln l2 l3"><span class="f">print</span>(word[<span class="m">0</span>], word[-<span class="m">1</span>])</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:560px;width:960px;color:var(--paper)">input() 读进来的本来就是字符串，输入 hello。</p>
-  <p class="abs say only2" style="left:96px;top:560px;width:960px;color:var(--paper)">[0] 是 h，[-1] 是 o。不管多长，最后一个都是 [-1]。</p>
-  <p class="abs say only3" style="left:96px;top:560px;width:960px;color:var(--paper)">只输入一个字 a 呢？第一个和最后一个是同一个，输出 a a。</p>
-  <a class="ide step s3" style="left:96px;top:760px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+<section class="slide lay-walk" aria-label="例题：首尾两个字" data-steps="3" data-at="3">
+  <h2 class="t">例题：首尾两个字</h2>
+  <div class="editor"><div class="tab">ends.py</div>
+<pre class="code" data-file="solutions/02_ends.py" data-light="1:1 2:2-3"></pre></div>
+  <div class="turns">
+      <p class="say only1">input() 读进来的本来就是字符串，输入 hello。</p>
+      <p class="say only2">[0] 是 h，[-1] 是 o。不管多长，最后一个都是 [-1]。</p>
+      <p class="say only3">只输入一个字 a 呢？第一个和最后一个是同一个，输出 a a。</p>
+    </div>
+  <a class="ide step s3">▶ 在 IDE 打开</a>
+  <div class="right">
     <div class="box step"><i style="width:190px">输入</i><b style="font-size:72px">hello</b></div>
     <div class="box out step s2"><i style="width:190px">输出</i><b style="font-size:72px">h o</b></div>
     <div class="box out step s3"><i style="width:190px">输入 a</i><b style="font-size:72px">a a</b></div>
@@ -93,34 +102,37 @@
 </section>
 
 <!-- slicing -->
-<section class="slide" aria-label="切片" data-steps="2" data-at="2" data-chapter="切片">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">切片：截出一段</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">slice.py</div>
-<pre class="code" data-file="solutions/03_slice.py"><span class="ln">word = <span class="s">"Python"</span></span><span class="ln l1"><span class="f">print</span>(word[<span class="m">0</span>:<span class="m">2</span>])</span><span class="ln l2"><span class="f">print</span>(word[<span class="m">2</span>:<span class="m">5</span>])</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">方括号里写“起点:终点”，从起点截到终点前面。[0:2] 是下标 0 和 1：Py。</p>
-  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">[2:5] 是下标 2、3、4：tho。和 range 一样，不含终点。<br>截出几个字？终点减起点：5 - 2 = 3。</p>
-  <a class="ide step s2" style="left:96px;top:860px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+<section class="slide lay-walk" aria-label="切片" data-steps="2" data-at="2" data-chapter="切片">
+  <h2 class="t">切片：截出一段</h2>
+  <div class="editor"><div class="tab">slice.py</div>
+<pre class="code" data-file="solutions/03_slice.py" data-light="2:1 3:2"></pre></div>
+  <div class="turns">
+      <p class="say only1">方括号里写“起点:终点”，从起点截到终点前面。[0:2] 是下标 0 和 1：Py。</p>
+      <p class="say only2">[2:5] 是下标 2、3、4：tho。和 range 一样，不含终点。<br>截出几个字？终点减起点：5 - 2 = 3。</p>
+    </div>
+  <a class="ide step s2">▶ 在 IDE 打开</a>
+  <div class="right">
     <div class="box step"><i style="width:190px">[0:2]</i><b style="font-size:84px">Py</b></div>
     <div class="box out step s2"><i style="width:190px">[2:5]</i><b style="font-size:84px">tho</b></div>
   </div>
 </section>
 
 <!-- predict: leave out start or end -->
-<section class="slide" aria-label="猜一猜：省略起点终点" data-steps="2" data-at="2">
+<section class="slide lay-columns" aria-label="猜一猜：省略起点终点" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：起点或终点不写，会截出什么？</h2>
-  <div class="vs" style="top:220px">
+  <div class="vs">
     <div><h3>不写起点</h3><pre style="font-size:60px">word[:3]</pre><p class="res step s2" style="font-size:110px">Pyt</p></div>
     <div><h3>不写终点</h3><pre style="font-size:60px">word[3:]</pre><p class="res step s2" style="font-size:110px">hon</p></div>
   </div>
-  <p class="abs say only1" style="left:96px;top:700px;width:1728px">word 还是 "Python"。</p>
-  <p class="abs say step s2" style="left:96px;top:700px;width:1728px">不写起点，就从头开始：前 3 个字。不写终点，就截到最后。<br>前 k 个写 word[:k]，后 k 个写 word[-k:]。</p>
+  <div class="turns">
+      <p class="say only1">word 还是 "Python"。</p>
+      <p class="say step s2">不写起点，就从头开始：前 3 个字。不写终点，就截到最后。<br>前 k 个写 word[:k]，后 k 个写 word[-k:]。</p>
+    </div>
   <div class="foot"></div>
 </section>
 
 <!-- quiz: slice -->
-<section class="slide" aria-label="小测：切片">
+<section class="slide lay-ask" aria-label="小测：切片">
   <h2 class="t r">小测：s = "abcdef"，s[1:4] 是什么？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="下标 1 是 b，不是 a，起点要算进去。"><i>1</i>abcd</button>
@@ -133,7 +145,7 @@
 </section>
 
 <!-- your turn: first two and last two -->
-<section class="slide" aria-label="前两个和后两个">
+<section class="slide lay-try" aria-label="前两个和后两个">
   <div class="band r"><b>动手<br>改一改</b><span>把下标换成切片。</span></div>
   <div class="turn">
     <h2 class="r d1">前两个字和后两个字</h2>
@@ -141,20 +153,21 @@
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入</small><pre>Python</pre></div><div><small>输出</small><pre>Py on</pre></div></div>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr;margin-top:16px"><div><small>输入</small><pre>ab</pre></div><div><small>输出</small><pre>ab ab</pre></div></div>
   </div>
-  <a class="ide r d3" data-code-file="starter/04_two_two.py" style="left:610px;top:830px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code-file="starter/04_two_two.py">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- each character -->
-<section class="slide" aria-label="一个字一个字地看" data-steps="3" data-at="3" data-chapter="遍历">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">for：一个字一个字地看</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:52px"><div class="tab">each.py</div>
-<pre class="code" data-file="solutions/05_each.py"><span class="ln">word = <span class="s">"cat"</span></span><span class="ln l1 l2 l3"><span class="k">for</span> ch <span class="k">in</span> word:</span><span class="ln l1 l2 l3">    <span class="f">print</span>(ch)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">第一遍，ch 拿到第一个字 c。</p>
-  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">第二遍是 a。</p>
-  <p class="abs say only3" style="left:96px;top:620px;width:960px;color:var(--paper)">第三遍是 t。几个字就转几遍，和遍历列表一样。</p>
-  <a class="ide step s3" style="left:96px;top:820px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+<section class="slide lay-walk" aria-label="一个字一个字地看" data-steps="3" data-at="3" data-chapter="遍历">
+  <h2 class="t">for：一个字一个字地看</h2>
+  <div class="editor"><div class="tab">each.py</div>
+<pre class="code" data-file="solutions/05_each.py" data-light="2-3:1-3"></pre></div>
+  <div class="turns">
+      <p class="say only1">第一遍，ch 拿到第一个字 c。</p>
+      <p class="say only2">第二遍是 a。</p>
+      <p class="say only3">第三遍是 t。几个字就转几遍，和遍历列表一样。</p>
+    </div>
+  <a class="ide step s3">▶ 在 IDE 打开</a>
+  <div class="right">
     <div class="box step"><i style="width:190px;white-space:nowrap">第 1 遍</i><b style="font-size:84px">c</b></div>
     <div class="box step s2"><i style="width:190px;white-space:nowrap">第 2 遍</i><b style="font-size:84px">a</b></div>
     <div class="box out step s3"><i style="width:190px;white-space:nowrap">第 3 遍</i><b style="font-size:84px">t</b></div>
@@ -162,16 +175,17 @@
 </section>
 
 <!-- worked example: count a -->
-<section class="slide" aria-label="例题：有几个 a" data-steps="3" data-at="3">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">例题：数一数 a</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">count_a.py</div>
-<pre class="code" data-file="solutions/06_count_a.py"><span class="ln l1">word = <span class="f">input</span>()</span><span class="ln l1">count = <span class="m">0</span></span><span class="ln l2"><span class="k">for</span> ch <span class="k">in</span> word:</span><span class="ln l2">    <span class="k">if</span> ch == <span class="s">"a"</span>:</span><span class="ln l2">        count += <span class="m">1</span></span><span class="ln l3"><span class="f">print</span>(count)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:800px;width:960px;color:var(--paper)">输入 banana。计数前先准备 count = 0。</p>
-  <p class="abs say only2" style="left:96px;top:800px;width:960px;color:var(--paper)">一个字一个字地比，是 a 就记一个：b 不是，a 是，n 不是……</p>
-  <p class="abs say only3" style="left:96px;top:800px;width:960px;color:var(--paper)">一共碰到 3 个 a，输出 3。</p>
-  <a class="ide step s3" style="left:96px;top:930px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+<section class="slide lay-walk" aria-label="例题：有几个 a" data-steps="3" data-at="3">
+  <h2 class="t">例题：数一数 a</h2>
+  <div class="editor"><div class="tab">count_a.py</div>
+<pre class="code" data-file="solutions/06_count_a.py" data-light="1-2:1 3-5:2 6:3"></pre></div>
+  <div class="turns">
+      <p class="say only1">输入 banana。计数前先准备 count = 0。</p>
+      <p class="say only2">一个字一个字地比，是 a 就记一个：b 不是，a 是，n 不是……</p>
+      <p class="say only3">一共碰到 3 个 a，输出 3。</p>
+    </div>
+  <a class="ide step s3">▶ 在 IDE 打开</a>
+  <div class="right">
     <div class="box step"><i style="width:190px">输入</i><b style="font-size:72px">banana</b></div>
     <div class="box step s2"><i style="width:190px">count</i><b style="font-size:72px">1, 2, 3</b></div>
     <div class="box out step s3"><i style="width:190px">输出</i><b style="font-size:72px">3</b></div>
@@ -179,7 +193,7 @@
 </section>
 
 <!-- your turn: count any character -->
-<section class="slide" aria-label="数任意一个字">
+<section class="slide lay-try" aria-label="数任意一个字">
   <div class="band r"><b>动手<br>改一改</b><span>要数的字不写死，先读进来。</span></div>
   <div class="turn">
     <h2 class="r d1">数一数这个字出现几次</h2>
@@ -187,18 +201,24 @@
     <div class="sheet r d2" style="display:grid;grid-template-columns:1.6fr 1fr"><div><small>依次输入两行</small><pre style="line-height:1.2;font-size:48px">a
 a cat and a dog</pre></div><div><small>输出</small><pre style="line-height:1.2">4</pre></div></div>
   </div>
-  <a class="ide r d3" data-code-file="starter/07_count_char.py" style="left:610px;top:830px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code-file="starter/07_count_char.py">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- strings cannot be changed in place -->
-<section class="slide dark" aria-label="字符串不能改" data-chapter="找错">
+<section class="slide dark lay-predict" aria-label="字符串不能改" data-chapter="找错">
   <h2 class="t r">字符串里的字不能直接换</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:50px"><div class="tab">change.py（只阅读）</div>
-<pre class="code"><span class="ln">word = <span class="s">"Python"</span></span><span class="ln">word[<span class="m">0</span>] = <span class="s">"J"</span></span></pre></div>
-  <div class="slip tilt r d2" style="left:1180px;top:230px;width:640px"><small>屏幕上</small><pre style="font-size:34px;white-space:pre-wrap">TypeError: 'str' object does not support item assignment</pre></div>
-  <p class="abs say r d3" style="left:96px;top:560px;width:1600px">列表的盒子能换，字符串的不能。想要一个新词，就拼一个新的字符串：</p>
-  <div class="editor r d3" style="left:96px;top:680px;width:1000px;--fs:50px"><div class="tab">new.py</div>
-<pre class="code"><span class="ln">new = <span class="s">"J"</span> + word[<span class="m">1</span>:]</span><span class="ln"><span class="f">print</span>(new)<span style="color:#77746b">    # Jython</span></span></pre></div>
+  <div class="editor r d1" style="--fs:46px"><div class="tab">change.py（只阅读）</div>
+<pre class="code">word = "Python"
+word[0] = "J"</pre></div>
+  <div class="answer">
+    <div class="slip tilt r d2" style="width:600px"><small>屏幕上</small><pre style="font-size:34px;white-space:pre-wrap">TypeError: 'str' object does not support item assignment</pre></div>
+  </div>
+  <div class="says r d3">
+    <p class="say" style="font-size:34px">列表的盒子能换，字符串的不能。想要一个新词，就拼一个新的字符串：</p>
+    <div class="editor" style="width:1000px;--fs:46px"><div class="tab">new.py</div>
+<pre class="code">new = "J" + word[1:]
+print(new)    # Jython</pre></div>
+  </div>
   <div class="foot"></div>
 </section>
 
@@ -216,23 +236,22 @@ a cat and a dog</pre></div><div><small>输出</small><pre style="line-height:1.2
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark" aria-label="找错：一个 a 也没数到">
+<section class="slide dark lay-ask" aria-label="找错：一个 a 也没数到">
   <h2 class="t r">找错：banana 里怎么一个 a 也没有？</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
+  <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="4" data-yes="找到了！大写 A 和小写 a 是两个不同的字，banana 里一个大写 A 也没有。改成小写 &quot;a&quot; 就对了。" data-no="这一行没问题。输出 0，说明一次也没比中，看看是拿什么在比。"><span class="ln">word = <span class="s">"banana"</span></span><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">for</span> ch <span class="k">in</span> word:</span><span class="ln">    <span class="k">if</span> ch == <span class="s">"A"</span>:</span><span class="ln">        count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(count)</span></pre></div>
-  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">应该输出 3，程序却输出 0。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="left:1220px;top:480px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="say r d2">应该输出 3，程序却输出 0。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section class="slide clay" aria-label="倒着念" data-chapter="挑战">
-  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
-  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">倒着念</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1000px">读入一行文字（可以有空格）。<br>把它倒过来输出：最后一个字在最前面，第一个字在最后面，<b>空格也要保留</b>。</p>
-  <div class="slip tilt2 r d3" style="right:110px;top:200px;width:560px"><small>输入</small><pre>上海自来水</pre><small style="margin-top:20px">输出</small><pre>水来自海上</pre></div>
-  <a class="ide r d3" data-code-file="starter/08_reverse.py" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
-  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+<section class="slide clay lay-notes challenge" aria-label="倒着念" data-chapter="挑战">
+  <p class="kicker r"># 自己挑战</p>
+  <h2 class="big r d1">倒着念</h2>
+  <p class="say r d2">读入一行文字（可以有空格）。<br>把它倒过来输出：最后一个字在最前面，第一个字在最后面，<b>空格也要保留</b>。</p>
+  <div class="slip tilt2 r d3" style="width:560px"><small>输入</small><pre>上海自来水</pre><small style="margin-top:20px">输出</small><pre>水来自海上</pre></div>
+  <div class="go r d3"><a class="ide" data-code-file="starter/08_reverse.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
 

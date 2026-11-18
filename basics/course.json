@@ -79,31 +79,36 @@
     "id": "12-string-basics",
     "tag": "LESSON 12",
     "title": "字符串基础",
-    "stage": "列表和字符串"
+    "stage": "列表和字符串",
+    "structured": true
   },
   {
     "id": "13-string-methods",
     "tag": "LESSON 13",
     "title": "字符串常用方法",
-    "stage": "列表和字符串"
+    "stage": "列表和字符串",
+    "structured": true
   },
   {
     "id": "14-functions",
     "tag": "LESSON 14",
     "title": "函数定义与调用",
-    "stage": "函数"
+    "stage": "函数",
+    "structured": true
   },
   {
     "id": "15-params-return",
     "tag": "LESSON 15",
     "title": "参数与返回值",
-    "stage": "函数"
+    "stage": "函数",
+    "structured": true
   },
   {
     "id": "16-math-functions",
     "tag": "LESSON 16",
     "title": "常用数学函数",
-    "stage": "函数"
+    "stage": "函数",
+    "structured": true
   },
   {
     "id": "17-dict-basics",

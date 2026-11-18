@@ -555,8 +555,10 @@ dialog p{color:var(--muted);font-size:15px}
 /* Several sentences that stay, one under another (sentences taking turns may be one of them). */
 .slide[class*=" lay-"] .says{display:flex;flex-direction:column;gap:24px}
 /* A part inside a cell (the right column, the answer, sentences taking turns) follows the cell, whatever place it has alone. */
-.slide[class*=" lay-"] :is(.right,.answer,.turns,.go)>:where(:not(.free)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
+.slide[class*=" lay-"] :is(.right,.answer,.turns,.says,.go)>:where(:not(.free)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
 .slide[class*=" lay-"] :is(.right,.answer,.turns,.go) :is(.crate,.slip,.ide,.live-out):where(:not(.free)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
+/* A comment in a code box the build coloured. */
+.slide[class*=" lay-"] .code .c{color:#77746b}
 /* The big question mark that stands where the answer will be. */
 .slide[class*=" lay-"] .qmark{font:800 400px/1 var(--code);color:var(--clay-soft)}
 /* A code box keeps its full height when the page is crowded (a grid would otherwise squeeze a box that hides its overflow). */
