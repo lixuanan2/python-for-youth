@@ -552,6 +552,13 @@ dialog p{color:var(--muted);font-size:15px}
 /* One of several sentences shown a step at a time: they share one place and take turns. */
 .slide[class*=" lay-"] .turns{display:grid}
 .slide[class*=" lay-"] .turns>*{grid-area:1/1}
+/* A part inside a cell (the right column, the answer, sentences taking turns) follows the cell, whatever place it has alone. */
+.slide[class*=" lay-"] :is(.right,.answer,.turns,.go)>:where(:not(.free)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
+.slide[class*=" lay-"] :is(.right,.answer,.turns,.go) :is(.crate,.slip,.ide,.live-out):where(:not(.free)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
+/* The big question mark that stands where the answer will be. */
+.slide[class*=" lay-"] .qmark{font:800 400px/1 var(--code);color:var(--clay-soft)}
+/* A code box keeps its full height when the page is crowded (a grid would otherwise squeeze a box that hides its overflow). */
+.slide[class*=" lay-"]>.editor{min-height:min-content}
 
 /* 1 cover: the lesson number, two big words joined by a line with a bit of code on it, the title and one sentence. */
 .lay-cover>.kicker{top:96px;font:400 36px var(--code);color:var(--muted)}
@@ -579,7 +586,7 @@ dialog p{color:var(--muted);font-size:15px}
 /* 3 walk: run through a program. Code on a dark column on the left with what each step does under it; on the right,
    what the program holds or shows (.right: variable boxes, output, a live yellow-box output, an algorithm demo).
    .wide and .narrow change the dark column from 1130px to 1230px or 1010px. */
-.lay-walk{--split:1130px;display:grid;grid-template-columns:calc(var(--split) - 170px) 1fr;grid-template-rows:auto auto 1fr;
+.lay-walk{--split:1130px;display:grid;grid-template-columns:calc(var(--split) - 170px) 1fr;grid-template-rows:max-content auto 1fr;
   grid-template-areas:"code right" "say right" "ide right";column-gap:154px;row-gap:40px;padding:200px 96px 90px;align-items:start;
   background:linear-gradient(90deg,var(--night) var(--split),var(--paper) var(--split))}
 .lay-walk.wide{--split:1230px}.lay-walk.narrow{--split:1010px}
@@ -591,18 +598,25 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
 .lay-walk>.foot{color:var(--ghost)}
 
-/* 4 predict: guess what a program does. Code on the left, the answer on the right (shown on step 2), a sentence under both. */
-.lay-predict{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"code answer" "say say" "ide ide";
+/* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
+   the IDE button at the bottom on the right. */
+.lay-predict{display:grid;grid-template-columns:1000px 1fr;grid-template-rows:max-content auto 1fr;grid-template-areas:"code answer" "say answer" "say ide";
   column-gap:100px;row-gap:50px;padding:220px 96px 120px;align-items:start}
 .lay-predict>.editor{grid-area:code;width:1000px}
 .lay-predict>.answer{grid-area:answer;padding-top:30px}
 .lay-predict>.answer.big{font:800 130px/1.3 var(--code);color:var(--clay)}
 .lay-predict>.say,.lay-predict>.turns{grid-area:say}
-.lay-predict>.ide{grid-area:ide;justify-self:start}
+.lay-predict>.answer.turns{grid-area:answer}
+.lay-predict>.answer.turns>*{justify-self:start;align-self:start}
+/* What the program shows, stacked: a box with the variable, then the screen, then maybe the IDE button. */
+.lay-predict>.answer:not(.turns,.big),.lay-predict>.answer.turns>div:not([class]){display:flex;flex-direction:column;align-items:flex-start;gap:50px}
+.lay-predict .crate{margin-top:92px}
+.lay-predict>.ide{grid-area:ide;justify-self:start;align-self:end}
 
 /* 5 columns: two or three things side by side or row by row (.vs, .steps3, .sheet3, .ledger, .later, .verbs), a sentence under them. */
 .lay-columns{display:flex;flex-direction:column;gap:64px;padding:240px 96px 180px}
 .lay-columns>.say,.lay-columns>.turns{margin-top:auto}
+.lay-columns>.ide{align-self:flex-start}
 .lay-columns .sheet3>div{grid-template-columns:var(--key,560px) 1fr}
 .lay-columns .ledger>div{grid-template-columns:var(--key,600px) var(--mid,460px) 1fr}
 /* A row that says something in words instead of code. */
@@ -653,21 +667,21 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- the problem -->
-<section id="page-2" class="slide clay" aria-label="及格还是不及格">
+<section id="page-2" class="slide clay lay-columns" aria-label="及格还是不及格">
   <h2 class="t r">同一个程序，不同的回答</h2>
-  <div class="verbs" style="top:250px">
+  <div class="verbs">
     <div class="r d1"><b>85</b><code>及格</code></div><em class="r d1">·</em>
     <div class="r d2"><b>59</b><code>继续加油</code></div><em class="r d2">·</em>
     <div class="r d3"><b>60</b><code>及格</code></div>
   </div>
-  <p class="abs say r d3" style="left:96px;right:96px;top:640px">到现在，程序每次都从第一行走到最后一行。<br>这节课让它先看一看数据，再决定走哪条路。</p>
+  <p class="say r d3">到现在，程序每次都从第一行走到最后一行。<br>这节课让它先看一看数据，再决定走哪条路。</p>
   <div class="foot"></div>
 </section>
 
 <!-- comparisons -->
-<section id="page-3" class="slide" aria-label="六种比较" data-chapter="比较">
+<section id="page-3" class="slide lay-columns" aria-label="六种比较" data-chapter="比较">
   <h2 class="t r">比一比，得到真或假</h2>
-  <div class="sheet3" style="top:200px">
+  <div class="sheet3">
     <div class="r d1"><code>&gt;   &lt;</code><span>大于、小于</span></div>
     <div class="r d1"><code>&gt;=  &lt;=</code><span>大于等于、小于等于，先写尖括号</span></div>
     <div class="r d2"><code>==</code><span>等于，两个等号连着写</span></div>
@@ -678,18 +692,18 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- = vs == -->
-<section id="page-4" class="slide" aria-label="一个等号和两个等号">
+<section id="page-4" class="slide lay-columns" aria-label="一个等号和两个等号">
   <h2 class="t r">一个等号，两个等号</h2>
   <div class="vs">
     <div class="r d1"><h3>一个 = 是放进去</h3><pre>score = <span style="color:var(--clay)">60</span></pre><p class="say">把 60 放进 score。</p></div>
     <div class="r d2"><h3>两个 == 是问一问</h3><pre>score <span style="color:var(--clay)">==</span> 60</pre><p class="say">score 等于 60 吗？</p></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:640px">写判断时最容易漏掉一个等号，写完可以再看一眼。</p>
+  <p class="say r d3">写判断时最容易漏掉一个等号，写完可以再看一眼。</p>
   <div class="foot"></div>
 </section>
 
 <!-- quiz: >= -->
-<section id="page-5" class="slide" aria-label="小测：5 大于等于 5">
+<section id="page-5" class="slide lay-ask" aria-label="小测：5 大于等于 5">
   <h2 class="t r">小测：print(5 &gt;= 5) 输出什么？</h2>
   <div class="quiz r d1" data-right="0">
     <button type="button" data-fb="答对了！&gt;= 是大于或等于，5 等于 5，条件成立。"><i>1</i>True</button>
@@ -702,47 +716,53 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- live comparisons: change the score -->
-<section id="page-6" class="slide" aria-label="换个分数比一比">
-  <div class="night" style="width:1010px"></div>
-  <h2 class="t" style="color:var(--paper)">换个分数比一比</h2>
-  <div class="editor" style="left:96px;top:230px;width:830px;--fs:50px"><div class="tab">score.py</div>
+<section id="page-6" class="slide lay-walk narrow" aria-label="换个分数比一比">
+  <h2 class="t">换个分数比一比</h2>
+  <div class="editor" style="--fs:52px"><div class="tab">score.py</div>
 <pre class="code"><span class="ln">score = <input class="slot" data-var="score" value="75" inputmode="numeric" autocomplete="off" aria-label="分数"></span><span class="ln"><span class="f">print</span>(score &gt;= <span class="m">60</span>)</span><span class="ln"><span class="f">print</span>(score == <span class="m">100</span>)</span><span class="ln"><span class="f">print</span>(score &lt; <span class="m">60</span>)</span></pre></div>
-  <p class="abs say" style="left:96px;top:715px;width:830px;color:var(--paper)">点黄色的分数，改完三个结果马上变。</p>
-  <a class="ide" style="left:96px;top:850px">▶ 带这个分数进 IDE</a>
-  <div class="live-out">
+  <p class="say">点黄色的分数，改完三个结果马上变。</p>
+  <a class="ide">▶ 带这个分数进 IDE</a>
+  <div class="right">
+    <div class="live-out">
     <div><i>第 2 行：大于等于 60 吗</i><b data-eval="score &gt;= 60">True</b></div>
     <div><i>第 3 行：等于 100 吗</i><b data-eval="score == 100">False</b></div>
     <div><i>第 4 行：小于 60 吗</i><b data-eval="score &lt; 60">False</b></div>
   </div>
-  <p class="abs say" style="left:1090px;top:780px;width:734px;font-size:38px">先猜再改：59 分呢？100 分呢？</p>
+    <p class="say" style="font-size:38px">先猜再改：59 分呢？100 分呢？</p>
+  </div>
   <div class="foot"></div>
 </section>
 
 <!-- if with trace -->
-<section id="page-7" class="slide dark" aria-label="if 的写法" data-steps="3" data-at="3" data-chapter="if">
+<section id="page-7" class="slide dark lay-predict" aria-label="if 的写法" data-steps="3" data-at="3" data-chapter="if">
   <h2 class="t">if：条件成立才做</h2>
-  <div class="editor" style="left:96px;top:230px;width:1080px;--fs:50px"><div class="tab">if.py</div>
+  <div class="editor" style="--fs:58px"><div class="tab">if.py</div>
 <pre class="code" data-stdin="50&#10;" data-file="solutions/01_if.py"><span class="ln l1">score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"考完了"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:690px;width:1080px">输入 50，放进 score。</p>
-  <p class="abs say only2" style="left:96px;top:690px;width:1080px">50 &gt;= 60 不成立，缩进的那一行被跳过。</p>
-  <p class="abs say only3" style="left:96px;top:690px;width:1080px">最后一行没有缩进，不归 if 管，总会运行。</p>
-  <div class="slip tilt step s3" style="left:1270px;top:300px"><small>屏幕上</small><pre>考完了</pre></div>
-  <p class="abs say" style="left:1260px;top:640px;right:96px;font-size:34px;color:var(--clay-soft)">if 这一行末尾有冒号。<br>属于它的行要缩进 4 个空格。</p>
-  <a class="ide step s3" style="left:96px;top:850px">▶ 在 IDE 打开</a>
+  <div class="answer">
+    <div class="slip tilt step s3"><small>屏幕上</small><pre>考完了</pre></div>
+    <p class="say" style="font-size:34px;color:var(--clay-soft)">if 这一行末尾有冒号。<br>属于它的行要缩进 4 个空格。</p>
+  </div>
+  <div class="turns">
+    <p class="say only1">输入 50，放进 score。</p>
+    <p class="say only2">50 &gt;= 60 不成立，缩进的那一行被跳过。</p>
+    <p class="say only3">最后一行没有缩进，不归 if 管，总会运行。</p>
+  </div>
+  <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="foot"></div>
 </section>
 
 <!-- if / else -->
-<section id="page-8" class="slide" aria-label="if 和 else" data-steps="3" data-at="3" data-chapter="else">
-  <div class="night" style="width:1230px"></div>
-  <h2 class="t" style="color:var(--paper)">else：否则走另一条路</h2>
-  <div class="editor" style="left:96px;top:230px;width:1040px;--fs:50px"><div class="tab">pass.py</div>
+<section id="page-8" class="slide lay-walk wide" aria-label="if 和 else" data-steps="3" data-at="3" data-chapter="else">
+  <h2 class="t">else：否则走另一条路</h2>
+  <div class="editor" style="--fs:52px"><div class="tab">pass.py</div>
 <pre class="code" data-stdin="59&#10;" data-file="solutions/02_pass.py"><span class="ln l1">score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln l3"><span class="k">else</span>:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"继续加油"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:766px;width:1040px;color:var(--paper)">输入 59，放进 score。</p>
-  <p class="abs say only2" style="left:96px;top:766px;width:1040px;color:var(--paper)">59 &gt;= 60 不成立，跳过 if 这一段。</p>
-  <p class="abs say only3" style="left:96px;top:766px;width:1040px;color:var(--paper)">走 else 这条路。两条路只会走一条。</p>
-  <a class="ide step s3" style="left:96px;top:880px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1310px;right:96px;top:170px">
+  <div class="turns">
+    <p class="say only1">输入 59，放进 score。</p>
+    <p class="say only2">59 &gt;= 60 不成立，跳过 if 这一段。</p>
+    <p class="say only3">走 else 这条路。两条路只会走一条。</p>
+  </div>
+  <a class="ide step s3">▶ 在 IDE 打开</a>
+  <div class="right">
     <div class="box step"><i style="width:160px">score</i><b>59</b></div>
     <div class="box step s2"><i style="width:160px">成立吗</i><b style="font-size:84px">False</b></div>
     <div class="box out step s3"><i style="width:160px">输出</i><b style="font-size:76px;line-height:1.5">继续加油</b></div>
@@ -750,77 +770,84 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: boundary -->
-<section id="page-9" class="slide" aria-label="小测：边界">
+<section id="page-9" class="slide lay-ask" aria-label="小测：边界">
   <h2 class="t r">小测：&gt;= 改成 &gt;，输入 60 输出什么？</h2>
-  <div class="quiz side r d1" data-right="1">
+  <div class="editor r d2" style="--fs:48px"><div class="tab">输入 60</div>
+<pre class="code"><span class="ln">score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln mod"><span class="k">if</span> score &gt; <span class="m">60</span>:<span class="orig">原来是 &gt;=</span></span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"继续加油"</span>)</span></pre></div>
+  <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="&gt; 不包含相等，60 &gt; 60 不成立。"><i>1</i>及格</button>
     <button type="button" data-fb="答对了！所以及格线要写 &gt;= 60。写完判断，一定要试一试边界上的数。"><i>2</i>继续加油</button>
   </div>
-  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
-  <div class="editor side r d2" style="--fs:44px"><div class="tab">输入 60</div>
-<pre class="code"><span class="ln">score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln mod"><span class="k">if</span> score &gt; <span class="m">60</span>:<span class="orig">原来是 &gt;=</span></span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"继续加油"</span>)</span></pre></div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- your turn -->
-<section id="page-10" class="slide" aria-label="判断奇偶">
+<section id="page-10" class="slide lay-try" aria-label="判断奇偶">
   <div class="band r"><b>动手<br>改一改</b><span>还记得吗？余数是 0 就是偶数。</span></div>
   <div class="turn">
     <h2 class="r d1">改成判断奇偶</h2>
     <p class="say r d1">读入一个整数，输出它是偶数还是奇数。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 7，输出</small><pre>奇数</pre></div><div><small>输入 0，输出</small><pre>偶数</pre></div></div>
   </div>
-  <a class="ide r d3" data-code="# 【改成判断奇偶】&#10;# 读入一个整数，输出它是偶数还是奇数。&#10;# 例如输入：7&#10;# 应该输出：奇数&#10;# 提示：还记得吗？余数是 0 就是偶数。&#10;# ↓ 在下面这段程序上改&#10;&#10;score = int(input())&#10;if score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;else:&#10;    print(&quot;继续加油&quot;)&#10;" style="left:610px;top:730px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【改成判断奇偶】&#10;# 读入一个整数，输出它是偶数还是奇数。&#10;# 例如输入：7&#10;# 应该输出：奇数&#10;# 提示：还记得吗？余数是 0 就是偶数。&#10;# ↓ 在下面这段程序上改&#10;&#10;score = int(input())&#10;if score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;else:&#10;    print(&quot;继续加油&quot;)&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- comparing text -->
-<section id="page-11" class="slide dark" aria-label="文字也能比较">
+<section id="page-11" class="slide dark lay-predict" aria-label="文字也能比较">
   <h2 class="t r">文字也能比较</h2>
-  <div class="editor r d1" style="left:96px;top:230px;width:1080px;--fs:50px"><div class="tab">secret.py</div>
+  <div class="editor r d1" style="--fs:58px"><div class="tab">secret.py</div>
 <pre class="code" data-file="solutions/04_secret.py"><span class="ln">word = <span class="f">input</span>()</span><span class="ln"><span class="k">if</span> word == <span class="s">"Python"</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"暗号正确"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"再想想"</span>)</span></pre></div>
-  <p class="abs say r d2" style="left:1270px;top:240px;right:96px">两段文字一模一样才算相等。<br>python 和 Python 大小写不同，就不相等。</p>
-  <a class="ide r d3" style="left:1270px;top:560px">▶ 在 IDE 试暗号</a>
+  <div class="answer">
+    <p class="say r d2">两段文字一模一样才算相等。<br>python 和 Python 大小写不同，就不相等。</p>
+    <a class="ide r d3">▶ 在 IDE 试暗号</a>
+  </div>
   <div class="foot"></div>
 </section>
 
 <!-- elif -->
-<section id="page-12" class="slide" aria-label="elif 多分支" data-steps="3" data-at="3" data-chapter="elif">
-  <div class="night" style="width:1230px"></div>
-  <h2 class="t" style="color:var(--paper)">elif：不止两条路</h2>
-  <div class="editor" style="left:96px;top:210px;width:1040px;--fs:44px"><div class="tab">grade.py</div>
+<section id="page-12" class="slide lay-walk wide" aria-label="elif 多分支" data-steps="3" data-at="3" data-chapter="elif">
+  <h2 class="t">elif：不止两条路</h2>
+  <div class="editor" style="--fs:51px"><div class="tab">grade.py</div>
 <pre class="code" data-stdin="75&#10;" data-file="solutions/05_grade.py"><span class="ln">score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1"><span class="k">if</span> score &gt;= <span class="m">90</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"优秀"</span>)</span><span class="ln l2"><span class="k">elif</span> score &gt;= <span class="m">60</span>:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"继续加油"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:846px;width:1040px;color:var(--paper)">输入 75。先问：75 &gt;= 90 吗？不是，往下看。</p>
-  <p class="abs say only2" style="left:96px;top:846px;width:1040px;color:var(--paper)">再问：75 &gt;= 60 吗？是，走这条路。</p>
-  <p class="abs say only3" style="left:96px;top:846px;width:1040px;color:var(--paper)">输出及格，后面的路全部跳过。</p>
-  <div class="abs" style="left:1310px;right:96px;top:170px">
+  <div class="turns">
+    <p class="say only1">输入 75。先问：75 &gt;= 90 吗？不是，往下看。</p>
+    <p class="say only2">再问：75 &gt;= 60 吗？是，走这条路。</p>
+    <p class="say only3">输出及格，后面的路全部跳过。</p>
+  </div>
+  <div class="right">
     <div class="box step"><i style="width:190px;white-space:nowrap">&gt;= 90</i><b style="font-size:84px">False</b></div>
     <div class="box step s2"><i style="width:190px;white-space:nowrap">&gt;= 60</i><b style="font-size:84px">True</b></div>
     <div class="box out step s3"><i style="width:190px">输出</i><b style="font-size:76px;line-height:1.5">及格</b></div>
+    <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
-  <a class="ide step s3" style="left:1310px;top:740px">▶ 在 IDE 打开</a>
 </section>
 
 <!-- predict: only one branch, then elif becomes if -->
-<section id="page-13" class="slide dark" aria-label="猜一猜：elif 换成 if" data-steps="4" data-at="4">
+<section id="page-13" class="slide dark lay-predict" aria-label="猜一猜：elif 换成 if" data-steps="4" data-at="4">
   <h2 class="t">猜一猜：x = 10，输出几行？</h2>
-  <div class="editor" style="left:96px;top:220px;width:880px;--fs:44px"><div class="tab">branch.py</div>
+  <div class="editor" style="--fs:47px"><div class="tab">branch.py</div>
 <pre class="code was" data-file="solutions/06_one_way.py"><span class="ln">x = <span class="m">10</span></span><span class="ln"><span class="k">if</span> x &gt; <span class="m">5</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 5"</span>)</span><span class="ln"><span class="k">elif</span> x &gt; <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 8"</span>)</span></pre>
 <pre class="code" data-file="solutions/06b_two_ifs.py" data-change="3"><span class="ln">x = <span class="m">10</span></span><span class="ln"><span class="k">if</span> x &gt; <span class="m">5</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 5"</span>)</span><span class="ln"><span class="k">if</span> x &gt; <span class="m">8</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"大于 8"</span>)</span></pre></div>
-  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
-  <p class="abs only3" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
-  <div class="slip tilt only2" style="left:1100px;top:260px"><small>屏幕上，只有一行</small><pre>大于 5</pre></div>
-  <div class="slip tilt step s4" style="left:1100px;top:260px"><small>屏幕上，有两行</small><pre>大于 5
+  <div class="answer turns">
+    <p class="qmark only1">?</p>
+    <p class="qmark only3">?</p>
+    <div class="slip tilt only2"><small>屏幕上，只有一行</small><pre>大于 5</pre></div>
+    <div class="slip tilt step s4"><small>屏幕上，有两行</small><pre>大于 5
 大于 8</pre></div>
-  <p class="abs say only1" style="left:96px;top:760px">10 既大于 5，也大于 8。先想一想。</p>
-  <p class="abs say only2" style="left:96px;top:760px;width:1600px">虽然两个条件都成立，但第一条路走了，后面的 elif 就不看了。</p>
-  <p class="abs say only3" style="left:96px;top:760px;width:1600px">把 elif 换成 if，只差一个词。这次输出几行？</p>
-  <p class="abs say step s4" style="left:96px;top:760px;width:1600px">两个 if 是两次判断，各问各的，输出两行。<br>elif 属于同一次判断，前面走了就不看它，只输出一行。</p>
-  <a class="ide step s4" style="left:96px;top:880px">▶ 在 IDE 打开</a>
+  </div>
+  <div class="turns">
+    <p class="say only1">10 既大于 5，也大于 8。先想一想。</p>
+    <p class="say only2">虽然两个条件都成立，但第一条路走了，后面的 elif 就不看了。</p>
+    <p class="say only3">把 elif 换成 if，只差一个词。这次输出几行？</p>
+    <p class="say step s4">两个 if 是两次判断，各问各的，输出两行。<br>elif 属于同一次判断，前面走了就不看它，只输出一行。</p>
+  </div>
+  <a class="ide step s4">▶ 在 IDE 打开</a>
   <div class="foot"></div>
 </section>
 
 <!-- your turn -->
-<section id="page-14" class="slide" aria-label="再加一档">
+<section id="page-14" class="slide lay-try" aria-label="再加一档">
   <div class="band r"><b>动手<br>改一改</b><span>elif 可以写很多个，想想新的一档放在哪。</span></div>
   <div class="turn">
     <h2 class="r d1">再加一档“良好”</h2>
@@ -828,7 +855,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 75，输出</small><pre>良好</pre></div><div><small>输入 74，输出</small><pre>及格</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">写完用 59、60、74、75、89、90 各试一次，这些数都紧贴分界线。</p>
   </div>
-  <a class="ide r d3" data-code="# 【再加一档“良好”】&#10;# 分数是 0 到 100 的整数，75 分到 89 分输出良好。&#10;# 例如输入：75&#10;# 应该输出：良好&#10;# 提示：elif 可以写很多个，想想新的一档放在哪。&#10;# ↓ 在下面这段程序上改&#10;&#10;score = int(input())&#10;if score &gt;= 90:&#10;    print(&quot;优秀&quot;)&#10;elif score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;else:&#10;    print(&quot;继续加油&quot;)&#10;" style="left:610px;top:750px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【再加一档“良好”】&#10;# 分数是 0 到 100 的整数，75 分到 89 分输出良好。&#10;# 例如输入：75&#10;# 应该输出：良好&#10;# 提示：elif 可以写很多个，想想新的一档放在哪。&#10;# ↓ 在下面这段程序上改&#10;&#10;score = int(input())&#10;if score &gt;= 90:&#10;    print(&quot;优秀&quot;)&#10;elif score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;else:&#10;    print(&quot;继续加油&quot;)&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -845,23 +872,22 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-16" data-ide="score = 95&#10;if score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;elif score &gt;= 90:&#10;    print(&quot;优秀&quot;)" class="slide dark" aria-label="找错：优秀去哪了">
+<section id="page-16" data-ide="score = 95&#10;if score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;elif score &gt;= 90:&#10;    print(&quot;优秀&quot;)" class="slide dark lay-ask" aria-label="找错：优秀去哪了">
   <h2 class="t r">找错：优秀去哪了？</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:1040px;--fs:46px"><div class="tab">bug.py（只阅读）</div>
+  <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="1" data-yes="对！95 &gt;= 60 成立，程序从这里走了，后面 90 分的判断轮不到。两段要换位置，范围小的条件写在前面。" data-no="再跟着程序走一遍：95 &gt;= 60 成立吗？"><span class="ln"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">elif</span> score &gt;= <span class="m">90</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"优秀"</span>)</span></pre></div>
-  <p class="abs say r d2" style="left:1220px;top:240px;right:96px">输入 95，程序却输出及格，也没有报错。<br>95 分走进了哪条路？点那条路的条件。</p>
-  <p class="fb" style="top:690px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="say r d2">输入 95，程序却输出及格，也没有报错。<br>95 分走进了哪条路？点那条路的条件。</p>
+  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-17" class="slide clay" aria-label="快递运费" data-chapter="挑战">
-  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
-  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">快递<br>运费</h2>
-  <p class="abs say r d2" style="left:96px;top:620px;width:960px">读入重量（整数，单位公斤）。前 3 公斤一共 10 元，<b>超过 3 公斤的部分</b>每公斤加 2 元。</p>
-  <div class="slip tilt2 r d3" style="right:110px;top:190px;width:600px"><small>输入</small><pre>5</pre><small style="margin-top:26px">输出</small><pre>运费 14 元</pre></div>
-  <a class="ide r d3" data-code="# 【快递运费】&#10;# 读入重量（整数，单位公斤）。前 3 公斤一共 10 元，&#10;#   超过 3 公斤的部分每公斤加 2 元。&#10;# 例如输入：5&#10;# 应该输出：运费 14 元&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
-  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+<section id="page-17" class="slide clay lay-notes challenge" aria-label="快递运费" data-chapter="挑战">
+  <p class="kicker r"># 自己挑战</p>
+  <h2 class="big r d1">快递<br>运费</h2>
+  <p class="say r d2">读入重量（整数，单位公斤）。前 3 公斤一共 10 元，<b>超过 3 公斤的部分</b>每公斤加 2 元。</p>
+  <div class="slip tilt2 r d3"><small>输入</small><pre>5</pre><small style="margin-top:26px">输出</small><pre>运费 14 元</pre></div>
+  <div class="go r d3"><a class="ide" data-code="# 【快递运费】&#10;# 读入重量（整数，单位公斤）。前 3 公斤一共 10 元，&#10;#   超过 3 公斤的部分每公斤加 2 元。&#10;# 例如输入：5&#10;# 应该输出：运费 14 元&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
 

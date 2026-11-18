@@ -87,7 +87,7 @@
 | `lay-cover` 封面 | 每节课第一页 | `.kicker` 课号（`# LESSON 15`）、`.cover-row` 两个大字和中间的线、`.headline` 标题、`.say` 一句话 |
 | `lay-notes` 便签 | 开头讲故事的一排便签；加 `.challenge` 是挑战题 | 便签页：`h2.t` 标题、`.notes` 里放 2 到 6 张 `.slip`、`.say` 一段话。挑战题：`.kicker`（`# 自己挑战`）、`h2.big` 大标题、`.say` 题目、一张 `.slip` 写输入和输出（在右边）、`.go` 里放 IDE 按钮和一句话 |
 | `lay-walk` 代码走一遍 | 左边深色栏里讲一段程序，右边看变量和输出 | `h2.t`、`.editor` 代码、`.say` 或 `.turns`（每一步一句）、`a.ide`、`.right` 右栏（变量框 `.box`、输出、黄色框的 `.live-out`、算法演示，也可以把讲解放进来）。深色栏默认宽 1130，加 `.wide` 是 1230，加 `.narrow` 是 1010 |
-| `lay-predict` 猜一猜 | 先猜程序输出什么，翻一步看答案 | `h2.t`、`.editor` 代码（左）、`.answer` 答案（右，一般加 `step s2`；大数字加 `.big`）、`.say` 或 `.turns`、可选的 `a.ide` |
+| `lay-predict` 猜一猜 | 先猜程序输出什么，翻一步看答案 | `h2.t`、`.editor` 代码（左）、`.say` 或 `.turns`（代码下面）、`.answer` 答案（右；一个大数字写 `<p class="answer big step s2">`，变量框和输出便签放进 `<div class="answer">` 从上往下排；先放大问号 `<p class="qmark only1">?</p>`、翻一步换成答案的，写 `<div class="answer turns">`）、可选的 `a.ide`（右下角） |
 | `lay-columns` 分栏 | 左右对比、三步、速查卡、三种常见错误、后面再学 | `h2.t`、可选的 `.note`（右上角一行小字）、一个分栏组件（`.vs`、`.steps3`、`.sheet3`、`.ledger`、`.later`、`.verbs`）、最下面的 `.say`。速查卡和三种常见错误的第一栏宽度写在组件上：`style="--key:780px"`，三种常见错误的第二栏用 `--mid` |
 | `lay-try` 动手改一改 | 琥珀色带子的动手页 | `.band` 左边的带子、`.turn` 题目和例子、`a.ide` |
 | `lay-ask` 提问 | 小测、找错 | 有代码：`.editor` 在左，`.quiz`（选项竖排）或找错的 `.say` 在右，`.fb` 在它们下面。没有代码：`.quiz` 四个选项两列，`.fb` 在下面 |
@@ -128,6 +128,10 @@
 - 改过的一行：`data-mod="行:说明"`，比如 `data-mod="2:原来是 >="`，这一行标黄，行尾是灰色的说明。几行用 `|` 隔开。
 - 两种代码框照旧手写颜色：找错题（`pre.code.pick`），故意写错的地方不能被上成对的颜色；放了黄色框（`input.slot`）的代码。
 - `data-file`、`data-lines`（只摘几行）、`data-stdin`、`data-change` 照旧。
+
+放进格子（`.right`、`.answer`、`.turns`、`.go`）的变量框、便签、按钮不写位置，在格子里从上往下排。
+
+走一遍和猜一猜的代码放在讲解上面，构建按最长的那句讲解留出位置，再定代码的字号，讲解很长时代码会变小。代码要更大，就把讲解写短，或者给讲解写 `style="font-size:34px"`、给 `.editor` 写 `--fs`。
 
 **放不进版式的页**
 

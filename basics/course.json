@@ -9,31 +9,36 @@
     "id": "02-variables",
     "tag": "LESSON 02",
     "title": "变量与数据类型",
-    "stage": "基础"
+    "stage": "基础",
+    "structured": true
   },
   {
     "id": "03-arithmetic",
     "tag": "LESSON 03",
     "title": "算术运算",
-    "stage": "基础"
+    "stage": "基础",
+    "structured": true
   },
   {
     "id": "04-conditions",
     "tag": "LESSON 04",
     "title": "条件判断",
-    "stage": "判断"
+    "stage": "判断",
+    "structured": true
   },
   {
     "id": "05-logic",
     "tag": "LESSON 05",
     "title": "逻辑运算",
-    "stage": "判断"
+    "stage": "判断",
+    "structured": true
   },
   {
     "id": "06-for-loop",
     "tag": "LESSON 06",
     "title": "for 循环",
-    "stage": "循环"
+    "stage": "循环",
+    "structured": true
   },
   {
     "id": "07-while-loop",
