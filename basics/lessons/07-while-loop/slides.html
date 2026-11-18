@@ -138,7 +138,7 @@ while i &lt;= n:
 </section>
 
 <!-- infinite loop: read only, and the quick IDE button carries the fixed program -->
-<section class="slide dark lay-predict under" aria-label="停不下来的循环" data-chapter="死循环">
+<section class="slide dark lay-predict" aria-label="停不下来的循环" data-chapter="死循环" data-steps="3" data-at="3">
   <h2 class="t r">忘了更新，就停不下来</h2>
   <div class="editor r d1"><div class="tab">只阅读，不要运行</div>
 <pre class="code" data-full="i = 1&#10;while i &lt;= 3:&#10;    print(i)&#10;    i = i + 1">i = 1
@@ -152,7 +152,10 @@ while i &lt;= 3:
   </div>
   <div class="says r d3">
     <p class="say">i 一直是 1，条件一直成立，程序就停不下来了。这叫<b>死循环</b>。</p>
-    <p class="say">万一遇到了：IDE 会卡住，点什么都没反应。按 F5 刷新网页，代码回到刚带进来的样子，自己改过的要重新改。<br>运行之前问问自己：每一遍哪个值变了？这样变下去，条件最后会不成立吗？</p>
+    <div class="turns">
+      <p class="say only2">万一遇到了：IDE 会卡住，点什么都没反应。按 F5 刷新网页，代码回到刚带进来的样子，自己改过的要重新改。</p>
+      <p class="say step s3">运行之前问问自己：每一遍哪个值变了？这样变下去，条件最后会不成立吗？</p>
+    </div>
   </div>
   <div class="foot"></div>
 </section>

@@ -564,6 +564,9 @@ dialog p{color:var(--muted);font-size:15px}
 /* A code box keeps its full height when the page is crowded (a grid would otherwise squeeze a box that hides its overflow). */
 .slide[class*=" lay-"]>.editor{min-height:min-content}
 
+/* The code column of predict and ask is a variable: build.py sets it from site.json "code_room" for a course whose
+   programs need more room. */
+
 /* 1 cover: the lesson number, two big words joined by a line with a bit of code on it, the title and one sentence. */
 .lay-cover>.kicker{top:96px;font:400 36px var(--code);color:var(--muted)}
 .lay-cover>.cover-row{position:absolute;left:96px;right:96px;top:290px}
@@ -604,9 +607,9 @@ dialog p{color:var(--muted);font-size:15px}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
    the IDE button at the bottom on the right. */
-.lay-predict{display:grid;grid-template-columns:1000px 1fr;grid-template-rows:max-content auto 1fr;grid-template-areas:"code answer" "say answer" "say ide";
+.lay-predict{display:grid;grid-template-columns:var(--predict-code,1000px) 1fr;grid-template-rows:max-content auto 1fr;grid-template-areas:"code answer" "say answer" "say ide";
   column-gap:100px;row-gap:50px;padding:220px 96px 120px;align-items:start}
-.lay-predict>.editor{grid-area:code;width:1000px}
+.lay-predict>.editor{grid-area:code;width:var(--predict-code,1000px)}
 .lay-predict>.answer{grid-area:answer;padding-top:30px}
 .lay-predict>.answer.big{font:800 130px/1.3 var(--code);color:var(--clay)}
 .lay-predict>.say,.lay-predict>.turns,.lay-predict>.says{grid-area:say}
@@ -616,9 +619,8 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-predict>.answer:not(.turns,.big),.lay-predict>.answer.turns>div:not([class]){display:flex;flex-direction:column;align-items:flex-start;gap:50px}
 .lay-predict .crate{margin-top:92px}
 .lay-predict>.ide{grid-area:ide;justify-self:start;align-self:end}
-/* .under: long sentences go across the page under both the code and the answer, the IDE button under them. */
-.lay-predict.under{grid-template-areas:"code answer" "say say" "ide ide"}
-.lay-predict.under>.ide{align-self:start}
+/* An error box (.tb) under the code takes the sentence's place. */
+.lay-predict>.tb{grid-area:say;width:auto}
 
 /* 5 columns: two or three things side by side or row by row (.vs, .steps3, .sheet3, .ledger, .later, .verbs), a sentence under them. */
 .lay-columns{display:flex;flex-direction:column;gap:64px;padding:240px 96px 180px}
@@ -640,8 +642,8 @@ dialog p{color:var(--muted);font-size:15px}
    has what went wrong on the right instead of choices. */
 .lay-ask{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto 1fr;grid-template-areas:"code pick" "code fb";
   column-gap:64px;row-gap:40px;padding:220px 96px 120px;align-items:start}
-.lay-ask>.editor{grid-area:code;width:800px}
-.lay-ask:has(.pick)>.editor{width:1040px}
+.lay-ask>.editor{grid-area:code;width:var(--ask-code,800px)}
+.lay-ask:has(.pick)>.editor{width:var(--ask-bug-code,1040px)}
 .lay-ask>.quiz,.lay-ask>.say{grid-area:pick}
 .lay-ask>.editor~.quiz{grid-template-columns:1fr;gap:16px}
 .lay-ask>.fb{grid-area:fb}
@@ -663,6 +665,7 @@ dialog p{color:var(--muted);font-size:15px}
    its parts keep their own left/top. A page with much more or much less text than usual keeps its layout and changes
    a size in its own style (a font-size, a width, --fs for code). */
 
+
 :root{--lesson:"第 21 课 随机数与小游戏"}
 </style>
 </head>
@@ -678,23 +681,24 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- the problem -->
-<section id="page-2" class="slide clay" aria-label="每次都一样不好玩">
+<section id="page-2" class="slide clay lay-notes" aria-label="每次都一样不好玩">
   <h2 class="t r">每次都一样，就不好玩了</h2>
-  <div class="slip r d1" style="left:96px;top:290px;width:520px"><small style="font-size:34px">第 7 课的猜数字</small><pre style="font-size:52px">secret = 7</pre></div>
-  <div class="slip tilt r d2" style="left:700px;top:290px;width:560px"><small style="font-size:34px">玩过一次就知道答案</small><pre style="font-size:52px">一猜就中</pre></div>
-  <p class="abs say r d3" style="left:96px;right:96px;top:640px">游戏要有意外：骰子掷出几点、抽到哪张签、电脑出什么，事先谁也不知道。<br>Python 有一盒叫 random 的工具，能帮程序“随便挑一个”。</p>
+  <div class="notes">
+    <div class="slip r d1"><small style="font-size:34px">第 7 课的猜数字</small><pre style="font-size:52px">secret = 7</pre></div>
+    <div class="slip tilt r d2"><small style="font-size:34px">玩过一次就知道答案</small><pre style="font-size:52px">一猜就中</pre></div>
+  </div>
+  <p class="say r d3">游戏要有意外：骰子掷出几点、抽到哪张签、电脑出什么，事先谁也不知道。<br>Python 有一盒叫 random 的工具，能帮程序“随便挑一个”。</p>
   <div class="foot"></div>
 </section>
 
 <!-- randint -->
-<section id="page-3" class="slide" aria-label="randint 掷骰子" data-chapter="随机">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">randint：掷骰子</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:48px"><div class="tab">dice.py</div>
+<section id="page-3" class="slide lay-walk" aria-label="randint 掷骰子" data-chapter="随机">
+  <h2 class="t">randint：掷骰子</h2>
+  <div class="editor" style="--fs:49px"><div class="tab">dice.py</div>
 <pre class="code"><span class="ln"><span class="k">import</span> random</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">6</span>))</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">6</span>))</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">6</span>))</span></pre></div>
-  <p class="abs say" style="left:96px;top:690px;width:960px;color:var(--paper)">random 是“随机”，先 import 借来。<br>randint(1, 6) 从 1 到 6 里随机挑一个整数。</p>
-  <a class="ide" style="left:96px;top:880px">▶ 在 IDE 多运行几次</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+  <p class="say">random 是“随机”，先 import 借来。<br>randint(1, 6) 从 1 到 6 里随机挑一个整数。</p>
+  <a class="ide">▶ 在 IDE 多运行几次</a>
+  <div class="right">
     <p class="say" style="font-size:36px;color:var(--muted)">每次运行都不一样，比如：</p>
     <p style="font:800 96px/1.3 var(--code);margin-top:20px">4<br>1<br>6</p>
     <p class="say" style="font-size:36px;color:var(--muted);margin-top:20px">你运行出来的多半和这里不同，这才对。</p>
@@ -702,33 +706,34 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- predict: both ends -->
-<section id="page-4" class="slide dark" aria-label="猜一猜：两头取得到吗" data-steps="2" data-at="2">
+<section id="page-4" class="slide dark lay-columns" aria-label="猜一猜：两头取得到吗" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：randint(1, 6) 能掷出 6 吗？</h2>
-  <div class="vs" style="top:220px">
+  <div class="vs">
     <div><h3>range(1, 6)</h3><pre style="font-size:60px">1 2 3 4 5</pre><p class="res step s2" style="font-size:60px;color:var(--clay-soft)">没有 6</p></div>
     <div><h3>randint(1, 6)</h3><pre style="font-size:60px">1 到 6 里挑</pre><p class="res step s2" style="font-size:60px;color:var(--clay-soft)">6 也可能</p></div>
   </div>
-  <p class="abs say only1" style="left:96px;top:700px;width:1728px">第 6 课学过，range 不含终点。randint 也一样吗？</p>
-  <p class="abs say step s2" style="left:96px;top:700px;width:1728px">不一样。randint 两头都算：1 和 6 都可能出现，正好是一颗骰子。<br>range 不含终点，randint 含终点，这两个最容易记混。</p>
+  <div class="turns">
+      <p class="say only1">第 6 课学过，range 不含终点。randint 也一样吗？</p>
+      <p class="say step s2">不一样。randint 两头都算：1 和 6 都可能出现，正好是一颗骰子。<br>range 不含终点，randint 含终点，这两个最容易记混。</p>
+    </div>
   <div class="foot"></div>
 </section>
 
 <!-- choice -->
-<section id="page-5" class="slide" aria-label="choice 抽一个">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">choice：从列表里抽一个</h2>
-  <div class="editor" style="left:96px;top:200px;width:1010px;--fs:44px"><div class="tab">draw.py</div>
+<section id="page-5" class="slide lay-walk" aria-label="choice 抽一个">
+  <h2 class="t">choice：从列表里抽一个</h2>
+  <div class="editor" style="--fs:44px"><div class="tab">draw.py</div>
 <pre class="code"><span class="ln"><span class="k">import</span> random</span><span class="ln">names = [<span class="s">"小明"</span>, <span class="s">"小红"</span>, <span class="s">"小刚"</span>]</span><span class="ln">pick = random.<span class="f">choice</span>(names)</span><span class="ln"><span class="f">print</span>(pick, <span class="s">"来回答"</span>)</span></pre></div>
-  <p class="abs say" style="left:96px;top:660px;width:960px;color:var(--paper)">choice 的意思是“挑选”。括号里放一个列表，它随机抽出其中一个。<br>抽签、点名、电脑出拳，都用它。</p>
-  <a class="ide" style="left:96px;top:870px">▶ 在 IDE 抽几次</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+  <p class="say">choice 的意思是“挑选”。括号里放一个列表，它随机抽出其中一个。<br>抽签、点名、电脑出拳，都用它。</p>
+  <a class="ide">▶ 在 IDE 抽几次</a>
+  <div class="right">
     <p class="say" style="font-size:36px;color:var(--muted)">可能是：</p>
     <p style="font:800 72px/1.4 var(--text);margin-top:20px">小红 来回答</p>
   </div>
 </section>
 
 <!-- quiz -->
-<section id="page-6" class="slide" aria-label="小测：可能是几">
+<section id="page-6" class="slide lay-ask" aria-label="小测：可能是几">
   <h2 class="t r">小测：random.randint(1, 3) 可能是哪些数？</h2>
   <div class="quiz r d1" data-right="2">
     <button type="button" data-fb="randint 不会出 0，它从第一个数开始。"><i>1</i>0、1、2</button>
@@ -741,35 +746,39 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- seed -->
-<section id="page-7" class="slide" aria-label="seed 种子" data-steps="2" data-at="2" data-chapter="种子">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">seed：让随机可以重来</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:46px"><div class="tab">seed.py</div>
+<section id="page-7" class="slide lay-walk" aria-label="seed 种子" data-steps="2" data-at="2" data-chapter="种子">
+  <h2 class="t">seed：让随机可以重来</h2>
+  <div class="editor" style="--fs:46px"><div class="tab">seed.py</div>
 <pre class="code" data-file="solutions/01_seed.py"><span class="ln"><span class="k">import</span> random</span><span class="ln l1">random.<span class="f">seed</span>(<span class="m">7</span>)</span><span class="ln l2"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span><span class="ln l2"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:690px;width:960px;color:var(--paper)">seed 是“种子”。随机数是从种子一步一步算出来的，种子一样，后面挑出的数就一样。</p>
-  <p class="abs say only2" style="left:96px;top:690px;width:960px;color:var(--paper)">种子是 7，每次运行都先出 42、再出 20。全班用同一个种子，就能对答案。真玩游戏时，不写 seed。</p>
-  <a class="ide step s2" style="left:96px;top:880px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+  <div class="turns">
+      <p class="say only1">seed 是“种子”。随机数是从种子一步一步算出来的，种子一样，后面挑出的数就一样。</p>
+      <p class="say only2">种子是 7，每次运行都先出 42、再出 20。全班用同一个种子，就能对答案。真玩游戏时，不写 seed。</p>
+    </div>
+  <a class="ide step s2">▶ 在 IDE 打开</a>
+  <div class="right">
     <div class="box step"><i style="width:170px">种子</i><b style="font-size:84px">7</b></div>
     <div class="box out step s2"><i style="width:170px">每次都是</i><b style="font-size:72px">42、20</b></div>
   </div>
 </section>
 
 <!-- worked example: guess with a random secret -->
-<section id="page-8" class="slide" aria-label="例题：随机猜数字" data-steps="3" data-at="3" data-chapter="猜数字">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper);top:40px">例题：秘密数随机出</h2>
-  <div class="editor" style="left:96px;top:175px;width:960px;--fs:44px"><div class="tab">guess.py</div>
+<section id="page-8" class="slide lay-walk" aria-label="例题：随机猜数字" data-steps="3" data-at="3" data-chapter="猜数字">
+  <h2 class="t">例题：秘密数随机出</h2>
+  <div class="editor" style="--fs:38px"><div class="tab">guess.py</div>
 <pre class="code" data-file="solutions/02_guess.py"><span class="ln l1"><span class="k">import</span> random</span><span class="ln l1">random.<span class="f">seed</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l1">secret = random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>)</span><span class="ln l2">guess = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">while</span> guess != secret:</span><span class="ln l2">    <span class="k">if</span> guess &gt; secret:</span><span class="ln l2">        <span class="f">print</span>(<span class="s">"大了"</span>)</span><span class="ln l2">    <span class="k">else</span>:</span><span class="ln l2">        <span class="f">print</span>(<span class="s">"小了"</span>)</span><span class="ln l2">    guess = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l3"><span class="f">print</span>(<span class="s">"猜中了！"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:1210px;right:96px;top:170px;font-size:34px">第一行读入种子 7，秘密数就是 42。换个种子，秘密数就变了。</p>
-  <p class="abs say only2" style="left:1210px;right:96px;top:170px;font-size:34px">后面和第 7 课一样：猜 50 说大了，猜 25 说小了。</p>
-  <p class="abs say only3" style="left:1210px;right:96px;top:170px;font-size:34px">猜到 42 就停下。课后自己玩，把第 2 行删掉，每次都不一样。</p>
-  <div class="abs step s2" style="left:1210px;right:96px;top:470px;font:400 48px/1.5 var(--code);color:var(--clay)">大了<br>小了<br><span class="step s3">猜中了！</span></div>
-  <a class="ide step s3" style="left:1210px;top:900px">▶ 在 IDE 打开</a>
+  <div class="right">
+    <div class="turns">
+      <p class="say only1" style="font-size:34px">第一行读入种子 7，秘密数就是 42。换个种子，秘密数就变了。</p>
+      <p class="say only2" style="font-size:34px">后面和第 7 课一样：猜 50 说大了，猜 25 说小了。</p>
+      <p class="say only3" style="font-size:34px">猜到 42 就停下。课后自己玩，把第 2 行删掉，每次都不一样。</p>
+    </div>
+    <div class="step s2" style="font:400 48px/1.5 var(--code);color:var(--clay)">大了<br>小了<br><span class="step s3">猜中了！</span></div>
+    <a class="ide step s3">▶ 在 IDE 打开</a>
+  </div>
 </section>
 
 <!-- your turn: count sixes -->
-<section id="page-9" class="slide" aria-label="数一数几个 6">
+<section id="page-9" class="slide lay-try" aria-label="数一数几个 6">
   <div class="band r"><b>动手<br>改一改</b><span>不猜了，用循环掷很多次，数一数。</span></div>
   <div class="turn">
     <h2 class="r d1">掷 n 次，有几个 6</h2>
@@ -777,21 +786,21 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>种子 1，掷 10 次</small><pre>1</pre></div><div><small>种子 3，掷 600 次</small><pre>95</pre></div><div><small>掷 0 次</small><pre>0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">掷 600 次，6 大约出现 100 次。</p>
   </div>
-  <a class="ide r d3" data-code="# 【掷 n 次，有几个 6】&#10;# 第一行读入种子，第二行读入次数 n。用这个种子掷 n 次骰子，&#10;#   输出一共掷出了几次 6。&#10;# 例如输入（每个一行）：1、10&#10;# 应该输出：1&#10;# 提示：不猜了，用循环掷很多次，数一数。&#10;# ↓ 在下面这段程序上改&#10;&#10;import random&#10;random.seed(int(input()))&#10;secret = random.randint(1, 100)&#10;guess = int(input())&#10;while guess != secret:&#10;    if guess &gt; secret:&#10;        print(&quot;大了&quot;)&#10;    else:&#10;        print(&quot;小了&quot;)&#10;    guess = int(input())&#10;print(&quot;猜中了！&quot;)&#10;" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【掷 n 次，有几个 6】&#10;# 第一行读入种子，第二行读入次数 n。用这个种子掷 n 次骰子，&#10;#   输出一共掷出了几次 6。&#10;# 例如输入（每个一行）：1、10&#10;# 应该输出：1&#10;# 提示：不猜了，用循环掷很多次，数一数。&#10;# ↓ 在下面这段程序上改&#10;&#10;import random&#10;random.seed(int(input()))&#10;secret = random.randint(1, 100)&#10;guess = int(input())&#10;while guess != secret:&#10;    if guess &gt; secret:&#10;        print(&quot;大了&quot;)&#10;    else:&#10;        print(&quot;小了&quot;)&#10;    guess = int(input())&#10;print(&quot;猜中了！&quot;)&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: same seed -->
-<section id="page-10" class="slide" aria-label="小测：同一个种子">
+<section id="page-10" class="slide lay-ask" aria-label="小测：同一个种子">
   <h2 class="t r">小测：种子都是 7，运行两次，结果呢？</h2>
-  <div class="quiz side r d1" data-right="0">
+  <div class="editor r d2" style="--fs:37px"><div class="tab">运行两次</div>
+<pre class="code"><span class="ln"><span class="k">import</span> random</span><span class="ln">random.<span class="f">seed</span>(<span class="m">7</span>)</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span></pre></div>
+  <div class="quiz r d1" data-right="0">
     <button type="button" data-fb="答对了！种子一样，挑出的数就一样。"><i>1</i>一定一样</button>
     <button type="button" data-fb="设了一样的种子，就不会不一样。"><i>2</i>一定不一样</button>
     <button type="button" data-fb="种子一样，结果是定好的，不用碰运气。"><i>3</i>说不准</button>
     <button type="button" data-fb="seed 设种子不会报错。"><i>4</i>报错</button>
   </div>
-  <p class="fb side" data-empty="点一个答案，或按键盘数字键"></p>
-  <div class="editor side r d2" style="--fs:44px"><div class="tab">运行两次</div>
-<pre class="code"><span class="ln"><span class="k">import</span> random</span><span class="ln">random.<span class="f">seed</span>(<span class="m">7</span>)</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span></pre></div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
@@ -809,25 +818,24 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-12" class="slide dark" aria-label="找错：骰子掷出 0">
+<section id="page-12" class="slide dark lay-ask" aria-label="找错：骰子掷出 0">
   <h2 class="t r">找错：骰子怎么掷出了 0 点？</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:50px"><div class="tab">bug.py（只阅读）</div>
+  <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！randint 两头都算，从 0 开始就可能掷出 0。骰子是 1 到 6，写 randint(1, 6)。" data-no="这一行没问题。0 点是从哪里来的？看看随机的范围。"><span class="ln"><span class="k">import</span> random</span><span class="ln">point = random.<span class="f">randint</span>(<span class="m">0</span>, <span class="m">6</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"掷出了"</span>, point, <span class="s">"点"</span>)</span></pre></div>
-  <p class="abs say r d2" style="left:1200px;top:240px;right:96px">多运行几次，偶尔会出现“掷出了 0 点”。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="left:1200px;top:520px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="say r d2">多运行几次，偶尔会出现“掷出了 0 点”。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-13" class="slide clay" aria-label="石头剪刀布" data-chapter="挑战">
-  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
-  <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">石头剪刀布</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:960px">第一行读入种子，第二行读入你出的：石头、剪刀或布。电脑用 random.choice(["石头", "剪刀", "布"]) 出一个，<b>列表照这个顺序写</b>，结果才和样例一样。<br>先输出“电脑出 ……”，再输出你的结果：赢、输或平。石头赢剪刀，剪刀赢布，布赢石头。</p>
-  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:540px"><small>依次输入</small><pre>7
+<section id="page-13" class="slide clay lay-notes challenge" aria-label="石头剪刀布" data-chapter="挑战">
+  <p class="kicker r"># 自己挑战</p>
+  <h2 class="big r d1">石头剪刀布</h2>
+  <p class="say r d2">第一行读入种子，第二行读入你出的：石头、剪刀或布。电脑用 random.choice(["石头", "剪刀", "布"]) 出一个，<b>列表照这个顺序写</b>，结果才和样例一样。<br>先输出“电脑出 ……”，再输出你的结果：赢、输或平。石头赢剪刀，剪刀赢布，布赢石头。</p>
+  <div class="slip tilt2 r d3" style="width:540px"><small>依次输入</small><pre>7
 石头</pre><small style="margin-top:14px">输出</small><pre style="font-size:48px;white-space:pre">电脑出 剪刀
 赢</pre></div>
-  <a class="ide r d3" data-code="# 【石头剪刀布】&#10;# 第一行读入种子，第二行读入你出的：石头、剪刀或布。&#10;#   电脑用 random.choice([&quot;石头&quot;, &quot;剪刀&quot;, &quot;布&quot;]) 出一个，&#10;#   列表照这个顺序写，结果才和样例一样。&#10;# 先输出电脑出的是什么，再输出你的结果：赢、输或平。石头赢剪刀，&#10;#   剪刀赢布，布赢石头。&#10;# 例如输入（每个一行）：7、石头&#10;# 应该输出（每个一行）：电脑出 剪刀、赢&#10;# ↓ 从这里开始写&#10;&#10;import random&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
-  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="go r d3"><a class="ide" data-code="# 【石头剪刀布】&#10;# 第一行读入种子，第二行读入你出的：石头、剪刀或布。&#10;#   电脑用 random.choice([&quot;石头&quot;, &quot;剪刀&quot;, &quot;布&quot;]) 出一个，&#10;#   列表照这个顺序写，结果才和样例一样。&#10;# 先输出电脑出的是什么，再输出你的结果：赢、输或平。石头赢剪刀，&#10;#   剪刀赢布，布赢石头。&#10;# 例如输入（每个一行）：7、石头&#10;# 应该输出（每个一行）：电脑出 剪刀、赢&#10;# ↓ 从这里开始写&#10;&#10;import random&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
 

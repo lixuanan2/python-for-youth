@@ -17,7 +17,7 @@
 - `template/`：所有课共用的外壳、样式和脚本。缩略图、时间轴、章节跳转都在这里。
 - `template/layouts.css`：8 种版式（封面、便签、代码走一遍、猜一猜、分栏、动手、提问、提示）。有页写了版式的课，构建时把它内联进去；没有的课不带它。版式怎么写见 [PROMPT.md](PROMPT.md) 的“版式和格子”。
 - `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。全部页都换成版式写法的课加 `"structured": true`。
-- `site.json`：网站名称、首页文字、语言、IDE 平台和谢谢页的文案、链接。换语言或换 IDE 只改这里。谢谢页加链接就在 `thanks.links` 加一项，图标放 `template/icons/`。
+- `site.json`：网站名称、首页文字、语言、IDE 平台和谢谢页的文案、链接。换语言或换 IDE 只改这里。代码比较长的课可以写 `code_room`，放大猜一猜和小测的代码栏，比如 `"code_room": {"predict": [1160, 740, 58], "ask": [1000, 760, 48]}`（宽、高、最大字号，键是 `build.py` 里 `CODE_ROOM` 的名字）；不写就用 `CODE_ROOM` 的值。谢谢页加链接就在 `thanks.links` 加一项，图标放 `template/icons/`。
 - `pdf.json`：每份 `dist/<课>/slides.pdf` 照哪一版页面打印、PDF 本身的哈希，由 `build.py --pdf` 写，不要手改。`check.py` 比对它，PDF 跟不上页面就报错。
 - `dist/`：生成结果，提交进仓库，不要手改。每节课的 `starter/index.html` 由 `template/starter.html` 生成，列出这节课的起始程序。GitHub Pages 不列出文件夹内容，所以页面上的链接都要指向具体文件，`tools/check.py` 会查。
 

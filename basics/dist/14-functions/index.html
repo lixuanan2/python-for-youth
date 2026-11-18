@@ -564,6 +564,9 @@ dialog p{color:var(--muted);font-size:15px}
 /* A code box keeps its full height when the page is crowded (a grid would otherwise squeeze a box that hides its overflow). */
 .slide[class*=" lay-"]>.editor{min-height:min-content}
 
+/* The code column of predict and ask is a variable: build.py sets it from site.json "code_room" for a course whose
+   programs need more room. */
+
 /* 1 cover: the lesson number, two big words joined by a line with a bit of code on it, the title and one sentence. */
 .lay-cover>.kicker{top:96px;font:400 36px var(--code);color:var(--muted)}
 .lay-cover>.cover-row{position:absolute;left:96px;right:96px;top:290px}
@@ -604,9 +607,9 @@ dialog p{color:var(--muted);font-size:15px}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
    the IDE button at the bottom on the right. */
-.lay-predict{display:grid;grid-template-columns:1000px 1fr;grid-template-rows:max-content auto 1fr;grid-template-areas:"code answer" "say answer" "say ide";
+.lay-predict{display:grid;grid-template-columns:var(--predict-code,1000px) 1fr;grid-template-rows:max-content auto 1fr;grid-template-areas:"code answer" "say answer" "say ide";
   column-gap:100px;row-gap:50px;padding:220px 96px 120px;align-items:start}
-.lay-predict>.editor{grid-area:code;width:1000px}
+.lay-predict>.editor{grid-area:code;width:var(--predict-code,1000px)}
 .lay-predict>.answer{grid-area:answer;padding-top:30px}
 .lay-predict>.answer.big{font:800 130px/1.3 var(--code);color:var(--clay)}
 .lay-predict>.say,.lay-predict>.turns,.lay-predict>.says{grid-area:say}
@@ -616,9 +619,8 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-predict>.answer:not(.turns,.big),.lay-predict>.answer.turns>div:not([class]){display:flex;flex-direction:column;align-items:flex-start;gap:50px}
 .lay-predict .crate{margin-top:92px}
 .lay-predict>.ide{grid-area:ide;justify-self:start;align-self:end}
-/* .under: long sentences go across the page under both the code and the answer, the IDE button under them. */
-.lay-predict.under{grid-template-areas:"code answer" "say say" "ide ide"}
-.lay-predict.under>.ide{align-self:start}
+/* An error box (.tb) under the code takes the sentence's place. */
+.lay-predict>.tb{grid-area:say;width:auto}
 
 /* 5 columns: two or three things side by side or row by row (.vs, .steps3, .sheet3, .ledger, .later, .verbs), a sentence under them. */
 .lay-columns{display:flex;flex-direction:column;gap:64px;padding:240px 96px 180px}
@@ -640,8 +642,8 @@ dialog p{color:var(--muted);font-size:15px}
    has what went wrong on the right instead of choices. */
 .lay-ask{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto 1fr;grid-template-areas:"code pick" "code fb";
   column-gap:64px;row-gap:40px;padding:220px 96px 120px;align-items:start}
-.lay-ask>.editor{grid-area:code;width:800px}
-.lay-ask:has(.pick)>.editor{width:1040px}
+.lay-ask>.editor{grid-area:code;width:var(--ask-code,800px)}
+.lay-ask:has(.pick)>.editor{width:var(--ask-bug-code,1040px)}
 .lay-ask>.quiz,.lay-ask>.say{grid-area:pick}
 .lay-ask>.editor~.quiz{grid-template-columns:1fr;gap:16px}
 .lay-ask>.fb{grid-area:fb}
@@ -662,6 +664,7 @@ dialog p{color:var(--muted);font-size:15px}
 /* A free page draws something no layout holds (a picture with labels, a table where the place of each cell is the point):
    its parts keep their own left/top. A page with much more or much less text than usual keeps its layout and changes
    a size in its own style (a font-size, a width, --fs for code). */
+
 
 :root{--lesson:"第 14 课 函数定义与调用"}
 </style>
@@ -710,7 +713,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- predict: define only -->
-<section id="page-4" class="slide dark lay-predict under" aria-label="猜一猜：只定义不调用" data-steps="2" data-at="2">
+<section id="page-4" class="slide dark lay-predict" aria-label="猜一猜：只定义不调用" data-steps="3" data-at="3">
   <h2 class="t">猜一猜：这段程序输出什么？</h2>
   <div class="editor" style="--fs:58px"><div class="tab">guess.py</div>
 <pre class="code"><span class="ln"><span class="k">def</span> <span class="f">hello</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"你好！"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"结束"</span>)</span></pre></div>
@@ -720,9 +723,10 @@ dialog p{color:var(--muted);font-size:15px}
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
-      <p class="say step s2">只输出“结束”。定义函数就像把菜谱写好放进抽屉，没人照着做，就不会有菜。<br>函数里的话，只有调用 hello() 的时候才会说。</p>
+      <p class="say only2">只输出“结束”。定义函数就像把菜谱写好放进抽屉，没人照着做，就不会有菜。</p>
+      <p class="say step s3">函数里的话，只有调用 hello() 的时候才会说。</p>
     </div>
-  <a class="ide step s2">▶ 在 IDE 验证</a>
+  <a class="ide step s3">▶ 在 IDE 验证</a>
   <div class="foot"></div>
 </section>
 
@@ -790,7 +794,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- predict: call before define -->
-<section id="page-9" class="slide lay-predict under" aria-label="猜一猜：先调用后定义" data-steps="2" data-at="2">
+<section id="page-9" class="slide lay-predict" aria-label="猜一猜：先调用后定义" data-steps="3" data-at="3">
   <h2 class="t">猜一猜：先调用，再定义，行吗？</h2>
   <div class="editor" style="--fs:58px"><div class="tab">order.py（只阅读）</div>
 <pre class="code"><span class="ln"><span class="f">hello</span>()</span><span class="ln"><span class="k">def</span> <span class="f">hello</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"你好！"</span>)</span></pre></div>
@@ -799,7 +803,8 @@ dialog p{color:var(--muted);font-size:15px}
   </div>
   <div class="turns">
       <p class="say only1">程序从上往下一行一行地走。走到第 1 行时，它认识 hello 吗？</p>
-      <p class="say step s2">不行。第 1 行时还没读到定义，程序不认识 hello，报 NameError。<br>先定义，后调用。定义一般都写在程序最上面。</p>
+      <p class="say only2">不行。第 1 行时还没读到定义，程序不认识 hello，报 NameError。</p>
+      <p class="say step s3">先定义，后调用。定义一般都写在程序最上面。</p>
     </div>
   <div class="foot"></div>
 </section>

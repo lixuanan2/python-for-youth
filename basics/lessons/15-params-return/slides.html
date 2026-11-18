@@ -41,7 +41,7 @@
 </section>
 
 <!-- predict: order of arguments -->
-<section class="slide lay-predict under" aria-label="猜一猜：换了顺序" data-steps="2" data-at="2">
+<section class="slide lay-predict" aria-label="猜一猜：换了顺序" data-steps="3" data-at="3">
   <h2 class="t">猜一猜：数据换了顺序，结果一样吗？</h2>
   <div class="editor"><div class="tab">order.py</div>
 <pre class="code">def show(a, b):
@@ -53,7 +53,8 @@ show(3, 10)</pre></div>
   </div>
   <div class="turns">
       <p class="say only1">两次调用给的都是 10 和 3，只是顺序不同。</p>
-      <p class="say step s2">不一样。数据按顺序一个对一个：第一个给 a，第二个给 b。<br>show(3, 10) 时 a 是 3、b 是 10，算出 -7。调用时要按参数的顺序给。</p>
+      <p class="say only2">不一样。数据按顺序一个对一个：第一个给 a，第二个给 b。</p>
+      <p class="say step s3">show(3, 10) 时 a 是 3、b 是 10，算出 -7。调用时要按参数的顺序给。</p>
     </div>
   <div class="foot"></div>
 </section>

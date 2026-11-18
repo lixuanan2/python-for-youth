@@ -40,7 +40,7 @@
 </section>
 
 <!-- predict: define only -->
-<section class="slide dark lay-predict under" aria-label="猜一猜：只定义不调用" data-steps="2" data-at="2">
+<section class="slide dark lay-predict" aria-label="猜一猜：只定义不调用" data-steps="3" data-at="3">
   <h2 class="t">猜一猜：这段程序输出什么？</h2>
   <div class="editor"><div class="tab">guess.py</div>
 <pre class="code">def hello():
@@ -52,9 +52,10 @@ print("结束")</pre></div>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
-      <p class="say step s2">只输出“结束”。定义函数就像把菜谱写好放进抽屉，没人照着做，就不会有菜。<br>函数里的话，只有调用 hello() 的时候才会说。</p>
+      <p class="say only2">只输出“结束”。定义函数就像把菜谱写好放进抽屉，没人照着做，就不会有菜。</p>
+      <p class="say step s3">函数里的话，只有调用 hello() 的时候才会说。</p>
     </div>
-  <a class="ide step s2">▶ 在 IDE 验证</a>
+  <a class="ide step s3">▶ 在 IDE 验证</a>
   <div class="foot"></div>
 </section>
 
@@ -127,7 +128,7 @@ f()</pre></div>
 </section>
 
 <!-- predict: call before define -->
-<section class="slide lay-predict under" aria-label="猜一猜：先调用后定义" data-steps="2" data-at="2">
+<section class="slide lay-predict" aria-label="猜一猜：先调用后定义" data-steps="3" data-at="3">
   <h2 class="t">猜一猜：先调用，再定义，行吗？</h2>
   <div class="editor"><div class="tab">order.py（只阅读）</div>
 <pre class="code">hello()
@@ -138,7 +139,8 @@ def hello():
   </div>
   <div class="turns">
       <p class="say only1">程序从上往下一行一行地走。走到第 1 行时，它认识 hello 吗？</p>
-      <p class="say step s2">不行。第 1 行时还没读到定义，程序不认识 hello，报 NameError。<br>先定义，后调用。定义一般都写在程序最上面。</p>
+      <p class="say only2">不行。第 1 行时还没读到定义，程序不认识 hello，报 NameError。</p>
+      <p class="say step s3">先定义，后调用。定义一般都写在程序最上面。</p>
     </div>
   <div class="foot"></div>
 </section>
