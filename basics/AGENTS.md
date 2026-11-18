@@ -15,7 +15,7 @@
 - `lessons/<编号-英文名>/slides.html`：一节课的页面，只写 `<section>`。这是页面正文的唯一来源。题目的条件（输入、范围、输出格式、样例）改了，要同时核对这节课的 `tasks.json`（包括 IDE 里题目注释用的 `brief`）、`solutions/`、`starter/` 和 `tests/`，让它们和页面说的一致。
 - `lessons/<…>/tasks.json`、`starter/`、`solutions/`、`tests/`：题目、起始程序、答案和测试。`tests/claims.json` 记录页面说过的输出和报错。
 - `template/`：所有课共用的外壳、样式和脚本。缩略图、时间轴、章节跳转都在这里。
-- `template/layouts.css`：8 种版式（封面、便签、代码走一遍、猜一猜、分栏、动手、提问、提示）。有页写了版式的课，构建时把它内联进去；没有的课不带它。版式怎么写见 [PROMPT.md](PROMPT.md) 的“版式和格子”。
+- `template/layouts.css`：8 种版式（封面、便签、代码走一遍、猜一猜、分栏、动手、提问、提示）。每节课构建时都内联它。版式怎么写见 [PROMPT.md](PROMPT.md) 的“版式和格子”。
 - `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。全部页都换成版式写法的课加 `"structured": true`。
 - `site.json`：网站名称、首页文字、语言、IDE 平台和谢谢页的文案、链接。换语言或换 IDE 只改这里。代码比较长的课可以写 `code_room`，放大猜一猜和小测的代码栏，比如 `"code_room": {"predict": [1160, 740, 58], "ask": [1000, 760, 48]}`（宽、高、最大字号，键是 `build.py` 里 `CODE_ROOM` 的名字）；不写就用 `CODE_ROOM` 的值。谢谢页加链接就在 `thanks.links` 加一项，图标放 `template/icons/`。
 - `pdf.json`：每份 `dist/<课>/slides.pdf` 照哪一版页面打印、PDF 本身的哈希，由 `build.py --pdf` 写，不要手改。`check.py` 比对它，PDF 跟不上页面就报错。
@@ -54,9 +54,9 @@ node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查：改过的
 - 改了 `template/`、`vendor/`、`course.json`、`site.json`、`dist/index.html`，`tools/` 里的 `build.py`、`algo.py`、`check_browser.mjs`，或者工作流本身：全部 30 节，分 4 台机器并行。
 - 每周一自动全量查一次；在 GitHub 上手动运行也是全量。
 
-## 换成版式
+## 版式
 
-2026-11-18 起，课件分批换成版式写法：页面写版式和格子，不写坐标；代码框只写代码，颜色和字号由 `build.py` 生成。在 `structure` 分支上做，一批开一个 PR，CI 全过再合：先合工具（这一批），再换 30 节课的封面和收尾 5 页，然后大约每 5 节课一批，01 放最后。写了版式的页，`check.py` 就按版式的规则查；一节课全部换完，在 `course.json` 给它加 `"structured": true`，从此每页都要有版式。换的时候页面允许和原来有小差别，看着舒服就行。
+2026-11-18 到 11-19，30 节课分 8 批全部换成版式写法（每批一个 PR，在 `structure` 分支上做）：页面写版式和格子，不写坐标；代码框只写代码，颜色和字号由 `build.py` 生成。现在 `course.json` 里每节课都有 `"structured": true`，`check.py` 要求每页都有版式或是自由页。自由页留给位置本身就是内容的页：IDE 截图上的标注、数轴、下标表、算法演示。新课和改课都按 [PROMPT.md](PROMPT.md) 的“版式和格子”写。
 
 ## 规则
 

@@ -8,39 +8,48 @@
 </section>
 
 <!-- the problem -->
-<section class="slide clay" aria-label="签到表上有重复">
+<section class="slide clay lay-notes" aria-label="签到表上有重复">
   <h2 class="t r">签到表上，有人签了三次</h2>
-  <div class="slip r d1" style="left:96px;top:290px;width:700px"><small style="font-size:34px">签到表</small><pre style="font-size:52px">小明 小红 小明 小明</pre></div>
-  <div class="slip tilt r d2" style="left:880px;top:290px;width:560px"><small style="font-size:34px">到底来了几个人？</small><pre style="font-size:52px">2 个，不是 4 个</pre></div>
-  <p class="abs say r d3" style="left:96px;right:96px;top:640px">列表会把每一次都记下来，重复的也算。想知道“有哪些人”，就要把重复的去掉。<br>Python 的集合（set）专门干这个：同样的东西只留一个。它还能找出两份名单里都有的人。</p>
+  <div class="notes">
+    <div class="slip r d1"><small style="font-size:34px">签到表</small><pre style="font-size:52px">小明 小红 小明 小明</pre></div>
+    <div class="slip tilt r d2"><small style="font-size:34px">到底来了几个人？</small><pre style="font-size:52px">2 个，不是 4 个</pre></div>
+  </div>
+  <p class="say r d3">列表会把每一次都记下来，重复的也算。想知道“有哪些人”，就要把重复的去掉。<br>Python 的集合（set）专门干这个：同样的东西只留一个。它还能找出两份名单里都有的人。</p>
   <div class="foot"></div>
 </section>
 
 <!-- the first set -->
-<section class="slide" aria-label="第一个集合" data-steps="2" data-at="2" data-chapter="集合">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">集合：同样的只留一个</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">set.py</div>
-<pre class="code" data-file="solutions/01_set.py"><span class="ln l1">s = {<span class="m">3</span>, <span class="m">1</span>, <span class="m">3</span>, <span class="m">2</span>, <span class="m">1</span>}</span><span class="ln l1"><span class="f">print</span>(<span class="f">len</span>(s))</span><span class="ln l2"><span class="f">print</span>(<span class="f">sorted</span>(s))</span><span class="ln l2"><span class="f">print</span>(<span class="m">2</span> <span class="k">in</span> s)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">集合用大括号写。像一个袋子：放进去 5 个数，重复的 3 和 1 只留一个，袋子里只有 3 个。</p>
-  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">袋子里的东西没有先后，不能用下标拿。要看清楚，就用 sorted 排好；用 in 问在不在。</p>
-  <a class="ide step s2" style="left:96px;top:900px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px;font:800 72px/1.5 var(--code)">3<br><span class="step s2" style="color:var(--clay)">[1, 2, 3]<br>True</span></div>
+<section class="slide lay-walk" aria-label="第一个集合" data-steps="2" data-at="2" data-chapter="集合">
+  <h2 class="t">集合：同样的只留一个</h2>
+  <div class="editor"><div class="tab">set.py</div>
+<pre class="code" data-file="solutions/01_set.py" data-light="1-2:1 3-4:2"></pre></div>
+  <div class="turns">
+      <p class="say only1">集合用大括号写。像一个袋子：放进去 5 个数，重复的 3 和 1 只留一个，袋子里只有 3 个。</p>
+      <p class="say only2">袋子里的东西没有先后，不能用下标拿。要看清楚，就用 sorted 排好；用 in 问在不在。</p>
+    </div>
+  <a class="ide step s2">▶ 在 IDE 打开</a>
+  <div class="right">
+    <div style="font:800 72px/1.5 var(--code)">3<br><span class="step s2" style="color:var(--clay)">[1, 2, 3]<br>True</span></div>
+  </div>
 </section>
 
 <!-- predict: dedupe a list -->
-<section class="slide dark" aria-label="猜一猜：列表变集合" data-steps="2" data-at="2">
+<section class="slide dark lay-predict" aria-label="猜一猜：列表变集合" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：两行分别输出几？</h2>
-  <div class="editor" style="left:96px;top:220px;width:1300px;--fs:44px"><div class="tab">names.py</div>
-<pre class="code" data-file="solutions/02_dedupe.py"><span class="ln">names = [<span class="s">"小明"</span>, <span class="s">"小红"</span>, <span class="s">"小明"</span>, <span class="s">"小红"</span>]</span><span class="ln"><span class="f">print</span>(<span class="f">len</span>(names))</span><span class="ln l2"><span class="f">print</span>(<span class="f">len</span>(<span class="f">set</span>(names)))</span></pre></div>
-  <p class="abs step s2" style="left:1480px;right:96px;top:230px;font:800 100px/1.3 var(--code);color:var(--clay-soft)">4<br>2</p>
-  <p class="abs say only1" style="left:96px;top:600px;width:1728px">列表里有 4 个名字。set(names) 把列表变成集合，会剩几个？</p>
-  <p class="abs say step s2" style="left:96px;top:600px;width:1728px">列表 4 个，集合只剩小明、小红 2 个。<br>set( ) 能把列表变成集合，一下子去掉重复的。len 数的就是“有几个不同的”。</p>
+  <div class="editor"><div class="tab">names.py</div>
+<pre class="code" data-file="solutions/02_dedupe.py" data-light="3:2"></pre></div>
+  <div class="answer">
+    <p class="step s2" style="font:800 100px/1.3 var(--code);color:var(--clay-soft)">4<br>2</p>
+  </div>
+  <div class="turns">
+      <p class="say only1">列表里有 4 个名字。set(names) 把列表变成集合，会剩几个？</p>
+      <p class="say step s2">列表 4 个，集合只剩小明、小红 2 个。<br>set( ) 能把列表变成集合，一下子去掉重复的。len 数的就是“有几个不同的”。</p>
+    </div>
   <div class="foot"></div>
 </section>
 
 <!-- quiz: empty braces -->
-<section class="slide" aria-label="小测：空的大括号">
+<section class="slide lay-ask" aria-label="小测：空的大括号">
   <h2 class="t r">小测：x = {}，x 是什么？</h2>
   <div class="quiz r d1" data-right="1">
     <button type="button" data-fb="空的大括号先被字典占用了。空集合要写 set()。"><i>1</i>空集合</button>
@@ -53,24 +62,28 @@
 </section>
 
 <!-- & | - -->
-<section class="slide" aria-label="都有、合起来、只有一边有" data-steps="3" data-at="3" data-chapter="交并差">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">都有、合起来、只有一边有</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">ops.py</div>
-<pre class="code" data-file="solutions/03_ops.py"><span class="ln">a = {<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>}</span><span class="ln">b = {<span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span>}</span><span class="ln l1"><span class="f">print</span>(<span class="f">sorted</span>(a &amp; b))</span><span class="ln l2"><span class="f">print</span>(<span class="f">sorted</span>(a | b))</span><span class="ln l3"><span class="f">print</span>(<span class="f">sorted</span>(a - b))</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:790px;width:960px;color:var(--paper)">a &amp; b：两边都有的，叫交集。3 和 4 两个袋子里都有。</p>
-  <p class="abs say only2" style="left:96px;top:790px;width:960px;color:var(--paper)">a | b：两个袋子倒在一起，叫并集。重复的 3、4 还是只留一个。</p>
-  <p class="abs say only3" style="left:96px;top:790px;width:960px;color:var(--paper)">a - b：a 里有、b 里没有的，叫差集。从 a 里拿掉 b 也有的。</p>
-  <a class="ide step s3" style="left:96px;top:900px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px;font:700 52px/1.9 var(--code)"><span style="color:var(--clay)">[3, 4]</span><br><span class="step s2">[1, 2, 3, 4, 5]</span><br><span class="step s3">[1, 2]</span></div>
+<section class="slide lay-walk" aria-label="都有、合起来、只有一边有" data-steps="3" data-at="3" data-chapter="交并差">
+  <h2 class="t">都有、合起来、只有一边有</h2>
+  <div class="editor"><div class="tab">ops.py</div>
+<pre class="code" data-file="solutions/03_ops.py" data-light="3:1 4:2 5:3"></pre></div>
+  <div class="turns">
+      <p class="say only1">a &amp; b：两边都有的，叫交集。3 和 4 两个袋子里都有。</p>
+      <p class="say only2">a | b：两个袋子倒在一起，叫并集。重复的 3、4 还是只留一个。</p>
+      <p class="say only3">a - b：a 里有、b 里没有的，叫差集。从 a 里拿掉 b 也有的。</p>
+    </div>
+  <a class="ide step s3">▶ 在 IDE 打开</a>
+  <div class="right">
+    <div style="font:700 52px/1.9 var(--code)"><span style="color:var(--clay)">[3, 4]</span><br><span class="step s2">[1, 2, 3, 4, 5]</span><br><span class="step s3">[1, 2]</span></div>
+  </div>
 </section>
 
 <!-- quiz: difference -->
-<section class="slide" aria-label="小测：a 减 b">
+<section class="slide lay-ask top" aria-label="小测：a 减 b">
   <h2 class="t r">小测：sorted(a - b) 是什么？</h2>
-  <pre class="abs r d1" style="left:96px;top:200px;font:400 48px/1.5 var(--code)">a = {1, 2, 3}
-b = {2, 3, 4}</pre>
-  <div class="quiz r d1" data-right="0" style="top:390px">
+  <div class="editor r d1"><div class="tab">代码</div>
+<pre class="code">a = {1, 2, 3}
+b = {2, 3, 4}</pre></div>
+  <div class="quiz r d1" data-right="0">
     <button type="button" data-fb="答对了！a 里有、b 里没有的，只剩 1。"><i>1</i>[1]</button>
     <button type="button" data-fb="4 是 b 里才有的，那是 b - a。"><i>2</i>[4]</button>
     <button type="button" data-fb="这是两边各自独有的合在一起。a - b 只看 a 这边。"><i>3</i>[1, 4]</button>
@@ -81,19 +94,22 @@ b = {2, 3, 4}</pre>
 </section>
 
 <!-- worked example: distinct words -->
-<section class="slide" aria-label="例题：有几个不同的词" data-steps="2" data-at="2" data-chapter="数不同的词">
-  <div class="night" style="width:1310px"></div>
-  <h2 class="t" style="color:var(--paper)">例题：一句话里有几个不同的词</h2>
-  <div class="editor" style="left:96px;top:200px;width:1170px;--fs:46px"><div class="tab">words.py</div>
-<pre class="code" data-file="solutions/04_words.py"><span class="ln l1">words = <span class="f">input</span>().<span class="f">split</span>()</span><span class="ln l1"><span class="f">print</span>(<span class="f">len</span>(words), <span class="s">"个词"</span>)</span><span class="ln l2"><span class="f">print</span>(<span class="f">len</span>(<span class="f">set</span>(words)), <span class="s">"个不同的词"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:600px;width:1170px;color:var(--paper)">输入 i like cats i like dogs。第 13 课的 split() 按空格切开，得到 6 个词的列表。</p>
-  <p class="abs say only2" style="left:96px;top:600px;width:1170px;color:var(--paper)">变成集合，重复的 i 和 like 各留一个，剩 i、like、cats、dogs 4 个。</p>
-  <a class="ide step s2" style="left:1390px;top:900px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1390px;right:96px;top:170px;font:400 52px/1.7 var(--text);color:var(--clay)">6 个词<br><span class="step s2">4 个不同的词</span></div>
+<section class="slide lay-walk wide" aria-label="例题：有几个不同的词" data-steps="2" data-at="2" data-chapter="数不同的词">
+  <h2 class="t">例题：一句话里有几个不同的词</h2>
+  <div class="editor"><div class="tab">words.py</div>
+<pre class="code" data-file="solutions/04_words.py" data-light="1-2:1 3:2"></pre></div>
+  <div class="turns">
+      <p class="say only1">输入 i like cats i like dogs。第 13 课的 split() 按空格切开，得到 6 个词的列表。</p>
+      <p class="say only2">变成集合，重复的 i 和 like 各留一个，剩 i、like、cats、dogs 4 个。</p>
+    </div>
+  <div class="right">
+    <div style="font:400 52px/1.7 var(--text);color:var(--clay)">6 个词<br><span class="step s2">4 个不同的词</span></div>
+    <a class="ide step s2">▶ 在 IDE 打开</a>
+  </div>
 </section>
 
 <!-- your turn -->
-<section class="slide" aria-label="把不同的词列出来">
+<section class="slide lay-try" aria-label="把不同的词列出来">
   <div class="band r"><b>动手<br>改一改</b><span>再加一行输出。</span></div>
   <div class="turn">
     <h2 class="r d1">把不同的词列出来</h2>
@@ -101,7 +117,7 @@ b = {2, 3, 4}</pre>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>例题那句，第三行</small><pre>cats dogs i like</pre></div><div><small>b a b，第三行</small><pre>a b</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 13 课的 join 能把列表连成一行。</p>
   </div>
-  <a class="ide r d3" data-code-file="starter/05_repeat.py" style="left:610px;top:860px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code-file="starter/05_repeat.py">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
@@ -118,25 +134,24 @@ b = {2, 3, 4}</pre>
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark" aria-label="找错：dict 没有 add">
+<section class="slide dark lay-ask" aria-label="找错：dict 没有 add">
   <h2 class="t r">找错：第 2 行报 AttributeError</h2>
-  <div class="editor r d1" style="left:96px;top:240px;width:960px;--fs:50px"><div class="tab">bug.py（只阅读）</div>
+  <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="1" data-yes="找到了！空的 {} 是字典，字典没有 add。空集合要写 seen = set()。" data-no="这一行没问题。报错说它是 dict，seen 是从哪里来的？"><span class="ln">seen = {}</span><span class="ln">seen.<span class="f">add</span>(<span class="s">"小明"</span>)</span><span class="ln">seen.<span class="f">add</span>(<span class="s">"小红"</span>)</span><span class="ln"><span class="f">print</span>(<span class="f">len</span>(seen))</span></pre></div>
-  <p class="abs say r d2" style="left:1160px;top:260px;right:96px">想做一个空集合，再一个个放进去。报错说：<br><span style="font-family:var(--code);font-size:30px">'dict' object has no attribute 'add'</span><br>点出该改的那一行。</p>
-  <p class="fb" style="left:1160px;top:540px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="say r d2">想做一个空集合，再一个个放进去。报错说：<br><span style="font-family:var(--code);font-size:30px">'dict' object has no attribute 'add'</span><br>点出该改的那一行。</p>
+  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section class="slide clay" aria-label="谁没来" data-chapter="挑战">
-  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
-  <h2 class="abs r d1" style="left:96px;top:170px;font:800 160px/1.2 var(--text)">谁没来？</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:1060px">第一行是全班名单，第二行是签到记录，名字都用空格隔开。<b>有人签了好几次</b>，也可能没人签。<br>输出两行：第一行“到了 几 人”；第二行把没到的人从小到大排好（和 sorted 排的一样），写成“没到：A B”，都到了就写“全到了”。</p>
-  <div class="slip tilt2 r d3" style="right:100px;top:200px;width:520px"><small>依次输入</small><pre style="font-size:40px;white-space:pre">Amy Bob Cat Dan
+<section class="slide clay lay-notes challenge" aria-label="谁没来" data-chapter="挑战">
+  <p class="kicker r"># 自己挑战</p>
+  <h2 class="big r d1" style="font-size:160px">谁没来？</h2>
+  <p class="say r d2">第一行是全班名单，第二行是签到记录，名字都用空格隔开。<b>有人签了好几次</b>，也可能没人签。<br>输出两行：第一行“到了 几 人”；第二行把没到的人从小到大排好（和 sorted 排的一样），写成“没到：A B”，都到了就写“全到了”。</p>
+  <div class="slip tilt2 r d3" style="width:520px"><small>依次输入</small><pre style="font-size:40px;white-space:pre">Amy Bob Cat Dan
 Bob Amy Bob</pre><small style="margin-top:14px">输出</small><pre style="font-size:40px;white-space:pre">到了 2 人
 没到：Cat Dan</pre></div>
-  <a class="ide r d3" data-code-file="starter/06_attendance.py" style="left:96px;top:880px">▶ 在 IDE 开始写</a>
-  <p class="abs say r d3" style="left:560px;top:886px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="go r d3"><a class="ide" data-code-file="starter/06_attendance.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
 
