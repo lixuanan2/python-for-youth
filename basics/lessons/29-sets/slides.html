@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="集合" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 29</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">去重</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">set(names)</span></div><b class="r d2" style="font-size:250px">找同</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">集合：去掉重复，找出相同</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能一下子去掉重复的名字，找出两份名单里都有的、只有一边有的。</p>
+<section class="slide lay-cover" aria-label="集合" data-chapter="开始">
+  <p class="kicker r"># LESSON 29</p>
+  <div class="cover-row"><b class="r">去重</b><div class="wire r d1"><i></i><span>set(names)</span></div><b class="r d2">找同</b></div>
+  <p class="headline r d3">集合：去掉重复，找出相同</p>
+  <p class="say r d3">学完你能一下子去掉重复的名字，找出两份名单里都有的、只有一边有的。</p>
   <div class="foot"></div>
 </section>
 
@@ -105,15 +105,15 @@ b = {2, 3, 4}</pre>
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:520px 500px 1fr"><code>s = {}</code><b>AttributeError</b><span>那是空字典，没有 add</span></div>
-    <div class="r d2" style="grid-template-columns:520px 500px 1fr"><code>s[0]</code><b>TypeError</b><span>集合没有下标</span></div>
-    <div class="r d3" style="grid-template-columns:520px 500px 1fr"><code>print(s)</code><b>不报错</b><span>顺序说不准，用 sorted</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:520px;--mid:500px">
+    <div class="r d1"><code>s = {}</code><b>AttributeError</b><span>那是空字典，没有 add</span></div>
+    <div class="r d2"><code>s[0]</code><b>TypeError</b><span>集合没有下标</span></div>
+    <div class="r d3"><code>print(s)</code><b>不报错</b><span>顺序说不准，用 sorted</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">空集合写 set()。往集合里放东西用 add，比如 s.add(3)。</p>
+  <p class="say r d3">空集合写 set()。往集合里放东西用 add，比如 s.add(3)。</p>
   <div class="foot"></div>
 </section>
 
@@ -141,7 +141,7 @@ Bob Amy Bob</pre><small style="margin-top:14px">输出</small><pre style="font-s
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>两行都先 split()，再 set()：签了好几次的，只留一个。</span></p>
@@ -154,38 +154,38 @@ Bob Amy Bob</pre><small style="margin-top:14px">输出</small><pre style="font-s
 <!-- @answer 02 | 名单和签到都变成集合：交集 &amp; 是到了的，差集 - 是没到的；签好几次也只算一次。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>集合和列表最大的不同？<em class="step s2" style="font-style:normal;font-weight:400">　集合里同样的只留一个，也没有先后和下标。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>&amp;、|、- 分别是什么？<em class="step s3" style="font-style:normal;font-weight:400">　两边都有、合起来、只在前面那个里有。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>空集合怎么写？<em class="step s4" style="font-style:normal;font-weight:400">　set()。空的 {} 是字典。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>集合和列表最大的不同？<em class="step s2">　集合里同样的只留一个，也没有先后和下标。</em></span></p>
+    <p><i>Q2</i><span>&amp;、|、- 分别是什么？<em class="step s3">　两边都有、合起来、只在前面那个里有。</em></span></p>
+    <p><i>Q3</i><span>空集合怎么写？<em class="step s4">　set()。空的 {} 是字典。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>set(names)</code><span>列表变集合，去掉重复</span></div>
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>s.add(x)   x in s</code><span>放进去；问在不在</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>a &amp; b   a | b   a - b</code><span>都有、合起来、只在 a 里</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>sorted(s)</code><span>排好成列表再看</span></div>
-    <div class="r d3" style="grid-template-columns:860px 1fr"><code>set()</code><span>空集合；{} 是空字典</span></div>
+  <div class="sheet3" style="--key:860px">
+    <div class="r d1"><code>set(names)</code><span>列表变集合，去掉重复</span></div>
+    <div class="r d1"><code>s.add(x)   x in s</code><span>放进去；问在不在</span></div>
+    <div class="r d2"><code>a &amp; b   a | b   a - b</code><span>都有、合起来、只在 a 里</span></div>
+    <div class="r d2"><code>sorted(s)</code><span>排好成列表再看</span></div>
+    <div class="r d3"><code>set()</code><span>空集合；{} 是空字典</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>元组</code><span>用圆括号，像不能改的列表</span></div>
     <div class="r d2"><code>找得更快</code><span>东西很多时，在集合里用 in 比在列表里快得多</span></div>
     <div class="r d3"><code>^</code><span>只有一边有的，两边合在一起</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天学会了用集合去掉重复、找出相同。名单、单词、爱好，都能这样比一比。</p>
+  <p class="say r d3">今天学会了用集合去掉重复、找出相同。名单、单词、爱好，都能这样比一比。</p>
   <div class="foot"></div>
 </section>

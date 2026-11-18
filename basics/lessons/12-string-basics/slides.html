@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="字符串基础" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 12</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">一句</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">word[0]</span></div><b class="r d2" style="font-size:250px">一字</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">字符串基础：一句话也是一排盒子</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能取出一句话的第几个字、截出一段，还能数出某个字出现了几次。</p>
+<section class="slide lay-cover" aria-label="字符串基础" data-chapter="开始">
+  <p class="kicker r"># LESSON 12</p>
+  <div class="cover-row"><b class="r">一句</b><div class="wire r d1"><i></i><span>word[0]</span></div><b class="r d2">一字</b></div>
+  <p class="headline r d3">字符串基础：一句话也是一排盒子</p>
+  <p class="say r d3">学完你能取出一句话的第几个字、截出一段，还能数出某个字出现了几次。</p>
   <div class="foot"></div>
 </section>
 
@@ -203,15 +203,15 @@ a cat and a dog</pre></div><div><small>输出</small><pre style="line-height:1.2
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误">
+<section class="slide lay-columns" aria-label="三种常见错误">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
     <div class="r d1"><code>word[6]</code><b>IndexError</b><span>6 个字，最大下标是 5</span></div>
     <div class="r d2"><code>word[0] = "J"</code><b>TypeError</b><span>不能换，要拼一个新的</span></div>
     <div class="r d3"><code>word[1:3]</code><b>不报错</b><span>是 yt，终点 3 不算</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">切片截少了一个最常见。截之前先数：终点减起点，就是截出几个字。</p>
+  <p class="say r d3">切片截少了一个最常见。截之前先数：终点减起点，就是截出几个字。</p>
   <div class="foot"></div>
 </section>
 
@@ -237,7 +237,7 @@ a cat and a dog</pre></div><div><small>输出</small><pre style="line-height:1.2
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>准备一个空字符串 ""，就像累加前准备 0。</span></p>
@@ -250,38 +250,38 @@ a cat and a dog</pre></div><div><small>输出</small><pre style="line-height:1.2
 <!-- @answer 03 | 每拿到一个字，就放到 result 的前面：<code>ch + result</code>。走完一遍就倒过来了。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>word[-1] 是哪个字？<em class="step s2" style="font-style:normal;font-weight:400">　最后一个字，不管有多长。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>word[2:5] 截出几个字？<em class="step s3" style="font-style:normal;font-weight:400">　3 个，终点 5 不算。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>想换掉字符串里的一个字，怎么办？<em class="step s4" style="font-style:normal;font-weight:400">　不能直接换，拼一个新的字符串。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>word[-1] 是哪个字？<em class="step s2">　最后一个字，不管有多长。</em></span></p>
+    <p><i>Q2</i><span>word[2:5] 截出几个字？<em class="step s3">　3 个，终点 5 不算。</em></span></p>
+    <p><i>Q3</i><span>想换掉字符串里的一个字，怎么办？<em class="step s4">　不能直接换，拼一个新的字符串。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div style="grid-template-columns:680px 1fr" class="r d1"><code>len(word)</code><span>有几个字，空格也算</span></div>
-    <div style="grid-template-columns:680px 1fr" class="r d1"><code>word[0]  word[-1]</code><span>第一个字，最后一个字</span></div>
-    <div style="grid-template-columns:680px 1fr" class="r d2"><code>word[2:5]</code><span>截出下标 2、3、4，不含终点</span></div>
-    <div style="grid-template-columns:680px 1fr" class="r d2"><code>word[:2]  word[-2:]</code><span>前两个，后两个</span></div>
-    <div style="grid-template-columns:680px 1fr" class="r d3"><code>for ch in word:</code><span>一个字一个字地看</span></div>
+  <div class="sheet3" style="--key:680px">
+    <div class="r d1"><code>len(word)</code><span>有几个字，空格也算</span></div>
+    <div class="r d1"><code>word[0]  word[-1]</code><span>第一个字，最后一个字</span></div>
+    <div class="r d2"><code>word[2:5]</code><span>截出下标 2、3、4，不含终点</span></div>
+    <div class="r d2"><code>word[:2]  word[-2:]</code><span>前两个，后两个</span></div>
+    <div class="r d3"><code>for ch in word:</code><span>一个字一个字地看</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>count()</code><span>下节课：一句话数出某个字出现几次</span></div>
     <div class="r d2"><code>replace()</code><span>下节课：把一个词换成另一个</span></div>
     <div class="r d3"><code>split()</code><span>下节课：把一句话切成一个个词</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天自己动手拆字、截字、数字。下节课看看 Python 自带了哪些好用的工具。</p>
+  <p class="say r d3">今天自己动手拆字、截字、数字。下节课看看 Python 自带了哪些好用的工具。</p>
   <div class="foot"></div>
 </section>

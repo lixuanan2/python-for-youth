@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="递归入门" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 23</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">大事</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">f(n) → f(n - 1)</span></div><b class="r d2" style="font-size:250px">化小</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">递归入门：函数调用自己</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让函数调用自己，把一件大事拆成一样的小事，一层层做完。</p>
+<section class="slide lay-cover" aria-label="递归入门" data-chapter="开始">
+  <p class="kicker r"># LESSON 23</p>
+  <div class="cover-row"><b class="r">大事</b><div class="wire r d1"><i></i><span>f(n) → f(n - 1)</span></div><b class="r d2">化小</b></div>
+  <p class="headline r d3">递归入门：函数调用自己</p>
+  <p class="say r d3">学完你能让函数调用自己，把一件大事拆成一样的小事，一层层做完。</p>
   <div class="foot"></div>
 </section>
 
@@ -115,15 +115,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:560px 540px 1fr"><code class="plain">没写出口</code><b>RecursionError</b><span>先想好什么时候停</span></div>
-    <div class="r d2" style="grid-template-columns:560px 540px 1fr"><code>countdown(n)</code><b>RecursionError</b><span>每次要变小：n - 1</span></div>
-    <div class="r d3" style="grid-template-columns:560px 540px 1fr"><code class="plain">忘了写 return</code><b>TypeError</b><span>交回 None，拿去加数就报错</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:540px">
+    <div class="r d1"><code class="plain">没写出口</code><b>RecursionError</b><span>先想好什么时候停</span></div>
+    <div class="r d2"><code>countdown(n)</code><b>RecursionError</b><span>每次要变小：n - 1</span></div>
+    <div class="r d3"><code class="plain">忘了写 return</code><b>TypeError</b><span>交回 None，拿去加数就报错</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">看到 RecursionError，先查两件事：有没有出口，每次有没有变小。</p>
+  <p class="say r d3">看到 RecursionError，先查两件事：有没有出口，每次有没有变小。</p>
   <div class="foot"></div>
 </section>
 
@@ -149,7 +149,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>只有一位数时（n &lt; 10），各位加起来就是它自己。这就是出口。</span></p>
@@ -162,38 +162,38 @@
 <!-- @answer 02 | 个位是 <code>n % 10</code>，剩下的 <code>n // 10</code> 交给自己去加；只剩一位时直接还 n。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>什么是递归？<em class="step s2" style="font-style:normal;font-weight:400">　函数调用自己，每次处理小一点的问题。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>写递归要有哪两件事？<em class="step s3" style="font-style:normal;font-weight:400">　出口和变小。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>total(3) 怎么算出 6？<em class="step s4" style="font-style:normal;font-weight:400">　3 + total(2)，total(2) 是 2 + total(1)，total(1) 是 1，再一层层交回。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>什么是递归？<em class="step s2">　函数调用自己，每次处理小一点的问题。</em></span></p>
+    <p><i>Q2</i><span>写递归要有哪两件事？<em class="step s3">　出口和变小。</em></span></p>
+    <p><i>Q3</i><span>total(3) 怎么算出 6？<em class="step s4">　3 + total(2)，total(2) 是 2 + total(1)，total(1) 是 1，再一层层交回。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>countdown(n - 1)</code><span>函数里调用自己，每次变小</span></div>
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>if n == 0:</code><span>出口：小到一眼能答就停</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>return n + total(n - 1)</code><span>用小一号的结果算出大的</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">先调用，后输出</code><span>最里面那层最先输出</span></div>
-    <div class="r d3" style="grid-template-columns:860px 1fr"><code>RecursionError</code><span>查出口，查变小</span></div>
+  <div class="sheet3" style="--key:860px">
+    <div class="r d1"><code>countdown(n - 1)</code><span>函数里调用自己，每次变小</span></div>
+    <div class="r d1"><code>if n == 0:</code><span>出口：小到一眼能答就停</span></div>
+    <div class="r d2"><code>return n + total(n - 1)</code><span>用小一号的结果算出大的</span></div>
+    <div class="r d2"><code class="plain">先调用，后输出</code><span>最里面那层最先输出</span></div>
+    <div class="r d3"><code>RecursionError</code><span>查出口，查变小</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>兔子数列</code><span>直接递归会把同一个数算很多遍，很慢</span></div>
     <div class="r d2"><code>记住算过的</code><span>把算过的结果存进字典，下次直接拿</span></div>
     <div class="r d3"><code>汉诺塔</code><span>一层里调用自己两次，把一摞盘子搬到另一根柱子</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天学会了把大事拆成一样的小事。下节课学排序，看看怎样把一堆数排整齐。</p>
+  <p class="say r d3">今天学会了把大事拆成一样的小事。下节课学排序，看看怎样把一堆数排整齐。</p>
   <div class="foot"></div>
 </section>

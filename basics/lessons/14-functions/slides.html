@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="函数定义与调用" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 14</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">起名</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">def cheer():</span></div><b class="r d2" style="font-size:250px">叫它</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">函数定义与调用：给一段代码起个名字</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能把常用的几行打包成函数，想用几次就叫几次。</p>
+<section class="slide lay-cover" aria-label="函数定义与调用" data-chapter="开始">
+  <p class="kicker r"># LESSON 14</p>
+  <div class="cover-row"><b class="r">起名</b><div class="wire r d1"><i></i><span>def cheer():</span></div><b class="r d2">叫它</b></div>
+  <p class="headline r d3">函数定义与调用：给一段代码起个名字</p>
+  <p class="say r d3">学完你能把常用的几行打包成函数，想用几次就叫几次。</p>
   <div class="foot"></div>
 </section>
 
@@ -169,15 +169,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:540px 600px 1fr"><code>hello</code><b>不报错</b><span>没有括号，没调用</span></div>
-    <div class="r d2" style="grid-template-columns:540px 600px 1fr"><code class="plain">先调用后定义</code><b>NameError</b><span>定义写在最上面</span></div>
-    <div class="r d3" style="grid-template-columns:540px 600px 1fr"><code class="plain">函数体没缩进</code><b>IndentationError</b><span>函数体缩进 4 个空格</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:540px;--mid:600px">
+    <div class="r d1"><code>hello</code><b>不报错</b><span>没有括号，没调用</span></div>
+    <div class="r d2"><code class="plain">先调用后定义</code><b>NameError</b><span>定义写在最上面</span></div>
+    <div class="r d3"><code class="plain">函数体没缩进</code><b>IndentationError</b><span>函数体缩进 4 个空格</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">IndentationError 的意思是“缩进出错”。看到它，先看 def 下面一行有没有缩进。</p>
+  <p class="say r d3">IndentationError 的意思是“缩进出错”。看到它，先看 def 下面一行有没有缩进。</p>
   <div class="foot"></div>
 </section>
 
@@ -212,7 +212,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>倒数函数上面已经写过了，放在程序最上面。</span></p>
@@ -225,38 +225,38 @@
 <!-- @answer 03 | 倒数和发射写进 countdown；循环里每次先说第几次，再调用它。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>定义了函数，为什么没有输出？<em class="step s2" style="font-style:normal;font-weight:400">　没有调用，函数体不会运行。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>调用完函数，程序接着走哪里？<em class="step s3" style="font-style:normal;font-weight:400">　回到调用那一行的下一行。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>用函数有什么好处？<em class="step s4" style="font-style:normal;font-weight:400">　写一次用多次，要改只改一处。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>定义了函数，为什么没有输出？<em class="step s2">　没有调用，函数体不会运行。</em></span></p>
+    <p><i>Q2</i><span>调用完函数，程序接着走哪里？<em class="step s3">　回到调用那一行的下一行。</em></span></p>
+    <p><i>Q3</i><span>用函数有什么好处？<em class="step s4">　写一次用多次，要改只改一处。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>def hello():</code><span>定义：起名字，后面有括号和冒号</span></div>
     <div class="r d1"><code style="white-space:pre">    print("你好")</code><span>函数体：缩进 4 个空格</span></div>
     <div class="r d2"><code>hello()</code><span>调用：名字加括号</span></div>
     <div class="r d2"><code>hello</code><span>没有括号，不会调用</span></div>
-    <div class="r d3"><code class="plain" style="font-family:var(--text)">先定义，后调用</code><span>定义写在程序最上面</span></div>
+    <div class="r d3"><code class="plain">先定义，后调用</code><span>定义写在程序最上面</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>参数</code><span>下节课：调用时往括号里塞数据，每次做的不一样</span></div>
     <div class="r d2"><code>return</code><span>下节课：函数算完把结果交回来</span></div>
     <div class="r d3"><code>print() len()</code><span>它们也是函数，Python 早就写好了</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天的函数每次都做一样的事。下节课让它根据你给的数据，做不一样的事。</p>
+  <p class="say r d3">今天的函数每次都做一样的事。下节课让它根据你给的数据，做不一样的事。</p>
   <div class="foot"></div>
 </section>

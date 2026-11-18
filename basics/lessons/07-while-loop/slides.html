@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="while 循环" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 07</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">没好</b><div class="wire r d1"><i></i><span style="font-family:var(--code)">while</span></div><b class="r d2" style="font-size:250px">继续</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">while 循环：条件成立就一直做</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能写一个猜对才结束的小游戏。</p>
+<section class="slide lay-cover" aria-label="while 循环" data-chapter="开始">
+  <p class="kicker r"># LESSON 07</p>
+  <div class="cover-row"><b class="r">没好</b><div class="wire r d1"><i></i><span>while</span></div><b class="r d2">继续</b></div>
+  <p class="headline r d3">while 循环：条件成立就一直做</p>
+  <p class="say r d3">学完你能写一个猜对才结束的小游戏。</p>
   <div class="foot"></div>
 </section>
 
@@ -202,15 +202,15 @@ while i &lt;= n:
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
     <div class="r d1"><code>while i &lt;= 3</code><b>SyntaxError</b><span>末尾要加冒号</span></div>
     <div class="r d2"><code>while i = 3:</code><b>SyntaxError</b><span>比较要写 ==</span></div>
     <div class="r d3"><code class="plain">循环前忘了写 i = 1</code><b>NameError</b><span>先给开始值</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">要小心：忘了更新变量不报错，只是停不下来。</p>
+  <p class="say r d3">要小心：忘了更新变量不报错，只是停不下来。</p>
   <div class="foot"></div>
 </section>
 
@@ -238,7 +238,7 @@ while i &lt;= n:
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>数有几位事先不知道，所以用 while。怎么取出个位？第 3 课学过。</span></p>
@@ -251,19 +251,19 @@ while i &lt;= n:
 <!-- @answer 04 | 关键是两步：<code>n % 10</code> 取出个位，<code>n // 10</code> 去掉个位。n 变成 0，数字就念完了。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>while 和 if 有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　if 只问一次，while 反复问。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>写 while 要想好哪三件事？<em class="step s3" style="font-style:normal;font-weight:400">　开始值、继续条件、更新。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>什么时候用 while 更合适？<em class="step s4" style="font-style:normal;font-weight:400">　不知道要重复几次的时候。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>while 和 if 有什么不同？<em class="step s2">　if 只问一次，while 反复问。</em></span></p>
+    <p><i>Q2</i><span>写 while 要想好哪三件事？<em class="step s3">　开始值、继续条件、更新。</em></span></p>
+    <p><i>Q3</i><span>什么时候用 while 更合适？<em class="step s4">　不知道要重复几次的时候。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>while 条件:</code><span>条件成立就运行缩进的行，再回来问</span></div>
@@ -276,13 +276,13 @@ while i &lt;= n:
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>total = total + i</code><span>用循环把一串数加起来</span></div>
     <div class="r d2"><code>i += 1</code><span>更新变量的简写</span></div>
     <div class="r d3"><code>break</code><span>在循环中间提前跳出来</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天程序学会了等条件。下节课用循环把数加起来。</p>
+  <p class="say r d3">今天程序学会了等条件。下节课用循环把数加起来。</p>
   <div class="foot"></div>
 </section>

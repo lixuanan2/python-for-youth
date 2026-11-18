@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="列表常用操作" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 19</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">一句</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">sorted(scores)</span></div><b class="r d2" style="font-size:250px">排好</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">列表常用操作：求和、找最大、排名次</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能一句话算出总分和最高分，排出名次表，还能做比赛评分。</p>
+<section class="slide lay-cover" aria-label="列表常用操作" data-chapter="开始">
+  <p class="kicker r"># LESSON 19</p>
+  <div class="cover-row"><b class="r">一句</b><div class="wire r d1"><i></i><span>sorted(scores)</span></div><b class="r d2">排好</b></div>
+  <p class="headline r d3">列表常用操作：求和、找最大、排名次</p>
+  <p class="say r d3">学完你能一句话算出总分和最高分，排出名次表，还能做比赛评分。</p>
   <div class="foot"></div>
 </section>
 
@@ -169,15 +169,15 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:620px 420px 1fr"><code>max([])</code><b>ValueError</b><span>空列表找不出最大</span></div>
-    <div class="r d2" style="grid-template-columns:620px 420px 1fr"><code>a = a.sort()</code><b>不报错</b><span>a 变成了 None</span></div>
-    <div class="r d3" style="grid-template-columns:620px 420px 1fr"><code>sum(["1", "2"])</code><b>TypeError</b><span>只能加数，先用 int()</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:620px;--mid:420px">
+    <div class="r d1"><code>max([])</code><b>ValueError</b><span>空列表找不出最大</span></div>
+    <div class="r d2"><code>a = a.sort()</code><b>不报错</b><span>a 变成了 None</span></div>
+    <div class="r d3"><code>sum(["1", "2"])</code><b>TypeError</b><span>只能加数，先用 int()</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">记住：sort 改原来的、什么也不交回；sorted 交回新的。</p>
+  <p class="say r d3">记住：sort 改原来的、什么也不交回；sorted 交回新的。</p>
   <div class="foot"></div>
 </section>
 
@@ -208,7 +208,7 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>先把分数存进列表，再排好顺序。最高分和最低分在哪？</span></p>
@@ -221,38 +221,38 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
 <!-- @answer 02 | 排好序以后，<code>s[1:-1]</code> 去掉最低和最高各一个，再求平均。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>平均分怎么一句话算出来？<em class="step s2" style="font-style:normal;font-weight:400">　sum 除以 len。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>sort 和 sorted 有什么不同？<em class="step s3" style="font-style:normal;font-weight:400">　sort 改原来的，sorted 交回新的。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>用 max 前要想到什么？<em class="step s4" style="font-style:normal;font-weight:400">　列表会不会是空的。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>平均分怎么一句话算出来？<em class="step s2">　sum 除以 len。</em></span></p>
+    <p><i>Q2</i><span>sort 和 sorted 有什么不同？<em class="step s3">　sort 改原来的，sorted 交回新的。</em></span></p>
+    <p><i>Q3</i><span>用 max 前要想到什么？<em class="step s4">　列表会不会是空的。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>sum(a)  max(a)  min(a)</code><span>总和、最大、最小</span></div>
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>sum(a) / len(a)</code><span>平均数</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>sorted(a, reverse=True)</code><span>交回排好的新列表</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>a.sort()</code><span>直接排好 a，交回 None</span></div>
-    <div class="r d3" style="grid-template-columns:860px 1fr"><code>x in a   a[1:-1]</code><span>在不在；去掉头尾</span></div>
+  <div class="sheet3" style="--key:860px">
+    <div class="r d1"><code>sum(a)  max(a)  min(a)</code><span>总和、最大、最小</span></div>
+    <div class="r d1"><code>sum(a) / len(a)</code><span>平均数</span></div>
+    <div class="r d2"><code>sorted(a, reverse=True)</code><span>交回排好的新列表</span></div>
+    <div class="r d2"><code>a.sort()</code><span>直接排好 a，交回 None</span></div>
+    <div class="r d3"><code>x in a   a[1:-1]</code><span>在不在；去掉头尾</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>二维列表</code><span>下节课：列表里放列表，像一张表格</span></div>
     <div class="r d2"><code>a.count(x)</code><span>数一数某个数出现几次</span></div>
     <div class="r d3"><code>round()</code><span>把平均分保留一位小数</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天用一句话做了以前要写好几行的事。下节课把列表排成一张表格。</p>
+  <p class="say r d3">今天用一句话做了以前要写好几行的事。下节课把列表排成一张表格。</p>
   <div class="foot"></div>
 </section>

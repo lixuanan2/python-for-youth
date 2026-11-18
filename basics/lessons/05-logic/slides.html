@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="逻辑运算" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 05</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">条件</b><div class="wire r d1"><i></i><span style="font-family:var(--code)">and or not</span></div><b class="r d2" style="font-size:250px">条件</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">逻辑运算：把条件连起来</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让程序一次看好几个条件，再做决定。</p>
+<section class="slide lay-cover" aria-label="逻辑运算" data-chapter="开始">
+  <p class="kicker r"># LESSON 05</p>
+  <div class="cover-row"><b class="r">条件</b><div class="wire r d1"><i></i><span>and or not</span></div><b class="r d2">条件</b></div>
+  <p class="headline r d3">逻辑运算：把条件连起来</p>
+  <p class="say r d3">学完你能让程序一次看好几个条件，再做决定。</p>
   <div class="foot"></div>
 </section>
 
@@ -236,15 +236,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
     <div class="r d1"><code>x &gt; 1 and &lt; 5</code><b>SyntaxError</b><span>两边都要写完整</span></div>
     <div class="r d2"><code>x &gt; 1 And x &lt; 5</code><b>SyntaxError</b><span>and 全部小写</span></div>
     <div class="r d3"><code>x &gt; 1 &amp;&amp; x &lt; 5</code><b>SyntaxError</b><span>Python 写 and</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">上面三种会报错，还算好找。下一页这种不报错，更要小心。</p>
+  <p class="say r d3">上面三种会报错，还算好找。下一页这种不报错，更要小心。</p>
   <div class="foot"></div>
 </section>
 
@@ -270,7 +270,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>规则分两层：“至少一门满 90 分”和“两门都满 60 分”。先分开想。</span></p>
@@ -283,19 +283,19 @@
 <!-- @answer 07 | 至少一门满 90 用 or，先加括号，再用 and 连及格。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>and 和 or 有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　and 要都成立，or 有一个成立就行。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>x &gt;= 60 and x &lt; 90 含 90 吗？<em class="step s3" style="font-style:normal;font-weight:400">　不含，90 &lt; 90 不成立。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>and 和 or 混着用，怎么写才清楚？<em class="step s4" style="font-style:normal;font-weight:400">　加括号。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>and 和 or 有什么不同？<em class="step s2">　and 要都成立，or 有一个成立就行。</em></span></p>
+    <p><i>Q2</i><span>x &gt;= 60 and x &lt; 90 含 90 吗？<em class="step s3">　不含，90 &lt; 90 不成立。</em></span></p>
+    <p><i>Q3</i><span>and 和 or 混着用，怎么写才清楚？<em class="step s4">　加括号。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>a and b</code><span>两个都成立才是 True</span></div>
@@ -304,18 +304,18 @@
     <div class="r d2"><code>x &gt;= 1 and x &lt; 9</code><span>范围：两边都写完整</span></div>
     <div class="r d3"><code>(a or b) and c</code><span>括号里的先算</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:900px;font-size:34px;color:var(--muted)">这里的 a、b 指比较这样有真假结果的条件。</p>
+  <p class="say r d3" style="font-size:34px;color:var(--muted)">这里的 a、b 指比较这样有真假结果的条件。</p>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>60 &lt;= x &lt; 90</code><span>Python 里范围还有更短的写法</span></div>
     <div class="r d2"><code>if 里面的 if</code><span>一条路里再分几条路</span></div>
     <div class="r d3"><code>for</code><span>让程序重复做事</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天程序学会了同时看好几个条件。下节课让它学会重复。</p>
+  <p class="say r d3">今天程序学会了同时看好几个条件。下节课让它学会重复。</p>
   <div class="foot"></div>
 </section>

@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="算术运算" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 03</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">算式</b><div class="wire r d1"><i></i><span>计算</span></div><b class="r d2" style="font-size:250px">结果</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">让程序替你算数</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能写面积程序，还能把糖果分清楚。</p>
+<section class="slide lay-cover" aria-label="算术运算" data-chapter="开始">
+  <p class="kicker r"># LESSON 03</p>
+  <div class="cover-row"><b class="r">算式</b><div class="wire r d1"><i></i><span>计算</span></div><b class="r d2">结果</b></div>
+  <p class="headline r d3">让程序替你算数</p>
+  <p class="say r d3">学完你能写面积程序，还能把糖果分清楚。</p>
   <div class="foot"></div>
 </section>
 
@@ -219,15 +219,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
     <div class="r d1"><code>print(3 x 4)</code><b>SyntaxError</b><span>乘号要写成 *</span></div>
     <div class="r d2"><code>print(5 / 0)</code><b style="font-size:42px">ZeroDivisionError</b><span>除数不能是 0</span></div>
     <div class="r d3"><code>int("2.5")</code><b>ValueError</b><span>小数要用 float()</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">// 和 % 除以 0 也一样会报错。</p>
+  <p class="say r d3">// 和 % 除以 0 也一样会报错。</p>
   <div class="foot"></div>
 </section>
 
@@ -253,7 +253,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>温度可能有小数，读入时用 int 还是 float？</span></p>
@@ -278,19 +278,19 @@
 <!-- @answer 06b | <code>// 60</code> 得到几分，<code>% 60</code> 得到剩下几秒。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>/、// 和 % 有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　小数除法、整除、求余数。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>2 + 3 * 4 先算哪一步？<em class="step s3" style="font-style:normal;font-weight:400">　先算乘法，结果是 14。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>什么时候用 float(input())？<em class="step s4" style="font-style:normal;font-weight:400">　读入的数可能有小数时。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>/、// 和 % 有什么不同？<em class="step s2">　小数除法、整除、求余数。</em></span></p>
+    <p><i>Q2</i><span>2 + 3 * 4 先算哪一步？<em class="step s3">　先算乘法，结果是 14。</em></span></p>
+    <p><i>Q3</i><span>什么时候用 float(input())？<em class="step s4">　读入的数可能有小数时。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>3 * 4</code><span>乘法，结果是 12</span></div>
@@ -303,13 +303,13 @@
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>2 ** 3</code><span>乘方，2 的 3 次方</span></div>
     <div class="r d2"><code>round()</code><span>保留几位小数，规则和四舍五入不完全一样</span></div>
     <div class="r d3"><code>-7 // 2</code><span>负数的整除和余数</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天学会了算式，程序就能替你算账了。下节课让它学会做判断。</p>
+  <p class="say r d3">今天学会了算式，程序就能替你算账了。下节课让它学会做判断。</p>
   <div class="foot"></div>
 </section>

@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="字符串常用方法" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 13</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">乱糟</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">.strip() .split()</span></div><b class="r d2" style="font-size:250px">整齐</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">字符串常用方法：Python 自带的整理工具</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能去掉多余的空格、换掉词语，还能把一句话切开再拼回去。</p>
+<section class="slide lay-cover" aria-label="字符串常用方法" data-chapter="开始">
+  <p class="kicker r"># LESSON 13</p>
+  <div class="cover-row"><b class="r">乱糟</b><div class="wire r d1"><i></i><span>.strip() .split()</span></div><b class="r d2">整齐</b></div>
+  <p class="headline r d3">字符串常用方法：Python 自带的整理工具</p>
+  <p class="say r d3">学完你能去掉多余的空格、换掉词语，还能把一句话切开再拼回去。</p>
   <div class="foot"></div>
 </section>
 
@@ -169,15 +169,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:620px 440px 1fr"><code>name.strip()</code><b>不报错</b><span>没有存起来，name 没变</span></div>
-    <div class="r d2" style="grid-template-columns:620px 440px 1fr"><code>line.split(" ")</code><b>不报错</b><span>连着的空格切出空字符串</span></div>
-    <div class="r d3" style="grid-template-columns:620px 440px 1fr"><code>",".join([1, 2])</code><b>TypeError</b><span>join 只能拼字符串</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:620px;--mid:440px">
+    <div class="r d1"><code>name.strip()</code><b>不报错</b><span>没有存起来，name 没变</span></div>
+    <div class="r d2"><code>line.split(" ")</code><b>不报错</b><span>连着的空格切出空字符串</span></div>
+    <div class="r d3"><code>",".join([1, 2])</code><b>TypeError</b><span>join 只能拼字符串</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">方法做出来的是新字符串。用完记得存起来，或者直接输出。</p>
+  <p class="say r d3">方法做出来的是新字符串。用完记得存起来，或者直接输出。</p>
   <div class="foot"></div>
 </section>
 
@@ -203,7 +203,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>两种分隔符太麻烦，先把连字符都换成空格。</span></p>
@@ -216,38 +216,38 @@
 <!-- @answer 02 | 先把 - 换成空格；<code>split()</code> 不写参数，连着的空格只算一处；再用一个空格 join 起来。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>name.strip() 之后，name 变了吗？<em class="step s2" style="font-style:normal;font-weight:400">　没变，要存起来才算数。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>split 和 join 各得到什么？<em class="step s3" style="font-style:normal;font-weight:400">　split 得到列表，join 得到字符串。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>按空格切词，为什么一般不写 " "？<em class="step s4" style="font-style:normal;font-weight:400">　不写能把连着的空格当成一处。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>name.strip() 之后，name 变了吗？<em class="step s2">　没变，要存起来才算数。</em></span></p>
+    <p><i>Q2</i><span>split 和 join 各得到什么？<em class="step s3">　split 得到列表，join 得到字符串。</em></span></p>
+    <p><i>Q3</i><span>按空格切词，为什么一般不写 " "？<em class="step s4">　不写能把连着的空格当成一处。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:780px 1fr"><code>s.strip()</code><span>去掉两头的空格</span></div>
-    <div class="r d1" style="grid-template-columns:780px 1fr"><code>s.replace("旧", "新")</code><span>把旧的都换成新的</span></div>
-    <div class="r d2" style="grid-template-columns:780px 1fr"><code>s.count("a")</code><span>数一数出现几次</span></div>
-    <div class="r d2" style="grid-template-columns:780px 1fr"><code>s.split()  s.split(",")</code><span>按空格或逗号切成列表</span></div>
-    <div class="r d3" style="grid-template-columns:780px 1fr"><code>"-".join(words)</code><span>用连接符把列表拼起来</span></div>
+  <div class="sheet3" style="--key:780px">
+    <div class="r d1"><code>s.strip()</code><span>去掉两头的空格</span></div>
+    <div class="r d1"><code>s.replace("旧", "新")</code><span>把旧的都换成新的</span></div>
+    <div class="r d2"><code>s.count("a")</code><span>数一数出现几次</span></div>
+    <div class="r d2"><code>s.split()  s.split(",")</code><span>按空格或逗号切成列表</span></div>
+    <div class="r d3"><code>"-".join(words)</code><span>用连接符把列表拼起来</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>upper() lower()</code><span>英文变大写、变小写</span></div>
     <div class="r d2"><code>find()</code><span>找一找某个词在第几个位置</span></div>
     <div class="r d3"><code>def</code><span>下节课：自己造一个工具，起个名字反复用</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天用了 Python 自带的工具。下节课，自己动手造工具。</p>
+  <p class="say r d3">今天用了 Python 自带的工具。下节课，自己动手造工具。</p>
   <div class="foot"></div>
 </section>

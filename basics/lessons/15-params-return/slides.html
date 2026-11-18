@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="参数与返回值" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 15</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">给它</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">area(3, 4)</span></div><b class="r d2" style="font-size:250px">还你</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">参数与返回值：给函数数据，让它交回结果</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能写出算面积、判等级的函数，把算出的结果接着拿来用。</p>
+<section class="slide lay-cover" aria-label="参数与返回值" data-chapter="开始">
+  <p class="kicker r"># LESSON 15</p>
+  <div class="cover-row"><b class="r">给它</b><div class="wire r d1"><i></i><span>area(3, 4)</span></div><b class="r d2">还你</b></div>
+  <p class="headline r d3">参数与返回值：给函数数据，让它交回结果</p>
+  <p class="say r d3">学完你能写出算面积、判等级的函数，把算出的结果接着拿来用。</p>
   <div class="foot"></div>
 </section>
 
@@ -184,15 +184,15 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:600px 440px 1fr"><code>area(3)</code><b>TypeError</b><span>参数有几个，就给几个</span></div>
-    <div class="r d2" style="grid-template-columns:600px 440px 1fr"><code class="plain">函数里只 print</code><b>拿到 None</b><span>要接着用结果就 return</span></div>
-    <div class="r d3" style="grid-template-columns:600px 440px 1fr"><code class="plain">return 后面还写代码</code><b>不报错</b><span>那几行永远轮不到</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--mid:440px">
+    <div class="r d1"><code>area(3)</code><b>TypeError</b><span>参数有几个，就给几个</span></div>
+    <div class="r d2"><code class="plain">函数里只 print</code><b>拿到 None</b><span>要接着用结果就 return</span></div>
+    <div class="r d3"><code class="plain">return 后面还写代码</code><b>不报错</b><span>那几行永远轮不到</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">分清两件事：print 是给人看的，return 是交给程序接着用的。</p>
+  <p class="say r d3">分清两件事：print 是给人看的，return 是交给程序接着用的。</p>
   <div class="foot"></div>
 </section>
 
@@ -220,7 +220,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>bigger 就是上面“谁大就交回谁”的那个函数。</span></p>
@@ -233,38 +233,38 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
 <!-- @answer 03 | 先比出 a、b 里大的，再拿它和 c 比：<code>bigger(bigger(a, b), c)</code>。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>调用时给的数据，按什么放进参数？<em class="step s2" style="font-style:normal;font-weight:400">　按顺序，一个对一个。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>print 和 return 有什么不同？<em class="step s3" style="font-style:normal;font-weight:400">　print 给人看，return 交回结果接着用。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>碰到 return 以后，函数还会往下走吗？<em class="step s4" style="font-style:normal;font-weight:400">　不会，马上结束。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>调用时给的数据，按什么放进参数？<em class="step s2">　按顺序，一个对一个。</em></span></p>
+    <p><i>Q2</i><span>print 和 return 有什么不同？<em class="step s3">　print 给人看，return 交回结果接着用。</em></span></p>
+    <p><i>Q3</i><span>碰到 return 以后，函数还会往下走吗？<em class="step s4">　不会，马上结束。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div style="grid-template-columns:780px 1fr" class="r d1"><code>def area(w, h):</code><span>括号里是参数</span></div>
-    <div style="grid-template-columns:780px 1fr" class="r d1"><code style="white-space:pre">    return w * h</code><span>交回结果，函数结束</span></div>
-    <div style="grid-template-columns:780px 1fr" class="r d2"><code>s = area(3, 4)</code><span>3 给 w，4 给 h，s 是 12</span></div>
-    <div style="grid-template-columns:780px 1fr" class="r d2"><code>area(1, 2) + area(3, 4)</code><span>返回值可以接着算</span></div>
-    <div style="grid-template-columns:780px 1fr" class="r d3"><code class="plain" style="font-family:var(--text)">没有 return</code><span>交回 None</span></div>
+  <div class="sheet3" style="--key:780px">
+    <div class="r d1"><code>def area(w, h):</code><span>括号里是参数</span></div>
+    <div class="r d1"><code style="white-space:pre">    return w * h</code><span>交回结果，函数结束</span></div>
+    <div class="r d2"><code>s = area(3, 4)</code><span>3 给 w，4 给 h，s 是 12</span></div>
+    <div class="r d2"><code>area(1, 2) + area(3, 4)</code><span>返回值可以接着算</span></div>
+    <div class="r d3"><code class="plain">没有 return</code><span>交回 None</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>max() abs()</code><span>Python 自带的函数，也有参数和返回值</span></div>
     <div class="r d2"><code>import math</code><span>下节课：借来一整盒数学函数</span></div>
     <div class="r d3"><code>默认参数</code><span>不给数据时，参数自己用一个默认值</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天自己写了会算数的函数。下节课看看 Python 早就准备好的数学函数。</p>
+  <p class="say r d3">今天自己写了会算数的函数。下节课看看 Python 早就准备好的数学函数。</p>
   <div class="foot"></div>
 </section>

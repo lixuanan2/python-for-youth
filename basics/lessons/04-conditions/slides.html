@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="条件判断" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 04</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">条件</b><div class="wire r d1"><i></i><span>判断</span></div><b class="r d2" style="font-size:250px">选择</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">让程序自己做决定</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让程序看情况走不同的路。</p>
+<section class="slide lay-cover" aria-label="条件判断" data-chapter="开始">
+  <p class="kicker r"># LESSON 04</p>
+  <div class="cover-row"><b class="r">条件</b><div class="wire r d1"><i></i><span>判断</span></div><b class="r d2">选择</b></div>
+  <p class="headline r d3">让程序自己做决定</p>
+  <p class="say r d3">学完你能让程序看情况走不同的路。</p>
   <div class="foot"></div>
 </section>
 
@@ -187,15 +187,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
     <div class="r d1"><code>if x &gt; 3</code><b>SyntaxError</b><span>末尾要加冒号</span></div>
     <div class="r d2"><code>if x = 3:</code><b>SyntaxError</b><span>比较要写 ==</span></div>
     <div class="r d3"><code class="plain">if 下一行没缩进</code><b style="font-size:42px">IndentationError</b><span>缩进 4 个空格</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">要小心：把一行缩进错了，有时不报错，只是结果悄悄变了。</p>
+  <p class="say r d3">要小心：把一行缩进错了，有时不报错，只是结果悄悄变了。</p>
   <div class="foot"></div>
 </section>
 
@@ -221,7 +221,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>运费有两种算法，用什么来分开这两条路？</span></p>
@@ -234,19 +234,19 @@
 <!-- @answer 06 | 不超过 3 公斤就是 10 元；超过的部分是 <code>w - 3</code> 公斤，每公斤 2 元，加在 10 元上。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>= 和 == 有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　= 是放进去，== 是比较。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>怎么知道一行归 if 管？<em class="step s3" style="font-style:normal;font-weight:400">　看它有没有缩进。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>if、elif、else 能走几条路？<em class="step s4" style="font-style:normal;font-weight:400">　最多走一条。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>= 和 == 有什么不同？<em class="step s2">　= 是放进去，== 是比较。</em></span></p>
+    <p><i>Q2</i><span>怎么知道一行归 if 管？<em class="step s3">　看它有没有缩进。</em></span></p>
+    <p><i>Q3</i><span>if、elif、else 能走几条路？<em class="step s4">　最多走一条。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>==  !=</code><span>等于、不等于</span></div>
@@ -259,13 +259,13 @@
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>and  or  not</code><span>把几个条件组合起来</span></div>
     <div class="r d2"><code>if 里面的 if</code><span>一条路里再分几条路</span></div>
     <div class="r d3"><code>for  while</code><span>让程序重复做事</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天程序学会了做决定。下节课让它一次看好几个条件。</p>
+  <p class="say r d3">今天程序学会了做决定。下节课让它一次看好几个条件。</p>
   <div class="foot"></div>
 </section>

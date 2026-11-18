@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="break 和 continue" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 27</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">停下</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">break / continue</span></div><b class="r d2" style="font-size:250px">跳过</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">break 和 continue：让循环听指挥</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让循环在中途停下，或者跳过这一次，写出读到“再见”才结束的聊天程序。</p>
+<section class="slide lay-cover" aria-label="break 和 continue" data-chapter="开始">
+  <p class="kicker r"># LESSON 27</p>
+  <div class="cover-row"><b class="r">停下</b><div class="wire r d1"><i></i><span>break / continue</span></div><b class="r d2">跳过</b></div>
+  <p class="headline r d3">break 和 continue：让循环听指挥</p>
+  <p class="say r d3">学完你能让循环在中途停下，或者跳过这一次，写出读到“再见”才结束的聊天程序。</p>
   <div class="foot"></div>
 </section>
 
@@ -116,15 +116,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:700px 400px 1fr"><code class="plain">break 写在循环外</code><b>SyntaxError</b><span>break 只能用在循环里</span></div>
-    <div class="r d2" style="grid-template-columns:700px 400px 1fr"><code class="plain">while True 没写 break</code><b>停不下来</b><span>要有一个能走到的出口</span></div>
-    <div class="r d3" style="grid-template-columns:700px 400px 1fr"><code class="plain">该停处写成 continue</code><b>停不下来</b><span>continue 只跳过这一次</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:700px;--mid:400px">
+    <div class="r d1"><code class="plain">break 写在循环外</code><b>SyntaxError</b><span>break 只能用在循环里</span></div>
+    <div class="r d2"><code class="plain">while True 没写 break</code><b>停不下来</b><span>要有一个能走到的出口</span></div>
+    <div class="r d3"><code class="plain">该停处写成 continue</code><b>停不下来</b><span>continue 只跳过这一次</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:840px">写 while True 时先问自己：哪一句 break 能让它停下？那句真的走得到吗？</p>
+  <p class="say r d3">写 while True 时先问自己：哪一句 break 能让它停下？那句真的走得到吗？</p>
   <div class="foot"></div>
 </section>
 
@@ -155,7 +155,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>用 while True 一直读。读到 -1 用 break 停下，和动手题读到 0 一样。</span></p>
@@ -168,38 +168,38 @@
 <!-- @answer 02 lines 1-10 | 读到 -1 用 break 结束；不在 0 到 100 的用 continue 跳过，不加也不数。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>break 做什么？<em class="step s2" style="font-style:normal;font-weight:400">　马上跳出整个循环，去运行循环后面的。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>continue 做什么？<em class="step s3" style="font-style:normal;font-weight:400">　跳过这一圈剩下的，直接进下一圈。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>while True 什么时候停？<em class="step s4" style="font-style:normal;font-weight:400">　这节课靠里面的 break 停，所以要保证 break 一定走得到。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>break 做什么？<em class="step s2">　马上跳出整个循环，去运行循环后面的。</em></span></p>
+    <p><i>Q2</i><span>continue 做什么？<em class="step s3">　跳过这一圈剩下的，直接进下一圈。</em></span></p>
+    <p><i>Q3</i><span>while True 什么时候停？<em class="step s4">　这节课靠里面的 break 停，所以要保证 break 一定走得到。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>break</code><span>整个循环马上结束</span></div>
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>continue</code><span>跳过这一次，进下一圈</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>while True:</code><span>一直转，靠里面的 break 停</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>if word == "再见":</code><span>先判断，再 break</span></div>
-    <div class="r d3" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">break 前面的已经做了</code><span>不会收回</span></div>
+  <div class="sheet3" style="--key:860px">
+    <div class="r d1"><code>break</code><span>整个循环马上结束</span></div>
+    <div class="r d1"><code>continue</code><span>跳过这一次，进下一圈</span></div>
+    <div class="r d2"><code>while True:</code><span>一直转，靠里面的 break 停</span></div>
+    <div class="r d2"><code>if word == "再见":</code><span>先判断，再 break</span></div>
+    <div class="r d3"><code class="plain">break 前面的已经做了</code><span>不会收回</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>两层循环里的 break</code><span>只跳出它所在的那一层</span></div>
     <div class="r d2"><code>for ... else</code><span>循环没被 break 打断时，才运行 else</span></div>
     <div class="r d3"><code>pass</code><span>什么也不做，先占个位置</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天学会了让循环听指挥：该停就停，该跳就跳。</p>
+  <p class="say r d3">今天学会了让循环听指挥：该停就停，该跳就跳。</p>
   <div class="foot"></div>
 </section>
