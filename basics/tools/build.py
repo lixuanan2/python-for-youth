@@ -216,12 +216,15 @@ def css_string(text):
 KEYWORDS = {'python': r'\b(?:def|return|if|elif|else|for|while|in|and|or|not|is|True|False|None|import|from|as|break|continue|try|except|pass|global|lambda)\b',
             'cpp': r'(?:#include|\b(?:int|long|double|float|char|bool|void|string|auto|const|struct|return|if|else|for|while|do|break|continue|true|false|using|namespace)\b)'}
 # A string may start with f (f-string): the f takes the string's colour, as on the hand-coloured pages.
-TOKEN = r'(?P<s>(?:\bf)?\'[^\']*\'|(?:\bf)?"[^"]*")|(?P<m>\b\d+(?:\.\d+)?\b)|(?P<f>\b\w+(?=\())|(?P<k>%s)'
+# A comment runs to the end of its line and is grey.
+COMMENT = {'python': r'#.*', 'cpp': r'//.*'}
+TOKEN = r'(?P<s>(?:\bf)?\'[^\']*\'|(?:\bf)?"[^"]*")|(?P<c>%s)|(?P<m>\b\d+(?:\.\d+)?\b)|(?P<f>\b\w+(?=\())|(?P<k>%s)'
 
 
 def highlight(code):
     """Program text as an editor shows it: one .ln per line, coloured with the classes the slides use."""
-    token = re.compile(TOKEN % KEYWORDS[site()['language']])
+    language = site()['language']
+    token = re.compile(TOKEN % (COMMENT[language], KEYWORDS[language]))
 
     def line(text):
         out, at = [], 0
@@ -397,7 +400,9 @@ def fit_code(slides, lesson):
             width, height, top = room
             own = re.search(r'width:\s*(\d+)px', attrs)
             width = int(own.group(1)) if own else width
-            versions = [[html.unescape(re.sub(r'<[^>]+>', '', re.sub(r'<span class="orig">.*?</span>', '', l)))
+            # A yellow box takes the room of its value and about three more characters for its frame and padding.
+            slot = lambda l: re.sub(r'<input[^>]*value="([^"]*)"[^>]*>', lambda m: m.group(1) + '   ', l)
+            versions = [[html.unescape(re.sub(r'<[^>]+>', '', slot(re.sub(r'<span class="orig">.*?</span>', '', l))))
                          for l in re.findall(r'<span class="ln[^"]*">(.*?)</span>(?=<span class="ln|$)', code, re.S)] or ['']
                         for code in re.findall(r'<pre[^>]*>(.*?)</pre>', inner, re.S)]
             # The grey "原来是 ..." note sits at the end of its line in a smaller font; it does not set the size.
