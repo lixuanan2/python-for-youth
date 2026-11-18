@@ -329,12 +329,33 @@ def build_code(slides, lesson):
 
 
 # Where each layout puts its code box: (width, height for the box, largest font). The build picks the font so the code
-# fits; a page can still set --fs or a width of its own. Keep in step with template/layouts.css.
+# fits; a page can still set --fs or a width of its own. Keep in step with template/layouts.css. A course can change
+# them in site.json "code_room" (see code_rooms); a changed width of predict or ask also widens that column in the CSS.
 # In walk and predict the sentences go under the code, so the height is what the column leaves after them (code_height).
 CODE_ROOM = {'walk': (960, 790, 52), 'walk wide': (1060, 790, 52), 'walk narrow': (840, 790, 52),
              'predict': (1000, 740, 58), 'ask': (800, 600, 48), 'ask top': (1728, 300, 48), 'ask bug': (1040, 640, 50), 'try': (1200, 260, 44)}
 # An editor may hold two versions of its code (pre.code.was, then the new one shown from data-change); the font fits both.
 EDITOR = re.compile(r'<div class="editor([^"]*)"((?: [\w-]+="[^"]*")*)>(\s*<div class="tab">.*?</div>((?:\s*<pre class="code[^"]*"[^>]*>.*?</pre>)+))', re.S)
+
+
+def code_rooms():
+    """CODE_ROOM with the course's own sizes from site.json "code_room" (e.g. {"predict": [1160, 740, 58]}): a language
+    whose programs are longer gives its code boxes more room. Without it a course uses CODE_ROOM as it is."""
+    own = site().get('code_room', {})
+    unknown = set(own) - set(CODE_ROOM)
+    assert not unknown, f'site.json code_room: no such layout {", ".join(sorted(unknown))}; use {", ".join(CODE_ROOM)}'
+    return {name: tuple(own.get(name, room)) for name, room in CODE_ROOM.items()}
+
+
+# The widths layouts.css gives the code column, as CSS variables a course can change through site.json "code_room".
+CODE_WIDTH = {'predict': '--predict-code', 'ask': '--ask-code', 'ask bug': '--ask-bug-code'}
+
+
+def code_width_css():
+    """The :root rule that widens the code column where site.json "code_room" changes a width; empty otherwise."""
+    own = site().get('code_room', {})
+    rules = [f'{CODE_WIDTH[name]}:{room[0]}px' for name, room in own.items() if name in CODE_WIDTH and room[0] != CODE_ROOM[name][0]]
+    return f':root{{{";".join(rules)}}}' if rules else ''
 
 
 def code_room(section):
@@ -347,7 +368,7 @@ def code_room(section):
         layout = 'ask bug'
     elif layout == 'ask' and 'top' in names:
         layout = 'ask top'
-    return CODE_ROOM.get(layout)
+    return layout, code_rooms().get(layout)
 
 
 def outside(section, *cells):
@@ -368,8 +389,6 @@ def code_height(section, layout, width, column):
     if not layout.startswith(('walk', 'predict')):
         return column
     rest = outside(section, 'right', 'answer')
-    if layout == 'predict' and re.search(r'<section class="slide[^"]* under\b', section):
-        width = 1728  # .under: the sentences go across the page
 
     def lines(say):
         parts = [html.unescape(re.sub(r'<[^>]+>', '', part)) for part in re.split(r'<br\s*/?>', say)]
@@ -387,10 +406,9 @@ def code_height(section, layout, width, column):
 def fit_code(slides, lesson):
     """Give each code box a font size that fits its layout, from its line count and longest line."""
     def section(page):
-        room = code_room(page.group())
+        layout, room = code_room(page.group())
         if not room:
             return page.group()
-        layout = next(name for name, value in CODE_ROOM.items() if value is room)
         room = (room[0], code_height(page.group(), layout, room[0], room[1]), room[2])
 
         def editor(match):
@@ -467,7 +485,7 @@ def answer_pages(slides, lesson):
 
 def render(lesson):
     slides = read(f'lessons/{lesson["id"]}/slides.html').rstrip()
-    sheets = [read('vendor/viewport.css'), read('template/theme.css')] + ([read('template/layouts.css')] if uses_layouts(slides) else [])
+    sheets = [read('vendor/viewport.css'), read('template/theme.css')] + ([read('template/layouts.css'), code_width_css()] if uses_layouts(slides) else [])
     css = '\n'.join([font_face(w) for w in (400, 700, 800)] + sheets)
     page = read('template/page.html')
     if uses_layouts(slides):

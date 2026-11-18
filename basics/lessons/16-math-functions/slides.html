@@ -55,7 +55,7 @@
 </section>
 
 <!-- predict: sqrt gives a float -->
-<section class="slide dark lay-predict under" aria-label="猜一猜：sqrt 的结果" data-steps="2" data-at="2">
+<section class="slide dark lay-predict" aria-label="猜一猜：sqrt 的结果" data-steps="3" data-at="3">
   <h2 class="t">猜一猜：输出 4 还是 4.0？</h2>
   <div class="editor"><div class="tab">guess.py</div>
 <pre class="code">import math
@@ -66,9 +66,10 @@ print(math.sqrt(16))</pre></div>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
-      <p class="say step s2">是 4.0。sqrt 的结果总是小数，哪怕刚好开得尽，和 / 一样。<br>想要整数，就用 int() 包一下。</p>
+      <p class="say only2">是 4.0。sqrt 的结果总是小数，哪怕刚好开得尽，和 / 一样。</p>
+      <p class="say step s3">想要整数，就用 int() 包一下。</p>
     </div>
-  <a class="ide step s2">▶ 在 IDE 验证</a>
+  <a class="ide step s3">▶ 在 IDE 验证</a>
   <div class="foot"></div>
 </section>
 
@@ -101,14 +102,17 @@ print(math.sqrt(16))</pre></div>
 </section>
 
 <!-- forgot import -->
-<section class="slide dark lay-predict under" aria-label="忘了 import">
+<section class="slide dark lay-predict" aria-label="忘了 import" data-steps="2" data-at="2">
   <h2 class="t r">忘了 import 会怎样？</h2>
   <div class="editor r d1"><div class="tab">no_import.py（只阅读）</div>
 <pre class="code">print(math.sqrt(16))</pre></div>
   <div class="answer">
     <div class="slip tilt r d2" style="width:600px"><small>屏幕上</small><pre style="font-size:36px;white-space:pre-wrap">NameError: name 'math' is not defined</pre></div>
   </div>
-  <p class="say r d3">程序不认识 math，报 NameError。工具盒要先借来，才能用里面的工具。<br>import math 写在程序第一行，后面整个程序都能用。abs 不用 import，它是 Python 自带的。</p>
+  <div class="turns r d3">
+    <p class="say only1">程序不认识 math，报 NameError。工具盒要先借来，才能用里面的工具。</p>
+    <p class="say step s2">import math 写在程序第一行，后面整个程序都能用。abs 不用 import，它是 Python 自带的。</p>
+  </div>
   <div class="foot"></div>
 </section>
 

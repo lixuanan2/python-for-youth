@@ -564,6 +564,9 @@ dialog p{color:var(--muted);font-size:15px}
 /* A code box keeps its full height when the page is crowded (a grid would otherwise squeeze a box that hides its overflow). */
 .slide[class*=" lay-"]>.editor{min-height:min-content}
 
+/* The code column of predict and ask is a variable: build.py sets it from site.json "code_room" for a course whose
+   programs need more room. */
+
 /* 1 cover: the lesson number, two big words joined by a line with a bit of code on it, the title and one sentence. */
 .lay-cover>.kicker{top:96px;font:400 36px var(--code);color:var(--muted)}
 .lay-cover>.cover-row{position:absolute;left:96px;right:96px;top:290px}
@@ -604,9 +607,9 @@ dialog p{color:var(--muted);font-size:15px}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
    the IDE button at the bottom on the right. */
-.lay-predict{display:grid;grid-template-columns:1000px 1fr;grid-template-rows:max-content auto 1fr;grid-template-areas:"code answer" "say answer" "say ide";
+.lay-predict{display:grid;grid-template-columns:var(--predict-code,1000px) 1fr;grid-template-rows:max-content auto 1fr;grid-template-areas:"code answer" "say answer" "say ide";
   column-gap:100px;row-gap:50px;padding:220px 96px 120px;align-items:start}
-.lay-predict>.editor{grid-area:code;width:1000px}
+.lay-predict>.editor{grid-area:code;width:var(--predict-code,1000px)}
 .lay-predict>.answer{grid-area:answer;padding-top:30px}
 .lay-predict>.answer.big{font:800 130px/1.3 var(--code);color:var(--clay)}
 .lay-predict>.say,.lay-predict>.turns,.lay-predict>.says{grid-area:say}
@@ -616,9 +619,8 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-predict>.answer:not(.turns,.big),.lay-predict>.answer.turns>div:not([class]){display:flex;flex-direction:column;align-items:flex-start;gap:50px}
 .lay-predict .crate{margin-top:92px}
 .lay-predict>.ide{grid-area:ide;justify-self:start;align-self:end}
-/* .under: long sentences go across the page under both the code and the answer, the IDE button under them. */
-.lay-predict.under{grid-template-areas:"code answer" "say say" "ide ide"}
-.lay-predict.under>.ide{align-self:start}
+/* An error box (.tb) under the code takes the sentence's place. */
+.lay-predict>.tb{grid-area:say;width:auto}
 
 /* 5 columns: two or three things side by side or row by row (.vs, .steps3, .sheet3, .ledger, .later, .verbs), a sentence under them. */
 .lay-columns{display:flex;flex-direction:column;gap:64px;padding:240px 96px 180px}
@@ -640,8 +642,8 @@ dialog p{color:var(--muted);font-size:15px}
    has what went wrong on the right instead of choices. */
 .lay-ask{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto 1fr;grid-template-areas:"code pick" "code fb";
   column-gap:64px;row-gap:40px;padding:220px 96px 120px;align-items:start}
-.lay-ask>.editor{grid-area:code;width:800px}
-.lay-ask:has(.pick)>.editor{width:1040px}
+.lay-ask>.editor{grid-area:code;width:var(--ask-code,800px)}
+.lay-ask:has(.pick)>.editor{width:var(--ask-bug-code,1040px)}
 .lay-ask>.quiz,.lay-ask>.say{grid-area:pick}
 .lay-ask>.editor~.quiz{grid-template-columns:1fr;gap:16px}
 .lay-ask>.fb{grid-area:fb}
@@ -663,6 +665,7 @@ dialog p{color:var(--muted);font-size:15px}
    its parts keep their own left/top. A page with much more or much less text than usual keeps its layout and changes
    a size in its own style (a font-size, a width, --fs for code). */
 
+
 :root{--lesson:"第 18 课 嵌套循环与图形"}
 </style>
 </head>
@@ -678,116 +681,136 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- the problem -->
-<section id="page-2" class="slide clay" aria-label="画一片星星">
+<section id="page-2" class="slide clay lay-notes" aria-label="画一片星星">
   <h2 class="t r">怎么画出 3 行、每行 4 颗星？</h2>
-  <div class="slip r d1" style="left:96px;top:290px;width:520px"><small style="font-size:34px">想要的样子</small><pre style="font-size:72px;line-height:1.2">****
+  <div class="notes">
+    <div class="slip r d1"><small style="font-size:34px">想要的样子</small><pre style="font-size:72px;line-height:1.2">****
 ****
 ****</pre></div>
-  <p class="abs say r d2" style="left:700px;top:310px;right:96px">画一行 4 颗星，用一个循环就行。<br>画 3 行，就是把“画一行”再重复 3 遍。</p>
-  <p class="abs say r d3" style="left:96px;right:96px;top:700px">把一个循环整个放进另一个循环里，叫“嵌套循环”。<br>先学一件小事：怎样让几颗星排在同一行，不换行。</p>
+  </div>
+  <div class="says">
+    <p class="say r d2">画一行 4 颗星，用一个循环就行。<br>画 3 行，就是把“画一行”再重复 3 遍。</p>
+    <p class="say r d3">把一个循环整个放进另一个循环里，叫“嵌套循环”。<br>先学一件小事：怎样让几颗星排在同一行，不换行。</p>
+  </div>
   <div class="foot"></div>
 </section>
 
 <!-- end="" -->
-<section id="page-3" class="slide" aria-label="end 不换行" data-steps="2" data-at="2" data-chapter="一行">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">end=""：先别换行</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">one_row.py</div>
+<section id="page-3" class="slide lay-walk" aria-label="end 不换行" data-steps="2" data-at="2" data-chapter="一行">
+  <h2 class="t">end=""：先别换行</h2>
+  <div class="editor" style="--fs:52px"><div class="tab">one_row.py</div>
 <pre class="code" data-file="solutions/01_one_row.py"><span class="ln l1"><span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">4</span>):</span><span class="ln l1">    <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln l2"><span class="f">print</span>()</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:620px;width:960px;color:var(--paper)">print 平时输出完就换行。加上 end=""，意思是“结尾什么也不加”，下一颗星就接在后面。</p>
-  <p class="abs say only2" style="left:96px;top:620px;width:960px;color:var(--paper)">这一行画完了，单独一个 print()，什么也不输出，只换行。</p>
-  <a class="ide step s2" style="left:96px;top:820px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:170px">
+  <div class="turns">
+      <p class="say only1">print 平时输出完就换行。加上 end=""，意思是“结尾什么也不加”，下一颗星就接在后面。</p>
+      <p class="say only2">这一行画完了，单独一个 print()，什么也不输出，只换行。</p>
+    </div>
+  <a class="ide step s2">▶ 在 IDE 打开</a>
+  <div class="right">
     <div class="box step"><i style="width:170px">画星</i><b style="font-size:84px">****</b></div>
     <div class="box out step s2"><i style="width:170px">print()</i><b style="font-size:56px">换行</b></div>
   </div>
 </section>
 
 <!-- predict: no end -->
-<section id="page-4" class="slide dark" aria-label="猜一猜：去掉 end" data-steps="2" data-at="2">
+<section id="page-4" class="slide dark lay-predict" aria-label="猜一猜：去掉 end" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：去掉 end=""，会画成什么样？</h2>
-  <div class="editor" style="left:96px;top:230px;width:1000px;--fs:56px"><div class="tab">guess.py</div>
+  <div class="editor" style="--fs:58px"><div class="tab">guess.py</div>
 <pre class="code"><span class="ln"><span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">4</span>):</span><span class="ln">    <span class="f">print</span>(<span class="s">"*"</span>)</span></pre></div>
-  <p class="abs only1" style="left:1240px;top:190px;font:800 480px/1 var(--code);color:var(--clay-soft)">?</p>
-  <p class="abs say only1" style="left:96px;top:560px">先在纸上画出来。</p>
-  <p class="abs step s2" style="left:1300px;top:200px;font:800 110px/1 var(--code);color:var(--clay-soft)">*<br>*<br>*<br>*</p>
-  <p class="abs say step s2" style="left:96px;top:560px;width:1100px">竖着一列。每个 print 都换一次行，4 颗星就占 4 行。<br>想排在一行，要加 end=""。</p>
-  <a class="ide step s2" style="left:96px;top:760px">▶ 在 IDE 验证</a>
+  <div class="answer turns">
+    <p class="qmark only1">?</p>
+    <p class="step s2" style="font:800 110px/1 var(--code);color:var(--clay-soft)">*<br>*<br>*<br>*</p>
+  </div>
+  <div class="turns">
+      <p class="say only1">先在纸上画出来。</p>
+      <p class="say step s2">竖着一列。每个 print 都换一次行，4 颗星就占 4 行。<br>想排在一行，要加 end=""。</p>
+    </div>
+  <a class="ide step s2">▶ 在 IDE 验证</a>
   <div class="foot"></div>
 </section>
 
 <!-- rectangle -->
-<section id="page-5" class="slide" aria-label="例题：长方形" data-steps="5" data-at="5" data-chapter="两层循环">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">例题：画长方形</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">rect.py</div>
+<section id="page-5" class="slide lay-walk" aria-label="例题：长方形" data-steps="5" data-at="5" data-chapter="两层循环">
+  <h2 class="t">例题：画长方形</h2>
+  <div class="editor" style="--fs:51px"><div class="tab">rect.py</div>
 <pre class="code was" data-file="solutions/01_one_row.py"><span class="ln"><span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">4</span>):</span><span class="ln">    <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln"><span class="f">print</span>()</span></pre>
 <pre class="code" data-change="2" data-file="solutions/02_rect.py"><span class="ln l2 l3 l4"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln l2 l3 l4">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">4</span>):</span><span class="ln l2 l3 l4">        <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln l2 l3 l4">    <span class="f">print</span>()</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">前面画一行的程序，外面再套一层 for i。原来的三行都往右缩进 4 格，归外层管。</p>
-  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">外层第一遍，i 是 0。里面的循环整个跑一遍：画 4 颗星，再换行。</p>
-  <p class="abs say only3" style="left:96px;top:700px;width:960px;color:var(--paper)">外层第二遍，i 是 1。里面的循环从头再来，又画 4 颗，换行。</p>
-  <p class="abs say only4" style="left:96px;top:700px;width:960px;color:var(--paper)">第三遍，i 是 2，画出第三行。</p>
-  <p class="abs say only5" style="left:96px;top:700px;width:960px;color:var(--paper)">外层转 3 遍，每遍里面转 4 遍，一共 3 × 4 = 12 颗星。看缩进：print() 在外层里、内层外。</p>
-  <a class="ide step s5" style="left:96px;top:900px">▶ 在 IDE 打开</a>
-  <div class="abs step s2" style="left:1210px;right:96px;top:200px;font:800 110px/1.25 var(--code)"><span>****</span><br><span class="step s3">****</span><br><span class="step s4">****</span></div>
+  <div class="turns">
+      <p class="say only1">前面画一行的程序，外面再套一层 for i。原来的三行都往右缩进 4 格，归外层管。</p>
+      <p class="say only2">外层第一遍，i 是 0。里面的循环整个跑一遍：画 4 颗星，再换行。</p>
+      <p class="say only3">外层第二遍，i 是 1。里面的循环从头再来，又画 4 颗，换行。</p>
+      <p class="say only4">第三遍，i 是 2，画出第三行。</p>
+      <p class="say only5">外层转 3 遍，每遍里面转 4 遍，一共 3 × 4 = 12 颗星。看缩进：print() 在外层里、内层外。</p>
+    </div>
+  <a class="ide step s5">▶ 在 IDE 打开</a>
+  <div class="right">
+    <div class="step s2" style="font:800 110px/1.25 var(--code)"><span>****</span><br><span class="step s3">****</span><br><span class="step s4">****</span></div>
+  </div>
 </section>
 
 <!-- outer and inner -->
-<section id="page-6" class="slide" aria-label="外层和内层">
+<section id="page-6" class="slide lay-columns" aria-label="外层和内层">
   <h2 class="t r">外层管几行，内层管每行几个</h2>
   <div class="steps3">
     <div class="r d1"><i>外</i><b>外层循环</b><span>for i in range(3)<br>转几遍，就画几行</span></div>
     <div class="r d2"><i>内</i><b>内层循环</b><span>for j in range(4)<br>每一行画几颗</span></div>
     <div class="r d3"><i>换</i><b>换行</b><span>print()<br>在外层里、内层外，每行画完换一次</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:820px">像排队做操：一排一排地站，每一排从左站到右。外层管排，内层管每排里的人。</p>
+  <p class="say r d3">像排队做操：一排一排地站，每一排从左站到右。外层管排，内层管每排里的人。</p>
   <div class="foot"></div>
 </section>
 
 <!-- quiz -->
-<section id="page-7" class="slide" aria-label="小测：几个 a">
+<section id="page-7" class="slide lay-ask" aria-label="小测：几个 a">
   <h2 class="t r">小测：一共输出几个 a？</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:46px"><div class="tab">几个？</div>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">几个？</div>
 <pre class="code"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">2</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">        <span class="f">print</span>(<span class="s">"a"</span>)</span></pre></div>
-  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="2">
+  <div class="quiz r d2" data-right="2">
     <button type="button" data-fb="内层每一遍都输出一个，不是一共只输出一轮。"><i>1</i>3 个</button>
     <button type="button" data-fb="两层的次数要相乘，不是相加。"><i>2</i>5 个</button>
     <button type="button" data-fb="答对了！外层 2 遍，每遍里面 3 个，2 × 3 = 6。没有 end，所以一个占一行。"><i>3</i>6 个</button>
     <button type="button" data-fb="外层只转 2 遍。"><i>4</i>9 个</button>
   </div>
-  <p class="fb" style="left:96px;right:1000px;top:620px" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- triangle -->
-<section id="page-8" class="slide" aria-label="三角形" data-steps="4" data-at="4" data-chapter="三角形">
-  <div class="night" style="width:1130px"></div>
-  <h2 class="t" style="color:var(--paper)">三角形：每行多一颗</h2>
-  <div class="editor" style="left:96px;top:200px;width:960px;--fs:50px"><div class="tab">triangle.py</div>
+<section id="page-8" class="slide lay-walk" aria-label="三角形" data-steps="4" data-at="4" data-chapter="三角形">
+  <h2 class="t">三角形：每行多一颗</h2>
+  <div class="editor" style="--fs:51px"><div class="tab">triangle.py</div>
 <pre class="code" data-file="solutions/03_triangle.py"><span class="ln l1 l2 l3 l4"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">5</span>):</span><span class="ln l1 l2 l3 l4">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(i):</span><span class="ln l1 l2 l3 l4">        <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln l1 l2 l3 l4">    <span class="f">print</span>()</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:700px;width:960px;color:var(--paper)">关键在内层的 range(i)：i 是几，这一行就画几颗。i 是 1，画 1 颗。</p>
-  <p class="abs say only2" style="left:96px;top:700px;width:960px;color:var(--paper)">i 是 2，画 2 颗。内层的次数跟着外层变。</p>
-  <p class="abs say only3" style="left:96px;top:700px;width:960px;color:var(--paper)">i 是 3，画 3 颗。</p>
-  <p class="abs say only4" style="left:96px;top:700px;width:960px;color:var(--paper)">i 是 4，画 4 颗。外层从 1 开始，第一行才不会是空的。</p>
-  <a class="ide step s4" style="left:96px;top:900px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1210px;right:96px;top:200px;font:800 110px/1.25 var(--code)"><span>*</span><br><span class="step s2">**</span><br><span class="step s3">***</span><br><span class="step s4">****</span></div>
+  <div class="turns">
+      <p class="say only1">关键在内层的 range(i)：i 是几，这一行就画几颗。i 是 1，画 1 颗。</p>
+      <p class="say only2">i 是 2，画 2 颗。内层的次数跟着外层变。</p>
+      <p class="say only3">i 是 3，画 3 颗。</p>
+      <p class="say only4">i 是 4，画 4 颗。外层从 1 开始，第一行才不会是空的。</p>
+    </div>
+  <a class="ide step s4">▶ 在 IDE 打开</a>
+  <div class="right" style="font:800 110px/1.25 var(--code)">
+<span>*</span><br><span class="step s2">**</span><br><span class="step s3">***</span><br><span class="step s4">****</span>
+  </div>
 </section>
 
 <!-- predict: starting from 0 -->
-<section id="page-9" class="slide" aria-label="猜一猜：从 0 开始" data-steps="2" data-at="2">
+<section id="page-9" class="slide lay-predict" aria-label="猜一猜：从 0 开始" data-steps="3" data-at="3">
   <h2 class="t">猜一猜：外层从 0 开始，会画成什么样？</h2>
-  <div class="editor" style="left:96px;top:220px;width:960px;--fs:50px"><div class="tab">zero.py</div>
+  <div class="editor" style="--fs:54px"><div class="tab">zero.py</div>
 <pre class="code"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(i):</span><span class="ln">        <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln">    <span class="f">print</span>()</span></pre></div>
-  <div class="slip tilt step s2" style="left:1180px;top:230px;width:600px"><small>屏幕上</small><pre style="font-size:72px;line-height:1.25">（空行）
+  <div class="answer">
+    <div class="slip tilt step s2" style="width:600px"><small>屏幕上</small><pre style="font-size:72px;line-height:1.25">（空行）
 *
 **</pre></div>
-  <p class="abs say only1" style="left:96px;top:700px;width:1728px">i 依次是 0、1、2。第一行要画几颗？</p>
-  <p class="abs say step s2" style="left:96px;top:700px;width:1728px">第一行 i 是 0，range(0) 一遍也不转，一颗星也没画，只换了行，所以是一个空行。<br>画图前先想：第一行该画几个，外层从几开始。</p>
+  </div>
+  <div class="turns">
+      <p class="say only1">i 依次是 0、1、2。第一行要画几颗？</p>
+      <p class="say only2">第一行 i 是 0，range(0) 一遍也不转，一颗星也没画，只换了行，所以是一个空行。</p>
+      <p class="say step s3">画图前先想：第一行该画几个，外层从几开始。</p>
+    </div>
   <div class="foot"></div>
 </section>
 
 <!-- your turn: square -->
-<section id="page-10" class="slide" aria-label="画正方形">
+<section id="page-10" class="slide lay-try" aria-label="画正方形">
   <div class="band r"><b>动手<br>改一改</b><span>先读入 n，再把两个固定的数换掉。</span></div>
   <div class="turn">
     <h2 class="r d1">画 n × n 的正方形</h2>
@@ -796,23 +819,26 @@ dialog p{color:var(--muted);font-size:15px}
 ***
 ***</pre></div></div>
   </div>
-  <a class="ide r d3" data-code="# 【画 n × n 的正方形】&#10;# 读入边长 n，画 n 行，每行 n 颗星。n 是 0 就什么也不画。&#10;# 例如输入：3&#10;# 应该输出（每个一行）：***、***、***&#10;# 提示：先读入 n，再把两个固定的数换掉。&#10;# ↓ 在下面这段程序上改&#10;&#10;for i in range(3):&#10;    for j in range(4):&#10;        print(&quot;*&quot;, end=&quot;&quot;)&#10;    print()&#10;" style="left:610px;top:830px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【画 n × n 的正方形】&#10;# 读入边长 n，画 n 行，每行 n 颗星。n 是 0 就什么也不画。&#10;# 例如输入：3&#10;# 应该输出（每个一行）：***、***、***&#10;# 提示：先读入 n，再把两个固定的数换掉。&#10;# ↓ 在下面这段程序上改&#10;&#10;for i in range(3):&#10;    for j in range(4):&#10;        print(&quot;*&quot;, end=&quot;&quot;)&#10;    print()&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- seats -->
-<section id="page-11" class="slide" aria-label="例题：座位号" data-steps="2" data-at="2" data-chapter="座位表">
-  <div class="night" style="width:1250px"></div>
-  <h2 class="t" style="color:var(--paper)">例题：电影院的座位号</h2>
-  <div class="editor" style="left:96px;top:200px;width:1120px;--fs:44px"><div class="tab">seats.py</div>
+<section id="page-11" class="slide lay-walk wide" aria-label="例题：座位号" data-steps="2" data-at="2" data-chapter="座位表">
+  <h2 class="t">例题：电影院的座位号</h2>
+  <div class="editor" style="--fs:43px"><div class="tab">seats.py</div>
 <pre class="code" data-file="solutions/05_seats.py"><span class="ln l1 l2"><span class="k">for</span> row <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">3</span>):</span><span class="ln l1 l2">    <span class="k">for</span> col <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">4</span>):</span><span class="ln l1 l2">        <span class="f">print</span>(row, <span class="s">"排"</span>, col, <span class="s">"号"</span>)</span></pre></div>
-  <p class="abs say only1" style="left:96px;top:620px;width:1100px;color:var(--paper)">row 是第几排，col 是第几号。第 1 排时，col 从 1 走到 3。</p>
-  <p class="abs say only2" style="left:96px;top:620px;width:1100px;color:var(--paper)">然后才轮到第 2 排，col 又从 1 开始。外层变一次，内层要走完一整轮。</p>
-  <a class="ide step s2" style="left:96px;top:820px">▶ 在 IDE 打开</a>
-  <div class="abs" style="left:1330px;right:96px;top:180px;font:400 48px/1.45 var(--code)"><p>1 排 1 号<br>1 排 2 号<br>1 排 3 号</p><p class="step s2" style="color:var(--clay)">2 排 1 号<br>2 排 2 号<br>2 排 3 号</p></div>
+  <div class="turns">
+      <p class="say only1">row 是第几排，col 是第几号。第 1 排时，col 从 1 走到 3。</p>
+      <p class="say only2">然后才轮到第 2 排，col 又从 1 开始。外层变一次，内层要走完一整轮。</p>
+    </div>
+  <a class="ide step s2">▶ 在 IDE 打开</a>
+  <div class="right" style="font:400 48px/1.45 var(--code)">
+<p>1 排 1 号<br>1 排 2 号<br>1 排 3 号</p><p class="step s2" style="color:var(--clay)">2 排 1 号<br>2 排 2 号<br>2 排 3 号</p>
+  </div>
 </section>
 
 <!-- your turn: upside-down triangle -->
-<section id="page-12" class="slide" aria-label="画倒三角">
+<section id="page-12" class="slide lay-try" aria-label="画倒三角">
   <div class="band r"><b>动手<br>改一改</b><span>外层倒着数，内层跟着它。</span></div>
   <div class="turn">
     <h2 class="r d1">画倒三角</h2>
@@ -823,21 +849,21 @@ dialog p{color:var(--muted);font-size:15px}
 *</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">还记得 range 怎么倒着数吗？</p>
   </div>
-  <a class="ide r d3" data-code="# 【画倒三角】&#10;# 读入一个整数 n。第一行画 n 颗星，每往下一行少一颗，&#10;#   最后一行 1 颗。&#10;# 例如输入：4&#10;# 应该输出（每个一行）：****、***、**、*&#10;# 提示：外层倒着数，内层跟着它。&#10;# ↓ 在下面这段程序上改&#10;&#10;for i in range(1, 5):&#10;    for j in range(i):&#10;        print(&quot;*&quot;, end=&quot;&quot;)&#10;    print()&#10;" style="left:610px;top:910px">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【画倒三角】&#10;# 读入一个整数 n。第一行画 n 颗星，每往下一行少一颗，&#10;#   最后一行 1 颗。&#10;# 例如输入：4&#10;# 应该输出（每个一行）：****、***、**、*&#10;# 提示：外层倒着数，内层跟着它。&#10;# ↓ 在下面这段程序上改&#10;&#10;for i in range(1, 5):&#10;    for j in range(i):&#10;        print(&quot;*&quot;, end=&quot;&quot;)&#10;    print()&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz -->
-<section id="page-13" class="slide" aria-label="小测：数字三角形">
+<section id="page-13" class="slide lay-ask" aria-label="小测：数字三角形">
   <h2 class="t r">小测：这段程序画出什么？</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:800px;--fs:46px"><div class="tab">画出什么？</div>
+  <div class="editor r d1" style="--fs:44px"><div class="tab">画出什么？</div>
 <pre class="code"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">4</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(i):</span><span class="ln">        <span class="f">print</span>(i, end=<span class="s">""</span>)</span><span class="ln">    <span class="f">print</span>()</span></pre></div>
-  <div class="quiz r d2" style="left:960px;top:220px;grid-template-columns:1fr" data-right="0">
+  <div class="quiz r d2" data-right="0">
     <button type="button" data-fb="答对了！第 i 行输出 i 个 i：1、22、333。"><i>1</i>1 / 22 / 333</button>
     <button type="button" data-fb="输出的是 i，不是 j，同一行里数字都一样。"><i>2</i>0 / 01 / 012</button>
     <button type="button" data-fb="输出的是 i，不是 j + 1。"><i>3</i>1 / 12 / 123</button>
     <button type="button" data-fb="有 end=&quot;&quot;，同一行的数字挨在一起，不会各占一行。"><i>4</i>一行一个数字</button>
   </div>
-  <p class="fb" style="left:96px;right:1000px;top:680px" data-empty="点一个答案，或按键盘数字键"></p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
@@ -855,26 +881,25 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- bug hunt -->
-<section id="page-15" class="slide dark" aria-label="找错：三角形变成一列">
+<section id="page-15" class="slide dark lay-ask" aria-label="找错：三角形变成一列">
   <h2 class="t r">找错：三角形怎么变成了一列？</h2>
-  <div class="editor r d1" style="left:96px;top:220px;width:1000px;--fs:48px"><div class="tab">bug.py（只阅读）</div>
+  <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="4" data-yes="找到了！这一行缩进在内层循环里，每画一颗星就换一次行。往左退 4 个空格，和内层的 for 对齐，就是每行画完才换行。" data-no="这一行没问题。每颗星都单独占了一行，想一想换行是在哪里发生的。"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">4</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(i):</span><span class="ln">        <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln">        <span class="f">print</span>()</span></pre></div>
-  <p class="abs say r d2" style="left:1200px;top:240px;right:96px">想画 1、2、3 颗星的三角形，结果 6 颗星排成了一列。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="left:1200px;top:560px;color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="say r d2">想画 1、2、3 颗星的三角形，结果 6 颗星排成了一列。<br>点你认为有问题的那一行。</p>
+  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-16" class="slide clay" aria-label="空心正方形" data-chapter="挑战">
-  <p class="abs r" style="left:96px;top:90px;font:700 40px var(--code)"># 自己挑战</p>
-  <h2 class="abs r d1" style="left:96px;top:170px;font:800 170px/1.2 var(--text)">空心正方形</h2>
-  <p class="abs say r d2" style="left:96px;top:420px;width:960px">读入边长 n。画一个 n 行 n 列的空心正方形：四条边上是 *，里面是空格。</p>
-  <div class="slip tilt2 r d3" style="right:110px;top:200px;width:460px"><small>输入 4</small><pre style="font-size:72px;line-height:1.2;white-space:pre">****
+<section id="page-16" class="slide clay lay-notes challenge" aria-label="空心正方形" data-chapter="挑战">
+  <p class="kicker r"># 自己挑战</p>
+  <h2 class="big r d1">空心正方形</h2>
+  <p class="say r d2">读入边长 n。画一个 n 行 n 列的空心正方形：四条边上是 *，里面是空格。</p>
+  <div class="slip tilt2 r d3" style="width:460px"><small>输入 4</small><pre style="font-size:72px;line-height:1.2;white-space:pre">****
 *  *
 *  *
 ****</pre></div>
-  <a class="ide r d3" data-code="# 【空心正方形】&#10;# 读入边长 n。画一个 n 行 n 列的空心正方形：四条边上是 *，&#10;#   里面是空格。&#10;# 例如输入：4&#10;# 应该输出（每个一行）：****、*  *、*  *、****&#10;# ↓ 从这里开始写&#10;" style="left:96px;top:850px">▶ 在 IDE 开始写</a>
-  <p class="abs say r d3" style="left:560px;top:856px;font-size:34px">先自己写，卡住了再翻下一页。</p>
+  <div class="go r d3"><a class="ide" data-code="# 【空心正方形】&#10;# 读入边长 n。画一个 n 行 n 列的空心正方形：四条边上是 *，&#10;#   里面是空格。&#10;# 例如输入：4&#10;# 应该输出（每个一行）：****、*  *、*  *、****&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
 

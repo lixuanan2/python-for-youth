@@ -114,31 +114,36 @@
     "id": "17-dict-basics",
     "tag": "LESSON 17",
     "title": "字典基础",
-    "stage": "字典"
+    "stage": "字典",
+    "structured": true
   },
   {
     "id": "18-nested-loops",
     "tag": "LESSON 18",
     "title": "嵌套循环与图形",
-    "stage": "进阶"
+    "stage": "进阶",
+    "structured": true
   },
   {
     "id": "19-list-tools",
     "tag": "LESSON 19",
     "title": "列表常用操作",
-    "stage": "进阶"
+    "stage": "进阶",
+    "structured": true
   },
   {
     "id": "20-2d-lists",
     "tag": "LESSON 20",
     "title": "二维列表",
-    "stage": "进阶"
+    "stage": "进阶",
+    "structured": true
   },
   {
     "id": "21-random-games",
     "tag": "LESSON 21",
     "title": "随机数与小游戏",
-    "stage": "进阶"
+    "stage": "进阶",
+    "structured": true
   },
   {
     "id": "22-try-except",
