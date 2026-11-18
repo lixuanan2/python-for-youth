@@ -233,12 +233,20 @@ def highlight(code):
     return ''.join(line(text) for text in code.split('\n'))
 
 
-# === LAYOUTS: a lesson marked "structured": true in course.json is written with layouts (template/layouts.css): every
-# page names its layout and its cells, and carries no coordinates. Its code boxes hold plain code and are coloured here.
-# Lessons not yet moved to layouts are built exactly as before.
+# === LAYOUTS: a page with a layout (class lay-walk and so on, template/layouts.css) names its cells and carries no
+# coordinates. Its code boxes, and a free page's, hold plain code and are coloured here. Other pages are built as before.
+# A lesson marked "structured": true in course.json has moved every page over (check.py then wants a layout on each).
 
 def structured(lesson):
     return bool(lesson.get('structured'))
+
+
+# A page moved over: it names a layout, or it is a free page (class free) that keeps its own left/top.
+LAID_OUT = re.compile(r'<section class="slide[^"]* (?:lay-|free\b)')
+
+
+def uses_layouts(slides):
+    return bool(LAID_OUT.search(slides))
 
 
 def numbers(text):
@@ -291,7 +299,7 @@ COLOURED = re.compile(r'<span class="[kmfs]">')
 
 
 def build_code(slides, lesson):
-    """Colour each code box from its code: written in the page, or from data-file when the box is empty."""
+    """Colour each code box on a page with a layout from its code: written in the page, or from data-file when the box is empty."""
     def box(match):
         classes, attrs, inner = match.groups()
         where = f'{lesson["id"]}: code box {html.unescape(attrs.strip())[:60]}'
@@ -312,7 +320,8 @@ def build_code(slides, lesson):
         light, mod = get('data-light'), get('data-mod')
         attrs = re.sub(r' data-(?:light|mod)="[^"]*"', '', attrs)
         return f'<pre class="code{classes}"{attrs}>{mark_lines(inner, html.unescape(light or ''), html.unescape(mod or ''), where)}</pre>'
-    return CODE_BOX.sub(box, slides)
+    return re.sub(r'<section class="slide.*?</section>', lambda page: CODE_BOX.sub(box, page.group()) if LAID_OUT.match(page.group()) else page.group(),
+                  slides, flags=re.S)
 
 
 # Where each layout puts its code box: (width, height for the box, largest font). The build picks the font so the code
@@ -411,11 +420,11 @@ def answer_pages(slides, lesson):
 
 
 def render(lesson):
-    sheets = [read('vendor/viewport.css'), read('template/theme.css')] + ([read('template/layouts.css')] if structured(lesson) else [])
+    slides = read(f'lessons/{lesson["id"]}/slides.html').rstrip()
+    sheets = [read('vendor/viewport.css'), read('template/theme.css')] + ([read('template/layouts.css')] if uses_layouts(slides) else [])
     css = '\n'.join([font_face(w) for w in (400, 700, 800)] + sheets)
     page = read('template/page.html')
-    slides = read(f'lessons/{lesson["id"]}/slides.html').rstrip()
-    if structured(lesson):
+    if uses_layouts(slides):
         slides = fit_code(build_code(slides, lesson), lesson)
     fields = dict(title=html.escape(lesson['title']), lesson=css_string(lesson_label(lesson)), css=css,
                   site=html.escape(site()['title']),

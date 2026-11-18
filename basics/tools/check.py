@@ -535,18 +535,22 @@ LAYOUTS = ['cover', 'notes', 'walk', 'predict', 'columns', 'try', 'ask', 'hints'
 
 
 def check_layouts(lesson, folder):
-    """A lesson marked "structured" in course.json is written with layouts: every page names one of the eight layouts, or
-    is a free page (class free); outside free pages nothing carries left/top/right/bottom, and code boxes hold plain
-    code (a bug hunt and a box with yellow boxes keep their colours; build.py stops on any other)."""
-    if not builder.structured(lesson):
-        return 0
+    """Pages moved to layouts: each names one of the eight layouts (or is a free page, class free), and outside free
+    pages nothing carries left/top/right/bottom; build.py stops on a code box with colours written by hand (a bug hunt
+    and a box with yellow boxes may keep theirs). A lesson marked "structured" in course.json has moved every page."""
     text = (folder / 'slides.html').read_text(encoding='utf-8')
+    moved = 0
     for n, section in enumerate(re.findall(r'<section\b.*?</section>', text, re.S), 1):
         classes = re.search(r'<section class="([^"]*)"', section).group(1).split()
         named = [c[4:] for c in classes if c.startswith('lay-')]
         where = f'{folder.name} page {n} of slides.html'
-        assert 'free' in classes or (len(named) == 1 and named[0] in LAYOUTS), \
-            f'{where}: name one layout ({", ".join("lay-" + l for l in LAYOUTS)}) or make it a free page (class free)'
+        if not named and 'free' not in classes:
+            assert not builder.structured(lesson), \
+                f'{where}: the lesson is marked structured; name one layout ({", ".join("lay-" + l for l in LAYOUTS)}) or make it a free page (class free)'
+            continue
+        moved += 1
+        assert len(named) <= 1 and all(l in LAYOUTS for l in named) and (named or 'free' in classes), \
+            f'{where}: one layout, one of {", ".join("lay-" + l for l in LAYOUTS)}'
         if 'free' in classes:
             continue
         # A part a layout cannot hold may keep its own place with class free; its children go with it.
@@ -561,18 +565,18 @@ def check_layouts(lesson, folder):
             kept = kept[:start] + kept[at:]
         placed = re.findall(r'style="[^"]*(?<![\w-])(left|top|right|bottom)\s*:', kept)
         assert not placed, f'{where}: the layout places its parts; take out {", ".join(sorted(set(placed)))} (or mark the part free)'
-    return 1
+    return moved
 
 
 def main():
-    scripts = cases = claims = pages = changes = algos = boxes = 0
+    scripts = cases = claims = pages = changes = algos = boxes = moved = 0
     lessons = builder.lessons()
     for lesson in lessons:
         folder = ROOT / 'lessons' / lesson['id']
         s, c = check_programs(folder)
         scripts += s; cases += c
         claims += check_claims(folder)
-        check_layouts(lesson, folder)
+        moved += check_layouts(lesson, folder)
         p, c, a, b = check_deck(lesson, folder)
         algos += a; boxes += b
         pages += p; changes += c
@@ -585,7 +589,7 @@ def main():
     if '--traces' in sys.argv:
         for name, n, note in untraced:
             print(f'not traced: {name} page {n}: {note}')
-    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {algos} algorithm demos, {boxes} error-box lines, {traced} trace pages ({len(untraced)} not checkable, see --traces), {links} index and starter links, {docs} document links.')
+    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {algos} algorithm demos, {boxes} error-box lines, {traced} trace pages ({len(untraced)} not checkable, see --traces), {moved} pages on layouts, {links} index and starter links, {docs} document links.')
 
 
 if __name__ == '__main__':
