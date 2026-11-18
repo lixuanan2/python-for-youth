@@ -365,13 +365,18 @@ def code_height(section, layout, width, column):
     if not layout.startswith(('walk', 'predict')):
         return column
     rest = outside(section, 'right', 'answer')
-    lines = 0
-    for say in re.findall(r'<p class="say[^"]*"[^>]*>(.*?)</p>', rest, re.S):
+
+    def lines(say):
         parts = [html.unescape(re.sub(r'<[^>]+>', '', part)) for part in re.split(r'<br\s*/?>', say)]
-        lines = max(lines, sum(-(-sum(10 if ord(ch) > 0x2e7f else 6 for ch in part) * 4 // width) or 1 for part in parts))
+        return sum(-(-sum(10 if ord(ch) > 0x2e7f else 6 for ch in part) * 4 // width) or 1 for part in parts)
+    say = re.compile(r'<p class="say[^"]*"[^>]*>(.*?)</p>', re.S)
+    # Sentences taking turns need the room of the longest; sentences that stay add up, 24px apart.
+    blocks = [max(map(lines, say.findall(turn)), default=0) for turn in re.findall(r'<div class="turns">(.*?)</div>', rest, re.S)]
+    blocks += [lines(text) for text in say.findall(re.sub(r'<div class="turns">.*?</div>', '', rest, flags=re.S))]
+    height = sum(blocks) * 64 + 24 * (len(blocks) - 1) if blocks else 0
     gap = 40 if layout.startswith('walk') else 50
     button = 115 if layout.startswith('walk') and '<a class="ide' in rest else 0
-    return column - (gap + lines * 64 if lines else 0) - button
+    return column - (gap + height if height else 0) - button
 
 
 def fit_code(slides, lesson):

@@ -11,6 +11,8 @@
 /* One of several sentences shown a step at a time: they share one place and take turns. */
 .slide[class*=" lay-"] .turns{display:grid}
 .slide[class*=" lay-"] .turns>*{grid-area:1/1}
+/* Several sentences that stay, one under another (sentences taking turns may be one of them). */
+.slide[class*=" lay-"] .says{display:flex;flex-direction:column;gap:24px}
 /* A part inside a cell (the right column, the answer, sentences taking turns) follows the cell, whatever place it has alone. */
 .slide[class*=" lay-"] :is(.right,.answer,.turns,.go)>:where(:not(.free)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
 .slide[class*=" lay-"] :is(.right,.answer,.turns,.go) :is(.crate,.slip,.ide,.live-out):where(:not(.free)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
@@ -51,7 +53,7 @@
 .lay-walk.wide{--split:1230px}.lay-walk.narrow{--split:1010px}
 .lay-walk>h2.t{color:var(--paper)}
 .lay-walk>.editor{grid-area:code}
-.lay-walk>.say,.lay-walk>.turns{grid-area:say;color:var(--paper)}
+.lay-walk>.say,.lay-walk>.turns,.lay-walk>.says{grid-area:say;color:var(--paper)}
 .lay-walk>.ide{grid-area:ide;justify-self:start}
 .lay-walk>.right{grid-area:right;margin-top:-30px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
@@ -64,7 +66,7 @@
 .lay-predict>.editor{grid-area:code;width:1000px}
 .lay-predict>.answer{grid-area:answer;padding-top:30px}
 .lay-predict>.answer.big{font:800 130px/1.3 var(--code);color:var(--clay)}
-.lay-predict>.say,.lay-predict>.turns{grid-area:say}
+.lay-predict>.say,.lay-predict>.turns,.lay-predict>.says{grid-area:say}
 .lay-predict>.answer.turns{grid-area:answer}
 .lay-predict>.answer.turns>*{justify-self:start;align-self:start}
 /* What the program shows, stacked: a box with the variable, then the screen, then maybe the IDE button. */
@@ -74,7 +76,7 @@
 
 /* 5 columns: two or three things side by side or row by row (.vs, .steps3, .sheet3, .ledger, .later, .verbs), a sentence under them. */
 .lay-columns{display:flex;flex-direction:column;gap:64px;padding:240px 96px 180px}
-.lay-columns>.say,.lay-columns>.turns{margin-top:auto}
+.lay-columns>.say,.lay-columns>.turns,.lay-columns>.says{margin-top:auto}
 .lay-columns>.ide{align-self:flex-start}
 .lay-columns .sheet3>div{grid-template-columns:var(--key,560px) 1fr}
 .lay-columns .ledger>div{grid-template-columns:var(--key,600px) var(--mid,460px) 1fr}
