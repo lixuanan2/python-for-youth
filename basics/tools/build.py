@@ -319,7 +319,8 @@ def build_code(slides, lesson):
             assert not COLOURED.search(inner), f'{where}: write the code without colour spans; the build colours it'
         light, mod = get('data-light'), get('data-mod')
         attrs = re.sub(r' data-(?:light|mod)="[^"]*"', '', attrs)
-        return f'<pre class="code{classes}"{attrs}>{mark_lines(inner, html.unescape(light or ''), html.unescape(mod or ''), where)}</pre>'
+        inner = mark_lines(inner, html.unescape(light or ''), html.unescape(mod or ''), where)
+        return f'<pre class="code{classes}"{attrs}>{inner}</pre>'
     return re.sub(r'<section class="slide.*?</section>', lambda page: CODE_BOX.sub(box, page.group()) if LAID_OUT.match(page.group()) else page.group(),
                   slides, flags=re.S)
 
