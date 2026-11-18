@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="接住报错" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 22</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">出错</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">try / except</span></div><b class="r d2" style="font-size:250px">接住</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">接住报错：程序不怕乱输</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让程序遇到输错的内容不停下，先提醒一句，再接着运行。</p>
+<section class="slide lay-cover" aria-label="接住报错" data-chapter="开始">
+  <p class="kicker r"># LESSON 22</p>
+  <div class="cover-row"><b class="r">出错</b><div class="wire r d1"><i></i><span>try / except</span></div><b class="r d2">接住</b></div>
+  <p class="headline r d3">接住报错：程序不怕乱输</p>
+  <p class="say r d3">学完你能让程序遇到输错的内容不停下，先提醒一句，再接着运行。</p>
   <div class="foot"></div>
 </section>
 
@@ -163,15 +163,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:580px 360px 1fr"><code class="plain">try 缺了 except</code><b>SyntaxError</b><span>try 要和 except 配对</span></div>
-    <div class="r d2" style="grid-template-columns:580px 360px 1fr"><code class="plain">名字写成别的错</code><b>没接住</b><span>int() 的错要写 ValueError</span></div>
-    <div class="r d3" style="grid-template-columns:580px 360px 1fr"><code>except:</code><b>不报错</b><span>什么错都接住，打错字也看不出</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:580px;--mid:360px">
+    <div class="r d1"><code class="plain">try 缺了 except</code><b>SyntaxError</b><span>try 要和 except 配对</span></div>
+    <div class="r d2"><code class="plain">名字写成别的错</code><b>没接住</b><span>int() 的错要写 ValueError</span></div>
+    <div class="r d3"><code>except:</code><b>不报错</b><span>什么错都接住，打错字也看不出</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:840px">except 后面写上名字，只接你想到的那种错。别的错照样红字，你才知道哪里写错了。</p>
+  <p class="say r d3">except 后面写上名字，只接你想到的那种错。别的错照样红字，你才知道哪里写错了。</p>
   <div class="foot"></div>
 </section>
 
@@ -203,7 +203,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>先读入 n，准备两个计数器：总和与不是整数的行数，都从 0 开始。用 for 循环读 n 行。</span></p>
@@ -216,38 +216,38 @@
 <!-- @answer 02 | <code>int(text)</code> 放进 try：是整数就加进和，不是就跳到 except，数一行。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>try 里出错以后，剩下的行还运行吗？<em class="step s2" style="font-style:normal;font-weight:400">　不运行，直接跳到 except。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>except 后面为什么要写 ValueError？<em class="step s3" style="font-style:normal;font-weight:400">　只接这一种错，别的错照样看得见。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>怎么一直问到输对为止？<em class="step s4" style="font-style:normal;font-weight:400">　用 while 和 done，输对了才把 done 变成 True。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>try 里出错以后，剩下的行还运行吗？<em class="step s2">　不运行，直接跳到 except。</em></span></p>
+    <p><i>Q2</i><span>except 后面为什么要写 ValueError？<em class="step s3">　只接这一种错，别的错照样看得见。</em></span></p>
+    <p><i>Q3</i><span>怎么一直问到输对为止？<em class="step s4">　用 while 和 done，输对了才把 done 变成 True。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>try:</code><span>下面缩进的几行先试着运行</span></div>
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>except ValueError:</code><span>值不对，比如 int("abc")</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>except ZeroDivisionError:</code><span>除数是 0</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">出错就跳走</code><span>try 里剩下的行不运行</span></div>
-    <div class="r d3" style="grid-template-columns:860px 1fr"><code>while not done:</code><span>一直问到输对为止</span></div>
+  <div class="sheet3" style="--key:860px">
+    <div class="r d1"><code>try:</code><span>下面缩进的几行先试着运行</span></div>
+    <div class="r d1"><code>except ValueError:</code><span>值不对，比如 int("abc")</span></div>
+    <div class="r d2"><code>except ZeroDivisionError:</code><span>除数是 0</span></div>
+    <div class="r d2"><code class="plain">出错就跳走</code><span>try 里剩下的行不运行</span></div>
+    <div class="r d3"><code>while not done:</code><span>一直问到输对为止</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>else 和 finally</code><span>没出错时做什么、不管出没出错最后都做什么</span></div>
     <div class="r d2"><code>while True 和 break</code><span>另一种“一直问到输对”的写法</span></div>
     <div class="r d3"><code>raise</code><span>自己发出一个报错，比如年龄是负数时</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天程序学会了接住报错。会想到别人可能怎么输错，写出来的程序才结实。</p>
+  <p class="say r d3">今天程序学会了接住报错。会想到别人可能怎么输错，写出来的程序才结实。</p>
   <div class="foot"></div>
 </section>

@@ -5,8 +5,8 @@
 /* Cells sit where the layout puts them, not where the component would sit on its own. The title and the status bar keep
    their fixed places; .free is the way out for one part a layout cannot hold (it keeps its own left/top). */
 .slide[class*=" lay-"]>:where(:not(h2.t,.foot,.free,.kicker,.note)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
-.slide[class*=" lay-"]>.kicker{position:absolute;left:96px;top:90px;font:700 40px var(--code)}
-.slide[class*=" lay-"]>.note{position:absolute;right:96px;top:112px;font:400 34px var(--text);color:var(--muted)}
+.slide:where([class*=" lay-"])>.kicker{position:absolute;left:96px;top:90px;font:700 40px var(--code)}
+.slide:where([class*=" lay-"])>.note{position:absolute;right:96px;top:112px;font:400 34px var(--text);color:var(--muted)}
 .dark.slide[class*=" lay-"]>.note{color:var(--ghost)}
 /* One of several sentences shown a step at a time: they share one place and take turns. */
 .slide[class*=" lay-"] .turns{display:grid}
@@ -16,6 +16,7 @@
 .lay-cover>.kicker{top:96px;font:400 36px var(--code);color:var(--muted)}
 .lay-cover>.cover-row{position:absolute;left:96px;right:96px;top:290px}
 .lay-cover>.cover-row b{font-size:250px}
+.lay-cover .wire span{font-family:var(--code);white-space:nowrap}
 .lay-cover>.headline{position:absolute;left:96px;top:700px;font:700 60px var(--text)}
 .lay-cover>.say{position:absolute;left:96px;right:96px;top:790px;color:var(--muted)}
 
@@ -63,6 +64,8 @@
 .lay-columns>.say,.lay-columns>.turns{margin-top:auto}
 .lay-columns .sheet3>div{grid-template-columns:var(--key,560px) 1fr}
 .lay-columns .ledger>div{grid-template-columns:var(--key,600px) var(--mid,460px) 1fr}
+/* A row that says something in words instead of code. */
+.lay-columns .sheet3 code.plain{font-family:var(--text)}
 
 /* 6 try: the yellow band says what to change, the task and its example on the right, the IDE button under it. */
 .lay-try{display:grid;grid-template-columns:520px 1fr;grid-template-rows:auto 1fr;column-gap:90px;padding-right:96px;align-items:start}

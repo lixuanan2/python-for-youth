@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="冒泡排序" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 24</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">比比</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">a[j] &gt; a[j + 1]</span></div><b class="r d2" style="font-size:250px">换换</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">冒泡排序：自己动手排整齐</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能不用 sorted，自己写出一个排序程序，看清每一步是怎么换的。</p>
+<section class="slide lay-cover" aria-label="冒泡排序" data-chapter="开始">
+  <p class="kicker r"># LESSON 24</p>
+  <div class="cover-row"><b class="r">比比</b><div class="wire r d1"><i></i><span>a[j] &gt; a[j + 1]</span></div><b class="r d2">换换</b></div>
+  <p class="headline r d3">冒泡排序：自己动手排整齐</p>
+  <p class="say r d3">学完你能不用 sorted，自己写出一个排序程序，看清每一步是怎么换的。</p>
   <div class="foot"></div>
 </section>
 
@@ -113,15 +113,15 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:720px 360px 1fr"><code class="plain">先 a = b，再 b = a</code><b>不报错</b><span>两个都变成一样的数</span></div>
-    <div class="r d2" style="grid-template-columns:720px 360px 1fr"><code>for j in range(n):</code><b>IndexError</b><span>a[j + 1] 超出了列表</span></div>
-    <div class="r d3" style="grid-template-columns:720px 360px 1fr"><code>if a[j] &lt; a[j + 1]:</code><b>不报错</b><span>排成了从大到小</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:720px;--mid:360px">
+    <div class="r d1"><code class="plain">先 a = b，再 b = a</code><b>不报错</b><span>两个都变成一样的数</span></div>
+    <div class="r d2"><code>for j in range(n):</code><b>IndexError</b><span>a[j + 1] 超出了列表</span></div>
+    <div class="r d3"><code>if a[j] &lt; a[j + 1]:</code><b>不报错</b><span>排成了从大到小</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">排序写错，常常不报错，只是结果不对。写完用几组数试一试：本来就排好的、倒着的、有一样的。</p>
+  <p class="say r d3">排序写错，常常不报错，只是结果不对。写完用几组数试一试：本来就排好的、倒着的、有一样的。</p>
   <div class="foot"></div>
 </section>
 
@@ -152,7 +152,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>读入和排序都可以照例题写。去掉每轮的 print，排好以后再输出一次列表。</span></p>
@@ -165,38 +165,38 @@ a[0], a[1] = a[1], a[0]</pre>
 <!-- @answer 02 | 冒泡排序每换一次，swaps 就加 1；一样高的不满足 <code>&gt;</code>，不会换。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>怎样交换两个变量？<em class="step s2" style="font-style:normal;font-weight:400">　a, b = b, a，一行同时换。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>比完一轮，哪个站对了位置？<em class="step s3" style="font-style:normal;font-weight:400">　最大的到了最后。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>为什么内层是 range(n - 1 - r)？<em class="step s4" style="font-style:normal;font-weight:400">　后面 r 个已经排好，不用再比；再减 1 是因为要比 a[j + 1]。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>怎样交换两个变量？<em class="step s2">　a, b = b, a，一行同时换。</em></span></p>
+    <p><i>Q2</i><span>比完一轮，哪个站对了位置？<em class="step s3">　最大的到了最后。</em></span></p>
+    <p><i>Q3</i><span>为什么内层是 range(n - 1 - r)？<em class="step s4">　后面 r 个已经排好，不用再比；再减 1 是因为要比 a[j + 1]。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>a, b = b, a</code><span>一行交换，谁也不会被盖掉</span></div>
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>a[j], a[j + 1] = a[j + 1], a[j]</code><span>交换列表里挨着的两个</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>for r in range(n - 1):</code><span>n 个数比 n - 1 轮</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>for j in range(n - 1 - r):</code><span>每轮少比一对</span></div>
-    <div class="r d3" style="grid-template-columns:860px 1fr"><code>if a[j] &gt; a[j + 1]:</code><span>从小到大；换成 &lt; 就从大到小</span></div>
+  <div class="sheet3" style="--key:860px">
+    <div class="r d1"><code>a, b = b, a</code><span>一行交换，谁也不会被盖掉</span></div>
+    <div class="r d1"><code>a[j], a[j + 1] = a[j + 1], a[j]</code><span>交换列表里挨着的两个</span></div>
+    <div class="r d2"><code>for r in range(n - 1):</code><span>n 个数比 n - 1 轮</span></div>
+    <div class="r d2"><code>for j in range(n - 1 - r):</code><span>每轮少比一对</span></div>
+    <div class="r d3"><code>if a[j] &gt; a[j + 1]:</code><span>从小到大；换成 &lt; 就从大到小</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>选择排序</code><span>每轮找出最小的，放到最前面</span></div>
     <div class="r d2"><code>插入排序</code><span>像整理手里的扑克牌，一张张插进去</span></div>
     <div class="r d3"><code>更快的排序</code><span>数很多时冒泡太慢，sorted 用的是更快的办法</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天自己写出了排序。以后用 sorted 时，你知道它在背后做的是什么样的事了。</p>
+  <p class="say r d3">今天自己写出了排序。以后用 sorted 时，你知道它在背后做的是什么样的事了。</p>
   <div class="foot"></div>
 </section>

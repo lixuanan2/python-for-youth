@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="字典基础" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 17</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">报名</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">price["苹果"]</span></div><b class="r d2" style="font-size:250px">得数</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">字典基础：按名字找东西</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能做一张价格表、一本小词典，还能数出每个词出现了几次。</p>
+<section class="slide lay-cover" aria-label="字典基础" data-chapter="开始">
+  <p class="kicker r"># LESSON 17</p>
+  <div class="cover-row"><b class="r">报名</b><div class="wire r d1"><i></i><span>price["苹果"]</span></div><b class="r d2">得数</b></div>
+  <p class="headline r d3">字典基础：按名字找东西</p>
+  <p class="say r d3">学完你能做一张价格表、一本小词典，还能数出每个词出现了几次。</p>
   <div class="foot"></div>
 </section>
 
@@ -167,15 +167,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:620px 440px 1fr"><code>price["西瓜"]</code><b>KeyError</b><span>先用 in 问，或者用 get</span></div>
-    <div class="r d2" style="grid-template-columns:620px 440px 1fr"><code>price[0]</code><b>KeyError</b><span>字典按键找，没有编号</span></div>
-    <div class="r d3" style="grid-template-columns:620px 440px 1fr"><code>"Apple" in price</code><b>不报错</b><span>大小写不同，算两个键</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:620px;--mid:440px">
+    <div class="r d1"><code>price["西瓜"]</code><b>KeyError</b><span>先用 in 问，或者用 get</span></div>
+    <div class="r d2"><code>price[0]</code><b>KeyError</b><span>字典按键找，没有编号</span></div>
+    <div class="r d3"><code>"Apple" in price</code><b>不报错</b><span>大小写不同，算两个键</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">查不到的时候，先看看键是不是写得一模一样，空格和大小写都算。</p>
+  <p class="say r d3">查不到的时候，先看看键是不是写得一模一样，空格和大小写都算。</p>
   <div class="foot"></div>
 </section>
 
@@ -204,7 +204,7 @@ hat 1</pre></div>
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>先用 split 切出单词，再准备一个空字典 counts = {}。</span></p>
@@ -217,38 +217,38 @@ hat 1</pre></div>
 <!-- @answer 02 | 字典记次数：没见过的词从 <code>counts.get(w, 0)</code> 的 0 开始，每见一次加 1。字典按放进去的顺序输出。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>字典和列表找东西有什么不同？<em class="step s2" style="font-style:normal;font-weight:400">　列表按编号，字典按键。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>给一个没有的键赋值会怎样？<em class="step s3" style="font-style:normal;font-weight:400">　新加一对，不报错。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>怎样查才不会报 KeyError？<em class="step s4" style="font-style:normal;font-weight:400">　先用 in 问一问，或者用 get 给默认值。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>字典和列表找东西有什么不同？<em class="step s2">　列表按编号，字典按键。</em></span></p>
+    <p><i>Q2</i><span>给一个没有的键赋值会怎样？<em class="step s3">　新加一对，不报错。</em></span></p>
+    <p><i>Q3</i><span>怎样查才不会报 KeyError？<em class="step s4">　先用 in 问一问，或者用 get 给默认值。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:780px 1fr"><code>d = {"苹果": 5}</code><span>建一个字典，键: 值</span></div>
-    <div class="r d1" style="grid-template-columns:780px 1fr"><code>d["苹果"]</code><span>按键取值，没有会报错</span></div>
-    <div class="r d2" style="grid-template-columns:780px 1fr"><code>d["西瓜"] = 20</code><span>有就改，没有就加</span></div>
-    <div class="r d2" style="grid-template-columns:780px 1fr"><code>"西瓜" in d</code><span>问一问有没有这个键</span></div>
-    <div class="r d3" style="grid-template-columns:780px 1fr"><code>d.get("西瓜", 0)</code><span>查不到给默认值，不会加进去</span></div>
+  <div class="sheet3" style="--key:780px">
+    <div class="r d1"><code>d = {"苹果": 5}</code><span>建一个字典，键: 值</span></div>
+    <div class="r d1"><code>d["苹果"]</code><span>按键取值，没有会报错</span></div>
+    <div class="r d2"><code>d["西瓜"] = 20</code><span>有就改，没有就加</span></div>
+    <div class="r d2"><code>"西瓜" in d</code><span>问一问有没有这个键</span></div>
+    <div class="r d3"><code>d.get("西瓜", 0)</code><span>查不到给默认值，不会加进去</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>keys() values()</code><span>只拿出所有的键，或者所有的值</span></div>
     <div class="r d2"><code>列表套字典</code><span>一个列表里放很多张卡片，做成通讯录</span></div>
     <div class="r d3"><code>文件</code><span>把字典存到文件里，下次打开还在</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">到这里，你已经学会了变量、判断、循环、列表、字符串、函数和字典。用它们，能写出很多好玩的程序了。</p>
+  <p class="say r d3">到这里，你已经学会了变量、判断、循环、列表、字符串、函数和字典。用它们，能写出很多好玩的程序了。</p>
   <div class="foot"></div>
 </section>

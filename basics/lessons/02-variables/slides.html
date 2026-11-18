@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="变量与数据类型" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 02</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">变量</b><div class="wire r d1"><i></i><span>记住</span></div><b class="r d2" style="font-size:250px">类型</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">让程序记住会变的东西</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能用一个变量记账，还能说清数据是哪一种。</p>
+<section class="slide lay-cover" aria-label="变量与数据类型" data-chapter="开始">
+  <p class="kicker r"># LESSON 02</p>
+  <div class="cover-row"><b class="r">变量</b><div class="wire r d1"><i></i><span>记住</span></div><b class="r d2">类型</b></div>
+  <p class="headline r d3">让程序记住会变的东西</p>
+  <p class="say r d3">学完你能用一个变量记账，还能说清数据是哪一种。</p>
   <div class="foot"></div>
 </section>
 
@@ -232,15 +232,15 @@ my-age</pre></div>
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
     <div class="r d1"><code>print(scor)</code><b>NameError</b><span>名字写错或还没赋值</span></div>
     <div class="r d2"><code>2age = 1</code><b>SyntaxError</b><span>名字不能用数字开头</span></div>
     <div class="r d3"><code>"年龄" + 12</code><b>TypeError</b><span>用逗号或 str()</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">程序从上往下跑，变量要先赋值，后面才能用。</p>
+  <p class="say r d3">程序从上往下跑，变量要先赋值，后面才能用。</p>
   <div class="foot"></div>
 </section>
 
@@ -268,7 +268,7 @@ my-age</pre></div>
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>三个数都要拿来算，读入时要变成整数吗？</span></p>
@@ -281,19 +281,19 @@ my-age</pre></div>
 <!-- @answer 06 | 只用一个变量 money 记账：存钱就加，花钱就减，最后输出 money。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>x = x + 1 是什么意思？<em class="step s2" style="font-style:normal;font-weight:400">　先算右边，再放回 x。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>四种类型分别是什么？<em class="step s3" style="font-style:normal;font-weight:400">　int、float、str、bool。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>"12" 和 12 有什么不同？<em class="step s4" style="font-style:normal;font-weight:400">　前者是文字，后者是整数。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>x = x + 1 是什么意思？<em class="step s2">　先算右边，再放回 x。</em></span></p>
+    <p><i>Q2</i><span>四种类型分别是什么？<em class="step s3">　int、float、str、bool。</em></span></p>
+    <p><i>Q3</i><span>"12" 和 12 有什么不同？<em class="step s4">　前者是文字，后者是整数。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>age = 12</code><span>把 12 放进变量 age</span></div>
@@ -306,13 +306,13 @@ my-age</pre></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>/  //  %</code><span>除法、整除和求余数</span></div>
     <div class="r d2"><code>float(input())</code><span>读入带小数点的数</span></div>
     <div class="r d3"><code>total += 1</code><span>更新变量的简写</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天学会了赋值和更新，程序就能记账了。下节课让它算得更多。</p>
+  <p class="say r d3">今天学会了赋值和更新，程序就能记账了。下节课让它算得更多。</p>
   <div class="foot"></div>
 </section>

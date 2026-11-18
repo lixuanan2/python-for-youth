@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="for 循环" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 06</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">一遍</b><div class="wire r d1"><i></i><span style="font-family:var(--code)">for</span></div><b class="r d2" style="font-size:250px">又一遍</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">for 循环：让程序重复做事</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能用两行代码从 1 数到 1000，还能把想要的数挑出来。</p>
+<section class="slide lay-cover" aria-label="for 循环" data-chapter="开始">
+  <p class="kicker r"># LESSON 06</p>
+  <div class="cover-row"><b class="r">一遍</b><div class="wire r d1"><i></i><span>for</span></div><b class="r d2">又一遍</b></div>
+  <p class="headline r d3">for 循环：让程序重复做事</p>
+  <p class="say r d3">学完你能用两行代码从 1 数到 1000，还能把想要的数挑出来。</p>
   <div class="foot"></div>
 </section>
 
@@ -308,15 +308,15 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
     <div class="r d1"><code>for i in range(3)</code><b>SyntaxError</b><span>末尾要加冒号</span></div>
     <div class="r d2"><code>for i in 3:</code><b>TypeError</b><span>要写 range(3)</span></div>
     <div class="r d3"><code class="plain">for 下一行没缩进</code><b style="font-size:42px">IndentationError</b><span>缩进 4 个空格</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">要小心：倒着数忘了写 -1，比如 range(5, 0)，不报错，只是一遍也不运行。</p>
+  <p class="say r d3">要小心：倒着数忘了写 -1，比如 range(5, 0)，不报错，只是一遍也不运行。</p>
   <div class="foot"></div>
 </section>
 
@@ -343,7 +343,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>每个数要做的事都一样：先判断，再说话。这件事放在哪里重复？</span></p>
@@ -356,19 +356,19 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 <!-- @answer 09 | 7 的倍数是 <code>i % 7 == 0</code>，个位是 7 是 <code>i % 10 == 7</code>，两个用 or 连起来。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>range(1, 5) 里有 5 吗？<em class="step s2" style="font-style:normal;font-weight:400">　没有，终点不算在内。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>怎么知道一行归 for 管？<em class="step s3" style="font-style:normal;font-weight:400">　看它有没有缩进。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>怎么让 range 倒着数？<em class="step s4" style="font-style:normal;font-weight:400">　步长写负数，比如 -1。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>range(1, 5) 里有 5 吗？<em class="step s2">　没有，终点不算在内。</em></span></p>
+    <p><i>Q2</i><span>怎么知道一行归 for 管？<em class="step s3">　看它有没有缩进。</em></span></p>
+    <p><i>Q3</i><span>怎么让 range 倒着数？<em class="step s4">　步长写负数，比如 -1。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>range(3)</code><span>0、1、2</span></div>
@@ -381,13 +381,13 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>while</code><span>不知道要重复几次时的循环</span></div>
     <div class="r d2"><code>total = total + i</code><span>把一个个数加起来</span></div>
     <div class="r d3"><code>循环里的循环</code><span>一遍里面再转好几遍</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天程序学会了重复。下节课学另一种循环：while。</p>
+  <p class="say r d3">今天程序学会了重复。下节课学另一种循环：while。</p>
   <div class="foot"></div>
 </section>

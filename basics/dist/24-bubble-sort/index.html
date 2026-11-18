@@ -539,17 +539,116 @@ dialog p{color:var(--muted);font-size:15px}
   .tag,.slip{box-shadow:none}
 }
 
+/* === LAYOUTS: eight page shapes. A page names one (class="slide lay-walk") and puts its parts in named cells; the layout
+   places them, so the page carries no left/top. A lesson uses this file once it is marked "structured" in course.json.
+   How to write each one: PROMPT.md, "版式". Sizes are on the 1920×1080 stage. === */
+
+/* Cells sit where the layout puts them, not where the component would sit on its own. The title and the status bar keep
+   their fixed places; .free is the way out for one part a layout cannot hold (it keeps its own left/top). */
+.slide[class*=" lay-"]>:where(:not(h2.t,.foot,.free,.kicker,.note)){position:relative;left:auto;right:auto;top:auto;bottom:auto}
+.slide:where([class*=" lay-"])>.kicker{position:absolute;left:96px;top:90px;font:700 40px var(--code)}
+.slide:where([class*=" lay-"])>.note{position:absolute;right:96px;top:112px;font:400 34px var(--text);color:var(--muted)}
+.dark.slide[class*=" lay-"]>.note{color:var(--ghost)}
+/* One of several sentences shown a step at a time: they share one place and take turns. */
+.slide[class*=" lay-"] .turns{display:grid}
+.slide[class*=" lay-"] .turns>*{grid-area:1/1}
+
+/* 1 cover: the lesson number, two big words joined by a line with a bit of code on it, the title and one sentence. */
+.lay-cover>.kicker{top:96px;font:400 36px var(--code);color:var(--muted)}
+.lay-cover>.cover-row{position:absolute;left:96px;right:96px;top:290px}
+.lay-cover>.cover-row b{font-size:250px}
+.lay-cover .wire span{font-family:var(--code);white-space:nowrap}
+.lay-cover>.headline{position:absolute;left:96px;top:700px;font:700 60px var(--text)}
+.lay-cover>.say{position:absolute;left:96px;right:96px;top:790px;color:var(--muted)}
+
+/* 2 notes: a story told with paper notes. A row of notes (.notes) and a sentence under it; or, for a challenge
+   (.challenge), the task on the left and one note with its input and output on the right. */
+.lay-notes{display:flex;flex-direction:column;gap:70px;padding:300px 96px 120px}
+/* A tilted note leans a little past the row; the padding keeps that inside it. */
+.lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
+.lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
+.lay-notes>.notes>.slip.big{flex:1.2}
+.lay-notes.challenge{display:grid;grid-template-columns:1fr 440px;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
+.lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
+.lay-notes.challenge>.say{grid-column:1;max-width:1000px}
+.lay-notes.challenge>.slip{grid-column:2;grid-row:1/4;align-self:start;margin-top:30px}
+.lay-notes.challenge>.go{grid-column:1/-1;grid-row:4;display:flex;align-items:center;gap:60px}
+.lay-notes.challenge>.go .ide{position:relative;left:auto;top:auto}
+.lay-notes.challenge>.go .say{font-size:34px}
+
+/* 3 walk: run through a program. Code on a dark column on the left with what each step does under it; on the right,
+   what the program holds or shows (.right: variable boxes, output, a live yellow-box output, an algorithm demo).
+   .wide and .narrow change the dark column from 1130px to 1230px or 1010px. */
+.lay-walk{--split:1130px;display:grid;grid-template-columns:calc(var(--split) - 170px) 1fr;grid-template-rows:auto auto 1fr;
+  grid-template-areas:"code right" "say right" "ide right";column-gap:154px;row-gap:40px;padding:200px 96px 90px;align-items:start;
+  background:linear-gradient(90deg,var(--night) var(--split),var(--paper) var(--split))}
+.lay-walk.wide{--split:1230px}.lay-walk.narrow{--split:1010px}
+.lay-walk>h2.t{color:var(--paper)}
+.lay-walk>.editor{grid-area:code}
+.lay-walk>.say,.lay-walk>.turns{grid-area:say;color:var(--paper)}
+.lay-walk>.ide{grid-area:ide;justify-self:start}
+.lay-walk>.right{grid-area:right;margin-top:-30px}
+.lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
+.lay-walk>.foot{color:var(--ghost)}
+
+/* 4 predict: guess what a program does. Code on the left, the answer on the right (shown on step 2), a sentence under both. */
+.lay-predict{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"code answer" "say say" "ide ide";
+  column-gap:100px;row-gap:50px;padding:220px 96px 120px;align-items:start}
+.lay-predict>.editor{grid-area:code;width:1000px}
+.lay-predict>.answer{grid-area:answer;padding-top:30px}
+.lay-predict>.answer.big{font:800 130px/1.3 var(--code);color:var(--clay)}
+.lay-predict>.say,.lay-predict>.turns{grid-area:say}
+.lay-predict>.ide{grid-area:ide;justify-self:start}
+
+/* 5 columns: two or three things side by side or row by row (.vs, .steps3, .sheet3, .ledger, .later, .verbs), a sentence under them. */
+.lay-columns{display:flex;flex-direction:column;gap:64px;padding:240px 96px 180px}
+.lay-columns>.say,.lay-columns>.turns{margin-top:auto}
+.lay-columns .sheet3>div{grid-template-columns:var(--key,560px) 1fr}
+.lay-columns .ledger>div{grid-template-columns:var(--key,600px) var(--mid,460px) 1fr}
+/* A row that says something in words instead of code. */
+.lay-columns .sheet3 code.plain{font-family:var(--text)}
+
+/* 6 try: the yellow band says what to change, the task and its example on the right, the IDE button under it. */
+.lay-try{display:grid;grid-template-columns:520px 1fr;grid-template-rows:auto 1fr;column-gap:90px;padding-right:96px;align-items:start}
+.lay-try>.band{grid-row:1/-1;height:1080px}
+.lay-try>.turn{margin-top:110px}
+.lay-try>.ide{grid-column:2;justify-self:start;margin-top:50px}
+
+/* 7 ask: a question with an answer to pick. With code: the code on the left, the choices on the right in one column,
+   the feedback under them. Without code: four choices in two columns, feedback under. A bug hunt (code you click a line of)
+   has what went wrong on the right instead of choices. */
+.lay-ask{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto 1fr;grid-template-areas:"code pick" "code fb";
+  column-gap:64px;row-gap:40px;padding:220px 96px 120px;align-items:start}
+.lay-ask>.editor{grid-area:code;width:800px}
+.lay-ask:has(.pick)>.editor{width:1040px}
+.lay-ask>.quiz,.lay-ask>.say{grid-area:pick}
+.lay-ask>.editor~.quiz{grid-template-columns:1fr;gap:16px}
+.lay-ask>.fb{grid-area:fb}
+.lay-ask:not(:has(>.editor)){grid-template-columns:1fr;grid-template-areas:"pick" "fb"}
+
+/* 8 hints: lines shown one at a time: hints for a challenge (.hints on clay), or questions with their answers (olive). */
+.lay-hints>h2.big{position:absolute;left:96px;top:90px;font:800 130px/1.2 var(--text)}
+.lay-hints>.hints{position:absolute;left:96px;right:96px;top:230px}
+.lay-hints>h2.big~.hints{top:290px}
+.lay-hints .hints.qa p{font-weight:700}
+.lay-hints .hints.qa em{font-style:normal;font-weight:400}
+.lay-hints>.say,.lay-hints>.turns{position:absolute;left:96px;right:96px;top:880px}
+
+/* A free page draws something no layout holds (a picture with labels, a table where the place of each cell is the point):
+   its parts keep their own left/top. A page with much more or much less text than usual keeps its layout and changes
+   a size in its own style (a font-size, a width, --fs for code). */
+
 :root{--lesson:"第 24 课 冒泡排序"}
 </style>
 </head>
 <body>
 <div class="deck-viewport"><main class="deck-stage" id="deckStage" aria-label="冒泡排序放映课件">
 <!-- cover -->
-<section id="page-1" class="slide active visible" aria-label="冒泡排序" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 24</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">比比</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">a[j] &gt; a[j + 1]</span></div><b class="r d2" style="font-size:250px">换换</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">冒泡排序：自己动手排整齐</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能不用 sorted，自己写出一个排序程序，看清每一步是怎么换的。</p>
+<section id="page-1" class="slide active visible lay-cover" aria-label="冒泡排序" data-chapter="开始">
+  <p class="kicker r"># LESSON 24</p>
+  <div class="cover-row"><b class="r">比比</b><div class="wire r d1"><i></i><span>a[j] &gt; a[j + 1]</span></div><b class="r d2">换换</b></div>
+  <p class="headline r d3">冒泡排序：自己动手排整齐</p>
+  <p class="say r d3">学完你能不用 sorted，自己写出一个排序程序，看清每一步是怎么换的。</p>
   <div class="foot"></div>
 </section>
 
@@ -659,15 +758,15 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- errors -->
-<section id="page-10" class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section id="page-10" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:720px 360px 1fr"><code class="plain">先 a = b，再 b = a</code><b>不报错</b><span>两个都变成一样的数</span></div>
-    <div class="r d2" style="grid-template-columns:720px 360px 1fr"><code>for j in range(n):</code><b>IndexError</b><span>a[j + 1] 超出了列表</span></div>
-    <div class="r d3" style="grid-template-columns:720px 360px 1fr"><code>if a[j] &lt; a[j + 1]:</code><b>不报错</b><span>排成了从大到小</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:720px;--mid:360px">
+    <div class="r d1"><code class="plain">先 a = b，再 b = a</code><b>不报错</b><span>两个都变成一样的数</span></div>
+    <div class="r d2"><code>for j in range(n):</code><b>IndexError</b><span>a[j + 1] 超出了列表</span></div>
+    <div class="r d3"><code>if a[j] &lt; a[j + 1]:</code><b>不报错</b><span>排成了从大到小</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">排序写错，常常不报错，只是结果不对。写完用几组数试一试：本来就排好的、倒着的、有一样的。</p>
+  <p class="say r d3">排序写错，常常不报错，只是结果不对。写完用几组数试一试：本来就排好的、倒着的、有一样的。</p>
   <div class="foot"></div>
 </section>
 
@@ -698,7 +797,7 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- hints -->
-<section id="page-13" class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-13" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>读入和排序都可以照例题写。去掉每轮的 print，排好以后再输出一次列表。</span></p>
@@ -719,39 +818,39 @@ a[0], a[1] = a[1], a[0]</pre>
 </section>
 
 <!-- review -->
-<section id="page-15" class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>怎样交换两个变量？<em class="step s2" style="font-style:normal;font-weight:400">　a, b = b, a，一行同时换。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>比完一轮，哪个站对了位置？<em class="step s3" style="font-style:normal;font-weight:400">　最大的到了最后。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>为什么内层是 range(n - 1 - r)？<em class="step s4" style="font-style:normal;font-weight:400">　后面 r 个已经排好，不用再比；再减 1 是因为要比 a[j + 1]。</em></span></p>
+<section id="page-15" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>怎样交换两个变量？<em class="step s2">　a, b = b, a，一行同时换。</em></span></p>
+    <p><i>Q2</i><span>比完一轮，哪个站对了位置？<em class="step s3">　最大的到了最后。</em></span></p>
+    <p><i>Q3</i><span>为什么内层是 range(n - 1 - r)？<em class="step s4">　后面 r 个已经排好，不用再比；再减 1 是因为要比 a[j + 1]。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-16" class="slide" aria-label="速查卡">
+<section id="page-16" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>a, b = b, a</code><span>一行交换，谁也不会被盖掉</span></div>
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>a[j], a[j + 1] = a[j + 1], a[j]</code><span>交换列表里挨着的两个</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>for r in range(n - 1):</code><span>n 个数比 n - 1 轮</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>for j in range(n - 1 - r):</code><span>每轮少比一对</span></div>
-    <div class="r d3" style="grid-template-columns:860px 1fr"><code>if a[j] &gt; a[j + 1]:</code><span>从小到大；换成 &lt; 就从大到小</span></div>
+  <div class="sheet3" style="--key:860px">
+    <div class="r d1"><code>a, b = b, a</code><span>一行交换，谁也不会被盖掉</span></div>
+    <div class="r d1"><code>a[j], a[j + 1] = a[j + 1], a[j]</code><span>交换列表里挨着的两个</span></div>
+    <div class="r d2"><code>for r in range(n - 1):</code><span>n 个数比 n - 1 轮</span></div>
+    <div class="r d2"><code>for j in range(n - 1 - r):</code><span>每轮少比一对</span></div>
+    <div class="r d3"><code>if a[j] &gt; a[j + 1]:</code><span>从小到大；换成 &lt; 就从大到小</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section id="page-17" class="slide" aria-label="后面再学">
+<section id="page-17" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>选择排序</code><span>每轮找出最小的，放到最前面</span></div>
     <div class="r d2"><code>插入排序</code><span>像整理手里的扑克牌，一张张插进去</span></div>
     <div class="r d3"><code>更快的排序</code><span>数很多时冒泡太慢，sorted 用的是更快的办法</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天自己写出了排序。以后用 sorted 时，你知道它在背后做的是什么样的事了。</p>
+  <p class="say r d3">今天自己写出了排序。以后用 sorted 时，你知道它在背后做的是什么样的事了。</p>
   <div class="foot"></div>
 </section>
 

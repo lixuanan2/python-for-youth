@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="输入输出" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 01</p>
+<section class="slide lay-cover" aria-label="输入输出" data-chapter="开始">
+  <p class="kicker r"># LESSON 01</p>
   <div class="cover-row"><b class="r">输入</b><div class="wire r d1"><i></i><span>程序</span></div><b class="r d2">输出</b></div>
-  <p class="abs r d3" style="left:96px;top:740px;font:700 60px var(--text)">读入数据，输出结果</p>
-  <p class="abs r d3 say" style="left:96px;top:830px;color:var(--muted)">不需要编程基础，从第一行代码开始。</p>
+  <p class="headline r d3">读入数据，输出结果</p>
+  <p class="say r d3">不需要编程基础，从第一行代码开始。</p>
   <div class="foot"></div>
 </section>
 
@@ -227,15 +227,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误">
+<section class="slide lay-columns" aria-label="三种常见错误">
   <h2 class="t r">三种最常见的错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
   <div class="ledger">
     <div class="r d1"><code>Print("hi")</code><b>NameError</b><span>print 全部小写</span></div>
     <div class="r d2"><code>print(“hi”)</code><b>SyntaxError</b><span>换成英文引号</span></div>
     <div class="r d3"><code class="plain">int() 读到 3 4</code><b>ValueError</b><span>一个 int() 只转换一个数</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">只写 input() 读入 3 4 没问题，转不了的是 int()。</p>
+  <p class="say r d3">只写 input() 读入 3 4 没问题，转不了的是 int()。</p>
   <div class="foot"></div>
 </section>
 
@@ -262,7 +262,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>名字是文字，要不要转换？年龄呢？</span></p>
@@ -275,19 +275,19 @@
 <!-- @answer 06 | 读进来的年龄是一串字，先用 <code>int()</code> 变成数，才能 <code>+ 1</code>。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>input() 读进来的是什么？<em class="step s2" style="font-style:normal;font-weight:400">　是文字，哪怕你输入的是数字。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>什么时候要用 int()？<em class="step s3" style="font-style:normal;font-weight:400">　读入的是整数，要按整数来算的时候。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>不看代码，能写出两数求和吗？<em class="step s4" style="font-style:normal;font-weight:400">　合上课件试一试。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>input() 读进来的是什么？<em class="step s2">　是文字，哪怕你输入的是数字。</em></span></p>
+    <p><i>Q2</i><span>什么时候要用 int()？<em class="step s3">　读入的是整数，要按整数来算的时候。</em></span></p>
+    <p><i>Q3</i><span>不看代码，能写出两数求和吗？<em class="step s4">　合上课件试一试。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:760px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>print("文字")</code><span>在屏幕上显示文字，然后换行</span></div>
@@ -300,13 +300,13 @@
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>float()</code><span>带小数点的数，比如 3.5</span></div>
     <div class="r d2"><code>input("提示")</code><span>让程序先说一句话，再等你打字</span></div>
     <div class="r d3"><code>split()</code><span>在一行里读入好几个数</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天学会用 print、input 和 int，就已经能写出会“对话”的程序了。</p>
+  <p class="say r d3">今天学会用 print、input 和 int，就已经能写出会“对话”的程序了。</p>
   <div class="foot"></div>
 </section>

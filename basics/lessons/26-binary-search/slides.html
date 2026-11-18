@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="二分查找" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 26</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">一半</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">(lo + hi) // 2</span></div><b class="r d2" style="font-size:250px">一半</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">二分查找：每次排除一半</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让电脑猜 1 到 100 的数最多 7 次就猜中，还能在排好序的数里飞快找到一个。</p>
+<section class="slide lay-cover" aria-label="二分查找" data-chapter="开始">
+  <p class="kicker r"># LESSON 26</p>
+  <div class="cover-row"><b class="r">一半</b><div class="wire r d1"><i></i><span>(lo + hi) // 2</span></div><b class="r d2">一半</b></div>
+  <p class="headline r d3">二分查找：每次排除一半</p>
+  <p class="say r d3">学完你能让电脑猜 1 到 100 的数最多 7 次就猜中，还能在排好序的数里飞快找到一个。</p>
   <div class="foot"></div>
 </section>
 
@@ -108,15 +108,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:560px 300px 1fr"><code>lo = guess</code><b>不报错</b><span>可能一直猜同一个，停不下来</span></div>
-    <div class="r d2" style="grid-template-columns:560px 300px 1fr"><code>(lo + hi) / 2</code><b>不对劲</b><span>/ 得到小数，猜 50.5 这样的数</span></div>
-    <div class="r d3" style="grid-template-columns:560px 300px 1fr"><code class="plain">数没排好就二分</code><b>不报错</b><span>可能找不到明明有的数</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:300px">
+    <div class="r d1"><code>lo = guess</code><b>不报错</b><span>可能一直猜同一个，停不下来</span></div>
+    <div class="r d2"><code>(lo + hi) / 2</code><b>不对劲</b><span>/ 得到小数，猜 50.5 这样的数</span></div>
+    <div class="r d3"><code class="plain">数没排好就二分</code><b>不报错</b><span>可能找不到明明有的数</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">猜过的数已经不可能了，所以写 guess + 1 和 guess - 1。用 1 和 100 两头试一试。</p>
+  <p class="say r d3">猜过的数已经不可能了，所以写 guess + 1 和 guess - 1。用 1 和 100 两头试一试。</p>
   <div class="foot"></div>
 </section>
 
@@ -151,7 +151,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>这回 lo 和 hi 是下标：lo = 0，hi = n - 1。每次看中间的 a[mid]，看一次计数加 1。</span></p>
@@ -164,38 +164,38 @@
 <!-- @answer 02 lines 10-18 | 每看一个中间的数就记一次；比目标小去右半边，比目标大去左半边。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>二分查找为什么快？<em class="step s2" style="font-style:normal;font-weight:400">　每次去掉一半，1 到 100 最多 7 次。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>用二分有什么前提？<em class="step s3" style="font-style:normal;font-weight:400">　数要排好顺序。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>为什么是 guess + 1，不是 guess？<em class="step s4" style="font-style:normal;font-weight:400">　猜过的已经不对，不用再留着，不然可能停不下来。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>二分查找为什么快？<em class="step s2">　每次去掉一半，1 到 100 最多 7 次。</em></span></p>
+    <p><i>Q2</i><span>用二分有什么前提？<em class="step s3">　数要排好顺序。</em></span></p>
+    <p><i>Q3</i><span>为什么是 guess + 1，不是 guess？<em class="step s4">　猜过的已经不对，不用再留着，不然可能停不下来。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>mid = (lo + hi) // 2</code><span>取中间，用整除</span></div>
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>lo = mid + 1</code><span>中间太小，去右半边</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>hi = mid - 1</code><span>中间太大，去左半边</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>while lo &lt;= hi:</code><span>还有数没排除，就接着找</span></div>
-    <div class="r d3" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">先排好序</code><span>这节课的数要先排好，比完才知道扔哪一半</span></div>
+  <div class="sheet3" style="--key:860px">
+    <div class="r d1"><code>mid = (lo + hi) // 2</code><span>取中间，用整除</span></div>
+    <div class="r d1"><code>lo = mid + 1</code><span>中间太小，去右半边</span></div>
+    <div class="r d2"><code>hi = mid - 1</code><span>中间太大，去左半边</span></div>
+    <div class="r d2"><code>while lo &lt;= hi:</code><span>还有数没排除，就接着找</span></div>
+    <div class="r d3"><code class="plain">先排好序</code><span>这节课的数要先排好，比完才知道扔哪一半</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>二分答案</code><span>答案不在列表里，也能对半猜，比如开平方</span></div>
     <div class="r d2"><code>bisect</code><span>Python 自带的二分工具</span></div>
     <div class="r d3"><code>比一比快慢</code><span>数越多，挨个试和二分差得越远</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天学会了每次排除一半。排序和二分常常一起用：先排好，再快快地找。</p>
+  <p class="say r d3">今天学会了每次排除一半。排序和二分常常一起用：先排好，再快快地找。</p>
   <div class="foot"></div>
 </section>

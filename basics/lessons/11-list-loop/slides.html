@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="列表遍历" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 11</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">挨个</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">for s in scores:</span></div><b class="r d2" style="font-size:250px">看完</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">列表遍历：把列表从头看到尾</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能数出及格人数，给全班加分，还能找出谁高于平均分。</p>
+<section class="slide lay-cover" aria-label="列表遍历" data-chapter="开始">
+  <p class="kicker r"># LESSON 11</p>
+  <div class="cover-row"><b class="r">挨个</b><div class="wire r d1"><i></i><span>for s in scores:</span></div><b class="r d2">看完</b></div>
+  <p class="headline r d3">列表遍历：把列表从头看到尾</p>
+  <p class="say r d3">学完你能数出及格人数，给全班加分，还能找出谁高于平均分。</p>
   <div class="foot"></div>
 </section>
 
@@ -169,15 +169,15 @@ print(scores)</pre><p class="res step s2" style="font-size:66px">[85, 100, 75]</
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:700px 400px 1fr"><code>print(i)</code><b>不报错</b><span>输出的是下标，不是分数</span></div>
-    <div class="r d2" style="grid-template-columns:700px 400px 1fr"><code>scores[len(scores)]</code><b>IndexError</b><span>最后一个是 len - 1</span></div>
-    <div class="r d3" style="grid-template-columns:700px 400px 1fr"><code>s += 5</code><b>不报错</b><span>改的是拿出来的一份，列表没变</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:700px;--mid:400px">
+    <div class="r d1"><code>print(i)</code><b>不报错</b><span>输出的是下标，不是分数</span></div>
+    <div class="r d2"><code>scores[len(scores)]</code><b>IndexError</b><span>最后一个是 len - 1</span></div>
+    <div class="r d3"><code>s += 5</code><b>不报错</b><span>改的是拿出来的一份，列表没变</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">两种不报错的最难发现。写完先想：我要的是下标，还是数？</p>
+  <p class="say r d3">两种不报错的最难发现。写完先想：我要的是下标，还是数？</p>
   <div class="foot"></div>
 </section>
 
@@ -207,7 +207,7 @@ print(scores)</pre><p class="res step s2" style="font-size:66px">[85, 100, 75]</
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>先把分数都存进列表，遍历一遍，算出平均分。</span></p>
@@ -220,38 +220,38 @@ print(scores)</pre><p class="res step s2" style="font-size:66px">[85, 100, 75]</
 <!-- @answer 03 lines 5-13 | 先加出总分、算出平均分，再走一遍列表，只数 <code>s &gt; average</code> 的，一样的不算。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>for s in scores 里，s 拿到的是什么？<em class="step s2" style="font-style:normal;font-weight:400">　列表里的数，一遍一个。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>什么时候要用 range(len(scores))？<em class="step s3" style="font-style:normal;font-weight:400">　要编号或者要改列表的时候。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>为什么高于平均分要遍历两遍？<em class="step s4" style="font-style:normal;font-weight:400">　第一遍算出平均分，第二遍才能比。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>for s in scores 里，s 拿到的是什么？<em class="step s2">　列表里的数，一遍一个。</em></span></p>
+    <p><i>Q2</i><span>什么时候要用 range(len(scores))？<em class="step s3">　要编号或者要改列表的时候。</em></span></p>
+    <p><i>Q3</i><span>为什么高于平均分要遍历两遍？<em class="step s4">　第一遍算出平均分，第二遍才能比。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:900px 1fr"><code>for s in scores:</code><span>一个一个拿出数</span></div>
-    <div class="r d1" style="grid-template-columns:900px 1fr"><code>for i in range(len(scores)):</code><span>一个一个拿出下标</span></div>
-    <div class="r d2" style="grid-template-columns:900px 1fr"><code>scores[i]</code><span>用下标取数</span></div>
-    <div class="r d2" style="grid-template-columns:900px 1fr"><code>scores[i] += 5</code><span>改列表要用下标</span></div>
-    <div class="r d3" style="grid-template-columns:900px 1fr"><code>i + 1</code><span>给人看的编号从 1 开始</span></div>
+  <div class="sheet3" style="--key:900px">
+    <div class="r d1"><code>for s in scores:</code><span>一个一个拿出数</span></div>
+    <div class="r d1"><code>for i in range(len(scores)):</code><span>一个一个拿出下标</span></div>
+    <div class="r d2"><code>scores[i]</code><span>用下标取数</span></div>
+    <div class="r d2"><code>scores[i] += 5</code><span>改列表要用下标</span></div>
+    <div class="r d3"><code>i + 1</code><span>给人看的编号从 1 开始</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>sum()</code><span>Python 自带的求和，一行算出总分</span></div>
     <div class="r d2"><code>enumerate()</code><span>同时拿到编号和数</span></div>
     <div class="r d3"><code>字符串</code><span>下节课：一句话也能一个字一个字地遍历</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天学会了把列表从头看到尾，还能看好几遍。下节课看看文字里藏着什么。</p>
+  <p class="say r d3">今天学会了把列表从头看到尾，还能看好几遍。下节课看看文字里藏着什么。</p>
   <div class="foot"></div>
 </section>

@@ -1,9 +1,9 @@
 <!-- cover -->
-<section class="slide" aria-label="枚举" data-chapter="开始">
-  <p class="abs r" style="left:96px;top:96px;font:400 36px var(--code);color:var(--muted)"># LESSON 25</p>
-  <div class="cover-row"><b class="r" style="font-size:250px">挨个</b><div class="wire r d1"><i></i><span style="font-family:var(--code);white-space:nowrap">for x in range(...)</span></div><b class="r d2" style="font-size:250px">试遍</b></div>
-  <p class="abs r d3" style="left:96px;top:700px;font:700 60px var(--text)">枚举：把可能都试一遍</p>
-  <p class="abs r d3 say" style="left:96px;top:790px;color:var(--muted)">学完你能让程序把所有可能一个个试过去，找出鸡兔同笼这类题的答案。</p>
+<section class="slide lay-cover" aria-label="枚举" data-chapter="开始">
+  <p class="kicker r"># LESSON 25</p>
+  <div class="cover-row"><b class="r">挨个</b><div class="wire r d1"><i></i><span>for x in range(...)</span></div><b class="r d2">试遍</b></div>
+  <p class="headline r d3">枚举：把可能都试一遍</p>
+  <p class="say r d3">学完你能让程序把所有可能一个个试过去，找出鸡兔同笼这类题的答案。</p>
   <div class="foot"></div>
 </section>
 
@@ -122,15 +122,15 @@
 </section>
 
 <!-- errors -->
-<section class="slide" aria-label="三种常见错误" data-chapter="找错">
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="abs r" style="right:96px;top:112px;font:400 34px var(--text);color:var(--muted)">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1" style="grid-template-columns:780px 280px 1fr"><code>range(heads)</code><b>不报错</b><span>漏了“全是鸡”这一种</span></div>
-    <div class="r d2" style="grid-template-columns:780px 280px 1fr"><code>range(1, heads + 1)</code><b>不报错</b><span>漏了“一只鸡也没有”</span></div>
-    <div class="r d3" style="grid-template-columns:780px 280px 1fr"><code class="plain">循环里写“没有答案”</code><b>不报错</b><span>每试错一次就说一遍</span></div>
+  <p class="note r">划线的写法只阅读，不要照抄</p>
+  <div class="ledger" style="--key:780px;--mid:280px">
+    <div class="r d1"><code>range(heads)</code><b>不报错</b><span>漏了“全是鸡”这一种</span></div>
+    <div class="r d2"><code>range(1, heads + 1)</code><b>不报错</b><span>漏了“一只鸡也没有”</span></div>
+    <div class="r d3"><code class="plain">循环里写“没有答案”</code><b>不报错</b><span>每试错一次就说一遍</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:790px">枚举的错大多不报错，只是少了答案或多了废话。用两头的数据试一试：全是鸡、全是兔。</p>
+  <p class="say r d3">枚举的错大多不报错，只是少了答案或多了废话。用两头的数据试一试：全是鸡、全是兔。</p>
   <div class="foot"></div>
 </section>
 
@@ -159,7 +159,7 @@
 </section>
 
 <!-- hints -->
-<section class="slide clay" aria-label="提示" data-steps="3" data-at="3">
+<section class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>定范围：公鸡最多 n // 5 只，母鸡最多 n // 3 只。用第 18 课的两层循环，外层试公鸡，内层试母鸡。</span></p>
@@ -172,38 +172,38 @@
 <!-- @answer 02 | 两层循环试公鸡和母鸡，小鸡是剩下的，钱对上就输出。 -->
 
 <!-- review -->
-<section class="slide olive" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
-  <h2 class="abs" style="left:96px;top:90px;font:800 130px/1.2 var(--text)">说得清吗？</h2>
-  <div class="hints" style="top:290px">
-    <p style="font-weight:700"><i>Q1</i><span>枚举分哪三步？<em class="step s2" style="font-style:normal;font-weight:400">　定范围，一个个试，判断对不对。</em></span></p>
-    <p style="font-weight:700"><i>Q2</i><span>范围漏了会怎样？<em class="step s3" style="font-style:normal;font-weight:400">　不报错，只是找不到漏掉的答案。</em></span></p>
-    <p style="font-weight:700"><i>Q3</i><span>怎样在没答案时说一声？<em class="step s4" style="font-style:normal;font-weight:400">　用 found 记着找到过没有，循环结束后再判断。</em></span></p>
+<section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+  <h2 class="big">说得清吗？</h2>
+  <div class="hints qa">
+    <p><i>Q1</i><span>枚举分哪三步？<em class="step s2">　定范围，一个个试，判断对不对。</em></span></p>
+    <p><i>Q2</i><span>范围漏了会怎样？<em class="step s3">　不报错，只是找不到漏掉的答案。</em></span></p>
+    <p><i>Q3</i><span>怎样在没答案时说一声？<em class="step s4">　用 found 记着找到过没有，循环结束后再判断。</em></span></p>
   </div>
-  <p class="abs say only1" style="left:96px;top:880px">先自己说一说，再翻下一步看答案。</p>
+  <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section class="slide" aria-label="速查卡">
+<section class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3">
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>for x in range(1, 101):</code><span>1 到 100 挨个试</span></div>
-    <div class="r d1" style="grid-template-columns:860px 1fr"><code>if 条件:</code><span>对上了就输出</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>range(heads + 1)</code><span>从 0 到 heads，两头都要试</span></div>
-    <div class="r d2" style="grid-template-columns:860px 1fr"><code>found = False</code><span>记着找到过没有</span></div>
-    <div class="r d3" style="grid-template-columns:860px 1fr"><code class="plain" style="font-family:var(--text)">两个未知数</code><span>两层循环，或者用一个算出另一个</span></div>
+  <div class="sheet3" style="--key:860px">
+    <div class="r d1"><code>for x in range(1, 101):</code><span>1 到 100 挨个试</span></div>
+    <div class="r d1"><code>if 条件:</code><span>对上了就输出</span></div>
+    <div class="r d2"><code>range(heads + 1)</code><span>从 0 到 heads，两头都要试</span></div>
+    <div class="r d2"><code>found = False</code><span>记着找到过没有</span></div>
+    <div class="r d3"><code class="plain">两个未知数</code><span>两层循环，或者用一个算出另一个</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section class="slide" aria-label="后面再学">
+<section class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>缩小范围</code><span>先想清楚哪些不可能，就不用试</span></div>
     <div class="r d2"><code>二分查找</code><span>排好序的数，每次去掉一半，试得更少</span></div>
     <div class="r d3"><code>回溯</code><span>走不通就退一步，换条路再试</span></div>
   </div>
-  <p class="abs say r d3" style="left:96px;top:700px">今天学会了挨个试。下节课学二分查找：同样是找，每次能排除一半。</p>
+  <p class="say r d3">今天学会了挨个试。下节课学二分查找：同样是找，每次能排除一半。</p>
   <div class="foot"></div>
 </section>
