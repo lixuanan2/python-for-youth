@@ -44,31 +44,36 @@
     "id": "07-while-loop",
     "tag": "LESSON 07",
     "title": "while 循环",
-    "stage": "循环"
+    "stage": "循环",
+    "structured": true
   },
   {
     "id": "08-loop-tally",
     "tag": "LESSON 08",
     "title": "累加和计数",
-    "stage": "循环"
+    "stage": "循环",
+    "structured": true
   },
   {
     "id": "09-max-min",
     "tag": "LESSON 09",
     "title": "最大值和最小值",
-    "stage": "循环"
+    "stage": "循环",
+    "structured": true
   },
   {
     "id": "10-list-basics",
     "tag": "LESSON 10",
     "title": "列表基础",
-    "stage": "列表和字符串"
+    "stage": "列表和字符串",
+    "structured": true
   },
   {
     "id": "11-list-loop",
     "tag": "LESSON 11",
     "title": "列表遍历",
-    "stage": "列表和字符串"
+    "stage": "列表和字符串",
+    "structured": true
   },
   {
     "id": "12-string-basics",
