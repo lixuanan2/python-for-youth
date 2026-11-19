@@ -165,6 +165,7 @@ h2.t{position:absolute;left:96px;top:84px;font:800 76px/1.2 var(--text);letter-s
 h2.t::before{content:"# ";color:var(--clay)}
 .clay h2.t::before,.olive h2.t::before{color:#ffffffa0}
 .say{font:400 40px/1.6 var(--text)}
+.say.small{font-size:34px}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
@@ -208,6 +209,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slip{position:absolute;background:var(--paper);color:var(--ink);padding:24px 40px 28px;box-shadow:0 16px 36px #0005}
 .slip small{display:block;font:400 28px var(--text);color:var(--muted);margin-bottom:6px}
 .slip pre{font:700 56px/1.4 var(--code)}
+/* Note tiers, named by how much text they hold (tools/tierrules.py, PROMPT.md "档位"); the regular note has no class.
+   A second label in a note (input, then output) keeps a gap above it. */
+.slip.short pre{font-size:72px}.slip.long pre{font-size:44px}.slip.longest pre{font-size:34px;white-space:pre-wrap}
+.slip pre+small{margin-top:20px}
 .tilt{transform:rotate(-1.2deg)}.tilt2{transform:rotate(1.2deg)}
 
 /* === SPREADS === */
@@ -220,6 +225,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .turn h2{font:800 80px/1.2 var(--text)}
 .turn p{margin-top:24px}
 .sheet{margin-top:34px;background:var(--sand);padding:26px 40px 30px}
+.sheet.two{display:grid;grid-template-columns:1fr 1fr}.sheet.three{display:grid;grid-template-columns:1fr 1fr 1fr}
 .sheet small{display:block;font:400 30px var(--text);color:var(--muted);margin-bottom:8px}
 .sheet pre{font:700 56px/1.4 var(--code)}
 
@@ -281,6 +287,8 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .box{display:flex;align-items:baseline;gap:30px;border-top:5px solid var(--ink);padding:10px 0 16px}
 .box i{font:400 44px var(--code);color:var(--muted);font-style:normal;width:130px}
 .box b{font:800 120px/1.15 var(--code)}
+/* Value tiers, named by how long the value is (tools/tierrules.py); the regular box has no class. */
+.box.long b{font-size:84px}.box.longer b{font-size:60px}.box.longest b{font-size:40px}
 .box.out b{color:var(--clay)}.box.out i{font:400 40px var(--text)}
 
 /* === QUIZ, click a choice and read why === */
@@ -582,6 +590,7 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
 .lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
 .lay-notes>.notes>.slip.big{flex:1.2}
+.lay-notes>.notes>.slip small{font-size:34px}
 .lay-notes.challenge{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
 .lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
 .lay-notes.challenge>.say{grid-column:1;max-width:1000px}
@@ -603,6 +612,12 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-walk>.ide{grid-area:ide;justify-self:start}
 .lay-walk>.right{grid-area:right;margin-top:-30px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
+/* Variable boxes line up by themselves: the labels take one column as wide as the widest of them, so no box sets a width. */
+.lay-walk>.right:has(>.box){display:grid;grid-template-columns:minmax(130px,max-content) minmax(0,1fr);column-gap:30px;align-content:start}
+.lay-walk>.right:has(>.box)>*{grid-column:1/-1}
+.lay-walk>.right:has(>.box)>.ide{justify-self:start}
+.lay-walk>.right>.box{display:grid;grid-template-columns:subgrid;align-items:baseline}
+.lay-walk>.right>.box i{width:auto;white-space:nowrap}
 .lay-walk>.foot{color:var(--ghost)}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
@@ -684,8 +699,8 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="乱糟糟的输入">
   <h2 class="t r">别人输入的东西，常常乱糟糟</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">名字前后多打了空格</small><pre style="font-size:60px;white-space:pre">"  小明  "</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">一行里写了好几个名字</small><pre style="font-size:60px">小明, 小红 ,小刚</pre></div>
+    <div class="slip r d1 short"><small>名字前后多打了空格</small><pre style="white-space:pre">"  小明  "</pre></div>
+    <div class="slip tilt r d2 short"><small>一行里写了好几个名字</small><pre>小明, 小红 ,小刚</pre></div>
   </div>
   <p class="say r d3">上节课一个字一个字地拆，能做到，但要写好几行。<br>Python 给字符串带了一套工具，叫“方法”，写法是“字符串.方法名()”，一句就能整理好。</p>
   <div class="foot"></div>
@@ -702,8 +717,8 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:150px">name</i><b style="font-size:64px;white-space:pre">[  小明  ]</b></div>
-    <div class="box out step s2"><i style="width:150px">clean</i><b style="font-size:64px">[小明]</b></div>
+    <div class="box step longer"><i>name</i><b style="white-space:pre">[  小明  ]</b></div>
+    <div class="box out step s2 longer"><i>clean</i><b>[小明]</b></div>
   </div>
 </section>
 
@@ -736,8 +751,8 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step" style="display:block"><i style="display:block;width:auto">第 2 行</i><b style="display:block;font-size:56px">我爱狗，狗爱我</b></div>
-    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">第 3 行</i><b style="display:block;font-size:56px">我爱猫，猫爱我</b></div>
+    <div class="box step longer" style="display:block"><i style="display:block">第 2 行</i><b style="display:block">我爱狗，狗爱我</b></div>
+    <div class="box out step s2 longer" style="display:block"><i style="display:block">第 3 行</i><b style="display:block">我爱猫，猫爱我</b></div>
   </div>
 </section>
 
@@ -779,8 +794,8 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step" style="display:block"><i style="display:block;width:auto">names</i><b style="display:block;font-size:40px">['小明', '小红', '小刚']</b></div>
-    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">len</i><b style="display:block;font-size:84px">3</b></div>
+    <div class="box step longest" style="display:block"><i style="display:block">names</i><b style="display:block">['小明', '小红', '小刚']</b></div>
+    <div class="box out step s2 longest" style="display:block"><i style="display:block">len</i><b style="display:block">3</b></div>
   </div>
 </section>
 
@@ -809,15 +824,15 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step" style="display:block"><i style="display:block;width:auto">"-"</i><b style="display:block;font-size:52px">red-green-blue</b></div>
-    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">" "</i><b style="display:block;font-size:52px">red green blue</b></div>
+    <div class="box step longer" style="display:block"><i style="display:block">"-"</i><b style="display:block">red-green-blue</b></div>
+    <div class="box out step s2 longer" style="display:block"><i style="display:block">" "</i><b style="display:block">red green blue</b></div>
   </div>
 </section>
 
 <!-- worked example: clean names -->
-<section id="page-11" class="slide lay-walk" aria-label="例题：整理名字" data-steps="3" data-at="3">
+<section id="page-11" class="slide lay-walk narrow" aria-label="例题：整理名字" data-steps="3" data-at="3">
   <h2 class="t">例题：整理一行名字</h2>
-  <div class="editor" style="--fs:47px"><div class="tab">clean_names.py</div>
+  <div class="editor" style="--fs:40px"><div class="tab">clean_names.py</div>
 <pre class="code" data-file="solutions/05_clean_names.py"><span class="ln l1">line = <span class="f">input</span>()</span><span class="ln l2 l3"><span class="k">for</span> name <span class="k">in</span> line.<span class="f">split</span>(<span class="s">","</span>):</span><span class="ln l3">    <span class="f">print</span>(name.<span class="f">strip</span>())</span></pre></div>
   <div class="turns">
       <p class="say only1">输入：小明, 小红 ,小刚。逗号前后的空格有多有少。</p>
@@ -826,9 +841,9 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:150px">输入</i><b style="font-size:48px;white-space:pre">小明, 小红 ,小刚</b></div>
-    <div class="box step s2"><i style="width:150px">切开</i><b style="font-size:40px;white-space:pre">'小明' ' 小红 ' '小刚'</b></div>
-    <div class="box out step s3"><i style="width:150px">输出</i><b style="font-size:48px;line-height:1.3">小明<br>小红<br>小刚</b></div>
+    <div class="box step longest"><i>输入</i><b style="white-space:pre">小明, 小红 ,小刚</b></div>
+    <div class="box step s2 longest"><i>切开</i><b style="white-space:pre">'小明' ' 小红 ' '小刚'</b></div>
+    <div class="box out step s3 longest"><i>输出</i><b style="line-height:1.3">小明<br>小红<br>小刚</b></div>
   </div>
 </section>
 
@@ -838,7 +853,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="turn">
     <h2 class="r d1">把逗号换成顿号</h2>
     <p class="say r d1">读入一行用英文逗号隔开的词，没有空格。把它们用中文顿号“、”连起来，输出一行。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入</small><pre style="font-size:48px">苹果,香蕉,橙子</pre></div><div><small>输出</small><pre style="font-size:48px">苹果、香蕉、橙子</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入</small><pre style="font-size:48px">苹果,香蕉,橙子</pre></div><div><small>输出</small><pre style="font-size:48px">苹果、香蕉、橙子</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">只有一个词时，就输出它自己。</p>
   </div>
   <a class="ide r d3" data-code="# 【把逗号换成顿号】&#10;# 读入一行用英文逗号隔开的词，没有空格。把它们用中文顿号“、&#10;#   ”连起来，输出一行。&#10;# 例如输入：苹果,香蕉,橙子&#10;# 应该输出：苹果、香蕉、橙子&#10;# 提示：切开以后，用 join 拼回去。&#10;# ↓ 在下面这段程序上改&#10;&#10;line = input()&#10;for name in line.split(&quot;,&quot;):&#10;    print(name.strip())&#10;">▶ 在 IDE 开始改</a>
@@ -885,7 +900,7 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">整理单词</h2>
   <p class="say r d2">读入一行英文单词，单词之间用空格或连字符 - 隔开，<b>可能连着好几个，两头也可能有</b>。<br>整理成单词之间只隔一个空格、两头没有空格，输出一行。</p>
-  <div class="slip tilt2 r d3" style="width:700px"><small>输入</small><pre style="font-size:40px;white-space:pre">red--green  blue-  pink</pre><small style="margin-top:20px">输出</small><pre style="font-size:40px">red green blue pink</pre></div>
+  <div class="slip tilt2 r d3 long" style="width:700px"><small>输入</small><pre style="white-space:pre">red--green  blue-  pink</pre><small>输出</small><pre>red green blue pink</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【整理单词】&#10;# 读入一行英文单词，单词之间用空格或连字符 - 隔开，&#10;#   可能连着好几个，两头也可能有。&#10;# 整理成单词之间只隔一个空格、两头没有空格，输出一行。&#10;# 例如输入：red--green  blue-  pink&#10;# 应该输出：red green blue pink&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

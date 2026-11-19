@@ -165,6 +165,7 @@ h2.t{position:absolute;left:96px;top:84px;font:800 76px/1.2 var(--text);letter-s
 h2.t::before{content:"# ";color:var(--clay)}
 .clay h2.t::before,.olive h2.t::before{color:#ffffffa0}
 .say{font:400 40px/1.6 var(--text)}
+.say.small{font-size:34px}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
@@ -208,6 +209,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slip{position:absolute;background:var(--paper);color:var(--ink);padding:24px 40px 28px;box-shadow:0 16px 36px #0005}
 .slip small{display:block;font:400 28px var(--text);color:var(--muted);margin-bottom:6px}
 .slip pre{font:700 56px/1.4 var(--code)}
+/* Note tiers, named by how much text they hold (tools/tierrules.py, PROMPT.md "档位"); the regular note has no class.
+   A second label in a note (input, then output) keeps a gap above it. */
+.slip.short pre{font-size:72px}.slip.long pre{font-size:44px}.slip.longest pre{font-size:34px;white-space:pre-wrap}
+.slip pre+small{margin-top:20px}
 .tilt{transform:rotate(-1.2deg)}.tilt2{transform:rotate(1.2deg)}
 
 /* === SPREADS === */
@@ -220,6 +225,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .turn h2{font:800 80px/1.2 var(--text)}
 .turn p{margin-top:24px}
 .sheet{margin-top:34px;background:var(--sand);padding:26px 40px 30px}
+.sheet.two{display:grid;grid-template-columns:1fr 1fr}.sheet.three{display:grid;grid-template-columns:1fr 1fr 1fr}
 .sheet small{display:block;font:400 30px var(--text);color:var(--muted);margin-bottom:8px}
 .sheet pre{font:700 56px/1.4 var(--code)}
 
@@ -281,6 +287,8 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .box{display:flex;align-items:baseline;gap:30px;border-top:5px solid var(--ink);padding:10px 0 16px}
 .box i{font:400 44px var(--code);color:var(--muted);font-style:normal;width:130px}
 .box b{font:800 120px/1.15 var(--code)}
+/* Value tiers, named by how long the value is (tools/tierrules.py); the regular box has no class. */
+.box.long b{font-size:84px}.box.longer b{font-size:60px}.box.longest b{font-size:40px}
 .box.out b{color:var(--clay)}.box.out i{font:400 40px var(--text)}
 
 /* === QUIZ, click a choice and read why === */
@@ -582,6 +590,7 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
 .lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
 .lay-notes>.notes>.slip.big{flex:1.2}
+.lay-notes>.notes>.slip small{font-size:34px}
 .lay-notes.challenge{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
 .lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
 .lay-notes.challenge>.say{grid-column:1;max-width:1000px}
@@ -603,6 +612,12 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-walk>.ide{grid-area:ide;justify-self:start}
 .lay-walk>.right{grid-area:right;margin-top:-30px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
+/* Variable boxes line up by themselves: the labels take one column as wide as the widest of them, so no box sets a width. */
+.lay-walk>.right:has(>.box){display:grid;grid-template-columns:minmax(130px,max-content) minmax(0,1fr);column-gap:30px;align-content:start}
+.lay-walk>.right:has(>.box)>*{grid-column:1/-1}
+.lay-walk>.right:has(>.box)>.ide{justify-self:start}
+.lay-walk>.right>.box{display:grid;grid-template-columns:subgrid;align-items:baseline}
+.lay-walk>.right>.box i{width:auto;white-space:nowrap}
 .lay-walk>.foot{color:var(--ghost)}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
@@ -684,11 +699,11 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="谁高于平均分">
   <h2 class="t r">有几个人高于平均分？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">小明</small><pre style="font-size:60px">80</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">小红</small><pre style="font-size:60px">90</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">小刚</small><pre style="font-size:60px">70</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">小丽</small><pre style="font-size:60px">60</pre></div>
-    <div class="slip tilt r d3"><small style="font-size:34px">平均分</small><pre style="font-size:72px">75</pre></div>
+    <div class="slip r d1 short"><small>小明</small><pre>80</pre></div>
+    <div class="slip r d2 short"><small>小红</small><pre>90</pre></div>
+    <div class="slip r d2 short"><small>小刚</small><pre>70</pre></div>
+    <div class="slip r d2 short"><small>小丽</small><pre>60</pre></div>
+    <div class="slip tilt r d3 short"><small>平均分</small><pre>75</pre></div>
   </div>
   <p class="say r d3">要先把全部分数加完，才知道平均分是 75；知道了平均分，还得回头再看一遍每个人。<br>边读边算的老办法做不到“回头看”。这节课把分数存进列表，想看几遍就看几遍。</p>
   <div class="foot"></div>
@@ -706,9 +721,9 @@ dialog p{color:var(--muted);font-size:15px}
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">第 1 遍</i><b style="font-size:84px">80</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">第 2 遍</i><b style="font-size:84px">95</b></div>
-    <div class="box out step s3"><i style="width:190px;white-space:nowrap">第 3 遍</i><b style="font-size:84px">70</b></div>
+    <div class="box step"><i>第 1 遍</i><b>80</b></div>
+    <div class="box step s2"><i>第 2 遍</i><b>95</b></div>
+    <div class="box out step s3"><i>第 3 遍</i><b>70</b></div>
   </div>
 </section>
 
@@ -719,7 +734,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code"><span class="ln">names = [<span class="s">"小明"</span>, <span class="s">"小红"</span>]</span><span class="ln"><span class="k">for</span> x <span class="k">in</span> names:</span><span class="ln">    <span class="f">print</span>(<span class="s">"你好"</span>, x)</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2"><small>屏幕上</small><pre>你好 小明
+    <div class="slip tilt step s2 short"><small>屏幕上</small><pre>你好 小明
 你好 小红</pre></div>
   </div>
   <div class="turns">
@@ -755,9 +770,9 @@ dialog p{color:var(--muted);font-size:15px}
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">i = 0</i><b style="font-size:84px">1 80</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px">2 95</b></div>
-    <div class="box out step s3"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px">3 70</b></div>
+    <div class="box step"><i>i = 0</i><b>1 80</b></div>
+    <div class="box step s2"><i>i = 1</i><b>2 95</b></div>
+    <div class="box out step s3"><i>i = 2</i><b>3 70</b></div>
   </div>
 </section>
 
@@ -783,15 +798,15 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code" data-file="solutions/03_count_pass.py"><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">scores = []</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2">count = <span class="m">0</span></span><span class="ln l3"><span class="k">for</span> s <span class="k">in</span> scores:</span><span class="ln l3">    <span class="k">if</span> s &gt;= <span class="m">60</span>:</span><span class="ln l3">        count += <span class="m">1</span></span><span class="ln l4"><span class="f">print</span>(count)</span></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1" style="font-size:34px">前四行和上节课一样：输入 4，再输入 80、59、60、30，存进列表。</p>
-      <p class="say only2" style="font-size:34px">计数前，先准备 count = 0。</p>
-      <p class="say only3" style="font-size:34px">遍历列表，碰到 60 分及以上就记一个：80 和 60。</p>
-      <p class="say only4" style="font-size:34px">看完了，输出 2。</p>
+      <p class="say only1 small">前四行和上节课一样：输入 4，再输入 80、59、60、30，存进列表。</p>
+      <p class="say only2 small">计数前，先准备 count = 0。</p>
+      <p class="say only3 small">遍历列表，碰到 60 分及以上就记一个：80 和 60。</p>
+      <p class="say only4 small">看完了，输出 2。</p>
     </div>
-    <div class="box step"><i style="width:170px">scores</i><b style="font-size:40px">[80, 59, 60, 30]</b></div>
-    <div class="box step s2"><i style="width:170px">count</i><b style="font-size:72px">0</b></div>
-    <div class="box step s3"><i style="width:170px">count</i><b style="font-size:72px">2</b></div>
-    <div class="box out step s4"><i style="width:170px">输出</i><b style="font-size:72px">2</b></div>
+    <div class="box step longest"><i>scores</i><b>[80, 59, 60, 30]</b></div>
+    <div class="box step s2 longest"><i>count</i><b>0</b></div>
+    <div class="box step s3 longest"><i>count</i><b>2</b></div>
+    <div class="box out step s4 longest"><i>输出</i><b>2</b></div>
     <a class="ide step s4">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -802,7 +817,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="turn">
     <h2 class="r d1">把不及格的分数列出来</h2>
     <p class="say r d1">第一行读入人数 n，接下来 n 行，每行一个整数分数。把不到 60 分的分数按原来的顺序输出，一行一个；<b>一个也没有就什么也不输出</b>。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 5 行</small><pre style="font-size:44px">4、80、59、60、30</pre></div><div><small>输出</small><pre style="line-height:1.2">59
+    <div class="sheet two r d2"><div><small>依次输入 5 行</small><pre style="font-size:44px">4、80、59、60、30</pre></div><div><small>输出</small><pre style="line-height:1.2">59
 30</pre></div></div>
   </div>
   <a class="ide r d3" data-code="# 【把不及格的分数列出来】&#10;# 第一行读入人数 n，接下来 n 行，每行一个整数分数。&#10;#   把不到 60 分的分数按原来的顺序输出，一行一个；&#10;#   一个也没有就什么也不输出。&#10;# 例如输入（每个一行）：4、80、59、60、30&#10;# 应该输出（每个一行）：59、30&#10;# 提示：不用数了，碰到就直接输出。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;count = 0&#10;for s in scores:&#10;    if s &gt;= 60:&#10;        count += 1&#10;print(count)&#10;">▶ 在 IDE 开始改</a>
@@ -880,11 +895,11 @@ print(scores)</pre><p class="res step s2" style="font-size:66px">[85, 100, 75]</
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">高于平均分</h2>
   <p class="say r d2">第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。<br>输出分数严格高于平均分的人数，<b>和平均分一样的不算</b>。</p>
-  <div class="slip tilt2 r d3" style="width:480px"><small>依次输入</small><pre>4
+  <div class="slip tilt2 r d3 short" style="width:480px"><small>依次输入</small><pre>4
 80
 90
 70
-60</pre><small style="margin-top:20px">输出</small><pre>2</pre></div>
+60</pre><small>输出</small><pre>2</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【高于平均分】&#10;# 第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。&#10;# 输出分数严格高于平均分的人数，和平均分一样的不算。&#10;# 例如输入（每个一行）：4、80、90、70、60&#10;# 应该输出：2&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

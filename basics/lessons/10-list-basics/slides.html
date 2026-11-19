@@ -11,9 +11,9 @@
 <section class="slide clay lay-notes" aria-label="第 2 个人多少分">
   <h2 class="t r">第 2 个人考了多少分？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">[0]</small><pre style="font-size:60px">80</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">[1]</small><pre style="font-size:60px">95</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">[2]</small><pre style="font-size:60px">70</pre></div>
+    <div class="slip r d1 short"><small>[0]</small><pre>80</pre></div>
+    <div class="slip r d2 short"><small>[1]</small><pre>95</pre></div>
+    <div class="slip r d2 short"><small>[2]</small><pre>70</pre></div>
   </div>
   <p class="say r d1">上节课只记住了最大的那个，<br>别的分数都留不住。</p>
   <p class="say r d3">一个变量是一个盒子，只装一个数。列表是一排盒子，每个盒子有编号，<br>编号从 0 开始。想要哪个，报编号就能拿到。</p>
@@ -32,9 +32,9 @@
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:150px">输出</i><b style="font-size:48px">[80, 95, 70]</b></div>
-    <div class="box out step s2"><i style="width:150px">[0]</i><b style="font-size:84px">80</b></div>
-    <div class="box out step s3"><i style="width:150px">len</i><b style="font-size:84px">3</b></div>
+    <div class="box step longer"><i>输出</i><b>[80, 95, 70]</b></div>
+    <div class="box out step s2 longer"><i>[0]</i><b>80</b></div>
+    <div class="box out step s3 longer"><i>len</i><b>3</b></div>
   </div>
 </section>
 
@@ -91,7 +91,7 @@ print(names[2])</pre></div>
 <pre class="code">scores = [80, 95, 70]
 print(scores[3])</pre></div>
   <div class="answer">
-    <div class="slip tilt r d2"><small>屏幕上</small><pre style="font-size:36px;white-space:pre-wrap">IndexError: list index
+    <div class="slip tilt r d2 longest"><small>屏幕上</small><pre style="white-space:pre-wrap">IndexError: list index
 out of range</pre></div>
   </div>
   <p class="say r d3">三个分数，下标只有 0、1、2。要 [3] 就超出了范围，程序报 IndexError，停下来。<br>报错的意思是：下标超出了列表的范围。看到它，先数一数列表里有几个。</p>
@@ -113,9 +113,9 @@ print(len(scores))</pre></div>
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:150px">[-1]</i><b style="font-size:84px">70</b></div>
-    <div class="box step s2"><i style="width:150px">[-2]</i><b style="font-size:84px">95</b></div>
-    <div class="box out step s3"><i style="width:150px">len</i><b style="font-size:84px">3</b></div>
+    <div class="box step"><i>[-1]</i><b>70</b></div>
+    <div class="box step s2"><i>[-2]</i><b>95</b></div>
+    <div class="box out step s3"><i>len</i><b>3</b></div>
   </div>
 </section>
 
@@ -143,8 +143,8 @@ print(len(scores))</pre></div>
   </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:150px">[1]</i><b style="font-size:84px">100</b></div>
-    <div class="box out step s2"><i style="width:150px">输出</i><b style="font-size:48px">[80, 100, 70]</b></div>
+    <div class="box step longest"><i>[1]</i><b>100</b></div>
+    <div class="box out step s2 longest"><i>输出</i><b>[80, 100, 70]</b></div>
   </div>
 </section>
 
@@ -160,9 +160,9 @@ print(len(scores))</pre></div>
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:200px">scores</i><b style="font-size:48px">[]</b></div>
-    <div class="box step s2"><i style="width:200px">scores</i><b style="font-size:48px">[80]</b></div>
-    <div class="box out step s3"><i style="width:200px">scores</i><b style="font-size:48px">[80, 95]</b></div>
+    <div class="box step long"><i>scores</i><b>[]</b></div>
+    <div class="box step s2 long"><i>scores</i><b>[80]</b></div>
+    <div class="box out step s3 long"><i>scores</i><b>[80, 95]</b></div>
   </div>
 </section>
 
@@ -179,10 +179,10 @@ print(len(scores))</pre></div>
   </div>
   <a class="ide step s4">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:200px">scores</i><b style="font-size:48px">[]</b></div>
-    <div class="box step s2"><i style="width:200px">scores</i><b style="font-size:48px">[80, 95, 70]</b></div>
-    <div class="box step s3"><i style="width:150px">k</i><b style="font-size:84px">2</b></div>
-    <div class="box out step s4"><i style="width:150px">输出</i><b style="font-size:84px">95</b></div>
+    <div class="box step longest"><i>scores</i><b>[]</b></div>
+    <div class="box step s2 longest"><i>scores</i><b>[80, 95, 70]</b></div>
+    <div class="box step s3 longest"><i>k</i><b>2</b></div>
+    <div class="box out step s4 longest"><i>输出</i><b>95</b></div>
   </div>
 </section>
 
@@ -260,13 +260,13 @@ print(len(a))</pre></div>
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">从两头数</h2>
   <p class="say r d2">第一行读入个数 n，接下来 n 行，每行一个整数，最后一行读入 k，k 在 1 到 n 之间。<br>输出从前往后数第 k 个和<b>从后往前数第 k 个</b>，中间空一格。</p>
-  <div class="slip tilt2 r d3" style="width:520px"><small>依次输入</small><pre style="font-size:48px">5
+  <div class="slip tilt2 r d3" style="width:520px"><small>依次输入</small><pre>5
 10
 20
 30
 40
 50
-2</pre><small style="margin-top:14px">输出</small><pre style="font-size:48px">20 40</pre></div>
+2</pre><small>输出</small><pre>20 40</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/06_two_ends.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

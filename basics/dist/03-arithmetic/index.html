@@ -165,6 +165,7 @@ h2.t{position:absolute;left:96px;top:84px;font:800 76px/1.2 var(--text);letter-s
 h2.t::before{content:"# ";color:var(--clay)}
 .clay h2.t::before,.olive h2.t::before{color:#ffffffa0}
 .say{font:400 40px/1.6 var(--text)}
+.say.small{font-size:34px}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
@@ -208,6 +209,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slip{position:absolute;background:var(--paper);color:var(--ink);padding:24px 40px 28px;box-shadow:0 16px 36px #0005}
 .slip small{display:block;font:400 28px var(--text);color:var(--muted);margin-bottom:6px}
 .slip pre{font:700 56px/1.4 var(--code)}
+/* Note tiers, named by how much text they hold (tools/tierrules.py, PROMPT.md "档位"); the regular note has no class.
+   A second label in a note (input, then output) keeps a gap above it. */
+.slip.short pre{font-size:72px}.slip.long pre{font-size:44px}.slip.longest pre{font-size:34px;white-space:pre-wrap}
+.slip pre+small{margin-top:20px}
 .tilt{transform:rotate(-1.2deg)}.tilt2{transform:rotate(1.2deg)}
 
 /* === SPREADS === */
@@ -220,6 +225,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .turn h2{font:800 80px/1.2 var(--text)}
 .turn p{margin-top:24px}
 .sheet{margin-top:34px;background:var(--sand);padding:26px 40px 30px}
+.sheet.two{display:grid;grid-template-columns:1fr 1fr}.sheet.three{display:grid;grid-template-columns:1fr 1fr 1fr}
 .sheet small{display:block;font:400 30px var(--text);color:var(--muted);margin-bottom:8px}
 .sheet pre{font:700 56px/1.4 var(--code)}
 
@@ -281,6 +287,8 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .box{display:flex;align-items:baseline;gap:30px;border-top:5px solid var(--ink);padding:10px 0 16px}
 .box i{font:400 44px var(--code);color:var(--muted);font-style:normal;width:130px}
 .box b{font:800 120px/1.15 var(--code)}
+/* Value tiers, named by how long the value is (tools/tierrules.py); the regular box has no class. */
+.box.long b{font-size:84px}.box.longer b{font-size:60px}.box.longest b{font-size:40px}
 .box.out b{color:var(--clay)}.box.out i{font:400 40px var(--text)}
 
 /* === QUIZ, click a choice and read why === */
@@ -582,6 +590,7 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
 .lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
 .lay-notes>.notes>.slip.big{flex:1.2}
+.lay-notes>.notes>.slip small{font-size:34px}
 .lay-notes.challenge{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
 .lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
 .lay-notes.challenge>.say{grid-column:1;max-width:1000px}
@@ -603,6 +612,12 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-walk>.ide{grid-area:ide;justify-self:start}
 .lay-walk>.right{grid-area:right;margin-top:-30px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
+/* Variable boxes line up by themselves: the labels take one column as wide as the widest of them, so no box sets a width. */
+.lay-walk>.right:has(>.box){display:grid;grid-template-columns:minmax(130px,max-content) minmax(0,1fr);column-gap:30px;align-content:start}
+.lay-walk>.right:has(>.box)>*{grid-column:1/-1}
+.lay-walk>.right:has(>.box)>.ide{justify-self:start}
+.lay-walk>.right>.box{display:grid;grid-template-columns:subgrid;align-items:baseline}
+.lay-walk>.right>.box i{width:auto;white-space:nowrap}
 .lay-walk>.foot{color:var(--ghost)}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
@@ -711,7 +726,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="--fs:58px"><div class="tab">ops.py</div>
 <pre class="code" data-file="solutions/00_ops.py"><span class="ln"><span class="f">print</span>(<span class="m">7</span> + <span class="m">2</span>)</span><span class="ln"><span class="f">print</span>(<span class="m">7</span> - <span class="m">2</span>)</span><span class="ln"><span class="f">print</span>(<span class="m">7</span> * <span class="m">2</span>)</span><span class="ln"><span class="f">print</span>(<span class="m">7</span> / <span class="m">2</span>)</span></pre></div>
   <div class="answer">
-    <div class="slip tilt r d2"><small>屏幕上</small><pre>9
+    <div class="slip tilt r d2 short"><small>屏幕上</small><pre>9
 5
 14
 3.5</pre></div>
@@ -828,7 +843,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code" data-file="solutions/04_order.py"><span class="ln"><span class="f">print</span>(<span class="m">2</span> + <span class="m">3</span> * <span class="m">4</span>)</span><span class="ln"><span class="f">print</span>((<span class="m">2</span> + <span class="m">3</span>) * <span class="m">4</span>)</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2"><small>屏幕上</small><pre>14
+    <div class="slip tilt step s2 short"><small>屏幕上</small><pre>14
 20</pre></div>
   </div>
   <div class="turns">
@@ -863,9 +878,9 @@ dialog p{color:var(--muted);font-size:15px}
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:160px">length</i><b style="font-size:96px">2.5</b></div>
-    <div class="box step s2"><i style="width:160px">width</i><b style="font-size:96px">4.0</b></div>
-    <div class="box out step s3"><i style="width:160px">输出</i><b style="font-size:96px">10.0</b></div>
+    <div class="box step"><i>length</i><b>2.5</b></div>
+    <div class="box step s2"><i>width</i><b>4.0</b></div>
+    <div class="box out step s3"><i>输出</i><b>10.0</b></div>
   </div>
 </section>
 
@@ -932,7 +947,7 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">温度<br>换算</h2>
   <p class="say r d2">读入一个摄氏度（可能有小数），输出华氏度。公式：华氏度 = 摄氏度 × 9 ÷ 5 + 32。<br>直接输出算出来的数：输入 0，输出 32.0。</p>
-  <div class="slip tilt2 r d3" style="width:600px"><small>输入一行</small><pre>36.5</pre><small style="margin-top:26px">输出</small><pre>97.7</pre></div>
+  <div class="slip tilt2 r d3 short" style="width:600px"><small>输入一行</small><pre>36.5</pre><small>输出</small><pre>97.7</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【温度换算】&#10;# 读入一个摄氏度（可能有小数），输出华氏度。公式：&#10;#   华氏度 = 摄氏度 × 9 ÷ 5 + 32。&#10;# 直接输出算出来的数：输入 0，输出 32.0。&#10;# 例如输入：36.5&#10;# 应该输出：97.7&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
@@ -963,7 +978,7 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 再挑战一题</p>
   <h2 class="big r d1">秒数<br>换算</h2>
   <p class="say r d2">读入总秒数，输出是几分几秒。写完用 59、60、61 各试一次。</p>
-  <div class="slip tilt2 r d3" style="width:600px"><small>输入一行</small><pre>125</pre><small style="margin-top:26px">输出</small><pre>2 分 5 秒</pre></div>
+  <div class="slip tilt2 r d3 short" style="width:600px"><small>输入一行</small><pre>125</pre><small>输出</small><pre>2 分 5 秒</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【秒数换算】&#10;# 读入总秒数，输出是几分几秒。写完用 59、60、61 各试一次。&#10;# 例如输入：125&#10;# 应该输出：2 分 5 秒&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a></div>
   <div class="foot"></div>
 </section>

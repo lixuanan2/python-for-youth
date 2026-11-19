@@ -11,9 +11,9 @@
 <section class="slide clay lay-notes" aria-label="要猜几次">
   <h2 class="t r">猜数字，要猜几次？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">小明</small><pre style="font-size:72px">猜 1 次</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">小红</small><pre style="font-size:72px">猜 5 次</pre></div>
-    <div class="slip r d3"><small style="font-size:34px">小刚</small><pre style="font-size:72px">猜 12 次</pre></div>
+    <div class="slip r d1 short"><small>小明</small><pre>猜 1 次</pre></div>
+    <div class="slip r d2 short"><small>小红</small><pre>猜 5 次</pre></div>
+    <div class="slip r d3 short"><small>小刚</small><pre>猜 12 次</pre></div>
   </div>
   <p class="say r d3">写程序的时候，你不知道别人要猜几次，range 里填几都不对。<br>这时要换一种说法：只要还没猜对，就继续。</p>
   <div class="foot"></div>
@@ -35,10 +35,10 @@
   </div>
   <a class="ide step s4">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px;color:var(--clay)">1</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px;color:var(--clay)">2</b></div>
-    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:84px;color:var(--clay)">3</b></div>
-    <div class="box step s4"><i style="width:190px;white-space:nowrap">i = 4</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">结束</b></div>
+    <div class="box step"><i>i = 1</i><b style="color:var(--clay)">1</b></div>
+    <div class="box step s2"><i>i = 2</i><b style="color:var(--clay)">2</b></div>
+    <div class="box step s3"><i>i = 3</i><b style="color:var(--clay)">3</b></div>
+    <div class="box step s4"><i>i = 4</i><b style="line-height:1.5;color:var(--muted)">结束</b></div>
   </div>
 </section>
 
@@ -129,7 +129,7 @@ while i &lt;= n:
   <div class="turn">
     <h2 class="r d1">用 while 倒计时</h2>
     <p class="say r d1">读入一个整数 n，从 n 倒数到 1，每个数占一行，最后输出发射！</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 2，输出</small><pre>2
+    <div class="sheet two r d2"><div><small>输入 2，输出</small><pre>2
 1
 发射！</pre></div><div><small>输入 1，输出</small><pre>1
 发射！</pre></div></div>
@@ -145,7 +145,7 @@ while i &lt;= n:
 while i &lt;= 3:
     print(i)</pre></div>
   <div class="answer">
-    <div class="slip tilt r d2"><small>屏幕上，一直输出 1</small><pre>1
+    <div class="slip tilt r d2 short"><small>屏幕上，一直输出 1</small><pre>1
 1
 1
 ……</pre></div>
@@ -190,9 +190,9 @@ while i &gt; 0:
   </div>
   <a class="ide step s4">▶ 在 IDE 玩一玩</a>
   <div class="right">
-    <div class="box step"><i style="width:150px;white-space:nowrap">猜 3</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">不对</b></div>
-    <div class="box step s2"><i style="width:150px;white-space:nowrap">猜 9</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">不对</b></div>
-    <div class="box out step s3"><i style="width:150px;white-space:nowrap;font:400 44px var(--code)">猜 7</i><b style="font-size:64px;line-height:1.5">猜对了</b></div>
+    <div class="box step long"><i>猜 3</i><b style="line-height:1.5;color:var(--muted)">不对</b></div>
+    <div class="box step s2 long"><i>猜 9</i><b style="line-height:1.5;color:var(--muted)">不对</b></div>
+    <div class="box out step s3 long"><i style="font-weight:400;font-family:var(--code)">猜 7</i><b style="line-height:1.5">猜对了</b></div>
   </div>
 </section>
 
@@ -203,7 +203,7 @@ while i &gt; 0:
 <pre class="code" data-file="solutions/04_guess.py"></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2"><small>屏幕上，只有一行</small><pre>猜对了</pre></div>
+    <div class="slip tilt step s2 short"><small>屏幕上，只有一行</small><pre>猜对了</pre></div>
   </div>
   <div class="turns">
     <p class="say only1">“不对，再猜”会输出几次？</p>
@@ -218,7 +218,7 @@ while i &gt; 0:
   <div class="turn">
     <h2 class="r d1">提示大了还是小了</h2>
     <p class="say r d1">答案还是 7。每行读入一个整数，猜大了输出大了，猜小了输出小了，猜中才结束。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">50
+    <div class="sheet two r d2"><div><small>依次输入</small><pre style="line-height:1.2">50
 3
 7</pre></div><div><small>输出</small><pre style="line-height:1.2">大了
 小了
@@ -255,7 +255,7 @@ while i &gt; 0:
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">反着<br>念数字</h2>
   <p class="say r d2">读入一个正整数 n，从个位开始，一位一位地输出，每位占一行。<br>输入 100，就输出 0、0、1 三行。</p>
-  <div class="slip tilt2 r d3" style="width:600px"><small>输入一行</small><pre>123</pre><small style="margin-top:26px">输出三行</small><pre>3
+  <div class="slip tilt2 r d3 short" style="width:600px"><small>输入一行</small><pre>123</pre><small>输出三行</small><pre>3
 2
 1</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/06_reverse_digits.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>

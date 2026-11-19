@@ -11,11 +11,11 @@
 <section class="slide clay lay-notes" aria-label="每次都一样的函数">
   <h2 class="t r">函数每次都做一样的事？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">想跟每个人打招呼</small><pre style="font-size:52px">你好 小明
+    <div class="slip r d1 short"><small>想跟每个人打招呼</small><pre>你好 小明
 你好 小红</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">想算不同房间的面积</small><pre style="font-size:52px">3 × 4 = 12
+    <div class="slip r d2 short"><small>想算不同房间的面积</small><pre>3 × 4 = 12
 2 × 5 = 10</pre></div>
-    <div class="slip tilt r d3"><small style="font-size:34px">上节课的函数</small><pre style="font-size:52px">只会说
+    <div class="slip tilt r d3 short"><small>上节课的函数</small><pre>只会说
 同一句话</pre></div>
   </div>
   <p class="say r d3">上节课的函数像只会放一首歌的音乐盒。这节课给函数开两扇门：<br>进门的叫“参数”，把数据带进去；出门的叫“返回值”，把算好的结果带回来。</p>
@@ -34,9 +34,9 @@
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">name</i><b style="font-size:60px;color:var(--muted)">还没有</b></div>
-    <div class="box step s2"><i style="width:170px">第 3 行</i><b style="font-size:60px">你好 小明</b></div>
-    <div class="box out step s3"><i style="width:170px">第 4 行</i><b style="font-size:60px">你好 小红</b></div>
+    <div class="box step long"><i>name</i><b style="color:var(--muted)">还没有</b></div>
+    <div class="box step s2 long"><i>第 3 行</i><b>你好 小明</b></div>
+    <div class="box out step s3 long"><i>第 4 行</i><b>你好 小红</b></div>
   </div>
 </section>
 
@@ -71,9 +71,9 @@ show(3, 10)</pre></div>
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">w, h</i><b style="font-size:72px">3, 4</b></div>
-    <div class="box step s2"><i style="width:170px">s</i><b style="font-size:84px">12</b></div>
-    <div class="box out step s3"><i style="width:170px">输出</i><b style="font-size:72px;line-height:1.2">12<br>10</b></div>
+    <div class="box step"><i>w, h</i><b>3, 4</b></div>
+    <div class="box step s2"><i>s</i><b>12</b></div>
+    <div class="box out step s3"><i>输出</i><b style="line-height:1.2">12<br>10</b></div>
   </div>
 </section>
 
@@ -138,13 +138,13 @@ f()</pre></div>
 <pre class="code" data-file="solutions/03_rooms.py" data-light="3-6:1 7-8:2 9:3"></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1" style="font-size:34px">分四行读入两个房间的长和宽：3、4、2、5。</p>
-      <p class="say only2" style="font-size:34px">算面积的方法只写一次，调用两次。返回的 12 和 10 分别存进 s1 和 s2。</p>
-      <p class="say only3" style="font-size:34px">两个返回值相加，输出一共 22。</p>
+      <p class="say only1 small">分四行读入两个房间的长和宽：3、4、2、5。</p>
+      <p class="say only2 small">算面积的方法只写一次，调用两次。返回的 12 和 10 分别存进 s1 和 s2。</p>
+      <p class="say only3 small">两个返回值相加，输出一共 22。</p>
     </div>
-    <div class="box step"><i style="width:170px">输入</i><b style="font-size:60px">3 4 2 5</b></div>
-    <div class="box step s2"><i style="width:170px">s1, s2</i><b style="font-size:60px">12, 10</b></div>
-    <div class="box out step s3"><i style="width:170px">输出</i><b style="font-size:72px">22</b></div>
+    <div class="box step long"><i>输入</i><b>3 4 2 5</b></div>
+    <div class="box step s2 long"><i>s1, s2</i><b>12, 10</b></div>
+    <div class="box out step s3 long"><i>输出</i><b>22</b></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -155,7 +155,7 @@ f()</pre></div>
   <div class="turn">
     <h2 class="r d1">写一个周长函数</h2>
     <p class="say r d1">起始程序里有面积函数。把它改成 perimeter(w, h)，返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，都是整数，输出周长。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">3
+    <div class="sheet two r d2"><div><small>依次输入</small><pre style="line-height:1.2">3
 4</pre></div><div><small>输出</small><pre style="line-height:1.2">14</pre></div></div>
   </div>
   <a class="ide r d3" data-code-file="starter/04_perimeter.py">▶ 在 IDE 开始改</a>
@@ -189,8 +189,8 @@ print(area(3))</pre></div>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step" style="display:block"><i style="display:block;width:auto">bigger(3, 8)</i><b style="display:block;font-size:84px">8</b></div>
-    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">bigger(9, 2)</i><b style="display:block;font-size:84px">9</b></div>
+    <div class="box step" style="display:block"><i style="display:block">bigger(3, 8)</i><b style="display:block">8</b></div>
+    <div class="box out step s2" style="display:block"><i style="display:block">bigger(9, 2)</i><b style="display:block">9</b></div>
   </div>
 </section>
 
@@ -200,7 +200,7 @@ print(area(3))</pre></div>
   <div class="turn">
     <h2 class="r d1">写一个成绩等级函数</h2>
     <p class="say r d1">写 grade(score)：90 分及以上返回“优秀”，60 分及以上返回“及格”，其余返回“不及格”。读入一个 0 到 100 的整数分数，输出等级。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>输入 95</small><pre>优秀</pre></div><div><small>输入 60</small><pre>及格</pre></div><div><small>输入 59</small><pre>不及格</pre></div></div>
+    <div class="sheet three r d2"><div><small>输入 95</small><pre>优秀</pre></div><div><small>输入 60</small><pre>及格</pre></div><div><small>输入 59</small><pre>不及格</pre></div></div>
   </div>
   <a class="ide r d3" data-code-file="starter/06_grade.py">▶ 在 IDE 开始改</a>
 </section>
@@ -233,9 +233,9 @@ print(area(3))</pre></div>
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">三个数比大小</h2>
   <p class="say r d2">分三行读入三个整数，输出最大的那个。<br>先写 bigger(a, b)，返回两个数里大的那个，再只用它比出三个数里最大的，<b>不再写别的 if</b>。</p>
-  <div class="slip tilt2 r d3" style="width:440px"><small>依次输入</small><pre>3
+  <div class="slip tilt2 r d3 short" style="width:440px"><small>依次输入</small><pre>3
 9
-5</pre><small style="margin-top:20px">输出</small><pre>9</pre></div>
+5</pre><small>输出</small><pre>9</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/07_max3.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

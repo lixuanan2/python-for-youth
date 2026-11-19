@@ -165,6 +165,7 @@ h2.t{position:absolute;left:96px;top:84px;font:800 76px/1.2 var(--text);letter-s
 h2.t::before{content:"# ";color:var(--clay)}
 .clay h2.t::before,.olive h2.t::before{color:#ffffffa0}
 .say{font:400 40px/1.6 var(--text)}
+.say.small{font-size:34px}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
@@ -208,6 +209,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slip{position:absolute;background:var(--paper);color:var(--ink);padding:24px 40px 28px;box-shadow:0 16px 36px #0005}
 .slip small{display:block;font:400 28px var(--text);color:var(--muted);margin-bottom:6px}
 .slip pre{font:700 56px/1.4 var(--code)}
+/* Note tiers, named by how much text they hold (tools/tierrules.py, PROMPT.md "档位"); the regular note has no class.
+   A second label in a note (input, then output) keeps a gap above it. */
+.slip.short pre{font-size:72px}.slip.long pre{font-size:44px}.slip.longest pre{font-size:34px;white-space:pre-wrap}
+.slip pre+small{margin-top:20px}
 .tilt{transform:rotate(-1.2deg)}.tilt2{transform:rotate(1.2deg)}
 
 /* === SPREADS === */
@@ -220,6 +225,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .turn h2{font:800 80px/1.2 var(--text)}
 .turn p{margin-top:24px}
 .sheet{margin-top:34px;background:var(--sand);padding:26px 40px 30px}
+.sheet.two{display:grid;grid-template-columns:1fr 1fr}.sheet.three{display:grid;grid-template-columns:1fr 1fr 1fr}
 .sheet small{display:block;font:400 30px var(--text);color:var(--muted);margin-bottom:8px}
 .sheet pre{font:700 56px/1.4 var(--code)}
 
@@ -281,6 +287,8 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .box{display:flex;align-items:baseline;gap:30px;border-top:5px solid var(--ink);padding:10px 0 16px}
 .box i{font:400 44px var(--code);color:var(--muted);font-style:normal;width:130px}
 .box b{font:800 120px/1.15 var(--code)}
+/* Value tiers, named by how long the value is (tools/tierrules.py); the regular box has no class. */
+.box.long b{font-size:84px}.box.longer b{font-size:60px}.box.longest b{font-size:40px}
 .box.out b{color:var(--clay)}.box.out i{font:400 40px var(--text)}
 
 /* === QUIZ, click a choice and read why === */
@@ -582,6 +590,7 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
 .lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
 .lay-notes>.notes>.slip.big{flex:1.2}
+.lay-notes>.notes>.slip small{font-size:34px}
 .lay-notes.challenge{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
 .lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
 .lay-notes.challenge>.say{grid-column:1;max-width:1000px}
@@ -603,6 +612,12 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-walk>.ide{grid-area:ide;justify-self:start}
 .lay-walk>.right{grid-area:right;margin-top:-30px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
+/* Variable boxes line up by themselves: the labels take one column as wide as the widest of them, so no box sets a width. */
+.lay-walk>.right:has(>.box){display:grid;grid-template-columns:minmax(130px,max-content) minmax(0,1fr);column-gap:30px;align-content:start}
+.lay-walk>.right:has(>.box)>*{grid-column:1/-1}
+.lay-walk>.right:has(>.box)>.ide{justify-self:start}
+.lay-walk>.right>.box{display:grid;grid-template-columns:subgrid;align-items:baseline}
+.lay-walk>.right>.box i{width:auto;white-space:nowrap}
 .lay-walk>.foot{color:var(--ghost)}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
@@ -724,7 +739,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="--fs:58px"><div class="tab">hello.py</div>
 <pre class="code" data-file="solutions/00_hello.py"><span class="ln"><span class="f">print</span>(<span class="s">"Hello, Python!"</span>)</span></pre></div>
   <div class="answer">
-    <div class="slip tilt r d3"><small>屏幕上</small><pre style="font-size:44px">Hello, Python!</pre></div>
+    <div class="slip tilt r d3"><small>屏幕上</small><pre>Hello, Python!</pre></div>
   </div>
   <p class="say r d2">print 的意思是“打印”。括号里写什么，屏幕上就出现什么。<br>文字要放在<b>英文引号</b>里，print 要<b>全部小写</b>。</p>
   <a class="ide r d3">▶ 在 IDE 打开</a>
@@ -796,7 +811,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="right">
     <div class="r d2"><p class="say" style="color:var(--muted)">你打字，再按回车</p><p style="font:800 96px/1.4 var(--code)">Ming</p></div>
     <div class="r d3" style="border-top:5px solid var(--ink);padding-top:22px"><p class="say" style="color:var(--muted)">屏幕回答</p><p style="font:800 76px/1.4 var(--code);color:var(--clay)">Hello Ming</p></div>
-    <p class="say r d3" style="font-size:34px">print 里的逗号，会变成一个空格。</p>
+    <p class="say r d3 small">print 里的逗号，会变成一个空格。</p>
   </div>
 </section>
 
@@ -866,7 +881,7 @@ dialog p{color:var(--muted);font-size:15px}
       <p class="say only2">输入 4，变成整数 4，放进盒子 b。</p>
       <p class="say only3">两个都是整数，相加得到 7，输出。</p>
     </div>
-    <p class="say step s3" style="font-size:34px">每个数单独占一行输入。</p>
+    <p class="say step s3 small">每个数单独占一行输入。</p>
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
@@ -896,7 +911,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="turn">
     <h2 class="r d1">改成三个数求和</h2>
     <p class="say r d1">再读入一个整数 c，输出三个数的和。三个数都是整数，各占一行。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 1、2、3，输出</small><pre style="font-size:100px;line-height:1.2">6</pre></div><div><small>再试 -5、2、0，输出</small><pre style="font-size:100px;line-height:1.2">-3</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 1、2、3，输出</small><pre style="font-size:100px;line-height:1.2">6</pre></div><div><small>再试 -5、2、0，输出</small><pre style="font-size:100px;line-height:1.2">-3</pre></div></div>
   </div>
   <a class="ide r d3" data-code='a = int(input())&#10;b = int(input())&#10;print(a + b)'>▶ 在 IDE 开始改</a>
 </section>
@@ -942,8 +957,8 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:180px">明年<br>几岁？</h2>
   <p class="say r d2">写一个程序：第一行读入名字，第二行读入今年的年龄，输出这个人明年几岁。</p>
-  <div class="slip tilt2 r d3" style="width:720px"><small>输入两行</small><pre>Ming
-10</pre><small style="margin-top:30px">输出一句话</small><pre style="font-size:50px">Ming 明年 11 岁</pre></div>
+  <div class="slip tilt2 r d3 short" style="width:720px"><small>输入两行</small><pre>Ming
+10</pre><small>输出一句话</small><pre>Ming 明年 11 岁</pre></div>
   <div class="go r d3"><a class="ide" data-code='# 第一行读入名字，第二行读入今年的年龄&#10;# 输出：Ming 明年 11 岁&#10;'>▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

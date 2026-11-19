@@ -20,6 +20,7 @@ spec = importlib.util.spec_from_file_location('builder', ROOT / 'tools/build.py'
 builder = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(builder)
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import tierrules  # noqa: E402
 import traces  # noqa: E402  (next to this file, like algo.py)
 
 TRACES = []  # (lesson, trace pages checked, [(page, why not)])
@@ -563,6 +564,7 @@ def check_layouts(lesson, folder):
                     at = start + m.end()
                     break
             kept = kept[:start] + kept[at:]
+        tierrules.check_section(section, where)
         placed = re.findall(r'style="[^"]*(?<![\w-])(left|top|right|bottom)\s*:', kept)
         assert not placed, f'{where}: the layout places its parts; take out {", ".join(sorted(set(placed)))} (or mark the part free)'
     return moved

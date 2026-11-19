@@ -165,6 +165,7 @@ h2.t{position:absolute;left:96px;top:84px;font:800 76px/1.2 var(--text);letter-s
 h2.t::before{content:"# ";color:var(--clay)}
 .clay h2.t::before,.olive h2.t::before{color:#ffffffa0}
 .say{font:400 40px/1.6 var(--text)}
+.say.small{font-size:34px}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
@@ -208,6 +209,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slip{position:absolute;background:var(--paper);color:var(--ink);padding:24px 40px 28px;box-shadow:0 16px 36px #0005}
 .slip small{display:block;font:400 28px var(--text);color:var(--muted);margin-bottom:6px}
 .slip pre{font:700 56px/1.4 var(--code)}
+/* Note tiers, named by how much text they hold (tools/tierrules.py, PROMPT.md "档位"); the regular note has no class.
+   A second label in a note (input, then output) keeps a gap above it. */
+.slip.short pre{font-size:72px}.slip.long pre{font-size:44px}.slip.longest pre{font-size:34px;white-space:pre-wrap}
+.slip pre+small{margin-top:20px}
 .tilt{transform:rotate(-1.2deg)}.tilt2{transform:rotate(1.2deg)}
 
 /* === SPREADS === */
@@ -220,6 +225,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .turn h2{font:800 80px/1.2 var(--text)}
 .turn p{margin-top:24px}
 .sheet{margin-top:34px;background:var(--sand);padding:26px 40px 30px}
+.sheet.two{display:grid;grid-template-columns:1fr 1fr}.sheet.three{display:grid;grid-template-columns:1fr 1fr 1fr}
 .sheet small{display:block;font:400 30px var(--text);color:var(--muted);margin-bottom:8px}
 .sheet pre{font:700 56px/1.4 var(--code)}
 
@@ -281,6 +287,8 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .box{display:flex;align-items:baseline;gap:30px;border-top:5px solid var(--ink);padding:10px 0 16px}
 .box i{font:400 44px var(--code);color:var(--muted);font-style:normal;width:130px}
 .box b{font:800 120px/1.15 var(--code)}
+/* Value tiers, named by how long the value is (tools/tierrules.py); the regular box has no class. */
+.box.long b{font-size:84px}.box.longer b{font-size:60px}.box.longest b{font-size:40px}
 .box.out b{color:var(--clay)}.box.out i{font:400 40px var(--text)}
 
 /* === QUIZ, click a choice and read why === */
@@ -582,6 +590,7 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
 .lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
 .lay-notes>.notes>.slip.big{flex:1.2}
+.lay-notes>.notes>.slip small{font-size:34px}
 .lay-notes.challenge{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
 .lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
 .lay-notes.challenge>.say{grid-column:1;max-width:1000px}
@@ -603,6 +612,12 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-walk>.ide{grid-area:ide;justify-self:start}
 .lay-walk>.right{grid-area:right;margin-top:-30px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
+/* Variable boxes line up by themselves: the labels take one column as wide as the widest of them, so no box sets a width. */
+.lay-walk>.right:has(>.box){display:grid;grid-template-columns:minmax(130px,max-content) minmax(0,1fr);column-gap:30px;align-content:start}
+.lay-walk>.right:has(>.box)>*{grid-column:1/-1}
+.lay-walk>.right:has(>.box)>.ide{justify-self:start}
+.lay-walk>.right>.box{display:grid;grid-template-columns:subgrid;align-items:baseline}
+.lay-walk>.right>.box i{width:auto;white-space:nowrap}
 .lay-walk>.foot{color:var(--ghost)}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
@@ -684,11 +699,11 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="同样几行写好几遍">
   <h2 class="t r">同样的几行，要写好几遍？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">开机前</small><pre style="font-size:44px">1. 检查电源
+    <div class="slip r d1 short"><small>开机前</small><pre>1. 检查电源
 2. 检查屏幕</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">关机前</small><pre style="font-size:44px">1. 检查电源
+    <div class="slip r d2 short"><small>关机前</small><pre>1. 检查电源
 2. 检查屏幕</pre></div>
-    <div class="slip tilt r d3"><small style="font-size:34px">想再加一步</small><pre style="font-size:44px">每一处都要改</pre></div>
+    <div class="slip tilt r d3 short"><small>想再加一步</small><pre>每一处都要改</pre></div>
   </div>
   <p class="say r d3">复制粘贴能做到，可是一要改就得每处都改，漏一处就错。<br>办法是给这几行起个名字，叫“函数”。要用的时候叫它的名字，改也只改一处。</p>
   <div class="foot"></div>
@@ -706,9 +721,9 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">定义</i><b style="font-size:56px;color:var(--muted)">不输出</b></div>
-    <div class="box step s2"><i style="width:170px">第 4 行</i><b style="font-size:48px;line-height:1.3">你好！<br>欢迎来上课</b></div>
-    <div class="box out step s3"><i style="width:170px">第 5 行</i><b style="font-size:48px;line-height:1.3">你好！<br>欢迎来上课</b></div>
+    <div class="box step longer"><i>定义</i><b style="color:var(--muted)">不输出</b></div>
+    <div class="box step s2 longer"><i>第 4 行</i><b style="line-height:1.3">你好！<br>欢迎来上课</b></div>
+    <div class="box out step s3 longer"><i>第 5 行</i><b style="line-height:1.3">你好！<br>欢迎来上课</b></div>
   </div>
 </section>
 
@@ -765,10 +780,10 @@ dialog p{color:var(--muted);font-size:15px}
   <a class="ide step s4">▶ 在 IDE 打开</a>
   <div class="right" style="font:400 40px/1.6 var(--code)">
     <div class="turns">
-      <p class="say only1" style="font-size:34px">前三行是定义，先记住，不输出。程序从第 4 行开始做事。</p>
-      <p class="say only2" style="font-size:34px">输出“开机前：”，然后第 5 行调用 check。</p>
-      <p class="say only3" style="font-size:34px">跳进函数，输出两步。做完了，回到第 5 行的下一行接着走。</p>
-      <p class="say only4" style="font-size:34px">输出“关机前：”，再调用一次，又跳进去做一遍。</p>
+      <p class="say only1 small">前三行是定义，先记住，不输出。程序从第 4 行开始做事。</p>
+      <p class="say only2 small">输出“开机前：”，然后第 5 行调用 check。</p>
+      <p class="say only3 small">跳进函数，输出两步。做完了，回到第 5 行的下一行接着走。</p>
+      <p class="say only4 small">输出“关机前：”，再调用一次，又跳进去做一遍。</p>
     </div>
     <p class="step s2">开机前：</p>
     <p class="step s3" style="color:var(--clay)">1. 检查电源<br>2. 检查屏幕</p>
@@ -799,7 +814,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor" style="--fs:58px"><div class="tab">order.py（只阅读）</div>
 <pre class="code"><span class="ln"><span class="f">hello</span>()</span><span class="ln"><span class="k">def</span> <span class="f">hello</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"你好！"</span>)</span></pre></div>
   <div class="answer">
-    <div class="slip tilt step s2" style="width:600px"><small>屏幕上</small><pre style="font-size:34px;white-space:pre-wrap">NameError: name 'hello' is not defined</pre></div>
+    <div class="slip tilt step s2 longest" style="width:600px"><small>屏幕上</small><pre style="white-space:pre-wrap">NameError: name 'hello' is not defined</pre></div>
   </div>
   <div class="turns">
       <p class="say only1">程序从上往下一行一行地走。走到第 1 行时，它认识 hello 吗？</p>
@@ -815,9 +830,9 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor" style="--fs:40px"><div class="tab">countdown.py</div>
 <pre class="code" data-file="solutions/04_countdown.py"><span class="ln l1"><span class="k">def</span> <span class="f">countdown</span>():</span><span class="ln l1">    <span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>, <span class="m">0</span>, -<span class="m">1</span>):</span><span class="ln l1">        <span class="f">print</span>(i)</span><span class="ln l1">    <span class="f">print</span>(<span class="s">"发射！"</span>)</span><span class="ln l2"><span class="f">countdown</span>()</span><span class="ln l3"><span class="f">print</span>(<span class="s">"再来一次"</span>)</span><span class="ln l3"><span class="f">countdown</span>()</span></pre></div>
   <div class="turns">
-      <p class="say only1" style="font-size:34px">函数体可以是好几行，循环、判断都能放。看缩进：发射在循环外，函数里。</p>
-      <p class="say only2" style="font-size:34px">调用一次：倒数 3、2、1，再喊发射。</p>
-      <p class="say only3" style="font-size:34px">再调用一次，整套又来一遍。</p>
+      <p class="say only1 small">函数体可以是好几行，循环、判断都能放。看缩进：发射在循环外，函数里。</p>
+      <p class="say only2 small">调用一次：倒数 3、2、1，再喊发射。</p>
+      <p class="say only3 small">再调用一次，整套又来一遍。</p>
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right" style="font:400 40px/1.5 var(--code)">
@@ -884,7 +899,7 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">发射练习</h2>
   <p class="say r d2">读入练习次数 n。每次先输出“第 k 次”，再倒数 3、2、1，最后输出“发射！”。<br>倒数的部分写成一个函数，在循环里调用它。</p>
-  <div class="slip tilt2 r d3" style="width:460px"><small>输入</small><pre style="font-size:48px">2</pre><small style="margin-top:14px">输出</small><pre style="font-size:34px;line-height:1.2">第 1 次
+  <div class="slip tilt2 r d3 longest" style="width:460px"><small>输入</small><pre>2</pre><small>输出</small><pre style="line-height:1.2">第 1 次
 3
 2
 1

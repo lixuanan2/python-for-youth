@@ -165,6 +165,7 @@ h2.t{position:absolute;left:96px;top:84px;font:800 76px/1.2 var(--text);letter-s
 h2.t::before{content:"# ";color:var(--clay)}
 .clay h2.t::before,.olive h2.t::before{color:#ffffffa0}
 .say{font:400 40px/1.6 var(--text)}
+.say.small{font-size:34px}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
@@ -208,6 +209,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slip{position:absolute;background:var(--paper);color:var(--ink);padding:24px 40px 28px;box-shadow:0 16px 36px #0005}
 .slip small{display:block;font:400 28px var(--text);color:var(--muted);margin-bottom:6px}
 .slip pre{font:700 56px/1.4 var(--code)}
+/* Note tiers, named by how much text they hold (tools/tierrules.py, PROMPT.md "档位"); the regular note has no class.
+   A second label in a note (input, then output) keeps a gap above it. */
+.slip.short pre{font-size:72px}.slip.long pre{font-size:44px}.slip.longest pre{font-size:34px;white-space:pre-wrap}
+.slip pre+small{margin-top:20px}
 .tilt{transform:rotate(-1.2deg)}.tilt2{transform:rotate(1.2deg)}
 
 /* === SPREADS === */
@@ -220,6 +225,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .turn h2{font:800 80px/1.2 var(--text)}
 .turn p{margin-top:24px}
 .sheet{margin-top:34px;background:var(--sand);padding:26px 40px 30px}
+.sheet.two{display:grid;grid-template-columns:1fr 1fr}.sheet.three{display:grid;grid-template-columns:1fr 1fr 1fr}
 .sheet small{display:block;font:400 30px var(--text);color:var(--muted);margin-bottom:8px}
 .sheet pre{font:700 56px/1.4 var(--code)}
 
@@ -281,6 +287,8 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .box{display:flex;align-items:baseline;gap:30px;border-top:5px solid var(--ink);padding:10px 0 16px}
 .box i{font:400 44px var(--code);color:var(--muted);font-style:normal;width:130px}
 .box b{font:800 120px/1.15 var(--code)}
+/* Value tiers, named by how long the value is (tools/tierrules.py); the regular box has no class. */
+.box.long b{font-size:84px}.box.longer b{font-size:60px}.box.longest b{font-size:40px}
 .box.out b{color:var(--clay)}.box.out i{font:400 40px var(--text)}
 
 /* === QUIZ, click a choice and read why === */
@@ -582,6 +590,7 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
 .lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
 .lay-notes>.notes>.slip.big{flex:1.2}
+.lay-notes>.notes>.slip small{font-size:34px}
 .lay-notes.challenge{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
 .lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
 .lay-notes.challenge>.say{grid-column:1;max-width:1000px}
@@ -603,6 +612,12 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-walk>.ide{grid-area:ide;justify-self:start}
 .lay-walk>.right{grid-area:right;margin-top:-30px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
+/* Variable boxes line up by themselves: the labels take one column as wide as the widest of them, so no box sets a width. */
+.lay-walk>.right:has(>.box){display:grid;grid-template-columns:minmax(130px,max-content) minmax(0,1fr);column-gap:30px;align-content:start}
+.lay-walk>.right:has(>.box)>*{grid-column:1/-1}
+.lay-walk>.right:has(>.box)>.ide{justify-self:start}
+.lay-walk>.right>.box{display:grid;grid-template-columns:subgrid;align-items:baseline}
+.lay-walk>.right>.box i{width:auto;white-space:nowrap}
 .lay-walk>.foot{color:var(--ghost)}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
@@ -684,12 +699,12 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="要写一百行吗">
   <h2 class="t r">从 1 数到 100，要写几行？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">不用循环，要写 100 行</small><pre>print(1)
+    <div class="slip r d1 long"><small>不用循环，要写 100 行</small><pre>print(1)
 print(2)
 print(3)
 ……
 print(100)</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">用 for 循环，只要 2 行</small><pre style="font-size:48px">for i in range(1, 101):
+    <div class="slip tilt r d2 long"><small>用 for 循环，只要 2 行</small><pre>for i in range(1, 101):
     print(i)</pre></div>
   </div>
   <p class="say r d3">人写一百遍又累又容易错，电脑最不怕重复。<br>这节课让程序替你一遍一遍地做。</p>
@@ -703,7 +718,7 @@ print(100)</pre></div>
 <pre class="code was"><span class="ln"><span class="f">print</span>(<span class="s">"加油"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"加油"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"加油"</span>)</span></pre>
 <pre class="code" data-file="solutions/01_cheer.py" data-change="2"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">    <span class="f">print</span>(<span class="s">"加油"</span>)</span></pre></div>
   <div class="answer">
-    <div class="slip tilt"><small>屏幕上</small><pre>加油
+    <div class="slip tilt short"><small>屏幕上</small><pre>加油
 加油
 加油</pre></div>
   </div>
@@ -730,9 +745,9 @@ print(100)</pre></div>
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">i = 0</i><b style="font-size:76px;line-height:1.5">加油</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:76px;line-height:1.5">加油</b></div>
-    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:76px;line-height:1.5">加油</b></div>
+    <div class="box step"><i>i = 0</i><b style="line-height:1.5">加油</b></div>
+    <div class="box step s2"><i>i = 1</i><b style="line-height:1.5">加油</b></div>
+    <div class="box step s3"><i>i = 2</i><b style="line-height:1.5">加油</b></div>
   </div>
 </section>
 
@@ -743,7 +758,7 @@ print(100)</pre></div>
 <pre class="code" data-file="solutions/02_print_i.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2"><small>屏幕上</small><pre>0
+    <div class="slip tilt step s2 short"><small>屏幕上</small><pre>0
 1
 2</pre></div>
   </div>
@@ -798,10 +813,10 @@ print(100)</pre></div>
   </div>
   <a class="ide step s5">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step s2"><i style="width:190px">n</i><b style="font-size:84px">3</b></div>
-    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px;color:var(--clay)">1</b></div>
-    <div class="box step s4"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px;color:var(--clay)">2</b></div>
-    <div class="box step s5"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:84px;color:var(--clay)">3</b></div>
+    <div class="box step s2"><i>n</i><b>3</b></div>
+    <div class="box step s3"><i>i = 1</i><b style="color:var(--clay)">1</b></div>
+    <div class="box step s4"><i>i = 2</i><b style="color:var(--clay)">2</b></div>
+    <div class="box step s5"><i>i = 3</i><b style="color:var(--clay)">3</b></div>
   </div>
 </section>
 
@@ -812,7 +827,7 @@ print(100)</pre></div>
 <pre class="code" data-file="solutions/04_one_to_n.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2"><small>屏幕上</small><pre style="color:var(--muted)">一行也没有</pre></div>
+    <div class="slip tilt step s2 short"><small>屏幕上</small><pre style="color:var(--muted)">一行也没有</pre></div>
   </div>
   <div class="turns">
     <p class="say only1">会报错吗？还是输出 0？</p>
@@ -840,7 +855,7 @@ print(100)</pre></div>
   <div class="turn">
     <h2 class="r d1">输出一列乘法口诀</h2>
     <p class="say r d1">读入一个整数 n，输出 9 行，让 i 从 1 走到 9。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 7，第一行</small><pre>7 x 1 = 7</pre></div><div><small>最后一行</small><pre>7 x 9 = 63</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 7，第一行</small><pre>7 x 1 = 7</pre></div><div><small>最后一行</small><pre>7 x 9 = 63</pre></div></div>
   </div>
   <a class="ide r d3" data-code="# 【输出一列乘法口诀】&#10;# 读入一个整数 n，输出 9 行，让 i 从 1 走到 9。&#10;# 例如输入：1&#10;# 应该输出（一共 9 行，这里用 / 隔开）：&#10;#   1 x 1 = 1 / 1 x 2 = 2 / 1 x 3 = 3 / 1 x 4 = 4 / 1 x 5 = 5&#10;#   1 x 6 = 6 / 1 x 7 = 7 / 1 x 8 = 8 / 1 x 9 = 9&#10;# 提示：i 不光能输出，还能拿来算。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;for i in range(1, n + 1):&#10;    print(i)&#10;">▶ 在 IDE 开始改</a>
 </section>
@@ -867,7 +882,7 @@ print(100)</pre></div>
 <pre class="code" data-file="solutions/07_rocket.py"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>, <span class="m">0</span>, -<span class="m">1</span>):</span><span class="ln">    <span class="f">print</span>(i)</span><span class="ln"><span class="f">print</span>(<span class="s">"发射！"</span>)</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2"><small>屏幕上</small><pre>3
+    <div class="slip tilt step s2 short"><small>屏幕上</small><pre>3
 2
 1
 发射！</pre></div>
@@ -914,7 +929,7 @@ print(100)</pre></div>
   <div class="turn">
     <h2 class="r d1">自己定倒计时</h2>
     <p class="say r d1">读入一个整数 n，从 n 倒数到 1，每个数占一行，最后输出发射！</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 2，输出</small><pre>2
+    <div class="sheet two r d2"><div><small>输入 2，输出</small><pre>2
 1
 发射！</pre></div><div><small>输入 1，输出</small><pre>1
 发射！</pre></div></div>
@@ -947,11 +962,11 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 <pre class="code was" data-file="solutions/04_one_to_n.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre>
 <pre class="code" data-file="solutions/09_even.py" data-change="2"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="k">if</span> i % <span class="m">2</span> == <span class="m">0</span>:</span><span class="ln">        <span class="f">print</span>(i)</span></pre></div>
   <div class="answer turns">
-    <div class="slip tilt only1"><small>输入 4，屏幕上</small><pre>1
+    <div class="slip tilt only1 short"><small>输入 4，屏幕上</small><pre>1
 2
 3
 4</pre></div>
-    <div class="slip tilt step s2"><small>输入 4，屏幕上</small><pre>2
+    <div class="slip tilt step s2 short"><small>输入 4，屏幕上</small><pre>2
 4</pre></div>
   </div>
   <div class="turns">
@@ -978,10 +993,10 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   </div>
   <a class="ide step s4">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">跳过</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:64px;line-height:1.5;color:var(--clay)">输出 2</b></div>
-    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">跳过</b></div>
-    <div class="box step s4"><i style="width:190px;white-space:nowrap">i = 4</i><b style="font-size:64px;line-height:1.5;color:var(--clay)">输出 4</b></div>
+    <div class="box step long"><i>i = 1</i><b style="line-height:1.5;color:var(--muted)">跳过</b></div>
+    <div class="box step s2 long"><i>i = 2</i><b style="line-height:1.5;color:var(--clay)">输出 2</b></div>
+    <div class="box step s3 long"><i>i = 3</i><b style="line-height:1.5;color:var(--muted)">跳过</b></div>
+    <div class="box step s4 long"><i>i = 4</i><b style="line-height:1.5;color:var(--clay)">输出 4</b></div>
   </div>
 </section>
 
@@ -1006,7 +1021,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   <div class="turn">
     <h2 class="r d1">挑出 3 的倍数</h2>
     <p class="say r d1">读入一个整数 n，输出 1 到 n 里所有 3 的倍数，每个数占一行。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 10，输出</small><pre>3
+    <div class="sheet two r d2"><div><small>输入 10，输出</small><pre>3
 6
 9</pre></div><div><small>输入 3，输出</small><pre>3</pre></div></div>
   </div>
@@ -1041,7 +1056,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">拍七</h2>
   <p class="say r d2">读入一个整数 n，从 1 数到 n，每个数占一行。<br>碰到 7 的倍数，或者<b>个位是 7</b> 的数，不说这个数，改说“过”。</p>
-  <div class="slip tilt2 r d3" style="width:600px"><small>输入 8，输出（每个占一行）</small><pre style="font-size:48px">1 2 3 4
+  <div class="slip tilt2 r d3 short" style="width:600px"><small>输入 8，输出（每个占一行）</small><pre>1 2 3 4
 5 6 过 8</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【拍七】&#10;# 读入一个整数 n，从 1 数到 n，每个数占一行。&#10;# 碰到 7 的倍数，或者个位是 7 的数，不说这个数，改说“过”。&#10;# 例如输入：8&#10;# 应该输出（每个一行）：1、2、3、4、5、6、过、8&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
