@@ -11,7 +11,7 @@
 
 - 做课、改课先读 `basics/AGENTS.md`，命令都在 `basics/` 里运行。教学要求在 `basics/PROMPT.md`。
 - 项目课和基础课件不同：代码在学生自己的电脑上写和运行，老师给素材、前端和测试，学生只写后端逻辑。第一个项目是井字棋。做项目课不改 `basics/`，命令在 `project/` 里运行。
-- `basics/` 自带模板、工具和字体（`template/`、`tools/`、`vendor/`）。`project/` 有自己的工具，课件直接读 `basics/` 的模板、字体和 IDE 设置，只读不改，自己的样式放 `project/template/`。
+- `basics/` 自带模板、工具和字体（`template/`、`tools/`、`vendor/`）。`project/` 有自己的工具，课件直接读 `basics/` 的模板、字体和 IDE 设置，只读不改，自己的样式放 `project/template/`。项目课的课件页还没用版式，照绝对定位写。
 
 ## 跨课程的规则
 
@@ -19,7 +19,8 @@
 
 - 一律用相对路径：课件里的链接、文档和给老师的命令都不写绝对路径。给命令时写清在哪个文件夹里运行，比如“在 `basics/` 里运行”。
 - 课件是上课讲的，不写“必做”“选做”“作业”这类字样，题目也不分等级。课后作业老师另外布置。
-- 只改一个值、结果一眼能看到的地方，用黄色框让学生直接在页面上改，省掉打开 IDE 的时间。多行输出、循环、改结构、读报错、运行完整程序，或者做起来复杂、容易出错的，都用 IDE，不勉强。具体写法见 [.claude/skills/python-lesson/SKILL.md](.claude/skills/python-lesson/SKILL.md) 的“黄色框”，每课几处、放在哪里见 [basics/PROMPT.md](basics/PROMPT.md) 的“互动”。
+- 只改一个值、结果一眼能看到的地方用黄色框，其余用 IDE。什么时候用见 [basics/PROMPT.md](basics/PROMPT.md) 的“互动”，写法见 [.claude/skills/python-lesson/SKILL.md](.claude/skills/python-lesson/SKILL.md) 的“黄色框”。
+- 基础课件每页都用版式（`basics/template/layouts.css`）：页面写版式和格子，不写坐标；代码框只写代码，颜色和字号由构建生成。写法见 [basics/PROMPT.md](basics/PROMPT.md) 的“版式和格子”。
 - `basics/` 里的 `template/`、`tools/`、`vendor/` 是 Python 课和 C++ 课（[lixuanan2/cpp-for-youth](https://github.com/lixuanan2/cpp-for-youth)）共用的，只在本仓库改，检查通过后由维护者同步到 C++ 课，再跑那边的检查。C++ 课需要改共用文件时也提到这里来。
 
 老师本机有主文件夹的话（本仓库的上一层，里面还放着 C++ 课），那里的 `AGENTS.md` 还写了几门课怎么一起管理、同步共用文件的命令。它只是老师本机的补充，上面的规则不依赖它。
