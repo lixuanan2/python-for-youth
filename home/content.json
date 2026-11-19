@@ -93,7 +93,7 @@
           "name": "基础课件",
           "readme": "basics/README.md",
           "href": "site:basics/",
-          "progress": "30 节已完成",
+          "progress": "{lessons} 节已完成",
           "p": "从输入输出、变量讲起，经过判断、循环、列表、字符串、函数、字典，到递归、排序、二分查找这些算法入门。",
           "stages": [
             "基础",

@@ -48,7 +48,7 @@
 print(word[1])</pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 260px/1 var(--code);color:var(--clay-soft)">y</p>
+    <p class="step s2 text-huge soft">y</p>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
@@ -62,10 +62,10 @@ print(word[1])</pre></div>
 <!-- index table -->
 <section class="slide free" aria-label="下标表">
   <h2 class="t r">"Python" 的两种编号</h2>
-  <div class="abs r d1" style="left:96px;right:96px;top:250px;display:grid;grid-template-columns:260px repeat(6,1fr);align-items:baseline;row-gap:36px;font:800 84px var(--code);text-align:center">
-    <span style="font:400 40px var(--text);color:var(--muted);text-align:left">字</span><span>P</span><span>y</span><span>t</span><span>h</span><span>o</span><span>n</span>
-    <span style="font:400 40px var(--text);color:var(--muted);text-align:left">正着数</span><span style="color:var(--clay)">0</span><span style="color:var(--clay)">1</span><span style="color:var(--clay)">2</span><span style="color:var(--clay)">3</span><span style="color:var(--clay)">4</span><span style="color:var(--clay)">5</span>
-    <span style="font:400 40px var(--text);color:var(--muted);text-align:left">倒着数</span><span style="color:var(--olive)">-6</span><span style="color:var(--olive)">-5</span><span style="color:var(--olive)">-4</span><span style="color:var(--olive)">-3</span><span style="color:var(--olive)">-2</span><span style="color:var(--olive)">-1</span>
+  <div class="abs r d1 text-mid" style="left:96px;right:96px;top:250px;display:grid;grid-template-columns:260px repeat(6,1fr);align-items:baseline;row-gap:36px;text-align:center">
+    <span class="muted" style="font:400 40px var(--text);text-align:left">字</span><span>P</span><span>y</span><span>t</span><span>h</span><span>o</span><span>n</span>
+    <span class="muted" style="font:400 40px var(--text);text-align:left">正着数</span><span class="out">0</span><span class="out">1</span><span class="out">2</span><span class="out">3</span><span class="out">4</span><span class="out">5</span>
+    <span class="muted" style="font:400 40px var(--text);text-align:left">倒着数</span><span class="ok">-6</span><span class="ok">-5</span><span class="ok">-4</span><span class="ok">-3</span><span class="ok">-2</span><span class="ok">-1</span>
   </div>
   <p class="abs say r d2" style="left:96px;top:740px">每个字都有两个编号。正着数从 0 到 len - 1，倒着数从 -1 开始。<br>空格和标点也各占一个盒子。</p>
   <div class="foot"></div>
@@ -242,7 +242,7 @@ print(new)    # Jython</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="4" data-yes="找到了！大写 A 和小写 a 是两个不同的字，banana 里一个大写 A 也没有。改成小写 &quot;a&quot; 就对了。" data-no="这一行没问题。输出 0，说明一次也没比中，看看是拿什么在比。"><span class="ln">word = <span class="s">"banana"</span></span><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">for</span> ch <span class="k">in</span> word:</span><span class="ln">    <span class="k">if</span> ch == <span class="s">"A"</span>:</span><span class="ln">        count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(count)</span></pre></div>
   <p class="say r d2">应该输出 3，程序却输出 0。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

@@ -231,7 +231,7 @@ print(count)</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="5" data-yes="找到了！这一行的缩进和 if 对齐，不归 if 管，每一遍都加 1。再缩进 4 个空格，才是碰到倍数才加。" data-no="这一行没问题。想一想：哪一行每一遍都运行了？"><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">10</span>):</span><span class="ln">    <span class="k">if</span> i % <span class="m">3</span> == <span class="m">0</span>:</span><span class="ln">        <span class="f">print</span>(i)</span><span class="ln">    count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(count)</span></pre></div>
   <p class="say r d2">1 到 9 里只有 3 个 3 的倍数，程序却说有 9 个。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

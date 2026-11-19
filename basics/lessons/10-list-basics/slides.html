@@ -46,7 +46,7 @@
 print(scores[1])</pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 220px/1 var(--code);color:var(--clay-soft)">95</p>
+    <p class="step s2 text-huge soft">95</p>
   </div>
   <div class="turns">
     <p class="say only1">先在纸上写下你的答案。</p>
@@ -197,7 +197,7 @@ for i in range(n):
 print(scores)</pre></div>
   <div class="answer turns">
     <p class="say only1">依次输入 3、80、95、70，最后输出什么？</p>
-    <p class="step s2" style="font:800 140px/1 var(--code);color:var(--clay)">[70]</p>
+    <p class="step s2 text-big out" style="line-height:1">[70]</p>
   </div>
   <p class="say step s2">每一遍都换一个新的空列表，前面存的全丢了，只剩最后一个 70。<br>和累加一样：准备工作放在循环前面，只做一次。</p>
   <div class="foot"></div>
@@ -251,7 +251,7 @@ print(len(a))</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="5" data-yes="找到了！n 个数的下标是 0 到 n - 1，[n] 超出了范围。写 scores[n - 1] 或 scores[-1] 都行。" data-no="这一行没问题。报的是 IndexError，想一想哪一行用到了下标。"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">scores = []</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln"><span class="f">print</span>(scores[n])</span></pre></div>
   <p class="say r d2">依次输入 3、80、95、70，程序报 IndexError。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

@@ -15,16 +15,16 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import zlib from 'node:zlib';
+import {compareShots, clearStray} from './shots.mjs';
 
 /* === WHICH LESSONS: arguments, and the local record of what passed === */
-const RECORD = '.check-state.json', SHOTS = '.check-shots', SHARED_KEY = '(template)';
+const RECORD = '.check-state.json', SHARED_KEY = '(template)';
 const allLessons = JSON.parse(fs.readFileSync('course.json', 'utf8')).filter(l => l.id);
 const files = dir => fs.readdirSync(dir, {withFileTypes: true}).sort((a, b) => a.name < b.name ? -1 : 1)
   .flatMap(e => e.isDirectory() ? files(path.join(dir, e.name)) : [path.join(dir, e.name)]);
 // What decides how every lesson renders and what this check does with it: the course index, the shared template and this
 // file. A lesson's own fingerprint is its built pages and starters; a change here is checked on the sample, and in full by CI.
-const SHARED = [path.join('dist', 'index.html'), ...files('template'), path.join('tools', 'check_browser.mjs')];
+const SHARED = [path.join('dist', 'index.html'), ...files('template'), path.join('tools', 'check_browser.mjs'), path.join('tools', 'shots.mjs')];
 const digest = list => {
   const hash = crypto.createHash('sha256');
   for (const file of list) {
@@ -89,15 +89,8 @@ const wanted = l => chosen.includes(l.id) || (words.includes('--sample') && samp
   || (words.includes('--changed') && (needs(l.id) || (sharedNeeds() && sample.includes(l))));
 const picked = chosen.length || words.includes('--sample') || words.includes('--changed') ? allLessons.filter(wanted) : allLessons;
 const targets = shard ? picked.filter((_, i) => i % +shard[2] === +shard[1] - 1) : picked;
-// Leftovers: screenshots this tool did not write (taken by hand, or of a lesson that was renamed) and the baselines of lessons
-// that are gone. A lesson's own folder is emptied when it is checked, so what is left in .preview is always its last run.
-if (!process.env.CI) {
-  const kept = new Set([...allLessons.map(l => l.id), 'changed.txt', 'home-phone.png', 'deck-phone.png']);
-  for (const dir of ['.preview', SHOTS]) {
-    if (!fs.existsSync(dir)) continue;
-    for (const name of fs.readdirSync(dir)) if (!kept.has(name)) fs.rmSync(path.join(dir, name), {recursive: true, force: true});
-  }
-}
+// Leftovers this tool did not write, and baselines of lessons that are gone.
+clearStray([...allLessons.map(l => l.id), 'changed.txt', 'home-phone.png', 'deck-phone.png']);
 if (!targets.length) {
   console.log(shard ? `Shard ${shard[0]} has no lesson.` : 'Nothing changed since the last local pass: no lesson to check. CI still checks what changed.');
   process.exit(0);
@@ -119,60 +112,9 @@ const passShared = () => {
   fs.writeFileSync(RECORD, JSON.stringify(now, null, 1) + '\n');
 };
 
-// Chrome compresses the same picture differently from run to run, so screens are compared by their pixels, not their bytes.
-const pixels = file => {
-  const buf = fs.readFileSync(file), idat = [];
-  let pos = 8, width = 0, height = 0, type = 2;
-  while (pos < buf.length) {
-    const len = buf.readUInt32BE(pos), kind = buf.toString('latin1', pos + 4, pos + 8), data = buf.subarray(pos + 8, pos + 8 + len);
-    if (kind === 'IHDR') { width = data.readUInt32BE(0); height = data.readUInt32BE(4); type = data[9]; }
-    if (kind === 'IDAT') idat.push(data);
-    pos += 12 + len;
-  }
-  const bpp = {0: 1, 2: 3, 4: 2, 6: 4}[type], stride = width * bpp, raw = zlib.inflateSync(Buffer.concat(idat)), out = Buffer.alloc(stride * height);
-  for (let y = 0; y < height; y++) {
-    const filter = raw[y * (stride + 1)], row = y * (stride + 1) + 1, o = y * stride;
-    for (let x = 0; x < stride; x++) {
-      const a = x >= bpp ? out[o + x - bpp] : 0, b = y ? out[o - stride + x] : 0, c = x >= bpp && y ? out[o - stride + x - bpp] : 0;
-      const p = a + b - c, pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c);
-      out[o + x] = (raw[row + x] + [0, a, b, (a + b) >> 1, pa <= pb && pa <= pc ? a : pb <= pc ? b : c][filter]) & 255;
-    }
-  }
-  return {width, height, bpp, data: out};
-};
-// Text edges may come out one shade apart between runs; a real change moves far more than 3 steps of 255. The thumbnail
-// rail on the left is left out: its edge sits on a fraction of a pixel and its scroll position varies, and every thumbnail
-// is a copy of a page that is compared full size anyway.
 let railWidth = 0;
-const samePicture = (x, y, rail = railWidth) => {
-  try {
-    const a = pixels(x), b = pixels(y);
-    if (a.width !== b.width || a.height !== b.height || a.bpp !== b.bpp) return false;
-    const skip = rail * a.bpp, stride = a.width * a.bpp;
-    for (let row = 0; row < a.data.length; row += stride)
-      for (let i = row + skip; i < row + stride; i++) if (Math.abs(a.data[i] - b.data[i]) > 3) return false;
-    return true;
-  } catch { return false; }
-};
 const measureRail = async () => {
   railWidth = await run(`(() => { const r = document.getElementById('thumbs'); return r && document.body.classList.contains('thumbs-open') ? Math.ceil(r.getBoundingClientRect().right * devicePixelRatio) + 2 : 0; })()`);
-};
-// Screens against the last pass: same pixels, same picture. Returns the screens that changed, appeared or went away, then keeps this pass as the new baseline.
-const compareShots = id => {
-  if (process.env.CI) return [];
-  const now = path.join('.preview', id), then = path.join(SHOTS, id);
-  const names = dir => fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith('.png')).sort() : [];
-  const before = new Set(names(then)), after = names(now);
-  const out = [];
-  for (const name of after) {
-    if (!before.has(name)) out.push(`${id}/${name} 新的`);
-    else if (!samePicture(path.join(now, name), path.join(then, name))) out.push(`${id}/${name} 变了`);
-  }
-  for (const name of before) if (!after.includes(name)) out.push(`${id}/${name} 没了`);
-  fs.rmSync(then, {recursive: true, force: true});
-  fs.mkdirSync(then, {recursive: true});
-  for (const name of after) fs.copyFileSync(path.join(now, name), path.join(then, name));
-  return out;
 };
 
 const chrome = [process.env.CHROME_PATH, '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
@@ -760,7 +702,7 @@ try {
     fs.writeFileSync(path.join('.preview', 'deck-phone.png'), Buffer.from(deckShot.data, 'base64'));
     await send('Emulation.setDeviceMetricsOverride', {width: 1920, height: 1080, deviceScaleFactor: 0.6, mobile: false});
     pass(lesson.id);
-    changedShots.push(...compareShots(lesson.id));
+    changedShots.push(...compareShots(lesson.id, () => railWidth));
     for (const [k, n] of Object.entries({pages: total, screens: shots, quizzes: result.quizzes.length, picks: result.picks.length,
       gates: result.gates.length, changes: changes.length, algos: algos.length, links: result.links})) sum[k] += n;
    } catch (error) {

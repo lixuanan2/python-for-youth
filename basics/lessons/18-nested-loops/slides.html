@@ -46,7 +46,7 @@
     print("*")</pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 110px/1 var(--code);color:var(--clay-soft)">*<br>*<br>*<br>*</p>
+    <p class="step s2 text-large soft" style="line-height:1">*<br>*<br>*<br>*</p>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上画出来。</p>
@@ -71,7 +71,7 @@
     </div>
   <a class="ide step s5">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="step s2" style="font:800 110px/1.25 var(--code)"><span>****</span><br><span class="step s3">****</span><br><span class="step s4">****</span></div>
+    <div class="step s2 text-large"><span>****</span><br><span class="step s3">****</span><br><span class="step s4">****</span></div>
   </div>
 </section>
 
@@ -116,7 +116,7 @@
       <p class="say only4">i 是 4，画 4 颗。外层从 1 开始，第一行才不会是空的。</p>
     </div>
   <a class="ide step s4">▶ 在 IDE 打开</a>
-  <div class="right" style="font:800 110px/1.25 var(--code)">
+  <div class="right text-large">
 <span>*</span><br><span class="step s2">**</span><br><span class="step s3">***</span><br><span class="step s4">****</span>
   </div>
 </section>
@@ -166,7 +166,7 @@
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right" style="font:400 48px/1.45 var(--code)">
-<p>1 排 1 号<br>1 排 2 号<br>1 排 3 号</p><p class="step s2" style="color:var(--clay)">2 排 1 号<br>2 排 2 号<br>2 排 3 号</p>
+<p>1 排 1 号<br>1 排 2 号<br>1 排 3 号</p><p class="step s2 out">2 排 1 号<br>2 排 2 号<br>2 排 3 号</p>
   </div>
 </section>
 
@@ -180,7 +180,7 @@
 ***
 **
 *</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">还记得 range 怎么倒着数吗？</p>
+    <p class="say tip r d3">还记得 range 怎么倒着数吗？</p>
   </div>
   <a class="ide r d3" data-code-file="starter/06_down_triangle.py">▶ 在 IDE 开始改</a>
 </section>
@@ -222,7 +222,7 @@
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="4" data-yes="找到了！这一行缩进在内层循环里，每画一颗星就换一次行。往左退 4 个空格，和内层的 for 对齐，就是每行画完才换行。" data-no="这一行没问题。每颗星都单独占了一行，想一想换行是在哪里发生的。"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">4</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(i):</span><span class="ln">        <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln">        <span class="f">print</span>()</span></pre></div>
   <p class="say r d2">想画 1、2、3 颗星的三角形，结果 6 颗星排成了一列。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

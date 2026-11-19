@@ -28,11 +28,11 @@
     if i * i &gt; 30:
         break</pre></div>
   <div class="answer turns">
-    <p class="only1" style="font:800 64px/1.35 var(--code)">1<br>2<br>3<br>4<br>5</p>
-    <p class="only2" style="font:800 64px/1.35 var(--code)">1<br>2<br>3<br>4<br>5<br><span style="color:var(--clay-soft)">停在 6</span></p>
+    <p class="only1 text-num" style="line-height:1.35">1<br>2<br>3<br>4<br>5</p>
+    <p class="only2 text-num" style="line-height:1.35">1<br>2<br>3<br>4<br>5<br><span class="soft">停在 6</span></p>
     <p class="say only3">猜一猜：把 print(i) 挪到 if 前面，只是换了两行的位置。<br>输出到 5，还是到 6？</p>
     <div>
-      <p class="step s4" style="font:800 60px/1.3 var(--code);color:var(--clay-soft)">1 2 3<br>4 5 6</p>
+      <p class="step s4 text-num soft" style="line-height:1.3">1 2 3<br>4 5 6</p>
       <a class="ide step s4">▶ 在 IDE 验证</a>
     </div>
     <a class="ide only2" data-code-file="starter/01_break.py">▶ 在 IDE 打开</a>
@@ -76,7 +76,7 @@ print(n)</pre></div>
       <p class="say only3 small">输入“再见”，break 跳出循环，最后说“拜拜”。</p>
     </div>
   <div class="right">
-    <div style="font:400 48px/1.6 var(--text);color:var(--clay)">你说 你好<br><span class="step s2">你说 吃了吗</span><br><span class="step s3">拜拜</span></div>
+    <div class="out" style="font:400 48px/1.6 var(--text)">你说 你好<br><span class="step s2">你说 吃了吗</span><br><span class="step s3">拜拜</span></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -88,8 +88,8 @@ print(n)</pre></div>
 <pre class="code" data-file="solutions/03_retry.py"></pre></div>
   <p class="say small">转换成功，才走到 break；出错就跳到 except，break 被跳过，接着再问。<br>不用 done 记着，读起来就像在说：一直问，输对了就停。</p>
   <div class="right">
-    <p class="say" style="font-size:36px;color:var(--muted)">依次输入 abc、3.5、12：</p>
-    <p style="font:400 40px/1.6 var(--text);color:var(--clay);margin-top:16px">不是整数，再输一次<br>不是整数，再输一次<br>明年你 13 岁</p>
+    <p class="say muted" style="font-size:36px">依次输入 abc、3.5、12：</p>
+    <p class="out" style="font:400 40px/1.6 var(--text);margin-top:16px">不是整数，再输一次<br>不是整数，再输一次<br>明年你 13 岁</p>
     <a class="ide">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -105,7 +105,7 @@ print(n)</pre></div>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div style="font:800 64px/1.35 var(--code)">1 2<br><span class="step s2">4 5<br>7 8<br>10</span></div>
+    <div class="text-num" style="line-height:1.35">1 2<br><span class="step s2">4 5<br>7 8<br>10</span></div>
   </div>
 </section>
 
@@ -134,7 +134,7 @@ print(n)</pre></div>
     <h2 class="r d1">读到 0 就停，算总和</h2>
     <p class="say r d1">在例题上改：每行读入一个整数，读到 0 就停。停下以后输出前面所有数的和，<b>0 不算</b>。不知道一共几个数，所以用 while True。</p>
     <div class="sheet two r d2"><div><small>依次输入 5、8、-3、0</small><pre>10</pre></div><div><small>第一个就是 0</small><pre>0</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">输入要先变成整数，总和从 0 开始。</p>
+    <p class="say tip r d3">输入要先变成整数，总和从 0 开始。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/05_sum_until_zero.py">▶ 在 IDE 开始改</a>
 </section>
@@ -158,7 +158,7 @@ print(n)</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="5" data-yes="找到了！continue 只跳过这一次，循环还在转，又去读下一句。说“再见”要停下，应该写 break。" data-no="这一行没问题。输入“再见”时，程序走进了 if，然后做了什么？"><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">while</span> <span class="k">True</span>:</span><span class="ln">    word = <span class="f">input</span>()</span><span class="ln">    <span class="k">if</span> word == <span class="s">"再见"</span>:</span><span class="ln">        <span class="k">continue</span></span><span class="ln">    count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(<span class="s">"说了"</span>, count, <span class="s">"句"</span>)</span></pre></div>
   <p class="say r d2">想数一数说了几句，<br>可它一直停不下来。<br>点出写错的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

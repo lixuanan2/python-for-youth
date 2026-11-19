@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -714,9 +729,9 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code" data-file="solutions/01_swap.py" data-change="3"><span class="ln">a = <span class="m">3</span></span><span class="ln">b = <span class="m">5</span></span><span class="ln l2">a, b = b, a</span><span class="ln"><span class="f">print</span>(a, b)</span></pre></div>
   <div class="answer turns">
     <p class="say only1">想要的是 5 3。<br>真的能换过来吗？</p>
-    <p class="only2" style="font:800 100px var(--code);color:var(--clay-soft)">5 5</p>
+    <p class="only2 text-large soft">5 5</p>
     <div>
-      <p class="step s3" style="font:800 100px var(--code);color:var(--mint)">5 3</p>
+      <p class="step s3 text-large" style="color:var(--mint)">5 3</p>
       <p class="say step s3">列表里的两个位置也能这样换：</p>
       <p class="step s3" style="font:400 40px/1.5 var(--code)">a[0], a[1] = a[1], a[0]</p>
       <a class="ide step s3">▶ 在 IDE 打开</a>
@@ -803,7 +818,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="sheet two r d2"><div><small>输入 4，再输入 1、2、3、4</small><pre style="font-size:40px;white-space:pre">[2, 3, 4, 1]
 [3, 4, 2, 1]
 [4, 3, 2, 1]</pre></div><div><small>输入 2，再输入 3、9</small><pre style="font-size:40px">[9, 3]</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">想一想：什么时候该换？</p>
+    <p class="say tip r d3">想一想：什么时候该换？</p>
   </div>
   <a class="ide r d3" data-code="# 【从大到小排】&#10;# 在例题上改，让大的排前面。第一行读入 n，&#10;#   接下来 n 行每行一个整数。和例题一样，每轮输出一次列表。&#10;# 例如输入（每个一行）：4、1、2、3、4&#10;# 应该输出（每个一行）：[2, 3, 4, 1] / [3, 4, 2, 1] / [4, 3, 2, 1]&#10;# 提示：只改一个符号。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;a = []&#10;for k in range(n):&#10;    a.append(int(input()))&#10;for r in range(n - 1):&#10;    for j in range(n - 1 - r):&#10;        if a[j] &gt; a[j + 1]:&#10;            a[j], a[j + 1] = a[j + 1], a[j]&#10;    print(a)&#10;">▶ 在 IDE 开始改</a>
 </section>
@@ -827,7 +842,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="--fs:34px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="4" data-yes="找到了！j 能走到 3，a[j + 1] 就是 a[4]，4 个数的列表没有下标 4。改成 range(n - 1 - r)。" data-no="这一行没问题。报错说下标超出了范围，看看 j 最大会走到几。"><span class="ln">a = [<span class="m">5</span>, <span class="m">2</span>, <span class="m">4</span>, <span class="m">1</span>]</span><span class="ln">n = <span class="f">len</span>(a)</span><span class="ln"><span class="k">for</span> r <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">        <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln">            a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln"><span class="f">print</span>(a)</span></pre></div>
   <p class="say r d2">点出该改的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

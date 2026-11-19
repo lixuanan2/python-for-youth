@@ -29,7 +29,7 @@
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div style="font:800 72px/1.5 var(--code)">3<br><span class="step s2" style="color:var(--clay)">[1, 2, 3]<br>True</span></div>
+    <div class="text-mid" style="line-height:1.5">3<br><span class="step s2 out">[1, 2, 3]<br>True</span></div>
   </div>
 </section>
 
@@ -39,7 +39,7 @@
   <div class="editor"><div class="tab">names.py</div>
 <pre class="code" data-file="solutions/02_dedupe.py" data-light="3:2"></pre></div>
   <div class="answer">
-    <p class="step s2" style="font:800 100px/1.3 var(--code);color:var(--clay-soft)">4<br>2</p>
+    <p class="step s2 text-large soft" style="line-height:1.3">4<br>2</p>
   </div>
   <div class="turns">
       <p class="say only1">列表里有 4 个名字。set(names) 把列表变成集合，会剩几个？</p>
@@ -73,7 +73,7 @@
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div style="font:700 52px/1.9 var(--code)"><span style="color:var(--clay)">[3, 4]</span><br><span class="step s2">[1, 2, 3, 4, 5]</span><br><span class="step s3">[1, 2]</span></div>
+    <div style="font:700 52px/1.9 var(--code)"><span class="out">[3, 4]</span><br><span class="step s2">[1, 2, 3, 4, 5]</span><br><span class="step s3">[1, 2]</span></div>
   </div>
 </section>
 
@@ -103,7 +103,7 @@ b = {2, 3, 4}</pre></div>
       <p class="say only2">变成集合，重复的 i 和 like 各留一个，剩 i、like、cats、dogs 4 个。</p>
     </div>
   <div class="right">
-    <div style="font:400 52px/1.7 var(--text);color:var(--clay)">6 个词<br><span class="step s2">4 个不同的词</span></div>
+    <div class="out" style="font:400 52px/1.7 var(--text)">6 个词<br><span class="step s2">4 个不同的词</span></div>
     <a class="ide step s2">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -115,7 +115,7 @@ b = {2, 3, 4}</pre></div>
     <h2 class="r d1">把不同的词列出来</h2>
     <p class="say r d1">在例题上改：最后再输出一行，把不同的词从小到大排好，用一个空格连起来。输入一行英文，词和词之间用空格隔开。</p>
     <div class="sheet two r d2"><div><small>例题那句，第三行</small><pre>cats dogs i like</pre></div><div><small>b a b，第三行</small><pre>a b</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 13 课的 join 能把列表连成一行。</p>
+    <p class="say tip r d3">第 13 课的 join 能把列表连成一行。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/05_repeat.py">▶ 在 IDE 开始改</a>
 </section>
@@ -139,7 +139,7 @@ b = {2, 3, 4}</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="1" data-yes="找到了！空的 {} 是字典，字典没有 add。空集合要写 seen = set()。" data-no="这一行没问题。报错说它是 dict，seen 是从哪里来的？"><span class="ln">seen = {}</span><span class="ln">seen.<span class="f">add</span>(<span class="s">"小明"</span>)</span><span class="ln">seen.<span class="f">add</span>(<span class="s">"小红"</span>)</span><span class="ln"><span class="f">print</span>(<span class="f">len</span>(seen))</span></pre></div>
   <p class="say r d2">想做一个空集合，再一个个放进去。报错说：<br><span style="font-family:var(--code);font-size:30px">'dict' object has no attribute 'add'</span><br>点出该改的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

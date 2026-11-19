@@ -60,7 +60,7 @@
         print(x)</pre></div>
   <div class="answer turns">
     <p class="say only1">答案 12 还在里面吗？</p>
-    <p class="step s2" style="font:800 72px/1.4 var(--text);color:var(--clay-soft)">什么也<br>不输出</p>
+    <p class="step s2 soft" style="font:800 72px/1.4 var(--text)">什么也<br>不输出</p>
   </div>
   <p class="say step s2">range(1, 12) 只试到 11，不含 12。答案不在范围里，就一个也找不到，而且不报错。<br>枚举最要紧的是范围：答案可能出现的地方，一个都不能漏。</p>
   <div class="foot"></div>
@@ -129,7 +129,7 @@ for c in range(heads + 1):
     <h2 class="r d1">没有答案时说一声</h2>
     <p class="say r d1">脚数是单数，或者太多太少，就怎么也凑不上。在例题上改：一种答案也没有时，输出“没有答案”。输入还是两行：头数和脚数。</p>
     <div class="sheet two r d2"><div><small>输入 35 和 94</small><pre>鸡 23 兔 12</pre></div><div><small>输入 10 和 21</small><pre>没有答案</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 22 课的 done 记着“输对了没有”，这里也可以记着“找到过没有”。</p>
+    <p class="say tip r d3">第 22 课的 done 记着“输对了没有”，这里也可以记着“找到过没有”。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/03_cage_none.py">▶ 在 IDE 开始改</a>
 </section>
@@ -153,7 +153,7 @@ for c in range(heads + 1):
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！range(heads) 是 0 到 9，鸡最多试到 9 只，“10 只鸡”这种可能被漏掉了。改成 range(heads + 1)。" data-no="这一行没问题。答案是鸡 10 只，循环试到过 10 吗？"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
   <p class="say r d2">点出该改的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

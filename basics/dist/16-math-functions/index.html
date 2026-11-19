@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -749,7 +764,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code"><span class="ln"><span class="k">import</span> math</span><span class="ln"><span class="f">print</span>(math.<span class="f">sqrt</span>(<span class="m">16</span>))</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 220px/1 var(--code);color:var(--clay-soft)">4.0</p>
+    <p class="step s2 text-huge soft">4.0</p>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
@@ -764,9 +779,9 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-6" class="slide lay-columns" aria-label="猜一猜：负数往哪边" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：-2.3 往哪边取？</h2>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:56px">
-    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">floor 往下</h3><pre style="font:700 54px/1.4 var(--code)">math.floor(-2.3)</pre><p class="step s2" style="font:800 130px/1.2 var(--code);color:var(--clay)">-3</p></div>
-    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">ceil 往上</h3><pre style="font:700 54px/1.4 var(--code)">math.ceil(-2.3)</pre><p class="step s2" style="font:800 130px/1.2 var(--code);color:var(--clay)">-2</p></div>
-    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">int 去掉小数</h3><pre style="font:700 54px/1.4 var(--code)">int(-2.3)</pre><p class="step s2" style="font:800 130px/1.2 var(--code);color:var(--clay)">-2</p></div>
+    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">floor 往下</h3><pre style="font:700 54px/1.4 var(--code)">math.floor(-2.3)</pre><p class="step s2 text-big out" style="line-height:1.2">-3</p></div>
+    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">ceil 往上</h3><pre style="font:700 54px/1.4 var(--code)">math.ceil(-2.3)</pre><p class="step s2 text-big out" style="line-height:1.2">-2</p></div>
+    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">int 去掉小数</h3><pre style="font:700 54px/1.4 var(--code)">int(-2.3)</pre><p class="step s2 text-big out" style="line-height:1.2">-2</p></div>
   </div>
   <div class="turns">
     <p class="say only1">在数轴上，-3 在 -2.3 的左边，-2 在右边。</p>
@@ -896,7 +911,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！int 只是砍掉小数，4.6 变成 4，剩下的 3 个苹果没地方放。要用 math.ceil 往上取，并在第一行 import math。" data-no="这一行没问题。4.6 被变成了 4，看看是哪一行做的。"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">k = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(<span class="f">int</span>(n / k))</span></pre></div>
   <p class="say r d2">输入 23 和 5，程序说要 4 箱，可是还剩 3 个苹果没地方放。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

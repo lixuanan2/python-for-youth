@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -733,7 +748,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln"><span class="f">print</span>(scores[<span class="m">1</span>])</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 220px/1 var(--code);color:var(--clay-soft)">95</p>
+    <p class="step s2 text-huge soft">95</p>
   </div>
   <div class="turns">
     <p class="say only1">先在纸上写下你的答案。</p>
@@ -875,7 +890,7 @@ out of range</pre></div>
 <pre class="code"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">    scores = []</span><span class="ln">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln"><span class="f">print</span>(scores)</span></pre></div>
   <div class="answer turns">
     <p class="say only1">依次输入 3、80、95、70，最后输出什么？</p>
-    <p class="step s2" style="font:800 140px/1 var(--code);color:var(--clay)">[70]</p>
+    <p class="step s2 text-big out" style="line-height:1">[70]</p>
   </div>
   <p class="say step s2">每一遍都换一个新的空列表，前面存的全丢了，只剩最后一个 70。<br>和累加一样：准备工作放在循环前面，只做一次。</p>
   <div class="foot"></div>
@@ -926,7 +941,7 @@ out of range</pre></div>
   <div class="editor r d1" style="--fs:47px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="5" data-yes="找到了！n 个数的下标是 0 到 n - 1，[n] 超出了范围。写 scores[n - 1] 或 scores[-1] 都行。" data-no="这一行没问题。报的是 IndexError，想一想哪一行用到了下标。"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">scores = []</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln"><span class="f">print</span>(scores[n])</span></pre></div>
   <p class="say r d2">依次输入 3、80、95、70，程序报 IndexError。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

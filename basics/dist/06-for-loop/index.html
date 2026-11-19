@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -827,7 +842,7 @@ print(100)</pre></div>
 <pre class="code" data-file="solutions/04_one_to_n.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2 short"><small>屏幕上</small><pre style="color:var(--muted)">一行也没有</pre></div>
+    <div class="slip tilt step s2 short"><small>屏幕上</small><pre class="muted">一行也没有</pre></div>
   </div>
   <div class="turns">
     <p class="say only1">会报错吗？还是输出 0？</p>
@@ -912,9 +927,9 @@ print(100)</pre></div>
 <section id="page-15" class="slide lay-columns" aria-label="猜一猜：三个 range" data-steps="4" data-at="4">
   <h2 class="t">猜一猜：这三个 range 给出哪些数？</h2>
   <div class="sheet3">
-    <div><code>range(1, 6, 2)</code><span class="step s2" style="font:800 56px var(--code)">1、3、5</span></div>
-    <div><code>range(6, 1, -2)</code><span class="step s3" style="font:800 56px var(--code)">6、4、2</span></div>
-    <div><code>range(6, 1, 2)</code><span class="step s4" style="font:800 56px var(--text);color:var(--clay)">一个数也没有</span></div>
+    <div><code>range(1, 6, 2)</code><span class="step s2 text-num">1、3、5</span></div>
+    <div><code>range(6, 1, -2)</code><span class="step s3 text-num">6、4、2</span></div>
+    <div><code>range(6, 1, 2)</code><span class="step s4 out" style="font:800 56px var(--text)">一个数也没有</span></div>
   </div>
   <div class="turns">
     <p class="say only1">看三样东西：从哪里开始，往哪边跳，跳到哪里停。</p>
@@ -1047,7 +1062,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！终点不算在内，range(1, n) 只到 4。要数到 n，就写 range(1, n + 1)。" data-no="这一行没问题。想一想：range 的终点算不算在内？"><span class="ln">n = <span class="m">5</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n):</span><span class="ln">    <span class="f">print</span>(i)</span><span class="ln"><span class="f">print</span>(<span class="s">"数完了"</span>)</span></pre></div>
   <p class="say r d2">想从 1 数到 5，程序却只数到 4，也没有报错。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

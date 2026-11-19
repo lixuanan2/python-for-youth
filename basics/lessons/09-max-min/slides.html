@@ -217,7 +217,7 @@ print(best)</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="7" data-yes="找到了！这一行和 if 对齐，不归 if 管，每一遍都换人，最后台上站的是最后一个数。再缩进 4 个空格就对了。" data-no="这一行没问题。想一想：哪一行每一遍都运行了？"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">best = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    x = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="k">if</span> x &gt; best:</span><span class="ln">        <span class="f">print</span>(<span class="s">"换人了"</span>)</span><span class="ln">    best = x</span><span class="ln"><span class="f">print</span>(best)</span></pre></div>
   <p class="say r d2">依次输入 3、80、95、70，最后一行却输出 70，不是 95。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

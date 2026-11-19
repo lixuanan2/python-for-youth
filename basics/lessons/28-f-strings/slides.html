@@ -27,10 +27,10 @@
 age = 12
 print("{name}今年{age}岁")</pre></div>
   <div class="answer turns">
-    <p class="only1" style="font:700 64px/1.5 var(--text);color:var(--clay-soft)">小明今年12岁</p>
-    <div class="only2"><p style="font:700 64px/1.5 var(--text);color:var(--clay-soft)">小明今年12岁<br>明年13岁</p><a class="ide only2" data-code-file="starter/01_fstring.py" style="margin-top:40px">▶ 在 IDE 打开</a></div>
+    <p class="only1 soft" style="font:700 64px/1.5 var(--text)">小明今年12岁</p>
+    <div class="only2"><p class="soft" style="font:700 64px/1.5 var(--text)">小明今年12岁<br>明年13岁</p><a class="ide only2" data-code-file="starter/01_fstring.py" style="margin-top:40px">▶ 在 IDE 打开</a></div>
     <p class="say only3">猜一猜：忘了写 f，会输出什么？<br>只少了一个字母 f，会报错吗？</p>
-    <div class="step s4"><p style="font:700 56px var(--code);color:var(--clay-soft);white-space:nowrap">{name}今年{age}岁</p><a class="ide step s4" style="margin-top:40px">▶ 在 IDE 验证</a></div>
+    <div class="step s4"><p class="soft" style="font:700 56px var(--code);white-space:nowrap">{name}今年{age}岁</p><a class="ide step s4" style="margin-top:40px">▶ 在 IDE 验证</a></div>
   </div>
   <div class="turns">
     <p class="say only1 small">f 是 format（格式）的第一个字母。加了 f，引号里的大括号 { } 就会换成变量的值。<br>没有逗号，也就没有多余的空格。</p>
@@ -67,7 +67,7 @@ print(f"{age}+1")</pre></div>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div style="font:700 48px/1.7 var(--code)">3.3333333333333335<br><span class="step s2" style="color:var(--clay);font-size:72px">3.33<br>3.3</span></div>
+    <div style="font:700 48px/1.7 var(--code)">3.3333333333333335<br><span class="step s2 out" style="font-size:72px">3.33<br>3.3</span></div>
   </div>
 </section>
 
@@ -98,7 +98,7 @@ print(f"{price:.2f}")</pre></div>
       <p class="say only3">14.0 也按 2 位显示成 14.00。钱数都是两位小数，小票看着就整齐了。</p>
     </div>
   <div class="right">
-    <div style="font:400 34px/1.7 var(--text);color:var(--clay)"><span class="step s2">4 件，每件 3.50 元</span><br><span class="step s3">一共 14.00 元</span></div>
+    <div class="out" style="font:400 34px/1.7 var(--text)"><span class="step s2">4 件，每件 3.50 元</span><br><span class="step s3">一共 14.00 元</span></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -110,7 +110,7 @@ print(f"{price:.2f}")</pre></div>
     <h2 class="r d1">打八折以后多少钱</h2>
     <p class="say r d1">在例题上改：最后再输出一行“打八折 …… 元”，也保留 2 位小数。打八折就是乘以 0.8。输入还是两行：单价和件数。</p>
     <div class="sheet two r d2"><div><small>输入 3.5 和 4，第三行</small><pre>打八折 11.20 元</pre></div><div><small>输入 10 和 1，第三行</small><pre>打八折 8.00 元</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">大括号里可以写算式。</p>
+    <p class="say tip r d3">大括号里可以写算式。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/04_discount.py">▶ 在 IDE 开始改</a>
 </section>
@@ -129,7 +129,7 @@ print(f"{m:02d}:{s:02d}")</pre></div>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div style="font:800 96px/1.4 var(--code)">5:9<br><span class="step s2" style="color:var(--clay)">05:09</span></div>
+    <div class="text-large" style="line-height:1.4">5:9<br><span class="step s2 out">05:09</span></div>
   </div>
 </section>
 
@@ -152,7 +152,7 @@ print(f"{m:02d}:{s:02d}")</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="1" data-yes="找到了！input() 读来的是文字，文字不能按 :.2f 显示。改成 price = float(input())。" data-no="这一行没问题。报错说这个值不能按小数显示，它是从哪里来的？"><span class="ln">price = <span class="f">input</span>()</span><span class="ln">count = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(<span class="s">f"每件 {price:.2f} 元"</span>)</span></pre></div>
   <p class="say r d2">输入 3.5 和 4，报错的最后一行是：<br><span style="font-family:var(--code);font-size:30px">ValueError: Unknown format code 'f' for object of type 'str'</span><br>点出该改的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

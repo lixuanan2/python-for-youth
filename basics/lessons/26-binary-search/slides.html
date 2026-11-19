@@ -25,7 +25,7 @@
     <p class="say only1">从 1 到 100，每猜一次没猜中，剩下的就少一半。猜几次一定能猜中？<br>先自己估一个数。</p>
     <div class="step s2" style="font:700 60px/1.5 var(--code)">剩 100 → 50 → 25 → 12 → 6 → 3 → 1</div>
   </div>
-  <p class="step s2" style="font:800 120px var(--text);color:var(--clay-soft)">最多 7 次</p>
+  <p class="step s2 soft" style="font:800 120px var(--text)">最多 7 次</p>
   <p class="say step s2">猜一次没中，剩下的不到一半。猜 6 次以后最多剩 1 个，第 7 次一定中。<br>从 1 猜起最多要 100 次，二分只要 7 次。数越多，差得越远：1000 个数也只要 10 次。</p>
   <div class="foot"></div>
 </section>
@@ -118,7 +118,7 @@ while guess != secret:
     <h2 class="r d1">最后说出猜了几次</h2>
     <p class="say r d1">在例题上改：每猜一次，计数加 1。猜中以后，再输出一行“猜了 几 次”。秘密数是 1 到 100 的整数。</p>
     <div class="sheet three r d2"><div><small>秘密数 42</small><pre>猜了 7 次</pre></div><div><small>秘密数 50</small><pre>猜了 1 次</pre></div><div><small>秘密数 100</small><pre>猜了 7 次</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">把 1 到 100 都试一试，看看有没有超过 7 次的。</p>
+    <p class="say tip r d3">把 1 到 100 都试一试，看看有没有超过 7 次的。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/03_guess_count.py">▶ 在 IDE 开始改</a>
 </section>
@@ -142,7 +142,7 @@ while guess != secret:
   <div class="editor r d1" style="width:960px;--fs:40px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="9" data-yes="找到了！99 已经猜过、不对了，lo 还停在 99。(99 + 100) // 2 又是 99，永远猜不到 100。改成 lo = guess + 1。" data-no="这一行没问题。猜过 99 以后，范围变成了多少？"><span class="ln">secret = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">lo = <span class="m">1</span></span><span class="ln">hi = <span class="m">100</span></span><span class="ln">guess = <span class="m">0</span></span><span class="ln"><span class="k">while</span> guess != secret:</span><span class="ln">    guess = (lo + hi) // <span class="m">2</span></span><span class="ln">    <span class="f">print</span>(guess)</span><span class="ln">    <span class="k">if</span> guess &lt; secret:</span><span class="ln">        lo = guess</span><span class="ln">    <span class="k">elif</span> guess &gt; secret:</span><span class="ln">        hi = guess - <span class="m">1</span></span></pre></div>
   <p class="say r d2">输出 50、75、87、93、96、98、99，然后一直是 99。<br>点出该改的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
 </section>
 
 <!-- challenge -->

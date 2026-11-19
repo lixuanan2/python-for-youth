@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -735,7 +750,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code"><span class="ln">word = <span class="s">"Python"</span></span><span class="ln"><span class="f">print</span>(word[<span class="m">1</span>])</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 260px/1 var(--code);color:var(--clay-soft)">y</p>
+    <p class="step s2 text-huge soft">y</p>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
@@ -749,10 +764,10 @@ dialog p{color:var(--muted);font-size:15px}
 <!-- index table -->
 <section id="page-5" class="slide free" aria-label="下标表">
   <h2 class="t r">"Python" 的两种编号</h2>
-  <div class="abs r d1" style="left:96px;right:96px;top:250px;display:grid;grid-template-columns:260px repeat(6,1fr);align-items:baseline;row-gap:36px;font:800 84px var(--code);text-align:center">
-    <span style="font:400 40px var(--text);color:var(--muted);text-align:left">字</span><span>P</span><span>y</span><span>t</span><span>h</span><span>o</span><span>n</span>
-    <span style="font:400 40px var(--text);color:var(--muted);text-align:left">正着数</span><span style="color:var(--clay)">0</span><span style="color:var(--clay)">1</span><span style="color:var(--clay)">2</span><span style="color:var(--clay)">3</span><span style="color:var(--clay)">4</span><span style="color:var(--clay)">5</span>
-    <span style="font:400 40px var(--text);color:var(--muted);text-align:left">倒着数</span><span style="color:var(--olive)">-6</span><span style="color:var(--olive)">-5</span><span style="color:var(--olive)">-4</span><span style="color:var(--olive)">-3</span><span style="color:var(--olive)">-2</span><span style="color:var(--olive)">-1</span>
+  <div class="abs r d1 text-mid" style="left:96px;right:96px;top:250px;display:grid;grid-template-columns:260px repeat(6,1fr);align-items:baseline;row-gap:36px;text-align:center">
+    <span class="muted" style="font:400 40px var(--text);text-align:left">字</span><span>P</span><span>y</span><span>t</span><span>h</span><span>o</span><span>n</span>
+    <span class="muted" style="font:400 40px var(--text);text-align:left">正着数</span><span class="out">0</span><span class="out">1</span><span class="out">2</span><span class="out">3</span><span class="out">4</span><span class="out">5</span>
+    <span class="muted" style="font:400 40px var(--text);text-align:left">倒着数</span><span class="ok">-6</span><span class="ok">-5</span><span class="ok">-4</span><span class="ok">-3</span><span class="ok">-2</span><span class="ok">-1</span>
   </div>
   <p class="abs say r d2" style="left:96px;top:740px">每个字都有两个编号。正着数从 0 到 len - 1，倒着数从 -1 开始。<br>空格和标点也各占一个盒子。</p>
   <div class="foot"></div>
@@ -927,7 +942,7 @@ a cat and a dog</pre></div><div><small>输出</small><pre style="line-height:1.2
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="4" data-yes="找到了！大写 A 和小写 a 是两个不同的字，banana 里一个大写 A 也没有。改成小写 &quot;a&quot; 就对了。" data-no="这一行没问题。输出 0，说明一次也没比中，看看是拿什么在比。"><span class="ln">word = <span class="s">"banana"</span></span><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">for</span> ch <span class="k">in</span> word:</span><span class="ln">    <span class="k">if</span> ch == <span class="s">"A"</span>:</span><span class="ln">        count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(count)</span></pre></div>
   <p class="say r d2">应该输出 3，程序却输出 0。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

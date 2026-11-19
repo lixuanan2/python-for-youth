@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -743,7 +758,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code" data-file="solutions/01_divide.py"><span class="ln"><span class="f">print</span>(<span class="m">6</span> / <span class="m">2</span>)</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 220px/1 var(--code);color:var(--clay-soft)">3.0</p>
+    <p class="step s2 text-huge soft">3.0</p>
   </div>
   <div class="turns">
     <p class="say only1">先在纸上写下你的答案。</p>
@@ -888,8 +903,8 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-15" class="slide lay-columns" aria-label="int 还是 float">
   <h2 class="t r">int 还是 float？</h2>
   <div class="vs">
-    <div class="r d1"><h3>只有整数</h3><pre><span style="color:var(--clay)">int</span>(input())</pre><p class="say">人数、个数，用 int。</p></div>
-    <div class="r d2"><h3>可能有小数</h3><pre><span style="color:var(--clay)">float</span>(input())</pre><p class="say">长度、价格，用 float。</p></div>
+    <div class="r d1"><h3>只有整数</h3><pre><span class="out">int</span>(input())</pre><p class="say">人数、个数，用 int。</p></div>
+    <div class="r d2"><h3>可能有小数</h3><pre><span class="out">float</span>(input())</pre><p class="say">长度、价格，用 float。</p></div>
   </div>
   <p class="say r d3">int(input()) 读到 2.5 会报 ValueError，因为 2.5 不是整数的样子。<br>float(input()) 读到 4 没问题，会变成 4.0。</p>
   <div class="foot"></div>
@@ -938,7 +953,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！除法先算，变成了 80 + 45。要写成 (a + b) / 2。" data-no="这一行没有问题。想一想：程序先算的是哪一步？"><span class="ln">a = <span class="m">80</span></span><span class="ln">b = <span class="m">90</span></span><span class="ln">avg = a + b / <span class="m">2</span></span><span class="ln"><span class="f">print</span>(avg)</span></pre></div>
   <p class="say r d2">两门考了 80 和 90，平均分应该是 85.0，程序却输出 125.0。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

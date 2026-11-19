@@ -43,7 +43,7 @@ name.strip()
 print("[" + name + "]")</pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 110px/1 var(--code);color:var(--clay-soft);white-space:pre">[  小明  ]</p>
+    <p class="step s2 text-large soft" style="line-height:1;white-space:pre">[  小明  ]</p>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
@@ -168,7 +168,7 @@ print("[" + name + "]")</pre></div>
     <h2 class="r d1">把逗号换成顿号</h2>
     <p class="say r d1">读入一行用英文逗号隔开的词，没有空格。把它们用中文顿号“、”连起来，输出一行。</p>
     <div class="sheet two r d2"><div><small>输入</small><pre style="font-size:48px">苹果,香蕉,橙子</pre></div><div><small>输出</small><pre style="font-size:48px">苹果、香蕉、橙子</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">只有一个词时，就输出它自己。</p>
+    <p class="say tip r d3">只有一个词时，就输出它自己。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/06_joiner.py">▶ 在 IDE 开始改</a>
 </section>
@@ -205,7 +205,7 @@ print("[" + name + "]")</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！replace 做出了新字符串，但没有存起来。写成 s = s.replace(&quot;猫&quot;, &quot;狗&quot;) 就对了。" data-no="这一行没问题。想一想：换好的新字符串去哪了？"><span class="ln">s = <span class="s">"我爱猫"</span></span><span class="ln">s.<span class="f">replace</span>(<span class="s">"猫"</span>, <span class="s">"狗"</span>)</span><span class="ln"><span class="f">print</span>(s)</span></pre></div>
   <p class="say r d2">应该输出“我爱狗”，程序却输出“我爱猫”，也没有报错。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

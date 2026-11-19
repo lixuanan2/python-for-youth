@@ -48,7 +48,7 @@
 print("结束")</pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 180px/1 var(--text);color:var(--clay-soft)">结束</p>
+    <p class="step s2 soft" style="font:800 180px/1 var(--text)">结束</p>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
@@ -105,9 +105,9 @@ f()</pre></div>
       <p class="say only4 small">输出“关机前：”，再调用一次，又跳进去做一遍。</p>
     </div>
     <p class="step s2">开机前：</p>
-    <p class="step s3" style="color:var(--clay)">1. 检查电源<br>2. 检查屏幕</p>
+    <p class="step s3 out">1. 检查电源<br>2. 检查屏幕</p>
     <p class="step s4">关机前：</p>
-    <p class="step s4" style="color:var(--clay)">1. 检查电源<br>2. 检查屏幕</p>
+    <p class="step s4 out">1. 检查电源<br>2. 检查屏幕</p>
   </div>
 </section>
 
@@ -157,9 +157,9 @@ def hello():
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right" style="font:400 40px/1.5 var(--code)">
-    <p class="step s2" style="color:var(--clay)">3<br>2<br>1<br>发射！</p>
+    <p class="step s2 out">3<br>2<br>1<br>发射！</p>
     <p class="step s3">再来一次</p>
-    <p class="step s3" style="color:var(--clay)">3<br>2<br>1<br>发射！</p>
+    <p class="step s3 out">3<br>2<br>1<br>发射！</p>
   </div>
 </section>
 
@@ -213,7 +213,7 @@ hello</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！这一行没缩进，不归函数管，程序一开始就输出了它，而且只输出一次。缩进 4 个空格，它才是函数的一部分。" data-no="这一行没问题。想一想：哪一句不在函数里？"><span class="ln"><span class="k">def</span> <span class="f">cheer</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"加油！"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"我们是最棒的！"</span>)</span><span class="ln"><span class="f">cheer</span>()</span><span class="ln"><span class="f">cheer</span>()</span></pre></div>
   <p class="say r d2">想让每次都喊“加油！我们是最棒的！”，结果输出了“我们是最棒的！加油！加油！”。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

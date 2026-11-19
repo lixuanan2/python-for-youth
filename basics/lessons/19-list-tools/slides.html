@@ -139,7 +139,7 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
       <p class="say only1 small">前四行还是老样子：输入 3，再输入 80、95、70，存进列表。</p>
       <p class="say only2 small">后三行，一行一个工具。以前要好几个循环，现在一眼就看得懂。</p>
     </div>
-    <div class="step s2" style="font:400 56px/1.5 var(--code);color:var(--clay)">总分 245<br>最高 95<br>最低 70</div>
+    <div class="step s2 out" style="font:400 56px/1.5 var(--code)">总分 245<br>最高 95<br>最低 70</div>
     <a class="ide step s2">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -207,7 +207,7 @@ print(a[1:-1])</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！sort 直接把列表排好，但交回的是 None，又赋给了 scores，排好的列表就丢了。只写 scores.sort()，或者写 scores = sorted(scores)。" data-no="这一行没问题。输出 None，想一想是哪一行把 None 放进了 scores。"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln">scores = scores.<span class="f">sort</span>()</span><span class="ln"><span class="f">print</span>(scores)</span></pre></div>
   <p class="say r d2">想输出排好的分数，屏幕上却是 None。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

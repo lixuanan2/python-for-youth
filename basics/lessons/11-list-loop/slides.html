@@ -204,7 +204,7 @@ for x in a:
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！range(1, len(scores)) 从下标 1 开始，第一个人的 80 没加。写 range(len(scores)) 就是从 0 开始。" data-no="这一行没问题。少的正好是第一个人的分数，想一想循环从哪里开始。"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln">total = <span class="m">0</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="f">len</span>(scores)):</span><span class="ln">    total += scores[i]</span><span class="ln"><span class="f">print</span>(total)</span></pre></div>
   <p class="say r d2">三个分数加起来应该是 245，程序却输出 165。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

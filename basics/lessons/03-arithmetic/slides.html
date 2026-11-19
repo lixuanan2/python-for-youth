@@ -55,7 +55,7 @@
 <pre class="code" data-file="solutions/01_divide.py"></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 220px/1 var(--code);color:var(--clay-soft)">3.0</p>
+    <p class="step s2 text-huge soft">3.0</p>
   </div>
   <div class="turns">
     <p class="say only1">先在纸上写下你的答案。</p>
@@ -200,8 +200,8 @@
 <section class="slide lay-columns" aria-label="int 还是 float">
   <h2 class="t r">int 还是 float？</h2>
   <div class="vs">
-    <div class="r d1"><h3>只有整数</h3><pre><span style="color:var(--clay)">int</span>(input())</pre><p class="say">人数、个数，用 int。</p></div>
-    <div class="r d2"><h3>可能有小数</h3><pre><span style="color:var(--clay)">float</span>(input())</pre><p class="say">长度、价格，用 float。</p></div>
+    <div class="r d1"><h3>只有整数</h3><pre><span class="out">int</span>(input())</pre><p class="say">人数、个数，用 int。</p></div>
+    <div class="r d2"><h3>可能有小数</h3><pre><span class="out">float</span>(input())</pre><p class="say">长度、价格，用 float。</p></div>
   </div>
   <p class="say r d3">int(input()) 读到 2.5 会报 ValueError，因为 2.5 不是整数的样子。<br>float(input()) 读到 4 没问题，会变成 4.0。</p>
   <div class="foot"></div>
@@ -250,7 +250,7 @@
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！除法先算，变成了 80 + 45。要写成 (a + b) / 2。" data-no="这一行没有问题。想一想：程序先算的是哪一步？"><span class="ln">a = <span class="m">80</span></span><span class="ln">b = <span class="m">90</span></span><span class="ln">avg = a + b / <span class="m">2</span></span><span class="ln"><span class="f">print</span>(avg)</span></pre></div>
   <p class="say r d2">两门考了 80 和 90，平均分应该是 85.0，程序却输出 125.0。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

@@ -206,7 +206,7 @@ print(len(d))</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！第一次碰到苹果时，字典里还没有苹果这个键，没法在原来的数上加 1。要先让它有个开始的 0：可以先用 in 问一问，也可以用 get。" data-no="这一行没问题。报错说没有“苹果”这个键，想一想第一次碰到苹果时发生了什么。"><span class="ln">counts = {}</span><span class="ln"><span class="k">for</span> f <span class="k">in</span> [<span class="s">"苹果"</span>, <span class="s">"香蕉"</span>, <span class="s">"苹果"</span>]:</span><span class="ln">    counts[f] += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(counts)</span></pre></div>
   <p class="say r d2">想数出每种水果有几个，程序却报 KeyError: '苹果'。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
