@@ -1,0 +1,173 @@
+{
+  "_": "README.md 和网站首页 home/index.html 的文字都从这里来。改这里，再在 basics/ 里运行 python3 tools/build.py。写法见 basics/tools/promo.py 开头。",
+  "repo": "lixuanan2/python-for-youth",
+  "site": "https://lixuanan2.github.io/python-for-youth/",
+  "title": "Python 青少年编程",
+  "title_lines": [
+    "Python",
+    "青少年编程"
+  ],
+  "description": "给小学高年级和初中生的 Python 课件，免费、开源。离线双击打开，学生能照着自学，代码一键进在线 IDE。",
+  "en": "Free, open Python courseware in Chinese for upper-primary and middle-school students (about ages 10 to 15). Each lesson is a web page that opens offline with a double-click, reads well enough for self-study, and sends any code on the page to an online IDE in one click. Teachers, schools and anyone who wants to collaborate are welcome to get in touch through GitHub Discussions.",
+  "lead": "这是一套给小学高年级和初中生的 Python 课件，免费、开源。每节课是一个网页，老师拿来上课，学生也能照着自学。",
+  "buttons": [
+    {
+      "label": "打开基础课件",
+      "href": "site:basics/",
+      "badge": ".github/assets/button-basics.svg",
+      "class": "start"
+    },
+    {
+      "label": "打开项目课",
+      "href": "site:project/",
+      "badge": ".github/assets/button-project.svg",
+      "class": "start project"
+    }
+  ],
+  "more": "需要更多课程，见总仓库 [youth-coding-courses](https://github.com/lixuanan2/youth-coding-courses)。",
+  "sections": {
+    "who": {
+      "title": "适合谁",
+      "cards": [
+        {
+          "h": "学生",
+          "p": "小学高年级和初中生，零基础起步。"
+        },
+        {
+          "h": "老师",
+          "p": "学校、机构和兴趣班的老师。课件里的句子写得完整、口语化，老师照着读就能讲，不用另备讲稿。"
+        },
+        {
+          "h": "自学的孩子和家长",
+          "p": "只看页面也能看懂，每讲一点就有一道题马上练。"
+        }
+      ]
+    },
+    "features": {
+      "title": "有什么不一样",
+      "items": [
+        {
+          "b": "离线双击就能打开",
+          "p": "每节课是一个网页文件，样式、脚本和字体都在里面，不用装软件，不用联网。只有打开 IDE 和官方文档时要联网。"
+        },
+        {
+          "b": "学生能照着自学",
+          "p": "每节课按“讲一点、练一点”推进：先猜结果再揭晓，选择小测点了马上解释，点出报错的那一行，最后自己挑战一道新题，卡住了有一条一条的提示。"
+        },
+        {
+          "b": "代码一键进在线 IDE",
+          "p": "页面上的代码点一下就带到 JupyterLite 里运行，动手题带着起始程序打开，不用复制粘贴。"
+        },
+        {
+          "b": "黄色框能在页面上直接改值",
+          "p": "只改一个数、结果一眼能看到的地方，学生在页面上改 {slot:7}，结果马上变，省掉打开 IDE 的时间。"
+        },
+        {
+          "b": "每个程序和页面说法都有自动检查",
+          "p": "页面上的程序都由工具检查过：页面说的输出和报错用真实 Python 运行核对，个别停不下来的示例只检查写法、不运行；题目答案用测试数据跑过，动手题和挑战的答案不会出现在学生拿到的文件里。每次改动后，每一页还会在真实的 Chrome 里打开，检查排版、小测、黄色框和 IDE 链接。"
+        },
+        {
+          "b": "每一页都按固定版式排",
+          "p": "8 种版式（封面、猜一猜、代码走一遍、小测这些）管位置，代码的颜色和字号由工具算好。改课只改内容，不用一页页对齐。"
+        }
+      ]
+    },
+    "use": {
+      "title": "怎么用",
+      "cards": [
+        {
+          "h": "在线",
+          "p": "在[网站首页](site:)选一节课，直接放映。"
+        },
+        {
+          "h": "教室电脑",
+          "p": "在 [GitHub 仓库](https://github.com/lixuanan2/python-for-youth) 的页面点 Code → Download ZIP，解压后把 `basics/dist` 文件夹整个复制到教室电脑，双击里面的 `index.html`。这个文件夹里有课件、PDF 和起始程序，没有答案。"
+        }
+      ],
+      "keys": "放映时按 {kbd:→} 或空格翻页，{kbd:R} 带着本页代码打开 IDE，{kbd:F} 全屏，{kbd:?} 查看全部快捷键。更多用法见[基础课件的说明](basics/README.md)。"
+    },
+    "modules": {
+      "title": "模块和进度",
+      "items": [
+        {
+          "name": "基础课件",
+          "readme": "basics/README.md",
+          "href": "site:basics/",
+          "progress": "30 节已完成",
+          "p": "从输入输出、变量讲起，经过判断、循环、列表、字符串、函数、字典，到递归、排序、二分查找这些算法入门。",
+          "stages": [
+            "基础",
+            "判断",
+            "循环",
+            "列表和字符串",
+            "函数",
+            "字典",
+            "进阶",
+            "算法入门",
+            "语法进阶"
+          ],
+          "nav": [
+            {
+              "label": "课程目录",
+              "href": "site:basics/"
+            },
+            {
+              "label": "第一课",
+              "href": "site:basics/01-input-output/"
+            },
+            {
+              "label": "说明和源文件",
+              "href": "basics/"
+            }
+          ]
+        },
+        {
+          "name": "项目课",
+          "readme": "site:project/",
+          "href": "site:project/",
+          "progress": "井字棋 5 关",
+          "p": "学完一部分基础课，在自己的电脑上分关卡做一个小项目：老师给好画面和测试，学生只写程序的逻辑，测试全过就进下一关。",
+          "nav": [
+            {
+              "label": "项目列表",
+              "href": "site:project/"
+            },
+            {
+              "label": "井字棋开发文档",
+              "href": "site:project/tictactoe/guide.html"
+            },
+            {
+              "label": "说明和源文件",
+              "href": "project/"
+            }
+          ],
+          "demo": {
+            "gif": ".github/assets/tictactoe-demo.gif",
+            "video": "site:media/tictactoe-demo.mp4",
+            "poster": "site:media/tictactoe-demo.jpg",
+            "alt": "井字棋项目课演示：老师给画面和素材，学生写函数，5 关做完，在网页上和电脑下一盘",
+            "caption": "井字棋项目课 22 秒演示（有声音）：老师给画面，学生在 tictactoe.py 里写函数，一关一关测试，最后在网页上和电脑下一盘。"
+          }
+        }
+      ],
+      "later": "以后会继续加别的项目。"
+    },
+    "edge": {
+      "title": "用 Edge 的话",
+      "p": "IDE 里的 Python 是在浏览器里跑的。Edge 开着“增强的安全性”时会关掉它要用的功能，表现是点了运行右边一直空白。在 Edge 设置里搜“增强的安全性”，在“例外”里添加 `lixuanan2.github.io` 就好了；或者改用 Chrome。"
+    },
+    "talk": {
+      "title": "想合作或交流",
+      "page": "在学校或机构里用了这套课、想一起做新模块、发现哪里讲得不好，都欢迎来说。具体的错误和建议可以开 Issue，怎么提见[参与说明](CONTRIBUTING.md)。",
+      "button": {
+        "label": "来 Discussions 留言",
+        "href": "https://github.com/lixuanan2/python-for-youth/discussions"
+      }
+    },
+    "license": {
+      "title": "许可",
+      "p": "课件内容用 CC BY-NC-SA 4.0，可以免费用在课堂上、修改和分享；想用在收费课程里，先开一个 Issue 问一下。代码用 MIT。详见[许可](LICENSE.md)。",
+      "page_more": "源文件在 [GitHub](https://github.com/lixuanan2/python-for-youth)。"
+    }
+  }
+}

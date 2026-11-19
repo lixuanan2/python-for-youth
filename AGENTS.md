@@ -27,8 +27,7 @@
 
 ## 最外层
 
-- `README.md`：宣传门面，写给老师、机构和逛 GitHub 的人。最上面两三句英文，正文中文。改了要同步 `home/index.html`，两者内容一致。
-- `home/index.html`：网站首页 `https://lixuanan2.github.io/python-for-youth/`，手写，不经过构建。首页用的视频和封面放在 `home/media/`（文件名用英文），发布时整个 `home/` 复制到网站最外层，比如 `https://lixuanan2.github.io/python-for-youth/media/tictactoe-demo.mp4`。README 用的图片（按钮、演示 GIF）放在 `.github/assets/`，不发布到网站。README 里放 GIF（GitHub 播不了仓库里的 mp4），点开链到网站上带声音的 mp4；首页用 `<video controls>` 加封面，放在对应模块的卡片里，不自动播放。用到的字体由发布网站的那一步从 `basics/vendor/fonts/` 复制到网站的 `fonts/`。
+- `README.md` 和 `home/index.html`（网站首页 `https://lixuanan2.github.io/python-for-youth/`）：宣传门面，写给老师、机构和逛 GitHub 的人，最上面两三句英文，正文中文。两个文件都由 `basics/tools/promo.py` 生成，不要手改：文字只改 `home/content.json`（写法见 `promo.py` 开头），首页的样式和开头的互动编辑器在 `home/page.html`，改完在 `basics/` 里运行 `python3 tools/build.py`。`check.py` 查两者和 `content.json` 一致。C++ 课用同一个 `promo.py`，各有自己的 `content.json` 和 `page.html`。首页用的视频和封面放在 `home/media/`（文件名用英文），发布时整个 `home/` 复制到网站最外层，比如 `https://lixuanan2.github.io/python-for-youth/media/tictactoe-demo.mp4`。README 用的图片（按钮、演示 GIF）放在 `.github/assets/`，不发布到网站。README 里放 GIF（GitHub 播不了仓库里的 mp4），点开链到网站上带声音的 mp4；首页用 `<video controls>` 加封面，放在对应模块的卡片里，不自动播放。用到的字体由发布网站的那一步从 `basics/vendor/fonts/` 复制到网站的 `fonts/`。
 - `.github/workflows/check.yml` 先在各模块文件夹里跑检查：`check` 在 Ubuntu 和 Windows 上跑 `tools/check.py`，每次都跑；`browser` 在 Ubuntu 的 Chrome 里跑 `tools/check_browser.mjs`，查什么由 `.github/browser_plan.py` 按改动决定：只改 `README.md`、`home/` 这类文字不开浏览器，只改几节课或一个项目就只查它们，改了模板、页面工具或工作流就全量，basics 分 4 台机器并行。每周一和手动运行都是全量。两项都通过后，`deploy` 才把 `home/` 和各模块的 `dist/` 组装成网站发布：首页在最外层，`basics/dist/` 放到 `/basics/`。`deploy` 还按 `ide/` 构建课程用的 IDE，放到 `/ide/`；`project/dist/` 放到 `/project/`。`project` 这一项在 Ubuntu 和 Windows 上跑项目课的检查。只有 `main` 上的推送和手动运行会发布，PR 只检查。
 - `ide/`：课程用的在线 IDE，是固定版本的 JupyterLite，Python（Pyodide）一起发布，学生打开时不从 CDN 下载。只提交版本和配置：`requirements.txt` 定 JupyterLite 的版本，`prepare.py` 定 Pyodide 的版本，下载并核对哈希，只留内核启动要用的包。构建结果不进 Git，由 `deploy` 生成。本机试：在 `ide/` 里 `pip install -r requirements.txt`、`python prepare.py`、`jupyter lite build`，再用任意静态服务器打开 `_output/repl/index.html`。
 - `CONTRIBUTING.md`、`LICENSE.md`、`.github/` 的模板管整个仓库。
@@ -37,6 +36,6 @@
 ## 新增模块
 
 1. 新建 `<英文名>/` 文件夹，写它自己的 `AGENTS.md`、`CLAUDE.md`（内容 `@AGENTS.md`）和 `README.md`。
-2. 在上面的表格、宣传 `README.md` 和 `home/index.html` 的“模块和进度”里加上它。
+2. 在上面的表格和 `home/content.json` 的“模块和进度”里加上它，再构建一次。
 3. 在 `check.yml` 里加上它的检查（`check` 和 `browser` 各一步），再在 `deploy` 里加一行复制它的 `dist/`。
 4. 现在写死 `basics/` 的地方要一起改：`.claude/skills/python-lesson/SKILL.md` 只管基础课件，新模块要么另写 skill，要么在这个 skill 里写清各模块的路径；`.github/pull_request_template.md` 的自查清单；`CONTRIBUTING.md` 的“想直接改”和共用文件那一段。

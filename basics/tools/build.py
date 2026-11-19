@@ -16,6 +16,7 @@ import subprocess
 from urllib.parse import quote
 
 import algo
+import promo
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
@@ -639,6 +640,8 @@ def main():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding=file_encoding(path), newline='\n')
     print(f'Built {len(lessons())} lesson(s) into dist/')
+    if promo.write():
+        print('Wrote README.md and home/index.html from home/content.json')
     if args.pdf:
         chrome = args.chrome or next((c for c in CHROME if Path(c).is_file()), None)
         if not chrome:

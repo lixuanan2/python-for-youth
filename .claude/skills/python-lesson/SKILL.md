@@ -72,4 +72,4 @@ node tools/check_browser.mjs --changed
 
 ## 5. 交给老师
 
-打开 `dist/<课>/index.html`，说明验证了什么、没验证什么。Windows 和投影只有老师现场能确认。更新 `basics/README.md` 的课程表；课数变了，同时改仓库最外层宣传 `README.md` 和 `home/index.html` 里的节数。提交并推送。老师的修改意见如果是通用的，写回 PROMPT.md，下节课就不会再犯。
+打开 `dist/<课>/index.html`，说明验证了什么、没验证什么。Windows 和投影只有老师现场能确认。更新 `basics/README.md` 的课程表；课数变了，改仓库最外层 `home/content.json` 里的节数，构建时 README 和首页一起更新。提交并推送。老师的修改意见如果是通用的，写回 PROMPT.md，下节课就不会再犯。
