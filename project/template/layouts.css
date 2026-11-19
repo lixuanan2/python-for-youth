@@ -1,0 +1,30 @@
+/* === PROJECT LAYOUTS: the project course's own page shapes, separate from basics. A page in tictactoe/slides.html names
+   one (class="slide lay-think") and puts its parts in it; the layout places them, so the page writes no left/top. A page
+   whose picture is the point (class="slide free") keeps its own places. How to write each: project/AGENTS.md, "版式". === */
+
+.slide[class*=" lay-"]>:where(:not(h2.t,.foot)),.slide[class*=" lay-"] :is(.col,.side)>*{position:relative;left:auto;right:auto;top:auto;bottom:auto}
+
+/* think: a short demo in the online IDE. The code on the left, what it prints on a note on the right (with a sentence under
+   it when there is one, in .side), a sentence across the page and the IDE button under them. */
+.lay-think{display:grid;grid-template-columns:980px 1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"code out" "say say" "ide ide";
+  column-gap:84px;row-gap:44px;padding:220px 96px 90px;align-items:start}
+.lay-think>.editor{grid-area:code}
+.lay-think>.slip,.lay-think>.side{grid-area:out;margin-top:10px}
+.lay-think>.slip{width:420px}
+.lay-think>.side{display:flex;flex-direction:column;gap:50px}
+.lay-think>.side>.slip{width:420px}
+.lay-think>.say{grid-area:say}
+.lay-think>.ide{grid-area:ide;justify-self:start;align-self:end}
+
+/* quiz: what the question is about on the left (code, or a picture such as a board in .pic), four choices on the right in
+   one column, the feedback under the left part. */
+.lay-quiz{display:grid;grid-template-columns:800px 1fr;grid-template-rows:auto 1fr;grid-template-areas:"show pick" "fb pick";
+  column-gap:64px;row-gap:40px;padding:220px 96px 90px;align-items:start}
+.lay-quiz>:is(.editor,.pic){grid-area:show}
+.lay-quiz>.pic{padding-top:20px}
+.lay-quiz>.quiz{grid-area:pick;grid-template-columns:1fr}
+.lay-quiz>.fb{grid-area:fb}
+
+/* pair: two columns (.col) side by side, the left one as wide as what is in it; a sentence goes in the column it is about. */
+.lay-pair{display:grid;grid-template-columns:auto 1fr;column-gap:120px;padding:200px 96px 90px;align-items:start}
+.lay-pair>.col{display:flex;flex-direction:column;gap:44px;align-items:flex-start}

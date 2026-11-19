@@ -181,8 +181,31 @@ def check_pages(decks):
     return links
 
 
+LAYOUTS = ("think", "quiz", "pair")
+
+
+def check_layouts(projects):
+    """Each page written by hand in <project>/slides.html names one of the project layouts (template/layouts.css) or is a
+    free page; outside free pages nothing carries left/top/right/bottom."""
+    pages = 0
+    for name, _ in projects:
+        text = (ROOT / name / "slides.html").read_text(encoding="utf-8")
+        for section in re.findall(r"<section\b.*?</section>", text, re.S):
+            pages += 1
+            label = re.search(r'aria-label="([^"]*)"', section).group(1)
+            classes = re.search(r'<section class="([^"]*)"', section).group(1).split()
+            named = [c[4:] for c in classes if c.startswith("lay-")]
+            where = "%s/slides.html, page %s" % (name, label)
+            assert (len(named) == 1 and named[0] in LAYOUTS) != ("free" in classes), \
+                "%s: name one layout (%s) or make it a free page (class free)" % (where, ", ".join("lay-" + l for l in LAYOUTS))
+            placed = [] if "free" in classes else re.findall(r'style="[^"]*(?<![\w-])(left|top|right|bottom)\s*:', section)
+            assert not placed, "%s: the layout places its parts; take out %s" % (where, ", ".join(sorted(set(placed))))
+    return pages
+
+
 def main():
     projects, decks = check_current()
+    check_layouts(projects)
     check_no_answers(projects)
     check_plain(projects)
     check_needs(projects)

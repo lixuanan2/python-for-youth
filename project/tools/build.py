@@ -335,7 +335,8 @@ def slides(proj, name):
 
 def render_deck(proj, name):
     css = "\n".join([FONTS, basics_read("vendor/viewport.css"), basics_read("template/theme.css"),
-                     (ROOT / "template" / "project.css").read_text(encoding="utf-8")])
+                     (ROOT / "template" / "project.css").read_text(encoding="utf-8"),
+                     (ROOT / "template" / "layouts.css").read_text(encoding="utf-8")])
     script = basics_read("template/deck.js").replace("{{ide}}", json.dumps(BASICS_SITE["ide"], ensure_ascii=False)).replace("{{language}}", LANGUAGE)
     page = basics_read("template/page.html")
     fields = dict(title=esc(proj.PROJECT["title"]), lesson=json.dumps("项目 " + proj.PROJECT["title"], ensure_ascii=False), css=css, site=esc(SITE["title"]),
