@@ -699,8 +699,8 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="签到表上有重复">
   <h2 class="t r">签到表上，有人签了三次</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">签到表</small><pre style="font-size:52px">小明 小红 小明 小明</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">到底来了几个人？</small><pre style="font-size:52px">2 个，不是 4 个</pre></div>
+    <div class="slip r d1 short"><small>签到表</small><pre>小明 小红 小明 小明</pre></div>
+    <div class="slip tilt r d2 short"><small>到底来了几个人？</small><pre>2 个，不是 4 个</pre></div>
   </div>
   <p class="say r d3">列表会把每一次都记下来，重复的也算。想知道“有哪些人”，就要把重复的去掉。<br>Python 的集合（set）专门干这个：同样的东西只留一个。它还能找出两份名单里都有的人。</p>
   <div class="foot"></div>
@@ -801,7 +801,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="turn">
     <h2 class="r d1">把不同的词列出来</h2>
     <p class="say r d1">在例题上改：最后再输出一行，把不同的词从小到大排好，用一个空格连起来。输入一行英文，词和词之间用空格隔开。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>例题那句，第三行</small><pre>cats dogs i like</pre></div><div><small>b a b，第三行</small><pre>a b</pre></div></div>
+    <div class="sheet two r d2"><div><small>例题那句，第三行</small><pre>cats dogs i like</pre></div><div><small>b a b，第三行</small><pre>a b</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 13 课的 join 能把列表连成一行。</p>
   </div>
   <a class="ide r d3" data-code="# 【把不同的词列出来】&#10;# 在例题上改：最后再输出一行，把不同的词从小到大排好，&#10;#   用一个空格连起来。输入一行英文，词和词之间用空格隔开。&#10;# 例如输入：i like cats i like dogs&#10;# 应该输出：&#10;#   6 个词&#10;#   4 个不同的词&#10;#   cats dogs i like&#10;# 提示：再加一行输出。&#10;# ↓ 在下面这段程序上改&#10;&#10;words = input().split()&#10;print(len(words), &quot;个词&quot;)&#10;print(len(set(words)), &quot;个不同的词&quot;)&#10;">▶ 在 IDE 开始改</a>
@@ -835,8 +835,8 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:160px">谁没来？</h2>
   <p class="say r d2">第一行是全班名单，第二行是签到记录，名字都用空格隔开。<b>有人签了好几次</b>，也可能没人签。<br>输出两行：第一行“到了 几 人”；第二行把没到的人从小到大排好（和 sorted 排的一样），写成“没到：A B”，都到了就写“全到了”。</p>
-  <div class="slip tilt2 r d3" style="width:520px"><small>依次输入</small><pre style="font-size:40px;white-space:pre">Amy Bob Cat Dan
-Bob Amy Bob</pre><small style="margin-top:14px">输出</small><pre style="font-size:40px;white-space:pre">到了 2 人
+  <div class="slip tilt2 r d3 long" style="width:520px"><small>依次输入</small><pre style="white-space:pre">Amy Bob Cat Dan
+Bob Amy Bob</pre><small>输出</small><pre style="white-space:pre">到了 2 人
 没到：Cat Dan</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【谁没来？】&#10;# 第一行是全班名单，第二行是签到记录，名字都用空格隔开。&#10;#   有人签了好几次，也可能没人签。&#10;# 输出两行：第一行“到了 几 人”；&#10;#   第二行把没到的人从小到大排好（和 sorted 排的一样），&#10;#   写成“没到：A B”，都到了就写“全到了”。&#10;# 例如输入（每个一行）：Amy Bob Cat Dan、Bob Amy Bob&#10;# 应该输出：&#10;#   到了 2 人&#10;#   没到：Cat Dan&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>

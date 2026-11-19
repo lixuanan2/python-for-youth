@@ -699,9 +699,9 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="按名字找">
   <h2 class="t r">苹果多少钱？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">列表：按编号找</small><pre style="font-size:52px">[5, 3, 4]
+    <div class="slip r d1 short"><small>列表：按编号找</small><pre>[5, 3, 4]
 第几个是苹果？</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">字典：按名字找</small><pre style="font-size:52px">苹果 → 5
+    <div class="slip tilt r d2 short"><small>字典：按名字找</small><pre>苹果 → 5
 香蕉 → 3
 橙子 → 4</pre></div>
   </div>
@@ -721,9 +721,9 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">键</i><b style="font-size:60px">苹果、香蕉</b></div>
-    <div class="box step s2"><i style="width:170px">苹果</i><b style="font-size:84px">5</b></div>
-    <div class="box out step s3"><i style="width:170px">len</i><b style="font-size:84px">2</b></div>
+    <div class="box step long"><i>键</i><b>苹果、香蕉</b></div>
+    <div class="box step s2 long"><i>苹果</i><b>5</b></div>
+    <div class="box out step s3 long"><i>len</i><b>2</b></div>
   </div>
 </section>
 
@@ -734,7 +734,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code"><span class="ln">price = {<span class="s">"苹果"</span>: <span class="m">5</span>, <span class="s">"香蕉"</span>: <span class="m">3</span>}</span><span class="ln"><span class="f">print</span>(price[<span class="s">"西瓜"</span>])</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2" style="width:540px"><small>屏幕上</small><pre style="font-size:44px">KeyError: '西瓜'</pre></div>
+    <div class="slip tilt step s2 long" style="width:540px"><small>屏幕上</small><pre>KeyError: '西瓜'</pre></div>
   </div>
   <div class="turns">
       <p class="say only1">输出 0？什么也不输出？还是报错？</p>
@@ -755,8 +755,8 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step" style="display:block"><i style="display:block;width:auto">改</i><b style="display:block;font-size:48px">苹果: 5 → 6</b></div>
-    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">输出</i><b style="display:block;font-size:44px;line-height:1.3">{'苹果': 6, '香蕉': 3,<br>&nbsp;'西瓜': 20}</b></div>
+    <div class="box step longest" style="display:block"><i style="display:block">改</i><b style="display:block">苹果: 5 → 6</b></div>
+    <div class="box out step s2 longest" style="display:block"><i style="display:block">输出</i><b style="display:block;line-height:1.3">{'苹果': 6, '香蕉': 3,<br>&nbsp;'西瓜': 20}</b></div>
   </div>
 </section>
 
@@ -786,8 +786,8 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">苹果</i><b style="font-size:72px">True</b></div>
-    <div class="box out step s2"><i style="width:170px">西瓜</i><b style="font-size:72px">False</b></div>
+    <div class="box step"><i>苹果</i><b>True</b></div>
+    <div class="box out step s2"><i>西瓜</i><b>False</b></div>
   </div>
 </section>
 
@@ -802,8 +802,8 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">get</i><b style="font-size:84px">0</b></div>
-    <div class="box out step s2"><i style="width:170px">len</i><b style="font-size:84px">2</b></div>
+    <div class="box step"><i>get</i><b>0</b></div>
+    <div class="box out step s2"><i>len</i><b>2</b></div>
   </div>
 </section>
 
@@ -814,13 +814,13 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code" data-file="solutions/04_lookup.py"><span class="ln">price = {<span class="s">"苹果"</span>: <span class="m">5</span>, <span class="s">"香蕉"</span>: <span class="m">3</span>,</span><span class="ln">         <span class="s">"橙子"</span>: <span class="m">4</span>}</span><span class="ln l1">name = <span class="f">input</span>()</span><span class="ln l2 l3"><span class="k">if</span> name <span class="k">in</span> price:</span><span class="ln l2">    <span class="f">print</span>(price[name])</span><span class="ln l3"><span class="k">else</span>:</span><span class="ln l3">    <span class="f">print</span>(<span class="s">"没有这个商品"</span>)</span></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1" style="font-size:34px">读入顾客要的商品名。键也可以是变量，name 里装着什么，就查什么。</p>
-      <p class="say only2" style="font-size:34px">输入香蕉：在字典里，取出价格 3。</p>
-      <p class="say only3" style="font-size:34px">输入西瓜：不在，走 else，说一声没有，不会报错。</p>
+      <p class="say only1 small">读入顾客要的商品名。键也可以是变量，name 里装着什么，就查什么。</p>
+      <p class="say only2 small">输入香蕉：在字典里，取出价格 3。</p>
+      <p class="say only3 small">输入西瓜：不在，走 else，说一声没有，不会报错。</p>
     </div>
-    <div class="box step"><i style="width:170px">输入</i><b style="font-size:60px">香蕉</b></div>
-    <div class="box out step s2"><i style="width:170px">输出</i><b style="font-size:72px">3</b></div>
-    <div class="box out step s3"><i style="width:170px">西瓜</i><b style="font-size:48px">没有这个商品</b></div>
+    <div class="box step longer"><i>输入</i><b>香蕉</b></div>
+    <div class="box out step s2 longer"><i>输出</i><b>3</b></div>
+    <div class="box out step s3 longer"><i>西瓜</i><b>没有这个商品</b></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -831,7 +831,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="turn">
     <h2 class="r d1">买几个，一共多少钱</h2>
     <p class="say r d1">价格表不变。第一行读入商品名，第二行读入购买数量。输出一共多少钱；没有这个商品就输出“没有这个商品”。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 苹果 和 3</small><pre>15</pre></div><div><small>输入 葡萄 和 2</small><pre style="font-size:48px">没有这个商品</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 苹果 和 3</small><pre>15</pre></div><div><small>输入 葡萄 和 2</small><pre style="font-size:48px">没有这个商品</pre></div></div>
   </div>
   <a class="ide r d3" data-code="# 【买几个，一共多少钱】&#10;# 价格表不变。第一行读入商品名，第二行读入购买数量。&#10;#   输出一共多少钱；没有这个商品就输出“没有这个商品”。&#10;# 例如输入（每个一行）：苹果、3&#10;# 应该输出：15&#10;# 提示：多读一个数量，查到价格后乘上去。&#10;# ↓ 在下面这段程序上改&#10;&#10;price = {&quot;苹果&quot;: 5, &quot;香蕉&quot;: 3,&#10;         &quot;橙子&quot;: 4}&#10;name = input()&#10;if name in price:&#10;    print(price[name])&#10;else:&#10;    print(&quot;没有这个商品&quot;)&#10;">▶ 在 IDE 开始改</a>
 </section>
@@ -847,8 +847,8 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">第 1 遍</i><b style="font-size:72px">小明 11</b></div>
-    <div class="box out step s2"><i style="width:170px">第 2 遍</i><b style="font-size:72px">小红 12</b></div>
+    <div class="box step long"><i>第 1 遍</i><b>小明 11</b></div>
+    <div class="box out step s2 long"><i>第 2 遍</i><b>小红 12</b></div>
   </div>
 </section>
 
@@ -895,7 +895,7 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">数单词</h2>
   <p class="say r d2">读入一行英文，单词之间用空格隔开，<b>大写和小写算不同的词</b>。<br>按第一次出现的顺序，输出每个单词和它出现的次数，一行一个。</p>
-  <div class="slip tilt2 r d3" style="width:600px"><small>输入</small><pre style="font-size:44px">the cat and the hat</pre><small style="margin-top:20px">输出</small><pre style="font-size:44px;line-height:1.3">the 2
+  <div class="slip tilt2 r d3 long" style="width:600px"><small>输入</small><pre>the cat and the hat</pre><small>输出</small><pre style="line-height:1.3">the 2
 cat 1
 and 1
 hat 1</pre></div>

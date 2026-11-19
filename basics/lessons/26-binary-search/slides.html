@@ -11,8 +11,8 @@
 <section class="slide clay lay-notes" aria-label="猜数字怎么猜最快">
   <h2 class="t r">猜 1 到 100 的数，怎么猜最快？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">上节课的办法：从 1 猜起</small><pre style="font-size:52px">最多猜 100 次</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">先猜中间的 50</small><pre style="font-size:52px">一下去掉一半</pre></div>
+    <div class="slip r d1 short"><small>上节课的办法：从 1 猜起</small><pre>最多猜 100 次</pre></div>
+    <div class="slip tilt r d2 short"><small>先猜中间的 50</small><pre>一下去掉一半</pre></div>
   </div>
   <p class="say r d3">猜 50，对方说“大了”，51 到 100 就都不用想了。每次都猜剩下的正中间，每次都去掉一半。<br>这叫二分查找。它有个前提：数要排好顺序，才能从“大了、小了”知道往哪边找。</p>
   <div class="foot"></div>
@@ -41,9 +41,9 @@
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:120px">lo</i><b style="font-size:96px">1</b></div>
-    <div class="box step"><i style="width:120px">hi</i><b style="font-size:96px">100</b></div>
-    <div class="box out step s2"><i style="width:120px">mid</i><b style="font-size:96px">50</b></div>
+    <div class="box step"><i>lo</i><b>1</b></div>
+    <div class="box step"><i>hi</i><b>100</b></div>
+    <div class="box out step s2"><i>mid</i><b>50</b></div>
   </div>
 </section>
 
@@ -117,7 +117,7 @@ while guess != secret:
   <div class="turn">
     <h2 class="r d1">最后说出猜了几次</h2>
     <p class="say r d1">在例题上改：每猜一次，计数加 1。猜中以后，再输出一行“猜了 几 次”。秘密数是 1 到 100 的整数。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>秘密数 42</small><pre>猜了 7 次</pre></div><div><small>秘密数 50</small><pre>猜了 1 次</pre></div><div><small>秘密数 100</small><pre>猜了 7 次</pre></div></div>
+    <div class="sheet three r d2"><div><small>秘密数 42</small><pre>猜了 7 次</pre></div><div><small>秘密数 50</small><pre>猜了 1 次</pre></div><div><small>秘密数 100</small><pre>猜了 7 次</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">把 1 到 100 都试一试，看看有没有超过 7 次的。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/03_guess_count.py">▶ 在 IDE 开始改</a>
@@ -150,7 +150,7 @@ while guess != secret:
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:150px">在排好的数里找</h2>
   <p class="say r d2">图书馆的书按编号从小到大排好了。第一行读入 n，接下来 n 行是排好的编号，最后一行是要找的编号，都是整数。<br>用二分查找，输出两行：它的下标，<b>找不到就输出 -1</b>；一共看了几个数。<br>每次看中间 (lo + hi) // 2 那个，看一次算一次。</p>
-  <div class="slip tilt2 r d3" style="width:420px"><small>依次输入</small><pre style="font-size:36px;white-space:pre">8
+  <div class="slip tilt2 r d3 longest" style="width:420px"><small>依次输入</small><pre style="white-space:pre">8
 3
 8
 15
@@ -159,7 +159,7 @@ while guess != secret:
 42
 57
 66
-42</pre><small style="margin-top:10px">输出</small><pre style="font-size:36px;white-space:pre">5
+42</pre><small>输出</small><pre style="white-space:pre">5
 2</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/04_find.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>

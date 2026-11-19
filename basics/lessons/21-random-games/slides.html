@@ -11,8 +11,8 @@
 <section class="slide clay lay-notes" aria-label="每次都一样不好玩">
   <h2 class="t r">每次都一样，就不好玩了</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">第 7 课的猜数字</small><pre style="font-size:52px">secret = 7</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">玩过一次就知道答案</small><pre style="font-size:52px">一猜就中</pre></div>
+    <div class="slip r d1 short"><small>第 7 课的猜数字</small><pre>secret = 7</pre></div>
+    <div class="slip tilt r d2 short"><small>玩过一次就知道答案</small><pre>一猜就中</pre></div>
   </div>
   <p class="say r d3">游戏要有意外：骰子掷出几点、抽到哪张签、电脑出什么，事先谁也不知道。<br>Python 有一盒叫 random 的工具，能帮程序“随便挑一个”。</p>
   <div class="foot"></div>
@@ -89,8 +89,8 @@ print(pick, "来回答")</pre></div>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">种子</i><b style="font-size:84px">7</b></div>
-    <div class="box out step s2"><i style="width:170px">每次都是</i><b style="font-size:72px">42、20</b></div>
+    <div class="box step"><i>种子</i><b>7</b></div>
+    <div class="box out step s2"><i>每次都是</i><b>42、20</b></div>
   </div>
 </section>
 
@@ -101,9 +101,9 @@ print(pick, "来回答")</pre></div>
 <pre class="code" data-file="solutions/02_guess.py" data-light="1-3:1 4-10:2 11:3"></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1" style="font-size:34px">第一行读入种子 7，秘密数就是 42。换个种子，秘密数就变了。</p>
-      <p class="say only2" style="font-size:34px">后面和第 7 课一样：猜 50 说大了，猜 25 说小了。</p>
-      <p class="say only3" style="font-size:34px">猜到 42 就停下。课后自己玩，把第 2 行删掉，每次都不一样。</p>
+      <p class="say only1 small">第一行读入种子 7，秘密数就是 42。换个种子，秘密数就变了。</p>
+      <p class="say only2 small">后面和第 7 课一样：猜 50 说大了，猜 25 说小了。</p>
+      <p class="say only3 small">猜到 42 就停下。课后自己玩，把第 2 行删掉，每次都不一样。</p>
     </div>
     <div class="step s2" style="font:400 48px/1.5 var(--code);color:var(--clay)">大了<br>小了<br><span class="step s3">猜中了！</span></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
@@ -116,7 +116,7 @@ print(pick, "来回答")</pre></div>
   <div class="turn">
     <h2 class="r d1">掷 n 次，有几个 6</h2>
     <p class="say r d1">第一行读入种子，第二行读入次数 n。用这个种子掷 n 次骰子，输出一共掷出了几次 6。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>种子 1，掷 10 次</small><pre>1</pre></div><div><small>种子 3，掷 600 次</small><pre>95</pre></div><div><small>掷 0 次</small><pre>0</pre></div></div>
+    <div class="sheet three r d2"><div><small>种子 1，掷 10 次</small><pre>1</pre></div><div><small>种子 3，掷 600 次</small><pre>95</pre></div><div><small>掷 0 次</small><pre>0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">掷 600 次，6 大约出现 100 次。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/03_count_six.py">▶ 在 IDE 开始改</a>
@@ -168,8 +168,8 @@ print(random.randint(1, 100))</pre></div>
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:160px">石头剪刀布</h2>
   <p class="say r d2">第一行读入种子，第二行读入你出的：石头、剪刀或布。电脑用 random.choice(["石头", "剪刀", "布"]) 出一个，<b>列表照这个顺序写</b>，结果才和样例一样。<br>先输出“电脑出 ……”，再输出你的结果：赢、输或平。石头赢剪刀，剪刀赢布，布赢石头。</p>
-  <div class="slip tilt2 r d3" style="width:540px"><small>依次输入</small><pre>7
-石头</pre><small style="margin-top:14px">输出</small><pre style="font-size:48px;white-space:pre">电脑出 剪刀
+  <div class="slip tilt2 r d3 short" style="width:540px"><small>依次输入</small><pre>7
+石头</pre><small>输出</small><pre style="white-space:pre">电脑出 剪刀
 赢</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/04_rps.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>

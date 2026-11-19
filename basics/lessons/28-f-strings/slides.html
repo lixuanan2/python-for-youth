@@ -11,8 +11,8 @@
 <section class="slide clay lay-notes" aria-label="输出不太整齐">
   <h2 class="t r">输出总是不太整齐</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">print("明年你", age + 1, "岁")</small><pre style="font-size:52px">明年你 13 岁</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">print(10 / 3)</small><pre style="font-size:52px">3.3333333333333335</pre></div>
+    <div class="slip r d1"><small>print("明年你", age + 1, "岁")</small><pre>明年你 13 岁</pre></div>
+    <div class="slip tilt r d2"><small>print(10 / 3)</small><pre>3.3333333333333335</pre></div>
   </div>
   <p class="say r d3">逗号会多出空格，小数又长得看不完。写成绩单、小票、时钟，都想要整整齐齐的输出。<br>这节课学 f-string：在引号前面加一个 f，就能把变量直接写进句子里，还能管住小数有几位。</p>
   <div class="foot"></div>
@@ -33,9 +33,9 @@ print("{name}今年{age}岁")</pre></div>
     <div class="step s4"><p style="font:700 56px var(--code);color:var(--clay-soft);white-space:nowrap">{name}今年{age}岁</p><a class="ide step s4" style="margin-top:40px">▶ 在 IDE 验证</a></div>
   </div>
   <div class="turns">
-    <p class="say only1" style="font-size:34px">f 是 format（格式）的第一个字母。加了 f，引号里的大括号 { } 就会换成变量的值。<br>没有逗号，也就没有多余的空格。</p>
-    <p class="say only2" style="font-size:34px">大括号里还能写算式。{age + 1} 先算出 13，再放进句子里。</p>
-    <p class="say step s4" style="font-size:34px">不报错，原样输出。没有 f，它就是一串普通的文字，大括号也只是普通的符号。<br>看到屏幕上出现大括号，先检查引号前面有没有 f。</p>
+    <p class="say only1 small">f 是 format（格式）的第一个字母。加了 f，引号里的大括号 { } 就会换成变量的值。<br>没有逗号，也就没有多余的空格。</p>
+    <p class="say only2 small">大括号里还能写算式。{age + 1} 先算出 13，再放进句子里。</p>
+    <p class="say step s4 small">不报错，原样输出。没有 f，它就是一串普通的文字，大括号也只是普通的符号。<br>看到屏幕上出现大括号，先检查引号前面有没有 f。</p>
   </div>
   <div class="foot"></div>
 </section>
@@ -109,7 +109,7 @@ print(f"{price:.2f}")</pre></div>
   <div class="turn">
     <h2 class="r d1">打八折以后多少钱</h2>
     <p class="say r d1">在例题上改：最后再输出一行“打八折 …… 元”，也保留 2 位小数。打八折就是乘以 0.8。输入还是两行：单价和件数。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 3.5 和 4，第三行</small><pre>打八折 11.20 元</pre></div><div><small>输入 10 和 1，第三行</small><pre>打八折 8.00 元</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 3.5 和 4，第三行</small><pre>打八折 11.20 元</pre></div><div><small>输入 10 和 1，第三行</small><pre>打八折 8.00 元</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">大括号里可以写算式。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/04_discount.py">▶ 在 IDE 开始改</a>
@@ -161,7 +161,7 @@ print(f"{m:02d}:{s:02d}")</pre></div>
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:160px">电子钟</h2>
   <p class="say r d2">读入从零点开始过了多少秒，像电子钟那样显示成 时:分:秒。<br>每一段都显示两位，<b>不够两位前面补 0</b>。</p>
-  <div class="slip tilt2 r d3" style="width:520px"><small>输入</small><pre>3909</pre><small style="margin-top:14px">输出</small><pre style="font-size:60px">01:05:09</pre><small style="margin-top:14px">输入 86399</small><pre style="font-size:60px">23:59:59</pre></div>
+  <div class="slip tilt2 r d3 short" style="width:520px"><small>输入</small><pre>3909</pre><small>输出</small><pre>01:05:09</pre><small>输入 86399</small><pre>23:59:59</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/05_clock.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

@@ -11,9 +11,9 @@
 <section class="slide clay lay-notes" aria-label="像打开套娃">
   <h2 class="t r">像打开套娃</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">打开一个套娃</small><pre style="font-size:52px">里面还有一个</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">打开它</small><pre style="font-size:52px">再小一号</pre></div>
-    <div class="slip r d3"><small style="font-size:34px">打开到最小的那个</small><pre style="font-size:52px">打不开，停</pre></div>
+    <div class="slip r d1 short"><small>打开一个套娃</small><pre>里面还有一个</pre></div>
+    <div class="slip tilt r d2 short"><small>打开它</small><pre>再小一号</pre></div>
+    <div class="slip r d3 short"><small>打开到最小的那个</small><pre>打不开，停</pre></div>
   </div>
   <p class="say r d3">每次做的事都一样：打开。只是套娃一次比一次小，小到最后一个就停下。<br>函数也能这样：在函数里调用自己，每次处理小一点的问题，小到一眼能答就停。这叫递归。</p>
   <div class="foot"></div>
@@ -96,10 +96,10 @@ countdown(0)</pre></div>
       <p class="say only4">结果一层层交回去：2 + 1 是 3，3 + 3 是 6，4 + 6 是 10。最后输出 10。</p>
     </div>
   <div class="right">
-    <div class="box"><i style="width:220px;white-space:nowrap">total(4)</i><b style="font:700 46px var(--code)">4 + total(3)</b></div>
-    <div class="box step s2"><i style="width:220px;white-space:nowrap">total(3)</i><b style="font:700 46px var(--code)">3 + total(2)</b></div>
-    <div class="box step s2"><i style="width:220px;white-space:nowrap">total(2)</i><b style="font:700 46px var(--code)">2 + total(1)</b></div>
-    <div class="box step s3"><i style="width:220px;white-space:nowrap">total(1)</i><b style="font:700 52px var(--code);color:var(--clay)">1</b></div>
+    <div class="box longest"><i>total(4)</i><b style="font-weight:700;font-family:var(--code)">4 + total(3)</b></div>
+    <div class="box step s2 longest"><i>total(3)</i><b style="font-weight:700;font-family:var(--code)">3 + total(2)</b></div>
+    <div class="box step s2 longest"><i>total(2)</i><b style="font-weight:700;font-family:var(--code)">2 + total(1)</b></div>
+    <div class="box step s3 longest"><i>total(1)</i><b style="font-weight:700;font-family:var(--code);color:var(--clay)">1</b></div>
     <p class="step s4" style="font:800 52px/1.5 var(--code);color:var(--clay)">1 → 3 → 6 → 10</p>
     <a class="ide step s4">▶ 在 IDE 打开</a>
   </div>
@@ -130,7 +130,7 @@ print(total(int(input())))</pre></div>
   <div class="turn">
     <h2 class="r d1">从 1 乘到 n</h2>
     <p class="say r d1">读入一个正整数 n，输出 1 × 2 × 3 × … × n。这个数叫 n 的阶乘。在例题上改，想一想出口还是 1 吗。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>输入 4</small><pre>24</pre></div><div><small>输入 1</small><pre>1</pre></div><div><small>输入 10</small><pre>3628800</pre></div></div>
+    <div class="sheet three r d2"><div><small>输入 4</small><pre>24</pre></div><div><small>输入 1</small><pre>1</pre></div><div><small>输入 10</small><pre>3628800</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">Python 里乘号写 *。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/03_factorial.py">▶ 在 IDE 开始改</a>
@@ -164,7 +164,7 @@ print(total(int(input())))</pre></div>
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:160px">数字加起来</h2>
   <p class="say r d2">读入一个正整数 n，用递归把它的每一位数字加起来，输出结果。<br>比如 2026：2 + 0 + 2 + 6 = 10。<b>不许把 n 变成字符串</b>，只用数和递归。</p>
-  <div class="slip tilt2 r d3" style="width:480px"><small>输入</small><pre>2026</pre><small style="margin-top:14px">输出</small><pre>10</pre></div>
+  <div class="slip tilt2 r d3 short" style="width:480px"><small>输入</small><pre>2026</pre><small>输出</small><pre>10</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/04_digit_sum.py">▶ 在 IDE 开始写</a><p class="say">试试 7 和 10。先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

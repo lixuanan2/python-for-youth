@@ -7,8 +7,8 @@ import re
 # Notes (.slip): the class, its font size, and the longest line it holds in a 600px note (520px for the text).
 SLIP = [('short', 72), ('', 56), ('long', 44), ('longest', 34)]
 TEXT_WIDTH = 520
-# While lessons move to tiers, a note or box that still sets its own font-size is passed over; True once all have moved.
-STRICT = False
+# Every lesson uses tiers: a note or box that sets its own font-size is an error. (False passes old pages over.)
+STRICT = True
 
 
 def width(line):
