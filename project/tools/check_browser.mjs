@@ -9,13 +9,15 @@ import {spawn} from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import zlib from 'node:zlib';
+// Screenshot comparison is shared with the basics check and read from there, never changed here.
+import {compareShots, clearStray} from '../../basics/tools/shots.mjs';
 
 const site = JSON.parse(fs.readFileSync('site.json', 'utf8'));
 const chosen = process.argv.slice(2);
 const unknown = chosen.filter(name => !site.projects.includes(name));
 assert(!unknown.length, `No such project: ${unknown.join(', ')}. Projects are: ${site.projects.join(' ')}`);
 const projects = chosen.length ? site.projects.filter(name => chosen.includes(name)) : site.projects;
+clearStray([...site.projects, 'changed.txt']);  // screenshots this tool did not write, and baselines of projects that are gone
 const chrome = [process.env.CHROME_PATH, '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   'C:/Program Files/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find(p => p && fs.existsSync(p));
 assert(chrome, 'Chrome not found; set CHROME_PATH');
@@ -62,59 +64,9 @@ const OVERFLOW = `(() => {
   return out;
 })()`;
 
-// Chrome compresses the same picture differently from run to run, so screens are compared by their pixels, not their bytes.
-const pixels = file => {
-  const buf = fs.readFileSync(file), idat = [];
-  let pos = 8, width = 0, height = 0, type = 2;
-  while (pos < buf.length) {
-    const len = buf.readUInt32BE(pos), kind = buf.toString('latin1', pos + 4, pos + 8), data = buf.subarray(pos + 8, pos + 8 + len);
-    if (kind === 'IHDR') { width = data.readUInt32BE(0); height = data.readUInt32BE(4); type = data[9]; }
-    if (kind === 'IDAT') idat.push(data);
-    pos += 12 + len;
-  }
-  const bpp = {0: 1, 2: 3, 4: 2, 6: 4}[type], stride = width * bpp, raw = zlib.inflateSync(Buffer.concat(idat)), out = Buffer.alloc(stride * height);
-  for (let y = 0; y < height; y++) {
-    const filter = raw[y * (stride + 1)], row = y * (stride + 1) + 1, o = y * stride;
-    for (let x = 0; x < stride; x++) {
-      const a = x >= bpp ? out[o + x - bpp] : 0, b = y ? out[o - stride + x] : 0, c = x >= bpp && y ? out[o - stride + x - bpp] : 0;
-      const p = a + b - c, pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c);
-      out[o + x] = (raw[row + x] + [0, a, b, (a + b) >> 1, pa <= pb && pa <= pc ? a : pb <= pc ? b : c][filter]) & 255;
-    }
-  }
-  return {width, height, bpp, data: out};
-};
-// Text edges may come out one shade apart between runs; a real change moves far more than 3 steps of 255. The thumbnail
-// rail on the left is left out: its edge sits on a fraction of a pixel and its scroll position varies, and every thumbnail
-// is a copy of a page that is compared full size anyway.
 let railWidth = 0;
-const samePicture = (x, y, rail = railWidth) => {
-  try {
-    const a = pixels(x), b = pixels(y);
-    if (a.width !== b.width || a.height !== b.height || a.bpp !== b.bpp) return false;
-    const skip = rail * a.bpp, stride = a.width * a.bpp;
-    for (let row = 0; row < a.data.length; row += stride)
-      for (let i = row + skip; i < row + stride; i++) if (Math.abs(a.data[i] - b.data[i]) > 3) return false;
-    return true;
-  } catch { return false; }
-};
 const measureRail = async () => {
   railWidth = await run(`(() => { const r = document.getElementById('thumbs'); return r && document.body.classList.contains('thumbs-open') ? Math.ceil(r.getBoundingClientRect().right * devicePixelRatio) + 2 : 0; })()`);
-};
-// Screens against the last local pass: same pixels, same picture. Lists what changed, then keeps this pass.
-const SHOTS = '.check-shots';
-const compareShots = name => {
-  if (process.env.CI) return [];
-  const pngs = dir => fs.existsSync(dir) ? fs.readdirSync(dir, {recursive: true}).filter(f => f.endsWith('.png')).sort() : [];
-  const now = path.join('.preview', name), then = path.join(SHOTS, name);
-  const before = new Set(pngs(then)), after = pngs(now), out = [];
-  for (const f of after) {
-    if (!before.has(f)) out.push(`${name}/${f} 新的`);
-    else if (!samePicture(path.join(now, f), path.join(then, f), f.startsWith('slides') ? railWidth : 0)) out.push(`${name}/${f} 变了`);
-  }
-  for (const f of before) if (!after.includes(f)) out.push(`${name}/${f} 没了`);
-  fs.rmSync(then, {recursive: true, force: true});
-  for (const f of after) { fs.mkdirSync(path.dirname(path.join(then, f)), {recursive: true}); fs.copyFileSync(path.join(now, f), path.join(then, f)); }
-  return out;
 };
 const sum = {pages: 0, screens: 0, quizzes: 0, ide: 0, sheets: 0}, changedShots = [];
 
@@ -178,7 +130,7 @@ try {
       fs.writeFileSync(path.join('.preview', name, 'pages', page.replaceAll(path.sep, '-').replace('.html', '.png')), Buffer.from(r.data, 'base64'));
       sum.sheets++;
     }
-    changedShots.push(...compareShots(name));
+    changedShots.push(...compareShots(name, f => f.startsWith('slides') ? railWidth : 0));
    } catch (error) {
     console.error(`FAIL: ${name}`);
     error.message = `${name}: ${error.message}`;

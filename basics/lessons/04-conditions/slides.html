@@ -36,8 +36,8 @@
 <section class="slide lay-columns" aria-label="一个等号和两个等号">
   <h2 class="t r">一个等号，两个等号</h2>
   <div class="vs">
-    <div class="r d1"><h3>一个 = 是放进去</h3><pre>score = <span style="color:var(--clay)">60</span></pre><p class="say">把 60 放进 score。</p></div>
-    <div class="r d2"><h3>两个 == 是问一问</h3><pre>score <span style="color:var(--clay)">==</span> 60</pre><p class="say">score 等于 60 吗？</p></div>
+    <div class="r d1"><h3>一个 = 是放进去</h3><pre>score = <span class="out">60</span></pre><p class="say">把 60 放进 score。</p></div>
+    <div class="r d2"><h3>两个 == 是问一问</h3><pre>score <span class="out">==</span> 60</pre><p class="say">score 等于 60 吗？</p></div>
   </div>
   <p class="say r d3">写判断时最容易漏掉一个等号，写完可以再看一眼。</p>
   <div class="foot"></div>
@@ -81,7 +81,7 @@
 <pre class="code" data-stdin="50&#10;" data-file="solutions/01_if.py" data-light="1:1 2:2 4:3"></pre></div>
   <div class="answer">
     <div class="slip tilt step s3 short"><small>屏幕上</small><pre>考完了</pre></div>
-    <p class="say small" style="color:var(--clay-soft)">if 这一行末尾有冒号。<br>属于它的行要缩进 4 个空格。</p>
+    <p class="say small soft">if 这一行末尾有冒号。<br>属于它的行要缩进 4 个空格。</p>
   </div>
   <div class="turns">
     <p class="say only1">输入 50，放进 score。</p>
@@ -198,7 +198,7 @@ else:
     <h2 class="r d1">再加一档“良好”</h2>
     <p class="say r d1">分数是 0 到 100 的整数，75 分到 89 分输出良好。</p>
     <div class="sheet two r d2"><div><small>输入 75，输出</small><pre>良好</pre></div><div><small>输入 74，输出</small><pre>及格</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">写完用 59、60、74、75、89、90 各试一次，这些数都紧贴分界线。</p>
+    <p class="say tip r d3">写完用 59、60、74、75、89、90 各试一次，这些数都紧贴分界线。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/07_grade_four.py">▶ 在 IDE 开始改</a>
 </section>
@@ -222,7 +222,7 @@ else:
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="1" data-yes="对！95 &gt;= 60 成立，程序从这里走了，后面 90 分的判断轮不到。两段要换位置，范围小的条件写在前面。" data-no="再跟着程序走一遍：95 &gt;= 60 成立吗？"><span class="ln"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">elif</span> score &gt;= <span class="m">90</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"优秀"</span>)</span></pre></div>
   <p class="say r d2">输入 95，程序却输出及格，也没有报错。<br>95 分走进了哪条路？点那条路的条件。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

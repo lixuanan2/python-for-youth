@@ -62,7 +62,7 @@
 print(math.sqrt(16))</pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 220px/1 var(--code);color:var(--clay-soft)">4.0</p>
+    <p class="step s2 text-huge soft">4.0</p>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
@@ -77,9 +77,9 @@ print(math.sqrt(16))</pre></div>
 <section class="slide lay-columns" aria-label="猜一猜：负数往哪边" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：-2.3 往哪边取？</h2>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:56px">
-    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">floor 往下</h3><pre style="font:700 54px/1.4 var(--code)">math.floor(-2.3)</pre><p class="step s2" style="font:800 130px/1.2 var(--code);color:var(--clay)">-3</p></div>
-    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">ceil 往上</h3><pre style="font:700 54px/1.4 var(--code)">math.ceil(-2.3)</pre><p class="step s2" style="font:800 130px/1.2 var(--code);color:var(--clay)">-2</p></div>
-    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">int 去掉小数</h3><pre style="font:700 54px/1.4 var(--code)">int(-2.3)</pre><p class="step s2" style="font:800 130px/1.2 var(--code);color:var(--clay)">-2</p></div>
+    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">floor 往下</h3><pre style="font:700 54px/1.4 var(--code)">math.floor(-2.3)</pre><p class="step s2 text-big out" style="line-height:1.2">-3</p></div>
+    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">ceil 往上</h3><pre style="font:700 54px/1.4 var(--code)">math.ceil(-2.3)</pre><p class="step s2 text-big out" style="line-height:1.2">-2</p></div>
+    <div style="border-top:6px solid var(--ink);padding-top:18px"><h3 style="font:700 48px var(--text)">int 去掉小数</h3><pre style="font:700 54px/1.4 var(--code)">int(-2.3)</pre><p class="step s2 text-big out" style="line-height:1.2">-2</p></div>
   </div>
   <div class="turns">
     <p class="say only1">在数轴上，-3 在 -2.3 的左边，-2 在右边。</p>
@@ -209,7 +209,7 @@ print(math.sqrt(16))</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！int 只是砍掉小数，4.6 变成 4，剩下的 3 个苹果没地方放。要用 math.ceil 往上取，并在第一行 import math。" data-no="这一行没问题。4.6 被变成了 4，看看是哪一行做的。"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">k = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(<span class="f">int</span>(n / k))</span></pre></div>
   <p class="say r d2">输入 23 和 5，程序说要 4 箱，可是还剩 3 个苹果没地方放。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

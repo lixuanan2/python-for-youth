@@ -413,6 +413,11 @@ def check_deck(lesson, folder):
     assert not re.search(r'@import|https?://[^"\')\s]+\.(?:js|css)\b', text), 'Remote resource in deck'
     deck = Deck(text)
     assert deck.shown, 'Deck shows no tested program'
+    # No code anywhere in the deck (pages, answer pages, a size written by hand) is smaller than the build allows.
+    small = [(label, int(size)) for label, body in re.findall(r'<section [^>]*aria-label="([^"]*)"(.*?)</section>', text, re.S)
+             for size in re.findall(r'class="editor[^"]*"[^>]*--fs:(\d+)px', body) if int(size) < builder.MIN_CODE]
+    assert not small, f'{lesson["id"]}: code below {builder.MIN_CODE}px: ' + ', '.join(f'{l} ({n}px)' for l, n in small) + \
+        '; show fewer lines, move the sentences to steps, or split the page'
     check_ide(text, folder)
     changes = check_changes(text, folder)
     algos = check_algos(text)

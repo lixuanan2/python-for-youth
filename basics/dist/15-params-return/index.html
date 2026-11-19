@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -734,7 +749,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor" style="--fs:58px"><div class="tab">order.py</div>
 <pre class="code"><span class="ln"><span class="k">def</span> <span class="f">show</span>(a, b):</span><span class="ln">    <span class="f">print</span>(a - b)</span><span class="ln"><span class="f">show</span>(<span class="m">10</span>, <span class="m">3</span>)</span><span class="ln"><span class="f">show</span>(<span class="m">3</span>, <span class="m">10</span>)</span></pre></div>
   <div class="answer">
-    <div class="step s2" style="font:800 130px/1.3 var(--code);color:var(--clay)">7<br>-7</div>
+    <div class="step s2 text-big out" style="line-height:1.3">7<br>-7</div>
   </div>
   <div class="turns">
       <p class="say only1">两次调用给的都是 10 和 3，只是顺序不同。</p>
@@ -904,7 +919,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！这一行只把 6 显示出来，没有交回去，x 拿到的是 None，None 不能乘 2。改成 return s 就对了。" data-no="这一行没问题。报错说 x 是 None，想一想函数交回了什么。"><span class="ln"><span class="k">def</span> <span class="f">total</span>(a, b, c):</span><span class="ln">    s = a + b + c</span><span class="ln">    <span class="f">print</span>(s)</span><span class="ln">x = <span class="f">total</span>(<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>)</span><span class="ln"><span class="f">print</span>(x * <span class="m">2</span>)</span></pre></div>
   <p class="say r d2">程序先输出 6，然后报 TypeError，说 None 不能和 2 相乘。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

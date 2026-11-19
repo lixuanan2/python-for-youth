@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -794,7 +809,7 @@ dialog p{color:var(--muted);font-size:15px}
       <p class="say only2 small">输入 8 和 0：除以 0 报 ZeroDivisionError，第 3 课见过。跳过第一个 except，找到名字对上的第二个。</p>
       <p class="say only3 small">输入 8 和 abc：第 3 行报 ValueError，第一个 except 就对上了。</p>
     </div>
-    <div class="turns" style="font:400 48px/1.6 var(--code);color:var(--clay)"><span class="only1">4</span><span class="only2">除数不能是 0</span><span class="only3">要输入整数</span></div>
+    <div class="turns out" style="font:400 48px/1.6 var(--code)"><span class="only1">4</span><span class="only2">除数不能是 0</span><span class="only3">要输入整数</span></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -830,7 +845,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="box step s2 longest"><i>abc</i><b style="font-weight:700;font-family:var(--text)">出错，再问</b></div>
     <div class="box step s3 longest"><i>3.5</i><b style="font-weight:700;font-family:var(--text)">出错，再问</b></div>
     <div class="box step s4 longest"><i>12</i><b style="font-weight:700;font-family:var(--text)">done 变成 True</b></div>
-    <div class="step s2" style="font:400 40px/1.5 var(--text);color:var(--clay)">不是整数，再输一次<br><span class="step s3">不是整数，再输一次</span><br><span class="step s4">明年你 13 岁</span></div>
+    <div class="step s2 out" style="font:400 40px/1.5 var(--text)">不是整数，再输一次<br><span class="step s3">不是整数，再输一次</span><br><span class="step s4">明年你 13 岁</span></div>
     <a class="ide step s4">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -842,7 +857,7 @@ dialog p{color:var(--muted);font-size:15px}
     <h2 class="r d1">最后说出输错了几次</h2>
     <p class="say r d1">在例题上改：每输错一次，计数加 1。输对以后，先说“明年你 …… 岁”，再输出一行“输错了 几 次”。</p>
     <div class="sheet two r d2"><div><small>依次输入 abc、3.5、12</small><pre>输错了 2 次</pre></div><div><small>一次输对 12</small><pre>输错了 0 次</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 8 课的计数器：先设 0，再一次次加 1。</p>
+    <p class="say tip r d3">第 8 课的计数器：先设 0，再一次次加 1。</p>
   </div>
   <a class="ide r d3" data-code="# 【最后说出输错了几次】&#10;# 在例题上改：每输错一次，计数加 1。输对以后，先说明年你多少岁，&#10;#   再输出一行“输错了 几 次”。&#10;# 例如输入（每个一行）：abc、3.5、12&#10;# 应该输出（一共 4 行，这里用 / 隔开）：&#10;#   不是整数，再输一次 / 不是整数，再输一次 / 明年你 13 岁&#10;#   输错了 2 次&#10;# 提示：在例题上加一个计数器。&#10;# ↓ 在下面这段程序上改&#10;&#10;done = False&#10;while not done:&#10;    try:&#10;        age = int(input())&#10;        done = True&#10;    except ValueError:&#10;        print(&quot;不是整数，再输一次&quot;)&#10;print(&quot;明年你&quot;, age + 1, &quot;岁&quot;)&#10;">▶ 在 IDE 开始改</a>
 </section>
@@ -881,7 +896,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="--fs:45px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！inptu 是 input 打错了字，本来报 NameError，却被不写名字的 except 接住了。改成 input，再把 except 写成 except ValueError。" data-no="这一行没有写错字。输入 12 本来没问题，是哪一行先出了错？"><span class="ln"><span class="k">try</span>:</span><span class="ln">    age = <span class="f">int</span>(inptu())</span><span class="ln">    <span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span><span class="ln"><span class="k">except</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"请输入整数"</span>)</span></pre></div>
   <p class="say r d2">怎么输入都只说“请输入整数”。<br>点出真正写错的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

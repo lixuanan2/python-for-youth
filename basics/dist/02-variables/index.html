@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -725,7 +740,7 @@ dialog p{color:var(--muted);font-size:15px}
   <h2 class="t r">这个等号不是“相等”</h2>
   <div class="vs">
     <div class="r d1"><h3>数学里的 =</h3><pre>3 + 1 = 4</pre><p class="say">两边的值相等。</p></div>
-    <div class="r d2"><h3>Python 里的 =</h3><pre>age = <span style="color:var(--clay)">12</span></pre><p class="say">把右边的 12 放进左边的 age。</p></div>
+    <div class="r d2"><h3>Python 里的 =</h3><pre>age = <span class="out">12</span></pre><p class="say">把右边的 12 放进左边的 age。</p></div>
   </div>
   <p class="say r d3">这个动作叫<b>赋值</b>。读代码时从右往左读：把 12 放进 age。</p>
   <div class="foot"></div>
@@ -739,7 +754,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="answer turns">
     <p class="qmark only1">?</p>
     <div>
-      <div class="crate step s2" style="width:420px"><small style="color:var(--clay-soft)">x</small>8</div>
+      <div class="crate step s2" style="width:420px"><small class="soft">x</small>8</div>
       <div class="slip tilt step s3 short"><small>屏幕上</small><pre>8</pre></div>
     </div>
   </div>
@@ -807,7 +822,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="answer turns">
     <p class="qmark only1">?</p>
     <div>
-      <div style="display:flex;gap:60px"><div class="crate step s2" style="width:280px"><small style="color:var(--clay-soft)">a</small>8</div><div class="crate step s2" style="width:280px"><small style="color:var(--clay-soft)">b</small>3</div></div>
+      <div style="display:flex;gap:60px"><div class="crate step s2" style="width:280px"><small class="soft">a</small>8</div><div class="crate step s2" style="width:280px"><small class="soft">b</small>3</div></div>
       <div class="slip tilt step s2 short"><small>屏幕上</small><pre>3</pre></div>
     </div>
   </div>
@@ -837,7 +852,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="r d1"><h3>可以</h3><pre style="font-size:62px">age
 my_age
 score2</pre></div>
-    <div class="r d2"><h3>不可以</h3><pre style="font-size:62px;color:var(--muted)">2age
+    <div class="r d2"><h3>不可以</h3><pre class="muted" style="font-size:62px">2age
 my age
 my-age</pre></div>
   </div>
@@ -862,10 +877,10 @@ my-age</pre></div>
 <section id="page-13" class="slide lay-columns" aria-label="四种常用类型" data-chapter="四种类型">
   <h2 class="t r">盒子里的东西分种类</h2>
   <div class="later" style="grid-template-columns:repeat(4,1fr);gap:40px">
-    <div class="r d1"><code>int</code><p style="font:800 76px/1.3 var(--code)">12</p><span>整数，比如年龄</span></div>
-    <div class="r d1"><code>float</code><p style="font:800 76px/1.3 var(--code)">2.5</p><span>小数，比如价格</span></div>
-    <div class="r d2"><code>str</code><p style="font:800 76px/1.3 var(--code)">"Ming"</p><span>文字，比如名字</span></div>
-    <div class="r d2"><code>bool</code><p style="font:800 76px/1.3 var(--code)">True</p><span>真假，比如过关了吗</span></div>
+    <div class="r d1"><code>int</code><p class="text-mid" style="line-height:1.3">12</p><span>整数，比如年龄</span></div>
+    <div class="r d1"><code>float</code><p class="text-mid" style="line-height:1.3">2.5</p><span>小数，比如价格</span></div>
+    <div class="r d2"><code>str</code><p class="text-mid" style="line-height:1.3">"Ming"</p><span>文字，比如名字</span></div>
+    <div class="r d2"><code>bool</code><p class="text-mid" style="line-height:1.3">True</p><span>真假，比如过关了吗</span></div>
   </div>
   <p class="say r d3">这就是<b>数据类型</b>。写 age = 12 时不用说明类型，Python 看右边的值就知道。</p>
   <a class="ide r d3" data-code="age = 12&#10;price = 2.5&#10;letter = &quot;A&quot;&#10;ready = True&#10;print(age)&#10;print(price)&#10;print(letter)&#10;print(ready)&#10;">▶ 在 IDE 看这四种</a>
@@ -905,7 +920,7 @@ my-age</pre></div>
 <section id="page-16" class="slide lay-columns" aria-label="bool 只有两个值">
   <h2 class="t r">bool：只有两个值</h2>
   <div class="vs">
-    <div class="r d1"><p class="res" style="color:var(--olive)">True</p><p class="say">成立，是真的。</p></div>
+    <div class="r d1"><p class="res ok">True</p><p class="say">成立，是真的。</p></div>
     <div class="r d2"><p class="res">False</p><p class="say">不成立，是假的。</p></div>
   </div>
   <p class="say r d3">第一个字母要大写，写成 true 会报错。<br>比较大小会得到 bool：print(3 &gt; 2) 输出 True。后面学判断时天天用。</p>
@@ -958,7 +973,7 @@ my-age</pre></div>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！score + 5 算出了 15，但没有放回盒子。要写 score = score + 5。" data-no="这一行没有问题。想一想：算出来的结果放到哪里去了？"><span class="ln">score = <span class="m">10</span></span><span class="ln">score + <span class="m">5</span></span><span class="ln"><span class="f">print</span>(score)</span></pre></div>
   <p class="say r d2">这段程序想给分数加 5，运行后却输出 10，也没有报错。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

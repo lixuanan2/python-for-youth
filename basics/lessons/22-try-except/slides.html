@@ -114,7 +114,7 @@ except ValueError:
       <p class="say only2 small">输入 8 和 0：除以 0 报 ZeroDivisionError，第 3 课见过。跳过第一个 except，找到名字对上的第二个。</p>
       <p class="say only3 small">输入 8 和 abc：第 3 行报 ValueError，第一个 except 就对上了。</p>
     </div>
-    <div class="turns" style="font:400 48px/1.6 var(--code);color:var(--clay)"><span class="only1">4</span><span class="only2">除数不能是 0</span><span class="only3">要输入整数</span></div>
+    <div class="turns out" style="font:400 48px/1.6 var(--code)"><span class="only1">4</span><span class="only2">除数不能是 0</span><span class="only3">要输入整数</span></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -157,7 +157,7 @@ except ZeroDivisionError:
     <div class="box step s2 longest"><i>abc</i><b style="font-weight:700;font-family:var(--text)">出错，再问</b></div>
     <div class="box step s3 longest"><i>3.5</i><b style="font-weight:700;font-family:var(--text)">出错，再问</b></div>
     <div class="box step s4 longest"><i>12</i><b style="font-weight:700;font-family:var(--text)">done 变成 True</b></div>
-    <div class="step s2" style="font:400 40px/1.5 var(--text);color:var(--clay)">不是整数，再输一次<br><span class="step s3">不是整数，再输一次</span><br><span class="step s4">明年你 13 岁</span></div>
+    <div class="step s2 out" style="font:400 40px/1.5 var(--text)">不是整数，再输一次<br><span class="step s3">不是整数，再输一次</span><br><span class="step s4">明年你 13 岁</span></div>
     <a class="ide step s4">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -169,7 +169,7 @@ except ZeroDivisionError:
     <h2 class="r d1">最后说出输错了几次</h2>
     <p class="say r d1">在例题上改：每输错一次，计数加 1。输对以后，先说“明年你 …… 岁”，再输出一行“输错了 几 次”。</p>
     <div class="sheet two r d2"><div><small>依次输入 abc、3.5、12</small><pre>输错了 2 次</pre></div><div><small>一次输对 12</small><pre>输错了 0 次</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 8 课的计数器：先设 0，再一次次加 1。</p>
+    <p class="say tip r d3">第 8 课的计数器：先设 0，再一次次加 1。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/04_retry_count.py">▶ 在 IDE 开始改</a>
 </section>
@@ -215,7 +215,7 @@ print("明年你", age + 1, "岁")</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！inptu 是 input 打错了字，本来报 NameError，却被不写名字的 except 接住了。改成 input，再把 except 写成 except ValueError。" data-no="这一行没有写错字。输入 12 本来没问题，是哪一行先出了错？"><span class="ln"><span class="k">try</span>:</span><span class="ln">    age = <span class="f">int</span>(inptu())</span><span class="ln">    <span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span><span class="ln"><span class="k">except</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"请输入整数"</span>)</span></pre></div>
   <p class="say r d2">怎么输入都只说“请输入整数”。<br>点出真正写错的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

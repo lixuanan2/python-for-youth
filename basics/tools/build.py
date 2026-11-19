@@ -428,7 +428,7 @@ def fit_code(slides, lesson):
             widest = max(sum(10 if ord(ch) > 0x2e7f else 6 for ch in l) for lines in versions for l in lines) or 1
             size = min(top, (width - GUTTER) * 10 // widest, (height - 130) * 100 // (155 * max(map(len, versions))))
             name = (re.search(r'aria-label="([^"]*)"', page.group()) or [None, '?'])[1]
-            assert size >= 30, f'{lesson["id"]} page "{name}": a code box needs {size}px to fit its layout; cut lines or give it room'
+            assert size >= MIN_CODE, f'{lesson["id"]} page "{name}": a code box needs {size}px to fit its layout; cut lines or give it room'
             style = re.search(r' style="([^"]*)"', attrs)
             attrs = re.sub(r' style="[^"]*"', '', attrs) + f' style="{(style.group(1).rstrip(";") + ";") if style else ""}--fs:{size}px"'
             return f'<div class="editor{classes}"{attrs}>{body}'
@@ -440,6 +440,7 @@ def fit_code(slides, lesson):
 # (tasks.json role 独立迁移), straight from its tested solution. The page opens covered; the teacher turns the next step to show it.
 ANSWER = re.compile(r'<!-- @answer (\S+)(?: lines (\d+)-(\d+))? \| (.+?) -->')
 GUTTER = 156  # an editor's line numbers and padding, in px
+MIN_CODE = 30  # the smallest code font, on any page: below it the page shows fewer lines or moves to steps
 
 
 def answer_page(match, lesson):
@@ -464,7 +465,7 @@ def answer_page(match, lesson):
         assert len(re.sub(r'<[^>]+>', '', say)) <= 30, f'{lesson["id"]}: under a wide answer the explanation has one line; keep it to 30 characters'
         aside = f'  <p class="abs say step s2" style="left:96px;top:890px;width:1300px">{say}</p>\n' \
                 '  <a class="ide step s2" style="left:1480px;top:880px">▶ 在 IDE 打开</a>\n'
-    assert size >= 26, f'{lesson["id"]}: the answer to {task_id} needs a font of {size}px; show its key lines with "lines A-B"'
+    assert size >= MIN_CODE, f'{lesson["id"]}: the answer to {task_id} needs a font of {size}px; show its key lines with "lines A-B"'
     title = html.escape(task['brief']['title'])
     tab = html.escape(re.sub(r'^\d+[a-z]?_', '', task['solution'].split('/')[-1]))
     picked = f' data-lines="{first}-{last}"' if first else ''

@@ -7,9 +7,9 @@ Run in basics/. A repository without home/content.json is skipped. The page arou
 editor, the script) is home/page.html; it has {{name}} slots for what content.json gives.
 
 Text in content.json is written once for both: **bold**, `code`, [text](link), {slot:7} (a yellow box on the page, `7` in
-the README) and {kbd:F} (a key). A link to a file in the repository (CONTRIBUTING.md, basics/README.md) stays relative in
-the README and points to GitHub on the page; a link starting with site: (site:basics/) is a page of the website, relative
-on the page and full in the README.
+the README), {kbd:F} (a key) and {lessons} (how many lessons basics/course.json has made). A link to a file in the
+repository (CONTRIBUTING.md, basics/README.md) stays relative in the README and points to GitHub on the page; a link
+starting with site: (site:basics/) is a page of the website, relative on the page and full in the README.
 """
 import html
 import json
@@ -122,8 +122,14 @@ def home(c):
     return re.sub(r'\{\{(\w+)\}\}', lambda m: slots[m.group(1)], page)
 
 
+def lessons_done():
+    """How many lessons basics/course.json has made (an entry with an id)."""
+    return sum(1 for item in json.loads((ROOT / 'basics' / 'course.json').read_text(encoding='utf-8')) if item.get('id'))
+
+
 def made():
-    c = json.loads(CONTENT.read_text(encoding='utf-8'))
+    # {lessons} in the text is how many lessons are made, from basics/course.json, so the count is never written by hand.
+    c = json.loads(CONTENT.read_text(encoding='utf-8').replace('{lessons}', str(lessons_done())))
     return {README: readme(c), HOME: home(c)}
 
 

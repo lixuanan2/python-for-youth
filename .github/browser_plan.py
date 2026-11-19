@@ -23,11 +23,11 @@ ALL = "all"
 # Changing one of these changes every page of that module, or how the check works.
 EVERYTHING = (".github/workflows/check.yml", ".github/browser_plan.py")
 BASICS_ALL = ("basics/template/", "basics/vendor/", "basics/course.json", "basics/site.json", "basics/dist/index.html",
-              "basics/tools/build.py", "basics/tools/algo.py", "basics/tools/check_browser.mjs")
-# Project decks are built from basics' page, theme, script, fonts and IDE settings.
+              "basics/tools/build.py", "basics/tools/algo.py", "basics/tools/check_browser.mjs", "basics/tools/shots.mjs")
+# Project decks are built from basics' page, theme, script, fonts and IDE settings; the screenshot check is basics' shots.mjs.
 PROJECT_ALL = ("project/template/", "project/site.json", "project/dist/index.html", "project/tools/build.py",
                "project/tools/stagefiles.py", "project/tools/check_browser.mjs",
-               "basics/template/", "basics/vendor/", "basics/site.json")
+               "basics/template/", "basics/vendor/", "basics/site.json", "basics/tools/shots.mjs")
 
 
 def changed(base):

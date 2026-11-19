@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -713,7 +728,7 @@ dialog p{color:var(--muted);font-size:15px}
     <p class="say only1">从 1 到 100，每猜一次没猜中，剩下的就少一半。猜几次一定能猜中？<br>先自己估一个数。</p>
     <div class="step s2" style="font:700 60px/1.5 var(--code)">剩 100 → 50 → 25 → 12 → 6 → 3 → 1</div>
   </div>
-  <p class="step s2" style="font:800 120px var(--text);color:var(--clay-soft)">最多 7 次</p>
+  <p class="step s2 soft" style="font:800 120px var(--text)">最多 7 次</p>
   <p class="say step s2">猜一次没中，剩下的不到一半。猜 6 次以后最多剩 1 个，第 7 次一定中。<br>从 1 猜起最多要 100 次，二分只要 7 次。数越多，差得越远：1000 个数也只要 10 次。</p>
   <div class="foot"></div>
 </section>
@@ -796,7 +811,7 @@ dialog p{color:var(--muted);font-size:15px}
     <h2 class="r d1">最后说出猜了几次</h2>
     <p class="say r d1">在例题上改：每猜一次，计数加 1。猜中以后，再输出一行“猜了 几 次”。秘密数是 1 到 100 的整数。</p>
     <div class="sheet three r d2"><div><small>秘密数 42</small><pre>猜了 7 次</pre></div><div><small>秘密数 50</small><pre>猜了 1 次</pre></div><div><small>秘密数 100</small><pre>猜了 7 次</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">把 1 到 100 都试一试，看看有没有超过 7 次的。</p>
+    <p class="say tip r d3">把 1 到 100 都试一试，看看有没有超过 7 次的。</p>
   </div>
   <a class="ide r d3" data-code="# 【最后说出猜了几次】&#10;# 在例题上改：每猜一次，计数加 1。猜中以后，&#10;#   再输出一行“猜了 几 次”。秘密数是 1 到 100 的整数。&#10;# 例如输入：42&#10;# 应该输出（每个一行）：50、25、37、43、40、41、42、猜了 7 次&#10;# 提示：加一个计数器。&#10;# ↓ 在下面这段程序上改&#10;&#10;secret = int(input())&#10;lo = 1&#10;hi = 100&#10;guess = 0&#10;while guess != secret:&#10;    guess = (lo + hi) // 2&#10;    print(guess)&#10;    if guess &lt; secret:&#10;        lo = guess + 1&#10;    elif guess &gt; secret:&#10;        hi = guess - 1&#10;">▶ 在 IDE 开始改</a>
 </section>
@@ -820,7 +835,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="width:960px;--fs:40px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="9" data-yes="找到了！99 已经猜过、不对了，lo 还停在 99。(99 + 100) // 2 又是 99，永远猜不到 100。改成 lo = guess + 1。" data-no="这一行没问题。猜过 99 以后，范围变成了多少？"><span class="ln">secret = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">lo = <span class="m">1</span></span><span class="ln">hi = <span class="m">100</span></span><span class="ln">guess = <span class="m">0</span></span><span class="ln"><span class="k">while</span> guess != secret:</span><span class="ln">    guess = (lo + hi) // <span class="m">2</span></span><span class="ln">    <span class="f">print</span>(guess)</span><span class="ln">    <span class="k">if</span> guess &lt; secret:</span><span class="ln">        lo = guess</span><span class="ln">    <span class="k">elif</span> guess &gt; secret:</span><span class="ln">        hi = guess - <span class="m">1</span></span></pre></div>
   <p class="say r d2">输出 50、75、87、93、96、98、99，然后一直是 99。<br>点出该改的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
 </section>
 
 <!-- challenge -->

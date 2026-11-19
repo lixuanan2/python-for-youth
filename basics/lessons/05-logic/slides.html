@@ -43,10 +43,10 @@
 <section class="slide lay-columns" aria-label="猜一猜 and 的四种组合" data-steps="5" data-at="5">
   <h2 class="t">猜一猜：and 的四种组合</h2>
   <div class="sheet3">
-    <div><code>True and True</code><span class="step s2" style="font:800 60px var(--code);color:var(--olive)">True</span></div>
-    <div><code>True and False</code><span class="step s3" style="font:800 60px var(--code)">False</span></div>
-    <div><code>False and True</code><span class="step s4" style="font:800 60px var(--code)">False</span></div>
-    <div><code>False and False</code><span class="step s5" style="font:800 60px var(--code)">False</span></div>
+    <div><code>True and True</code><span class="step s2 text-num ok">True</span></div>
+    <div><code>True and False</code><span class="step s3 text-num">False</span></div>
+    <div><code>False and True</code><span class="step s4 text-num">False</span></div>
+    <div><code>False and False</code><span class="step s5 text-num">False</span></div>
   </div>
   <div class="turns">
     <p class="say only1">每一行先在心里猜 True 还是 False，再翻下一步。</p>
@@ -147,10 +147,10 @@
 <section class="slide lay-columns" aria-label="猜一猜 or 的四种组合" data-steps="5" data-at="5">
   <h2 class="t">猜一猜：or 的四种组合</h2>
   <div class="sheet3">
-    <div><code>True or True</code><span class="step s2" style="font:800 60px var(--code);color:var(--olive)">True</span></div>
-    <div><code>True or False</code><span class="step s3" style="font:800 60px var(--code);color:var(--olive)">True</span></div>
-    <div><code>False or True</code><span class="step s4" style="font:800 60px var(--code);color:var(--olive)">True</span></div>
-    <div><code>False or False</code><span class="step s5" style="font:800 60px var(--code)">False</span></div>
+    <div><code>True or True</code><span class="step s2 text-num ok">True</span></div>
+    <div><code>True or False</code><span class="step s3 text-num ok">True</span></div>
+    <div><code>False or True</code><span class="step s4 text-num ok">True</span></div>
+    <div><code>False or False</code><span class="step s5 text-num">False</span></div>
   </div>
   <div class="turns">
     <p class="say only1">第一行最容易猜错：两个都成立，算不算？</p>
@@ -271,7 +271,7 @@
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！or 的两边都要写完整：n == 1 or n == 2。只写一个 2，Python 不会拿它和 n 比，而是把它当成成立。" data-no="这一行没问题。想一想：n 是 5，为什么条件成立了？"><span class="ln">n = <span class="m">5</span></span><span class="ln"><span class="k">if</span> n == <span class="m">1</span> <span class="k">or</span> <span class="m">2</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"中奖了"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"没中"</span>)</span></pre></div>
   <p class="say r d2">抽到 1 号或 2 号才中奖。n 是 5，程序却输出中奖了，也没有报错。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
@@ -320,7 +320,7 @@
     <div class="r d2"><code>x &gt;= 1 and x &lt; 9</code><span>范围：两边都写完整</span></div>
     <div class="r d3"><code>(a or b) and c</code><span>括号里的先算</span></div>
   </div>
-  <p class="say r d3 small" style="color:var(--muted)">这里的 a、b 指比较这样有真假结果的条件。</p>
+  <p class="say r d3 small muted">这里的 a、b 指比较这样有真假结果的条件。</p>
   <div class="foot"></div>
 </section>
 

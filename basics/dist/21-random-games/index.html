@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -714,9 +729,9 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="say">random 是“随机”，先 import 借来。<br>randint(1, 6) 从 1 到 6 里随机挑一个整数。</p>
   <a class="ide">▶ 在 IDE 多运行几次</a>
   <div class="right">
-    <p class="say" style="font-size:36px;color:var(--muted)">每次运行都不一样，比如：</p>
-    <p style="font:800 96px/1.3 var(--code);margin-top:20px">4<br>1<br>6</p>
-    <p class="say" style="font-size:36px;color:var(--muted);margin-top:20px">你运行出来的多半和这里不同，这才对。</p>
+    <p class="say muted" style="font-size:36px">每次运行都不一样，比如：</p>
+    <p class="text-large" style="line-height:1.3;margin-top:20px">4<br>1<br>6</p>
+    <p class="say muted" style="font-size:36px;margin-top:20px">你运行出来的多半和这里不同，这才对。</p>
   </div>
 </section>
 
@@ -724,8 +739,8 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-4" class="slide dark lay-columns" aria-label="猜一猜：两头取得到吗" data-steps="2" data-at="2">
   <h2 class="t">猜一猜：randint(1, 6) 能掷出 6 吗？</h2>
   <div class="vs">
-    <div><h3>range(1, 6)</h3><pre style="font-size:60px">1 2 3 4 5</pre><p class="res step s2" style="font-size:60px;color:var(--clay-soft)">没有 6</p></div>
-    <div><h3>randint(1, 6)</h3><pre style="font-size:60px">1 到 6 里挑</pre><p class="res step s2" style="font-size:60px;color:var(--clay-soft)">6 也可能</p></div>
+    <div><h3>range(1, 6)</h3><pre style="font-size:60px">1 2 3 4 5</pre><p class="res step s2 soft" style="font-size:60px">没有 6</p></div>
+    <div><h3>randint(1, 6)</h3><pre style="font-size:60px">1 到 6 里挑</pre><p class="res step s2 soft" style="font-size:60px">6 也可能</p></div>
   </div>
   <div class="turns">
       <p class="say only1">第 6 课学过，range 不含终点。randint 也一样吗？</p>
@@ -742,7 +757,7 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="say">choice 的意思是“挑选”。括号里放一个列表，它随机抽出其中一个。<br>抽签、点名、电脑出拳，都用它。</p>
   <a class="ide">▶ 在 IDE 抽几次</a>
   <div class="right">
-    <p class="say" style="font-size:36px;color:var(--muted)">可能是：</p>
+    <p class="say muted" style="font-size:36px">可能是：</p>
     <p style="font:800 72px/1.4 var(--text);margin-top:20px">小红 来回答</p>
   </div>
 </section>
@@ -787,7 +802,7 @@ dialog p{color:var(--muted);font-size:15px}
       <p class="say only2 small">后面和第 7 课一样：猜 50 说大了，猜 25 说小了。</p>
       <p class="say only3 small">猜到 42 就停下。课后自己玩，把第 2 行删掉，每次都不一样。</p>
     </div>
-    <div class="step s2" style="font:400 48px/1.5 var(--code);color:var(--clay)">大了<br>小了<br><span class="step s3">猜中了！</span></div>
+    <div class="step s2 out" style="font:400 48px/1.5 var(--code)">大了<br>小了<br><span class="step s3">猜中了！</span></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -799,7 +814,7 @@ dialog p{color:var(--muted);font-size:15px}
     <h2 class="r d1">掷 n 次，有几个 6</h2>
     <p class="say r d1">第一行读入种子，第二行读入次数 n。用这个种子掷 n 次骰子，输出一共掷出了几次 6。</p>
     <div class="sheet three r d2"><div><small>种子 1，掷 10 次</small><pre>1</pre></div><div><small>种子 3，掷 600 次</small><pre>95</pre></div><div><small>掷 0 次</small><pre>0</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">掷 600 次，6 大约出现 100 次。</p>
+    <p class="say tip r d3">掷 600 次，6 大约出现 100 次。</p>
   </div>
   <a class="ide r d3" data-code="# 【掷 n 次，有几个 6】&#10;# 第一行读入种子，第二行读入次数 n。用这个种子掷 n 次骰子，&#10;#   输出一共掷出了几次 6。&#10;# 例如输入（每个一行）：1、10&#10;# 应该输出：1&#10;# 提示：不猜了，用循环掷很多次，数一数。&#10;# ↓ 在下面这段程序上改&#10;&#10;import random&#10;random.seed(int(input()))&#10;secret = random.randint(1, 100)&#10;guess = int(input())&#10;while guess != secret:&#10;    if guess &gt; secret:&#10;        print(&quot;大了&quot;)&#10;    else:&#10;        print(&quot;小了&quot;)&#10;    guess = int(input())&#10;print(&quot;猜中了！&quot;)&#10;">▶ 在 IDE 开始改</a>
 </section>
@@ -838,7 +853,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！randint 两头都算，从 0 开始就可能掷出 0。骰子是 1 到 6，写 randint(1, 6)。" data-no="这一行没问题。0 点是从哪里来的？看看随机的范围。"><span class="ln"><span class="k">import</span> random</span><span class="ln">point = random.<span class="f">randint</span>(<span class="m">0</span>, <span class="m">6</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"掷出了"</span>, point, <span class="s">"点"</span>)</span></pre></div>
   <p class="say r d2">多运行几次，偶尔会出现“掷出了 0 点”。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
@@ -868,10 +883,10 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-15" class="slide dark" aria-label="参考答案：石头剪刀布" data-answer="02" data-steps="2" data-at="2">
   <h2 class="t">参考答案：石头剪刀布</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
-  <div class="editor step s2" style="left:96px;top:200px;width:1728px;--fs:26px"><div class="tab">rps.py</div>
-<pre class="code" data-file="solutions/04_rps.py"><span class="ln"><span class="k">import</span> random</span><span class="ln">random.<span class="f">seed</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln">me = <span class="f">input</span>()</span><span class="ln">pc = random.<span class="f">choice</span>([<span class="s">"石头"</span>, <span class="s">"剪刀"</span>, <span class="s">"布"</span>])</span><span class="ln"><span class="f">print</span>(<span class="s">"电脑出"</span>, pc)</span><span class="ln"><span class="k">if</span> me == pc:</span><span class="ln">    <span class="f">print</span>(<span class="s">"平"</span>)</span><span class="ln"><span class="k">elif</span> (me == <span class="s">"石头"</span> <span class="k">and</span> pc == <span class="s">"剪刀"</span>) <span class="k">or</span> (me == <span class="s">"剪刀"</span> <span class="k">and</span> pc == <span class="s">"布"</span>) <span class="k">or</span> (me == <span class="s">"布"</span> <span class="k">and</span> pc == <span class="s">"石头"</span>):</span><span class="ln">    <span class="f">print</span>(<span class="s">"赢"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"输"</span>)</span></pre></div>
-  <p class="abs say step s2" style="left:96px;top:890px;width:1300px">一样就是平；三种赢法用 or 连起来，其余就是输。</p>
-  <a class="ide step s2" style="left:1480px;top:880px">▶ 在 IDE 打开</a>
+  <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">rps.py</div>
+<pre class="code" data-file="solutions/04_rps.py" data-lines="6-14" data-full="import random&#10;random.seed(int(input()))&#10;me = input()&#10;pc = random.choice([&quot;石头&quot;, &quot;剪刀&quot;, &quot;布&quot;])&#10;print(&quot;电脑出&quot;, pc)&#10;a = me == &quot;石头&quot; and pc == &quot;剪刀&quot;&#10;b = me == &quot;剪刀&quot; and pc == &quot;布&quot;&#10;c = me == &quot;布&quot; and pc == &quot;石头&quot;&#10;if me == pc:&#10;    print(&quot;平&quot;)&#10;elif a or b or c:&#10;    print(&quot;赢&quot;)&#10;else:&#10;    print(&quot;输&quot;)&#10;"><span class="ln">a = me == <span class="s">"石头"</span> <span class="k">and</span> pc == <span class="s">"剪刀"</span></span><span class="ln">b = me == <span class="s">"剪刀"</span> <span class="k">and</span> pc == <span class="s">"布"</span></span><span class="ln">c = me == <span class="s">"布"</span> <span class="k">and</span> pc == <span class="s">"石头"</span></span><span class="ln"><span class="k">if</span> me == pc:</span><span class="ln">    <span class="f">print</span>(<span class="s">"平"</span>)</span><span class="ln"><span class="k">elif</span> a <span class="k">or</span> b <span class="k">or</span> c:</span><span class="ln">    <span class="f">print</span>(<span class="s">"赢"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"输"</span>)</span></pre></div>
+  <p class="abs say step s2" style="left:1340px;top:220px;width:484px">先把三种赢法各存进一个变量。一样就是平；三种赢法用 or 连起来，其余就是输。</p>
+  <a class="ide step s2" style="left:1340px;top:860px">▶ 在 IDE 打开</a>
   <div class="foot"></div>
 </section>
 

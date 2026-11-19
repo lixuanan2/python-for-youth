@@ -49,7 +49,7 @@
 show(10, 3)
 show(3, 10)</pre></div>
   <div class="answer">
-    <div class="step s2" style="font:800 130px/1.3 var(--code);color:var(--clay)">7<br>-7</div>
+    <div class="step s2 text-big out" style="line-height:1.3">7<br>-7</div>
   </div>
   <div class="turns">
       <p class="say only1">两次调用给的都是 10 和 3，只是顺序不同。</p>
@@ -224,7 +224,7 @@ print(area(3))</pre></div>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！这一行只把 6 显示出来，没有交回去，x 拿到的是 None，None 不能乘 2。改成 return s 就对了。" data-no="这一行没问题。报错说 x 是 None，想一想函数交回了什么。"><span class="ln"><span class="k">def</span> <span class="f">total</span>(a, b, c):</span><span class="ln">    s = a + b + c</span><span class="ln">    <span class="f">print</span>(s)</span><span class="ln">x = <span class="f">total</span>(<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>)</span><span class="ln"><span class="f">print</span>(x * <span class="m">2</span>)</span></pre></div>
   <p class="say r d2">程序先输出 6，然后报 TypeError，说 None 不能和 2 相乘。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

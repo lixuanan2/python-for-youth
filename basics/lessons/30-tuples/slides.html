@@ -29,7 +29,7 @@
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div style="font:800 72px/1.5 var(--code)">(3, 5)<br>3 5<br><span class="step s2" style="color:var(--clay)">8</span></div>
+    <div class="text-mid" style="line-height:1.5">(3, 5)<br>3 5<br><span class="step s2 out">8</span></div>
   </div>
 </section>
 
@@ -92,7 +92,7 @@ print(b, a)</pre></div>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="step s2" style="font:400 48px/1.7 var(--text);color:var(--clay)">小明：90 分<br>小红：85 分</div>
+    <div class="step s2 out" style="font:400 48px/1.7 var(--text)">小明：90 分<br>小红：85 分</div>
   </div>
 </section>
 
@@ -123,7 +123,7 @@ for name, score in pairs:
       <p class="say only2 small">调用 low_high，交回 (77, 96)，拆成 low 和 high。</p>
       <p class="say only3 small">两个值都拿到了，还能接着算：96 - 77 是 19。</p>
     </div>
-    <div class="step s3" style="font:400 48px/1.6 var(--text);color:var(--clay)">最低 77 最高 96<br>相差 19</div>
+    <div class="step s3 out" style="font:400 48px/1.6 var(--text)">最低 77 最高 96<br>相差 19</div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -135,7 +135,7 @@ for name, score in pairs:
     <h2 class="r d1">再交回平均分</h2>
     <p class="say r d1">在例题上改：函数改成一次交回三个值：最低、最高、平均分，平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。输入和例题一样，n 至少是 1。</p>
     <div class="sheet two r d2"><div><small>输入 4、90、85、77、96，第三行</small><pre>平均 87.0</pre></div><div><small>输入 1、60，第三行</small><pre>平均 60.0</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">交回几个，拆的时候左边就写几个名字。</p>
+    <p class="say tip r d3">交回几个，拆的时候左边就写几个名字。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/05_stats_avg.py">▶ 在 IDE 开始改</a>
 </section>
@@ -159,7 +159,7 @@ for name, score in pairs:
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！函数交回 3 个值，左边只写了 low、high 两个名字，个数对不上。要写成 low, high, total = ……" data-no="这一行没问题。报错说要拆的值太多了，是在哪一行拆的？"><span class="ln"><span class="k">def</span> <span class="f">low_high_total</span>(nums):</span><span class="ln">    <span class="k">return</span> <span class="f">min</span>(nums), <span class="f">max</span>(nums), <span class="f">sum</span>(nums)</span><span class="ln">low, high = <span class="f">low_high_total</span>([<span class="m">60</span>, <span class="m">80</span>, <span class="m">100</span>])</span><span class="ln"><span class="f">print</span>(low, high)</span></pre></div>
   <p class="say r d2">报错说要拆的值太多了。函数名说了要交回三样：最低、最高、总和。点出该改的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

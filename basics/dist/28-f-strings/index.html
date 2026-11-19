@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -713,10 +728,10 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code was" data-file="solutions/01_fstring.py"><span class="ln">name = <span class="s">"小明"</span></span><span class="ln">age = <span class="m">12</span></span><span class="ln l1"><span class="f">print</span>(<span class="s">f"{name}今年{age}岁"</span>)</span><span class="ln l2"><span class="f">print</span>(<span class="s">f"明年{age + 1}岁"</span>)</span></pre>
 <pre class="code" data-change="3"><span class="ln">name = <span class="s">"小明"</span></span><span class="ln">age = <span class="m">12</span></span><span class="ln l1"><span class="f">print</span>(<span class="s">"{name}今年{age}岁"</span>)</span></pre></div>
   <div class="answer turns">
-    <p class="only1" style="font:700 64px/1.5 var(--text);color:var(--clay-soft)">小明今年12岁</p>
-    <div class="only2"><p style="font:700 64px/1.5 var(--text);color:var(--clay-soft)">小明今年12岁<br>明年13岁</p><a class="ide only2" data-code="name = &quot;小明&quot;&#10;age = 12&#10;print(f&quot;{name}今年{age}岁&quot;)&#10;print(f&quot;明年{age + 1}岁&quot;)&#10;" style="margin-top:40px">▶ 在 IDE 打开</a></div>
+    <p class="only1 soft" style="font:700 64px/1.5 var(--text)">小明今年12岁</p>
+    <div class="only2"><p class="soft" style="font:700 64px/1.5 var(--text)">小明今年12岁<br>明年13岁</p><a class="ide only2" data-code="name = &quot;小明&quot;&#10;age = 12&#10;print(f&quot;{name}今年{age}岁&quot;)&#10;print(f&quot;明年{age + 1}岁&quot;)&#10;" style="margin-top:40px">▶ 在 IDE 打开</a></div>
     <p class="say only3">猜一猜：忘了写 f，会输出什么？<br>只少了一个字母 f，会报错吗？</p>
-    <div class="step s4"><p style="font:700 56px var(--code);color:var(--clay-soft);white-space:nowrap">{name}今年{age}岁</p><a class="ide step s4" style="margin-top:40px">▶ 在 IDE 验证</a></div>
+    <div class="step s4"><p class="soft" style="font:700 56px var(--code);white-space:nowrap">{name}今年{age}岁</p><a class="ide step s4" style="margin-top:40px">▶ 在 IDE 验证</a></div>
   </div>
   <div class="turns">
     <p class="say only1 small">f 是 format（格式）的第一个字母。加了 f，引号里的大括号 { } 就会换成变量的值。<br>没有逗号，也就没有多余的空格。</p>
@@ -752,7 +767,7 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div style="font:700 48px/1.7 var(--code)">3.3333333333333335<br><span class="step s2" style="color:var(--clay);font-size:72px">3.33<br>3.3</span></div>
+    <div style="font:700 48px/1.7 var(--code)">3.3333333333333335<br><span class="step s2 out" style="font-size:72px">3.33<br>3.3</span></div>
   </div>
 </section>
 
@@ -782,7 +797,7 @@ dialog p{color:var(--muted);font-size:15px}
       <p class="say only3">14.0 也按 2 位显示成 14.00。钱数都是两位小数，小票看着就整齐了。</p>
     </div>
   <div class="right">
-    <div style="font:400 34px/1.7 var(--text);color:var(--clay)"><span class="step s2">4 件，每件 3.50 元</span><br><span class="step s3">一共 14.00 元</span></div>
+    <div class="out" style="font:400 34px/1.7 var(--text)"><span class="step s2">4 件，每件 3.50 元</span><br><span class="step s3">一共 14.00 元</span></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -794,7 +809,7 @@ dialog p{color:var(--muted);font-size:15px}
     <h2 class="r d1">打八折以后多少钱</h2>
     <p class="say r d1">在例题上改：最后再输出一行“打八折 …… 元”，也保留 2 位小数。打八折就是乘以 0.8。输入还是两行：单价和件数。</p>
     <div class="sheet two r d2"><div><small>输入 3.5 和 4，第三行</small><pre>打八折 11.20 元</pre></div><div><small>输入 10 和 1，第三行</small><pre>打八折 8.00 元</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">大括号里可以写算式。</p>
+    <p class="say tip r d3">大括号里可以写算式。</p>
   </div>
   <a class="ide r d3" data-code="# 【打八折以后多少钱】&#10;# 在例题上改：最后再输出一行打八折以后的钱，也保留 2 位小数。&#10;#   打八折就是乘以 0.8。输入还是两行：单价和件数。&#10;# 例如输入（每个一行）：3.5、4&#10;# 应该输出：&#10;#   4 件，每件 3.50 元&#10;#   一共 14.00 元&#10;#   打八折 11.20 元&#10;# 提示：小票上再加一行。&#10;# ↓ 在下面这段程序上改&#10;&#10;price = float(input())&#10;count = int(input())&#10;total = price * count&#10;print(f&quot;{count} 件，每件 {price:.2f} 元&quot;)&#10;print(f&quot;一共 {total:.2f} 元&quot;)&#10;">▶ 在 IDE 开始改</a>
 </section>
@@ -810,7 +825,7 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div style="font:800 96px/1.4 var(--code)">5:9<br><span class="step s2" style="color:var(--clay)">05:09</span></div>
+    <div class="text-large" style="line-height:1.4">5:9<br><span class="step s2 out">05:09</span></div>
   </div>
 </section>
 
@@ -833,7 +848,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="1" data-yes="找到了！input() 读来的是文字，文字不能按 :.2f 显示。改成 price = float(input())。" data-no="这一行没问题。报错说这个值不能按小数显示，它是从哪里来的？"><span class="ln">price = <span class="f">input</span>()</span><span class="ln">count = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(<span class="s">f"每件 {price:.2f} 元"</span>)</span></pre></div>
   <p class="say r d2">输入 3.5 和 4，报错的最后一行是：<br><span style="font-family:var(--code);font-size:30px">ValueError: Unknown format code 'f' for object of type 'str'</span><br>点出该改的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -734,7 +749,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code"><span class="ln">scores = [[<span class="m">90</span>, <span class="m">80</span>, <span class="m">70</span>],</span><span class="ln">          [<span class="m">60</span>, <span class="m">85</span>, <span class="m">95</span>]]</span><span class="ln"><span class="f">print</span>(scores[<span class="m">1</span>][<span class="m">0</span>])</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2" style="font:800 220px/1 var(--code);color:var(--clay-soft)">60</p>
+    <p class="step s2 text-huge soft">60</p>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
@@ -748,10 +763,10 @@ dialog p{color:var(--muted);font-size:15px}
 <!-- row and column numbers -->
 <section id="page-5" class="slide free" aria-label="行号和列号">
   <h2 class="t r">每一格都有行号和列号</h2>
-  <div class="abs r d1" style="left:96px;right:96px;top:250px;display:grid;grid-template-columns:260px repeat(3,1fr);align-items:baseline;row-gap:36px;font:800 84px var(--code);text-align:center">
-    <span></span><span style="font:400 40px var(--text);color:var(--muted)">第 0 列</span><span style="font:400 40px var(--text);color:var(--muted)">第 1 列</span><span style="font:400 40px var(--text);color:var(--muted)">第 2 列</span>
-    <span style="font:400 40px var(--text);color:var(--muted);text-align:left">第 0 行</span><span>90</span><span>80</span><span>70</span>
-    <span style="font:400 40px var(--text);color:var(--muted);text-align:left">第 1 行</span><span>60</span><span>85</span><span style="color:var(--clay)">95</span>
+  <div class="abs r d1 text-mid" style="left:96px;right:96px;top:250px;display:grid;grid-template-columns:260px repeat(3,1fr);align-items:baseline;row-gap:36px;text-align:center">
+    <span></span><span class="muted" style="font:400 40px var(--text)">第 0 列</span><span class="muted" style="font:400 40px var(--text)">第 1 列</span><span class="muted" style="font:400 40px var(--text)">第 2 列</span>
+    <span class="muted" style="font:400 40px var(--text);text-align:left">第 0 行</span><span>90</span><span>80</span><span>70</span>
+    <span class="muted" style="font:400 40px var(--text);text-align:left">第 1 行</span><span>60</span><span>85</span><span class="out">95</span>
   </div>
   <p class="abs say r d2" style="left:96px;top:700px">红色的 95 在第 1 行、第 2 列，写成 scores[1][2]。<br>像电影票上的“几排几号”：先说排，再说号。</p>
   <div class="foot"></div>
@@ -782,7 +797,7 @@ dialog p{color:var(--muted);font-size:15px}
       <p class="say only2">一行看完换行。和上上节课画星星一样：外层管行，内层管每行里的格子。</p>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
-  <div class="right" style="font:800 96px/1.3 var(--code)">
+  <div class="right text-large" style="line-height:1.3">
 <span class="step">1 2 3</span><br><span class="step s2">4 5 6</span>
   </div>
 </section>
@@ -869,7 +884,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="4" data-yes="找到了！i 管的是行，j 管的是列，这里写成了 grid[j][i]。j 走到 2 时，grid[2] 超出了只有两行的表。改成 grid[i][j]。" data-no="这一行没问题。两层循环本身没错，想一想下标的顺序。"><span class="ln">grid = [[<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>], [<span class="m">4</span>, <span class="m">5</span>, <span class="m">6</span>]]</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">2</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">        <span class="f">print</span>(grid[j][i])</span></pre></div>
   <p class="say r d2">想一个一个输出 2 行 3 列的表，输出两个数以后就报 IndexError。<br>点你认为有问题的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 

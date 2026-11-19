@@ -171,6 +171,20 @@ h2.t::before{content:"# ";color:var(--clay)}
 .clay .say b,.olive .say b{color:#fff}
 /* A side condition of a task (input ranges, what is guaranteed) reads quieter than the task itself, same size. */
 .aside{color:#8a887f;font-weight:400}
+/* Colour words a page used to write by hand: the result or what to notice (.out), a second voice (.muted), right or
+   allowed (.ok), the soft clay on dark pages (.soft). They stand in for a style written on the element, so they win over
+   a component's own colour, as that style did. A smaller extra line under a task (.say.tip). */
+:where(span,b,p,small,em,code,pre,div,strong).out{color:var(--clay)!important}
+:where(span,b,p,small,em,code,pre,div).muted{color:var(--muted)!important}
+:where(span,b,p,small,em,code,pre,div).ok{color:var(--olive)!important}
+:where(span,b,p,small,em,code,pre,div).soft{color:var(--clay-soft)!important}
+.say.tip{margin-top:20px;font-size:32px;color:var(--muted)}
+/* Big display text in the code font (answers, numbers, a result shown large), named by size: .text-huge 200,
+   .text-big 130, .text-large 96, .text-mid 72, .text-num 56. Like the colours they win over a component's own font; the
+   line height is the class's unless the page writes its own. */
+:is(.text-huge,.text-big,.text-large,.text-mid,.text-num){font-family:var(--code)!important;font-weight:800!important;line-height:1.25}
+.text-huge{font-size:200px!important;line-height:1}.text-big{font-size:130px!important}.text-large{font-size:96px!important}
+.text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
 .olive .aside{color:#c5cfb8}
@@ -299,6 +313,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .quiz button.yes{background:#dcebd9;border-color:var(--olive)}
 .quiz button.no{background:#f6e0d6;border-color:var(--clay)}
 .fb{position:absolute;left:96px;right:96px;top:690px;font:400 42px/1.55 var(--text);min-height:130px}
+.dark .fb{color:var(--paper)}
 /* Quiz beside its code: what the question is about stays on the page. Options in one column on the left, the feedback
    under them, the whole program on the right. A changed line is marked .mod and ends with a grey .orig note. */
 .quiz.side{right:auto;width:600px;top:220px;grid-template-columns:1fr;gap:16px}
@@ -746,7 +761,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code"><span class="ln l2"><span class="k">for</span> x <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">12</span>):</span><span class="ln">    <span class="k">if</span> x * x == <span class="m">144</span>:</span><span class="ln">        <span class="f">print</span>(x)</span></pre></div>
   <div class="answer turns">
     <p class="say only1">答案 12 还在里面吗？</p>
-    <p class="step s2" style="font:800 72px/1.4 var(--text);color:var(--clay-soft)">什么也<br>不输出</p>
+    <p class="step s2 soft" style="font:800 72px/1.4 var(--text)">什么也<br>不输出</p>
   </div>
   <p class="say step s2">range(1, 12) 只试到 11，不含 12。答案不在范围里，就一个也找不到，而且不报错。<br>枚举最要紧的是范围：答案可能出现的地方，一个都不能漏。</p>
   <div class="foot"></div>
@@ -810,7 +825,7 @@ dialog p{color:var(--muted);font-size:15px}
     <h2 class="r d1">没有答案时说一声</h2>
     <p class="say r d1">脚数是单数，或者太多太少，就怎么也凑不上。在例题上改：一种答案也没有时，输出“没有答案”。输入还是两行：头数和脚数。</p>
     <div class="sheet two r d2"><div><small>输入 35 和 94</small><pre>鸡 23 兔 12</pre></div><div><small>输入 10 和 21</small><pre>没有答案</pre></div></div>
-    <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 22 课的 done 记着“输对了没有”，这里也可以记着“找到过没有”。</p>
+    <p class="say tip r d3">第 22 课的 done 记着“输对了没有”，这里也可以记着“找到过没有”。</p>
   </div>
   <a class="ide r d3" data-code="# 【没有答案时说一声】&#10;# 脚数是单数，或者太多太少，就怎么也凑不上。在例题上改：&#10;#   一种答案也没有时，输出“没有答案”。输入还是两行：头数和脚数。&#10;# 例如输入（每个一行）：10、21&#10;# 应该输出：没有答案&#10;# 提示：一个也没找到时，说一声。&#10;# 提示：用一个变量记住“找到过没有”。&#10;# ↓ 在下面这段程序上改&#10;&#10;heads = int(input())&#10;feet = int(input())&#10;for c in range(heads + 1):&#10;    r = heads - c&#10;    if c * 2 + r * 4 == feet:&#10;        print(&quot;鸡&quot;, c, &quot;兔&quot;, r)&#10;">▶ 在 IDE 开始改</a>
 </section>
@@ -834,7 +849,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor r d1" style="--fs:48px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！range(heads) 是 0 到 9，鸡最多试到 9 只，“10 只鸡”这种可能被漏掉了。改成 range(heads + 1)。" data-no="这一行没问题。答案是鸡 10 只，循环试到过 10 吗？"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
   <p class="say r d2">点出该改的那一行。</p>
-  <p class="fb" style="color:var(--paper)" data-empty="点代码里的一行"></p>
+  <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
