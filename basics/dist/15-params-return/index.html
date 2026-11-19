@@ -165,6 +165,7 @@ h2.t{position:absolute;left:96px;top:84px;font:800 76px/1.2 var(--text);letter-s
 h2.t::before{content:"# ";color:var(--clay)}
 .clay h2.t::before,.olive h2.t::before{color:#ffffffa0}
 .say{font:400 40px/1.6 var(--text)}
+.say.small{font-size:34px}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
@@ -208,6 +209,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slip{position:absolute;background:var(--paper);color:var(--ink);padding:24px 40px 28px;box-shadow:0 16px 36px #0005}
 .slip small{display:block;font:400 28px var(--text);color:var(--muted);margin-bottom:6px}
 .slip pre{font:700 56px/1.4 var(--code)}
+/* Note tiers, named by how much text they hold (tools/tierrules.py, PROMPT.md "档位"); the regular note has no class.
+   A second label in a note (input, then output) keeps a gap above it. */
+.slip.short pre{font-size:72px}.slip.long pre{font-size:44px}.slip.longest pre{font-size:34px;white-space:pre-wrap}
+.slip pre+small{margin-top:20px}
 .tilt{transform:rotate(-1.2deg)}.tilt2{transform:rotate(1.2deg)}
 
 /* === SPREADS === */
@@ -220,6 +225,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .turn h2{font:800 80px/1.2 var(--text)}
 .turn p{margin-top:24px}
 .sheet{margin-top:34px;background:var(--sand);padding:26px 40px 30px}
+.sheet.two{display:grid;grid-template-columns:1fr 1fr}.sheet.three{display:grid;grid-template-columns:1fr 1fr 1fr}
 .sheet small{display:block;font:400 30px var(--text);color:var(--muted);margin-bottom:8px}
 .sheet pre{font:700 56px/1.4 var(--code)}
 
@@ -281,6 +287,8 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .box{display:flex;align-items:baseline;gap:30px;border-top:5px solid var(--ink);padding:10px 0 16px}
 .box i{font:400 44px var(--code);color:var(--muted);font-style:normal;width:130px}
 .box b{font:800 120px/1.15 var(--code)}
+/* Value tiers, named by how long the value is (tools/tierrules.py); the regular box has no class. */
+.box.long b{font-size:84px}.box.longer b{font-size:60px}.box.longest b{font-size:40px}
 .box.out b{color:var(--clay)}.box.out i{font:400 40px var(--text)}
 
 /* === QUIZ, click a choice and read why === */
@@ -582,6 +590,7 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
 .lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
 .lay-notes>.notes>.slip.big{flex:1.2}
+.lay-notes>.notes>.slip small{font-size:34px}
 .lay-notes.challenge{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
 .lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
 .lay-notes.challenge>.say{grid-column:1;max-width:1000px}
@@ -603,6 +612,12 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-walk>.ide{grid-area:ide;justify-self:start}
 .lay-walk>.right{grid-area:right;margin-top:-30px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
+/* Variable boxes line up by themselves: the labels take one column as wide as the widest of them, so no box sets a width. */
+.lay-walk>.right:has(>.box){display:grid;grid-template-columns:minmax(130px,max-content) minmax(0,1fr);column-gap:30px;align-content:start}
+.lay-walk>.right:has(>.box)>*{grid-column:1/-1}
+.lay-walk>.right:has(>.box)>.ide{justify-self:start}
+.lay-walk>.right>.box{display:grid;grid-template-columns:subgrid;align-items:baseline}
+.lay-walk>.right>.box i{width:auto;white-space:nowrap}
 .lay-walk>.foot{color:var(--ghost)}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
@@ -684,11 +699,11 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="每次都一样的函数">
   <h2 class="t r">函数每次都做一样的事？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">想跟每个人打招呼</small><pre style="font-size:52px">你好 小明
+    <div class="slip r d1 short"><small>想跟每个人打招呼</small><pre>你好 小明
 你好 小红</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">想算不同房间的面积</small><pre style="font-size:52px">3 × 4 = 12
+    <div class="slip r d2 short"><small>想算不同房间的面积</small><pre>3 × 4 = 12
 2 × 5 = 10</pre></div>
-    <div class="slip tilt r d3"><small style="font-size:34px">上节课的函数</small><pre style="font-size:52px">只会说
+    <div class="slip tilt r d3 short"><small>上节课的函数</small><pre>只会说
 同一句话</pre></div>
   </div>
   <p class="say r d3">上节课的函数像只会放一首歌的音乐盒。这节课给函数开两扇门：<br>进门的叫“参数”，把数据带进去；出门的叫“返回值”，把算好的结果带回来。</p>
@@ -707,9 +722,9 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">name</i><b style="font-size:60px;color:var(--muted)">还没有</b></div>
-    <div class="box step s2"><i style="width:170px">第 3 行</i><b style="font-size:60px">你好 小明</b></div>
-    <div class="box out step s3"><i style="width:170px">第 4 行</i><b style="font-size:60px">你好 小红</b></div>
+    <div class="box step long"><i>name</i><b style="color:var(--muted)">还没有</b></div>
+    <div class="box step s2 long"><i>第 3 行</i><b>你好 小明</b></div>
+    <div class="box out step s3 long"><i>第 4 行</i><b>你好 小红</b></div>
   </div>
 </section>
 
@@ -741,9 +756,9 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">w, h</i><b style="font-size:72px">3, 4</b></div>
-    <div class="box step s2"><i style="width:170px">s</i><b style="font-size:84px">12</b></div>
-    <div class="box out step s3"><i style="width:170px">输出</i><b style="font-size:72px;line-height:1.2">12<br>10</b></div>
+    <div class="box step"><i>w, h</i><b>3, 4</b></div>
+    <div class="box step s2"><i>s</i><b>12</b></div>
+    <div class="box out step s3"><i>输出</i><b style="line-height:1.2">12<br>10</b></div>
   </div>
 </section>
 
@@ -805,13 +820,13 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
 <pre class="code" data-file="solutions/03_rooms.py"><span class="ln"><span class="k">def</span> <span class="f">area</span>(w, h):</span><span class="ln">    <span class="k">return</span> w * h</span><span class="ln l1">w1 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">h1 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">w2 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">h2 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2">s1 = <span class="f">area</span>(w1, h1)</span><span class="ln l2">s2 = <span class="f">area</span>(w2, h2)</span><span class="ln l3"><span class="f">print</span>(s1 + s2)</span></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1" style="font-size:34px">分四行读入两个房间的长和宽：3、4、2、5。</p>
-      <p class="say only2" style="font-size:34px">算面积的方法只写一次，调用两次。返回的 12 和 10 分别存进 s1 和 s2。</p>
-      <p class="say only3" style="font-size:34px">两个返回值相加，输出一共 22。</p>
+      <p class="say only1 small">分四行读入两个房间的长和宽：3、4、2、5。</p>
+      <p class="say only2 small">算面积的方法只写一次，调用两次。返回的 12 和 10 分别存进 s1 和 s2。</p>
+      <p class="say only3 small">两个返回值相加，输出一共 22。</p>
     </div>
-    <div class="box step"><i style="width:170px">输入</i><b style="font-size:60px">3 4 2 5</b></div>
-    <div class="box step s2"><i style="width:170px">s1, s2</i><b style="font-size:60px">12, 10</b></div>
-    <div class="box out step s3"><i style="width:170px">输出</i><b style="font-size:72px">22</b></div>
+    <div class="box step long"><i>输入</i><b>3 4 2 5</b></div>
+    <div class="box step s2 long"><i>s1, s2</i><b>12, 10</b></div>
+    <div class="box out step s3 long"><i>输出</i><b>22</b></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -822,7 +837,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
   <div class="turn">
     <h2 class="r d1">写一个周长函数</h2>
     <p class="say r d1">起始程序里有面积函数。把它改成 perimeter(w, h)，返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，都是整数，输出周长。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">3
+    <div class="sheet two r d2"><div><small>依次输入</small><pre style="line-height:1.2">3
 4</pre></div><div><small>输出</small><pre style="line-height:1.2">14</pre></div></div>
   </div>
   <a class="ide r d3" data-code="# 【写一个周长函数】&#10;# 起始程序里有面积函数。把它改成 perimeter(w, h)，&#10;#   返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，&#10;#   都是整数，输出周长。&#10;# 例如输入（每个一行）：3、4&#10;# 应该输出：14&#10;# 提示：换个名字，换个算法，别的不用动。&#10;# ↓ 在下面这段程序上改&#10;&#10;def area(w, h):&#10;    return w * h&#10;w = int(input())&#10;h = int(input())&#10;print(area(w, h))&#10;">▶ 在 IDE 开始改</a>
@@ -854,8 +869,8 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step" style="display:block"><i style="display:block;width:auto">bigger(3, 8)</i><b style="display:block;font-size:84px">8</b></div>
-    <div class="box out step s2" style="display:block"><i style="display:block;width:auto">bigger(9, 2)</i><b style="display:block;font-size:84px">9</b></div>
+    <div class="box step" style="display:block"><i style="display:block">bigger(3, 8)</i><b style="display:block">8</b></div>
+    <div class="box out step s2" style="display:block"><i style="display:block">bigger(9, 2)</i><b style="display:block">9</b></div>
   </div>
 </section>
 
@@ -865,7 +880,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
   <div class="turn">
     <h2 class="r d1">写一个成绩等级函数</h2>
     <p class="say r d1">写 grade(score)：90 分及以上返回“优秀”，60 分及以上返回“及格”，其余返回“不及格”。读入一个 0 到 100 的整数分数，输出等级。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>输入 95</small><pre>优秀</pre></div><div><small>输入 60</small><pre>及格</pre></div><div><small>输入 59</small><pre>不及格</pre></div></div>
+    <div class="sheet three r d2"><div><small>输入 95</small><pre>优秀</pre></div><div><small>输入 60</small><pre>及格</pre></div><div><small>输入 59</small><pre>不及格</pre></div></div>
   </div>
   <a class="ide r d3" data-code="# 【写一个成绩等级函数】&#10;# 写 grade(score)：90 分及以上返回“优秀”，60 分及以上返回“及格”，&#10;#   其余返回“不及格”。读入一个 0 到 100 的整数分数，输出等级。&#10;# 例如输入：95&#10;# 应该输出：优秀&#10;# 提示：一个参数，三种结果，碰到 return 就结束。&#10;# ↓ 在下面这段程序上改&#10;&#10;def bigger(a, b):&#10;    if a &gt; b:&#10;        return a&#10;    return b&#10;print(bigger(3, 8))&#10;print(bigger(9, 2))&#10;">▶ 在 IDE 开始改</a>
 </section>
@@ -898,9 +913,9 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">三个数比大小</h2>
   <p class="say r d2">分三行读入三个整数，输出最大的那个。<br>先写 bigger(a, b)，返回两个数里大的那个，再只用它比出三个数里最大的，<b>不再写别的 if</b>。</p>
-  <div class="slip tilt2 r d3" style="width:440px"><small>依次输入</small><pre>3
+  <div class="slip tilt2 r d3 short" style="width:440px"><small>依次输入</small><pre>3
 9
-5</pre><small style="margin-top:20px">输出</small><pre>9</pre></div>
+5</pre><small>输出</small><pre>9</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【三个数比大小】&#10;# 分三行读入三个整数，输出最大的那个。&#10;# 先写 bigger(a, b)，返回两个数里大的那个，&#10;#   再只用它比出三个数里最大的，不再写别的 if。&#10;# 例如输入（每个一行）：3、9、5&#10;# 应该输出：9&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

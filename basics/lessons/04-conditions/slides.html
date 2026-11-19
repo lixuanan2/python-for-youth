@@ -80,8 +80,8 @@
   <div class="editor"><div class="tab">if.py</div>
 <pre class="code" data-stdin="50&#10;" data-file="solutions/01_if.py" data-light="1:1 2:2 4:3"></pre></div>
   <div class="answer">
-    <div class="slip tilt step s3"><small>屏幕上</small><pre>考完了</pre></div>
-    <p class="say" style="font-size:34px;color:var(--clay-soft)">if 这一行末尾有冒号。<br>属于它的行要缩进 4 个空格。</p>
+    <div class="slip tilt step s3 short"><small>屏幕上</small><pre>考完了</pre></div>
+    <p class="say small" style="color:var(--clay-soft)">if 这一行末尾有冒号。<br>属于它的行要缩进 4 个空格。</p>
   </div>
   <div class="turns">
     <p class="say only1">输入 50，放进 score。</p>
@@ -104,9 +104,9 @@
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:160px">score</i><b>59</b></div>
-    <div class="box step s2"><i style="width:160px">成立吗</i><b style="font-size:84px">False</b></div>
-    <div class="box out step s3"><i style="width:160px">输出</i><b style="font-size:76px;line-height:1.5">继续加油</b></div>
+    <div class="box step long"><i>score</i><b>59</b></div>
+    <div class="box step s2 long"><i>成立吗</i><b>False</b></div>
+    <div class="box out step s3 long"><i>输出</i><b style="line-height:1.5">继续加油</b></div>
   </div>
 </section>
 
@@ -133,7 +133,7 @@ else:
   <div class="turn">
     <h2 class="r d1">改成判断奇偶</h2>
     <p class="say r d1">读入一个整数，输出它是偶数还是奇数。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 7，输出</small><pre>奇数</pre></div><div><small>输入 0，输出</small><pre>偶数</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 7，输出</small><pre>奇数</pre></div><div><small>输入 0，输出</small><pre>偶数</pre></div></div>
   </div>
   <a class="ide r d3" data-code-file="starter/03_odd_even.py">▶ 在 IDE 开始改</a>
 </section>
@@ -161,9 +161,9 @@ else:
     <p class="say only3">输出及格，后面的路全部跳过。</p>
   </div>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">&gt;= 90</i><b style="font-size:84px">False</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">&gt;= 60</i><b style="font-size:84px">True</b></div>
-    <div class="box out step s3"><i style="width:190px">输出</i><b style="font-size:76px;line-height:1.5">及格</b></div>
+    <div class="box step long"><i>&gt;= 90</i><b>False</b></div>
+    <div class="box step s2 long"><i>&gt;= 60</i><b>True</b></div>
+    <div class="box out step s3 long"><i>输出</i><b style="line-height:1.5">及格</b></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -177,8 +177,8 @@ else:
   <div class="answer turns">
     <p class="qmark only1">?</p>
     <p class="qmark only3">?</p>
-    <div class="slip tilt only2"><small>屏幕上，只有一行</small><pre>大于 5</pre></div>
-    <div class="slip tilt step s4"><small>屏幕上，有两行</small><pre>大于 5
+    <div class="slip tilt only2 short"><small>屏幕上，只有一行</small><pre>大于 5</pre></div>
+    <div class="slip tilt step s4 short"><small>屏幕上，有两行</small><pre>大于 5
 大于 8</pre></div>
   </div>
   <div class="turns">
@@ -197,7 +197,7 @@ else:
   <div class="turn">
     <h2 class="r d1">再加一档“良好”</h2>
     <p class="say r d1">分数是 0 到 100 的整数，75 分到 89 分输出良好。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 75，输出</small><pre>良好</pre></div><div><small>输入 74，输出</small><pre>及格</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 75，输出</small><pre>良好</pre></div><div><small>输入 74，输出</small><pre>及格</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">写完用 59、60、74、75、89、90 各试一次，这些数都紧贴分界线。</p>
   </div>
   <a class="ide r d3" data-code-file="starter/07_grade_four.py">▶ 在 IDE 开始改</a>
@@ -231,7 +231,7 @@ else:
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">快递<br>运费</h2>
   <p class="say r d2">读入重量（整数，单位公斤）。前 3 公斤一共 10 元，<b>超过 3 公斤的部分</b>每公斤加 2 元。</p>
-  <div class="slip tilt2 r d3" style="width:600px"><small>输入</small><pre>5</pre><small style="margin-top:26px">输出</small><pre>运费 14 元</pre></div>
+  <div class="slip tilt2 r d3 short" style="width:600px"><small>输入</small><pre>5</pre><small>输出</small><pre>运费 14 元</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/08_shipping.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

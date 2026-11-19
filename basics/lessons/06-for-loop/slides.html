@@ -11,12 +11,12 @@
 <section class="slide clay lay-notes" aria-label="要写一百行吗">
   <h2 class="t r">从 1 数到 100，要写几行？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">不用循环，要写 100 行</small><pre>print(1)
+    <div class="slip r d1 long"><small>不用循环，要写 100 行</small><pre>print(1)
 print(2)
 print(3)
 ……
 print(100)</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">用 for 循环，只要 2 行</small><pre style="font-size:48px">for i in range(1, 101):
+    <div class="slip tilt r d2 long"><small>用 for 循环，只要 2 行</small><pre>for i in range(1, 101):
     print(i)</pre></div>
   </div>
   <p class="say r d3">人写一百遍又累又容易错，电脑最不怕重复。<br>这节课让程序替你一遍一遍地做。</p>
@@ -32,7 +32,7 @@ print("加油")
 print("加油")</pre>
 <pre class="code" data-file="solutions/01_cheer.py" data-change="2"></pre></div>
   <div class="answer">
-    <div class="slip tilt"><small>屏幕上</small><pre>加油
+    <div class="slip tilt short"><small>屏幕上</small><pre>加油
 加油
 加油</pre></div>
   </div>
@@ -59,9 +59,9 @@ print("加油")</pre>
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">i = 0</i><b style="font-size:76px;line-height:1.5">加油</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:76px;line-height:1.5">加油</b></div>
-    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:76px;line-height:1.5">加油</b></div>
+    <div class="box step"><i>i = 0</i><b style="line-height:1.5">加油</b></div>
+    <div class="box step s2"><i>i = 1</i><b style="line-height:1.5">加油</b></div>
+    <div class="box step s3"><i>i = 2</i><b style="line-height:1.5">加油</b></div>
   </div>
 </section>
 
@@ -72,7 +72,7 @@ print("加油")</pre>
 <pre class="code" data-file="solutions/02_print_i.py"></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2"><small>屏幕上</small><pre>0
+    <div class="slip tilt step s2 short"><small>屏幕上</small><pre>0
 1
 2</pre></div>
   </div>
@@ -127,10 +127,10 @@ print("加油")</pre>
   </div>
   <a class="ide step s5">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step s2"><i style="width:190px">n</i><b style="font-size:84px">3</b></div>
-    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px;color:var(--clay)">1</b></div>
-    <div class="box step s4"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px;color:var(--clay)">2</b></div>
-    <div class="box step s5"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:84px;color:var(--clay)">3</b></div>
+    <div class="box step s2"><i>n</i><b>3</b></div>
+    <div class="box step s3"><i>i = 1</i><b style="color:var(--clay)">1</b></div>
+    <div class="box step s4"><i>i = 2</i><b style="color:var(--clay)">2</b></div>
+    <div class="box step s5"><i>i = 3</i><b style="color:var(--clay)">3</b></div>
   </div>
 </section>
 
@@ -141,7 +141,7 @@ print("加油")</pre>
 <pre class="code" data-file="solutions/04_one_to_n.py"></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2"><small>屏幕上</small><pre style="color:var(--muted)">一行也没有</pre></div>
+    <div class="slip tilt step s2 short"><small>屏幕上</small><pre style="color:var(--muted)">一行也没有</pre></div>
   </div>
   <div class="turns">
     <p class="say only1">会报错吗？还是输出 0？</p>
@@ -169,7 +169,7 @@ print("加油")</pre>
   <div class="turn">
     <h2 class="r d1">输出一列乘法口诀</h2>
     <p class="say r d1">读入一个整数 n，输出 9 行，让 i 从 1 走到 9。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 7，第一行</small><pre>7 x 1 = 7</pre></div><div><small>最后一行</small><pre>7 x 9 = 63</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 7，第一行</small><pre>7 x 1 = 7</pre></div><div><small>最后一行</small><pre>7 x 9 = 63</pre></div></div>
   </div>
   <a class="ide r d3" data-code-file="starter/05_times_table.py">▶ 在 IDE 开始改</a>
 </section>
@@ -196,7 +196,7 @@ print("加油")</pre>
 <pre class="code" data-file="solutions/07_rocket.py"></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2"><small>屏幕上</small><pre>3
+    <div class="slip tilt step s2 short"><small>屏幕上</small><pre>3
 2
 1
 发射！</pre></div>
@@ -243,7 +243,7 @@ print("加油")</pre>
   <div class="turn">
     <h2 class="r d1">自己定倒计时</h2>
     <p class="say r d1">读入一个整数 n，从 n 倒数到 1，每个数占一行，最后输出发射！</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 2，输出</small><pre>2
+    <div class="sheet two r d2"><div><small>输入 2，输出</small><pre>2
 1
 发射！</pre></div><div><small>输入 1，输出</small><pre>1
 发射！</pre></div></div>
@@ -276,11 +276,11 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 <pre class="code was" data-file="solutions/04_one_to_n.py"></pre>
 <pre class="code" data-file="solutions/09_even.py" data-change="2"></pre></div>
   <div class="answer turns">
-    <div class="slip tilt only1"><small>输入 4，屏幕上</small><pre>1
+    <div class="slip tilt only1 short"><small>输入 4，屏幕上</small><pre>1
 2
 3
 4</pre></div>
-    <div class="slip tilt step s2"><small>输入 4，屏幕上</small><pre>2
+    <div class="slip tilt step s2 short"><small>输入 4，屏幕上</small><pre>2
 4</pre></div>
   </div>
   <div class="turns">
@@ -307,10 +307,10 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   </div>
   <a class="ide step s4">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">跳过</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:64px;line-height:1.5;color:var(--clay)">输出 2</b></div>
-    <div class="box step s3"><i style="width:190px;white-space:nowrap">i = 3</i><b style="font-size:64px;line-height:1.5;color:var(--muted)">跳过</b></div>
-    <div class="box step s4"><i style="width:190px;white-space:nowrap">i = 4</i><b style="font-size:64px;line-height:1.5;color:var(--clay)">输出 4</b></div>
+    <div class="box step long"><i>i = 1</i><b style="line-height:1.5;color:var(--muted)">跳过</b></div>
+    <div class="box step s2 long"><i>i = 2</i><b style="line-height:1.5;color:var(--clay)">输出 2</b></div>
+    <div class="box step s3 long"><i>i = 3</i><b style="line-height:1.5;color:var(--muted)">跳过</b></div>
+    <div class="box step s4 long"><i>i = 4</i><b style="line-height:1.5;color:var(--clay)">输出 4</b></div>
   </div>
 </section>
 
@@ -338,7 +338,7 @@ for i in range(1, n + 1):
   <div class="turn">
     <h2 class="r d1">挑出 3 的倍数</h2>
     <p class="say r d1">读入一个整数 n，输出 1 到 n 里所有 3 的倍数，每个数占一行。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 10，输出</small><pre>3
+    <div class="sheet two r d2"><div><small>输入 10，输出</small><pre>3
 6
 9</pre></div><div><small>输入 3，输出</small><pre>3</pre></div></div>
   </div>
@@ -373,7 +373,7 @@ for i in range(1, n + 1):
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">拍七</h2>
   <p class="say r d2">读入一个整数 n，从 1 数到 n，每个数占一行。<br>碰到 7 的倍数，或者<b>个位是 7</b> 的数，不说这个数，改说“过”。</p>
-  <div class="slip tilt2 r d3" style="width:600px"><small>输入 8，输出（每个占一行）</small><pre style="font-size:48px">1 2 3 4
+  <div class="slip tilt2 r d3 short" style="width:600px"><small>输入 8，输出（每个占一行）</small><pre>1 2 3 4
 5 6 过 8</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/11_pass_seven.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>

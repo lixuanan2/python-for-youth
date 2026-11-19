@@ -11,11 +11,11 @@
 <section class="slide clay lay-notes" aria-label="谁高于平均分">
   <h2 class="t r">有几个人高于平均分？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">小明</small><pre style="font-size:60px">80</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">小红</small><pre style="font-size:60px">90</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">小刚</small><pre style="font-size:60px">70</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">小丽</small><pre style="font-size:60px">60</pre></div>
-    <div class="slip tilt r d3"><small style="font-size:34px">平均分</small><pre style="font-size:72px">75</pre></div>
+    <div class="slip r d1 short"><small>小明</small><pre>80</pre></div>
+    <div class="slip r d2 short"><small>小红</small><pre>90</pre></div>
+    <div class="slip r d2 short"><small>小刚</small><pre>70</pre></div>
+    <div class="slip r d2 short"><small>小丽</small><pre>60</pre></div>
+    <div class="slip tilt r d3 short"><small>平均分</small><pre>75</pre></div>
   </div>
   <p class="say r d3">要先把全部分数加完，才知道平均分是 75；知道了平均分，还得回头再看一遍每个人。<br>边读边算的老办法做不到“回头看”。这节课把分数存进列表，想看几遍就看几遍。</p>
   <div class="foot"></div>
@@ -33,9 +33,9 @@
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">第 1 遍</i><b style="font-size:84px">80</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">第 2 遍</i><b style="font-size:84px">95</b></div>
-    <div class="box out step s3"><i style="width:190px;white-space:nowrap">第 3 遍</i><b style="font-size:84px">70</b></div>
+    <div class="box step"><i>第 1 遍</i><b>80</b></div>
+    <div class="box step s2"><i>第 2 遍</i><b>95</b></div>
+    <div class="box out step s3"><i>第 3 遍</i><b>70</b></div>
   </div>
 </section>
 
@@ -48,7 +48,7 @@ for x in names:
     print("你好", x)</pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2"><small>屏幕上</small><pre>你好 小明
+    <div class="slip tilt step s2 short"><small>屏幕上</small><pre>你好 小明
 你好 小红</pre></div>
   </div>
   <div class="turns">
@@ -84,9 +84,9 @@ for x in names:
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">i = 0</i><b style="font-size:84px">1 80</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">i = 1</i><b style="font-size:84px">2 95</b></div>
-    <div class="box out step s3"><i style="width:190px;white-space:nowrap">i = 2</i><b style="font-size:84px">3 70</b></div>
+    <div class="box step"><i>i = 0</i><b>1 80</b></div>
+    <div class="box step s2"><i>i = 1</i><b>2 95</b></div>
+    <div class="box out step s3"><i>i = 2</i><b>3 70</b></div>
   </div>
 </section>
 
@@ -114,15 +114,15 @@ for i in range(len(a)):
 <pre class="code" data-file="solutions/03_count_pass.py" data-light="1-4:1 5:2 6-8:3 9:4"></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1" style="font-size:34px">前四行和上节课一样：输入 4，再输入 80、59、60、30，存进列表。</p>
-      <p class="say only2" style="font-size:34px">计数前，先准备 count = 0。</p>
-      <p class="say only3" style="font-size:34px">遍历列表，碰到 60 分及以上就记一个：80 和 60。</p>
-      <p class="say only4" style="font-size:34px">看完了，输出 2。</p>
+      <p class="say only1 small">前四行和上节课一样：输入 4，再输入 80、59、60、30，存进列表。</p>
+      <p class="say only2 small">计数前，先准备 count = 0。</p>
+      <p class="say only3 small">遍历列表，碰到 60 分及以上就记一个：80 和 60。</p>
+      <p class="say only4 small">看完了，输出 2。</p>
     </div>
-    <div class="box step"><i style="width:170px">scores</i><b style="font-size:40px">[80, 59, 60, 30]</b></div>
-    <div class="box step s2"><i style="width:170px">count</i><b style="font-size:72px">0</b></div>
-    <div class="box step s3"><i style="width:170px">count</i><b style="font-size:72px">2</b></div>
-    <div class="box out step s4"><i style="width:170px">输出</i><b style="font-size:72px">2</b></div>
+    <div class="box step longest"><i>scores</i><b>[80, 59, 60, 30]</b></div>
+    <div class="box step s2 longest"><i>count</i><b>0</b></div>
+    <div class="box step s3 longest"><i>count</i><b>2</b></div>
+    <div class="box out step s4 longest"><i>输出</i><b>2</b></div>
     <a class="ide step s4">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -133,7 +133,7 @@ for i in range(len(a)):
   <div class="turn">
     <h2 class="r d1">把不及格的分数列出来</h2>
     <p class="say r d1">第一行读入人数 n，接下来 n 行，每行一个整数分数。把不到 60 分的分数按原来的顺序输出，一行一个；<b>一个也没有就什么也不输出</b>。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 5 行</small><pre style="font-size:44px">4、80、59、60、30</pre></div><div><small>输出</small><pre style="line-height:1.2">59
+    <div class="sheet two r d2"><div><small>依次输入 5 行</small><pre style="font-size:44px">4、80、59、60、30</pre></div><div><small>输出</small><pre style="line-height:1.2">59
 30</pre></div></div>
   </div>
   <a class="ide r d3" data-code-file="starter/04_failed.py">▶ 在 IDE 开始改</a>
@@ -213,11 +213,11 @@ for x in a:
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">高于平均分</h2>
   <p class="say r d2">第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。<br>输出分数严格高于平均分的人数，<b>和平均分一样的不算</b>。</p>
-  <div class="slip tilt2 r d3" style="width:480px"><small>依次输入</small><pre>4
+  <div class="slip tilt2 r d3 short" style="width:480px"><small>依次输入</small><pre>4
 80
 90
 70
-60</pre><small style="margin-top:20px">输出</small><pre>2</pre></div>
+60</pre><small>输出</small><pre>2</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/06_above_average.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

@@ -165,6 +165,7 @@ h2.t{position:absolute;left:96px;top:84px;font:800 76px/1.2 var(--text);letter-s
 h2.t::before{content:"# ";color:var(--clay)}
 .clay h2.t::before,.olive h2.t::before{color:#ffffffa0}
 .say{font:400 40px/1.6 var(--text)}
+.say.small{font-size:34px}
 .say b{color:var(--clay);font-weight:700}
 .dark .say b{color:var(--clay-soft)}
 .clay .say b,.olive .say b{color:#fff}
@@ -208,6 +209,10 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .slip{position:absolute;background:var(--paper);color:var(--ink);padding:24px 40px 28px;box-shadow:0 16px 36px #0005}
 .slip small{display:block;font:400 28px var(--text);color:var(--muted);margin-bottom:6px}
 .slip pre{font:700 56px/1.4 var(--code)}
+/* Note tiers, named by how much text they hold (tools/tierrules.py, PROMPT.md "档位"); the regular note has no class.
+   A second label in a note (input, then output) keeps a gap above it. */
+.slip.short pre{font-size:72px}.slip.long pre{font-size:44px}.slip.longest pre{font-size:34px;white-space:pre-wrap}
+.slip pre+small{margin-top:20px}
 .tilt{transform:rotate(-1.2deg)}.tilt2{transform:rotate(1.2deg)}
 
 /* === SPREADS === */
@@ -220,6 +225,7 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .turn h2{font:800 80px/1.2 var(--text)}
 .turn p{margin-top:24px}
 .sheet{margin-top:34px;background:var(--sand);padding:26px 40px 30px}
+.sheet.two{display:grid;grid-template-columns:1fr 1fr}.sheet.three{display:grid;grid-template-columns:1fr 1fr 1fr}
 .sheet small{display:block;font:400 30px var(--text);color:var(--muted);margin-bottom:8px}
 .sheet pre{font:700 56px/1.4 var(--code)}
 
@@ -281,6 +287,8 @@ pre.code{font:400 var(--fs,62px)/1.55 var(--code);padding:30px 36px 34px 0;white
 .box{display:flex;align-items:baseline;gap:30px;border-top:5px solid var(--ink);padding:10px 0 16px}
 .box i{font:400 44px var(--code);color:var(--muted);font-style:normal;width:130px}
 .box b{font:800 120px/1.15 var(--code)}
+/* Value tiers, named by how long the value is (tools/tierrules.py); the regular box has no class. */
+.box.long b{font-size:84px}.box.longer b{font-size:60px}.box.longest b{font-size:40px}
 .box.out b{color:var(--clay)}.box.out i{font:400 40px var(--text)}
 
 /* === QUIZ, click a choice and read why === */
@@ -582,6 +590,7 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-notes>.notes{display:flex;gap:34px;align-items:flex-start;padding:0 12px;margin:0 -12px}
 .lay-notes>.notes>.slip{position:relative;flex:1;min-width:0}
 .lay-notes>.notes>.slip.big{flex:1.2}
+.lay-notes>.notes>.slip small{font-size:34px}
 .lay-notes.challenge{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto 1fr auto;column-gap:110px;row-gap:40px;padding:170px 110px 120px 96px}
 .lay-notes.challenge>h2.big{grid-column:1;font:800 170px/1.2 var(--text)}
 .lay-notes.challenge>.say{grid-column:1;max-width:1000px}
@@ -603,6 +612,12 @@ dialog p{color:var(--muted);font-size:15px}
 .lay-walk>.ide{grid-area:ide;justify-self:start}
 .lay-walk>.right{grid-area:right;margin-top:-30px}
 .lay-walk>.right>.say{font-size:34px;margin-bottom:30px}
+/* Variable boxes line up by themselves: the labels take one column as wide as the widest of them, so no box sets a width. */
+.lay-walk>.right:has(>.box){display:grid;grid-template-columns:minmax(130px,max-content) minmax(0,1fr);column-gap:30px;align-content:start}
+.lay-walk>.right:has(>.box)>*{grid-column:1/-1}
+.lay-walk>.right:has(>.box)>.ide{justify-self:start}
+.lay-walk>.right>.box{display:grid;grid-template-columns:subgrid;align-items:baseline}
+.lay-walk>.right>.box i{width:auto;white-space:nowrap}
 .lay-walk>.foot{color:var(--ghost)}
 
 /* 4 predict: guess what a program does. Code on the left with a sentence under it, the answer on the right (shown on step 2),
@@ -753,8 +768,8 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor" style="--fs:58px"><div class="tab">if.py</div>
 <pre class="code" data-stdin="50&#10;" data-file="solutions/01_if.py"><span class="ln l1">score = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"考完了"</span>)</span></pre></div>
   <div class="answer">
-    <div class="slip tilt step s3"><small>屏幕上</small><pre>考完了</pre></div>
-    <p class="say" style="font-size:34px;color:var(--clay-soft)">if 这一行末尾有冒号。<br>属于它的行要缩进 4 个空格。</p>
+    <div class="slip tilt step s3 short"><small>屏幕上</small><pre>考完了</pre></div>
+    <p class="say small" style="color:var(--clay-soft)">if 这一行末尾有冒号。<br>属于它的行要缩进 4 个空格。</p>
   </div>
   <div class="turns">
     <p class="say only1">输入 50，放进 score。</p>
@@ -777,9 +792,9 @@ dialog p{color:var(--muted);font-size:15px}
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:160px">score</i><b>59</b></div>
-    <div class="box step s2"><i style="width:160px">成立吗</i><b style="font-size:84px">False</b></div>
-    <div class="box out step s3"><i style="width:160px">输出</i><b style="font-size:76px;line-height:1.5">继续加油</b></div>
+    <div class="box step long"><i>score</i><b>59</b></div>
+    <div class="box step s2 long"><i>成立吗</i><b>False</b></div>
+    <div class="box out step s3 long"><i>输出</i><b style="line-height:1.5">继续加油</b></div>
   </div>
 </section>
 
@@ -802,7 +817,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="turn">
     <h2 class="r d1">改成判断奇偶</h2>
     <p class="say r d1">读入一个整数，输出它是偶数还是奇数。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 7，输出</small><pre>奇数</pre></div><div><small>输入 0，输出</small><pre>偶数</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 7，输出</small><pre>奇数</pre></div><div><small>输入 0，输出</small><pre>偶数</pre></div></div>
   </div>
   <a class="ide r d3" data-code="# 【改成判断奇偶】&#10;# 读入一个整数，输出它是偶数还是奇数。&#10;# 例如输入：7&#10;# 应该输出：奇数&#10;# 提示：还记得吗？余数是 0 就是偶数。&#10;# ↓ 在下面这段程序上改&#10;&#10;score = int(input())&#10;if score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;else:&#10;    print(&quot;继续加油&quot;)&#10;">▶ 在 IDE 开始改</a>
 </section>
@@ -830,9 +845,9 @@ dialog p{color:var(--muted);font-size:15px}
     <p class="say only3">输出及格，后面的路全部跳过。</p>
   </div>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">&gt;= 90</i><b style="font-size:84px">False</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">&gt;= 60</i><b style="font-size:84px">True</b></div>
-    <div class="box out step s3"><i style="width:190px">输出</i><b style="font-size:76px;line-height:1.5">及格</b></div>
+    <div class="box step long"><i>&gt;= 90</i><b>False</b></div>
+    <div class="box step s2 long"><i>&gt;= 60</i><b>True</b></div>
+    <div class="box out step s3 long"><i>输出</i><b style="line-height:1.5">及格</b></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -846,8 +861,8 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="answer turns">
     <p class="qmark only1">?</p>
     <p class="qmark only3">?</p>
-    <div class="slip tilt only2"><small>屏幕上，只有一行</small><pre>大于 5</pre></div>
-    <div class="slip tilt step s4"><small>屏幕上，有两行</small><pre>大于 5
+    <div class="slip tilt only2 short"><small>屏幕上，只有一行</small><pre>大于 5</pre></div>
+    <div class="slip tilt step s4 short"><small>屏幕上，有两行</small><pre>大于 5
 大于 8</pre></div>
   </div>
   <div class="turns">
@@ -866,7 +881,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="turn">
     <h2 class="r d1">再加一档“良好”</h2>
     <p class="say r d1">分数是 0 到 100 的整数，75 分到 89 分输出良好。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 75，输出</small><pre>良好</pre></div><div><small>输入 74，输出</small><pre>及格</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 75，输出</small><pre>良好</pre></div><div><small>输入 74，输出</small><pre>及格</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">写完用 59、60、74、75、89、90 各试一次，这些数都紧贴分界线。</p>
   </div>
   <a class="ide r d3" data-code="# 【再加一档“良好”】&#10;# 分数是 0 到 100 的整数，75 分到 89 分输出良好。&#10;# 例如输入：75&#10;# 应该输出：良好&#10;# 提示：elif 可以写很多个，想想新的一档放在哪。&#10;# ↓ 在下面这段程序上改&#10;&#10;score = int(input())&#10;if score &gt;= 90:&#10;    print(&quot;优秀&quot;)&#10;elif score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;else:&#10;    print(&quot;继续加油&quot;)&#10;">▶ 在 IDE 开始改</a>
@@ -900,7 +915,7 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">快递<br>运费</h2>
   <p class="say r d2">读入重量（整数，单位公斤）。前 3 公斤一共 10 元，<b>超过 3 公斤的部分</b>每公斤加 2 元。</p>
-  <div class="slip tilt2 r d3" style="width:600px"><small>输入</small><pre>5</pre><small style="margin-top:26px">输出</small><pre>运费 14 元</pre></div>
+  <div class="slip tilt2 r d3 short" style="width:600px"><small>输入</small><pre>5</pre><small>输出</small><pre>运费 14 元</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【快递运费】&#10;# 读入重量（整数，单位公斤）。前 3 公斤一共 10 元，&#10;#   超过 3 公斤的部分每公斤加 2 元。&#10;# 例如输入：5&#10;# 应该输出：运费 14 元&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

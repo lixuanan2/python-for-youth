@@ -11,10 +11,10 @@
 <section class="slide clay lay-notes" aria-label="谁的分数最高">
   <h2 class="t r">谁的分数最高？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">第一个</small><pre style="font-size:60px">80 分</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">第二个</small><pre style="font-size:60px">95 分</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">第三个</small><pre style="font-size:60px">70 分</pre></div>
-    <div class="slip tilt r d3"><small style="font-size:34px">台上站着</small><pre style="font-size:72px">95 分</pre></div>
+    <div class="slip r d1 short"><small>第一个</small><pre>80 分</pre></div>
+    <div class="slip r d2 short"><small>第二个</small><pre>95 分</pre></div>
+    <div class="slip r d2 short"><small>第三个</small><pre>70 分</pre></div>
+    <div class="slip tilt r d3 short"><small>台上站着</small><pre>95 分</pre></div>
   </div>
   <p class="say r d3">循环每一遍只看得到一个数。办法像打擂台：第一个人先站上台，<br>后面每来一个就比一比，比台上的大就换他上台。全部比完，台上的就是最大的。</p>
   <div class="foot"></div>
@@ -33,10 +33,10 @@
   </div>
   <a class="ide step s4">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:190px;white-space:nowrap">读到 80</i><b style="font-size:84px">80</b></div>
-    <div class="box step s2"><i style="width:190px;white-space:nowrap">读到 95</i><b style="font-size:84px">95</b></div>
-    <div class="box step s3"><i style="width:190px;white-space:nowrap">读到 70</i><b style="font-size:84px">95</b></div>
-    <div class="box out step s4"><i style="width:190px">输出</i><b style="font-size:84px">95</b></div>
+    <div class="box step"><i>读到 80</i><b>80</b></div>
+    <div class="box step s2"><i>读到 95</i><b>95</b></div>
+    <div class="box step s3"><i>读到 70</i><b>95</b></div>
+    <div class="box out step s4"><i>输出</i><b>95</b></div>
   </div>
 </section>
 
@@ -117,7 +117,7 @@ print(best)</pre></div>
   <div class="turn">
     <h2 class="r d1">改成找最低分</h2>
     <p class="say r d1">第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。输出最低分。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">3
+    <div class="sheet two r d2"><div><small>依次输入</small><pre style="line-height:1.2">3
 80
 95
 70</pre></div><div><small>输出</small><pre style="line-height:1.2">70</pre></div></div>
@@ -132,15 +132,15 @@ print(best)</pre></div>
 <pre class="code" data-stdin="3&#10;小明&#10;80&#10;小红&#10;95&#10;小刚&#10;70&#10;" data-file="solutions/03_winner.py" data-light="2-3:1 5-7:2-3 8-9:2 10:4"></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1" style="font-size:34px">输入 3，然后每人两行：名字一行，分数一行。小明 80 分，先上台。</p>
-      <p class="say only2" style="font-size:34px">小红 95 分，比 80 大。分数和名字一起换。</p>
-      <p class="say only3" style="font-size:34px">小刚 70 分，没有 95 大，不换。</p>
-      <p class="say only4" style="font-size:34px">比完了，输出台上的名字和分数。</p>
+      <p class="say only1 small">输入 3，然后每人两行：名字一行，分数一行。小明 80 分，先上台。</p>
+      <p class="say only2 small">小红 95 分，比 80 大。分数和名字一起换。</p>
+      <p class="say only3 small">小刚 70 分，没有 95 大，不换。</p>
+      <p class="say only4 small">比完了，输出台上的名字和分数。</p>
     </div>
-    <div class="box step"><i style="width:150px">台上</i><b style="font-size:60px">小明 80</b></div>
-    <div class="box step s2"><i style="width:150px">台上</i><b style="font-size:60px">小红 95</b></div>
-    <div class="box step s3"><i style="width:150px">台上</i><b style="font-size:60px">小红 95</b></div>
-    <div class="box out step s4"><i style="width:150px">输出</i><b style="font-size:60px">小红 95</b></div>
+    <div class="box step long"><i>台上</i><b>小明 80</b></div>
+    <div class="box step s2 long"><i>台上</i><b>小红 95</b></div>
+    <div class="box step s3 long"><i>台上</i><b>小红 95</b></div>
+    <div class="box out step s4 long"><i>输出</i><b>小红 95</b></div>
     <a class="ide step s4">▶ 在 IDE 打开</a>
   </div>
 </section>
@@ -169,7 +169,7 @@ print(best)</pre></div>
   <div class="turn">
     <h2 class="r d1">最高分是第几个？</h2>
     <p class="say r d1">第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。输出两个数：最高分是第几个出场的，最高分是多少。<b>一样高时算先出场的</b>。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="line-height:1.2">3
+    <div class="sheet two r d2"><div><small>依次输入</small><pre style="line-height:1.2">3
 80
 95
 70</pre></div><div><small>输出</small><pre style="line-height:1.2">2 95</pre></div></div>
@@ -226,11 +226,11 @@ print(best)</pre></div>
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">温差</h2>
   <p class="say r d2">第一行读入天数 n，至少 1 天，接下来 n 行，每行一个整数气温。<br>输出这几天里最热和最冷差了几度。</p>
-  <div class="slip tilt2 r d3" style="width:520px"><small>依次输入</small><pre>4
+  <div class="slip tilt2 r d3 short" style="width:520px"><small>依次输入</small><pre>4
 3
 -2
 8
--5</pre><small style="margin-top:20px">输出</small><pre>13</pre></div>
+-5</pre><small>输出</small><pre>13</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/05_temp_range.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
