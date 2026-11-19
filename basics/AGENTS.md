@@ -16,7 +16,7 @@
 - `lessons/<…>/tasks.json`、`starter/`、`solutions/`、`tests/`：题目、起始程序、答案和测试。`tests/claims.json` 记录页面说过的输出和报错。
 - `template/`：所有课共用的外壳、样式和脚本。缩略图、时间轴、章节跳转都在这里。
 - `template/layouts.css`：8 种版式（封面、便签、代码走一遍、猜一猜、分栏、动手、提问、提示）。每节课构建时都内联它。版式怎么写见 [PROMPT.md](PROMPT.md) 的“版式和格子”。
-- `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。全部页都换成版式写法的课加 `"structured": true`。
+- `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。每节课都写 `"structured": true`（每页都要有版式），新课也一样。
 - `site.json`：网站名称、首页文字、语言、IDE 平台和谢谢页的文案、链接。换语言或换 IDE 只改这里。代码比较长的课可以写 `code_room`，放大猜一猜和小测的代码栏，比如 `"code_room": {"predict": [1160, 740, 58], "ask": [1000, 760, 48]}`（宽、高、最大字号，键是 `build.py` 里 `CODE_ROOM` 的名字）；不写就用 `CODE_ROOM` 的值。谢谢页加链接就在 `thanks.links` 加一项，图标放 `template/icons/`。
 - `pdf.json`：每份 `dist/<课>/slides.pdf` 照哪一版页面打印、PDF 本身的哈希，由 `build.py --pdf` 写，不要手改。`check.py` 比对它，PDF 跟不上页面就报错。
 - `dist/`：生成结果，提交进仓库，不要手改。每节课的 `starter/index.html` 由 `template/starter.html` 生成，列出这节课的起始程序。GitHub Pages 不列出文件夹内容，所以页面上的链接都要指向具体文件，`tools/check.py` 会查。
@@ -43,7 +43,7 @@ node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查：改过的
 
 一节课在本机查通过，就把它的指纹记进 `.check-state.json`（`dist/<课>/`，PDF 除外），三节代表课都通过了再记下模板的指纹。这个记录只在本机，不进 Git，不能手写；真正算数的是推送后 CI 的检查。
 
-全部通过时只打一行汇总，失败才打详细内容，开头写着是哪节课。截图在 `.preview/`。每次通过后，截图和上次在本机通过时的比（上次的存在 `.check-shots/`，不进 Git），画面变了的页列在 `.preview/changed.txt`，**只看清单里的截图**。比的是像素，左边的缩略图栏不比；偶尔会有一两页误报（比如斜着的便签），看一眼就知道。
+全部通过时只打一行汇总，失败才打详细内容，开头写着是哪节课。截图在 `.preview/`，每节课查的时候先清空它的文件夹；每次运行还会删掉 `.preview/` 里不是这个工具写的图（手动截的、改了名的课）。每次通过后，截图和上次在本机通过时的比（上次的存在 `.check-shots/`，不进 Git），画面变了的页列在 `.preview/changed.txt`，**只看清单里的截图**。比的是像素，左边的缩略图栏不比；偶尔会有一两页误报（比如斜着的便签），看一眼就知道。
 
 本机的顺序：`build.py --pdf` → `check.py` → `check_browser.mjs --changed` → 看 `.preview/changed.txt` 列出的截图 → 推送 → 等 CI 和 Pages 都通过再汇报。
 
@@ -56,16 +56,15 @@ node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查：改过的
 
 ## 版式
 
-2026-11-18 到 11-19，30 节课分 8 批全部换成版式写法（每批一个 PR，在 `structure` 分支上做）：页面写版式和格子，不写坐标；代码框只写代码，颜色和字号由 `build.py` 生成。现在 `course.json` 里每节课都有 `"structured": true`，`check.py` 要求每页都有版式或是自由页。自由页留给位置本身就是内容的页：IDE 截图上的标注、数轴、下标表、算法演示。新课和改课都按 [PROMPT.md](PROMPT.md) 的“版式和格子”写。
+每页写版式和格子，不写坐标；代码框只写代码，颜色和字号由 `build.py` 生成。`check.py` 要求每页都有版式或是自由页。自由页只给位置本身就是内容的页：IDE 截图上的标注、数轴、下标表、算法演示。写法见 [PROMPT.md](PROMPT.md) 的“版式和格子”。
 
 ## 规则
 
-- 一律用相对路径：课件、文档和给老师的命令都不写绝对路径。给命令时说明要在 `basics/` 里运行。
 - 改课只改 `lessons/` 和 `template/`，再用 `--pdf` 重建，让 PDF 跟上页面。
 - 课件离线可用：样式、脚本和字体都内联，不用 CDN 和在线字体。只有 IDE 和官方文档链接需要联网。
 - IDE 地址只写在 `site.json` 的 `ide` 里，换平台只改这一处。现在用的是本仓库自己发布的 JupyterLite（仓库最外层的 `ide/`，网址 `https://lixuanan2.github.io/python-for-youth/ide/repl/index.html`）。它出问题时，把 `ide.base` 换回公开演示站 `https://jupyterlite.github.io/demo/repl/index.html`，重新构建就行。
 - 程序、页面说法和答案都要过 `tools/check.py`。页面上新写的输出或报错要加进 `claims.json`。
-- 小改写的答案不进 `dist/`；独立迁移（挑战）的答案只出现在它自己的参考答案页上，进页先盖着，老师讲的时候翻开（老师 2026-11-13 要的）。`dist/` 里没有 `solutions/`、`tests/`。这只减少学生接触，不是权限控制：网上的课件和 PDF 学生也能翻到答案页。
+- 小改写的答案不进 `dist/`；独立迁移（挑战）的答案只出现在它自己的参考答案页上，进页先盖着，老师讲的时候翻开。`dist/` 里没有 `solutions/`、`tests/`。这只减少学生接触，不是权限控制：网上的课件和 PDF 学生也能翻到答案页。
 - 一次做一节课，先把设计给老师确认再写。见仓库最外层的 `.claude/skills/python-lesson`。
 - 新模块沿用现有组件。确实需要新组件时写进 `template/theme.css`，并检查已有课程。
 - 公开仓库和部署只由老师决定，不自动做。真实学生记录不进 Git，也不写进 Issue、PR 和评论。
@@ -80,7 +79,7 @@ node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查：改过的
 
 ## 姊妹项目
 
-C++ 课件是仓库 `lixuanan2/cpp-for-youth`，用同一套模板。跨课程的规则写在仓库最外层 [AGENTS.md](../AGENTS.md) 的“跨课程的规则”：本仓库为主，`template/`、`tools/`、`vendor/` 只在这里（`basics/` 里）改，C++ 有需要时提过来，改好后由维护者同步过去，再跑那边的检查。老师本机有主文件夹的话，C++ 课在 `../../cpp-for-youth/`，同步命令在主文件夹的 `AGENTS.md`，那只是老师本机的补充。
+C++ 课件（`lixuanan2/cpp-for-youth`）用同一套 `template/`、`tools/`、`vendor/`，只在这里改，规则见仓库最外层 [AGENTS.md](../AGENTS.md) 的“跨课程的规则”。
 
 ## 旧资料
 

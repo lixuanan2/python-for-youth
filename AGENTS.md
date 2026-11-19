@@ -11,7 +11,7 @@
 
 - 做课、改课先读 `basics/AGENTS.md`，命令都在 `basics/` 里运行。教学要求在 `basics/PROMPT.md`。
 - 项目课和基础课件不同：代码在学生自己的电脑上写和运行，老师给素材、前端和测试，学生只写后端逻辑。第一个项目是井字棋。做项目课不改 `basics/`，命令在 `project/` 里运行。
-- `basics/` 自带模板、工具和字体（`template/`、`tools/`、`vendor/`）。`project/` 有自己的工具，课件直接读 `basics/` 的模板、字体和 IDE 设置，只读不改，自己的样式放 `project/template/`。
+- `basics/` 自带模板、工具和字体（`template/`、`tools/`、`vendor/`）。`project/` 有自己的工具，课件直接读 `basics/` 的模板、字体和 IDE 设置，只读不改，自己的样式放 `project/template/`。项目课的课件页还没用版式，照绝对定位写。
 
 ## 跨课程的规则
 
@@ -19,15 +19,15 @@
 
 - 一律用相对路径：课件里的链接、文档和给老师的命令都不写绝对路径。给命令时写清在哪个文件夹里运行，比如“在 `basics/` 里运行”。
 - 课件是上课讲的，不写“必做”“选做”“作业”这类字样，题目也不分等级。课后作业老师另外布置。
-- 只改一个值、结果一眼能看到的地方，用黄色框让学生直接在页面上改，省掉打开 IDE 的时间。多行输出、循环、改结构、读报错、运行完整程序，或者做起来复杂、容易出错的，都用 IDE，不勉强。具体写法见 [.claude/skills/python-lesson/SKILL.md](.claude/skills/python-lesson/SKILL.md) 的“黄色框”，每课几处、放在哪里见 [basics/PROMPT.md](basics/PROMPT.md) 的“互动”。
+- 只改一个值、结果一眼能看到的地方用黄色框，其余用 IDE。什么时候用见 [basics/PROMPT.md](basics/PROMPT.md) 的“互动”，写法见 [.claude/skills/python-lesson/SKILL.md](.claude/skills/python-lesson/SKILL.md) 的“黄色框”。
+- 基础课件每页都用版式（`basics/template/layouts.css`）：页面写版式和格子，不写坐标；代码框只写代码，颜色和字号由构建生成。写法见 [basics/PROMPT.md](basics/PROMPT.md) 的“版式和格子”。
 - `basics/` 里的 `template/`、`tools/`、`vendor/` 是 Python 课和 C++ 课（[lixuanan2/cpp-for-youth](https://github.com/lixuanan2/cpp-for-youth)）共用的，只在本仓库改，检查通过后由维护者同步到 C++ 课，再跑那边的检查。C++ 课需要改共用文件时也提到这里来。
 
 老师本机有主文件夹的话（本仓库的上一层，里面还放着 C++ 课），那里的 `AGENTS.md` 还写了几门课怎么一起管理、同步共用文件的命令。它只是老师本机的补充，上面的规则不依赖它。
 
 ## 最外层
 
-- `README.md`：宣传门面，写给老师、机构和逛 GitHub 的人。最上面两三句英文，正文中文。改了要同步 `home/index.html`，两者内容一致。
-- `home/index.html`：网站首页 `https://lixuanan2.github.io/python-for-youth/`，手写，不经过构建。首页用的视频和封面放在 `home/media/`（文件名用英文），发布时整个 `home/` 复制到网站最外层，比如 `https://lixuanan2.github.io/python-for-youth/media/tictactoe-demo.mp4`。README 用的图片（按钮、演示 GIF）放在 `.github/assets/`，不发布到网站。README 里放 GIF（GitHub 播不了仓库里的 mp4），点开链到网站上带声音的 mp4；首页用 `<video controls>` 加封面，放在对应模块的卡片里，不自动播放。用到的字体由发布网站的那一步从 `basics/vendor/fonts/` 复制到网站的 `fonts/`。
+- `README.md` 和 `home/index.html`（网站首页 `https://lixuanan2.github.io/python-for-youth/`）：宣传门面，写给老师、机构和逛 GitHub 的人，最上面两三句英文，正文中文。两个文件都由 `basics/tools/promo.py` 生成，不要手改：文字只改 `home/content.json`（写法见 `promo.py` 开头），首页的样式和开头的互动编辑器在 `home/page.html`，改完在 `basics/` 里运行 `python3 tools/build.py`。`check.py` 查两者和 `content.json` 一致。C++ 课用同一个 `promo.py`，各有自己的 `content.json` 和 `page.html`。首页用的视频和封面放在 `home/media/`（文件名用英文），发布时整个 `home/` 复制到网站最外层，比如 `https://lixuanan2.github.io/python-for-youth/media/tictactoe-demo.mp4`。README 用的图片（按钮、演示 GIF）放在 `.github/assets/`，不发布到网站。README 里放 GIF（GitHub 播不了仓库里的 mp4），点开链到网站上带声音的 mp4；首页用 `<video controls>` 加封面，放在对应模块的卡片里，不自动播放。用到的字体由发布网站的那一步从 `basics/vendor/fonts/` 复制到网站的 `fonts/`。
 - `.github/workflows/check.yml` 先在各模块文件夹里跑检查：`check` 在 Ubuntu 和 Windows 上跑 `tools/check.py`，每次都跑；`browser` 在 Ubuntu 的 Chrome 里跑 `tools/check_browser.mjs`，查什么由 `.github/browser_plan.py` 按改动决定：只改 `README.md`、`home/` 这类文字不开浏览器，只改几节课或一个项目就只查它们，改了模板、页面工具或工作流就全量，basics 分 4 台机器并行。每周一和手动运行都是全量。两项都通过后，`deploy` 才把 `home/` 和各模块的 `dist/` 组装成网站发布：首页在最外层，`basics/dist/` 放到 `/basics/`。`deploy` 还按 `ide/` 构建课程用的 IDE，放到 `/ide/`；`project/dist/` 放到 `/project/`。`project` 这一项在 Ubuntu 和 Windows 上跑项目课的检查。只有 `main` 上的推送和手动运行会发布，PR 只检查。
 - `ide/`：课程用的在线 IDE，是固定版本的 JupyterLite，Python（Pyodide）一起发布，学生打开时不从 CDN 下载。只提交版本和配置：`requirements.txt` 定 JupyterLite 的版本，`prepare.py` 定 Pyodide 的版本，下载并核对哈希，只留内核启动要用的包。构建结果不进 Git，由 `deploy` 生成。本机试：在 `ide/` 里 `pip install -r requirements.txt`、`python prepare.py`、`jupyter lite build`，再用任意静态服务器打开 `_output/repl/index.html`。
 - `CONTRIBUTING.md`、`LICENSE.md`、`.github/` 的模板管整个仓库。
@@ -36,6 +36,6 @@
 ## 新增模块
 
 1. 新建 `<英文名>/` 文件夹，写它自己的 `AGENTS.md`、`CLAUDE.md`（内容 `@AGENTS.md`）和 `README.md`。
-2. 在上面的表格、宣传 `README.md` 和 `home/index.html` 的“模块和进度”里加上它。
+2. 在上面的表格和 `home/content.json` 的“模块和进度”里加上它，再构建一次。
 3. 在 `check.yml` 里加上它的检查（`check` 和 `browser` 各一步），再在 `deploy` 里加一行复制它的 `dist/`。
 4. 现在写死 `basics/` 的地方要一起改：`.claude/skills/python-lesson/SKILL.md` 只管基础课件，新模块要么另写 skill，要么在这个 skill 里写清各模块的路径；`.github/pull_request_template.md` 的自查清单；`CONTRIBUTING.md` 的“想直接改”和共用文件那一段。

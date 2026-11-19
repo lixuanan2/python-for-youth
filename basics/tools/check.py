@@ -584,6 +584,8 @@ def main():
     stale = [lesson['id'] for lesson in builder.stale_pdfs()]
     assert not stale, f'PDF older than its deck, run python3 tools/build.py --pdf: {", ".join(stale)}'
     docs = check_docs()
+    import promo
+    promo.check()  # README.md and home/index.html are what home/content.json makes
     traced = sum(t for _, t, _ in TRACES)
     untraced = [(name, n, note) for name, _, skipped in TRACES for n, note in skipped]
     if '--traces' in sys.argv:

@@ -89,6 +89,15 @@ const wanted = l => chosen.includes(l.id) || (words.includes('--sample') && samp
   || (words.includes('--changed') && (needs(l.id) || (sharedNeeds() && sample.includes(l))));
 const picked = chosen.length || words.includes('--sample') || words.includes('--changed') ? allLessons.filter(wanted) : allLessons;
 const targets = shard ? picked.filter((_, i) => i % +shard[2] === +shard[1] - 1) : picked;
+// Leftovers: screenshots this tool did not write (taken by hand, or of a lesson that was renamed) and the baselines of lessons
+// that are gone. A lesson's own folder is emptied when it is checked, so what is left in .preview is always its last run.
+if (!process.env.CI) {
+  const kept = new Set([...allLessons.map(l => l.id), 'changed.txt', 'home-phone.png', 'deck-phone.png']);
+  for (const dir of ['.preview', SHOTS]) {
+    if (!fs.existsSync(dir)) continue;
+    for (const name of fs.readdirSync(dir)) if (!kept.has(name)) fs.rmSync(path.join(dir, name), {recursive: true, force: true});
+  }
+}
 if (!targets.length) {
   console.log(shard ? `Shard ${shard[0]} has no lesson.` : 'Nothing changed since the last local pass: no lesson to check. CI still checks what changed.');
   process.exit(0);
