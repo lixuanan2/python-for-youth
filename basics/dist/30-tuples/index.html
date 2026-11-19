@@ -699,8 +699,8 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="想一次交回两个">
   <h2 class="t r">有些东西总是成对出现</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">地图上的一个点</small><pre style="font-size:52px">横 3，竖 5</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">想让函数交回</small><pre style="font-size:52px">最低分和最高分</pre></div>
+    <div class="slip r d1 short"><small>地图上的一个点</small><pre>横 3，竖 5</pre></div>
+    <div class="slip tilt r d2 short"><small>想让函数交回</small><pre>最低分和最高分</pre></div>
   </div>
   <p class="say r d3">一个点要两个数才说得清，一个学生有名字也有分数。第 15 课的 return 只交回一个值，可有时想一次交回两个。<br>元组能把几个值打成一包，当成一个东西传来传去，用的时候再拆开。</p>
   <div class="foot"></div>
@@ -728,7 +728,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code"><span class="ln">p = (<span class="m">3</span>, <span class="m">5</span>)</span><span class="ln l2">p[<span class="m">0</span>] = <span class="m">9</span></span><span class="ln"><span class="f">print</span>(p)</span></pre></div>
   <div class="answer turns">
     <p class="say only1">第 10 课的列表这样改是可以的。<br>元组呢？</p>
-    <div class="slip tilt step s2" style="width:600px"><small>屏幕上</small><pre style="font-size:44px;white-space:pre-wrap">TypeError</pre></div>
+    <div class="slip tilt step s2 short" style="width:600px"><small>屏幕上</small><pre style="white-space:pre-wrap">TypeError</pre></div>
   </div>
   <p class="say step s2">报 TypeError：元组不支持给某一格重新赋值。元组打好包，就不能给哪一格重新赋值，比列表“牢”。<br>要换一个点，就整个重新写：p = (9, 5)。这样也不容易被别的代码不小心改掉。</p>
   <div class="foot"></div>
@@ -760,9 +760,9 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:150px">交回</i><b style="font-size:60px;white-space:nowrap">(2, 9)</b></div>
-    <div class="box out step s2"><i style="width:150px">low</i><b style="font-size:72px">2</b></div>
-    <div class="box out step s2"><i style="width:150px">high</i><b style="font-size:72px">9</b></div>
+    <div class="box step long"><i>交回</i><b style="white-space:nowrap">(2, 9)</b></div>
+    <div class="box out step s2 long"><i>low</i><b>2</b></div>
+    <div class="box out step s2 long"><i>high</i><b>9</b></div>
   </div>
 </section>
 
@@ -802,9 +802,9 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code" data-file="solutions/04_stats.py"><span class="ln l3"><span class="k">def</span> <span class="f">low_high</span>(nums):</span><span class="ln l3">    <span class="k">return</span> <span class="f">min</span>(nums), <span class="f">max</span>(nums)</span><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">scores = []</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2 l3">low, high = <span class="f">low_high</span>(scores)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"最低"</span>, low, <span class="s">"最高"</span>, high)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"相差"</span>, high - low)</span></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1" style="font-size:34px">先读入 4，再读 90、85、77、96，放进列表。</p>
-      <p class="say only2" style="font-size:34px">调用 low_high，交回 (77, 96)，拆成 low 和 high。</p>
-      <p class="say only3" style="font-size:34px">两个值都拿到了，还能接着算：96 - 77 是 19。</p>
+      <p class="say only1 small">先读入 4，再读 90、85、77、96，放进列表。</p>
+      <p class="say only2 small">调用 low_high，交回 (77, 96)，拆成 low 和 high。</p>
+      <p class="say only3 small">两个值都拿到了，还能接着算：96 - 77 是 19。</p>
     </div>
     <div class="step s3" style="font:400 48px/1.6 var(--text);color:var(--clay)">最低 77 最高 96<br>相差 19</div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
@@ -817,7 +817,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="turn">
     <h2 class="r d1">再交回平均分</h2>
     <p class="say r d1">在例题上改：函数改成一次交回三个值：最低、最高、平均分，平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。输入和例题一样，n 至少是 1。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 4、90、85、77、96，第三行</small><pre>平均 87.0</pre></div><div><small>输入 1、60，第三行</small><pre>平均 60.0</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 4、90、85、77、96，第三行</small><pre>平均 87.0</pre></div><div><small>输入 1、60，第三行</small><pre>平均 60.0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">交回几个，拆的时候左边就写几个名字。</p>
   </div>
   <a class="ide r d3" data-code="# 【再交回平均分】&#10;# 在例题上改：函数改成一次交回三个值：最低、最高、平均分，&#10;#   平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。&#10;#   输入和例题一样，n 至少是 1。&#10;# 例如输入（每个一行）：4、90、85、77、96&#10;# 应该输出：&#10;#   最低 77 最高 96&#10;#   相差 19&#10;#   平均 87.0&#10;# 提示：让函数多交回一个。&#10;# ↓ 在下面这段程序上改&#10;&#10;def low_high(nums):&#10;    return min(nums), max(nums)&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;low, high = low_high(scores)&#10;print(&quot;最低&quot;, low, &quot;最高&quot;, high)&#10;print(&quot;相差&quot;, high - low)&#10;">▶ 在 IDE 开始改</a>
@@ -851,10 +851,10 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:150px">最近的宝藏</h2>
   <p class="say r d2">你站在 (0, 0)，只能横着或竖着走，走到 (x, y) 要 |x| + |y| 步。第一行读入宝藏个数 n，至少 1 个，接下来 n 行每行两个整数 x 和 y，用空格隔开。<br>找出最近的宝藏，<b>一样近时选先出现的</b>。输出两行：它的位置，写成 (1, -2) 的样子；还有“几 步”。</p>
-  <div class="slip tilt2 r d3" style="width:460px"><small>依次输入</small><pre style="font-size:44px;white-space:pre">3
+  <div class="slip tilt2 r d3 short" style="width:460px"><small>依次输入</small><pre style="white-space:pre">3
 3 4
 -1 2
-5 0</pre><small style="margin-top:14px">输出</small><pre style="font-size:44px;white-space:pre">(-1, 2)
+5 0</pre><small>输出</small><pre style="white-space:pre">(-1, 2)
 3 步</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【最近的宝藏】&#10;# 你站在 (0, 0)，只能横着或竖着走，走到 (x, y) 要 |x| + |y| 步。&#10;#   第一行读入宝藏个数 n，至少 1 个，&#10;#   接下来 n 行每行两个整数 x 和 y，用空格隔开。&#10;# 找出最近的宝藏，一样近时选先出现的。输出两行：它的位置，&#10;#   写成 (1, -2) 的样子；还有“几 步”。&#10;# 例如输入（每个一行）：3、3 4、-1 2、5 0&#10;# 应该输出（每个一行）：(-1, 2) / 3 步&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>

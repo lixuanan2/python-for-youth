@@ -11,9 +11,9 @@
 <section class="slide clay lay-notes" aria-label="要几个箱子">
   <h2 class="t r">23 个苹果，每箱装 5 个，要几个箱子？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">直接除</small><pre style="font-size:72px">4.6</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">装满的</small><pre style="font-size:72px">4 箱</pre></div>
-    <div class="slip tilt r d3"><small style="font-size:34px">剩下 3 个也要一个箱子</small><pre style="font-size:72px">一共 5 箱</pre></div>
+    <div class="slip r d1 short"><small>直接除</small><pre>4.6</pre></div>
+    <div class="slip r d2 short"><small>装满的</small><pre>4 箱</pre></div>
+    <div class="slip tilt r d3 short"><small>剩下 3 个也要一个箱子</small><pre>一共 5 箱</pre></div>
   </div>
   <p class="say r d3">箱子没有 0.6 个。有剩下的，就得多拿一个，这叫“向上取整”。<br>这种常用的数学工具，Python 早就写好了，借来就能用。</p>
   <div class="foot"></div>
@@ -30,9 +30,9 @@
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:220px;white-space:nowrap">abs(-5)</i><b style="font-size:84px">5</b></div>
-    <div class="box step"><i style="width:220px;white-space:nowrap">abs(3)</i><b style="font-size:84px">3</b></div>
-    <div class="box out step s2"><i style="width:220px;white-space:nowrap">差多少</i><b style="font-size:84px">8</b></div>
+    <div class="box step"><i>abs(-5)</i><b>5</b></div>
+    <div class="box step"><i>abs(3)</i><b>3</b></div>
+    <div class="box out step s2"><i>差多少</i><b>8</b></div>
   </div>
 </section>
 
@@ -48,9 +48,9 @@
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">sqrt</i><b style="font-size:84px">4.0</b></div>
-    <div class="box step s2"><i style="width:170px">floor</i><b style="font-size:84px">4</b></div>
-    <div class="box out step s3"><i style="width:170px">ceil</i><b style="font-size:84px">5</b></div>
+    <div class="box step"><i>sqrt</i><b>4.0</b></div>
+    <div class="box step s2"><i>floor</i><b>4</b></div>
+    <div class="box out step s3"><i>ceil</i><b>5</b></div>
   </div>
 </section>
 
@@ -107,7 +107,7 @@ print(math.sqrt(16))</pre></div>
   <div class="editor r d1"><div class="tab">no_import.py（只阅读）</div>
 <pre class="code">print(math.sqrt(16))</pre></div>
   <div class="answer">
-    <div class="slip tilt r d2" style="width:600px"><small>屏幕上</small><pre style="font-size:36px;white-space:pre-wrap">NameError: name 'math' is not defined</pre></div>
+    <div class="slip tilt r d2 longest" style="width:600px"><small>屏幕上</small><pre style="white-space:pre-wrap">NameError: name 'math' is not defined</pre></div>
   </div>
   <div class="turns r d3">
     <p class="say only1">程序不认识 math，报 NameError。工具盒要先借来，才能用里面的工具。</p>
@@ -128,9 +128,9 @@ print(math.sqrt(16))</pre></div>
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">n / k</i><b style="font-size:84px">4.6</b></div>
-    <div class="box out step s2"><i style="width:170px">输出</i><b style="font-size:84px">5</b></div>
-    <div class="box out step s3"><i style="width:170px">20 个</i><b style="font-size:84px">4</b></div>
+    <div class="box step"><i>n / k</i><b>4.6</b></div>
+    <div class="box out step s2"><i>输出</i><b>5</b></div>
+    <div class="box out step s3"><i>20 个</i><b>4</b></div>
   </div>
 </section>
 
@@ -156,7 +156,7 @@ print(math.sqrt(16))</pre></div>
   <div class="turn">
     <h2 class="r d1">只数装满的箱子</h2>
     <p class="say r d1">分两行读入东西的个数 n 和每箱装几个 k，k 至少是 1。输出能装满几箱，<b>剩下装不满的不算</b>。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr 1fr"><div><small>输入 23 和 5</small><pre>4</pre></div><div><small>输入 20 和 5</small><pre>4</pre></div><div><small>输入 4 和 5</small><pre>0</pre></div></div>
+    <div class="sheet three r d2"><div><small>输入 23 和 5</small><pre>4</pre></div><div><small>输入 20 和 5</small><pre>4</pre></div><div><small>输入 4 和 5</small><pre>0</pre></div></div>
   </div>
   <a class="ide r d3" data-code-file="starter/04_full_boxes.py">▶ 在 IDE 开始改</a>
 </section>
@@ -185,8 +185,8 @@ print(math.sqrt(16))</pre></div>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">side</i><b style="font-size:84px">7.0</b></div>
-    <div class="box out step s2"><i style="width:170px">int</i><b style="font-size:84px">7</b></div>
+    <div class="box step"><i>side</i><b>7.0</b></div>
+    <div class="box out step s2"><i>int</i><b>7</b></div>
   </div>
 </section>
 
@@ -218,7 +218,7 @@ print(math.sqrt(16))</pre></div>
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">拼正方形</h2>
   <p class="say r d2">读入方块数 n，n 不是负数。用这些方块拼一个实心正方形，每行每列一样多，可以有剩下的。<br>输出最大的正方形每边有几块。</p>
-  <div class="slip tilt2 r d3" style="width:520px"><small>输入 17</small><pre>4</pre><small style="margin-top:14px">输入 16</small><pre>4</pre><small style="margin-top:14px">输入 15</small><pre>3</pre></div>
+  <div class="slip tilt2 r d3 short" style="width:520px"><small>输入 17</small><pre>4</pre><small>输入 16</small><pre>4</pre><small>输入 15</small><pre>3</pre></div>
   <div class="go r d3"><a class="ide" data-code-file="starter/06_big_square.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

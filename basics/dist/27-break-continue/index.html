@@ -699,8 +699,8 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="找到了还在找">
   <h2 class="t r">找到了，还在接着找？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">第 25 课的鸡兔同笼</small><pre style="font-size:52px">找到了还试完</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">第 22 课一直问到输对</small><pre style="font-size:52px">要记着 done</pre></div>
+    <div class="slip r d1 short"><small>第 25 课的鸡兔同笼</small><pre>找到了还试完</pre></div>
+    <div class="slip tilt r d2 short"><small>第 22 课一直问到输对</small><pre>要记着 done</pre></div>
   </div>
   <p class="say r d3">循环原来只会从头转到尾。有时我们想在中间就停下：找到了就别再找，输对了就别再问。<br>这节课学两个词：break 是“跳出”，整个循环马上结束；continue 是“继续”，跳过这一次，直接进下一圈。</p>
   <div class="foot"></div>
@@ -751,9 +751,9 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="editor" style="--fs:46px"><div class="tab">chat.py</div>
 <pre class="code" data-file="solutions/02_chat.py"><span class="ln l1 l2 l3"><span class="k">while</span> <span class="k">True</span>:</span><span class="ln l1 l2 l3">    word = <span class="f">input</span>()</span><span class="ln l1 l2 l3">    <span class="k">if</span> word == <span class="s">"再见"</span>:</span><span class="ln l3">        <span class="k">break</span></span><span class="ln l1 l2">    <span class="f">print</span>(<span class="s">"你说"</span>, word)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"拜拜"</span>)</span></pre></div>
   <div class="turns">
-      <p class="say only1" style="font-size:34px">while True 的意思是“一直转”。不知道要聊几句，就先一直转，等着说停。输入“你好”，不是再见，照着说一遍。</p>
-      <p class="say only2" style="font-size:34px">输入“吃了吗”，还不是再见，又说一遍，再回到开头读下一句。</p>
-      <p class="say only3" style="font-size:34px">输入“再见”，break 跳出循环，最后说“拜拜”。</p>
+      <p class="say only1 small">while True 的意思是“一直转”。不知道要聊几句，就先一直转，等着说停。输入“你好”，不是再见，照着说一遍。</p>
+      <p class="say only2 small">输入“吃了吗”，还不是再见，又说一遍，再回到开头读下一句。</p>
+      <p class="say only3 small">输入“再见”，break 跳出循环，最后说“拜拜”。</p>
     </div>
   <div class="right">
     <div style="font:400 48px/1.6 var(--text);color:var(--clay)">你说 你好<br><span class="step s2">你说 吃了吗</span><br><span class="step s3">拜拜</span></div>
@@ -766,7 +766,7 @@ dialog p{color:var(--muted);font-size:15px}
   <h2 class="t">第 22 课的例题，换个写法</h2>
   <div class="editor" style="--fs:33px"><div class="tab">retry.py</div>
 <pre class="code" data-file="solutions/03_retry.py"><span class="ln"><span class="k">while</span> <span class="k">True</span>:</span><span class="ln">    <span class="k">try</span>:</span><span class="ln">        age = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">        <span class="k">break</span></span><span class="ln">    <span class="k">except</span> ValueError:</span><span class="ln">        <span class="f">print</span>(<span class="s">"不是整数，再输一次"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span></pre></div>
-  <p class="say" style="font-size:34px">转换成功，才走到 break；出错就跳到 except，break 被跳过，接着再问。<br>不用 done 记着，读起来就像在说：一直问，输对了就停。</p>
+  <p class="say small">转换成功，才走到 break；出错就跳到 except，break 被跳过，接着再问。<br>不用 done 记着，读起来就像在说：一直问，输对了就停。</p>
   <div class="right">
     <p class="say" style="font-size:36px;color:var(--muted)">依次输入 abc、3.5、12：</p>
     <p style="font:400 40px/1.6 var(--text);color:var(--clay);margin-top:16px">不是整数，再输一次<br>不是整数，再输一次<br>明年你 13 岁</p>
@@ -781,7 +781,7 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code" data-file="solutions/04_continue.py"><span class="ln l1 l2"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">11</span>):</span><span class="ln l2">    <span class="k">if</span> i % <span class="m">3</span> == <span class="m">0</span>:</span><span class="ln l2">        <span class="k">continue</span></span><span class="ln l1">    <span class="f">print</span>(i)</span></pre></div>
   <div class="turns">
       <p class="say only1">1 和 2 不是 3 的倍数，不进 if，照常输出。</p>
-      <p class="say only2" style="font-size:34px">i 是 3 时运行 continue：剩下的 print 不做了，直接去下一圈。6 和 9 也被跳过。<br>break 是整个循环结束，continue 只跳过这一次。</p>
+      <p class="say only2 small">i 是 3 时运行 continue：剩下的 print 不做了，直接去下一圈。6 和 9 也被跳过。<br>break 是整个循环结束，continue 只跳过这一次。</p>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
@@ -810,7 +810,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="turn">
     <h2 class="r d1">读到 0 就停，算总和</h2>
     <p class="say r d1">在例题上改：每行读入一个整数，读到 0 就停。停下以后输出前面所有数的和，<b>0 不算</b>。不知道一共几个数，所以用 while True。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入 5、8、-3、0</small><pre>10</pre></div><div><small>第一个就是 0</small><pre>0</pre></div></div>
+    <div class="sheet two r d2"><div><small>依次输入 5、8、-3、0</small><pre>10</pre></div><div><small>第一个就是 0</small><pre>0</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">输入要先变成整数，总和从 0 开始。</p>
   </div>
   <a class="ide r d3" data-code="# 【读到 0 就停，算总和】&#10;# 在例题上改：每行读入一个整数，读到 0 就停。&#10;#   停下以后输出前面所有数的和，0 不算。不知道一共几个数，&#10;#   所以用 while True。&#10;# 例如输入（每个一行）：5、8、-3、0&#10;# 应该输出：10&#10;# 提示：把聊天程序改成记账。&#10;# ↓ 在下面这段程序上改&#10;&#10;while True:&#10;    word = input()&#10;    if word == &quot;再见&quot;:&#10;        break&#10;    print(&quot;你说&quot;, word)&#10;print(&quot;拜拜&quot;)&#10;">▶ 在 IDE 开始改</a>
@@ -844,11 +844,11 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:160px">整理成绩单</h2>
   <p class="say r d2">不停读入分数，每行一个整数，读到 -1 就结束。不在 0 到 100 之间的是写错了，<b>跳过不算</b>。<br>输出两行：“有效 几 个”和“平均 多少”，平均分用 round 保留 1 位小数。一个有效分数也没有，就输出“没有有效分数”。</p>
-  <div class="slip tilt2 r d3" style="width:480px"><small>依次输入</small><pre style="font-size:44px">90
+  <div class="slip tilt2 r d3" style="width:480px"><small>依次输入</small><pre>90
 80
 120
 85
--1</pre><small style="margin-top:14px">输出</small><pre style="font-size:44px;white-space:pre">有效 3 个
+-1</pre><small>输出</small><pre style="white-space:pre">有效 3 个
 平均 85.0</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【整理成绩单】&#10;# 不停读入分数，每行一个整数，读到 -1 就结束。&#10;#   不在 0 到 100 之间的是写错了，跳过不算。&#10;# 输出两行：“有效 几 个”和“平均 多少”，&#10;#   平均分用 round 保留 1 位小数。一个有效分数也没有，&#10;#   就输出“没有有效分数”。&#10;# 例如输入（每个一行）：90、80、120、85、-1&#10;# 应该输出（每个一行）：有效 3 个、平均 85.0&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>

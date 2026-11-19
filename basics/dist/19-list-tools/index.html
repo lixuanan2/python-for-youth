@@ -699,13 +699,13 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="以前写好几行">
   <h2 class="t r">以前要写好几行的事</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">第 8 课：算总分</small><pre style="font-size:40px">total = 0
+    <div class="slip r d1 longest"><small>第 8 课：算总分</small><pre>total = 0
 for s in scores:
     total += s</pre></div>
-    <div class="slip r d2"><small style="font-size:34px">第 9 课：找最大</small><pre style="font-size:40px">best = scores[0]
+    <div class="slip r d2 longest"><small>第 9 课：找最大</small><pre>best = scores[0]
 for s in scores:
     if s > best: …</pre></div>
-    <div class="slip tilt r d3"><small style="font-size:34px">今天</small><pre style="font-size:52px">sum(scores)
+    <div class="slip tilt r d3 longest"><small>今天</small><pre>sum(scores)
 max(scores)</pre></div>
   </div>
   <p class="say r d3">自己写过一遍，就知道它们是怎么算出来的。现在可以用 Python 自带的工具，一句话完成。</p>
@@ -724,10 +724,10 @@ max(scores)</pre></div>
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:150px">sum</i><b style="font-size:72px">245</b></div>
-    <div class="box step s2"><i style="width:150px">max</i><b style="font-size:72px">95</b></div>
-    <div class="box step s2"><i style="width:150px">min</i><b style="font-size:72px">70</b></div>
-    <div class="box out step s3" style="display:block"><i style="display:block;width:auto">平均</i><b style="display:block;font-size:52px">81.66666666666667</b></div>
+    <div class="box step longer"><i>sum</i><b>245</b></div>
+    <div class="box step s2 longer"><i>max</i><b>95</b></div>
+    <div class="box step s2 longer"><i>min</i><b>70</b></div>
+    <div class="box out step s3 longer" style="display:block"><i style="display:block">平均</i><b style="display:block">81.66666666666667</b></div>
   </div>
 </section>
 
@@ -738,7 +738,7 @@ max(scores)</pre></div>
 <pre class="code"><span class="ln">scores = []</span><span class="ln"><span class="f">print</span>(<span class="f">max</span>(scores))</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2" style="width:560px"><small>屏幕上</small><pre style="font-size:52px">ValueError</pre></div>
+    <div class="slip tilt step s2 short" style="width:560px"><small>屏幕上</small><pre>ValueError</pre></div>
   </div>
   <div class="turns">
       <p class="say only1">输出 0？什么也不输出？还是报错？</p>
@@ -760,9 +760,9 @@ max(scores)</pre></div>
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:100px">从小</i><b style="font-size:50px">[70, 80, 95]</b></div>
-    <div class="box step s2"><i style="width:100px">从大</i><b style="font-size:50px">[95, 80, 70]</b></div>
-    <div class="box out step s3"><i style="width:100px">原来</i><b style="font-size:50px">[80, 95, 70]</b></div>
+    <div class="box step longest"><i>从小</i><b>[70, 80, 95]</b></div>
+    <div class="box step s2 longest"><i>从大</i><b>[95, 80, 70]</b></div>
+    <div class="box out step s3 longest"><i>原来</i><b>[80, 95, 70]</b></div>
   </div>
 </section>
 
@@ -810,9 +810,9 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:150px">小红</i><b style="font-size:72px">True</b></div>
-    <div class="box step"><i style="width:150px">小刚</i><b style="font-size:72px">False</b></div>
-    <div class="box out step s2"><i style="width:150px">not in</i><b style="font-size:72px">True</b></div>
+    <div class="box step"><i>小红</i><b>True</b></div>
+    <div class="box step"><i>小刚</i><b>False</b></div>
+    <div class="box out step s2"><i>not in</i><b>True</b></div>
   </div>
 </section>
 
@@ -823,8 +823,8 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
 <pre class="code" data-file="solutions/04_report.py"><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">scores = []</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2"><span class="f">print</span>(<span class="s">"总分"</span>, <span class="f">sum</span>(scores))</span><span class="ln l2"><span class="f">print</span>(<span class="s">"最高"</span>, <span class="f">max</span>(scores))</span><span class="ln l2"><span class="f">print</span>(<span class="s">"最低"</span>, <span class="f">min</span>(scores))</span></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1" style="font-size:34px">前四行还是老样子：输入 3，再输入 80、95、70，存进列表。</p>
-      <p class="say only2" style="font-size:34px">后三行，一行一个工具。以前要好几个循环，现在一眼就看得懂。</p>
+      <p class="say only1 small">前四行还是老样子：输入 3，再输入 80、95、70，存进列表。</p>
+      <p class="say only2 small">后三行，一行一个工具。以前要好几个循环，现在一眼就看得懂。</p>
     </div>
     <div class="step s2" style="font:400 56px/1.5 var(--code);color:var(--clay)">总分 245<br>最高 95<br>最低 70</div>
     <a class="ide step s2">▶ 在 IDE 打开</a>
@@ -837,7 +837,7 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
   <div class="turn">
     <h2 class="r d1">排一张名次表</h2>
     <p class="say r d1">第一行读入人数 n，接下来 n 行，每行一个整数分数。从高到低输出名次和分数，一行一个，<b>分数一样也各占一个名次</b>。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>依次输入</small><pre style="font-size:44px">3、80、95、70</pre></div><div><small>输出</small><pre style="line-height:1.2">1 95
+    <div class="sheet two r d2"><div><small>依次输入</small><pre style="font-size:44px">3、80、95、70</pre></div><div><small>输出</small><pre style="line-height:1.2">1 95
 2 80
 3 70</pre></div></div>
   </div>
@@ -868,8 +868,8 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:150px">[:2]</i><b style="font-size:60px">[10, 20]</b></div>
-    <div class="box out step s2"><i style="width:150px">[1:-1]</i><b style="font-size:60px">[20, 30, 40]</b></div>
+    <div class="box step longer"><i>[:2]</i><b>[10, 20]</b></div>
+    <div class="box out step s2 longer"><i>[1:-1]</i><b>[20, 30, 40]</b></div>
   </div>
 </section>
 
@@ -906,7 +906,7 @@ print(a, x)</pre><p class="res step s2" style="font-size:60px">[1, 2, 3] None</p
 7
 8
 10
-6</pre><small style="margin-top:14px">输出</small><pre>8.0</pre></div>
+6</pre><small>输出</small><pre>8.0</pre></div>
   <div class="go r d3"><a class="ide" data-code="# 【比赛评分】&#10;# 第一行读入评委人数 n，至少 3 人，接下来 n 行，每行一个整数分数。&#10;# 去掉一个最高分、一个最低分，输出剩下分数的平均分。&#10;# 最高分或最低分有好几个，也只去掉一个。直接输出算出来的平均分，&#10;#   比如 8.0、2.5。&#10;# 例如输入（每个一行）：5、9、7、8、10、6&#10;# 应该输出：8.0&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>

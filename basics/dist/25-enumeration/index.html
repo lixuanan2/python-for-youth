@@ -699,8 +699,8 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-2" class="slide clay lay-notes" aria-label="忘了密码锁">
   <h2 class="t r">行李箱的密码忘了怎么办？</h2>
   <div class="notes">
-    <div class="slip r d1"><small style="font-size:34px">三位数的密码锁</small><pre style="font-size:60px">000 到 999</pre></div>
-    <div class="slip tilt r d2"><small style="font-size:34px">一个个拨过去</small><pre style="font-size:60px">总能打开</pre></div>
+    <div class="slip r d1 short"><small>三位数的密码锁</small><pre>000 到 999</pre></div>
+    <div class="slip tilt r d2 short"><small>一个个拨过去</small><pre>总能打开</pre></div>
   </div>
   <p class="say r d3">不知道答案，就把所有可能都试一遍。最多拨 1000 次，一定能找到。<br>人拨很累，计算机试起来飞快。这种办法叫枚举，也叫“穷举”：挨个列出来，一个个检查。</p>
   <div class="foot"></div>
@@ -717,8 +717,8 @@ dialog p{color:var(--muted);font-size:15px}
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i style="width:170px">要试</i><b style="font-size:72px">144 次</b></div>
-    <div class="box out step s2"><i style="width:170px">屏幕上</i><b style="font-size:100px">12</b></div>
+    <div class="box step"><i>要试</i><b>144 次</b></div>
+    <div class="box out step s2"><i>屏幕上</i><b>12</b></div>
   </div>
 </section>
 
@@ -809,7 +809,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="turn">
     <h2 class="r d1">没有答案时说一声</h2>
     <p class="say r d1">脚数是单数，或者太多太少，就怎么也凑不上。在例题上改：一种答案也没有时，输出“没有答案”。输入还是两行：头数和脚数。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1fr"><div><small>输入 35 和 94</small><pre>鸡 23 兔 12</pre></div><div><small>输入 10 和 21</small><pre>没有答案</pre></div></div>
+    <div class="sheet two r d2"><div><small>输入 35 和 94</small><pre>鸡 23 兔 12</pre></div><div><small>输入 10 和 21</small><pre>没有答案</pre></div></div>
     <p class="say r d3" style="margin-top:20px;font-size:32px;color:var(--muted)">第 22 课的 done 记着“输对了没有”，这里也可以记着“找到过没有”。</p>
   </div>
   <a class="ide r d3" data-code="# 【没有答案时说一声】&#10;# 脚数是单数，或者太多太少，就怎么也凑不上。在例题上改：&#10;#   一种答案也没有时，输出“没有答案”。输入还是两行：头数和脚数。&#10;# 例如输入（每个一行）：10、21&#10;# 应该输出：没有答案&#10;# 提示：一个也没找到时，说一声。&#10;# 提示：用一个变量记住“找到过没有”。&#10;# ↓ 在下面这段程序上改&#10;&#10;heads = int(input())&#10;feet = int(input())&#10;for c in range(heads + 1):&#10;    r = heads - c&#10;    if c * 2 + r * 4 == feet:&#10;        print(&quot;鸡&quot;, c, &quot;兔&quot;, r)&#10;">▶ 在 IDE 开始改</a>
@@ -843,7 +843,7 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:150px">百钱买百鸡</h2>
   <p class="say r d2">一道一千多年前的古题：公鸡 5 元一只，母鸡 3 元一只，小鸡 1 元 3 只。读入一个整数 n，用 n 元正好买 n 只鸡，<b>小鸡要整 3 只地买</b>。<br>每种买法输出一行，公鸡从少到多，公鸡一样时母鸡从少到多。一种也没有就输出“没有答案”。</p>
-  <div class="slip tilt2 r d3" style="width:560px"><small>输入</small><pre>100</pre><small style="margin-top:14px">输出</small><pre style="font-size:38px;white-space:pre">公鸡 0 母鸡 25 小鸡 75
+  <div class="slip tilt2 r d3 longest" style="width:560px"><small>输入</small><pre>100</pre><small>输出</small><pre style="white-space:pre">公鸡 0 母鸡 25 小鸡 75
 公鸡 4 母鸡 18 小鸡 78
 公鸡 8 母鸡 11 小鸡 81
 公鸡 12 母鸡 4 小鸡 84</pre></div>
