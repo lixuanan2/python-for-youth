@@ -11,7 +11,7 @@
 
 - 做课、改课先读 `basics/AGENTS.md`，命令都在 `basics/` 里运行。教学要求在 `basics/PROMPT.md`。
 - 项目课和基础课件不同：代码在学生自己的电脑上写和运行，老师给素材、前端和测试，学生只写后端逻辑。第一个项目是井字棋。做项目课不改 `basics/`，命令在 `project/` 里运行。
-- `basics/` 自带模板、工具和字体（`template/`、`tools/`、`vendor/`）。`project/` 有自己的工具，课件直接读 `basics/` 的模板、字体和 IDE 设置，只读不改，自己的样式放 `project/template/`。项目课的课件页还没用版式，照绝对定位写。
+- `basics/` 自带模板、工具和字体（`template/`、`tools/`、`vendor/`）。`project/` 有自己的工具，课件直接读 `basics/` 的模板、字体和 IDE 设置，只读不改，自己的样式放 `project/template/`。项目课有自己的版式（`project/template/layouts.css`），和基础课的分开。
 
 ## 跨课程的规则
 

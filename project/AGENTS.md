@@ -10,7 +10,9 @@
 
 ## 不动 basics
 
-- 做项目课不改 `basics/` 里的任何文件。项目课的课件直接读 `basics/` 的模板、字体和 IDE 设置（`page.html`、`theme.css`、`deck.js`、`site.json` 的 `ide`），只读不改；项目自己要的样式和页面放在 `project/template/`。
+- 做项目课不改 `basics/` 里的任何文件。
+- 项目课的版式和样式自己管（`project/template/`），不用基础课的 `layouts.css`。
+- 放映的外壳仍然只读 `basics/`：`page.html`、`theme.css`、`deck.js`、字体和 `site.json` 的 `ide`。这样画笔、白板、缩略图这些放映功能跟着基础课一起更新，不用另外维护一份；basics 的模板改了，CI 也会把项目课一起查一遍。
 - 项目课的工具（`project/tools/`）和模板以 Python 课为准，改好后同步给 C++ 课。工具按 `site.json` 的 `language` 分 Python 和 C++，C++ 的那一支现在没有项目在用。
 
 ## 目录
@@ -24,9 +26,20 @@
 - `<项目>/draw_assets.py`：用标准库画 `templates/web/assets/` 里的棋盘和棋子（不用别人的图）。老师换自己的图片时文件名不变就行，不用运行它。
 - `<项目>/slide-images/`：课件里用的图片（比如“先看成品”的网页版截图），构建复制到 `dist/<项目>/slides/`。
 - `<项目>/answers/`：参考答案，构建生成，提交进仓库，给老师看，不进 `dist/` 的下载包。
-- `template/`：项目课共用的样式（`project.css` 给课件，`site.css` 给项目地图、开发文档和首页）。
+- `template/`：项目课共用的样式。`layouts.css` 是课件的版式，`project.css` 是构建生成的页（地图、怎么运行、每关开头、答案）的样式，`site.css` 给项目地图、开发文档和首页。
 - `tools/`：`build.py` 生成，`check.py` 和 `verify.py` 检查，`check_browser.mjs` 在 Chrome 里看课件和网页，`stagefiles.py` 生成每关的文件和开发文档。
 - `dist/`：生成结果，提交进仓库，不要手改，发布到网站的 `/project/`。`dist/index.html` 是项目课首页；`dist/<项目>/` 里有项目地图 `index.html`、开发文档 `guide.html`、课件 `slides/index.html`，`download/` 是发给学生的每关文件夹和 zip（没有答案）。
+
+## 版式
+
+`<项目>/slides.html` 里手写的每页写一种版式，或者是自由页；页面上不写 `left`、`top`，`check.py` 会查。
+
+- `lay-think` 一起想：`.editor` 放演示代码，`.slip` 放输出（在右边）。输出下面还有一句话时，把便签和这句话一起放进 `.side`。下面是 `.say` 和 `a.ide`。
+- `lay-quiz` 小测：左边是 `.editor`，或者 `.pic`（放棋盘这类图）；`.quiz` 在右边，`.fb` 在左边下面。
+- `lay-pair` 两栏：两个 `.col`，左栏按内容宽；一句话放在它说的那一栏里。
+- 自由页 `class="slide free"`：位置本身就是内容的页，比如“同一组函数，两个画面”，用绝对定位写。
+
+构建生成的页用 `project.css`，不用写版式。
 
 ## 学生拿到什么
 
