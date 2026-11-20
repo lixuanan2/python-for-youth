@@ -29,7 +29,7 @@
 python3 tools/build.py          # 生成 dist/，PDF 过期时提醒
 python3 tools/build.py --pdf    # 同时用 Chrome 重新打印页面变了的课的 PDF
 python3 tools/check.py          # 程序、答案、页面说法、路径、PDF 是否过期、整个仓库的文档链接
-node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查：改过的课，改了模板再加三节代表课
+node tools/check_browser.mjs --changed  # 真实 Chrome 逐页、逐步检查：改过的课，改了模板再加三节代表课
 ```
 
 `check_browser.mjs` 的几种用法：
@@ -43,7 +43,7 @@ node tools/check_browser.mjs --changed  # 真实 Chrome 逐页检查：改过的
 
 一节课在本机查通过，就把它的指纹记进 `.check-state.json`（`dist/<课>/`，PDF 除外），三节代表课都通过了再记下模板的指纹。这个记录只在本机，不进 Git，不能手写；真正算数的是推送后 CI 的检查。
 
-全部通过时只打一行汇总，失败才打详细内容，开头写着是哪节课。截图在 `.preview/`，每节课查的时候先清空它的文件夹；每次运行还会删掉 `.preview/` 里不是这个工具写的图（手动截的、改了名的课）。每次通过后，截图和上次在本机通过时的比（上次的存在 `.check-shots/`，不进 Git），画面变了的页列在 `.preview/changed.txt`，**只看清单里的截图**。比的是像素，左边的缩略图栏不比；偶尔会有一两页误报（比如斜着的便签），看一眼就知道。
+分步的页每一步都截一张图，每一步都查有没有溢出、超出舞台，以及看得见的部分（便签、变量框、代码、讲解、按钮、答案、选项）有没有叠在一起；自由页不查重叠。全部通过时只打一行汇总，失败才打详细内容，开头写着是哪节课。截图在 `.preview/`，每节课查的时候先清空它的文件夹；每次运行还会删掉 `.preview/` 里不是这个工具写的图（手动截的、改了名的课）。每次通过后，截图和上次在本机通过时的比（上次的存在 `.check-shots/`，不进 Git），画面变了的页列在 `.preview/changed.txt`，**只看清单里的截图**。比的是像素，左边的缩略图栏不比；偶尔会有一两页误报（比如斜着的便签），看一眼就知道。
 
 本机的顺序：`build.py --pdf` → `check.py` → `check_browser.mjs --changed` → 看 `.preview/changed.txt` 列出的截图 → 推送 → 等 CI 和 Pages 都通过再汇报。
 

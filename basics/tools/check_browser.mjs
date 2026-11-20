@@ -171,6 +171,42 @@ const OVERFLOW = `(() => {
   return out;
 })()`;
 
+// Parts of a page that must not sit on one another at the step shown: notes, variable boxes, code, sentences, buttons,
+// answers, choices. Only what can be seen counts (a part waiting for a later step, or one of several taking turns, is
+// transparent), so a step where a new part lands on an old one is caught. Free pages place their parts by hand and are
+// left out, and a few pixels of touching (a tilted note's corner) are allowed.
+const OVERLAP = `(() => {
+  const slide = document.querySelector('#deckStage .slide.active');
+  if (slide.classList.contains('free')) return [];
+  const PARTS = '.slip,.box,.crate,.editor,.say,.ide,.quiz,.fb,.tb,.live-out,.sheet,.qmark,.answer > p,.algo,h2.t,.kicker,.headline,.hints,.ledger,.sheet3,.later,.vs,.verbs,.steps3';
+  const seen = e => { for (let n = e; n && n !== slide; n = n.parentElement) { const c = getComputedStyle(n);
+    if (c.display === 'none' || c.visibility === 'hidden' || Number(c.opacity) < 0.5) return false; } return true; };
+  const parts = [...slide.querySelectorAll(PARTS)].filter(e => !e.closest('.free') && seen(e))
+    .filter(e => !e.parentElement.closest(PARTS));  // a part inside another (a box's label, a quiz's buttons) is that part
+  // What a part shows: its own box when it draws one (a note, a code box, a button), else the union of the text that can be
+  // seen in it, so room kept for a hidden answer (a step not yet shown) does not count.
+  const drawn = e => { const c = getComputedStyle(e); return c.backgroundColor !== 'rgba(0, 0, 0, 0)' || c.borderTopWidth !== '0px' || c.boxShadow !== 'none'; };
+  const shown = e => {
+    if (drawn(e)) return e.getBoundingClientRect();
+    let r = null;
+    const walk = document.createTreeWalker(e, NodeFilter.SHOW_TEXT);
+    for (let t = walk.nextNode(); t; t = walk.nextNode()) {
+      if (!t.textContent.trim() || !seen(t.parentElement)) continue;
+      const range = document.createRange(); range.selectNodeContents(t);
+      for (const b of range.getClientRects()) if (b.width)
+        r = r ? {left: Math.min(r.left, b.left), top: Math.min(r.top, b.top), right: Math.max(r.right, b.right), bottom: Math.max(r.bottom, b.bottom), width: 1} : {left: b.left, top: b.top, right: b.right, bottom: b.bottom, width: 1};
+    }
+    return r || {width: 0};
+  };
+  const out = [], pad = 6;
+  for (let i = 0; i < parts.length; i++) for (let j = i + 1; j < parts.length; j++) {
+    const a = shown(parts[i]), b = shown(parts[j]);
+    if (a.width && b.width && a.left + pad < b.right && b.left + pad < a.right && a.top + pad < b.bottom && b.top + pad < a.bottom)
+      out.push('overlap: ' + parts[i].textContent.trim().slice(0, 14) + ' / ' + parts[j].textContent.trim().slice(0, 14));
+  }
+  return out;
+})()`;
+
 const INTERACT = `(async () => {
   await document.fonts.ready;
   const stage = document.getElementById('deckStage');
@@ -663,7 +699,7 @@ try {
       // Entry motion finishes first, so a screen is the same picture every run.
       await run(`Promise.all(document.getAnimations().filter(a => isFinite(a.effect.getComputedTiming().endTime)).map(a => a.finished.catch(() => {}))).then(() => true)`);
       const label = await run(`document.getElementById('counter').textContent`);
-      const found = await run(OVERFLOW);
+      const found = [...await run(OVERFLOW), ...await run(OVERLAP)];
       if (found.length) problems.push(`${label}: ${found.join(' | ')}`);
       const shot = await send('Page.captureScreenshot', {format: 'png'});
       fs.writeFileSync(path.join(dir, `${String(shots).padStart(2, '0')}.png`), Buffer.from(shot.data, 'base64'));
