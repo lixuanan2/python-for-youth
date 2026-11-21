@@ -719,6 +719,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="r d3"><b>60</b><code>及格</code></div>
   </div>
   <p class="say r d3">到现在，程序每次都从第一行走到最后一行。<br>这节课让它先看一看数据，再决定走哪条路。</p>
+  <p class="say tip r d3">生活里：售货机看钱够不够，游戏看过没过关。先想一想：输入 60，程序怎么知道该说“及格”？</p>
   <div class="foot"></div>
 </section>
 
@@ -747,13 +748,13 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: >= -->
-<section id="page-5" class="slide lay-ask" aria-label="小测：5 大于等于 5">
-  <h2 class="t r">小测：print(5 &gt;= 5) 输出什么？</h2>
+<section id="page-5" class="slide lay-ask" aria-label="小测：两种写法比一比">
+  <h2 class="t r">小测：整数分数，&gt;= 60 和 &gt; 59 一样吗？</h2>
   <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！&gt;= 是大于或等于，5 等于 5，条件成立。"><i>1</i>True</button>
-    <button type="button" data-fb="print(5 &gt; 5) 才是 False。多了等号，相等也算成立。"><i>2</i>False</button>
-    <button type="button" data-fb="比较的结果是真或假，不是数字。"><i>3</i>5</button>
-    <button type="button" data-fb="这一行可以运行，&gt;= 中间不能有空格，这里写对了。"><i>4</i>报错</button>
+    <button type="button" data-fb="答对了！分数是整数，比 59 大的最小整数就是 60，两种写法挑出的是同一批分数。"><i>1</i>没有区别，挑出的分数一样</button>
+    <button type="button" data-fb="60 &gt;= 60 成立，60 &gt; 59 也成立，60 分两边都算。"><i>2</i>60 分时不一样</button>
+    <button type="button" data-fb="59 &gt;= 60 不成立，59 &gt; 59 也不成立，两边都不算。"><i>3</i>59 分时不一样</button>
+    <button type="button" data-fb="两种都是正常的比较，不会报错。"><i>4</i>score &gt; 59 会报错</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -903,20 +904,34 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- errors -->
-<section id="page-15" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+<section id="page-15" class="slide lay-ask" aria-label="回顾：余数是 2">
+  <h2 class="t r">回顾第 3 课：这段程序输出什么？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">mod.py</div>
+<pre class="code"><span class="ln">x = <span class="m">17</span></span><span class="ln"><span class="k">if</span> x % <span class="m">5</span> == <span class="m">2</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"A"</span>)</span><span class="ln"><span class="k">else</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"B"</span>)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！17 除以 5 得 3 余 2，条件成立，输出 A。"><i>1</i>A</button>
+    <button type="button" data-fb="先算 17 % 5，余数是 2，条件是成立的。"><i>2</i>B</button>
+    <button type="button" data-fb="余数只是拿来比较，print 输出的是 A 或 B。"><i>3</i>2</button>
+    <button type="button" data-fb="% 和 == 可以写在一起，先算余数，再比较。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-16" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1"><code>if x &gt; 3</code><b>SyntaxError</b><span>末尾要加冒号</span></div>
-    <div class="r d2"><code>if x = 3:</code><b>SyntaxError</b><span>比较要写 ==</span></div>
-    <div class="r d3"><code class="plain">if 下一行没缩进</code><b style="font-size:42px">IndentationError</b><span>缩进 4 个空格</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:480px;--mid:520px">
+    <div class="r d1"><code>if x &gt; 3</code><b>if x &gt; 3:</b><span>if 这一行末尾要有冒号</span></div>
+    <div class="r d2"><code>if x = 3:</code><b>if x == 3:</b><span>一个等号是放进去，比较写两个</span></div>
+    <div class="r d3"><code>if x &gt; 3:<br>print(x)</code><b>if x &gt; 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x)</b><span>归 if 管的行，缩进 4 个空格</span></div>
   </div>
   <p class="say r d3">要小心：把一行缩进错了，有时不报错，只是结果悄悄变了。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-16" data-ide="score = 95&#10;if score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;elif score &gt;= 90:&#10;    print(&quot;优秀&quot;)" class="slide dark lay-ask" aria-label="找错：优秀去哪了">
+<section id="page-17" data-ide="score = 95&#10;if score &gt;= 60:&#10;    print(&quot;及格&quot;)&#10;elif score &gt;= 90:&#10;    print(&quot;优秀&quot;)" class="slide dark lay-ask" aria-label="找错：优秀去哪了">
   <h2 class="t r">找错：优秀去哪了？</h2>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="1" data-yes="对！95 &gt;= 60 成立，程序从这里走了，后面 90 分的判断轮不到。两段要换位置，范围小的条件写在前面。" data-no="再跟着程序走一遍：95 &gt;= 60 成立吗？"><span class="ln"><span class="k">if</span> score &gt;= <span class="m">60</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"及格"</span>)</span><span class="ln"><span class="k">elif</span> score &gt;= <span class="m">90</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"优秀"</span>)</span></pre></div>
@@ -926,7 +941,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- challenge -->
-<section id="page-17" class="slide clay lay-notes challenge" aria-label="快递运费" data-chapter="挑战">
+<section id="page-18" class="slide clay lay-notes challenge" aria-label="快递运费" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">快递<br>运费</h2>
   <p class="say r d2">读入重量（整数，单位公斤）。前 3 公斤一共 10 元，<b>超过 3 公斤的部分</b>每公斤加 2 元。</p>
@@ -936,7 +951,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-18" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-19" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>运费有两种算法，用什么来分开这两条路？</span></p>
@@ -946,7 +961,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
-<section id="page-19" class="slide dark" aria-label="参考答案：快递运费" data-answer="06" data-steps="2" data-at="2">
+<section id="page-20" class="slide dark" aria-label="参考答案：快递运费" data-answer="06" data-steps="2" data-at="2">
   <h2 class="t">参考答案：快递运费</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">shipping.py</div>
@@ -957,19 +972,19 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-20" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-21" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>= 和 == 有什么不同？<em class="step s2">　= 是放进去，== 是比较。</em></span></p>
-    <p><i>Q2</i><span>怎么知道一行归 if 管？<em class="step s3">　看它有没有缩进。</em></span></p>
-    <p><i>Q3</i><span>if、elif、else 能走几条路？<em class="step s4">　最多走一条。</em></span></p>
+    <p><i>Q1</i><span>为什么判断偶数写 n % 2 == 0？<em class="step s2">　偶数除以 2 没有余数，余数是 0。</em></span></p>
+    <p><i>Q2</i><span>把 else 那两行删掉，输入 50 会怎样？<em class="step s3">　什么也不输出：只有 if 成立才输出，不成立就直接往下走。</em></span></p>
+    <p><i>Q3</i><span>气温 30 度及以上说“热”，否则说“不热”，怎么写？<em class="step s4">　if t &gt;= 30: 下面输出热，else: 下面输出不热。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-21" class="slide lay-columns" aria-label="速查卡">
+<section id="page-22" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>==  !=</code><span>等于、不等于</span></div>
@@ -982,7 +997,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-22" class="slide lay-columns" aria-label="后面再学">
+<section id="page-23" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>and  or  not</code><span>把几个条件组合起来</span></div>
@@ -994,7 +1009,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-23" class="slide dark thanks" aria-label="谢谢">
+<section id="page-24" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>

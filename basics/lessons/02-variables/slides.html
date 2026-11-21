@@ -16,6 +16,7 @@
     <div class="r d3"><b>30</b><code>打败怪物</code></div>
   </div>
   <p class="say r d3">程序要一直记着现在的分数，加分的时候才知道从几开始加。<br>用来记住数据的东西，就叫<b>变量</b>。</p>
+  <p class="say tip r d3">先想一想：每吃到一个金币加 10 分，程序里这一行怎么写？学完这节课就会。</p>
   <div class="foot"></div>
 </section>
 
@@ -98,17 +99,18 @@
 </section>
 
 <!-- quiz: updating -->
-<section class="slide lay-ask" aria-label="小测：更新两次">
-  <h2 class="t r">小测：这段程序输出几？</h2>
+<section class="slide lay-ask" aria-label="小测：改成 score = 5">
+  <h2 class="t r">小测：第 3 行改了，现在输出几？</h2>
   <div class="editor r d1"><div class="tab">score.py</div>
-<pre class="code">score = 10
+<pre class="code" data-mod="3:原来是加 5">score = 10
 score = score + 5
-score = score + 5
+score = 5
 print(score)</pre></div>
   <div class="quiz r d2" data-right="2">
-    <button type="button" data-fb="10 只是开始时的值，后面更新了两次。"><i>1</i>10</button>
-    <button type="button" data-fb="只算到第 2 行。第 3 行还会在 15 的基础上再加 5。"><i>2</i>15</button>
-    <button type="button" data-fb="答对了！每一行都从 score 现在的值算起：10、15、20。"><i>3</i>20</button>
+    <button type="button" data-fb="这是没改之前的结果。第 3 行不再加 5 了。"><i>1</i>20</button>
+    <button type="button" data-fb="15 只在第 2 行之后待了一会儿，第 3 行又放进了新的值。"><i>2</i>15</button>
+    <button type="button" data-fb="答对了！第 3 行直接放进 5，旧的 15 就被换掉了，跟前面算过什么没关系。"><i>3</i>5</button>
+    <button type="button" data-fb="10 是开始的值，后面被换掉了两次。"><i>4</i>10</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -161,13 +163,16 @@ my-age</pre></div>
 </section>
 
 <!-- quiz: names -->
-<section class="slide lay-ask" aria-label="小测：哪个名字能用">
-  <h2 class="t r">小测：哪个名字能用？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="变量名不能用数字开头。"><i>1</i>1st_score</button>
-    <button type="button" data-fb="答对了！字母加下划线，而且一看就知道是总分。"><i>2</i>total_score</button>
-    <button type="button" data-fb="中间有空格，Python 会以为这是两个东西。"><i>3</i>total score</button>
-    <button type="button" data-fb="减号会被当成减法，不能放在名字里。"><i>4</i>total-score</button>
+<section class="slide lay-ask" aria-label="小测：Age 和 age">
+  <h2 class="t r">小测：这段程序会怎样？</h2>
+  <div class="editor r d1"><div class="tab">名字</div>
+<pre class="code">Age = 12
+print(age)</pre></div>
+  <div class="quiz r d2" data-right="1">
+    <button type="button" data-fb="12 放进的是 Age，不是 age。"><i>1</i>输出 12</button>
+    <button type="button" data-fb="答对了！Age 和 age 是两个不同的名字，age 还没放过东西，Python 不认识它。"><i>2</i>报错</button>
+    <button type="button" data-fb="没有引号，Python 不会原样显示 age 这三个字母。"><i>3</i>输出 age</button>
+    <button type="button" data-fb="Python 分大小写，不会把 Age 当成 age。"><i>4</i>输出 Age</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -243,13 +248,16 @@ print(type("12"))</pre></div>
 </section>
 
 <!-- quiz: type trap -->
-<section class="slide lay-ask" aria-label="小测：True 加引号">
-  <h2 class="t r">小测："True" 是什么类型？</h2>
-  <div class="quiz r d1" data-right="2">
-    <button type="button" data-fb="整数不会有引号，也不是字母。"><i>1</i>int</button>
-    <button type="button" data-fb="这里没有小数点，还多了一对引号。"><i>2</i>float</button>
-    <button type="button" data-fb="答对了！只要放在引号里，就是文字。"><i>3</i>str</button>
-    <button type="button" data-fb="不加引号的 True 才是 bool。看清那对引号。"><i>4</i>bool</button>
+<section class="slide lay-ask" aria-label="回顾：文字加整数">
+  <h2 class="t r">回顾第 1 课：哪一行会报错？</h2>
+  <div class="editor r d1"><div class="tab">两种 12</div>
+<pre class="code">a = "12"
+b = 12</pre></div>
+  <div class="quiz r d2" data-right="2">
+    <button type="button" data-fb="两个都是文字，拼在一起，输出 1212。"><i>1</i>print(a + a)</button>
+    <button type="button" data-fb="两个都是整数，输出 24。"><i>2</i>print(b + b)</button>
+    <button type="button" data-fb="答对了！a 是文字，b 是整数，两种不能直接相加。"><i>3</i>print(a + b)</button>
+    <button type="button" data-fb="逗号是分开输出，不是相加，输出 12 12。"><i>4</i>print(a, b)</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -258,13 +266,13 @@ print(type("12"))</pre></div>
 <!-- errors -->
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1"><code>print(scor)</code><b>NameError</b><span>名字写错或还没赋值</span></div>
-    <div class="r d2"><code>2age = 1</code><b>SyntaxError</b><span>名字不能用数字开头</span></div>
-    <div class="r d3"><code>"年龄" + 12</code><b>TypeError</b><span>用逗号或 str()</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:520px;--mid:600px">
+    <div class="r d1"><code>print(scor)</code><b>print(score)</b><span>名字要和放进去时一字不差</span></div>
+    <div class="r d2"><code>2age = 1</code><b>age2 = 1</b><span>名字不能用数字开头</span></div>
+    <div class="r d3"><code>"年龄" + 12</code><b>"年龄" + str(12)</b><span>文字和数字不能直接相加</span></div>
   </div>
-  <p class="say r d3">程序从上往下跑，变量要先赋值，后面才能用。</p>
+  <p class="say r d3">程序从上往下跑，变量要先放进东西，后面才能用。</p>
   <div class="foot"></div>
 </section>
 
@@ -307,9 +315,9 @@ print(type("12"))</pre></div>
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>x = x + 1 是什么意思？<em class="step s2">　先算右边，再放回 x。</em></span></p>
-    <p><i>Q2</i><span>四种类型分别是什么？<em class="step s3">　int、float、str、bool。</em></span></p>
-    <p><i>Q3</i><span>"12" 和 12 有什么不同？<em class="step s4">　前者是文字，后者是整数。</em></span></p>
+    <p><i>Q1</i><span>为什么 x = x + 1 不是一个错的等式？<em class="step s2">　这个等号是放进去：先算右边，再把结果放回 x。</em></span></p>
+    <p><i>Q2</i><span>"12" + "12" 和 12 + 12，结果有什么不同？<em class="step s3">　前者拼成 1212，后者算出 24。</em></span></p>
+    <p><i>Q3</i><span>age 是 12，想输出“我12岁”（中间没有空格），怎么写？<em class="step s4">　print("我" + str(age) + "岁")。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

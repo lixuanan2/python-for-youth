@@ -15,11 +15,6 @@
     "stdout": "12\n"
   },
   {
-    "page": 8,
-    "code": "score = 10\nscore = score + 5\nscore = score + 5\nprint(score)",
-    "stdout": "20\n"
-  },
-  {
     "page": 11,
     "code": "2age = 1",
     "error": "SyntaxError"
@@ -43,26 +38,6 @@
     "page": 11,
     "code": "age = 1\nprint(Age)",
     "error": "NameError"
-  },
-  {
-    "page": 12,
-    "code": "1st_score = 1",
-    "error": "SyntaxError"
-  },
-  {
-    "page": 12,
-    "code": "total score = 1",
-    "error": "SyntaxError"
-  },
-  {
-    "page": 12,
-    "code": "total-score = 1",
-    "error": "SyntaxError"
-  },
-  {
-    "page": 12,
-    "code": "total_score = 1\nprint(total_score)",
-    "stdout": "1\n"
   },
   {
     "page": 14,
@@ -90,21 +65,6 @@
     "error": "TypeError"
   },
   {
-    "page": 18,
-    "code": "print(type(\"True\"))",
-    "stdout": "<class 'str'>\n"
-  },
-  {
-    "page": 19,
-    "code": "print(scor)",
-    "error": "NameError"
-  },
-  {
-    "page": 19,
-    "code": "\"年龄\" + 12",
-    "error": "TypeError"
-  },
-  {
     "page": 20,
     "code": "score = 10\nscore + 5\nprint(score)",
     "stdout": "10\n"
@@ -118,5 +78,50 @@
     "page": 11,
     "code": "if = 3",
     "error": "SyntaxError"
+  },
+  {
+    "page": 8,
+    "code": "score = 10\nscore = score + 5\nscore = 5\nprint(score)",
+    "stdout": "5\n"
+  },
+  {
+    "page": 12,
+    "code": "Age = 12\nprint(age)",
+    "error": "NameError"
+  },
+  {
+    "page": 18,
+    "code": "a = \"12\"\nprint(a + a)",
+    "stdout": "1212\n"
+  },
+  {
+    "page": 18,
+    "code": "b = 12\nprint(b + b)",
+    "stdout": "24\n"
+  },
+  {
+    "page": 18,
+    "code": "a = \"12\"\nb = 12\nprint(a, b)",
+    "stdout": "12 12\n"
+  },
+  {
+    "page": 18,
+    "code": "a = \"12\"\nb = 12\nprint(a + b)",
+    "error": "TypeError"
+  },
+  {
+    "page": 19,
+    "code": "score = 1\nprint(scor)",
+    "error": "NameError"
+  },
+  {
+    "page": 19,
+    "code": "print(\"年龄\" + str(12))",
+    "stdout": "年龄12\n"
+  },
+  {
+    "page": 23,
+    "code": "age = 12\nprint(\"我\" + str(age) + \"岁\")",
+    "stdout": "我12岁\n"
   }
 ]

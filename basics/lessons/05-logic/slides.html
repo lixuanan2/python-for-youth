@@ -16,6 +16,7 @@
     <div class="slip r d3 short"><small>身高 110，年龄 10</small><pre>下次再来</pre></div>
   </div>
   <p class="say r d3">规定是：身高满 120 厘米，并且年满 8 岁。<br>上节课的条件一次只问一件事。这节课把两个问题连起来问。</p>
+  <p class="say tip r d3">生活里：门票、优惠、报名，常常要同时满足好几条。先想一想：“身高满 120 并且年满 8 岁”，一行 if 怎么写？</p>
   <div class="foot"></div>
 </section>
 
@@ -56,13 +57,17 @@
 </section>
 
 <!-- quiz: and -->
-<section class="slide lay-ask" aria-label="小测：and">
-  <h2 class="t r">小测：print(5 &gt; 3 and 2 &gt; 4) 输出什么？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="5 &gt; 3 成立，可是 2 &gt; 4 不成立。and 要两边都成立。"><i>1</i>True</button>
-    <button type="button" data-fb="答对了！左边是 True，右边是 False，两个没有都成立，结果就是 False。"><i>2</i>False</button>
-    <button type="button" data-fb="比较的结果是真或假，用 and 连起来还是真或假。"><i>3</i>5</button>
-    <button type="button" data-fb="这一行可以运行，and 的两边都是写完整的比较。"><i>4</i>报错</button>
+<section class="slide lay-ask" aria-label="小测：and 换成 or">
+  <h2 class="t r">小测：把 and 换成 or，输出会变吗？</h2>
+  <div class="editor r d1"><div class="tab">quiz.py</div>
+<pre class="code">age = 10
+height = 115
+print(age &gt;= 8 and height &gt;= 120)</pre></div>
+  <div class="quiz r d2" data-right="1">
+    <button type="button" data-fb="换成 or 以后，只要一边成立就行。age &gt;= 8 是成立的。"><i>1</i>不变，还是 False</button>
+    <button type="button" data-fb="答对了！and 要两边都成立，身高不够就是 False；or 只要一边成立，年龄够了就是 True。"><i>2</i>变成 True</button>
+    <button type="button" data-fb="比较的结果是 True 或 False，不会是数字。"><i>3</i>变成 10</button>
+    <button type="button" data-fb="把 and 换成 or 只是换了一个词，照样能运行。"><i>4</i>报错</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -101,13 +106,15 @@
 </section>
 
 <!-- quiz: writing a range -->
-<section class="slide lay-ask" aria-label="小测：写范围">
-  <h2 class="t r">小测：x 在 1 到 10 之间，含 1 和 10</h2>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！x 不小于 1，并且不大于 10，两头都管住了。"><i>1</i>x &gt;= 1 and x &lt;= 10</button>
-    <button type="button" data-fb="这样写范围太宽了：换成 or 后，100 和 -5 都成立。"><i>2</i>x &gt;= 1 or x &lt;= 10</button>
-    <button type="button" data-fb="这样写会报 SyntaxError：and 的右边缺了 x，两边都要写完整。"><i>3</i>x &gt;= 1 and &lt;= 10</button>
-    <button type="button" data-fb="不小于 10 又不大于 1，没有这样的数，这个条件总是 False。"><i>4</i>x &lt;= 1 and x &gt;= 10</button>
+<section class="slide lay-ask" aria-label="小测：漏掉了哪个数">
+  <h2 class="t r">小测：想要 1 到 10，这样写漏了哪个数？</h2>
+  <div class="editor r d1"><div class="tab">range.py</div>
+<pre class="code">x &gt;= 1 and x &lt; 10</pre></div>
+  <div class="quiz r d2" data-right="2">
+    <button type="button" data-fb="1 &gt;= 1 成立，1 &lt; 10 也成立，1 在里面。"><i>1</i>1</button>
+    <button type="button" data-fb="5 两头都满足，在里面。"><i>2</i>5</button>
+    <button type="button" data-fb="答对了！10 &lt; 10 不成立，10 被漏掉了。要含 10，就写 x &lt;= 10。"><i>3</i>10</button>
+    <button type="button" data-fb="11 本来就不该在里面，没有漏。"><i>4</i>11</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -160,15 +167,13 @@
 </section>
 
 <!-- quiz: or -->
-<section class="slide lay-ask" aria-label="小测：or">
-  <h2 class="t r">小测：x 是 5，这一行输出什么？</h2>
-  <div class="editor r d1"><div class="tab">输入 5</div>
-<pre class="code">print(x &gt; 8 or x &lt; 6)</pre></div>
-  <div class="quiz r d2" data-right="0">
-    <button type="button" data-fb="答对了！x &gt; 8 不成立，但 x &lt; 6 成立。or 有一边成立就够了。"><i>1</i>True</button>
-    <button type="button" data-fb="如果这里写的是 and，才会是 False。这里是 or。"><i>2</i>False</button>
-    <button type="button" data-fb="比较和 or 的结果是真或假，不会输出 x 的值。"><i>3</i>5</button>
-    <button type="button" data-fb="这一行可以运行，or 的两边都写完整了。"><i>4</i>报错</button>
+<section class="slide lay-ask" aria-label="小测：周末才开门">
+  <h2 class="t r">小测：day 是 6 或 7 是周末，怎么写？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！是 6 或者是 7，有一边成立就是周末。"><i>1</i>day == 6 or day == 7</button>
+    <button type="button" data-fb="day 不可能同时是 6 又是 7，这一行永远是 False。"><i>2</i>day == 6 and day == 7</button>
+    <button type="button" data-fb="任何一天都满足其中一边，这一行永远是 True。"><i>3</i>day &gt; 6 or day &lt; 7</button>
+    <button type="button" data-fb="这是反过来了：挑出的是 6、7 以外的日子。"><i>4</i>day &gt; 7 or day &lt; 6</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -204,13 +209,13 @@
 </section>
 
 <!-- quiz: not -->
-<section class="slide lay-ask" aria-label="小测：not">
-  <h2 class="t r">小测：print(not (3 &gt; 2)) 输出什么？</h2>
+<section class="slide lay-ask" aria-label="小测：not 换个说法">
+  <h2 class="t r">小测：not (x &gt; 5) 和哪一个意思一样？</h2>
   <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="3 &gt; 2 是 True 没错，可是前面还有 not，要再翻一次。"><i>1</i>True</button>
-    <button type="button" data-fb="答对了！先算括号里的 3 &gt; 2，得到 True，not 再把它翻成 False。"><i>2</i>False</button>
-    <button type="button" data-fb="not 翻的是真假，结果不是数字。"><i>3</i>3</button>
-    <button type="button" data-fb="这一行可以运行，not 写在条件的前面。"><i>4</i>报错</button>
+    <button type="button" data-fb="x 是 5 时，not (5 &gt; 5) 是 True，5 &lt; 5 却是 False。"><i>1</i>x &lt; 5</button>
+    <button type="button" data-fb="答对了！“不大于 5”就是小于或等于 5，等于 5 也算。"><i>2</i>x &lt;= 5</button>
+    <button type="button" data-fb="这正好相反，not 把真假翻过来了。"><i>3</i>x &gt; 5</button>
+    <button type="button" data-fb="x 是 9 时，not (9 &gt; 5) 是 False，9 != 5 却是 True。"><i>4</i>x != 5</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -253,15 +258,33 @@
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：两个 if">
+  <h2 class="t r">回顾第 4 课：这段程序输出几行？</h2>
+  <div class="editor r d1"><div class="tab">two_ifs.py</div>
+<pre class="code">score = 75
+if score &gt;= 60:
+    print("及格")
+if score &gt;= 70:
+    print("良好")</pre></div>
+  <div class="quiz r d2" data-right="2">
+    <button type="button" data-fb="第二个是 if，不是 elif，它会单独再检查一次。"><i>1</i>1 行：及格</button>
+    <button type="button" data-fb="第一个 if 也成立，也会输出。"><i>2</i>1 行：良好</button>
+    <button type="button" data-fb="答对了！两个 if 各查各的，75 两个都满足，输出两行。"><i>3</i>2 行：及格、良好</button>
+    <button type="button" data-fb="75 &gt;= 60 成立，至少会输出及格。"><i>4</i>什么也不输出</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1"><code>x &gt; 1 and &lt; 5</code><b>SyntaxError</b><span>两边都要写完整</span></div>
-    <div class="r d2"><code>x &gt; 1 And x &lt; 5</code><b>SyntaxError</b><span>and 全部小写</span></div>
-    <div class="r d3"><code>x &gt; 1 &amp;&amp; x &lt; 5</code><b>SyntaxError</b><span>Python 写 and</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:600px;--mid:640px">
+    <div class="r d1"><code style="font-size:44px">x &gt;= 1 or x &lt;= 10</code><b style="font-size:44px">x &gt;= 1 and x &lt;= 10</b><span>两头都要满足，用 and</span></div>
+    <div class="r d2"><code>x &gt; 1 And x &lt; 5</code><b>x &gt; 1 and x &lt; 5</b><span>and、or、not 全部小写</span></div>
+    <div class="r d3"><code>x &gt; 1 &amp;&amp; x &lt; 5</code><b>x &gt; 1 and x &lt; 5</b><span>Python 用英文单词 and</span></div>
   </div>
-  <p class="say r d3">上面三种会报错，还算好找。下一页这种不报错，更要小心。</p>
+  <p class="say r d3">第一种不报错：用 or 时，什么数都满足其中一边，范围就形同虚设。</p>
   <div class="foot"></div>
 </section>
 
@@ -302,9 +325,9 @@
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>and 和 or 有什么不同？<em class="step s2">　and 要都成立，or 有一个成立就行。</em></span></p>
-    <p><i>Q2</i><span>x &gt;= 60 and x &lt; 90 含 90 吗？<em class="step s3">　不含，90 &lt; 90 不成立。</em></span></p>
-    <p><i>Q3</i><span>and 和 or 混着用，怎么写才清楚？<em class="step s4">　加括号。</em></span></p>
+    <p><i>Q1</i><span>为什么判断“在 1 到 10 之间”要用 and？<em class="step s2">　两头都要满足：不小于 1，并且不大于 10。</em></span></p>
+    <p><i>Q2</i><span>过山车的规定把 and 写成 or，会怎样？<em class="step s3">　身高够或年龄够一样就能玩，6 岁的高个子也能上，规定变松了。</em></span></p>
+    <p><i>Q3</i><span>不是周末（day 不是 6 也不是 7），怎么写？<em class="step s4">　day != 6 and day != 7。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

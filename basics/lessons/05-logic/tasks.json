@@ -104,7 +104,7 @@
   {
     "id": "07",
     "role": "独立迁移",
-    "page": 20,
+    "page": 21,
     "starter": "starter/09_award.py",
     "solution": "solutions/09_award.py",
     "scope": "两行，语文和数学成绩均为整数",

@@ -10,39 +10,9 @@
     "stdout": "True\nFalse\nFalse\nFalse\n"
   },
   {
-    "page": 5,
-    "code": "print(5 > 3 and 2 > 4)",
-    "stdout": "False\n"
-  },
-  {
-    "page": 5,
-    "code": "print(5 > 3)\nprint(2 > 4)",
-    "stdout": "True\nFalse\n"
-  },
-  {
     "page": 7,
     "code": "score = 59\nprint(score >= 60 and score < 90)\nscore = 60\nprint(score >= 60 and score < 90)\nscore = 89\nprint(score >= 60 and score < 90)\nscore = 90\nprint(score >= 60 and score < 90)",
     "stdout": "False\nTrue\nTrue\nFalse\n"
-  },
-  {
-    "page": 8,
-    "code": "x = 10\nprint(x >= 1 and x <= 10)\nx = 1\nprint(x >= 1 and x <= 10)\nx = 11\nprint(x >= 1 and x <= 10)",
-    "stdout": "True\nTrue\nFalse\n"
-  },
-  {
-    "page": 8,
-    "code": "x = 100\nprint(x >= 1 or x <= 10)\nx = -5\nprint(x >= 1 or x <= 10)",
-    "stdout": "True\nTrue\n"
-  },
-  {
-    "page": 8,
-    "code": "x = 5\nprint(x >= 1 and <= 10)",
-    "error": "SyntaxError"
-  },
-  {
-    "page": 8,
-    "code": "x = 5\nprint(x <= 1 and x >= 10)",
-    "stdout": "False\n"
   },
   {
     "page": 11,
@@ -50,49 +20,74 @@
     "stdout": "True\nTrue\nTrue\nFalse\n"
   },
   {
-    "page": 12,
-    "ide": true,
-    "code": "x = 5\nprint(x > 8 or x < 6)\nprint(x > 8)\nprint(x < 6)",
-    "stdout": "True\nFalse\nTrue\n"
-  },
-  {
     "page": 14,
     "code": "print(not True)\nprint(not False)",
     "stdout": "False\nTrue\n"
   },
   {
-    "page": 15,
-    "code": "print(not (3 > 2))\nprint(3 > 2)",
-    "stdout": "False\nTrue\n"
-  },
-  {
-    "page": 18,
-    "code": "x = 3\nprint(x > 1 and < 5)",
-    "error": "SyntaxError"
-  },
-  {
-    "page": 18,
-    "code": "x = 3\nprint(x > 1 And x < 5)",
-    "error": "SyntaxError"
-  },
-  {
-    "page": 18,
-    "code": "x = 3\nprint(x > 1 && x < 5)",
-    "error": "SyntaxError"
-  },
-  {
-    "page": 19,
+    "page": 20,
     "code": "n = 5\nif n == 1 or 2:\n    print(\"中奖了\")\nelse:\n    print(\"没中\")",
     "stdout": "中奖了\n"
   },
   {
-    "page": 19,
+    "page": 20,
     "code": "n = 5\nif n == 1 or n == 2:\n    print(\"中奖了\")\nelse:\n    print(\"没中\")",
     "stdout": "没中\n"
   },
   {
-    "page": 25,
+    "page": 26,
     "code": "score = 89\nprint(60 <= score < 90)\nscore = 90\nprint(60 <= score < 90)",
     "stdout": "True\nFalse\n"
+  },
+  {
+    "page": 5,
+    "code": "age = 10\nheight = 115\nprint(age >= 8 and height >= 120)\nprint(age >= 8 or height >= 120)",
+    "stdout": "False\nTrue\n"
+  },
+  {
+    "page": 8,
+    "code": "for x in [1, 5, 10, 11]:\n    print(x >= 1 and x < 10)",
+    "stdout": "True\nTrue\nFalse\nFalse\n"
+  },
+  {
+    "page": 12,
+    "code": "for day in [5, 6, 7]:\n    print(day == 6 or day == 7, day == 6 and day == 7, day > 6 or day < 7, day > 7 or day < 6)",
+    "stdout": "False False True True\nTrue False True False\nTrue False True False\n"
+  },
+  {
+    "page": 15,
+    "code": "for x in [5, 9]:\n    print(not (x > 5), x < 5, x <= 5, x > 5, x != 5)",
+    "stdout": "True False True False False\nFalse False False True True\n"
+  },
+  {
+    "page": 18,
+    "code": "score = 75\nif score >= 60:\n    print(\"及格\")\nif score >= 70:\n    print(\"良好\")",
+    "stdout": "及格\n良好\n"
+  },
+  {
+    "page": 19,
+    "code": "x = 100\nprint(x >= 1 or x <= 10)\nprint(x >= 1 and x <= 10)",
+    "stdout": "True\nFalse\n"
+  },
+  {
+    "page": 19,
+    "code": "x = 3\nprint(x > 1 And x < 5)",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 19,
+    "code": "x = 3\nprint(x > 1 && x < 5)",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 24,
+    "code": "day = 3\nprint(day != 6 and day != 7)",
+    "stdout": "True\n"
+  },
+  {
+    "page": 8,
+    "ide": true,
+    "code": "x = 10\nprint(x >= 1 and x < 10)",
+    "stdout": "False\n"
   }
 ]
