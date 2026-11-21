@@ -71,7 +71,7 @@
   {
     "id": "04",
     "role": "独立迁移",
-    "page": 17,
+    "page": 18,
     "starter": "starter/06_reverse_digits.py",
     "solution": "solutions/06_reverse_digits.py",
     "scope": "n为正整数",

@@ -19,6 +19,7 @@
     <div class="slip r d3 short"><small>[5]</small><pre>n</pre></div>
   </div>
   <p class="say r d3">引号里的一串字叫“字符串”。它和列表很像：每个字占一个盒子，编号也从 0 开始。<br>列表学过的下标、len、for，字符串都能用。</p>
+  <p class="say tip r d3">生活里：手机号只露出后四位，快递单号只念最后几位。先想一想：一串手机号，怎样只取出最后四位？</p>
   <div class="foot"></div>
 </section>
 
@@ -72,13 +73,13 @@ print(word[1])</pre></div>
 </section>
 
 <!-- quiz -->
-<section class="slide lay-ask" aria-label="小测：中文的下标">
-  <h2 class="t r">小测：s = "你好世界"，s[2] 是哪个字？</h2>
-  <div class="quiz r d1" data-right="2">
-    <button type="button" data-fb="好是第 2 个字，下标是 1。"><i>1</i>好</button>
-    <button type="button" data-fb="你是第 1 个字，下标是 0。"><i>2</i>你</button>
-    <button type="button" data-fb="答对了！[0] 你，[1] 好，[2] 世。中文一个字也占一个盒子。"><i>3</i>世</button>
-    <button type="button" data-fb="界是最后一个字，下标是 3 或 -1。"><i>4</i>界</button>
+<section class="slide lay-ask" aria-label="小测：哪个是界">
+  <h2 class="t r">小测：s = "你好世界"，哪个取出“界”？</h2>
+  <div class="quiz r d1" data-right="1">
+    <button type="button" data-fb="4 个字的下标是 0 到 3，[4] 超出了范围。"><i>1</i>s[4]</button>
+    <button type="button" data-fb="答对了！-1 是最后一个字，就是界。写 s[3] 也行。"><i>2</i>s[-1]</button>
+    <button type="button" data-fb="len(s) 是 4，s[4] 超出了范围。"><i>3</i>s[len(s)]</button>
+    <button type="button" data-fb="倒着数第 4 个是第一个字“你”。"><i>4</i>s[-4]</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -133,13 +134,13 @@ print(word[1])</pre></div>
 </section>
 
 <!-- quiz: slice -->
-<section class="slide lay-ask" aria-label="小测：切片">
-  <h2 class="t r">小测：s = "abcdef"，s[1:4] 是什么？</h2>
+<section class="slide lay-ask" aria-label="小测：截出 cde">
+  <h2 class="t r">小测：s = "abcdef"，想截出 cde，怎么写？</h2>
   <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="下标 1 是 b，不是 a，起点要算进去。"><i>1</i>abcd</button>
-    <button type="button" data-fb="答对了！下标 1、2、3 是 b、c、d，终点 4 不算。"><i>2</i>bcd</button>
-    <button type="button" data-fb="终点 4 的 e 不算在内。"><i>3</i>bcde</button>
-    <button type="button" data-fb="切片截出的是一段字，不只一个。"><i>4</i>b</button>
+    <button type="button" data-fb="终点 4 不算，只截出 cd。"><i>1</i>s[2:4]</button>
+    <button type="button" data-fb="答对了！c 的下标是 2，e 是 4，终点要写 4 的下一个 5。"><i>2</i>s[2:5]</button>
+    <button type="button" data-fb="下标 3 是 d，c 的下标是 2。"><i>3</i>s[3:5]</button>
+    <button type="button" data-fb="这样截出的是 def。"><i>4</i>s[3:6]</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -212,7 +213,8 @@ a cat and a dog</pre></div><div><small>输出</small><pre style="line-height:1.2
 <pre class="code">word = "Python"
 word[0] = "J"</pre></div>
   <div class="answer">
-    <div class="slip tilt r d2 longest" style="width:600px"><small>屏幕上</small><pre style="white-space:pre-wrap">TypeError: 'str' object does not support item assignment</pre></div>
+    <div class="slip tilt r d2"><small>屏幕上</small><pre style="white-space:pre-wrap">红字报错
+程序停下</pre></div>
   </div>
   <div class="says r d3">
     <p class="say small">列表的盒子能换，字符串的不能。想要一个新词，就拼一个新的字符串：</p>
@@ -224,15 +226,32 @@ print(new)    # Jython</pre></div>
 </section>
 
 <!-- errors -->
-<section class="slide lay-columns" aria-label="三种常见错误">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1"><code>word[6]</code><b>IndexError</b><span>6 个字，最大下标是 5</span></div>
-    <div class="r d2"><code>word[0] = "J"</code><b>TypeError</b><span>不能换，要拼一个新的</span></div>
-    <div class="r d3"><code>word[1:3]</code><b>不报错</b><span>是 yt，终点 3 不算</span></div>
+<section class="slide lay-ask" aria-label="回顾：改的是哪一份">
+  <h2 class="t r">回顾第 11 课：最后输出几？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">a = [1, 2, 3]
+for x in a:
+    x = x * 2
+print(a[0] + a[-1])</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！改的是拿出来的 x，列表还是 [1, 2, 3]，1 + 3 = 4。"><i>1</i>4</button>
+    <button type="button" data-fb="要是列表变成 [2, 4, 6] 才是 8，可改 x 不会放回列表。"><i>2</i>8</button>
+    <button type="button" data-fb="a[-1] 是最后一个 3，不是 a[1]。"><i>3</i>6</button>
+    <button type="button" data-fb="a[0] + a[-1] 是第一个加最后一个。"><i>4</i>2</button>
   </div>
-  <p class="say r d3">切片截少了一个最常见。截之前先数：终点减起点，就是截出几个字。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:520px;--mid:660px">
+    <div class="r d1"><code>word[6]</code><b>word[5] 或 word[-1]</b><span>6 个字，最大下标是 5</span></div>
+    <div class="r d2"><code>word[0] = "J"</code><b>word = "J" + word[1:]</b><span>字符串里的字不能直接换，要拼一个新的</span></div>
+    <div class="r d3"><code>word[1:3]</code><b>word[1:4]</b><span>想要 yth：终点不算，要多写一个</span></div>
+  </div>
+  <p class="say r d3">第三种不报错，只截出 yt。截之前先数：终点减起点，就是截出几个字。</p>
   <div class="foot"></div>
 </section>
 
@@ -273,9 +292,9 @@ print(new)    # Jython</pre></div>
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>word[-1] 是哪个字？<em class="step s2">　最后一个字，不管有多长。</em></span></p>
-    <p><i>Q2</i><span>word[2:5] 截出几个字？<em class="step s3">　3 个，终点 5 不算。</em></span></p>
-    <p><i>Q3</i><span>想换掉字符串里的一个字，怎么办？<em class="step s4">　不能直接换，拼一个新的字符串。</em></span></p>
+    <p><i>Q1</i><span>倒着念为什么要把新拿到的字放在前面？<em class="step s2">　先拿到的字一次次被推到后面，最后一个字就到了最前面。</em></span></p>
+    <p><i>Q2</i><span>word[-2:] 和 word[-2]，有什么不同？<em class="step s3">　前者截出最后两个字 on，后者只取倒数第二个字 o。</em></span></p>
+    <p><i>Q3</i><span>手机号只露出后四位，前面都换成 *，怎么写？<em class="step s4">　stars 从 "" 开始，循环 len(s) - 4 遍，每遍拼一个 "*"，最后输出 stars + s[-4:]。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

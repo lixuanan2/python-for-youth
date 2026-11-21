@@ -3,20 +3,21 @@
   <p class="kicker r"># LESSON 09</p>
   <div class="cover-row"><b class="r">上台</b><div class="wire r d1"><i></i><span>if x &gt; best:</span></div><b class="r d2">换人</b></div>
   <p class="headline r d3">最大值和最小值：让程序记住最大的那个</p>
-  <p class="say r d3">学完你能找出最高分和最低分，还能说出冠军是谁。</p>
+  <p class="say r d3">学完你能找出最贵和最便宜的价格，还能说出最贵的是哪样。</p>
   <div class="foot"></div>
 </section>
 
 <!-- the problem -->
-<section class="slide clay lay-notes" aria-label="谁的分数最高">
-  <h2 class="t r">谁的分数最高？</h2>
+<section class="slide clay lay-notes" aria-label="哪样东西最贵">
+  <h2 class="t r">哪样东西最贵？</h2>
   <div class="notes">
-    <div class="slip r d1 short"><small>第一个</small><pre>80 分</pre></div>
-    <div class="slip r d2 short"><small>第二个</small><pre>95 分</pre></div>
-    <div class="slip r d2 short"><small>第三个</small><pre>70 分</pre></div>
-    <div class="slip tilt r d3 short"><small>台上站着</small><pre>95 分</pre></div>
+    <div class="slip r d1 short"><small>第一个</small><pre>80 元</pre></div>
+    <div class="slip r d2 short"><small>第二个</small><pre>95 元</pre></div>
+    <div class="slip r d2 short"><small>第三个</small><pre>70 元</pre></div>
+    <div class="slip tilt r d3 short"><small>台上站着</small><pre>95 元</pre></div>
   </div>
-  <p class="say r d3">循环每一遍只看得到一个数。办法像打擂台：第一个人先站上台，<br>后面每来一个就比一比，比台上的大就换他上台。全部比完，台上的就是最大的。</p>
+  <p class="say r d3">循环每一遍只看得到一个数。办法像打擂台：第一个数先站上台，<br>后面每来一个就比一比，比台上的大就换它上台。全部比完，台上的就是最大的。</p>
+  <p class="say tip r d3">生活里：比价时找最便宜的那家，运动会上找跳得最远的人。先想一想：价格一个个输入，程序怎样记住最贵的那个？</p>
   <div class="foot"></div>
 </section>
 
@@ -75,9 +76,9 @@ for i in range(n - 1):
 </section>
 
 <!-- quiz: n - 1 -->
-<section class="slide lay-ask" aria-label="小测：循环转几遍">
-  <h2 class="t r">小测：一共输入 5 个分数，循环转几遍？</h2>
-  <div class="editor r d2"><div class="tab">一共 5 个分数</div>
+<section class="slide lay-ask" aria-label="小测：一次也不换">
+  <h2 class="t r">小测：输入哪一组，台上一次也不换人？</h2>
+  <div class="editor r d1"><div class="tab">max.py</div>
 <pre class="code">n = int(input())
 best = int(input())
 for i in range(n - 1):
@@ -85,11 +86,11 @@ for i in range(n - 1):
     if x &gt; best:
         best = x
 print(best)</pre></div>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="5 个分数里，第一个在循环前已经读过了。"><i>1</i>5 遍</button>
-    <button type="button" data-fb="答对了！第一个先上台，剩下 4 个，range(n - 1) 正好转 4 遍。"><i>2</i>4 遍</button>
-    <button type="button" data-fb="range(n - 1) 比 n 还少一遍，不会是 6。"><i>3</i>6 遍</button>
-    <button type="button" data-fb="for 循环会把剩下的每一个都读一遍，不是只读一个。"><i>4</i>1 遍</button>
+  <div class="quiz r d2" data-right="1">
+    <button type="button" data-fb="读到 95 时比 80 大，换了一次。"><i>1</i>3、80、95、70</button>
+    <button type="button" data-fb="答对了！最大的 95 第一个上台，后面没有比它大的，一次也不换。"><i>2</i>3、95、80、70</button>
+    <button type="button" data-fb="最小的先上台，后面两个都比它大，换了两次。"><i>3</i>3、70、80、95</button>
+    <button type="button" data-fb="80 和 80 一样大不换，但 95 来了要换一次。"><i>4</i>3、80、80、95</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -112,11 +113,11 @@ print(best)</pre></div>
 </section>
 
 <!-- your turn: lowest -->
-<section class="slide lay-try" aria-label="改成最低分" data-chapter="最小值">
+<section class="slide lay-try" aria-label="改成最便宜" data-chapter="最小值">
   <div class="band r"><b>动手<br>改一改</b><span>改一个符号，再给变量起个好懂的名字。</span></div>
   <div class="turn">
-    <h2 class="r d1">改成找最低分</h2>
-    <p class="say r d1">第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。输出最低分。</p>
+    <h2 class="r d1">改成找最便宜的</h2>
+    <p class="say r d1">第一行读入件数 n，至少 1 件，接下来 n 行，每行一个整数价格。输出最低的价格。</p>
     <div class="sheet two r d2"><div><small>依次输入</small><pre style="line-height:1.2">3
 80
 95
@@ -126,49 +127,49 @@ print(best)</pre></div>
 </section>
 
 <!-- worked example: the winner's name -->
-<section class="slide lay-walk wide" aria-label="例题：冠军是谁" data-steps="4" data-at="4" data-chapter="冠军">
-  <h2 class="t">例题：冠军是谁</h2>
+<section class="slide lay-walk wide" aria-label="例题：最贵的是哪样" data-steps="4" data-at="4" data-chapter="最贵的">
+  <h2 class="t">例题：最贵的是哪样</h2>
   <div class="editor"><div class="tab">winner.py</div>
-<pre class="code" data-stdin="3&#10;小明&#10;80&#10;小红&#10;95&#10;小刚&#10;70&#10;" data-file="solutions/03_winner.py" data-light="2-3:1 5-7:2-3 8-9:2 10:4"></pre></div>
+<pre class="code" data-stdin="3&#10;书包&#10;80&#10;台灯&#10;95&#10;水杯&#10;70&#10;" data-file="solutions/03_winner.py" data-light="2-3:1 5-7:2-3 8-9:2 10:4"></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1 small">输入 3，然后每人两行：名字一行，分数一行。小明 80 分，先上台。</p>
-      <p class="say only2 small">小红 95 分，比 80 大。分数和名字一起换。</p>
-      <p class="say only3 small">小刚 70 分，没有 95 大，不换。</p>
-      <p class="say only4 small">比完了，输出台上的名字和分数。</p>
+      <p class="say only1 small">输入 3，然后每样两行：名字一行，价格一行。书包 80 元，先上台。</p>
+      <p class="say only2 small">台灯 95 元，比 80 大。价格和名字一起换。</p>
+      <p class="say only3 small">水杯 70 元，没有 95 大，不换。</p>
+      <p class="say only4 small">比完了，输出台上的名字和价格。</p>
     </div>
-    <div class="box step long"><i>台上</i><b>小明 80</b></div>
-    <div class="box step s2 long"><i>台上</i><b>小红 95</b></div>
-    <div class="box step s3 long"><i>台上</i><b>小红 95</b></div>
-    <div class="box out step s4 long"><i>输出</i><b>小红 95</b></div>
+    <div class="box step long"><i>台上</i><b>书包 80</b></div>
+    <div class="box step s2 long"><i>台上</i><b>台灯 95</b></div>
+    <div class="box step s3 long"><i>台上</i><b>台灯 95</b></div>
+    <div class="box out step s4 long"><i>输出</i><b>台灯 95</b></div>
     <a class="ide step s4">▶ 在 IDE 打开</a>
   </div>
 </section>
 
 <!-- predict: a tie -->
-<section class="slide lay-columns" aria-label="猜一猜：一样高" data-steps="2" data-at="2">
-  <h2 class="t">猜一猜：两人都是 90 分，谁是冠军？</h2>
+<section class="slide lay-columns" aria-label="猜一猜：一样贵" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：两样都是 90 元，算哪样？</h2>
   <div class="vs">
-    <div><h3>用 &gt;</h3><pre style="font-size:50px">if score &gt; best:
-    best = score
-    winner = name</pre><p class="res step s2" style="font-size:90px">小明 90</p></div>
-    <div><h3>用 &gt;=</h3><pre style="font-size:50px">if score &gt;= best:
-    best = score
-    winner = name</pre><p class="res step s2" style="font-size:90px">小红 90</p></div>
+    <div><h3>用 &gt;</h3><pre style="font-size:50px">if price &gt; best:
+    best = price
+    winner = name</pre><p class="res step s2" style="font-size:90px">书包 90</p></div>
+    <div><h3>用 &gt;=</h3><pre style="font-size:50px">if price &gt;= best:
+    best = price
+    winner = name</pre><p class="res step s2" style="font-size:90px">台灯 90</p></div>
   </div>
   <div class="turns">
-    <p class="say only1">小明先出场，小红后出场，两人都是 90 分。两边只差一个等号。</p>
-    <p class="say step s2">&gt; 要比台上大才换，一样大不换，先上台的留下。<br>&gt;= 一样大也换，后来的留下。比赛规则怎么定，写程序前先想清楚。</p>
+    <p class="say only1">书包先读入，台灯后读入，两样都是 90 元。两边只差一个等号。</p>
+    <p class="say step s2">&gt; 要比台上大才换，一样大不换，先上台的留下。<br>&gt;= 一样大也换，后来的留下。规则怎么定，写程序前先想清楚。</p>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- your turn: position -->
 <section class="slide lay-try" aria-label="记住是第几个">
-  <div class="band r"><b>动手<br>改一改</b><span>再请一个变量帮忙，记住擂主是第几个出场的。</span></div>
+  <div class="band r"><b>动手<br>改一改</b><span>再请一个变量帮忙，记住擂主是第几个读入的。</span></div>
   <div class="turn">
-    <h2 class="r d1">最高分是第几个？</h2>
-    <p class="say r d1">第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。输出两个数：最高分是第几个出场的，最高分是多少。<b>一样高时算先出场的</b>。</p>
+    <h2 class="r d1">最贵的是第几样？</h2>
+    <p class="say r d1">第一行读入件数 n，至少 1 件，接下来 n 行，每行一个整数价格。输出两个数：最贵的是第几样，价格是多少。<b>一样贵时算先读入的</b>。</p>
     <div class="sheet two r d2"><div><small>依次输入</small><pre style="line-height:1.2">3
 80
 95
@@ -199,24 +200,42 @@ print(best)</pre></div>
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：count 加了什么">
+  <h2 class="t r">回顾第 8 课：最后输出几？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">count = 0
+for i in range(1, 11):
+    if i % 2 == 0:
+        count += i
+print(count)</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！名字叫 count，加的却是 i：2 + 4 + 6 + 8 + 10 = 30。"><i>1</i>30</button>
+    <button type="button" data-fb="5 是偶数的个数，要写 count += 1 才是 5。"><i>2</i>5</button>
+    <button type="button" data-fb="55 是 1 到 10 全加，这里只加偶数。"><i>3</i>55</button>
+    <button type="button" data-fb="10 是最后一个偶数，前面的也加进去了。"><i>4</i>10</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1"><code>best = 0</code><b>不报错</b><span>全是负数就错了</span></div>
-    <div class="r d2"><code>x = best</code><b>不报错</b><span>写反了，擂主一直不换</span></div>
-    <div class="r d3"><code>range(n)</code><b>多等一行</b><span>第一个已经读过了</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:520px;--mid:600px">
+    <div class="r d1"><code>best = 0</code><b>best = int(input())</b><span>0 可能比所有数都大，比如全是负数</span></div>
+    <div class="r d2"><code>x = best</code><b>best = x</b><span>换人是把新来的放上台</span></div>
+    <div class="r d3"><code>for i in range(n):</code><b>for i in range(n - 1):</b><span>第一个在循环前已经读过了</span></div>
   </div>
-  <p class="say r d3">这三种都不报错，最难发现。多试几组：全是负数、只有一个数、最大的在最后。</p>
+  <p class="say r d3">前两种不报错，第三种会多等一行输入。多试几组：全是负数、只有一个数、最大的在最后。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark lay-ask" aria-label="找错：怎么输出了最后一个">
-  <h2 class="t r">找错：最高分怎么成了 70？</h2>
+<section class="slide dark lay-ask" aria-label="找错：一样贵算错了">
+  <h2 class="t r">找错：一样贵，怎么算成了台灯？</h2>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="7" data-yes="找到了！这一行和 if 对齐，不归 if 管，每一遍都换人，最后台上站的是最后一个数。再缩进 4 个空格就对了。" data-no="这一行没问题。想一想：哪一行每一遍都运行了？"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">best = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    x = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="k">if</span> x &gt; best:</span><span class="ln">        <span class="f">print</span>(<span class="s">"换人了"</span>)</span><span class="ln">    best = x</span><span class="ln"><span class="f">print</span>(best)</span></pre></div>
-  <p class="say r d2">依次输入 3、80、95、70，最后一行却输出 70，不是 95。<br>点你认为有问题的那一行。</p>
+<pre class="code pick" data-bug="7" data-yes="找到了！&gt;= 一样大也换，后读入的台灯留在台上。写成 &gt;，一样贵就不换，先读入的书包留下。" data-no="这一行没问题。想一想：一样贵的时候，哪一行让台上换了？"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">winner = <span class="f">input</span>()</span><span class="ln">best = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    name = <span class="f">input</span>()</span><span class="ln">    price = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">    <span class="k">if</span> price &gt;= best:</span><span class="ln">        best = price</span><span class="ln">        winner = name</span><span class="ln"><span class="f">print</span>(winner, best)</span></pre></div>
+  <p class="say r d2">规定一样贵时算先读入的。依次输入 3、书包、95、台灯、95、水杯、70，<br>程序却输出台灯 95。点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
@@ -252,9 +271,9 @@ print(best)</pre></div>
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>为什么让第一个数先上台，不从 0 开始？<em class="step s2">　0 可能比所有数据都大，比如全是负数。</em></span></p>
-    <p><i>Q2</i><span>读过第一个以后，为什么只循环 n - 1 遍？<em class="step s3">　第一个已经读了，只剩 n - 1 个。</em></span></p>
-    <p><i>Q3</i><span>一样大的时候，&gt; 和 &gt;= 有什么不同？<em class="step s4">　&gt; 不换，留先来的；&gt;= 换成后来的。</em></span></p>
+    <p><i>Q1</i><span>为什么 best = x 要写在 if 里面？<em class="step s2">　写在外面每一遍都换，最后台上是最后一个数。</em></span></p>
+    <p><i>Q2</i><span>找最便宜时，low 从 0 开始和第一个数先上台，有什么不同？<em class="step s3">　价格都比 0 大，谁也换不下 0，输出 0。</em></span></p>
+    <p><i>Q3</i><span>不读 n，读到 0 就停，找最大的数怎么写？<em class="step s4">　先读一个当 best，再读 x；while x != 0: 比一比，再读下一个 x。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
@@ -278,7 +297,7 @@ print(best)</pre></div>
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>max()  min()</code><span>Python 自带的找最大和找最小</span></div>
-    <div class="r d2"><code>列表</code><span>下节课：把全班的分数都存下来</span></div>
+    <div class="r d2"><code>列表</code><span>下节课：把每个数都存下来</span></div>
     <div class="r d3"><code>排序</code><span>从高到低排出名次</span></div>
   </div>
   <p class="say r d3">今天程序学会了只记住最大的那一个。下节课让它把每个数都记住。</p>

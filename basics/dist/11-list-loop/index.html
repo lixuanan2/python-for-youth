@@ -704,23 +704,24 @@ dialog p{color:var(--muted);font-size:15px}
 <!-- cover -->
 <section id="page-1" class="slide active visible lay-cover" aria-label="列表遍历" data-chapter="开始">
   <p class="kicker r"># LESSON 11</p>
-  <div class="cover-row"><b class="r">挨个</b><div class="wire r d1"><i></i><span>for s in scores:</span></div><b class="r d2">看完</b></div>
+  <div class="cover-row"><b class="r">挨个</b><div class="wire r d1"><i></i><span>for s in jumps:</span></div><b class="r d2">看完</b></div>
   <p class="headline r d3">列表遍历：把列表从头看到尾</p>
-  <p class="say r d3">学完你能数出及格人数，给全班加分，还能找出谁高于平均分。</p>
+  <p class="say r d3">学完你能数出跳绳达标的人数，给每人补上漏记的个数，还能找出谁比平均跳得多。</p>
   <div class="foot"></div>
 </section>
 
 <!-- the problem -->
-<section id="page-2" class="slide clay lay-notes" aria-label="谁高于平均分">
-  <h2 class="t r">有几个人高于平均分？</h2>
+<section id="page-2" class="slide clay lay-notes" aria-label="谁比平均跳得多">
+  <h2 class="t r">有几个人比平均跳得多？</h2>
   <div class="notes">
     <div class="slip r d1 short"><small>小明</small><pre>80</pre></div>
     <div class="slip r d2 short"><small>小红</small><pre>90</pre></div>
     <div class="slip r d2 short"><small>小刚</small><pre>70</pre></div>
     <div class="slip r d2 short"><small>小丽</small><pre>60</pre></div>
-    <div class="slip tilt r d3 short"><small>平均分</small><pre>75</pre></div>
+    <div class="slip tilt r d3 short"><small>平均</small><pre>75</pre></div>
   </div>
-  <p class="say r d3">要先把全部分数加完，才知道平均分是 75；知道了平均分，还得回头再看一遍每个人。<br>边读边算的老办法做不到“回头看”。这节课把分数存进列表，想看几遍就看几遍。</p>
+  <p class="say r d3">一分钟跳绳，要先把全部个数加完，才知道平均是 75；知道了平均，还得回头再看一遍每个人。<br>边读边算的老办法做不到“回头看”。这节课把数存进列表，想看几遍就看几遍。</p>
+  <p class="say tip r d3">生活里：体育课统计跳绳达标、给每个人补上漏记的个数。先想一想：输入只读一遍，怎样回头再看每个人一次？</p>
   <div class="foot"></div>
 </section>
 
@@ -728,7 +729,7 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-3" class="slide lay-walk" aria-label="一个一个拿出来" data-steps="3" data-at="3" data-chapter="遍历">
   <h2 class="t">for：一个一个拿出来</h2>
   <div class="editor" style="--fs:52px"><div class="tab">each.py</div>
-<pre class="code" data-file="solutions/01_each.py"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1 l2 l3"><span class="k">for</span> s <span class="k">in</span> scores:</span><span class="ln l1 l2 l3">    <span class="f">print</span>(s)</span></pre></div>
+<pre class="code" data-file="solutions/01_each.py"><span class="ln">jumps = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1 l2 l3"><span class="k">for</span> s <span class="k">in</span> jumps:</span><span class="ln l1 l2 l3">    <span class="f">print</span>(s)</span></pre></div>
   <div class="turns">
     <p class="say only1">第一遍，s 拿到第一个数 80，输出它。</p>
     <p class="say only2">第二遍，s 换成第二个数 95。</p>
@@ -764,22 +765,22 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-5" class="slide lay-columns" aria-label="两种遍历">
   <h2 class="t r">两种写法：拿数，还是拿下标</h2>
   <div class="vs">
-    <div class="r d1"><h3>拿到每个数</h3><pre style="font-size:46px">for s in scores:
+    <div class="r d1"><h3>拿到每个数</h3><pre style="font-size:46px">for s in jumps:
     print(s)</pre><p class="say" style="margin-top:24px">s 依次是 80、95、70。<br>只想看看每个数，用这种。</p></div>
-    <div class="r d2"><h3>拿到每个下标</h3><pre style="font-size:46px">for i in range(len(scores)):
-    print(i, scores[i])</pre><p class="say" style="margin-top:24px">i 依次是 0、1、2，用 scores[i] 取数。<br>要编号、要改列表，用这种。</p></div>
+    <div class="r d2"><h3>拿到每个下标</h3><pre style="font-size:46px">for i in range(len(jumps)):
+    print(i, jumps[i])</pre><p class="say" style="margin-top:24px">i 依次是 0、1、2，用 jumps[i] 取数。<br>要编号、要改列表，用这种。</p></div>
   </div>
-  <p class="say r d3">range(len(scores)) 就是 range(3)，正好是下标 0、1、2。</p>
+  <p class="say r d3">range(len(jumps)) 就是 range(3)，正好是下标 0、1、2。</p>
   <div class="foot"></div>
 </section>
 
 <!-- numbered list -->
 <section id="page-6" class="slide lay-walk" aria-label="带编号输出" data-steps="3" data-at="3">
   <h2 class="t">用下标，顺便编个号</h2>
-  <div class="editor" style="--fs:47px"><div class="tab">numbered.py</div>
-<pre class="code" data-file="solutions/02_numbered.py"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1 l2 l3"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="f">len</span>(scores)):</span><span class="ln l1 l2 l3">    <span class="f">print</span>(i + <span class="m">1</span>, scores[i])</span></pre></div>
+  <div class="editor" style="--fs:49px"><div class="tab">numbered.py</div>
+<pre class="code" data-file="solutions/02_numbered.py"><span class="ln">jumps = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1 l2 l3"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="f">len</span>(jumps)):</span><span class="ln l1 l2 l3">    <span class="f">print</span>(i + <span class="m">1</span>, jumps[i])</span></pre></div>
   <div class="turns">
-    <p class="say only1">i 是 0，scores[0] 是 80。编号要从 1 开始，所以输出 i + 1。</p>
+    <p class="say only1">i 是 0，jumps[0] 是 80。编号要从 1 开始，所以输出 i + 1。</p>
     <p class="say only2">i 是 1，输出 2 和 95。</p>
     <p class="say only3">i 是 2，输出 3 和 70。下标给程序用，编号给人看。</p>
   </div>
@@ -792,33 +793,33 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: which i -->
-<section id="page-7" class="slide lay-ask" aria-label="小测：i 依次是几">
-  <h2 class="t r">小测：a 里有 4 个数，i 依次是哪几个？</h2>
-  <div class="editor r d1" style="--fs:46px"><div class="tab">i 是几？</div>
-<pre class="code"><span class="ln">a = [<span class="m">5</span>, <span class="m">6</span>, <span class="m">7</span>, <span class="m">8</span>]</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="f">len</span>(a)):</span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
+<section id="page-7" class="slide lay-ask" aria-label="小测：改成 a[i] - i">
+  <h2 class="t r">小测：改成 print(a[i] - i)，输出什么？</h2>
+  <div class="editor r d1" style="--fs:46px"><div class="tab">index.py</div>
+<pre class="code"><span class="ln">a = [<span class="m">5</span>, <span class="m">6</span>, <span class="m">7</span>, <span class="m">8</span>]</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="f">len</span>(a)):</span><span class="ln mod">    <span class="f">print</span>(i)<span class="orig">print(a[i] - i)</span></span></pre></div>
   <div class="quiz r d2" data-right="0">
-    <button type="button" data-fb="答对了！len(a) 是 4，range(4) 是 0、1、2、3，正好是 4 个下标。"><i>1</i>0 1 2 3</button>
-    <button type="button" data-fb="下标从 0 开始，range(4) 不含终点 4。"><i>2</i>1 2 3 4</button>
-    <button type="button" data-fb="这些是列表里的数。i 拿的是下标，a[i] 才是数。"><i>3</i>5 6 7 8</button>
-    <button type="button" data-fb="range(4) 不含终点 4，只有 4 个数。"><i>4</i>0 1 2 3 4</button>
+    <button type="button" data-fb="答对了！i 是 0、1、2、3，a[i] 是 5、6、7、8，每次相减都是 5。"><i>1</i>5 5 5 5</button>
+    <button type="button" data-fb="这是 a[i]，还要减去 i。"><i>2</i>5 6 7 8</button>
+    <button type="button" data-fb="这是 i，a[i] - i 要先取数再减。"><i>3</i>0 1 2 3</button>
+    <button type="button" data-fb="i 最大是 3，a[3] 还在列表里，不会超出范围。"><i>4</i>报错</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- worked example: count pass -->
-<section id="page-8" class="slide lay-walk" aria-label="例题：及格人数" data-steps="4" data-at="4" data-chapter="统计">
-  <h2 class="t">例题：存下来，再数及格</h2>
-  <div class="editor" style="--fs:43px"><div class="tab">count_pass.py</div>
-<pre class="code" data-file="solutions/03_count_pass.py"><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">scores = []</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2">count = <span class="m">0</span></span><span class="ln l3"><span class="k">for</span> s <span class="k">in</span> scores:</span><span class="ln l3">    <span class="k">if</span> s &gt;= <span class="m">60</span>:</span><span class="ln l3">        count += <span class="m">1</span></span><span class="ln l4"><span class="f">print</span>(count)</span></pre></div>
+<section id="page-8" class="slide lay-walk" aria-label="例题：达标人数" data-steps="4" data-at="4" data-chapter="统计">
+  <h2 class="t">例题：存下来，再数达标</h2>
+  <div class="editor" style="--fs:44px"><div class="tab">count_pass.py</div>
+<pre class="code" data-file="solutions/03_count_pass.py"><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">jumps = []</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    jumps.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2">count = <span class="m">0</span></span><span class="ln l3"><span class="k">for</span> s <span class="k">in</span> jumps:</span><span class="ln l3">    <span class="k">if</span> s &gt;= <span class="m">60</span>:</span><span class="ln l3">        count += <span class="m">1</span></span><span class="ln l4"><span class="f">print</span>(count)</span></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1 small">前四行和上节课一样：输入 4，再输入 80、59、60、30，存进列表。</p>
+      <p class="say only1 small">前四行和上节课一样：4 个人跳绳，个数 80、59、60、30，存进列表。</p>
       <p class="say only2 small">计数前，先准备 count = 0。</p>
-      <p class="say only3 small">遍历列表，碰到 60 分及以上就记一个：80 和 60。</p>
+      <p class="say only3 small">遍历列表，碰到 60 个及以上就记一个：80 和 60。</p>
       <p class="say only4 small">看完了，输出 2。</p>
     </div>
-    <div class="box step longest"><i>scores</i><b>[80, 59, 60, 30]</b></div>
+    <div class="box step longest"><i>jumps</i><b>[80, 59, 60, 30]</b></div>
     <div class="box step s2 longest"><i>count</i><b>0</b></div>
     <div class="box step s3 longest"><i>count</i><b>2</b></div>
     <div class="box out step s4 longest"><i>输出</i><b>2</b></div>
@@ -827,149 +828,163 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- your turn: failed scores -->
-<section id="page-9" class="slide lay-try" aria-label="输出不及格的分数">
+<section id="page-9" class="slide lay-try" aria-label="列出没达标的">
   <div class="band r"><b>动手<br>改一改</b><span>不用数了，碰到就直接输出。</span></div>
   <div class="turn">
-    <h2 class="r d1">把不及格的分数列出来</h2>
-    <p class="say r d1">第一行读入人数 n，接下来 n 行，每行一个整数分数。把不到 60 分的分数按原来的顺序输出，一行一个；<b>一个也没有就什么也不输出</b>。</p>
+    <h2 class="r d1">把没达标的个数列出来</h2>
+    <p class="say r d1">第一行读入人数 n，接下来 n 行，每行一个整数，是这人一分钟跳绳的个数。把不到 60 个的按原来的顺序输出，一行一个；<b>一个也没有就什么也不输出</b>。</p>
     <div class="sheet two r d2"><div><small>依次输入 5 行</small><pre style="font-size:44px">4、80、59、60、30</pre></div><div><small>输出</small><pre style="line-height:1.2">59
 30</pre></div></div>
   </div>
-  <a class="ide r d3" data-code="# 【把不及格的分数列出来】&#10;# 第一行读入人数 n，接下来 n 行，每行一个整数分数。&#10;#   把不到 60 分的分数按原来的顺序输出，一行一个；&#10;#   一个也没有就什么也不输出。&#10;# 例如输入（每个一行）：4、80、59、60、30&#10;# 应该输出（每个一行）：59、30&#10;# 提示：不用数了，碰到就直接输出。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;count = 0&#10;for s in scores:&#10;    if s &gt;= 60:&#10;        count += 1&#10;print(count)&#10;">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【把没达标的个数列出来】&#10;# 第一行读入人数 n，接下来 n 行，每行一个整数，&#10;#   是这人一分钟跳绳的个数。把不到 60 个的按原来的顺序输出，&#10;#   一行一个；一个也没有就什么也不输出。&#10;# 例如输入（每个一行）：4、80、59、60、30&#10;# 应该输出（每个一行）：59、30&#10;# 提示：不用数了，碰到就直接输出。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;jumps = []&#10;for i in range(n):&#10;    jumps.append(int(input()))&#10;count = 0&#10;for s in jumps:&#10;    if s &gt;= 60:&#10;        count += 1&#10;print(count)&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- predict: changing s does nothing -->
-<section id="page-10" class="slide lay-columns" aria-label="猜一猜：给每人加 5 分" data-steps="2" data-at="2" data-chapter="改列表">
+<section id="page-10" class="slide lay-columns" aria-label="猜一猜：每人补 5 个" data-steps="2" data-at="2" data-chapter="改列表">
   <h2 class="t">猜一猜：两种写法，列表都变了吗？</h2>
   <div class="vs">
-    <div><h3>改 s</h3><pre style="font-size:44px">for s in scores:
+    <div><h3>改 s</h3><pre style="font-size:44px">for s in jumps:
     s += 5
-print(scores)</pre><p class="res step s2" style="font-size:66px">[80, 95, 70]</p></div>
-    <div><h3>改 scores[i]</h3><pre style="font-size:44px">for i in range(len(scores)):
-    scores[i] += 5
-print(scores)</pre><p class="res step s2" style="font-size:66px">[85, 100, 75]</p></div>
+print(jumps)</pre><p class="res step s2" style="font-size:66px">[80, 95, 70]</p></div>
+    <div><h3>改 jumps[i]</h3><pre style="font-size:44px">for i in range(len(jumps)):
+    jumps[i] += 5
+print(jumps)</pre><p class="res step s2" style="font-size:66px">[85, 100, 75]</p></div>
   </div>
   <div class="turns">
-    <p class="say only1">scores 一开始都是 [80, 95, 70]，想给每个人加 5 分。</p>
-    <p class="say step s2">s 只是从盒子里拿出来的一份，改 s 不会放回列表。<br>要改列表，就用下标找到那个盒子，改 scores[i]。</p>
+    <p class="say only1">jumps 一开始都是 [80, 95, 70]。计数器每人都少记了 5 个，想给每个人补上。</p>
+    <p class="say step s2">s 只是从盒子里拿出来的一份，改 s 不会放回列表。<br>要改列表，就用下标找到那个盒子，改 jumps[i]。</p>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- your turn: add five -->
-<section id="page-11" class="slide lay-try" aria-label="全班加 5 分">
-  <div class="band r"><b>动手<br>改一改</b><span>换成用下标遍历，把加分放回列表里。</span></div>
+<section id="page-11" class="slide lay-try" aria-label="每人补上 5 个">
+  <div class="band r"><b>动手<br>改一改</b><span>换成用下标遍历，把加上的放回列表里。</span></div>
   <div class="turn">
-    <h2 class="r d1">全班每人加 5 分</h2>
-    <p class="say r d1">第一行读入人数 n，接下来 n 行，每行一个整数分数。每人加 5 分，最后输出整个列表。</p>
+    <h2 class="r d1">每人补上 5 个</h2>
+    <p class="say r d1">第一行读入人数 n，接下来 n 行，每行一个整数跳绳个数。计数器每人少记了 5 个，每人加 5，最后输出整个列表。</p>
     <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1.3fr"><div><small>依次输入</small><pre style="font-size:44px">3、80、95、70</pre></div><div><small>输出</small><pre style="font-size:44px">[85, 100, 75]</pre></div></div>
   </div>
-  <a class="ide r d3" data-code="# 【全班每人加 5 分】&#10;# 第一行读入人数 n，接下来 n 行，每行一个整数分数。每人加 5 分，&#10;#   最后输出整个列表。&#10;# 例如输入（每个一行）：3、80、95、70&#10;# 应该输出：[85, 100, 75]&#10;# 提示：换成用下标遍历，把加分放回列表里。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;count = 0&#10;for s in scores:&#10;    if s &gt;= 60:&#10;        count += 1&#10;print(count)&#10;">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【每人补上 5 个】&#10;# 第一行读入人数 n，接下来 n 行，每行一个整数跳绳个数。&#10;#   计数器每人少记了 5 个，每人加 5，最后输出整个列表。&#10;# 例如输入（每个一行）：3、80、95、70&#10;# 应该输出：[85, 100, 75]&#10;# 提示：换成用下标遍历，把加上的放回列表里。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;jumps = []&#10;for i in range(n):&#10;    jumps.append(int(input()))&#10;count = 0&#10;for s in jumps:&#10;    if s &gt;= 60:&#10;        count += 1&#10;print(count)&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz -->
-<section id="page-12" class="slide lay-ask" aria-label="小测：输出什么">
-  <h2 class="t r">小测：这段程序输出什么？</h2>
-  <div class="editor r d1" style="--fs:48px"><div class="tab">输出什么？</div>
-<pre class="code"><span class="ln">a = [<span class="m">10</span>, <span class="m">20</span>, <span class="m">30</span>]</span><span class="ln"><span class="k">for</span> x <span class="k">in</span> a:</span><span class="ln">    <span class="f">print</span>(x // <span class="m">10</span>)</span></pre></div>
-  <div class="quiz r d2" data-right="2">
-    <button type="button" data-fb="x 拿到的是数 10、20、30，不是下标。"><i>1</i>0 1 2</button>
-    <button type="button" data-fb="print 在循环里，每一遍都输出一次，不是只输出一个。"><i>2</i>6</button>
-    <button type="button" data-fb="答对了！10 // 10 是 1，20 // 10 是 2，30 // 10 是 3，一行一个。"><i>3</i>1 2 3，一行一个</button>
-    <button type="button" data-fb="// 是整除，不会出现小数。"><i>4</i>1.0 2.0 3.0</button>
+<section id="page-12" class="slide lay-ask" aria-label="小测：两种写法比一比">
+  <h2 class="t r">小测：两段程序输出一样吗？</h2>
+  <div class="editor r d1" style="--fs:30px"><div class="tab">two.py</div>
+<pre class="code"><span class="ln">a = [<span class="m">10</span>, <span class="m">20</span>, <span class="m">30</span>]</span><span class="ln">t = <span class="m">0</span></span><span class="ln"><span class="k">for</span> x <span class="k">in</span> a:</span><span class="ln">    t += x</span><span class="ln"><span class="f">print</span>(t)</span><span class="ln"></span><span class="ln">t = <span class="m">0</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="f">len</span>(a)):</span><span class="ln">    t += i</span><span class="ln"><span class="f">print</span>(t)</span></pre></div>
+  <div class="quiz r d2" data-right="1">
+    <button type="button" data-fb="第二段加的是 i，也就是下标 0、1、2。"><i>1</i>一样，都是 60</button>
+    <button type="button" data-fb="答对了！第一段加的是数，第二段加的是下标 0 + 1 + 2。要加数得写 t += a[i]。"><i>2</i>不一样：60 和 3</button>
+    <button type="button" data-fb="下标从 0 开始，是 0 + 1 + 2，不是 1 + 2 + 3。"><i>3</i>不一样：60 和 6</button>
+    <button type="button" data-fb="i 只是用来加，没有拿它取数，不会超出范围。"><i>4</i>第二段会报错</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- errors -->
-<section id="page-13" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:700px;--mid:400px">
-    <div class="r d1"><code>print(i)</code><b>不报错</b><span>输出的是下标，不是分数</span></div>
-    <div class="r d2"><code>scores[len(scores)]</code><b>IndexError</b><span>最后一个是 len - 1</span></div>
-    <div class="r d3"><code>s += 5</code><b>不报错</b><span>改的是拿出来的一份，列表没变</span></div>
+<section id="page-13" class="slide lay-ask" aria-label="回顾：先改再接">
+  <h2 class="t r">回顾第 10 课：最后输出什么？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">review.py</div>
+<pre class="code"><span class="ln">a = [<span class="m">5</span>, <span class="m">8</span>, <span class="m">2</span>]</span><span class="ln">a[<span class="m">0</span>] = a[-<span class="m">1</span>]</span><span class="ln">a.<span class="f">append</span>(a[<span class="m">0</span>])</span><span class="ln"><span class="f">print</span>(a)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！a[0] 先换成最后一个 2，再把现在的 a[0] 也就是 2 接到后面。"><i>1</i>[2, 8, 2, 2]</button>
+    <button type="button" data-fb="第 2 行已经把 a[0] 换成 2 了。"><i>2</i>[5, 8, 2, 5]</button>
+    <button type="button" data-fb="换掉的是下标 0 的 5，下标 2 的 2 没动。"><i>3</i>[2, 8, 5, 2]</button>
+    <button type="button" data-fb="接到后面的是“现在的” a[0]，已经是 2。"><i>4</i>[2, 8, 2, 5]</button>
   </div>
-  <p class="say r d3">两种不报错的最难发现。写完先想：我要的是下标，还是数？</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-14" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:620px;--mid:700px">
+    <div class="r d1"><code style="font-size:40px">jumps[len(jumps)]</code><b style="font-size:40px">jumps[len(jumps) - 1]</b><span>最后一个的下标是 len - 1</span></div>
+    <div class="r d2"><code style="font-size:40px">for i in jumps:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(jumps[i])</code><b style="font-size:40px">for i in range(len(jumps)):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(jumps[i])</b><span>拿到的是数，不是下标</span></div>
+    <div class="r d3"><code style="font-size:40px">for s in range(jumps):</code><b style="font-size:40px">for s in jumps:</b><span>range 里放的是整数</span></div>
+  </div>
+  <p class="say small r d3">三种都会报错。写之前先想：我要的是下标，还是数？</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-14" class="slide dark lay-ask" aria-label="找错：总分少了">
-  <h2 class="t r">找错：总分怎么少了 80？</h2>
-  <div class="editor r d1" style="--fs:47px"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="3" data-yes="找到了！range(1, len(scores)) 从下标 1 开始，第一个人的 80 没加。写 range(len(scores)) 就是从 0 开始。" data-no="这一行没问题。少的正好是第一个人的分数，想一想循环从哪里开始。"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln">total = <span class="m">0</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="f">len</span>(scores)):</span><span class="ln">    total += scores[i]</span><span class="ln"><span class="f">print</span>(total)</span></pre></div>
-  <p class="say r d2">三个分数加起来应该是 245，程序却输出 165。<br>点你认为有问题的那一行。</p>
+<section id="page-15" class="slide dark lay-ask" aria-label="找错：列表怎么没变">
+  <h2 class="t r">找错：没达标的改成 60，列表怎么没变？</h2>
+  <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="4" data-yes="找到了！s 只是拿出来的一份，改它不会放回列表。要用 for i in range(len(jumps))，改 jumps[i] = 60。" data-no="这一行没问题。想一想：哪一行本来想改列表？"><span class="ln">jumps = [<span class="m">80</span>, <span class="m">59</span>, <span class="m">60</span>, <span class="m">30</span>]</span><span class="ln"><span class="k">for</span> s <span class="k">in</span> jumps:</span><span class="ln">    <span class="k">if</span> s &lt; <span class="m">60</span>:</span><span class="ln">        s = <span class="m">60</span></span><span class="ln"><span class="f">print</span>(jumps)</span></pre></div>
+  <p class="say r d2">想把不到 60 个的都改成 60，程序却原样输出 [80, 59, 60, 30]。<br>点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-15" class="slide clay lay-notes challenge" aria-label="高于平均分" data-chapter="挑战">
+<section id="page-16" class="slide clay lay-notes challenge" aria-label="比平均跳得多" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
-  <h2 class="big r d1">高于平均分</h2>
-  <p class="say r d2">第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。<br>输出分数严格高于平均分的人数，<b>和平均分一样的不算</b>。</p>
+  <h2 class="big r d1">比平均跳得多</h2>
+  <p class="say r d2">第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数跳绳个数。<br>输出跳得严格比平均多的人数，<b>和平均一样的不算</b>。</p>
   <div class="slip tilt2 r d3 short" style="width:480px"><small>依次输入</small><pre>4
 80
 90
 70
 60</pre><small>输出</small><pre>2</pre></div>
-  <div class="go r d3"><a class="ide" data-code="# 【高于平均分】&#10;# 第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。&#10;# 输出分数严格高于平均分的人数，和平均分一样的不算。&#10;# 例如输入（每个一行）：4、80、90、70、60&#10;# 应该输出：2&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
+  <div class="go r d3"><a class="ide" data-code="# 【比平均跳得多】&#10;# 第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数跳绳个数。&#10;# 输出跳得严格比平均多的人数，和平均一样的不算。&#10;# 例如输入（每个一行）：4、80、90、70、60&#10;# 应该输出：2&#10;# ↓ 从这里开始写&#10;">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
 
 <!-- hints -->
-<section id="page-16" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-17" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
-    <p class="step"><i>提示 1</i><span>先把分数都存进列表，遍历一遍，算出平均分。</span></p>
-    <p class="step s2"><i>提示 2</i><span>知道平均分以后，再从头遍历一遍，比平均分高的数一下。</span></p>
-    <p class="step s3"><i>提示 3</i><span>试试三个人都是 70 分：没有人比平均分高，应该输出 0。</span></p>
+    <p class="step"><i>提示 1</i><span>先把个数都存进列表，遍历一遍，算出平均。</span></p>
+    <p class="step s2"><i>提示 2</i><span>知道平均以后，再从头遍历一遍，比平均多的数一下。</span></p>
+    <p class="step s3"><i>提示 3</i><span>试试三个人都跳了 70 个：没有人比平均多，应该输出 0。</span></p>
   </div>
   <div class="foot"></div>
 </section>
 
-<section id="page-17" class="slide dark" aria-label="参考答案：高于平均分" data-answer="03" data-steps="2" data-at="2">
-  <h2 class="t">参考答案：高于平均分</h2>
+<section id="page-18" class="slide dark" aria-label="参考答案：比平均跳得多" data-answer="03" data-steps="2" data-at="2">
+  <h2 class="t">参考答案：比平均跳得多</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">above_average.py</div>
-<pre class="code" data-file="solutions/06_above_average.py" data-lines="5-13" data-full="n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;total = 0&#10;for s in scores:&#10;    total += s&#10;average = total / n&#10;count = 0&#10;for s in scores:&#10;    if s &gt; average:&#10;        count += 1&#10;print(count)&#10;"><span class="ln">total = <span class="m">0</span></span><span class="ln"><span class="k">for</span> s <span class="k">in</span> scores:</span><span class="ln">    total += s</span><span class="ln">average = total / n</span><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">for</span> s <span class="k">in</span> scores:</span><span class="ln">    <span class="k">if</span> s &gt; average:</span><span class="ln">        count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(count)</span></pre></div>
-  <p class="abs say step s2" style="left:1340px;top:220px;width:484px">先加出总分、算出平均分，再走一遍列表，只数 <code>s &gt; average</code> 的，一样的不算。</p>
+<pre class="code" data-file="solutions/06_above_average.py" data-lines="5-13" data-full="n = int(input())&#10;jumps = []&#10;for i in range(n):&#10;    jumps.append(int(input()))&#10;total = 0&#10;for s in jumps:&#10;    total += s&#10;average = total / n&#10;count = 0&#10;for s in jumps:&#10;    if s &gt; average:&#10;        count += 1&#10;print(count)&#10;"><span class="ln">total = <span class="m">0</span></span><span class="ln"><span class="k">for</span> s <span class="k">in</span> jumps:</span><span class="ln">    total += s</span><span class="ln">average = total / n</span><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">for</span> s <span class="k">in</span> jumps:</span><span class="ln">    <span class="k">if</span> s &gt; average:</span><span class="ln">        count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(count)</span></pre></div>
+  <p class="abs say step s2" style="left:1340px;top:220px;width:484px">先加出总数、算出平均，再走一遍列表，只数 <code>s &gt; average</code> 的，一样的不算。</p>
   <a class="ide step s2" style="left:1340px;top:860px">▶ 在 IDE 打开</a>
   <div class="foot"></div>
 </section>
 
 <!-- review -->
-<section id="page-18" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-19" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>for s in scores 里，s 拿到的是什么？<em class="step s2">　列表里的数，一遍一个。</em></span></p>
-    <p><i>Q2</i><span>什么时候要用 range(len(scores))？<em class="step s3">　要编号或者要改列表的时候。</em></span></p>
-    <p><i>Q3</i><span>为什么高于平均分要遍历两遍？<em class="step s4">　第一遍算出平均分，第二遍才能比。</em></span></p>
+    <p><i>Q1</i><span>为什么数比平均多的人要遍历两遍？<em class="step s2">　第一遍才算出平均，第二遍才能拿每个人和它比。</em></span></p>
+    <p><i>Q2</i><span>例题里 for s in jumps 换成 for s in range(n)，输出有什么不同？<em class="step s3">　s 拿到的是 0 到 n - 1，没有一个够 60，输出 0。</em></span></p>
+    <p><i>Q3</i><span>要输出每个人比平均多跳了几个，可以是负数，怎么写？<em class="step s4">　先算出 average，再 for s in jumps: print(s - average)。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-19" class="slide lay-columns" aria-label="速查卡">
+<section id="page-20" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3" style="--key:900px">
-    <div class="r d1"><code>for s in scores:</code><span>一个一个拿出数</span></div>
-    <div class="r d1"><code>for i in range(len(scores)):</code><span>一个一个拿出下标</span></div>
-    <div class="r d2"><code>scores[i]</code><span>用下标取数</span></div>
-    <div class="r d2"><code>scores[i] += 5</code><span>改列表要用下标</span></div>
+    <div class="r d1"><code>for s in jumps:</code><span>一个一个拿出数</span></div>
+    <div class="r d1"><code>for i in range(len(jumps)):</code><span>一个一个拿出下标</span></div>
+    <div class="r d2"><code>jumps[i]</code><span>用下标取数</span></div>
+    <div class="r d2"><code>jumps[i] += 5</code><span>改列表要用下标</span></div>
     <div class="r d3"><code>i + 1</code><span>给人看的编号从 1 开始</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section id="page-20" class="slide lay-columns" aria-label="后面再学">
+<section id="page-21" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
-    <div class="r d1"><code>sum()</code><span>Python 自带的求和，一行算出总分</span></div>
+    <div class="r d1"><code>sum()</code><span>Python 自带的求和，一行算出总数</span></div>
     <div class="r d2"><code>enumerate()</code><span>同时拿到编号和数</span></div>
     <div class="r d3"><code>字符串</code><span>下节课：一句话也能一个字一个字地遍历</span></div>
   </div>
@@ -978,7 +993,7 @@ print(scores)</pre><p class="res step s2" style="font-size:66px">[85, 100, 75]</
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-21" class="slide dark thanks" aria-label="谢谢">
+<section id="page-22" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>

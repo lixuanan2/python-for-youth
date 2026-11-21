@@ -1,7 +1,7 @@
 n = int(input())
-scores = []
+temps = []
 for i in range(n):
-    scores.append(int(input()))
+    temps.append(int(input()))
 k = int(input())
-scores[k - 1] += 5
-print(scores)
+temps[k - 1] += 5
+print(temps)

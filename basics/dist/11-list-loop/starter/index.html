@@ -62,71 +62,71 @@ footer{padding-top:24px;padding-bottom:56px;color:var(--muted);font-size:15px}
 
 <main>
   <ol class="files">
-    <li class="file"><div><h2><a href="01_each.py" download="01_each.py">01_each.py</a></h2><p>课件第 3 页：for s in scores 一个一个拿出来。</p></div>
-      <nav aria-label="01_each.py"><a href="01_each.py" download="01_each.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=scores%20%3D%20%5B80%2C%2095%2C%2070%5D%0Afor%20s%20in%20scores%3A%0A%20%20%20%20print(s)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-3">看第 3 页</a></nav>
-      <details><summary>看代码</summary><pre>scores = [80, 95, 70]
-for s in scores:
+    <li class="file"><div><h2><a href="01_each.py" download="01_each.py">01_each.py</a></h2><p>课件第 3 页：for s in jumps 一个一个拿出来。</p></div>
+      <nav aria-label="01_each.py"><a href="01_each.py" download="01_each.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=jumps%20%3D%20%5B80%2C%2095%2C%2070%5D%0Afor%20s%20in%20jumps%3A%0A%20%20%20%20print(s)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-3">看第 3 页</a></nav>
+      <details><summary>看代码</summary><pre>jumps = [80, 95, 70]
+for s in jumps:
     print(s)</pre></details></li>
     <li class="file"><div><h2><a href="02_numbered.py" download="02_numbered.py">02_numbered.py</a></h2><p>课件第 6 页：用下标遍历，顺便编号。</p></div>
-      <nav aria-label="02_numbered.py"><a href="02_numbered.py" download="02_numbered.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=scores%20%3D%20%5B80%2C%2095%2C%2070%5D%0Afor%20i%20in%20range(len(scores))%3A%0A%20%20%20%20print(i%20%2B%201%2C%20scores%5Bi%5D)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-6">看第 6 页</a></nav>
-      <details><summary>看代码</summary><pre>scores = [80, 95, 70]
-for i in range(len(scores)):
-    print(i + 1, scores[i])</pre></details></li>
-    <li class="file"><div><h2><a href="03_count_pass.py" download="03_count_pass.py">03_count_pass.py</a></h2><p>课件第 8 页：先存下来，再遍历统计及格人数。</p></div>
-      <nav aria-label="03_count_pass.py"><a href="03_count_pass.py" download="03_count_pass.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=n%20%3D%20int(input())%0Ascores%20%3D%20%5B%5D%0Afor%20i%20in%20range(n)%3A%0A%20%20%20%20scores.append(int(input()))%0Acount%20%3D%200%0Afor%20s%20in%20scores%3A%0A%20%20%20%20if%20s%20%3E%3D%2060%3A%0A%20%20%20%20%20%20%20%20count%20%2B%3D%201%0Aprint(count)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-8">看第 8 页</a></nav>
+      <nav aria-label="02_numbered.py"><a href="02_numbered.py" download="02_numbered.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=jumps%20%3D%20%5B80%2C%2095%2C%2070%5D%0Afor%20i%20in%20range(len(jumps))%3A%0A%20%20%20%20print(i%20%2B%201%2C%20jumps%5Bi%5D)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-6">看第 6 页</a></nav>
+      <details><summary>看代码</summary><pre>jumps = [80, 95, 70]
+for i in range(len(jumps)):
+    print(i + 1, jumps[i])</pre></details></li>
+    <li class="file"><div><h2><a href="03_count_pass.py" download="03_count_pass.py">03_count_pass.py</a></h2><p>课件第 8 页：先存下来，再遍历统计达标人数。</p></div>
+      <nav aria-label="03_count_pass.py"><a href="03_count_pass.py" download="03_count_pass.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=n%20%3D%20int(input())%0Ajumps%20%3D%20%5B%5D%0Afor%20i%20in%20range(n)%3A%0A%20%20%20%20jumps.append(int(input()))%0Acount%20%3D%200%0Afor%20s%20in%20jumps%3A%0A%20%20%20%20if%20s%20%3E%3D%2060%3A%0A%20%20%20%20%20%20%20%20count%20%2B%3D%201%0Aprint(count)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-8">看第 8 页</a></nav>
       <details><summary>看代码</summary><pre>n = int(input())
-scores = []
+jumps = []
 for i in range(n):
-    scores.append(int(input()))
+    jumps.append(int(input()))
 count = 0
-for s in scores:
+for s in jumps:
     if s &gt;= 60:
         count += 1
 print(count)</pre></details></li>
-    <li class="file"><div><h2><a href="04_failed.py" download="04_failed.py">04_failed.py</a></h2><p>课件第 9 页：把不及格的分数一行一个输出。</p></div>
-      <nav aria-label="04_failed.py"><a href="04_failed.py" download="04_failed.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%8A%8A%E4%B8%8D%E5%8F%8A%E6%A0%BC%E7%9A%84%E5%88%86%E6%95%B0%E5%88%97%E5%87%BA%E6%9D%A5%E3%80%91%0A%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E6%95%B4%E6%95%B0%E5%88%86%E6%95%B0%E3%80%82%0A%23%20%20%20%E6%8A%8A%E4%B8%8D%E5%88%B0%2060%20%E5%88%86%E7%9A%84%E5%88%86%E6%95%B0%E6%8C%89%E5%8E%9F%E6%9D%A5%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%BE%93%E5%87%BA%EF%BC%8C%E4%B8%80%E8%A1%8C%E4%B8%80%E4%B8%AA%EF%BC%9B%0A%23%20%20%20%E4%B8%80%E4%B8%AA%E4%B9%9F%E6%B2%A1%E6%9C%89%E5%B0%B1%E4%BB%80%E4%B9%88%E4%B9%9F%E4%B8%8D%E8%BE%93%E5%87%BA%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A4%E3%80%8180%E3%80%8159%E3%80%8160%E3%80%8130%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A59%E3%80%8130%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E4%B8%8D%E7%94%A8%E6%95%B0%E4%BA%86%EF%BC%8C%E7%A2%B0%E5%88%B0%E5%B0%B1%E7%9B%B4%E6%8E%A5%E8%BE%93%E5%87%BA%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0An%20%3D%20int(input())%0Ascores%20%3D%20%5B%5D%0Afor%20i%20in%20range(n)%3A%0A%20%20%20%20scores.append(int(input()))%0Acount%20%3D%200%0Afor%20s%20in%20scores%3A%0A%20%20%20%20if%20s%20%3E%3D%2060%3A%0A%20%20%20%20%20%20%20%20count%20%2B%3D%201%0Aprint(count)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-9">看第 9 页</a></nav>
-      <details><summary>看代码</summary><pre># 【把不及格的分数列出来】
-# 第一行读入人数 n，接下来 n 行，每行一个整数分数。
-#   把不到 60 分的分数按原来的顺序输出，一行一个；
-#   一个也没有就什么也不输出。
+    <li class="file"><div><h2><a href="04_failed.py" download="04_failed.py">04_failed.py</a></h2><p>课件第 9 页：把没达标的个数一行一个输出。</p></div>
+      <nav aria-label="04_failed.py"><a href="04_failed.py" download="04_failed.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%8A%8A%E6%B2%A1%E8%BE%BE%E6%A0%87%E7%9A%84%E4%B8%AA%E6%95%B0%E5%88%97%E5%87%BA%E6%9D%A5%E3%80%91%0A%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E6%95%B4%E6%95%B0%EF%BC%8C%0A%23%20%20%20%E6%98%AF%E8%BF%99%E4%BA%BA%E4%B8%80%E5%88%86%E9%92%9F%E8%B7%B3%E7%BB%B3%E7%9A%84%E4%B8%AA%E6%95%B0%E3%80%82%E6%8A%8A%E4%B8%8D%E5%88%B0%2060%20%E4%B8%AA%E7%9A%84%E6%8C%89%E5%8E%9F%E6%9D%A5%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%BE%93%E5%87%BA%EF%BC%8C%0A%23%20%20%20%E4%B8%80%E8%A1%8C%E4%B8%80%E4%B8%AA%EF%BC%9B%E4%B8%80%E4%B8%AA%E4%B9%9F%E6%B2%A1%E6%9C%89%E5%B0%B1%E4%BB%80%E4%B9%88%E4%B9%9F%E4%B8%8D%E8%BE%93%E5%87%BA%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A4%E3%80%8180%E3%80%8159%E3%80%8160%E3%80%8130%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A59%E3%80%8130%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E4%B8%8D%E7%94%A8%E6%95%B0%E4%BA%86%EF%BC%8C%E7%A2%B0%E5%88%B0%E5%B0%B1%E7%9B%B4%E6%8E%A5%E8%BE%93%E5%87%BA%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0An%20%3D%20int(input())%0Ajumps%20%3D%20%5B%5D%0Afor%20i%20in%20range(n)%3A%0A%20%20%20%20jumps.append(int(input()))%0Acount%20%3D%200%0Afor%20s%20in%20jumps%3A%0A%20%20%20%20if%20s%20%3E%3D%2060%3A%0A%20%20%20%20%20%20%20%20count%20%2B%3D%201%0Aprint(count)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-9">看第 9 页</a></nav>
+      <details><summary>看代码</summary><pre># 【把没达标的个数列出来】
+# 第一行读入人数 n，接下来 n 行，每行一个整数，
+#   是这人一分钟跳绳的个数。把不到 60 个的按原来的顺序输出，
+#   一行一个；一个也没有就什么也不输出。
 # 例如输入（每个一行）：4、80、59、60、30
 # 应该输出（每个一行）：59、30
 # 提示：不用数了，碰到就直接输出。
 # ↓ 在下面这段程序上改
 
 n = int(input())
-scores = []
+jumps = []
 for i in range(n):
-    scores.append(int(input()))
+    jumps.append(int(input()))
 count = 0
-for s in scores:
+for s in jumps:
     if s &gt;= 60:
         count += 1
 print(count)</pre></details></li>
-    <li class="file"><div><h2><a href="05_add_five.py" download="05_add_five.py">05_add_five.py</a></h2><p>课件第 11 页：用下标给每个人加5分。</p></div>
-      <nav aria-label="05_add_five.py"><a href="05_add_five.py" download="05_add_five.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E5%85%A8%E7%8F%AD%E6%AF%8F%E4%BA%BA%E5%8A%A0%205%20%E5%88%86%E3%80%91%0A%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E6%95%B4%E6%95%B0%E5%88%86%E6%95%B0%E3%80%82%E6%AF%8F%E4%BA%BA%E5%8A%A0%205%20%E5%88%86%EF%BC%8C%0A%23%20%20%20%E6%9C%80%E5%90%8E%E8%BE%93%E5%87%BA%E6%95%B4%E4%B8%AA%E5%88%97%E8%A1%A8%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A3%E3%80%8180%E3%80%8195%E3%80%8170%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A%5B85%2C%20100%2C%2075%5D%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E6%8D%A2%E6%88%90%E7%94%A8%E4%B8%8B%E6%A0%87%E9%81%8D%E5%8E%86%EF%BC%8C%E6%8A%8A%E5%8A%A0%E5%88%86%E6%94%BE%E5%9B%9E%E5%88%97%E8%A1%A8%E9%87%8C%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0An%20%3D%20int(input())%0Ascores%20%3D%20%5B%5D%0Afor%20i%20in%20range(n)%3A%0A%20%20%20%20scores.append(int(input()))%0Acount%20%3D%200%0Afor%20s%20in%20scores%3A%0A%20%20%20%20if%20s%20%3E%3D%2060%3A%0A%20%20%20%20%20%20%20%20count%20%2B%3D%201%0Aprint(count)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-11">看第 11 页</a></nav>
-      <details><summary>看代码</summary><pre># 【全班每人加 5 分】
-# 第一行读入人数 n，接下来 n 行，每行一个整数分数。每人加 5 分，
-#   最后输出整个列表。
+    <li class="file"><div><h2><a href="05_add_five.py" download="05_add_five.py">05_add_five.py</a></h2><p>课件第 11 页：用下标给每个人加5。</p></div>
+      <nav aria-label="05_add_five.py"><a href="05_add_five.py" download="05_add_five.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%AF%8F%E4%BA%BA%E8%A1%A5%E4%B8%8A%205%20%E4%B8%AA%E3%80%91%0A%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E6%95%B4%E6%95%B0%E8%B7%B3%E7%BB%B3%E4%B8%AA%E6%95%B0%E3%80%82%0A%23%20%20%20%E8%AE%A1%E6%95%B0%E5%99%A8%E6%AF%8F%E4%BA%BA%E5%B0%91%E8%AE%B0%E4%BA%86%205%20%E4%B8%AA%EF%BC%8C%E6%AF%8F%E4%BA%BA%E5%8A%A0%205%EF%BC%8C%E6%9C%80%E5%90%8E%E8%BE%93%E5%87%BA%E6%95%B4%E4%B8%AA%E5%88%97%E8%A1%A8%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A3%E3%80%8180%E3%80%8195%E3%80%8170%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A%5B85%2C%20100%2C%2075%5D%0A%23%20%E6%8F%90%E7%A4%BA%EF%BC%9A%E6%8D%A2%E6%88%90%E7%94%A8%E4%B8%8B%E6%A0%87%E9%81%8D%E5%8E%86%EF%BC%8C%E6%8A%8A%E5%8A%A0%E4%B8%8A%E7%9A%84%E6%94%BE%E5%9B%9E%E5%88%97%E8%A1%A8%E9%87%8C%E3%80%82%0A%23%20%E2%86%93%20%E5%9C%A8%E4%B8%8B%E9%9D%A2%E8%BF%99%E6%AE%B5%E7%A8%8B%E5%BA%8F%E4%B8%8A%E6%94%B9%0A%0An%20%3D%20int(input())%0Ajumps%20%3D%20%5B%5D%0Afor%20i%20in%20range(n)%3A%0A%20%20%20%20jumps.append(int(input()))%0Acount%20%3D%200%0Afor%20s%20in%20jumps%3A%0A%20%20%20%20if%20s%20%3E%3D%2060%3A%0A%20%20%20%20%20%20%20%20count%20%2B%3D%201%0Aprint(count)%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-11">看第 11 页</a></nav>
+      <details><summary>看代码</summary><pre># 【每人补上 5 个】
+# 第一行读入人数 n，接下来 n 行，每行一个整数跳绳个数。
+#   计数器每人少记了 5 个，每人加 5，最后输出整个列表。
 # 例如输入（每个一行）：3、80、95、70
 # 应该输出：[85, 100, 75]
-# 提示：换成用下标遍历，把加分放回列表里。
+# 提示：换成用下标遍历，把加上的放回列表里。
 # ↓ 在下面这段程序上改
 
 n = int(input())
-scores = []
+jumps = []
 for i in range(n):
-    scores.append(int(input()))
+    jumps.append(int(input()))
 count = 0
-for s in scores:
+for s in jumps:
     if s &gt;= 60:
         count += 1
 print(count)</pre></details></li>
-    <li class="file"><div><h2><a href="06_above_average.py" download="06_above_average.py">06_above_average.py</a></h2><p>课件第 15 页：先算平均分，再看一遍，数高于平均分的人。</p></div>
-      <nav aria-label="06_above_average.py"><a href="06_above_average.py" download="06_above_average.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E9%AB%98%E4%BA%8E%E5%B9%B3%E5%9D%87%E5%88%86%E3%80%91%0A%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%8C%E8%87%B3%E5%B0%91%201%20%E4%BA%BA%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E6%95%B4%E6%95%B0%E5%88%86%E6%95%B0%E3%80%82%0A%23%20%E8%BE%93%E5%87%BA%E5%88%86%E6%95%B0%E4%B8%A5%E6%A0%BC%E9%AB%98%E4%BA%8E%E5%B9%B3%E5%9D%87%E5%88%86%E7%9A%84%E4%BA%BA%E6%95%B0%EF%BC%8C%E5%92%8C%E5%B9%B3%E5%9D%87%E5%88%86%E4%B8%80%E6%A0%B7%E7%9A%84%E4%B8%8D%E7%AE%97%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A4%E3%80%8180%E3%80%8190%E3%80%8170%E3%80%8160%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A2%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E5%86%99%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-15">看第 15 页</a></nav>
-      <details><summary>看代码</summary><pre># 【高于平均分】
-# 第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。
-# 输出分数严格高于平均分的人数，和平均分一样的不算。
+    <li class="file"><div><h2><a href="06_above_average.py" download="06_above_average.py">06_above_average.py</a></h2><p>课件第 16 页：先算平均，再看一遍，数比平均多的人。</p></div>
+      <nav aria-label="06_above_average.py"><a href="06_above_average.py" download="06_above_average.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%AF%94%E5%B9%B3%E5%9D%87%E8%B7%B3%E5%BE%97%E5%A4%9A%E3%80%91%0A%23%20%E7%AC%AC%E4%B8%80%E8%A1%8C%E8%AF%BB%E5%85%A5%E4%BA%BA%E6%95%B0%20n%EF%BC%8C%E8%87%B3%E5%B0%91%201%20%E4%BA%BA%EF%BC%8C%E6%8E%A5%E4%B8%8B%E6%9D%A5%20n%20%E8%A1%8C%EF%BC%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E6%95%B4%E6%95%B0%E8%B7%B3%E7%BB%B3%E4%B8%AA%E6%95%B0%E3%80%82%0A%23%20%E8%BE%93%E5%87%BA%E8%B7%B3%E5%BE%97%E4%B8%A5%E6%A0%BC%E6%AF%94%E5%B9%B3%E5%9D%87%E5%A4%9A%E7%9A%84%E4%BA%BA%E6%95%B0%EF%BC%8C%E5%92%8C%E5%B9%B3%E5%9D%87%E4%B8%80%E6%A0%B7%E7%9A%84%E4%B8%8D%E7%AE%97%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A4%E3%80%8180%E3%80%8190%E3%80%8170%E3%80%8160%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%9A2%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E5%86%99%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-16">看第 16 页</a></nav>
+      <details><summary>看代码</summary><pre># 【比平均跳得多】
+# 第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数跳绳个数。
+# 输出跳得严格比平均多的人数，和平均一样的不算。
 # 例如输入（每个一行）：4、80、90、70、60
 # 应该输出：2
 # ↓ 从这里开始写</pre></details></li>
