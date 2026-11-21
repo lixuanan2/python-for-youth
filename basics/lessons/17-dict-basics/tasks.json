@@ -75,7 +75,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 15,
+    "page": 16,
     "starter": "starter/07_word_count.py",
     "solution": "solutions/07_word_count.py",
     "scope": "一行英文，单词用空格隔开，区分大小写",

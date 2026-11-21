@@ -5,32 +5,32 @@
     "expected": "tests/case-01.out"
   },
   {
-    "source": "solutions/02_area.py",
+    "source": "solutions/02_cost.py",
     "input": "tests/case-02.in",
     "expected": "tests/case-02.out"
   },
   {
-    "source": "solutions/03_rooms.py",
+    "source": "solutions/03_shopping.py",
     "input": "tests/case-03.in",
     "expected": "tests/case-03.out"
   },
   {
-    "source": "solutions/03_rooms.py",
+    "source": "solutions/03_shopping.py",
     "input": "tests/case-04.in",
     "expected": "tests/case-04.out"
   },
   {
-    "source": "solutions/04_perimeter.py",
+    "source": "solutions/04_change.py",
     "input": "tests/case-05.in",
     "expected": "tests/case-05.out"
   },
   {
-    "source": "solutions/04_perimeter.py",
+    "source": "solutions/04_change.py",
     "input": "tests/case-06.in",
     "expected": "tests/case-06.out"
   },
   {
-    "source": "solutions/04_perimeter.py",
+    "source": "solutions/04_change.py",
     "input": "tests/case-07.in",
     "expected": "tests/case-07.out"
   },
@@ -40,27 +40,27 @@
     "expected": "tests/case-08.out"
   },
   {
-    "source": "solutions/06_grade.py",
+    "source": "solutions/06_weather.py",
     "input": "tests/case-09.in",
     "expected": "tests/case-09.out"
   },
   {
-    "source": "solutions/06_grade.py",
+    "source": "solutions/06_weather.py",
     "input": "tests/case-10.in",
     "expected": "tests/case-10.out"
   },
   {
-    "source": "solutions/06_grade.py",
+    "source": "solutions/06_weather.py",
     "input": "tests/case-11.in",
     "expected": "tests/case-11.out"
   },
   {
-    "source": "solutions/06_grade.py",
+    "source": "solutions/06_weather.py",
     "input": "tests/case-12.in",
     "expected": "tests/case-12.out"
   },
   {
-    "source": "solutions/06_grade.py",
+    "source": "solutions/06_weather.py",
     "input": "tests/case-13.in",
     "expected": "tests/case-13.out"
   },

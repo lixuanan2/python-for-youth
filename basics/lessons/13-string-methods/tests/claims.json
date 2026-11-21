@@ -20,11 +20,6 @@
     "stdout": "3\n2\n"
   },
   {
-    "page": 7,
-    "code": "print(\"a-b-c\".replace(\"-\", \"\"))",
-    "stdout": "abc\n"
-  },
-  {
     "page": 8,
     "code": "line = \"小明 小红 小刚\"\nnames = line.split()\nprint(names)\nprint(len(names))\n",
     "stdout": "['小明', '小红', '小刚']\n3\n"
@@ -51,13 +46,40 @@
     "stdout": "4\n"
   },
   {
+    "page": 7,
+    "code": "print(\"a-b-c\".replace(\"-\", \"\"))\nprint(\"\".join(\"a-b-c\".split(\"-\")))",
+    "stdout": "abc\nabc\n"
+  },
+  {
     "page": 14,
-    "code": "print(\",\".join([1, 2]))",
-    "error": "TypeError: sequence item 0: expected str instance, int found"
+    "code": "s = \"hello\"\nprint(s[1:3] + s[-1])\nprint(s[1:4])",
+    "stdout": "elo\nell\n"
   },
   {
     "page": 15,
-    "code": "s = \"我爱猫\"\ns.replace(\"猫\", \"狗\")\nprint(s)",
-    "stdout": "我爱猫\n"
+    "code": "name = \"  小明  \"\nname.strip()\nprint(\"[\" + name + \"]\")\nname = name.strip()\nprint(\"[\" + name + \"]\")\nprint(\"a  b\".split(\" \"), \"a  b\".split())\nprint(\",\".join([\"1\", \"2\"]))",
+    "stdout": "[  小明  ]\n[小明]\n['a', '', 'b'] ['a', 'b']\n1,2\n"
+  },
+  {
+    "page": 15,
+    "code": "print(\",\".join([1, 2]))",
+    "error": "TypeError"
+  },
+  {
+    "page": 16,
+    "code": "line = input()\ncount = 0\nfor name in line.split(\",\"):\n    if name == \"小红\":\n        count += 1\nprint(count)",
+    "stdin": "小明, 小红, 小红\n",
+    "stdout": "0\n"
+  },
+  {
+    "page": 16,
+    "code": "line = input()\ncount = 0\nfor name in line.split(\",\"):\n    if name.strip() == \"小红\":\n        count += 1\nprint(count)",
+    "stdin": "小明, 小红, 小红\n",
+    "stdout": "2\n"
+  },
+  {
+    "page": 20,
+    "code": "line = \"小明, 小红 ,小刚\"\nfor name in line.split():\n    print(name.strip())\nprint(len(\"I  like  cats\".split()))",
+    "stdout": "小明,\n小红\n,小刚\n3\n"
   }
 ]

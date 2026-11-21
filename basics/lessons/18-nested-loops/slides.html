@@ -16,8 +16,8 @@
 ****</pre></div>
   </div>
   <div class="says">
-    <p class="say r d2">画一行 4 颗星，用一个循环就行。<br>画 3 行，就是把“画一行”再重复 3 遍。</p>
-    <p class="say r d3">把一个循环整个放进另一个循环里，叫“嵌套循环”。<br>先学一件小事：怎样让几颗星排在同一行，不换行。</p>
+    <p class="say r d2">画一行 4 颗星用一个循环；画 3 行，就把“画一行”重复 3 遍。<br>一个循环整个放进另一个循环里，叫“嵌套循环”。</p>
+    <p class="say tip r d3">生活里：座位表、课程表、棋盘都是一行一行排的。先想一想：画这片星星要几个循环？</p>
   </div>
   <div class="foot"></div>
 </section>
@@ -83,22 +83,22 @@
     <div class="r d2"><i>内</i><b>内层循环</b><span>for j in range(4)<br>每一行画几颗</span></div>
     <div class="r d3"><i>换</i><b>换行</b><span>print()<br>在外层里、内层外，每行画完换一次</span></div>
   </div>
-  <p class="say r d3">像排队做操：一排一排地站，每一排从左站到右。外层管排，内层管每排里的人。</p>
+  <p class="say r d3">外层转一遍，内层要从头到尾整个转完一轮。</p>
   <div class="foot"></div>
 </section>
 
 <!-- quiz -->
-<section class="slide lay-ask" aria-label="小测：几个 a">
-  <h2 class="t r">小测：一共输出几个 a？</h2>
+<section class="slide lay-ask top" aria-label="小测：改成 range(i)">
+  <h2 class="t r">小测：内层改成 range(i)，输出几个 a？</h2>
   <div class="editor r d1"><div class="tab">几个？</div>
-<pre class="code">for i in range(2):
-    for j in range(3):
+<pre class="code" data-mod="2:原来是 range(3)">for i in range(2):
+    for j in range(i):
         print("a")</pre></div>
-  <div class="quiz r d2" data-right="2">
-    <button type="button" data-fb="内层每一遍都输出一个，不是一共只输出一轮。"><i>1</i>3 个</button>
-    <button type="button" data-fb="两层的次数要相乘，不是相加。"><i>2</i>5 个</button>
-    <button type="button" data-fb="答对了！外层 2 遍，每遍里面 3 个，2 × 3 = 6。没有 end，所以一个占一行。"><i>3</i>6 个</button>
-    <button type="button" data-fb="外层只转 2 遍。"><i>4</i>9 个</button>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！i 是 0 时内层一遍也不转，i 是 1 时转 1 遍，一共 1 个。"><i>1</i>1 个</button>
+    <button type="button" data-fb="内层不再是 3 遍，次数跟着 i 变。"><i>2</i>6 个</button>
+    <button type="button" data-fb="i 只有 0 和 1，加起来 0 + 1。"><i>3</i>3 个</button>
+    <button type="button" data-fb="i 是 1 时 range(1) 转一遍。"><i>4</i>0 个</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -204,24 +204,41 @@
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：数字母">
+  <h2 class="t r">回顾第 17 课：输出什么？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">d = {}
+for ch in "abca":
+    d[ch] = d.get(ch, 0) + 1
+print(d["a"], len(d))</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！a 出现两次，字典里有 a、b、c 三个键。"><i>1</i>2 3</button>
+    <button type="button" data-fb="第二次碰到 a 时，从 1 加到 2。"><i>2</i>1 3</button>
+    <button type="button" data-fb=""abca" 有 4 个字，但 a 只算一个键。"><i>3</i>2 4</button>
+    <button type="button" data-fb="d["a"] 是 a 出现的次数，不是一共几个字。"><i>4</i>4 3</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--mid:420px">
-    <div class="r d1"><code class="plain">忘了加 end=""</code><b>不报错</b><span>一颗星占一行</span></div>
-    <div class="r d2"><code class="plain">忘了 print()</code><b>不报错</b><span>所有星挤在一行</span></div>
-    <div class="r d3"><code class="plain">print() 缩进太深</code><b>不报错</b><span>每画一颗就换行</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:600px">
+    <div class="r d1"><code>print("*")</code><b>print("*", end="")</b><span>不加 end，一颗星占一行</span></div>
+    <div class="r d2"><code>for i in range(3):</code><b>for i in range(1, 4):</b><span>三角形从 0 开始，第一行一颗也不画</span></div>
+    <div class="r d3"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print()</code><b>&nbsp;&nbsp;&nbsp;&nbsp;print()</b><span>和内层的 for 对齐，每行画完才换行</span></div>
   </div>
-  <p class="say r d3">三种都不报错，只是图画歪了。先在纸上画出想要的样子，再对着看是哪一种。</p>
+  <p class="say r d3">三种都不报错，只是图画歪了。先在纸上画出想要的样子，再对着看。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark lay-ask" aria-label="找错：三角形变成一列">
-  <h2 class="t r">找错：三角形怎么变成了一列？</h2>
+<section class="slide dark lay-ask" aria-label="找错：三角形变成正方形">
+  <h2 class="t r">找错：三角形怎么画成了正方形？</h2>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="4" data-yes="找到了！这一行缩进在内层循环里，每画一颗星就换一次行。往左退 4 个空格，和内层的 for 对齐，就是每行画完才换行。" data-no="这一行没问题。每颗星都单独占了一行，想一想换行是在哪里发生的。"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">4</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(i):</span><span class="ln">        <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln">        <span class="f">print</span>()</span></pre></div>
-  <p class="say r d2">想画 1、2、3 颗星的三角形，结果 6 颗星排成了一列。<br>点你认为有问题的那一行。</p>
+<pre class="code pick" data-bug="3" data-yes="找到了！内层每次都转 n 遍，每行都一样长。改成 range(i)，第 i 行才画 i 颗。" data-no="这一行没问题。每行都是 3 颗，想一想每行画几颗是谁决定的。"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n + <span class="m">1</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">        <span class="f">print</span>(<span class="s">"*"</span>, end=<span class="s">""</span>)</span><span class="ln">    <span class="f">print</span>()</span></pre></div>
+  <p class="say r d2">输入 3，想画 1、2、3 颗星的三角形，结果画出 3 行、每行 3 颗。<br>点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
@@ -256,9 +273,9 @@
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>外层和内层各管什么？<em class="step s2">　外层管几行，内层管每行几个。</em></span></p>
-    <p><i>Q2</i><span>end="" 有什么用？<em class="step s3">　输出完不换行，下一个接在后面。</em></span></p>
-    <p><i>Q3</i><span>三角形为什么每行颗数不一样？<em class="step s4">　内层的 range 用了外层的 i。</em></span></p>
+    <p><i>Q1</i><span>画长方形时，print() 为什么写在外层里、内层外？<em class="step s2">　每行画完换一次；放进内层每颗都换，放到外层外面只换一次。</em></span></p>
+    <p><i>Q2</i><span>座位号的两层 for 对调，外层 col、内层 row，输出有什么不同？<em class="step s3">　变成同一号的先排完：1 排 1 号、2 排 1 号、1 排 2 号……</em></span></p>
+    <p><i>Q3</i><span>画 n 行、每行 2n 颗星的长方形，怎么写？<em class="step s4">　外层 range(n)，内层 range(2 * n)，内层后面 print()。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

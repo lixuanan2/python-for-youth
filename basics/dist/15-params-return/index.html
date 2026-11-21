@@ -704,9 +704,9 @@ dialog p{color:var(--muted);font-size:15px}
 <!-- cover -->
 <section id="page-1" class="slide active visible lay-cover" aria-label="参数与返回值" data-chapter="开始">
   <p class="kicker r"># LESSON 15</p>
-  <div class="cover-row"><b class="r">给它</b><div class="wire r d1"><i></i><span>area(3, 4)</span></div><b class="r d2">还你</b></div>
+  <div class="cover-row"><b class="r">给它</b><div class="wire r d1"><i></i><span>cost(4, 3)</span></div><b class="r d2">还你</b></div>
   <p class="headline r d3">参数与返回值：给函数数据，让它交回结果</p>
-  <p class="say r d3">学完你能写出算面积、判等级的函数，把算出的结果接着拿来用。</p>
+  <p class="say r d3">学完你能写出算价钱、给提示的函数，把算出的结果接着拿来用。</p>
   <div class="foot"></div>
 </section>
 
@@ -716,12 +716,13 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="notes">
     <div class="slip r d1 short"><small>想跟每个人打招呼</small><pre>你好 小明
 你好 小红</pre></div>
-    <div class="slip r d2 short"><small>想算不同房间的面积</small><pre>3 × 4 = 12
-2 × 5 = 10</pre></div>
+    <div class="slip r d2 short"><small>想算买不同东西的价钱</small><pre>4 × 3 = 12
+5 × 2 = 10</pre></div>
     <div class="slip tilt r d3 short"><small>上节课的函数</small><pre>只会说
 同一句话</pre></div>
   </div>
-  <p class="say r d3">上节课的函数像只会放一首歌的音乐盒。这节课给函数开两扇门：<br>进门的叫“参数”，把数据带进去；出门的叫“返回值”，把算好的结果带回来。</p>
+  <p class="say r d3">上节课的函数每次都做一样的事。这节课让它收数据、交结果：<br>调用时带进去的数据叫“参数”，函数算好交回来的结果叫“返回值”。</p>
+  <p class="say tip r d3">生活里：买东西算总价，单价和数量每次都不一样。先想一想：同一个算法，怎样每次换不同的数来算？</p>
   <div class="foot"></div>
 </section>
 
@@ -762,33 +763,33 @@ dialog p{color:var(--muted);font-size:15px}
 <!-- return -->
 <section id="page-5" class="slide lay-walk" aria-label="return 交回结果" data-steps="3" data-at="3" data-chapter="返回值">
   <h2 class="t">return：把结果交回来</h2>
-  <div class="editor" style="--fs:48px"><div class="tab">area.py</div>
-<pre class="code" data-file="solutions/02_area.py"><span class="ln l2"><span class="k">def</span> <span class="f">area</span>(w, h):</span><span class="ln l2">    <span class="k">return</span> w * h</span><span class="ln l1 l2">s = <span class="f">area</span>(<span class="m">3</span>, <span class="m">4</span>)</span><span class="ln l3"><span class="f">print</span>(s)</span><span class="ln l3"><span class="f">print</span>(<span class="f">area</span>(<span class="m">2</span>, <span class="m">5</span>))</span></pre></div>
+  <div class="editor" style="--fs:48px"><div class="tab">cost.py</div>
+<pre class="code" data-file="solutions/02_cost.py"><span class="ln l2"><span class="k">def</span> <span class="f">cost</span>(price, count):</span><span class="ln l2">    <span class="k">return</span> price * count</span><span class="ln l1 l2">s = <span class="f">cost</span>(<span class="m">4</span>, <span class="m">3</span>)</span><span class="ln l3"><span class="f">print</span>(s)</span><span class="ln l3"><span class="f">print</span>(<span class="f">cost</span>(<span class="m">5</span>, <span class="m">2</span>))</span></pre></div>
   <div class="turns">
-      <p class="say only1">第 3 行调用 area，把 3 和 4 带进去。</p>
-      <p class="say only2">return 的意思是“返回”。函数算出 12，交回调用的地方，整个 area(3, 4) 就变成 12，存进 s。</p>
+      <p class="say only1">第 3 行调用 cost，把单价 4 和数量 3 带进去。</p>
+      <p class="say only2">return 的意思是“返回”。函数算出 12，交回调用的地方，整个 cost(4, 3) 就变成 12，存进 s。</p>
       <p class="say only3">交回来的数，可以存起来、输出，也可以直接放进 print 里。</p>
     </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i>w, h</i><b>3, 4</b></div>
-    <div class="box step s2"><i>s</i><b>12</b></div>
-    <div class="box out step s3"><i>输出</i><b style="line-height:1.2">12<br>10</b></div>
+    <div class="box step long"><i>price, count</i><b>4, 3</b></div>
+    <div class="box step s2 long"><i>s</i><b>12</b></div>
+    <div class="box out step s3 long"><i>输出</i><b style="line-height:1.2">12<br>10</b></div>
   </div>
 </section>
 
 <!-- live: change the numbers -->
-<section id="page-6" class="slide lay-walk narrow" aria-label="改长和宽">
-  <h2 class="t">改长和宽试试</h2>
-  <div class="editor" style="--fs:49px"><div class="tab">area.py</div>
-<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">area</span>(w, h):</span><span class="ln">    <span class="k">return</span> w * h</span><span class="ln"><span class="f">print</span>(<span class="f">area</span>(<input class="slot" data-var="w" value="3" inputmode="numeric" autocomplete="off" aria-label="长">, <input class="slot" data-var="h" value="4" inputmode="numeric" autocomplete="off" aria-label="宽">))</span></pre></div>
+<section id="page-6" class="slide lay-walk narrow" aria-label="改单价和数量">
+  <h2 class="t">改单价和数量试试</h2>
+  <div class="editor" style="--fs:47px"><div class="tab">cost.py</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">cost</span>(price, count):</span><span class="ln">    <span class="k">return</span> price * count</span><span class="ln"><span class="f">print</span>(<span class="f">cost</span>(<input class="slot" data-var="price" value="4" inputmode="numeric" autocomplete="off" aria-label="单价">, <input class="slot" data-var="count" value="3" inputmode="numeric" autocomplete="off" aria-label="数量">))</span></pre></div>
   <p class="say">函数不用改，只改调用时给的两个数。</p>
   <a class="ide">▶ 带这两个数进 IDE</a>
   <div class="right">
     <div class="live-out">
-    <div><i>第 3 行输出</i><b data-eval="w * h">12</b></div>
+    <div><i>第 3 行输出</i><b data-eval="price * count">12</b></div>
   </div>
-    <p class="say" style="font-size:38px">先猜再改：一边是 0 呢？两个数对调呢？</p>
+    <p class="say" style="font-size:38px">先猜再改：数量是 0 呢？两个数对调呢？</p>
   </div>
   <div class="foot"></div>
 </section>
@@ -808,38 +809,38 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
   </div>
   <div class="turns">
       <p class="say only1">左边的 x 拿到了什么？</p>
-      <p class="say step s2">print 只是显示，没有交回。没有 return 的函数交回 None，意思是“什么也没有”。<br>None 不能拿来算，f() + 1 会报 TypeError。要接着用结果，就用 return。</p>
+      <p class="say step s2">print 只是显示，没有交回。没有 return 的函数交回 None，意思是“什么也没有”。<br>None 不能拿来算，f() + 1 会报错。要接着用结果，就用 return。</p>
     </div>
   <div class="foot"></div>
 </section>
 
 <!-- quiz: after return -->
-<section id="page-8" class="slide lay-ask" aria-label="小测：return 后面">
-  <h2 class="t r">小测：调用 f() 会输出 hi 吗？</h2>
-  <div class="editor r d1" style="--fs:48px"><div class="tab">会吗？</div>
-<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">f</span>():</span><span class="ln">    <span class="k">return</span> <span class="m">1</span></span><span class="ln">    <span class="f">print</span>(<span class="s">"hi"</span>)</span><span class="ln"><span class="f">f</span>()</span></pre></div>
-  <div class="quiz r d2" data-right="1">
-    <button type="button" data-fb="print 在 return 后面，轮不到它。"><i>1</i>会，输出 hi</button>
-    <button type="button" data-fb="答对了！碰到 return，函数就交回结果、马上结束，后面的不再运行。"><i>2</i>不会，什么也不输出</button>
-    <button type="button" data-fb="return 交回 1，但没有 print 它，不会显示。"><i>3</i>输出 1</button>
-    <button type="button" data-fb="return 后面写代码不报错，只是永远轮不到。"><i>4</i>报错</button>
+<section id="page-8" class="slide lay-ask" aria-label="小测：换个位置">
+  <h2 class="t r">小测：print 挪到 return 前面，输出什么？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">swap.py</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">f</span>():</span><span class="ln mod">    <span class="f">print</span>(<span class="s">"hi"</span>)<span class="orig">原来在下一行</span></span><span class="ln">    <span class="k">return</span> <span class="m">1</span></span><span class="ln"><span class="f">f</span>()</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！print 挪到 return 前面就轮得到了。return 交回的 1 没人输出，不会显示。"><i>1</i>hi</button>
+    <button type="button" data-fb="对调以后 print 在前面，先运行。"><i>2</i>什么也不输出</button>
+    <button type="button" data-fb="return 交回 1，但没有 print 它，不会显示。"><i>3</i>1</button>
+    <button type="button" data-fb="交回的 1 没有放进 print，不会显示。"><i>4</i>hi 和 1</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- worked example: two rooms -->
-<section id="page-9" class="slide lay-walk" aria-label="例题：两个房间" data-steps="3" data-at="3">
-  <h2 class="t">例题：两个房间一共多大</h2>
-  <div class="editor" style="--fs:47px"><div class="tab">rooms.py</div>
-<pre class="code" data-file="solutions/03_rooms.py"><span class="ln"><span class="k">def</span> <span class="f">area</span>(w, h):</span><span class="ln">    <span class="k">return</span> w * h</span><span class="ln l1">w1 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">h1 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">w2 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">h2 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2">s1 = <span class="f">area</span>(w1, h1)</span><span class="ln l2">s2 = <span class="f">area</span>(w2, h2)</span><span class="ln l3"><span class="f">print</span>(s1 + s2)</span></pre></div>
+<section id="page-9" class="slide lay-walk" aria-label="例题：一共多少钱" data-steps="3" data-at="3">
+  <h2 class="t">例题：两样东西一共多少钱</h2>
+  <div class="editor" style="--fs:47px"><div class="tab">shopping.py</div>
+<pre class="code" data-file="solutions/03_shopping.py"><span class="ln"><span class="k">def</span> <span class="f">cost</span>(price, count):</span><span class="ln">    <span class="k">return</span> price * count</span><span class="ln l1">p1 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">c1 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">p2 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">c2 = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l2">s1 = <span class="f">cost</span>(p1, c1)</span><span class="ln l2">s2 = <span class="f">cost</span>(p2, c2)</span><span class="ln l3"><span class="f">print</span>(s1 + s2)</span></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1 small">分四行读入两个房间的长和宽：3、4、2、5。</p>
-      <p class="say only2 small">算面积的方法只写一次，调用两次。返回的 12 和 10 分别存进 s1 和 s2。</p>
-      <p class="say only3 small">两个返回值相加，输出一共 22。</p>
+      <p class="say only1 small">分四行读入两样东西的单价和数量：4、3、5、2。</p>
+      <p class="say only2 small">算价钱的方法只写一次，调用两次。返回的 12 和 10 分别存进 s1 和 s2。</p>
+      <p class="say only3 small">两个返回值相加，输出一共 22 元。</p>
     </div>
-    <div class="box step long"><i>输入</i><b>3 4 2 5</b></div>
+    <div class="box step long"><i>输入</i><b>4 3 5 2</b></div>
     <div class="box step s2 long"><i>s1, s2</i><b>12, 10</b></div>
     <div class="box out step s3 long"><i>输出</i><b>22</b></div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
@@ -847,27 +848,27 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
 </section>
 
 <!-- your turn: perimeter -->
-<section id="page-10" class="slide lay-try" aria-label="改成周长">
+<section id="page-10" class="slide lay-try" aria-label="写找零函数">
   <div class="band r"><b>动手<br>改一改</b><span>换个名字，换个算法，别的不用动。</span></div>
   <div class="turn">
-    <h2 class="r d1">写一个周长函数</h2>
-    <p class="say r d1">起始程序里有面积函数。把它改成 perimeter(w, h)，返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，都是整数，输出周长。</p>
-    <div class="sheet two r d2"><div><small>依次输入</small><pre style="line-height:1.2">3
-4</pre></div><div><small>输出</small><pre style="line-height:1.2">14</pre></div></div>
+    <h2 class="r d1">写一个找零函数</h2>
+    <p class="say r d1">起始程序里有 cost 函数。把它改成 change(paid, price)，返回该找回多少钱（付的钱减去价钱）。分两行读入付了多少、要付多少，都是整数，输出找零。</p>
+    <div class="sheet two r d2"><div><small>依次输入</small><pre style="line-height:1.2">20
+14</pre></div><div><small>输出</small><pre style="line-height:1.2">6</pre></div></div>
   </div>
-  <a class="ide r d3" data-code="# 【写一个周长函数】&#10;# 起始程序里有面积函数。把它改成 perimeter(w, h)，&#10;#   返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，&#10;#   都是整数，输出周长。&#10;# 例如输入（每个一行）：3、4&#10;# 应该输出：14&#10;# 提示：换个名字，换个算法，别的不用动。&#10;# ↓ 在下面这段程序上改&#10;&#10;def area(w, h):&#10;    return w * h&#10;w = int(input())&#10;h = int(input())&#10;print(area(w, h))&#10;">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【写一个找零函数】&#10;# 起始程序里有 cost 函数。把它改成 change(paid, price)，&#10;#   返回该找回多少钱（付的钱减去价钱）。分两行读入付了多少、&#10;#   要付多少，都是整数，输出找零。&#10;# 例如输入（每个一行）：20、14&#10;# 应该输出：6&#10;# 提示：换个名字，换个算法，别的不用动。&#10;# ↓ 在下面这段程序上改&#10;&#10;def cost(price, count):&#10;    return price * count&#10;price = int(input())&#10;count = int(input())&#10;print(cost(price, count))&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: missing argument -->
-<section id="page-11" class="slide lay-ask" aria-label="小测：少给一个">
-  <h2 class="t r">小测：area 要两个数，只给一个会怎样？</h2>
-  <div class="editor r d1" style="--fs:48px"><div class="tab">会怎样？</div>
-<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">area</span>(w, h):</span><span class="ln">    <span class="k">return</span> w * h</span><span class="ln"><span class="f">print</span>(<span class="f">area</span>(<span class="m">3</span>))</span></pre></div>
-  <div class="quiz r d2" data-right="2">
-    <button type="button" data-fb="h 没有数，Python 不会替你补 0。"><i>1</i>输出 0</button>
-    <button type="button" data-fb="Python 不会把一个数用两次。"><i>2</i>输出 9</button>
-    <button type="button" data-fb="答对了！报 TypeError，说 area() 少了一个参数 h。参数有几个，调用就给几个。"><i>3</i>报 TypeError</button>
-    <button type="button" data-fb="print 会运行，但 area(3) 先出错了。"><i>4</i>什么也不输出</button>
+<section id="page-11" class="slide lay-ask" aria-label="小测：两种写法比一比">
+  <h2 class="t r">小测：两行输出一样吗？</h2>
+  <div class="editor r d1" style="--fs:35px"><div class="tab">two.py</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">cost</span>(price, count):</span><span class="ln">    <span class="k">return</span> price * count</span><span class="ln"><span class="f">print</span>(<span class="f">cost</span>(<span class="m">4</span>, <span class="m">3</span>) + <span class="f">cost</span>(<span class="m">5</span>, <span class="m">2</span>))</span><span class="ln"><span class="f">print</span>(<span class="f">cost</span>(<span class="m">4</span> + <span class="m">5</span>, <span class="m">3</span> + <span class="m">2</span>))</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！第一行各算各的再加；第二行先加成 9 和 5，再乘，算的是另一回事。"><i>1</i>不一样：22 和 45</button>
+    <button type="button" data-fb="第二行先算括号里的 4 + 5 和 3 + 2，交给函数的是 9 和 5。"><i>2</i>一样，都是 22</button>
+    <button type="button" data-fb="第一行是 12 + 10。"><i>3</i>一样，都是 45</button>
+    <button type="button" data-fb="4 + 5 先算出 9，再交给 price，一共给了两个数，不会报错。"><i>4</i>第二行会报错</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -890,41 +891,55 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
 </section>
 
 <!-- your turn: grade -->
-<section id="page-13" class="slide lay-try" aria-label="成绩等级函数">
+<section id="page-13" class="slide lay-try" aria-label="穿衣提示函数">
   <div class="band r"><b>动手<br>改一改</b><span>一个参数，三种结果，碰到 return 就结束。</span></div>
   <div class="turn">
-    <h2 class="r d1">写一个成绩等级函数</h2>
-    <p class="say r d1">写 grade(score)：90 分及以上返回“优秀”，60 分及以上返回“及格”，其余返回“不及格”。读入一个 0 到 100 的整数分数，输出等级。</p>
-    <div class="sheet three r d2"><div><small>输入 95</small><pre>优秀</pre></div><div><small>输入 60</small><pre>及格</pre></div><div><small>输入 59</small><pre>不及格</pre></div></div>
+    <h2 class="r d1">写一个穿衣提示函数</h2>
+    <p class="say r d1">写 tip(t)：30 度及以上返回“很热”，15 度及以上返回“舒服”，其余返回“冷”。读入一个整数气温，输出提示。</p>
+    <div class="sheet three r d2"><div><small>输入 32</small><pre>很热</pre></div><div><small>输入 15</small><pre>舒服</pre></div><div><small>输入 14</small><pre>冷</pre></div></div>
   </div>
-  <a class="ide r d3" data-code="# 【写一个成绩等级函数】&#10;# 写 grade(score)：90 分及以上返回“优秀”，60 分及以上返回“及格”，&#10;#   其余返回“不及格”。读入一个 0 到 100 的整数分数，输出等级。&#10;# 例如输入：95&#10;# 应该输出：优秀&#10;# 提示：一个参数，三种结果，碰到 return 就结束。&#10;# ↓ 在下面这段程序上改&#10;&#10;def bigger(a, b):&#10;    if a &gt; b:&#10;        return a&#10;    return b&#10;print(bigger(3, 8))&#10;print(bigger(9, 2))&#10;">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【写一个穿衣提示函数】&#10;# 写 tip(t)：30 度及以上返回“很热”，15 度及以上返回“舒服”，&#10;#   其余返回“冷”。读入一个整数气温，输出提示。&#10;# 例如输入：32&#10;# 应该输出：很热&#10;# 提示：一个参数，三种结果，碰到 return 就结束。&#10;# ↓ 在下面这段程序上改&#10;&#10;def bigger(a, b):&#10;    if a &gt; b:&#10;        return a&#10;    return b&#10;print(bigger(3, 8))&#10;print(bigger(9, 2))&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
-<section id="page-14" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--mid:440px">
-    <div class="r d1"><code>area(3)</code><b>TypeError</b><span>参数有几个，就给几个</span></div>
-    <div class="r d2"><code class="plain">函数里只 print</code><b>拿到 None</b><span>要接着用结果就 return</span></div>
-    <div class="r d3"><code class="plain">return 后面还写代码</code><b>不报错</b><span>那几行永远轮不到</span></div>
+<section id="page-14" class="slide lay-ask" aria-label="回顾：跳进去再回来">
+  <h2 class="t r">回顾第 14 课：一共输出什么？</h2>
+  <div class="editor r d1" style="--fs:43px"><div class="tab">review.py</div>
+<pre class="code"><span class="ln"><span class="k">def</span> <span class="f">a</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"1"</span>)</span><span class="ln"><span class="k">def</span> <span class="f">b</span>():</span><span class="ln">    <span class="f">a</span>()</span><span class="ln">    <span class="f">print</span>(<span class="s">"2"</span>)</span><span class="ln"><span class="f">b</span>()</span><span class="ln"><span class="f">a</span>()</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！b() 先跳进 a 说 1，回来说 2；最后再调用一次 a 说 1。"><i>1</i>1 2 1</button>
+    <button type="button" data-fb="最后一行还调用了一次 a()。"><i>2</i>1 2</button>
+    <button type="button" data-fb="b 里第一句就是调用 a，所以先说 1。"><i>3</i>2 1 1</button>
+    <button type="button" data-fb="b 说完 1 和 2，才轮到最后一行的 a()。"><i>4</i>1 1 2</button>
   </div>
-  <p class="say r d3">分清两件事：print 是给人看的，return 是交给程序接着用的。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-15" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:640px">
+    <div class="r d1"><code style="font-size:40px">cost(4)</code><b style="font-size:40px">cost(4, 3)</b><span>参数有几个，就给几个</span></div>
+    <div class="r d2"><code style="font-size:40px">def cost(p, c):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(p * c)</code><b style="font-size:40px">def cost(p, c):<br>&nbsp;&nbsp;&nbsp;&nbsp;return p * c</b><span>print 只给人看，要接着算就交回来</span></div>
+    <div class="r d3"><code style="font-size:40px">&nbsp;&nbsp;&nbsp;&nbsp;return s<br>&nbsp;&nbsp;&nbsp;&nbsp;print("算完了")</code><b style="font-size:40px">&nbsp;&nbsp;&nbsp;&nbsp;print("算完了")<br>&nbsp;&nbsp;&nbsp;&nbsp;return s</b><span>return 后面的行轮不到</span></div>
+  </div>
+  <p class="say r d3">后两种不报错：一个交回 None，一个那行永远不运行。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-15" class="slide dark lay-ask" aria-label="找错：拿到了 None">
-  <h2 class="t r">找错：想输出 12，怎么报错了？</h2>
+<section id="page-16" class="slide dark lay-ask" aria-label="找错：总数只有 3">
+  <h2 class="t r">找错：3 + 4 + 5，怎么只得到 3？</h2>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="3" data-yes="找到了！这一行只把 6 显示出来，没有交回去，x 拿到的是 None，None 不能乘 2。改成 return s 就对了。" data-no="这一行没问题。报错说 x 是 None，想一想函数交回了什么。"><span class="ln"><span class="k">def</span> <span class="f">total</span>(a, b, c):</span><span class="ln">    s = a + b + c</span><span class="ln">    <span class="f">print</span>(s)</span><span class="ln">x = <span class="f">total</span>(<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>)</span><span class="ln"><span class="f">print</span>(x * <span class="m">2</span>)</span></pre></div>
-  <p class="say r d2">程序先输出 6，然后报 TypeError，说 None 不能和 2 相乘。<br>点你认为有问题的那一行。</p>
+<pre class="code pick" data-bug="5" data-yes="找到了！return 在循环里，第一遍加完 3 就交回去，函数马上结束。把它往左挪到和 for 对齐，全部加完再交回。" data-no="这一行没问题。想一想：函数什么时候结束的？"><span class="ln"><span class="k">def</span> <span class="f">total</span>(a):</span><span class="ln">    s = <span class="m">0</span></span><span class="ln">    <span class="k">for</span> x <span class="k">in</span> a:</span><span class="ln">        s += x</span><span class="ln">        <span class="k">return</span> s</span><span class="ln"><span class="f">print</span>(<span class="f">total</span>([<span class="m">3</span>, <span class="m">4</span>, <span class="m">5</span>]))</span></pre></div>
+  <p class="say r d2">应该输出 12，程序却输出 3。<br>点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-16" class="slide clay lay-notes challenge" aria-label="三个数里最大" data-chapter="挑战">
+<section id="page-17" class="slide clay lay-notes challenge" aria-label="三个数里最大" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">三个数比大小</h2>
   <p class="say r d2">分三行读入三个整数，输出最大的那个。<br>先写 bigger(a, b)，返回两个数里大的那个，再只用它比出三个数里最大的，<b>不再写别的 if</b>。</p>
@@ -936,7 +951,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
 </section>
 
 <!-- hints -->
-<section id="page-17" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-18" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>bigger 就是上面“谁大就交回谁”的那个函数。</span></p>
@@ -946,7 +961,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
   <div class="foot"></div>
 </section>
 
-<section id="page-18" class="slide dark" aria-label="参考答案：三个数比大小" data-answer="03" data-steps="2" data-at="2">
+<section id="page-19" class="slide dark" aria-label="参考答案：三个数比大小" data-answer="03" data-steps="2" data-at="2">
   <h2 class="t">参考答案：三个数比大小</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">max3.py</div>
@@ -957,32 +972,32 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
 </section>
 
 <!-- review -->
-<section id="page-19" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-20" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>调用时给的数据，按什么放进参数？<em class="step s2">　按顺序，一个对一个。</em></span></p>
-    <p><i>Q2</i><span>print 和 return 有什么不同？<em class="step s3">　print 给人看，return 交回结果接着用。</em></span></p>
-    <p><i>Q3</i><span>碰到 return 以后，函数还会往下走吗？<em class="step s4">　不会，马上结束。</em></span></p>
+    <p><i>Q1</i><span>bigger 里为什么不用写 else？<em class="step s2">　碰到 return 函数就结束，能走到最后一行，一定是 a 不比 b 大。</em></span></p>
+    <p><i>Q2</i><span>total 里把 return s 换成 print(s)，x = total([3, 4]) 以后 x 有什么不同？<em class="step s3">　x 变成 None，后面拿 x 去算就会报错。</em></span></p>
+    <p><i>Q3</i><span>想算打八折以后的价钱，函数怎么写？<em class="step s4">　def sale(price): 下一行 return price * 0.8。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-20" class="slide lay-columns" aria-label="速查卡">
+<section id="page-21" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
-  <div class="sheet3" style="--key:780px">
-    <div class="r d1"><code>def area(w, h):</code><span>括号里是参数</span></div>
-    <div class="r d1"><code style="white-space:pre">    return w * h</code><span>交回结果，函数结束</span></div>
-    <div class="r d2"><code>s = area(3, 4)</code><span>3 给 w，4 给 h，s 是 12</span></div>
-    <div class="r d2"><code>area(1, 2) + area(3, 4)</code><span>返回值可以接着算</span></div>
+  <div class="sheet3" style="--key:820px">
+    <div class="r d1"><code>def cost(price, count):</code><span>括号里是参数</span></div>
+    <div class="r d1"><code style="white-space:pre">    return price * count</code><span>交回结果，函数结束</span></div>
+    <div class="r d2"><code>s = cost(4, 3)</code><span>4 给 price，3 给 count，s 是 12</span></div>
+    <div class="r d2"><code>cost(4, 3) + cost(5, 2)</code><span>返回值可以接着算</span></div>
     <div class="r d3"><code class="plain">没有 return</code><span>交回 None</span></div>
   </div>
   <div class="foot"></div>
 </section>
 
 <!-- later -->
-<section id="page-21" class="slide lay-columns" aria-label="后面再学">
+<section id="page-22" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>max() abs()</code><span>Python 自带的函数，也有参数和返回值</span></div>
@@ -994,7 +1009,7 @@ print(y)</pre><p class="res step s2" style="font-size:80px">6</p></div>
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-22" class="slide dark thanks" aria-label="谢谢">
+<section id="page-23" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>

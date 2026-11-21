@@ -15,6 +15,7 @@
     <div class="slip tilt r d2 short"><small>一行里写了好几个名字</small><pre>小明, 小红 ,小刚</pre></div>
   </div>
   <p class="say r d3">上节课一个字一个字地拆，能做到，但要写好几行。<br>Python 给字符串带了一套工具，叫“方法”，写法是“字符串.方法名()”，一句就能整理好。</p>
+  <p class="say tip r d3">生活里：报名表、通讯录里的名字常常多打空格。先想一想：一行“小明, 小红 ,小刚”，怎样整理成干净的三个名字？</p>
   <div class="foot"></div>
 </section>
 
@@ -85,13 +86,16 @@ print("[" + name + "]")</pre></div>
 </section>
 
 <!-- quiz -->
-<section class="slide lay-ask" aria-label="小测：换成空的">
-  <h2 class="t r">小测："a-b-c".replace("-", "") 是什么？</h2>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！把 - 换成空字符串，就等于把它删掉了。"><i>1</i>abc</button>
-    <button type="button" data-fb="新的是空字符串 &quot;&quot;，什么也没有，不是空格。"><i>2</i>a b c</button>
-    <button type="button" data-fb="replace 会换掉所有的 -，不止第一个。"><i>3</i>ab-c</button>
-    <button type="button" data-fb="空字符串可以当新的，不会报错。"><i>4</i>报错</button>
+<section class="slide lay-ask top" aria-label="小测：两种写法比一比">
+  <h2 class="t r">小测：两行输出一样吗？</h2>
+  <div class="editor r d1"><div class="tab">two.py</div>
+<pre class="code">print("a-b-c".replace("-", ""))
+print("".join("a-b-c".split("-")))</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！第二行先切出 ['a', 'b', 'c']，再用空字符串连起来，也就是去掉了 -。"><i>1</i>一样，都是 abc</button>
+    <button type="button" data-fb="连接符是 ""，什么也没有，不是空格。"><i>2</i>不一样，第二行是 a b c</button>
+    <button type="button" data-fb="join 拼出来的是字符串，不是列表。"><i>3</i>不一样，第二行是一个列表</button>
+    <button type="button" data-fb="切出来的都是字符串，join 能拼。"><i>4</i>第二行会报错</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -187,24 +191,39 @@ print("[" + name + "]")</pre></div>
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：切片加下标">
+  <h2 class="t r">回顾第 12 课：输出什么？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">s = "hello"
+print(s[1:3] + s[-1])</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！s[1:3] 是下标 1、2：el，再接上最后一个字 o。"><i>1</i>elo</button>
+    <button type="button" data-fb="终点 3 不算，只截到下标 2。"><i>2</i>ello</button>
+    <button type="button" data-fb="下标 1 是 e，不是 h。"><i>3</i>hlo</button>
+    <button type="button" data-fb="s[-1] 是最后一个字 o。"><i>4</i>elh</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:620px;--mid:440px">
-    <div class="r d1"><code>name.strip()</code><b>不报错</b><span>没有存起来，name 没变</span></div>
-    <div class="r d2"><code>line.split(" ")</code><b>不报错</b><span>连着的空格切出空字符串</span></div>
-    <div class="r d3"><code>",".join([1, 2])</code><b>TypeError</b><span>join 只能拼字符串</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:620px">
+    <div class="r d1"><code>name.strip()</code><b>name = name.strip()</b><span>方法做出新字符串，要存起来</span></div>
+    <div class="r d2"><code>line.split(" ")</code><b>line.split()</b><span>连着的空格会切出空字符串</span></div>
+    <div class="r d3"><code>",".join([1, 2])</code><b>",".join(["1", "2"])</b><span>join 只能拼字符串</span></div>
   </div>
-  <p class="say r d3">方法做出来的是新字符串。用完记得存起来，或者直接输出。</p>
+  <p class="say r d3">前两种不报错，只是结果不对。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark lay-ask" aria-label="找错：猫还是猫">
-  <h2 class="t r">找错：猫怎么没换成狗？</h2>
+<section class="slide dark lay-ask" aria-label="找错：小红一个也没数到">
+  <h2 class="t r">找错：明明有两个小红，怎么数出 0？</h2>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="2" data-yes="找到了！replace 做出了新字符串，但没有存起来。写成 s = s.replace(&quot;猫&quot;, &quot;狗&quot;) 就对了。" data-no="这一行没问题。想一想：换好的新字符串去哪了？"><span class="ln">s = <span class="s">"我爱猫"</span></span><span class="ln">s.<span class="f">replace</span>(<span class="s">"猫"</span>, <span class="s">"狗"</span>)</span><span class="ln"><span class="f">print</span>(s)</span></pre></div>
-  <p class="say r d2">应该输出“我爱狗”，程序却输出“我爱猫”，也没有报错。<br>点你认为有问题的那一行。</p>
+<pre class="code pick" data-bug="4" data-yes="找到了！逗号后面的空格跟着切进来了，&quot; 小红&quot; 和 &quot;小红&quot; 不一样。写 name.strip() == &quot;小红&quot; 就对了。" data-no="这一行没问题。想一想：切出来的每一段，两头带着什么？"><span class="ln">line = <span class="f">input</span>()</span><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">for</span> name <span class="k">in</span> line.<span class="f">split</span>(<span class="s">","</span>):</span><span class="ln">    <span class="k">if</span> name == <span class="s">"小红"</span>:</span><span class="ln">        count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(count)</span></pre></div>
+  <p class="say r d2">输入“小明, 小红, 小红”，应该输出 2，程序却输出 0。<br>点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
@@ -236,9 +255,9 @@ print("[" + name + "]")</pre></div>
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>name.strip() 之后，name 变了吗？<em class="step s2">　没变，要存起来才算数。</em></span></p>
-    <p><i>Q2</i><span>split 和 join 各得到什么？<em class="step s3">　split 得到列表，join 得到字符串。</em></span></p>
-    <p><i>Q3</i><span>按空格切词，为什么一般不写 " "？<em class="step s4">　不写能把连着的空格当成一处。</em></span></p>
+    <p><i>Q1</i><span>整理名字为什么先 split 再 strip，不能先 strip？<em class="step s2">　strip 只去两头。逗号旁的空格在中间，切开以后才到了每一段的两头。</em></span></p>
+    <p><i>Q2</i><span>例题的 split(",") 换成 split()，输出有什么不同？<em class="step s3">　按空格切，输出“小明,”“小红”“,小刚”，逗号还粘在名字上。</em></span></p>
+    <p><i>Q3</i><span>想数一句英文有几个单词，怎么写？<em class="step s4">　len(s.split())，不写参数，连着的空格只算一处。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

@@ -14,8 +14,8 @@
     "id": "B",
     "role": "语法小演示",
     "page": 5,
-    "starter": "starter/02_area.py",
-    "solution": "solutions/02_area.py",
+    "starter": "starter/02_cost.py",
+    "solution": "solutions/02_cost.py",
     "scope": "无输入",
     "sample_input": "",
     "sample_output": "12\n10\n",
@@ -25,10 +25,10 @@
     "id": "C",
     "role": "基础例题",
     "page": 9,
-    "starter": "starter/03_rooms.py",
-    "solution": "solutions/03_rooms.py",
-    "scope": "分四行读入两个房间的长和宽，都是整数",
-    "sample_input": "3\n4\n2\n5\n",
+    "starter": "starter/03_shopping.py",
+    "solution": "solutions/03_shopping.py",
+    "scope": "分四行读入两样东西的单价和数量，都是整数",
+    "sample_input": "4\n3\n5\n2\n",
     "sample_output": "22\n",
     "description": "调用两次，把返回值加起来。"
   },
@@ -36,16 +36,16 @@
     "id": "01",
     "role": "学生小改写",
     "page": 10,
-    "starter": "starter/04_perimeter.py",
-    "solution": "solutions/04_perimeter.py",
-    "scope": "分两行读入长和宽，都是整数",
-    "sample_input": "3\n4\n",
-    "sample_output": "14\n",
-    "description": "改成周长函数。",
+    "starter": "starter/04_change.py",
+    "solution": "solutions/04_change.py",
+    "scope": "分两行读入付了多少和要付多少，都是整数",
+    "sample_input": "20\n14\n",
+    "sample_output": "6\n",
+    "description": "改成找零函数。",
     "brief": {
-      "title": "写一个周长函数",
+      "title": "写一个找零函数",
       "goal": [
-        "起始程序里有面积函数。把它改成 perimeter(w, h)，返回长方形的周长（长加宽，再乘 2）。分两行读入长和宽，都是整数，输出周长。"
+        "起始程序里有 cost 函数。把它改成 change(paid, price)，返回该找回多少钱（付的钱减去价钱）。分两行读入付了多少、要付多少，都是整数，输出找零。"
       ],
       "hint": "换个名字，换个算法，别的不用动。"
     }
@@ -65,16 +65,16 @@
     "id": "02",
     "role": "学生小改写",
     "page": 13,
-    "starter": "starter/06_grade.py",
-    "solution": "solutions/06_grade.py",
-    "scope": "一行0到100的整数分数",
-    "sample_input": "95\n",
-    "sample_output": "优秀\n",
-    "description": "写一个成绩等级函数。",
+    "starter": "starter/06_weather.py",
+    "solution": "solutions/06_weather.py",
+    "scope": "一行一个整数气温",
+    "sample_input": "32\n",
+    "sample_output": "很热\n",
+    "description": "写一个穿衣提示函数。",
     "brief": {
-      "title": "写一个成绩等级函数",
+      "title": "写一个穿衣提示函数",
       "goal": [
-        "写 grade(score)：90 分及以上返回“优秀”，60 分及以上返回“及格”，其余返回“不及格”。读入一个 0 到 100 的整数分数，输出等级。"
+        "写 tip(t)：30 度及以上返回“很热”，15 度及以上返回“舒服”，其余返回“冷”。读入一个整数气温，输出提示。"
       ],
       "hint": "一个参数，三种结果，碰到 return 就结束。"
     }
@@ -82,7 +82,7 @@
   {
     "id": "03",
     "role": "独立迁移",
-    "page": 16,
+    "page": 17,
     "starter": "starter/07_max3.py",
     "solution": "solutions/07_max3.py",
     "scope": "分三行读入三个整数",

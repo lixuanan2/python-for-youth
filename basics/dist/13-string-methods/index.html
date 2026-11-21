@@ -718,6 +718,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="slip tilt r d2 short"><small>一行里写了好几个名字</small><pre>小明, 小红 ,小刚</pre></div>
   </div>
   <p class="say r d3">上节课一个字一个字地拆，能做到，但要写好几行。<br>Python 给字符串带了一套工具，叫“方法”，写法是“字符串.方法名()”，一句就能整理好。</p>
+  <p class="say tip r d3">生活里：报名表、通讯录里的名字常常多打空格。先想一想：一行“小明, 小红 ,小刚”，怎样整理成干净的三个名字？</p>
   <div class="foot"></div>
 </section>
 
@@ -786,13 +787,15 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz -->
-<section id="page-7" class="slide lay-ask" aria-label="小测：换成空的">
-  <h2 class="t r">小测："a-b-c".replace("-", "") 是什么？</h2>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！把 - 换成空字符串，就等于把它删掉了。"><i>1</i>abc</button>
-    <button type="button" data-fb="新的是空字符串 &quot;&quot;，什么也没有，不是空格。"><i>2</i>a b c</button>
-    <button type="button" data-fb="replace 会换掉所有的 -，不止第一个。"><i>3</i>ab-c</button>
-    <button type="button" data-fb="空字符串可以当新的，不会报错。"><i>4</i>报错</button>
+<section id="page-7" class="slide lay-ask top" aria-label="小测：两种写法比一比">
+  <h2 class="t r">小测：两行输出一样吗？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">two.py</div>
+<pre class="code"><span class="ln"><span class="f">print</span>(<span class="s">"a-b-c"</span>.<span class="f">replace</span>(<span class="s">"-"</span>, <span class="s">""</span>))</span><span class="ln"><span class="f">print</span>(<span class="s">""</span>.<span class="f">join</span>(<span class="s">"a-b-c"</span>.<span class="f">split</span>(<span class="s">"-"</span>)))</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！第二行先切出 ['a', 'b', 'c']，再用空字符串连起来，也就是去掉了 -。"><i>1</i>一样，都是 abc</button>
+    <button type="button" data-fb="连接符是 ""，什么也没有，不是空格。"><i>2</i>不一样，第二行是 a b c</button>
+    <button type="button" data-fb="join 拼出来的是字符串，不是列表。"><i>3</i>不一样，第二行是一个列表</button>
+    <button type="button" data-fb="切出来的都是字符串，join 能拼。"><i>4</i>第二行会报错</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -888,30 +891,44 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- errors -->
-<section id="page-14" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:620px;--mid:440px">
-    <div class="r d1"><code>name.strip()</code><b>不报错</b><span>没有存起来，name 没变</span></div>
-    <div class="r d2"><code>line.split(" ")</code><b>不报错</b><span>连着的空格切出空字符串</span></div>
-    <div class="r d3"><code>",".join([1, 2])</code><b>TypeError</b><span>join 只能拼字符串</span></div>
+<section id="page-14" class="slide lay-ask" aria-label="回顾：切片加下标">
+  <h2 class="t r">回顾第 12 课：输出什么？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">review.py</div>
+<pre class="code"><span class="ln">s = <span class="s">"hello"</span></span><span class="ln"><span class="f">print</span>(s[<span class="m">1</span>:<span class="m">3</span>] + s[-<span class="m">1</span>])</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！s[1:3] 是下标 1、2：el，再接上最后一个字 o。"><i>1</i>elo</button>
+    <button type="button" data-fb="终点 3 不算，只截到下标 2。"><i>2</i>ello</button>
+    <button type="button" data-fb="下标 1 是 e，不是 h。"><i>3</i>hlo</button>
+    <button type="button" data-fb="s[-1] 是最后一个字 o。"><i>4</i>elh</button>
   </div>
-  <p class="say r d3">方法做出来的是新字符串。用完记得存起来，或者直接输出。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-15" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:620px">
+    <div class="r d1"><code>name.strip()</code><b>name = name.strip()</b><span>方法做出新字符串，要存起来</span></div>
+    <div class="r d2"><code>line.split(" ")</code><b>line.split()</b><span>连着的空格会切出空字符串</span></div>
+    <div class="r d3"><code>",".join([1, 2])</code><b>",".join(["1", "2"])</b><span>join 只能拼字符串</span></div>
+  </div>
+  <p class="say r d3">前两种不报错，只是结果不对。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-15" class="slide dark lay-ask" aria-label="找错：猫还是猫">
-  <h2 class="t r">找错：猫怎么没换成狗？</h2>
+<section id="page-16" class="slide dark lay-ask" aria-label="找错：小红一个也没数到">
+  <h2 class="t r">找错：明明有两个小红，怎么数出 0？</h2>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="2" data-yes="找到了！replace 做出了新字符串，但没有存起来。写成 s = s.replace(&quot;猫&quot;, &quot;狗&quot;) 就对了。" data-no="这一行没问题。想一想：换好的新字符串去哪了？"><span class="ln">s = <span class="s">"我爱猫"</span></span><span class="ln">s.<span class="f">replace</span>(<span class="s">"猫"</span>, <span class="s">"狗"</span>)</span><span class="ln"><span class="f">print</span>(s)</span></pre></div>
-  <p class="say r d2">应该输出“我爱狗”，程序却输出“我爱猫”，也没有报错。<br>点你认为有问题的那一行。</p>
+<pre class="code pick" data-bug="4" data-yes="找到了！逗号后面的空格跟着切进来了，&quot; 小红&quot; 和 &quot;小红&quot; 不一样。写 name.strip() == &quot;小红&quot; 就对了。" data-no="这一行没问题。想一想：切出来的每一段，两头带着什么？"><span class="ln">line = <span class="f">input</span>()</span><span class="ln">count = <span class="m">0</span></span><span class="ln"><span class="k">for</span> name <span class="k">in</span> line.<span class="f">split</span>(<span class="s">","</span>):</span><span class="ln">    <span class="k">if</span> name == <span class="s">"小红"</span>:</span><span class="ln">        count += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(count)</span></pre></div>
+  <p class="say r d2">输入“小明, 小红, 小红”，应该输出 2，程序却输出 0。<br>点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-16" class="slide clay lay-notes challenge" aria-label="整理单词" data-chapter="挑战">
+<section id="page-17" class="slide clay lay-notes challenge" aria-label="整理单词" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">整理单词</h2>
   <p class="say r d2">读入一行英文单词，单词之间用空格或连字符 - 隔开，<b>可能连着好几个，两头也可能有</b>。<br>整理成单词之间只隔一个空格、两头没有空格，输出一行。</p>
@@ -921,7 +938,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-17" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-18" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>两种分隔符太麻烦，先把连字符都换成空格。</span></p>
@@ -931,7 +948,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
-<section id="page-18" class="slide dark" aria-label="参考答案：整理单词" data-answer="02" data-steps="2" data-at="2">
+<section id="page-19" class="slide dark" aria-label="参考答案：整理单词" data-answer="02" data-steps="2" data-at="2">
   <h2 class="t">参考答案：整理单词</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">tidy_words.py</div>
@@ -942,19 +959,19 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-19" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-20" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>name.strip() 之后，name 变了吗？<em class="step s2">　没变，要存起来才算数。</em></span></p>
-    <p><i>Q2</i><span>split 和 join 各得到什么？<em class="step s3">　split 得到列表，join 得到字符串。</em></span></p>
-    <p><i>Q3</i><span>按空格切词，为什么一般不写 " "？<em class="step s4">　不写能把连着的空格当成一处。</em></span></p>
+    <p><i>Q1</i><span>整理名字为什么先 split 再 strip，不能先 strip？<em class="step s2">　strip 只去两头。逗号旁的空格在中间，切开以后才到了每一段的两头。</em></span></p>
+    <p><i>Q2</i><span>例题的 split(",") 换成 split()，输出有什么不同？<em class="step s3">　按空格切，输出“小明,”“小红”“,小刚”，逗号还粘在名字上。</em></span></p>
+    <p><i>Q3</i><span>想数一句英文有几个单词，怎么写？<em class="step s4">　len(s.split())，不写参数，连着的空格只算一处。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-20" class="slide lay-columns" aria-label="速查卡">
+<section id="page-21" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3" style="--key:780px">
     <div class="r d1"><code>s.strip()</code><span>去掉两头的空格</span></div>
@@ -967,7 +984,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-21" class="slide lay-columns" aria-label="后面再学">
+<section id="page-22" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>upper() lower()</code><span>英文变大写、变小写</span></div>
@@ -979,7 +996,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-22" class="slide dark thanks" aria-label="谢谢">
+<section id="page-23" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
