@@ -1,5 +1,5 @@
-scores = []
-scores.append(80)
-scores.append(95)
-print(scores)
-print(len(scores))
+temps = []
+temps.append(18)
+temps.append(25)
+print(temps)
+print(len(temps))

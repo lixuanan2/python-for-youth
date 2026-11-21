@@ -1,7 +1,7 @@
 n = int(input())
-scores = []
+jumps = []
 for i in range(n):
-    scores.append(int(input()))
-for s in scores:
+    jumps.append(int(input()))
+for s in jumps:
     if s < 60:
         print(s)

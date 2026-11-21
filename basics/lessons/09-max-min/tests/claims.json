@@ -18,12 +18,6 @@
     "stdout": "-3\n"
   },
   {
-    "page": 6,
-    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        best = x\nprint(best)\n",
-    "stdin": "5\n80\n95\n70\n88\n60\n",
-    "stdout": "95\n"
-  },
-  {
     "page": 7,
     "code": "best = 80\nx = 95\nprint(x > best)",
     "stdout": "True\n"
@@ -34,33 +28,96 @@
     "stdout": "False\n"
   },
   {
-    "page": 10,
-    "code": "n = int(input())\nwinner = input()\nbest = int(input())\nfor i in range(n - 1):\n    name = input()\n    score = int(input())\n    if score > best:\n        best = score\n        winner = name\nprint(winner, best)\n",
-    "stdin": "2\n小明\n90\n小红\n90\n",
-    "stdout": "小明 90\n"
-  },
-  {
-    "page": 10,
-    "code": "n = int(input())\nwinner = input()\nbest = int(input())\nfor i in range(n - 1):\n    name = input()\n    score = int(input())\n    if score >= best:\n        best = score\n        winner = name\nprint(winner, best)\n",
-    "stdin": "2\n小明\n90\n小红\n90\n",
-    "stdout": "小红 90\n"
-  },
-  {
     "page": 12,
     "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        best = x\nprint(best)\n",
     "stdin": "1\n77\n",
     "stdout": "77\n"
   },
   {
-    "page": 13,
-    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        x = best\nprint(best)\n",
+    "page": 6,
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        best = x\n        print(\"换\")\nprint(best)",
+    "stdin": "3\n95\n80\n70\n",
+    "stdout": "95\n"
+  },
+  {
+    "page": 6,
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        best = x\n        print(\"换\")\nprint(best)",
     "stdin": "3\n80\n95\n70\n",
+    "stdout": "换\n95\n"
+  },
+  {
+    "page": 6,
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        best = x\n        print(\"换\")\nprint(best)",
+    "stdin": "3\n70\n80\n95\n",
+    "stdout": "换\n换\n95\n"
+  },
+  {
+    "page": 6,
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        best = x\n        print(\"换\")\nprint(best)",
+    "stdin": "3\n80\n80\n95\n",
+    "stdout": "换\n95\n"
+  },
+  {
+    "page": 9,
+    "code": "n = int(input())\nwinner = input()\nbest = int(input())\nfor i in range(n - 1):\n    name = input()\n    price = int(input())\n    if price > best:\n        best = price\n        winner = name\nprint(winner, best)\n",
+    "ide": true,
+    "stdin": "3\n书包\n80\n台灯\n95\n水杯\n70\n",
+    "stdout": "台灯 95\n"
+  },
+  {
+    "page": 10,
+    "code": "n = int(input())\nwinner = input()\nbest = int(input())\nfor i in range(n - 1):\n    name = input()\n    price = int(input())\n    if price > best:\n        best = price\n        winner = name\nprint(winner, best)\n",
+    "stdin": "2\n书包\n90\n台灯\n90\n",
+    "stdout": "书包 90\n"
+  },
+  {
+    "page": 10,
+    "code": "n = int(input())\nwinner = input()\nbest = int(input())\nfor i in range(n - 1):\n    name = input()\n    price = int(input())\n    if price >= best:\n        best = price\n        winner = name\nprint(winner, best)\n",
+    "stdin": "2\n书包\n90\n台灯\n90\n",
+    "stdout": "台灯 90\n"
+  },
+  {
+    "page": 13,
+    "code": "count = 0\nfor i in range(1, 11):\n    if i % 2 == 0:\n        count += i\nprint(count)",
+    "stdout": "30\n"
+  },
+  {
+    "page": 14,
+    "code": "best = 0\nfor x in [-5, -3, -8]:\n    if x > best:\n        best = x\nprint(best)",
+    "stdout": "0\n"
+  },
+  {
+    "page": 14,
+    "code": "best = 80\nx = 95\nif x > best:\n    x = best\nprint(best)",
     "stdout": "80\n"
   },
   {
     "page": 14,
-    "code": "n = int(input())\nbest = int(input())\nfor i in range(n - 1):\n    x = int(input())\n    if x > best:\n        print(\"换人了\")\n    best = x\nprint(best)",
-    "stdin": "3\n80\n95\n70\n",
-    "stdout": "换人了\n70\n"
+    "code": "n = int(input())\nbest = int(input())\nfor i in range(n):\n    x = int(input())",
+    "stdin": "2\n5\n6\n",
+    "error": "EOFError"
+  },
+  {
+    "page": 15,
+    "code": "n = int(input())\nwinner = input()\nbest = int(input())\nfor i in range(n - 1):\n    name = input()\n    price = int(input())\n    if price >= best:\n        best = price\n        winner = name\nprint(winner, best)\n",
+    "stdin": "3\n书包\n95\n台灯\n95\n水杯\n70\n",
+    "stdout": "台灯 95\n"
+  },
+  {
+    "page": 15,
+    "code": "n = int(input())\nwinner = input()\nbest = int(input())\nfor i in range(n - 1):\n    name = input()\n    price = int(input())\n    if price > best:\n        best = price\n        winner = name\nprint(winner, best)\n",
+    "stdin": "3\n书包\n95\n台灯\n95\n水杯\n70\n",
+    "stdout": "书包 95\n"
+  },
+  {
+    "page": 19,
+    "code": "low = 0\nfor x in [80, 95, 70]:\n    if x < low:\n        low = x\nprint(low)",
+    "stdout": "0\n"
+  },
+  {
+    "page": 19,
+    "code": "best = int(input())\nx = int(input())\nwhile x != 0:\n    if x > best:\n        best = x\n    x = int(input())\nprint(best)",
+    "stdin": "5\n9\n2\n0\n",
+    "stdout": "9\n"
   }
 ]

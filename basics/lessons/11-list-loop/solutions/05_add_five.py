@@ -1,7 +1,7 @@
 n = int(input())
-scores = []
+jumps = []
 for i in range(n):
-    scores.append(int(input()))
-for i in range(len(scores)):
-    scores[i] += 5
-print(scores)
+    jumps.append(int(input()))
+for i in range(len(jumps)):
+    jumps[i] += 5
+print(jumps)

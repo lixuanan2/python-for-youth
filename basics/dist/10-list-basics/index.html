@@ -704,22 +704,23 @@ dialog p{color:var(--muted);font-size:15px}
 <!-- cover -->
 <section id="page-1" class="slide active visible lay-cover" aria-label="列表基础" data-chapter="开始">
   <p class="kicker r"># LESSON 10</p>
-  <div class="cover-row"><b class="r">排队</b><div class="wire r d1"><i></i><span>scores[0]</span></div><b class="r d2">取出</b></div>
+  <div class="cover-row"><b class="r">排队</b><div class="wire r d1"><i></i><span>temps[0]</span></div><b class="r d2">取出</b></div>
   <p class="headline r d3">列表基础：一排带编号的盒子</p>
-  <p class="say r d3">学完你能把全班的分数都存下来，想要第几个就取第几个。</p>
+  <p class="say r d3">学完你能把一周的气温都存下来，想要第几天就取第几天。</p>
   <div class="foot"></div>
 </section>
 
 <!-- the problem -->
-<section id="page-2" class="slide clay lay-notes" aria-label="第 2 个人多少分">
-  <h2 class="t r">第 2 个人考了多少分？</h2>
+<section id="page-2" class="slide clay lay-notes" aria-label="第 2 天多少度">
+  <h2 class="t r">第 2 天是多少度？</h2>
   <div class="notes">
-    <div class="slip r d1 short"><small>[0]</small><pre>80</pre></div>
-    <div class="slip r d2 short"><small>[1]</small><pre>95</pre></div>
-    <div class="slip r d2 short"><small>[2]</small><pre>70</pre></div>
+    <div class="slip r d1 short"><small>[0]</small><pre>18</pre></div>
+    <div class="slip r d2 short"><small>[1]</small><pre>25</pre></div>
+    <div class="slip r d2 short"><small>[2]</small><pre>21</pre></div>
   </div>
-  <p class="say r d1">上节课只记住了最大的那个，<br>别的分数都留不住。</p>
+  <p class="say r d1">上节课只记住了最大的那个，<br>别的数都留不住。</p>
   <p class="say r d3">一个变量是一个盒子，只装一个数。列表是一排盒子，每个盒子有编号，<br>编号从 0 开始。想要哪个，报编号就能拿到。</p>
+  <p class="say tip r d3">生活里：天气预报一周七天的气温、银行叫号排第几。先想一想：一周的气温都存下来以后，怎样一下子取出第 3 天的？</p>
   <div class="foot"></div>
 </section>
 
@@ -727,32 +728,32 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-3" class="slide lay-walk" aria-label="第一个列表" data-steps="3" data-at="3" data-chapter="下标">
   <h2 class="t">第一个列表</h2>
   <div class="editor" style="--fs:52px"><div class="tab">basics.py</div>
-<pre class="code" data-file="solutions/01_basics.py"><span class="ln l1">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1"><span class="f">print</span>(scores)</span><span class="ln l2"><span class="f">print</span>(scores[<span class="m">0</span>])</span><span class="ln l3"><span class="f">print</span>(<span class="f">len</span>(scores))</span></pre></div>
+<pre class="code" data-file="solutions/01_basics.py"><span class="ln l1">temps = [<span class="m">18</span>, <span class="m">25</span>, <span class="m">21</span>]</span><span class="ln l1"><span class="f">print</span>(temps)</span><span class="ln l2"><span class="f">print</span>(temps[<span class="m">0</span>])</span><span class="ln l3"><span class="f">print</span>(<span class="f">len</span>(temps))</span></pre></div>
   <div class="turns">
-    <p class="say only1">方括号里用逗号隔开，三个分数排成一排。整个列表也能直接输出。</p>
+    <p class="say only1">方括号里用逗号隔开，三天的气温排成一排。整个列表也能直接输出。</p>
     <p class="say only2">名字后面加方括号写编号，叫“下标”。下标 0 是第一个。</p>
     <p class="say only3">len() 数一数列表里有几个。</p>
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step longer"><i>输出</i><b>[80, 95, 70]</b></div>
-    <div class="box out step s2 longer"><i>[0]</i><b>80</b></div>
+    <div class="box step longer"><i>输出</i><b>[18, 25, 21]</b></div>
+    <div class="box out step s2 longer"><i>[0]</i><b>18</b></div>
     <div class="box out step s3 longer"><i>len</i><b>3</b></div>
   </div>
 </section>
 
-<!-- predict: scores[1] -->
-<section id="page-4" class="slide dark lay-predict" aria-label="猜一猜：scores[1]" data-steps="2" data-at="2">
-  <h2 class="t">猜一猜：scores[1] 是几？</h2>
+<!-- predict: temps[1] -->
+<section id="page-4" class="slide dark lay-predict" aria-label="猜一猜：temps[1]" data-steps="2" data-at="2">
+  <h2 class="t">猜一猜：temps[1] 是几？</h2>
   <div class="editor" style="--fs:58px"><div class="tab">guess.py</div>
-<pre class="code"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln"><span class="f">print</span>(scores[<span class="m">1</span>])</span></pre></div>
+<pre class="code"><span class="ln">temps = [<span class="m">18</span>, <span class="m">25</span>, <span class="m">21</span>]</span><span class="ln"><span class="f">print</span>(temps[<span class="m">1</span>])</span></pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <p class="step s2 text-huge soft">95</p>
+    <p class="step s2 text-huge soft">25</p>
   </div>
   <div class="turns">
     <p class="say only1">先在纸上写下你的答案。</p>
-    <p class="say step s2">不是 80，是 95。下标从 0 开始数：[0] 是第一个，[1] 是第二个。<br>所以第 k 个的下标是 k - 1。</p>
+    <p class="say step s2">不是 18，是 25。下标从 0 开始数：[0] 是第一个，[1] 是第二个。<br>所以第 k 个的下标是 k - 1。</p>
   </div>
   <a class="ide step s2">▶ 在 IDE 验证</a>
   <div class="foot"></div>
@@ -762,24 +763,24 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-5" class="slide lay-columns" aria-label="第几个和下标">
   <h2 class="t r">第几个，下标是几？</h2>
   <div class="ledger">
-    <div class="r d1" style="grid-template-columns:400px 400px 1fr"><code class="plain" style="font-family:var(--code);color:var(--ink);text-decoration:none">第 1 个</code><b>[0]</b><span>80</span></div>
-    <div class="r d2" style="grid-template-columns:400px 400px 1fr"><code class="plain" style="font-family:var(--code);color:var(--ink);text-decoration:none">第 2 个</code><b>[1]</b><span>95</span></div>
-    <div class="r d3" style="grid-template-columns:400px 400px 1fr"><code class="plain" style="font-family:var(--code);color:var(--ink);text-decoration:none">第 3 个</code><b>[2]</b><span>70</span></div>
+    <div class="r d1" style="grid-template-columns:400px 400px 1fr"><code class="plain" style="font-family:var(--code);color:var(--ink);text-decoration:none">第 1 个</code><b>[0]</b><span>18</span></div>
+    <div class="r d2" style="grid-template-columns:400px 400px 1fr"><code class="plain" style="font-family:var(--code);color:var(--ink);text-decoration:none">第 2 个</code><b>[1]</b><span>25</span></div>
+    <div class="r d3" style="grid-template-columns:400px 400px 1fr"><code class="plain" style="font-family:var(--code);color:var(--ink);text-decoration:none">第 3 个</code><b>[2]</b><span>21</span></div>
   </div>
   <p class="say r d3">像楼层一样，有的楼从 0 层开始算。下标总比“第几个”少 1。</p>
   <div class="foot"></div>
 </section>
 
 <!-- quiz -->
-<section id="page-6" class="slide lay-ask top" aria-label="小测：names[2]">
-  <h2 class="t r">小测：这段程序输出什么？</h2>
-  <div class="editor r d1" style="--fs:48px"><div class="tab">输出什么？</div>
-<pre class="code"><span class="ln">names = [<span class="s">"小明"</span>, <span class="s">"小红"</span>, <span class="s">"小刚"</span>, <span class="s">"小丽"</span>]</span><span class="ln"><span class="f">print</span>(names[<span class="m">2</span>])</span></pre></div>
-  <div class="quiz r d2" data-right="0">
-    <button type="button" data-fb="答对了！[0] 小明，[1] 小红，[2] 小刚。"><i>1</i>小刚</button>
-    <button type="button" data-fb="小红是第 2 个，下标是 1。"><i>2</i>小红</button>
-    <button type="button" data-fb="小丽是第 4 个，下标是 3。"><i>3</i>小丽</button>
-    <button type="button" data-fb="下标 2 在范围里，不会报错。"><i>4</i>报错</button>
+<section id="page-6" class="slide lay-ask top" aria-label="小测：哪个取不到小刚">
+  <h2 class="t r">小测：哪一个取不到小刚？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">names.py</div>
+<pre class="code"><span class="ln">names = [<span class="s">"小明"</span>, <span class="s">"小红"</span>, <span class="s">"小刚"</span>, <span class="s">"小丽"</span>]</span></pre></div>
+  <div class="quiz r d2" data-right="2">
+    <button type="button" data-fb="[2] 是第 3 个，就是小刚。"><i>1</i>names[2]</button>
+    <button type="button" data-fb="3 - 1 先算出 2，还是小刚。"><i>2</i>names[3 - 1]</button>
+    <button type="button" data-fb="答对了！小刚是第 3 个，下标是 2；[3] 是第 4 个小丽。"><i>3</i>names[3]</button>
+    <button type="button" data-fb="len 是 4，4 - 2 得 2，也是小刚。"><i>4</i>names[len(names) - 2]</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -789,12 +790,12 @@ dialog p{color:var(--muted);font-size:15px}
 <section id="page-7" class="slide dark lay-predict" aria-label="下标写大了">
   <h2 class="t r">下标写大了会怎样？</h2>
   <div class="editor r d1" style="--fs:58px"><div class="tab">too_far.py（只阅读）</div>
-<pre class="code"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln"><span class="f">print</span>(scores[<span class="m">3</span>])</span></pre></div>
+<pre class="code"><span class="ln">temps = [<span class="m">18</span>, <span class="m">25</span>, <span class="m">21</span>]</span><span class="ln"><span class="f">print</span>(temps[<span class="m">3</span>])</span></pre></div>
   <div class="answer">
-    <div class="slip tilt r d2 longest"><small>屏幕上</small><pre style="white-space:pre-wrap">IndexError: list index
-out of range</pre></div>
+    <div class="slip tilt r d2"><small>屏幕上</small><pre style="white-space:pre-wrap">红字报错
+程序停下</pre></div>
   </div>
-  <p class="say r d3">三个分数，下标只有 0、1、2。要 [3] 就超出了范围，程序报 IndexError，停下来。<br>报错的意思是：下标超出了列表的范围。看到它，先数一数列表里有几个。</p>
+  <p class="say r d3">三个数的下标只有 0、1、2。要 [3] 就超出了范围，程序报错，停下来。<br>看到这种报错，先数一数列表里有几个。</p>
   <div class="foot"></div>
 </section>
 
@@ -802,7 +803,7 @@ out of range</pre></div>
 <section id="page-8" class="slide lay-walk" aria-label="倒着数" data-steps="3" data-at="3">
   <h2 class="t">倒着数：-1 是最后一个</h2>
   <div class="editor" style="--fs:52px"><div class="tab">ends.py</div>
-<pre class="code"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1"><span class="f">print</span>(scores[-<span class="m">1</span>])</span><span class="ln l2"><span class="f">print</span>(scores[-<span class="m">2</span>])</span><span class="ln l3"><span class="f">print</span>(<span class="f">len</span>(scores))</span></pre></div>
+<pre class="code"><span class="ln">temps = [<span class="m">18</span>, <span class="m">25</span>, <span class="m">21</span>]</span><span class="ln l1"><span class="f">print</span>(temps[-<span class="m">1</span>])</span><span class="ln l2"><span class="f">print</span>(temps[-<span class="m">2</span>])</span><span class="ln l3"><span class="f">print</span>(<span class="f">len</span>(temps))</span></pre></div>
   <div class="turns">
     <p class="say only1">下标写负数，就是从后往前数。-1 是最后一个。</p>
     <p class="say only2">-2 是倒数第二个。倒数第 k 个就写 -k。</p>
@@ -810,20 +811,20 @@ out of range</pre></div>
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step"><i>[-1]</i><b>70</b></div>
-    <div class="box step s2"><i>[-2]</i><b>95</b></div>
+    <div class="box step"><i>[-1]</i><b>21</b></div>
+    <div class="box step s2"><i>[-2]</i><b>25</b></div>
     <div class="box out step s3"><i>len</i><b>3</b></div>
   </div>
 </section>
 
 <!-- quiz: last index -->
-<section id="page-9" class="slide lay-ask" aria-label="小测：最后一个的下标">
-  <h2 class="t r">小测：列表里有 5 个数，哪个能取到最后一个？</h2>
-  <div class="quiz r d1" data-right="2">
-    <button type="button" data-fb="5 个数的下标是 0 到 4，[5] 会报 IndexError。"><i>1</i>a[5]</button>
-    <button type="button" data-fb="[1] 是第二个，不是最后一个。"><i>2</i>a[1]</button>
-    <button type="button" data-fb="答对了！-1 从后往前数，就是最后一个。[4] 也行。"><i>3</i>a[-1]</button>
-    <button type="button" data-fb="[0] 是第一个，倒着数要写负数。"><i>4</i>a[0]</button>
+<section id="page-9" class="slide lay-ask" aria-label="小测：两种写法比一比">
+  <h2 class="t r">小测：a[len(a) - 1] 和 a[-1] 一样吗？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！len(a) - 1 是正着数最后一个的下标，-1 是倒着数第一个，指的是同一个盒子。"><i>1</i>一样，都是最后一个</button>
+    <button type="button" data-fb="下标从 0 开始，len(a) - 1 正好是最后一个。"><i>2</i>不一样，len(a) - 1 是倒数第二个</button>
+    <button type="button" data-fb="-1 从后往前数，是最后一个。"><i>3</i>不一样，a[-1] 是第一个</button>
+    <button type="button" data-fb="不管几个数，两种写法都指最后一个。"><i>4</i>只有 a 里有 5 个数时才一样</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -833,15 +834,15 @@ out of range</pre></div>
 <section id="page-10" class="slide lay-walk" aria-label="改一个盒子" data-steps="2" data-at="2" data-chapter="改和加">
   <h2 class="t">改一个盒子里的数</h2>
   <div class="editor" style="--fs:52px"><div class="tab">change.py</div>
-<pre class="code" data-file="solutions/02_change.py"><span class="ln">scores = [<span class="m">80</span>, <span class="m">95</span>, <span class="m">70</span>]</span><span class="ln l1">scores[<span class="m">1</span>] = <span class="m">100</span></span><span class="ln l2"><span class="f">print</span>(scores)</span></pre></div>
+<pre class="code" data-file="solutions/02_change.py"><span class="ln">temps = [<span class="m">18</span>, <span class="m">25</span>, <span class="m">21</span>]</span><span class="ln l1">temps[<span class="m">1</span>] = <span class="m">30</span></span><span class="ln l2"><span class="f">print</span>(temps)</span></pre></div>
   <div class="turns">
-    <p class="say only1">下标写在等号左边，就是把新数放进那个盒子，原来的 95 被换掉。</p>
+    <p class="say only1">下标写在等号左边，就是把新数放进那个盒子，原来的 25 被换掉。</p>
     <p class="say only2">别的盒子不动，顺序也不变。</p>
   </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step longest"><i>[1]</i><b>100</b></div>
-    <div class="box out step s2 longest"><i>输出</i><b>[80, 100, 70]</b></div>
+    <div class="box step longest"><i>[1]</i><b>30</b></div>
+    <div class="box out step s2 longest"><i>输出</i><b>[18, 30, 21]</b></div>
   </div>
 </section>
 
@@ -849,104 +850,118 @@ out of range</pre></div>
 <section id="page-11" class="slide lay-walk" aria-label="往后加一个" data-steps="3" data-at="3">
   <h2 class="t">append：往后面加一个</h2>
   <div class="editor" style="--fs:48px"><div class="tab">append.py</div>
-<pre class="code" data-file="solutions/03_append.py"><span class="ln l1">scores = []</span><span class="ln l2">scores.<span class="f">append</span>(<span class="m">80</span>)</span><span class="ln l3">scores.<span class="f">append</span>(<span class="m">95</span>)</span><span class="ln"><span class="f">print</span>(scores)</span><span class="ln"><span class="f">print</span>(<span class="f">len</span>(scores))</span></pre></div>
+<pre class="code" data-file="solutions/03_append.py"><span class="ln l1">temps = []</span><span class="ln l2">temps.<span class="f">append</span>(<span class="m">18</span>)</span><span class="ln l3">temps.<span class="f">append</span>(<span class="m">25</span>)</span><span class="ln"><span class="f">print</span>(temps)</span><span class="ln"><span class="f">print</span>(<span class="f">len</span>(temps))</span></pre></div>
   <div class="turns">
     <p class="say only1">[] 是空列表，一个盒子也没有。</p>
-    <p class="say only2">append 的意思是“追加”。在最后面接上一个盒子，放进 80。</p>
-    <p class="say only3">再接一个 95。现在有 2 个，输出 [80, 95] 和 2。</p>
+    <p class="say only2">append 的意思是“追加”。在最后面接上一个盒子，放进 18。</p>
+    <p class="say only3">再接一个 25。现在有 2 个，输出 [18, 25] 和 2。</p>
   </div>
   <a class="ide step s3">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step long"><i>scores</i><b>[]</b></div>
-    <div class="box step s2 long"><i>scores</i><b>[80]</b></div>
-    <div class="box out step s3 long"><i>scores</i><b>[80, 95]</b></div>
+    <div class="box step long"><i>temps</i><b>[]</b></div>
+    <div class="box step s2 long"><i>temps</i><b>[18]</b></div>
+    <div class="box out step s3 long"><i>temps</i><b>[18, 25]</b></div>
   </div>
 </section>
 
 <!-- worked example: store then pick -->
-<section id="page-12" class="slide lay-walk" aria-label="例题：第 k 个" data-steps="4" data-at="4">
-  <h2 class="t">例题：取第 k 个</h2>
+<section id="page-12" class="slide lay-walk" aria-label="例题：第 k 天" data-steps="4" data-at="4">
+  <h2 class="t">例题：第 k 天多少度</h2>
   <div class="editor" style="--fs:40px"><div class="tab">kth.py</div>
-<pre class="code" data-stdin="3&#10;80&#10;95&#10;70&#10;2&#10;" data-file="solutions/04_kth.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">scores = []</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l2">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l3">k = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l4"><span class="f">print</span>(scores[k - <span class="m">1</span>])</span></pre></div>
+<pre class="code" data-stdin="3&#10;18&#10;25&#10;21&#10;2&#10;" data-file="solutions/04_kth.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">temps = []</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l2">    temps.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l3">k = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l4"><span class="f">print</span>(temps[k - <span class="m">1</span>])</span></pre></div>
   <div class="turns">
     <p class="say only1">输入 3。先准备一个空列表，就像累加前先写 total = 0。</p>
-    <p class="say only2">循环 3 遍，每遍读一个分数接到后面：80、95、70。</p>
-    <p class="say only3">最后一行读入 k，想要第 2 个。</p>
-    <p class="say only4">第 2 个的下标是 2 - 1，也就是 1，输出 95。</p>
+    <p class="say only2">循环 3 遍，每遍读一天的气温接到后面：18、25、21。</p>
+    <p class="say only3">最后一行读入 k，想要第 2 天。</p>
+    <p class="say only4">第 2 天的下标是 2 - 1，也就是 1，输出 25。</p>
   </div>
   <a class="ide step s4">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="box step longest"><i>scores</i><b>[]</b></div>
-    <div class="box step s2 longest"><i>scores</i><b>[80, 95, 70]</b></div>
+    <div class="box step longest"><i>temps</i><b>[]</b></div>
+    <div class="box step s2 longest"><i>temps</i><b>[18, 25, 21]</b></div>
     <div class="box step s3 longest"><i>k</i><b>2</b></div>
-    <div class="box out step s4 longest"><i>输出</i><b>95</b></div>
+    <div class="box out step s4 longest"><i>输出</i><b>25</b></div>
   </div>
 </section>
 
 <!-- predict: empty list inside the loop -->
 <section id="page-13" class="slide lay-predict" aria-label="猜一猜：放进循环" data-steps="2" data-at="2">
-  <h2 class="t">猜一猜：把 scores = [] 放进循环会怎样？</h2>
-  <div class="editor" style="--fs:45px"><div class="tab">inside.py（只阅读）</div>
-<pre class="code"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">    scores = []</span><span class="ln">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln"><span class="f">print</span>(scores)</span></pre></div>
+  <h2 class="t">猜一猜：把 temps = [] 放进循环会怎样？</h2>
+  <div class="editor" style="--fs:46px"><div class="tab">inside.py（只阅读）</div>
+<pre class="code"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">    temps = []</span><span class="ln">    temps.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln"><span class="f">print</span>(temps)</span></pre></div>
   <div class="answer turns">
-    <p class="say only1">依次输入 3、80、95、70，最后输出什么？</p>
-    <p class="step s2 text-big out" style="line-height:1">[70]</p>
+    <p class="say only1">依次输入 3、18、25、21，最后输出什么？</p>
+    <p class="step s2 text-big out" style="line-height:1">[21]</p>
   </div>
-  <p class="say step s2">每一遍都换一个新的空列表，前面存的全丢了，只剩最后一个 70。<br>和累加一样：准备工作放在循环前面，只做一次。</p>
+  <p class="say step s2">每一遍都换一个新的空列表，前面存的全丢了，只剩最后一个 21。<br>和累加一样：准备工作放在循环前面，只做一次。</p>
   <div class="foot"></div>
 </section>
 
 <!-- your turn: bonus -->
-<section id="page-14" class="slide lay-try" aria-label="给第 k 个人加分">
+<section id="page-14" class="slide lay-try" aria-label="第 k 天加 5 度">
   <div class="band r"><b>动手<br>改一改</b><span>取出来、加上、放回去，最后输出整个列表。</span></div>
   <div class="turn">
-    <h2 class="r d1">给第 k 个人加 5 分</h2>
-    <p class="say r d1">第一行读入人数 n，接下来 n 行，每行一个整数分数，最后一行读入 k，k 在 1 到 n 之间。给第 k 个人加 5 分，输出整个列表。</p>
-    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1.4fr"><div><small>依次输入</small><pre style="font-size:44px">3、80、95、70、2</pre></div><div><small>输出</small><pre style="font-size:44px">[80, 100, 70]</pre></div></div>
+    <h2 class="r d1">第 k 天少记了 5 度</h2>
+    <p class="say r d1">第一行读入天数 n，接下来 n 行，每行一个整数气温，最后一行读入 k，k 在 1 到 n 之间。第 k 天少记了 5 度，给它加上 5，输出整个列表。</p>
+    <div class="sheet r d2" style="display:grid;grid-template-columns:1fr 1.4fr"><div><small>依次输入</small><pre style="font-size:44px">3、18、25、21、2</pre></div><div><small>输出</small><pre style="font-size:44px">[18, 30, 21]</pre></div></div>
   </div>
-  <a class="ide r d3" data-code="# 【给第 k 个人加 5 分】&#10;# 第一行读入人数 n，接下来 n 行，每行一个整数分数，&#10;#   最后一行读入 k，k 在 1 到 n 之间。给第 k 个人加 5 分，&#10;#   输出整个列表。&#10;# 例如输入（每个一行）：3、80、95、70、2&#10;# 应该输出：[80, 100, 70]&#10;# 提示：取出来、加上、放回去，最后输出整个列表。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;k = int(input())&#10;print(scores[k - 1])&#10;">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【第 k 天少记了 5 度】&#10;# 第一行读入天数 n，接下来 n 行，每行一个整数气温，&#10;#   最后一行读入 k，k 在 1 到 n 之间。第 k 天少记了 5 度，&#10;#   给它加上 5，输出整个列表。&#10;# 例如输入（每个一行）：3、18、25、21、2&#10;# 应该输出：[18, 30, 21]&#10;# 提示：取出来、加上、放回去，最后输出整个列表。&#10;# ↓ 在下面这段程序上改&#10;&#10;n = int(input())&#10;temps = []&#10;for i in range(n):&#10;    temps.append(int(input()))&#10;k = int(input())&#10;print(temps[k - 1])&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- quiz: len after append -->
-<section id="page-15" class="slide lay-ask" aria-label="小测：现在有几个">
-  <h2 class="t r">小测：最后输出几？</h2>
-  <div class="editor r d1" style="--fs:48px"><div class="tab">输出几？</div>
-<pre class="code"><span class="ln">a = [<span class="m">3</span>]</span><span class="ln">a.<span class="f">append</span>(<span class="m">5</span>)</span><span class="ln">a.<span class="f">append</span>(<span class="m">5</span>)</span><span class="ln"><span class="f">print</span>(<span class="f">len</span>(a))</span></pre></div>
-  <div class="quiz r d2" data-right="1">
-    <button type="button" data-fb="一样的 5 加两次，就有两个 5，不会合并。"><i>1</i>2</button>
-    <button type="button" data-fb="答对了！3 本来就在，又接了两个 5，一共 3 个：[3, 5, 5]。"><i>2</i>3</button>
-    <button type="button" data-fb="len 数的是有几个，不是把数加起来。"><i>3</i>13</button>
-    <button type="button" data-fb="append 一次只加一个，两次就是两个。"><i>4</i>1</button>
+<section id="page-15" class="slide lay-ask" aria-label="小测：-1 跟着变">
+  <h2 class="t r">小测：最后输出什么？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">append.py</div>
+<pre class="code"><span class="ln">a = [<span class="m">3</span>]</span><span class="ln">a.<span class="f">append</span>(a[<span class="m">0</span>] + <span class="m">1</span>)</span><span class="ln">a.<span class="f">append</span>(a[-<span class="m">1</span>] + <span class="m">1</span>)</span><span class="ln"><span class="f">print</span>(a)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！第二次 append 时最后一个已经是 4，a[-1] + 1 得 5。"><i>1</i>[3, 4, 5]</button>
+    <button type="button" data-fb="a[-1] 是“现在”的最后一个，第一次 append 以后它就是 4 了。"><i>2</i>[3, 4, 4]</button>
+    <button type="button" data-fb="append 了两次，一共 3 个。"><i>3</i>[3, 4]</button>
+    <button type="button" data-fb="append 只往后接，原来的 3 还在。"><i>4</i>[4, 5]</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- errors -->
-<section id="page-16" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:560px;--mid:540px">
-    <div class="r d1"><code>scores[3]</code><b>IndexError</b><span>只有 3 个，最大下标是 2</span></div>
-    <div class="r d2"><code>scores[1]</code><b>不报错</b><span>想要第一个，拿到了第二个</span></div>
-    <div class="r d3"><code>scores.add(70)</code><b>AttributeError</b><span>往后加用 append</span></div>
+<section id="page-16" class="slide lay-ask" aria-label="回顾：换了几次">
+  <h2 class="t r">回顾第 9 课：输出哪几个数？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">review.py</div>
+<pre class="code"><span class="ln">low = <span class="m">9</span></span><span class="ln"><span class="k">for</span> x <span class="k">in</span> [<span class="m">4</span>, <span class="m">7</span>, <span class="m">2</span>, <span class="m">8</span>]:</span><span class="ln">    <span class="k">if</span> x &lt; low:</span><span class="ln">        low = x</span><span class="ln">        <span class="f">print</span>(x)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！4 比 9 小换一次，2 比 4 小再换一次，7 和 8 都不换。"><i>1</i>4 和 2</button>
+    <button type="button" data-fb="4 比开始的 9 小，也换过一次。"><i>2</i>只有 2</button>
+    <button type="button" data-fb="print 在 if 里，只有换的时候才输出。"><i>3</i>4、7、2、8</button>
+    <button type="button" data-fb="8 是最后一个，可它比台上的 2 大，不换。"><i>4</i>只有 8</button>
   </div>
-  <p class="say r d3">第二种最难发现：不报错，只是拿错了盒子。想要第 k 个，下标写 k - 1。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-17" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:520px;--mid:560px">
+    <div class="r d1"><code>temps[3]</code><b>temps[2]</b><span>只有 3 个，最大下标是 2</span></div>
+    <div class="r d2"><code>temps(0)</code><b>temps[0]</b><span>取第几个用方括号</span></div>
+    <div class="r d3"><code>temps.add(30)</code><b>temps.append(30)</b><span>往后加用 append</span></div>
+  </div>
+  <p class="say r d3">列表有 3 个数时，下标是 0、1、2，[3] 已经超出范围。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-17" class="slide dark lay-ask" aria-label="找错：最后一个">
-  <h2 class="t r">找错：想输出最后一个，却报错了</h2>
-  <div class="editor r d1" style="--fs:47px"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="5" data-yes="找到了！n 个数的下标是 0 到 n - 1，[n] 超出了范围。写 scores[n - 1] 或 scores[-1] 都行。" data-no="这一行没问题。报的是 IndexError，想一想哪一行用到了下标。"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">scores = []</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln"><span class="f">print</span>(scores[n])</span></pre></div>
-  <p class="say r d2">依次输入 3、80、95、70，程序报 IndexError。<br>点你认为有问题的那一行。</p>
+<section id="page-18" class="slide dark lay-ask" aria-label="找错：拿到了后一天">
+  <h2 class="t r">找错：想要第 1 天，怎么给了第 2 天？</h2>
+  <div class="editor r d1" style="--fs:49px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="6" data-yes="找到了！第 k 天的下标是 k - 1，写成 [k] 就拿了后一个盒子。改成 temps[k - 1]。" data-no="这一行没问题。想一想：第 1 天在哪个盒子里？"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">temps = []</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">    temps.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln">k = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(temps[k])</span></pre></div>
+  <p class="say r d2">依次输入 3、18、25、21、1，想要第 1 天的 18，程序却输出 25。<br>点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-18" class="slide clay lay-notes challenge" aria-label="从两头数" data-chapter="挑战">
+<section id="page-19" class="slide clay lay-notes challenge" aria-label="从两头数" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">从两头数</h2>
   <p class="say r d2">第一行读入个数 n，接下来 n 行，每行一个整数，最后一行读入 k，k 在 1 到 n 之间。<br>输出从前往后数第 k 个和<b>从后往前数第 k 个</b>，中间空一格。</p>
@@ -962,7 +977,7 @@ out of range</pre></div>
 </section>
 
 <!-- hints -->
-<section id="page-19" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-20" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>先把 n 个数存进列表，就像例题那样。</span></p>
@@ -972,35 +987,35 @@ out of range</pre></div>
   <div class="foot"></div>
 </section>
 
-<section id="page-20" class="slide dark" aria-label="参考答案：从两头数" data-answer="02" data-steps="2" data-at="2">
+<section id="page-21" class="slide dark" aria-label="参考答案：从两头数" data-answer="02" data-steps="2" data-at="2">
   <h2 class="t">参考答案：从两头数</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">two_ends.py</div>
-<pre class="code" data-file="solutions/06_two_ends.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">scores = []</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln">k = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(scores[k - <span class="m">1</span>], scores[-k])</span></pre></div>
-  <p class="abs say step s2" style="left:1340px;top:220px;width:484px">第 k 个的下标是 <code>k - 1</code>；倒数第 k 个直接写 <code>scores[-k]</code>。</p>
+<pre class="code" data-file="solutions/06_two_ends.py"><span class="ln">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">temps = []</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">    temps.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln">k = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(temps[k - <span class="m">1</span>], temps[-k])</span></pre></div>
+  <p class="abs say step s2" style="left:1340px;top:220px;width:484px">第 k 个的下标是 <code>k - 1</code>；倒数第 k 个直接写 <code>temps[-k]</code>。</p>
   <a class="ide step s2" style="left:1340px;top:860px">▶ 在 IDE 打开</a>
   <div class="foot"></div>
 </section>
 
 <!-- review -->
-<section id="page-21" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-22" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>第 k 个的下标是几？<em class="step s2">　k - 1，因为下标从 0 开始。</em></span></p>
-    <p><i>Q2</i><span>scores[-1] 是哪一个？<em class="step s3">　最后一个，负数从后往前数。</em></span></p>
-    <p><i>Q3</i><span>scores = [] 为什么放在循环前？<em class="step s4">　放在循环里，每一遍都会清空。</em></span></p>
+    <p><i>Q1</i><span>例题为什么要先把气温都存进列表，不边读边输出？<em class="step s2">　最后才读到 k，前面的数得先留着，才知道要哪一个。</em></span></p>
+    <p><i>Q2</i><span>temps[1] = 30 和 temps.append(30)，有什么不同？<em class="step s3">　前者把第 2 个换成 30，个数不变；后者在最后多接一个，个数多 1。</em></span></p>
+    <p><i>Q3</i><span>想知道最后一天比第一天高了几度，怎么写？<em class="step s4">　print(temps[-1] - temps[0])</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-22" class="slide lay-columns" aria-label="速查卡">
+<section id="page-23" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
-    <div class="r d1"><code>a = [80, 95, 70]</code><span>建一个列表，逗号隔开</span></div>
+    <div class="r d1"><code>a = [18, 25, 21]</code><span>建一个列表，逗号隔开</span></div>
     <div class="r d1"><code>a[0]  a[-1]</code><span>第一个，最后一个</span></div>
-    <div class="r d2"><code>a[1] = 100</code><span>改一个盒子里的数</span></div>
+    <div class="r d2"><code>a[1] = 30</code><span>改一个盒子里的数</span></div>
     <div class="r d2"><code>a.append(60)</code><span>往最后面加一个</span></div>
     <div class="r d3"><code>len(a)</code><span>一共有几个</span></div>
   </div>
@@ -1008,7 +1023,7 @@ out of range</pre></div>
 </section>
 
 <!-- later -->
-<section id="page-23" class="slide lay-columns" aria-label="后面再学">
+<section id="page-24" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>for x in a</code><span>下节课：一个一个看完整个列表</span></div>
@@ -1020,7 +1035,7 @@ out of range</pre></div>
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-24" class="slide dark thanks" aria-label="谢谢">
+<section id="page-25" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>

@@ -34,10 +34,10 @@
     "page": 9,
     "starter": "starter/03_total.py",
     "solution": "solutions/03_total.py",
-    "scope": "第一行人数n；接下来n行每行一个整数",
-    "sample_input": "3\n80\n90\n70\n",
-    "sample_output": "240\n",
-    "description": "读入n个分数求总分。"
+    "scope": "第一行天数n；接下来n行每行一个整数",
+    "sample_input": "3\n20\n30\n10\n",
+    "sample_output": "60\n",
+    "description": "读入n天的页数求总页数。"
   },
   {
     "id": "02",
@@ -45,14 +45,14 @@
     "page": 10,
     "starter": "starter/04_average.py",
     "solution": "solutions/04_average.py",
-    "scope": "第一行人数n至少为1；接下来n行每行一个整数",
-    "sample_input": "3\n80\n90\n70\n",
-    "sample_output": "80.0\n",
-    "description": "改成输出平均分。",
+    "scope": "第一行天数n至少为1；接下来n行每行一个整数",
+    "sample_input": "3\n20\n30\n10\n",
+    "sample_output": "20.0\n",
+    "description": "改成输出平均每天读几页。",
     "brief": {
-      "title": "改成输出平均分",
+      "title": "平均每天读几页",
       "goal": [
-        "第一行读入人数 n，至少 1 人，接下来 n 行，每行一个整数分数。"
+        "第一行读入天数 n，至少 1 天，接下来 n 行，每行是这天读的页数。输出平均每天读几页。"
       ],
       "hint": "只要改最后一行。"
     }
@@ -74,14 +74,14 @@
     "page": 14,
     "starter": "starter/06_count_pass.py",
     "solution": "solutions/06_count_pass.py",
-    "scope": "第一行人数n；接下来n行每行一个整数",
-    "sample_input": "4\n80\n59\n60\n30\n",
+    "scope": "第一行天数n；接下来n行每行一个整数",
+    "sample_input": "4\n20\n15\n30\n8\n",
     "sample_output": "2\n",
-    "description": "改成统计及格人数。",
+    "description": "改成数有几天读够20页。",
     "brief": {
-      "title": "数一数几个人及格",
+      "title": "几天读够了 20 页",
       "goal": [
-        "第一行读入人数 n，接下来 n 行，每行一个整数分数。60 分及以上算及格，输出及格人数。"
+        "第一行读入天数 n，接下来 n 行，每行是这天读的页数。输出有几天读了 20 页或更多。"
       ],
       "hint": "把累加换成计数，再加一个判断。"
     }
@@ -89,7 +89,7 @@
   {
     "id": "04",
     "role": "独立迁移",
-    "page": 17,
+    "page": 18,
     "starter": "starter/07_savings.py",
     "solution": "solutions/07_savings.py",
     "scope": "每行一个整数，最后一行是0",

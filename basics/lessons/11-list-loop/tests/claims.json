@@ -1,7 +1,7 @@
 [
   {
     "page": 3,
-    "code": "scores = [80, 95, 70]\nfor s in scores:\n    print(s)\n",
+    "code": "jumps = [80, 95, 70]\nfor s in jumps:\n    print(s)\n",
     "stdout": "80\n95\n70\n"
   },
   {
@@ -11,13 +11,34 @@
   },
   {
     "page": 5,
-    "code": "scores = [80, 95, 70]\nfor i in range(len(scores)):\n    print(i, scores[i])",
+    "code": "jumps = [80, 95, 70]\nfor i in range(len(jumps)):\n    print(i, jumps[i])",
     "stdout": "0 80\n1 95\n2 70\n"
   },
   {
     "page": 6,
-    "code": "scores = [80, 95, 70]\nfor i in range(len(scores)):\n    print(i + 1, scores[i])\n",
+    "code": "jumps = [80, 95, 70]\nfor i in range(len(jumps)):\n    print(i + 1, jumps[i])\n",
     "stdout": "1 80\n2 95\n3 70\n"
+  },
+  {
+    "page": 8,
+    "code": "n = int(input())\njumps = []\nfor i in range(n):\n    jumps.append(int(input()))\ncount = 0\nfor s in jumps:\n    if s >= 60:\n        count += 1\nprint(count)\n",
+    "stdin": "4\n80\n59\n60\n30\n",
+    "stdout": "2\n"
+  },
+  {
+    "page": 10,
+    "code": "jumps = [80, 95, 70]\nfor s in jumps:\n    s += 5\nprint(jumps)",
+    "stdout": "[80, 95, 70]\n"
+  },
+  {
+    "page": 10,
+    "code": "jumps = [80, 95, 70]\nfor i in range(len(jumps)):\n    jumps[i] += 5\nprint(jumps)",
+    "stdout": "[85, 100, 75]\n"
+  },
+  {
+    "page": 7,
+    "code": "a = [5, 6, 7, 8]\nfor i in range(len(a)):\n    print(a[i] - i)",
+    "stdout": "5\n5\n5\n5\n"
   },
   {
     "page": 7,
@@ -25,39 +46,54 @@
     "stdout": "0\n1\n2\n3\n"
   },
   {
-    "page": 8,
-    "code": "n = int(input())\nscores = []\nfor i in range(n):\n    scores.append(int(input()))\ncount = 0\nfor s in scores:\n    if s >= 60:\n        count += 1\nprint(count)\n",
-    "stdin": "4\n80\n59\n60\n30\n",
-    "stdout": "2\n"
-  },
-  {
-    "page": 10,
-    "code": "scores = [80, 95, 70]\nfor s in scores:\n    s += 5\nprint(scores)",
-    "stdout": "[80, 95, 70]\n"
-  },
-  {
-    "page": 10,
-    "code": "scores = [80, 95, 70]\nfor i in range(len(scores)):\n    scores[i] += 5\nprint(scores)",
-    "stdout": "[85, 100, 75]\n"
-  },
-  {
     "page": 12,
-    "code": "a = [10, 20, 30]\nfor x in a:\n    print(x // 10)",
-    "stdout": "1\n2\n3\n"
+    "code": "a = [10, 20, 30]\nt = 0\nfor x in a:\n    t += x\nprint(t)\n\nt = 0\nfor i in range(len(a)):\n    t += i\nprint(t)",
+    "stdout": "60\n3\n"
   },
   {
     "page": 13,
-    "code": "scores = [80, 95, 70]\nfor i in range(len(scores)):\n    print(i)",
-    "stdout": "0\n1\n2\n"
-  },
-  {
-    "page": 13,
-    "code": "scores = [80, 95, 70]\nprint(scores[len(scores)])",
-    "error": "IndexError: list index out of range"
+    "code": "a = [5, 8, 2]\na[0] = a[-1]\na.append(a[0])\nprint(a)",
+    "stdout": "[2, 8, 2, 2]\n"
   },
   {
     "page": 14,
-    "code": "scores = [80, 95, 70]\ntotal = 0\nfor i in range(1, len(scores)):\n    total += scores[i]\nprint(total)",
-    "stdout": "165\n"
+    "code": "jumps = [80, 95, 70]\nprint(jumps[len(jumps)])",
+    "error": "IndexError"
+  },
+  {
+    "page": 14,
+    "code": "jumps = [80, 95, 70]\nfor i in jumps:\n    print(jumps[i])",
+    "error": "IndexError"
+  },
+  {
+    "page": 14,
+    "code": "jumps = [80, 95, 70]\nfor s in range(jumps):\n    print(s)",
+    "error": "TypeError"
+  },
+  {
+    "page": 14,
+    "code": "jumps = [80, 95, 70]\nprint(jumps[len(jumps) - 1])\nfor i in range(len(jumps)):\n    print(jumps[i])\nfor s in jumps:\n    print(s)",
+    "stdout": "70\n80\n95\n70\n80\n95\n70\n"
+  },
+  {
+    "page": 15,
+    "code": "jumps = [80, 59, 60, 30]\nfor s in jumps:\n    if s < 60:\n        s = 60\nprint(jumps)",
+    "stdout": "[80, 59, 60, 30]\n"
+  },
+  {
+    "page": 15,
+    "code": "jumps = [80, 59, 60, 30]\nfor i in range(len(jumps)):\n    if jumps[i] < 60:\n        jumps[i] = 60\nprint(jumps)",
+    "stdout": "[80, 60, 60, 60]\n"
+  },
+  {
+    "page": 19,
+    "code": "n = int(input())\njumps = []\nfor i in range(n):\n    jumps.append(int(input()))\ncount = 0\nfor s in range(n):\n    if s >= 60:\n        count += 1\nprint(count)",
+    "stdin": "4\n80\n59\n60\n30\n",
+    "stdout": "0\n"
+  },
+  {
+    "page": 19,
+    "code": "jumps = [80, 90, 70, 60]\ntotal = 0\nfor s in jumps:\n    total += s\naverage = total / len(jumps)\nfor s in jumps:\n    print(s - average)",
+    "stdout": "5.0\n15.0\n-5.0\n-15.0\n"
   }
 ]

@@ -1,3 +1,3 @@
-scores = [80, 95, 70]
-scores[1] = 100
-print(scores)
+temps = [18, 25, 21]
+temps[1] = 30
+print(temps)

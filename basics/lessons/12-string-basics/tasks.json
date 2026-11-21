@@ -93,7 +93,7 @@
   {
     "id": "03",
     "role": "独立迁移",
-    "page": 18,
+    "page": 19,
     "starter": "starter/08_reverse.py",
     "solution": "solutions/08_reverse.py",
     "scope": "一行文字，可以有空格",

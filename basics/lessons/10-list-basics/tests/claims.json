@@ -1,64 +1,95 @@
 [
   {
     "page": 3,
-    "code": "scores = [80, 95, 70]\nprint(scores)\nprint(scores[0])\nprint(len(scores))\n",
-    "stdout": "[80, 95, 70]\n80\n3\n"
+    "code": "temps = [18, 25, 21]\nprint(temps)\nprint(temps[0])\nprint(len(temps))\n",
+    "stdout": "[18, 25, 21]\n18\n3\n"
   },
   {
     "page": 4,
-    "code": "scores = [80, 95, 70]\nprint(scores[1])",
-    "stdout": "95\n"
-  },
-  {
-    "page": 6,
-    "code": "names = [\"小明\", \"小红\", \"小刚\", \"小丽\"]\nprint(names[2])",
-    "stdout": "小刚\n"
-  },
-  {
-    "page": 7,
-    "code": "scores = [80, 95, 70]\nprint(scores[3])",
-    "error": "IndexError: list index out of range"
+    "code": "temps = [18, 25, 21]\nprint(temps[1])",
+    "stdout": "25\n"
   },
   {
     "page": 8,
-    "code": "scores = [80, 95, 70]\nprint(scores[-1])\nprint(scores[-2])\nprint(len(scores))",
-    "stdout": "70\n95\n3\n"
+    "code": "temps = [18, 25, 21]\nprint(temps[-1])\nprint(temps[-2])\nprint(len(temps))",
+    "stdout": "21\n25\n3\n"
   },
   {
     "page": 10,
-    "code": "scores = [80, 95, 70]\nscores[1] = 100\nprint(scores)\n",
-    "stdout": "[80, 100, 70]\n"
+    "code": "temps = [18, 25, 21]\ntemps[1] = 30\nprint(temps)\n",
+    "stdout": "[18, 30, 21]\n"
   },
   {
     "page": 11,
-    "code": "scores = []\nscores.append(80)\nscores.append(95)\nprint(scores)\nprint(len(scores))\n",
-    "stdout": "[80, 95]\n2\n"
+    "code": "temps = []\ntemps.append(18)\ntemps.append(25)\nprint(temps)\nprint(len(temps))\n",
+    "stdout": "[18, 25]\n2\n"
   },
   {
     "page": 13,
-    "code": "n = int(input())\nfor i in range(n):\n    scores = []\n    scores.append(int(input()))\nprint(scores)\n",
-    "stdin": "3\n80\n95\n70\n",
-    "stdout": "[70]\n"
+    "code": "n = int(input())\nfor i in range(n):\n    temps = []\n    temps.append(int(input()))\nprint(temps)\n",
+    "stdin": "3\n18\n25\n21\n",
+    "stdout": "[21]\n"
+  },
+  {
+    "page": 6,
+    "code": "names = [\"小明\", \"小红\", \"小刚\", \"小丽\"]\nprint(names[2])\nprint(names[3 - 1])\nprint(names[3])\nprint(names[len(names) - 2])",
+    "stdout": "小刚\n小刚\n小丽\n小刚\n"
+  },
+  {
+    "page": 7,
+    "code": "temps = [18, 25, 21]\nprint(temps[3])",
+    "error": "IndexError"
+  },
+  {
+    "page": 9,
+    "code": "a = [4, 9, 1, 6, 2]\nprint(a[len(a) - 1], a[-1])\nb = [7]\nprint(b[len(b) - 1], b[-1])",
+    "stdout": "2 2\n7 7\n"
   },
   {
     "page": 15,
-    "code": "a = [3]\na.append(5)\na.append(5)\nprint(len(a))\nprint(a)",
-    "stdout": "3\n[3, 5, 5]\n"
+    "code": "a = [3]\na.append(a[0] + 1)\na.append(a[-1] + 1)\nprint(a)",
+    "stdout": "[3, 4, 5]\n"
   },
   {
     "page": 16,
-    "code": "scores = [80, 95]\nscores.add(70)",
-    "error": "AttributeError: 'list' object has no attribute 'add'"
-  },
-  {
-    "page": 16,
-    "code": "scores = [80, 95, 70]\nprint(scores[1])",
-    "stdout": "95\n"
+    "code": "low = 9\nfor x in [4, 7, 2, 8]:\n    if x < low:\n        low = x\n        print(x)",
+    "stdout": "4\n2\n"
   },
   {
     "page": 17,
-    "code": "n = int(input())\nscores = []\nfor i in range(n):\n    scores.append(int(input()))\nprint(scores[n])",
-    "stdin": "3\n80\n95\n70\n",
-    "error": "IndexError: list index out of range"
+    "code": "temps = [18, 25, 21]\nprint(temps[3])",
+    "error": "IndexError"
+  },
+  {
+    "page": 17,
+    "code": "temps = [18, 25, 21]\nprint(temps(0))",
+    "error": "TypeError"
+  },
+  {
+    "page": 17,
+    "code": "temps = [18, 25]\ntemps.add(30)",
+    "error": "AttributeError"
+  },
+  {
+    "page": 17,
+    "code": "temps = [18, 25, 21]\nprint(temps[2], temps[0])\ntemps.append(30)\nprint(temps)",
+    "stdout": "21 18\n[18, 25, 21, 30]\n"
+  },
+  {
+    "page": 18,
+    "code": "n = int(input())\ntemps = []\nfor i in range(n):\n    temps.append(int(input()))\nk = int(input())\nprint(temps[k])",
+    "stdin": "3\n18\n25\n21\n1\n",
+    "stdout": "25\n"
+  },
+  {
+    "page": 18,
+    "code": "n = int(input())\ntemps = []\nfor i in range(n):\n    temps.append(int(input()))\nk = int(input())\nprint(temps[k - 1])",
+    "stdin": "3\n18\n25\n21\n1\n",
+    "stdout": "18\n"
+  },
+  {
+    "page": 22,
+    "code": "temps = [18, 25, 21]\ntemps[1] = 30\nprint(temps)\ntemps.append(30)\nprint(temps)\nprint(temps[-1] - temps[0])",
+    "stdout": "[18, 30, 21]\n[18, 30, 21, 30]\n12\n"
   }
 ]

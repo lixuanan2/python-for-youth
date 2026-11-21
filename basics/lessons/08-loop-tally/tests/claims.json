@@ -10,11 +10,6 @@
     "stdout": "1\n3\n6\n"
   },
   {
-    "page": 6,
-    "code": "total = 0\nfor i in range(1, 5):\n    total = total + i\nprint(total)",
-    "stdout": "10\n"
-  },
-  {
     "page": 7,
     "code": "a = 5\na += 2\nprint(a)\na -= 1\nprint(a)",
     "stdout": "7\n6\n"
@@ -36,28 +31,54 @@
     "stdout": "0\n"
   },
   {
-    "page": 15,
-    "code": "for i in range(3):\n    total = total + i",
-    "error": "NameError"
-  },
-  {
-    "page": 15,
-    "code": "total = 0\ntotal += \"90\"",
-    "error": "TypeError"
-  },
-  {
-    "page": 15,
-    "code": "total = 0\nfor i in range(1, 4):\n    total =+ i\nprint(total)",
-    "stdout": "3\n"
-  },
-  {
-    "page": 16,
+    "page": 17,
     "code": "count = 0\nfor i in range(1, 10):\n    if i % 3 == 0:\n        print(i)\n    count += 1\nprint(count)",
     "stdout": "3\n6\n9\n9\n"
   },
   {
-    "page": 16,
+    "page": 17,
     "code": "count = 0\nfor i in range(1, 10):\n    if i % 3 == 0:\n        count += 1\nprint(count)",
     "stdout": "3\n"
+  },
+  {
+    "page": 6,
+    "code": "total = 0\nfor i in range(1, 5):\n    total = total + 2\nprint(total)",
+    "stdout": "8\n"
+  },
+  {
+    "page": 6,
+    "code": "total = 0\nfor i in range(1, 5):\n    total = total + i\nprint(total)",
+    "stdout": "10\n"
+  },
+  {
+    "page": 15,
+    "code": "i = 10\nwhile i > 3:\n    i = i - 4\nprint(i)",
+    "stdout": "2\n"
+  },
+  {
+    "page": 16,
+    "code": "for d in range(3):\n    total += 5",
+    "error": "NameError"
+  },
+  {
+    "page": 16,
+    "code": "total = 0\ntotal += input()",
+    "stdin": "5\n",
+    "error": "TypeError"
+  },
+  {
+    "page": 16,
+    "code": "total = 0\nfor i in range(1, 4):\n    total =+ i\nprint(total)",
+    "stdout": "3\n"
+  },
+  {
+    "page": 21,
+    "code": "total = 85 + 90\nprint(total / 2)\nprint(total // 2)",
+    "stdout": "87.5\n87\n"
+  },
+  {
+    "page": 21,
+    "code": "n = 3\ntotal = 0\ncount = 0\nfor d in range(n):\n    pages = [20, 15, 30][d]\n    total += pages\n    if pages >= 20:\n        count += 1\nprint(total, count)",
+    "stdout": "65 2\n"
   }
 ]

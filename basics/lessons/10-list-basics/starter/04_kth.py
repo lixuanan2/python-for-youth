@@ -1,6 +1,6 @@
 n = int(input())
-scores = []
+temps = []
 for i in range(n):
-    scores.append(int(input()))
+    temps.append(int(input()))
 k = int(input())
-print(scores[k - 1])
+print(temps[k - 1])

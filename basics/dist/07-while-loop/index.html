@@ -719,6 +719,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="slip r d3 short"><small>小刚</small><pre>猜 12 次</pre></div>
   </div>
   <p class="say r d3">写程序的时候，你不知道别人要猜几次，range 里填几都不对。<br>这时要换一种说法：只要还没猜对，就继续。</p>
+  <p class="say tip r d3">生活里：密码输错了就再输，钱没存够就接着存。先想一想：不知道要猜几次，循环该怎么写？</p>
   <div class="foot"></div>
 </section>
 
@@ -811,13 +812,13 @@ while i &lt;= n:
 </section>
 
 <!-- quiz: which loop -->
-<section id="page-8" class="slide lay-ask" aria-label="小测：用哪个">
-  <h2 class="t r">小测：一直读数，读到 0 才停，用哪个？</h2>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！不知道要读几次，只知道什么时候停，正适合 while。"><i>1</i>while</button>
-    <button type="button" data-fb="用 range 要先知道数的范围，这里不知道要读几次。"><i>2</i>for</button>
-    <button type="button" data-fb="if 只判断一次，读完一个数就过去了。"><i>3</i>if</button>
-    <button type="button" data-fb="print 只负责输出，不会重复。"><i>4</i>print</button>
+<section id="page-8" class="slide lay-ask" aria-label="小测：哪件事用 while">
+  <h2 class="t r">小测：哪件事用 while 比 for 合适？</h2>
+  <div class="quiz r d1" data-right="2">
+    <button type="button" data-fb="知道要做 100 遍，用 for 和 range 更简单。"><i>1</i>输出 1 到 100</button>
+    <button type="button" data-fb="知道是 5 遍，用 for。"><i>2</i>把 5 个名字各输出一遍</button>
+    <button type="button" data-fb="答对了！事先不说要几天，只知道“钱不够就接着存”，这正是 while 的写法。"><i>3</i>每天存 5 元，存到够 100 元</button>
+    <button type="button" data-fb="知道是 10 遍，range(10, 0, -1) 就行。"><i>4</i>从 10 倒数到 1</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -859,14 +860,14 @@ while i &lt;= n:
 </section>
 
 <!-- quiz: which one never stops -->
-<section id="page-11" data-ide="i = 5&#10;while i &gt; 0:&#10;    i = i - 1&#10;print(i)&#10;" class="slide lay-ask" aria-label="小测：哪一句停不下来">
-  <h2 class="t r">小测：填哪一句，循环会停不下来？</h2>
+<section id="page-11" data-ide="i = 5&#10;while i != 0:&#10;    i = i - 1&#10;print(i)&#10;" class="slide lay-ask" aria-label="小测：哪一句停不下来">
+  <h2 class="t r">小测：条件是 i != 0，填哪一句停不下来？</h2>
   <div class="editor r d1" style="--fs:48px"><div class="tab">空白处填一句</div>
-<pre class="code"><span class="ln">i = <span class="m">5</span></span><span class="ln"><span class="k">while</span> i &gt; <span class="m">0</span>:</span><span class="ln">    ……</span></pre></div>
-  <div class="quiz r d2" data-right="2">
-    <button type="button" data-fb="i 越来越小，变成 0 时条件不成立，能停下。"><i>1</i>i = i - 1</button>
-    <button type="button" data-fb="5、3、1、-1，一样能跳到 0 以下，能停下。"><i>2</i>i = i - 2</button>
-    <button type="button" data-fb="答对了！i 越来越大，离 0 越来越远，i &gt; 0 一直成立。有更新还不够，要往结束的方向走。"><i>3</i>i = i + 1</button>
+<pre class="code"><span class="ln">i = <span class="m">5</span></span><span class="ln"><span class="k">while</span> i != <span class="m">0</span>:</span><span class="ln">    ……</span></pre></div>
+  <div class="quiz r d2" data-right="1">
+    <button type="button" data-fb="5、4、3、2、1、0，正好碰到 0，能停下。"><i>1</i>i = i - 1</button>
+    <button type="button" data-fb="答对了！5、3、1、-1，一步跳过了 0，i != 0 一直成立。写 i &gt; 0 就不会漏掉。"><i>2</i>i = i - 2</button>
+    <button type="button" data-fb="5 减 5 正好是 0，一遍就停。"><i>3</i>i = i - 5</button>
     <button type="button" data-fb="i 马上变成 0，条件不成立，一遍就停。"><i>4</i>i = 0</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
@@ -924,20 +925,34 @@ while i &lt;= n:
 </section>
 
 <!-- errors -->
-<section id="page-15" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1"><code>while i &lt;= 3</code><b>SyntaxError</b><span>末尾要加冒号</span></div>
-    <div class="r d2"><code>while i = 3:</code><b>SyntaxError</b><span>比较要写 ==</span></div>
-    <div class="r d3"><code class="plain">循环前忘了写 i = 1</code><b>NameError</b><span>先给开始值</span></div>
+<section id="page-15" class="slide lay-ask" aria-label="回顾：循环后的 i">
+  <h2 class="t r">回顾第 6 课：最后一行输出几？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">after.py</div>
+<pre class="code"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">    <span class="f">print</span>(<span class="s">"嗨"</span>)</span><span class="ln"><span class="f">print</span>(i)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！i 最后一次拿到的是 2，循环结束后它还留着这个值。"><i>1</i>2</button>
+    <button type="button" data-fb="range(3) 是 0、1、2，取不到 3。"><i>2</i>3</button>
+    <button type="button" data-fb="0 是第一次拿到的，后面又换成了 1、2。"><i>3</i>0</button>
+    <button type="button" data-fb="循环结束后 i 还在，可以用。"><i>4</i>报错</button>
   </div>
-  <p class="say r d3">要小心：忘了更新变量不报错，只是停不下来。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-16" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:560px">
+    <div class="r d1"><code>while i = 3:</code><b>while i == 3:</b><span>比较要写两个等号</span></div>
+    <div class="r d2"><code>while i &lt;= 3:</code><b>i = 1<br>while i &lt;= 3:</b><span>条件里的变量，先在前面放好开始值</span></div>
+    <div class="r d3"><code style="font-size:40px">while i &lt;= 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</code><b style="font-size:40px">while i &lt;= 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br>&nbsp;&nbsp;&nbsp;&nbsp;i = i + 1</b><span>每一遍都要让 i 往结束走一步</span></div>
+  </div>
+  <p class="say r d3">第三种不报错，但条件一直成立，程序停不下来。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-16" class="slide dark lay-ask" aria-label="找错：一个数也没输出">
+<section id="page-17" class="slide dark lay-ask" aria-label="找错：一个数也没输出">
   <h2 class="t r">找错：怎么一个数也没输出？</h2>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！一开始 10 &lt; 0 就不成立，循环一遍也没运行。倒着数到 1，条件要写 i &gt; 0。" data-no="这一行没问题。想一想：i 是 10 的时候，能进循环吗？"><span class="ln">i = <span class="m">10</span></span><span class="ln"><span class="k">while</span> i &lt; <span class="m">0</span>:</span><span class="ln">    <span class="f">print</span>(i)</span><span class="ln">    i = i - <span class="m">1</span></span><span class="ln"><span class="f">print</span>(<span class="s">"结束"</span>)</span></pre></div>
@@ -947,7 +962,7 @@ while i &lt;= n:
 </section>
 
 <!-- challenge -->
-<section id="page-17" class="slide clay lay-notes challenge" aria-label="反着念数字" data-chapter="挑战">
+<section id="page-18" class="slide clay lay-notes challenge" aria-label="反着念数字" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">反着<br>念数字</h2>
   <p class="say r d2">读入一个正整数 n，从个位开始，一位一位地输出，每位占一行。<br>输入 100，就输出 0、0、1 三行。</p>
@@ -959,7 +974,7 @@ while i &lt;= n:
 </section>
 
 <!-- hints -->
-<section id="page-18" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-19" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>数有几位事先不知道，所以用 while。怎么取出个位？第 3 课学过。</span></p>
@@ -969,7 +984,7 @@ while i &lt;= n:
   <div class="foot"></div>
 </section>
 
-<section id="page-19" class="slide dark" aria-label="参考答案：反着念数字" data-answer="04" data-steps="2" data-at="2">
+<section id="page-20" class="slide dark" aria-label="参考答案：反着念数字" data-answer="04" data-steps="2" data-at="2">
   <h2 class="t">参考答案：反着念数字</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">reverse_digits.py</div>
@@ -980,19 +995,19 @@ while i &lt;= n:
 </section>
 
 <!-- review -->
-<section id="page-20" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-21" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>while 和 if 有什么不同？<em class="step s2">　if 只问一次，while 反复问。</em></span></p>
-    <p><i>Q2</i><span>写 while 要想好哪三件事？<em class="step s3">　开始值、继续条件、更新。</em></span></p>
-    <p><i>Q3</i><span>什么时候用 while 更合适？<em class="step s4">　不知道要重复几次的时候。</em></span></p>
+    <p><i>Q1</i><span>为什么猜数字要用 while，不用 for？<em class="step s2">　事先不知道要猜几次，只知道“没猜对就再猜”。</em></span></p>
+    <p><i>Q2</i><span>倒计时的条件写成 i &gt;= 0，和 i &gt; 0 有什么不同？<em class="step s3">　多输出一个 0：i 是 0 时 i &gt;= 0 还成立。</em></span></p>
+    <p><i>Q3</i><span>每天存 5 元，存到 100 元要几天，怎么写？<em class="step s4">　money 和 days 先放 0，while money &lt; 100: 里面 money 加 5、days 加 1。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-21" class="slide lay-columns" aria-label="速查卡">
+<section id="page-22" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>while 条件:</code><span>条件成立就运行缩进的行，再回来问</span></div>
@@ -1005,7 +1020,7 @@ while i &lt;= n:
 </section>
 
 <!-- later -->
-<section id="page-22" class="slide lay-columns" aria-label="后面再学">
+<section id="page-23" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>total = total + i</code><span>用循环把一串数加起来</span></div>
@@ -1017,7 +1032,7 @@ while i &lt;= n:
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-23" class="slide dark thanks" aria-label="谢谢">
+<section id="page-24" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
