@@ -16,6 +16,7 @@
     <div class="r d3"><b>输出</b><code>print()</code></div>
   </div>
   <p class="say r d3">计算器就是这样：你按下数字，它算一算，再把结果显示出来。<br>今天我们先学会<b>读入</b>和<b>输出</b>。</p>
+  <p class="say tip r d3">先想一想：读入 3 和 4，怎样让程序输出 7，而不是 34？学完这节课就知道。</p>
   <div class="foot"></div>
 </section>
 
@@ -89,13 +90,13 @@
 </section>
 
 <!-- quiz -->
-<section class="slide lay-ask" aria-label="小测：选对的写法">
-  <h2 class="t r">小测：哪一行能运行？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="Python 分大小写，Print 和 print 是两个不同的名字。"><i>1</i>Print("hi")</button>
-    <button type="button" data-fb="答对了！小写的 print，文字放在英文引号里。"><i>2</i>print("hi")</button>
-    <button type="button" data-fb="没有引号，Python 会把 hi 当成一个还没有的名字。"><i>3</i>print(hi)</button>
-    <button type="button" data-fb="这是中文引号。写代码时要先切换成英文输入法。"><i>4</i>print(“hi”)</button>
+<section class="slide lay-ask" aria-label="小测：哪一行不是 7">
+  <h2 class="t r">小测：屏幕上显示了 7，哪一行不可能是程序？</h2>
+  <div class="quiz r d1" data-right="3">
+    <button type="button" data-fb="没有引号，Python 先算 3 + 4，显示 7。"><i>1</i>print(3 + 4)</button>
+    <button type="button" data-fb="引号里就是 7，原样显示 7。"><i>2</i>print("7")</button>
+    <button type="button" data-fb="没有引号的 7 是一个数，显示 7。"><i>3</i>print(7)</button>
+    <button type="button" data-fb="答对了！有引号就原样显示，屏幕上是 3 + 4，不是 7。"><i>4</i>print("3 + 4")</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -204,15 +205,16 @@
 </section>
 
 <!-- quiz -->
-<section class="slide lay-ask" aria-label="小测：什么时候用 int">
-  <h2 class="t r">小测：这段程序会怎样？</h2>
+<section class="slide lay-ask top" aria-label="小测：什么时候用 int">
+  <h2 class="t r">小测：输入 10 想输出 11，改成哪一行？</h2>
   <div class="editor r d1"><div class="tab">输入 10</div>
 <pre class="code">age = input()
 print(age + 1)</pre></div>
-  <div class="quiz r d2" data-right="2">
-    <button type="button" data-fb="想要 11，得先用 int() 把文字变成整数。"><i>1</i>输出 11</button>
-    <button type="button" data-fb="拼接只能文字和文字拼，1 是整数，不能直接拼。"><i>2</i>输出 101</button>
-    <button type="button" data-fb="答对了！age 是文字，1 是整数，两种东西不能相加，Python 会报 TypeError。"><i>3</i>报错</button>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！age 先变成整数 10，再加 1 就是 11。"><i>1</i>age = int(input())</button>
+    <button type="button" data-fb="两个都是文字，拼在一起，输出 101。"><i>2</i>print(age + "1")</button>
+    <button type="button" data-fb="引号里的 age 是两个字母，文字和整数不能相加，还是报错。"><i>3</i>print("age" + 1)</button>
+    <button type="button" data-fb="不改的话，age 是文字，文字和整数不能相加，程序报错。"><i>4</i>哪一行都不用改</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -229,29 +231,16 @@ print(age + 1)</pre></div>
   <a class="ide r d3" data-code='a = int(input())&#10;b = int(input())&#10;print(a + b)'>▶ 在 IDE 开始改</a>
 </section>
 
-<!-- read a traceback -->
-<section class="slide lay-predict" aria-label="怎么读报错" style="--predict-code:1120px" data-chapter="读报错">
-  <h2 class="t r">红字不可怕：从最后一行读</h2>
-  <div class="tb r d1" style="grid-area:code"><span class="dim">Traceback (most recent call last):</span><br><span class="dim">&nbsp;&nbsp;File "hello.py", line </span><span class="hot">1</span><span class="dim">, in &lt;module&gt;</span><br><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;Print("hi")</span><br><span class="dim">&nbsp;&nbsp;&nbsp;&nbsp;^^^^^</span><br><span class="hot">NameError</span>: name 'Print' is not defined.<br>Did you mean: 'print'?</div>
-  <div class="answer r d2" style="padding-top:0">
-    <p class="say"><b>line 1</b>：错在第 1 行。</p>
-    <p class="say" style="margin-top:26px"><b>NameError</b> 表示 Python 不认识这个名字。</p>
-    <p class="say" style="margin-top:26px"><b>Did you mean</b> 是它在猜：你是想写 print 吗？</p>
-  </div>
-  <p class="say r d3">程序报错很正常，程序员每天都会遇到。<br>红字是 Python 在告诉你哪里出了问题，先看最后一行，再看行号。</p>
-  <div class="foot"></div>
-</section>
-
 <!-- errors -->
-<section class="slide lay-columns" aria-label="三种常见错误">
-  <h2 class="t r">三种最常见的错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1"><code>Print("hi")</code><b>NameError</b><span>print 全部小写</span></div>
-    <div class="r d2"><code>print(“hi”)</code><b>SyntaxError</b><span>换成英文引号</span></div>
-    <div class="r d3"><code class="plain">int() 读到 3 4</code><b>ValueError</b><span>一个 int() 只转换一个数</span></div>
+<section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:440px;--mid:620px">
+    <div class="r d1"><code>Print("hi")</code><b>print("hi")</b><span>Python 分大小写，print 全部小写</span></div>
+    <div class="r d2"><code>print(“hi”)</code><b>print("hi")</b><span>中文引号不算数，先切换成英文输入法</span></div>
+    <div class="r d3"><code>age = input()</code><b>age = int(input())</b><span>要拿来算的数，读入时先变成整数</span></div>
   </div>
-  <p class="say r d3">只写 input() 读入 3 4 没问题，转不了的是 int()。</p>
+  <p class="say r d3">程序出错时会显示红字。先看它说的是第几行，再从那一行往前找原因。</p>
   <div class="foot"></div>
 </section>
 
@@ -259,8 +248,8 @@ print(age + 1)</pre></div>
 <section class="slide dark lay-ask" aria-label="找错游戏">
   <h2 class="t r">找错：哪一行有问题？</h2>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="1" data-yes="找到了！程序在第 3 行报错，原因却在第 1 行：少了 int()，a 还是文字。报错的行是程序卡住的地方，要改的地方可能在前面。" data-no="这一行没有问题，再看看 a 和 b 是不是同一种东西。"><span class="ln">a = <span class="f">input</span>()</span><span class="ln">b = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(a + b)</span></pre></div>
-  <p class="say r d2">这段程序想算两数之和，运行时却报了 TypeError。<br>点你认为有问题的那一行。</p>
+<pre class="code pick" data-bug="3" data-yes="找到了！加了引号，a + b 就成了原样显示的三个字。去掉引号写 print(a + b)，Python 才会去算。" data-no="这一行没有问题，a 和 b 都变成了整数。再看看输出的那一行。"><span class="ln">a = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">b = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(<span class="s">"a + b"</span>)</span></pre></div>
+  <p class="say r d2">这段程序想算两数之和。输入 3 和 4，没有报错，屏幕上却是 a + b。<br>点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
@@ -293,9 +282,9 @@ print(age + 1)</pre></div>
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>input() 读进来的是什么？<em class="step s2">　是文字，哪怕你输入的是数字。</em></span></p>
-    <p><i>Q2</i><span>什么时候要用 int()？<em class="step s3">　读入的是整数，要按整数来算的时候。</em></span></p>
-    <p><i>Q3</i><span>不看代码，能写出两数求和吗？<em class="step s4">　合上课件试一试。</em></span></p>
+    <p><i>Q1</i><span>为什么读入 3 和 4，a + b 会输出 34？<em class="step s2">　input() 读进来的是文字，文字相加就是拼在一起。</em></span></p>
+    <p><i>Q2</i><span>print("name") 和 print(name)，输出有什么不同？<em class="step s3">　有引号原样显示 name；没引号显示盒子 name 里的东西。</em></span></p>
+    <p><i>Q3</i><span>读入一个名字，想输出“我叫 小明”，print 怎么写？<em class="step s4">　print("我叫", name)，逗号会变成一个空格。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

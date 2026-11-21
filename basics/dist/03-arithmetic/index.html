@@ -719,6 +719,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="r d3"><b>?</b><code>面积</code></div>
   </div>
   <p class="say r d3">一个房间能心算，一百个房间呢？<br>把算式写进程序，换一组数据，它马上算出来。</p>
+  <p class="say tip r d3">生活里：买地毯、分糖果、算找零都要算。先想一想：7 颗糖分给 2 个人，每人几颗、还剩几颗，程序怎么算？</p>
   <div class="foot"></div>
 </section>
 
@@ -817,13 +818,13 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: remainder -->
-<section id="page-9" class="slide lay-ask" aria-label="小测：17 除以 5 的余数">
-  <h2 class="t r">小测：print(17 % 5) 输出几？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="3 是 17 // 5 的结果，也就是商。"><i>1</i>3</button>
-    <button type="button" data-fb="答对了！5 个一组能分 3 组，用掉 15，还剩 2。"><i>2</i>2</button>
-    <button type="button" data-fb="3.4 是 17 / 5 的结果。"><i>3</i>3.4</button>
-    <button type="button" data-fb="% 在这里是求余数，不是百分号。"><i>4</i>17%</button>
+<section id="page-9" class="slide lay-ask" aria-label="小测：装鸡蛋">
+  <h2 class="t r">小测：20 个鸡蛋每盒装 6 个，剩几个？</h2>
+  <div class="quiz r d1" data-right="2">
+    <button type="button" data-fb="/ 算出 3.33……，是能装多少盒，还带着小数。"><i>1</i>print(20 / 6)</button>
+    <button type="button" data-fb="// 算出 3，是装满了几盒，不是剩几个。"><i>2</i>print(20 // 6)</button>
+    <button type="button" data-fb="答对了！装满 3 盒用掉 18 个，余数 2 就是剩下的。"><i>3</i>print(20 % 6)</button>
+    <button type="button" data-fb="20 - 6 只是拿走了一盒，还剩 14 个，没装满的还有很多。"><i>4</i>print(20 - 6)</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -869,13 +870,15 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: order -->
-<section id="page-13" class="slide lay-ask" aria-label="小测：先乘后减">
-  <h2 class="t r">小测：print(10 - 2 * 3) 输出几？</h2>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！先算 2 * 3 得 6，再算 10 - 6。"><i>1</i>4</button>
-    <button type="button" data-fb="这是先算 10 - 2 的结果。乘法要先算。"><i>2</i>24</button>
-    <button type="button" data-fb="没有除号，结果不会变成小数。"><i>3</i>4.0</button>
-    <button type="button" data-fb="这一行写得没有问题，可以运行。"><i>4</i>报错</button>
+<section id="page-13" class="slide lay-ask" aria-label="小测：加不加括号">
+  <h2 class="t r">小测：这两行输出一样吗？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">两种写法</div>
+<pre class="code"><span class="ln"><span class="f">print</span>(<span class="m">2</span> * <span class="m">3</span> + <span class="m">4</span>)</span><span class="ln"><span class="f">print</span>(<span class="m">2</span> * (<span class="m">3</span> + <span class="m">4</span>))</span></pre></div>
+  <div class="quiz r d2" data-right="2">
+    <button type="button" data-fb="第二行有括号，先算 3 + 4。"><i>1</i>一样，都是 10</button>
+    <button type="button" data-fb="第一行没有括号，先算 2 * 3。"><i>2</i>一样，都是 14</button>
+    <button type="button" data-fb="答对了！第一行先乘：6 + 4 是 10；第二行先算括号：2 * 7 是 14。"><i>3</i>不一样：10 和 14</button>
+    <button type="button" data-fb="反过来了。没括号的那行先乘再加。"><i>4</i>不一样：14 和 10</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -911,20 +914,36 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: type of result -->
-<section id="page-16" class="slide lay-ask" aria-label="小测：8 除以 4">
-  <h2 class="t r">小测：print(8 / 4) 输出什么？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="想得到整数 2，要用 8 // 4。"><i>1</i>2</button>
-    <button type="button" data-fb="答对了！用 / 除，结果总是小数。"><i>2</i>2.0</button>
-    <button type="button" data-fb="那是余数，要用 % 才能算出来。"><i>3</i>0</button>
-    <button type="button" data-fb="8 能被 4 除尽，也可以运行，不会报错。"><i>4</i>报错</button>
+<section id="page-16" class="slide lay-ask" aria-label="小测：输入什么会报错">
+  <h2 class="t r">小测：输入哪一个，这段程序会报错？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">double.py</div>
+<pre class="code"><span class="ln">a = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(a * <span class="m">2</span>)</span></pre></div>
+  <div class="quiz r d2" data-right="2">
+    <button type="button" data-fb="3 是整数，输出 6。"><i>1</i>3</button>
+    <button type="button" data-fb="负整数也是整数，输出 -6。"><i>2</i>-3</button>
+    <button type="button" data-fb="答对了！3.0 带小数点，int() 不认，要用 float()。哪怕小数部分是 0 也一样。"><i>3</i>3.0</button>
+    <button type="button" data-fb="0 是整数，输出 0。"><i>4</i>0</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-17" class="slide lay-ask" aria-label="回顾：放回 a">
+  <h2 class="t r">回顾第 2 课：这段程序输出什么？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">again.py</div>
+<pre class="code"><span class="ln">a = <span class="m">7</span></span><span class="ln">b = <span class="m">2</span></span><span class="ln">a = a // b</span><span class="ln"><span class="f">print</span>(a, a % b)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！第 3 行把 3 放回 a，旧的 7 没了。再算 3 % 2，是 1。"><i>1</i>3 1</button>
+    <button type="button" data-fb="第 3 行已经把 a 换成了 3，后面用的是新的 a。"><i>2</i>7 1</button>
+    <button type="button" data-fb="// 得到整数，不是 3.5。"><i>3</i>3.5 1</button>
+    <button type="button" data-fb="3 除以 2 还剩 1，不是 0。"><i>4</i>3 0</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- your turn -->
-<section id="page-17" class="slide lay-try" aria-label="面积改周长">
+<section id="page-18" class="slide lay-try" aria-label="面积改周长">
   <div class="band r"><b>动手<br>改一改</b><span>周长是长加宽，再乘 2。想想哪里要加括号。</span></div>
   <div class="turn">
     <h2 class="r d1">把面积改成周长</h2>
@@ -935,20 +954,20 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- errors -->
-<section id="page-18" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+<section id="page-19" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1"><code>print(3 x 4)</code><b>SyntaxError</b><span>乘号要写成 *</span></div>
-    <div class="r d2"><code>print(5 / 0)</code><b style="font-size:42px">ZeroDivisionError</b><span>除数不能是 0</span></div>
-    <div class="r d3"><code>int("2.5")</code><b>ValueError</b><span>小数要用 float()</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:520px;--mid:560px">
+    <div class="r d1"><code>print(3 x 4)</code><b>print(3 * 4)</b><span>乘号写 *，不是 x</span></div>
+    <div class="r d2"><code>每人 = 7 / 2</code><b>每人 = 7 // 2</b><span>/ 总得到小数，要整数用 //</span></div>
+    <div class="r d3"><code>int("2.5")</code><b>float("2.5")</b><span>带小数点的用 float()</span></div>
   </div>
-  <p class="say r d3">// 和 % 除以 0 也一样会报错。</p>
+  <p class="say r d3">除数不能是 0：7 / 0、7 // 0、7 % 0 都会出错。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-19" class="slide dark lay-ask" aria-label="找错：平均分">
+<section id="page-20" class="slide dark lay-ask" aria-label="找错：平均分">
   <h2 class="t r">找错：平均分怎么这么高？</h2>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="3" data-yes="找到了！除法先算，变成了 80 + 45。要写成 (a + b) / 2。" data-no="这一行没有问题。想一想：程序先算的是哪一步？"><span class="ln">a = <span class="m">80</span></span><span class="ln">b = <span class="m">90</span></span><span class="ln">avg = a + b / <span class="m">2</span></span><span class="ln"><span class="f">print</span>(avg)</span></pre></div>
@@ -958,7 +977,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- challenge -->
-<section id="page-20" class="slide clay lay-notes challenge" aria-label="温度换算" data-chapter="挑战">
+<section id="page-21" class="slide clay lay-notes challenge" aria-label="温度换算" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">温度<br>换算</h2>
   <p class="say r d2">读入一个摄氏度（可能有小数），输出华氏度。公式：华氏度 = 摄氏度 × 9 ÷ 5 + 32。<br>直接输出算出来的数：输入 0，输出 32.0。</p>
@@ -968,7 +987,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-21" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-22" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>温度可能有小数，读入时用 int 还是 float？</span></p>
@@ -978,7 +997,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
-<section id="page-22" class="slide dark" aria-label="参考答案：温度换算" data-answer="06" data-steps="2" data-at="2">
+<section id="page-23" class="slide dark" aria-label="参考答案：温度换算" data-answer="06" data-steps="2" data-at="2">
   <h2 class="t">参考答案：温度换算</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">temperature.py</div>
@@ -989,7 +1008,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- optional challenge -->
-<section id="page-23" class="slide clay lay-notes challenge" aria-label="秒数换算">
+<section id="page-24" class="slide clay lay-notes challenge" aria-label="秒数换算">
   <p class="kicker r"># 再挑战一题</p>
   <h2 class="big r d1">秒数<br>换算</h2>
   <p class="say r d2">读入总秒数，输出是几分几秒。写完用 59、60、61 各试一次。</p>
@@ -998,7 +1017,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
-<section id="page-24" class="slide dark" aria-label="参考答案：秒数换算" data-answer="06b" data-steps="2" data-at="2">
+<section id="page-25" class="slide dark" aria-label="参考答案：秒数换算" data-answer="06b" data-steps="2" data-at="2">
   <h2 class="t">参考答案：秒数换算</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:41px"><div class="tab">seconds.py</div>
@@ -1009,19 +1028,19 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-25" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-26" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>/、// 和 % 有什么不同？<em class="step s2">　小数除法、整除、求余数。</em></span></p>
-    <p><i>Q2</i><span>2 + 3 * 4 先算哪一步？<em class="step s3">　先算乘法，结果是 14。</em></span></p>
-    <p><i>Q3</i><span>什么时候用 float(input())？<em class="step s4">　读入的数可能有小数时。</em></span></p>
+    <p><i>Q1</i><span>为什么 6 / 2 输出 3.0，而不是 3？<em class="step s2">　/ 的结果总是小数，哪怕刚好除得尽。</em></span></p>
+    <p><i>Q2</i><span>分糖程序把 // 写成 /，会怎样？<em class="step s3">　每人 3.5 颗，糖不能掰开，结果不合理。</em></span></p>
+    <p><i>Q3</i><span>100 小时是几天零几小时，怎么算？<em class="step s4">　100 // 24 是 4 天，100 % 24 是 4 小时。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-26" class="slide lay-columns" aria-label="速查卡">
+<section id="page-27" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>3 * 4</code><span>乘法，结果是 12</span></div>
@@ -1034,7 +1053,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-27" class="slide lay-columns" aria-label="后面再学">
+<section id="page-28" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>2 ** 3</code><span>乘方，2 的 3 次方</span></div>
@@ -1046,7 +1065,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-28" class="slide dark thanks" aria-label="谢谢">
+<section id="page-29" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>

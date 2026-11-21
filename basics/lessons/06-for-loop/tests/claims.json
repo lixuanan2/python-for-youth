@@ -20,11 +20,6 @@
     "stdout": "[0, 1, 2]\n"
   },
   {
-    "page": 6,
-    "code": "print(list(range(5)))",
-    "stdout": "[0, 1, 2, 3, 4]\n"
-  },
-  {
     "page": 7,
     "code": "print(list(range(1, 6)))",
     "stdout": "[1, 2, 3, 4, 5]\n"
@@ -35,11 +30,6 @@
     "stdout": "[]\n"
   },
   {
-    "page": 10,
-    "code": "print(len(range(2, 5)))\nprint(list(range(2, 5)))",
-    "stdout": "3\n[2, 3, 4]\n"
-  },
-  {
     "page": 12,
     "code": "print(list(range(1, 10, 2)))",
     "stdout": "[1, 3, 5, 7, 9]\n"
@@ -48,11 +38,6 @@
     "page": 13,
     "code": "print(list(range(3, 0, -1)))",
     "stdout": "[3, 2, 1]\n"
-  },
-  {
-    "page": 14,
-    "code": "print(list(range(10, 0, -2)))",
-    "stdout": "[10, 8, 6, 4, 2]\n"
   },
   {
     "page": 15,
@@ -88,38 +73,73 @@
     "stdout": "2\n4\n"
   },
   {
-    "page": 22,
-    "code": "for i in range(3)\n    print(i)",
-    "error": "SyntaxError"
-  },
-  {
-    "page": 22,
-    "code": "for i in 3:\n    print(i)",
-    "error": "TypeError"
-  },
-  {
-    "page": 22,
-    "code": "for i in range(3):\nprint(i)",
-    "error": "IndentationError"
-  },
-  {
-    "page": 22,
-    "code": "print(list(range(5, 0)))",
-    "stdout": "[]\n"
-  },
-  {
-    "page": 23,
+    "page": 24,
     "code": "n = 5\nfor i in range(1, n):\n    print(i)\nprint(\"数完了\")",
     "stdout": "1\n2\n3\n4\n数完了\n"
   },
   {
-    "page": 23,
+    "page": 24,
     "code": "n = 5\nfor i in range(1, n + 1):\n    last = i\nprint(last)",
     "stdout": "5\n"
   },
   {
-    "page": 25,
+    "page": 26,
     "code": "for i in (71, 77):\n    print(i % 7 == 0 or i % 10 == 7)",
     "stdout": "False\nTrue\n"
+  },
+  {
+    "page": 6,
+    "code": "for i in range(5):\n    print(\"加油\")",
+    "stdout": "加油\n加油\n加油\n加油\n加油\n"
+  },
+  {
+    "page": 6,
+    "code": "for i in range(4):\n    print(\"加油\")",
+    "stdout": "加油\n加油\n加油\n加油\n"
+  },
+  {
+    "page": 6,
+    "code": "for i in range(3):\n    print(\"加油\" * 5)",
+    "stdout": "加油加油加油加油加油\n加油加油加油加油加油\n加油加油加油加油加油\n"
+  },
+  {
+    "page": 10,
+    "code": "print(list(range(3, 6)))\nprint(list(range(3, 7)))\nprint(list(range(4, 7)))\nprint(list(range(3, 6, 1)))",
+    "stdout": "[3, 4, 5]\n[3, 4, 5, 6]\n[4, 5, 6]\n[3, 4, 5]\n"
+  },
+  {
+    "page": 14,
+    "code": "print(list(range(10, 0, -2)))\nprint(list(range(10, 1, -2)))",
+    "stdout": "[10, 8, 6, 4, 2]\n[10, 8, 6, 4, 2]\n"
+  },
+  {
+    "page": 22,
+    "code": "for i in range(1, 11):\n    if i % 2 == 0 and i > 5:\n        print(i)",
+    "stdout": "6\n8\n10\n"
+  },
+  {
+    "page": 23,
+    "code": "for i in range(3)\n    print(i)",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 23,
+    "code": "for i in 3:\n    print(i)",
+    "error": "TypeError"
+  },
+  {
+    "page": 23,
+    "code": "for i in range(3):\nprint(i)",
+    "error": "IndentationError"
+  },
+  {
+    "page": 23,
+    "code": "print(list(range(5, 0)))",
+    "stdout": "[]\n"
+  },
+  {
+    "page": 28,
+    "code": "print(list(range(5, 0)))\nprint(list(range(10, 101, 10)))",
+    "stdout": "[]\n[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]\n"
   }
 ]

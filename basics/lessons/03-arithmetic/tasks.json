@@ -75,7 +75,7 @@
   {
     "id": "05",
     "role": "学生小改写",
-    "page": 17,
+    "page": 18,
     "starter": "starter/06_perimeter.py",
     "solution": "solutions/06_perimeter.py",
     "scope": "同例题B",
@@ -93,7 +93,7 @@
   {
     "id": "06",
     "role": "独立迁移",
-    "page": 20,
+    "page": 21,
     "starter": "starter/07_temperature.py",
     "solution": "solutions/07_temperature.py",
     "scope": "摄氏度为数，可能有小数，一行输入",
@@ -111,7 +111,7 @@
   {
     "id": "06b",
     "role": "独立迁移",
-    "page": 23,
+    "page": 24,
     "starter": "starter/09_seconds.py",
     "solution": "solutions/09_seconds.py",
     "scope": "总秒数为整数，一行输入",

@@ -35,11 +35,6 @@
     "error": "ZeroDivisionError"
   },
   {
-    "page": 9,
-    "code": "print(17 % 5)\nprint(17 // 5)\nprint(17 / 5)",
-    "stdout": "2\n3\n3.4\n"
-  },
-  {
     "page": 10,
     "code": "print(4 % 2)\nprint(7 % 2)\nprint(123 % 10)",
     "stdout": "0\n1\n3\n"
@@ -48,11 +43,6 @@
     "page": 12,
     "code": "print(2 + 3 * 4)\nprint((2 + 3) * 4)",
     "stdout": "14\n20\n"
-  },
-  {
-    "page": 13,
-    "code": "print(10 - 2 * 3)\nprint((10 - 2) * 3)",
-    "stdout": "4\n24\n"
   },
   {
     "page": 15,
@@ -67,53 +57,117 @@
     "stdout": "4.0\n"
   },
   {
-    "page": 16,
-    "code": "print(8 / 4)\nprint(8 // 4)\nprint(8 % 4)",
-    "stdout": "2.0\n2\n0\n"
+    "page": 20,
+    "code": "a = 80\nb = 90\navg = a + b / 2\nprint(avg)\nprint((a + b) / 2)",
+    "stdout": "125.0\n85.0\n"
   },
   {
-    "page": 18,
+    "page": 27,
+    "code": "print(3 * 4)",
+    "stdout": "12\n"
+  },
+  {
+    "page": 28,
+    "code": "print(2 ** 3)",
+    "stdout": "8\n"
+  },
+  {
+    "page": 28,
+    "code": "print(round(2.5))",
+    "stdout": "2\n"
+  },
+  {
+    "page": 9,
+    "code": "print(20 / 6)",
+    "stdout": "3.3333333333333335\n"
+  },
+  {
+    "page": 9,
+    "code": "print(20 // 6)",
+    "stdout": "3\n"
+  },
+  {
+    "page": 9,
+    "code": "print(20 % 6)",
+    "stdout": "2\n"
+  },
+  {
+    "page": 9,
+    "code": "print(20 - 6)",
+    "stdout": "14\n"
+  },
+  {
+    "page": 13,
+    "code": "print(2 * 3 + 4)\nprint(2 * (3 + 4))",
+    "stdout": "10\n14\n"
+  },
+  {
+    "page": 16,
+    "code": "a = int(input())\nprint(a * 2)",
+    "stdin": "3\n",
+    "stdout": "6\n"
+  },
+  {
+    "page": 16,
+    "code": "a = int(input())\nprint(a * 2)",
+    "stdin": "-3\n",
+    "stdout": "-6\n"
+  },
+  {
+    "page": 16,
+    "code": "a = int(input())\nprint(a * 2)",
+    "stdin": "0\n",
+    "stdout": "0\n"
+  },
+  {
+    "page": 16,
+    "code": "a = int(input())\nprint(a * 2)",
+    "stdin": "3.0\n",
+    "error": "ValueError"
+  },
+  {
+    "page": 17,
+    "code": "a = 7\nb = 2\na = a // b\nprint(a, a % b)",
+    "stdout": "3 1\n"
+  },
+  {
+    "page": 19,
     "code": "print(3 x 4)",
     "error": "SyntaxError"
   },
   {
-    "page": 18,
-    "code": "print(5 / 0)",
-    "error": "ZeroDivisionError"
+    "page": 19,
+    "code": "print(3 * 4)\nprint(7 / 2)\nprint(7 // 2)",
+    "stdout": "12\n3.5\n3\n"
   },
   {
-    "page": 18,
-    "code": "print(5 // 0)",
-    "error": "ZeroDivisionError"
-  },
-  {
-    "page": 18,
-    "code": "print(5 % 0)",
-    "error": "ZeroDivisionError"
-  },
-  {
-    "page": 18,
+    "page": 19,
     "code": "int(\"2.5\")",
     "error": "ValueError"
   },
   {
     "page": 19,
-    "code": "a = 80\nb = 90\navg = a + b / 2\nprint(avg)\nprint((a + b) / 2)",
-    "stdout": "125.0\n85.0\n"
+    "code": "print(float(\"2.5\"))",
+    "stdout": "2.5\n"
+  },
+  {
+    "page": 19,
+    "code": "print(7 / 0)",
+    "error": "ZeroDivisionError"
+  },
+  {
+    "page": 19,
+    "code": "print(7 // 0)",
+    "error": "ZeroDivisionError"
+  },
+  {
+    "page": 19,
+    "code": "print(7 % 0)",
+    "error": "ZeroDivisionError"
   },
   {
     "page": 26,
-    "code": "print(3 * 4)",
-    "stdout": "12\n"
-  },
-  {
-    "page": 27,
-    "code": "print(2 ** 3)",
-    "stdout": "8\n"
-  },
-  {
-    "page": 27,
-    "code": "print(round(2.5))",
-    "stdout": "2\n"
+    "code": "print(6 / 2)\nprint(100 // 24)\nprint(100 % 24)",
+    "stdout": "3.0\n4\n4\n"
   }
 ]

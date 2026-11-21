@@ -82,7 +82,7 @@
   {
     "id": "06",
     "role": "独立迁移",
-    "page": 21,
+    "page": 20,
     "starter": "starter/07_next_year.py",
     "solution": "solutions/07_next_year.py",
     "scope": "第一行名字；第二行整数年龄",

@@ -723,6 +723,7 @@ print(100)</pre></div>
     print(i)</pre></div>
   </div>
   <p class="say r d3">人写一百遍又累又容易错，电脑最不怕重复。<br>这节课让程序替你一遍一遍地做。</p>
+  <p class="say tip r d3">生活里：跳绳计数、发作业本、每天打卡，都是重复做同一件事。先想一想：输出 1 到 100，要写几行程序？</p>
   <div class="foot"></div>
 </section>
 
@@ -786,13 +787,15 @@ print(100)</pre></div>
 </section>
 
 <!-- quiz: range(5) -->
-<section id="page-6" class="slide lay-ask" aria-label="小测：range 最后一个数">
-  <h2 class="t r">小测：range(5) 最后一个数是几？</h2>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！从 0 开始数 5 个数：0、1、2、3、4。"><i>1</i>4</button>
-    <button type="button" data-fb="range(5) 不包含 5。它给出 5 个数，但第一个是 0。"><i>2</i>5</button>
-    <button type="button" data-fb="range(5) 连 5 都不包含，更不会到 6。"><i>3</i>6</button>
-    <button type="button" data-fb="0 是第一个数，不是最后一个。"><i>4</i>0</button>
+<section id="page-6" class="slide lay-ask" aria-label="小测：喊 5 次">
+  <h2 class="t r">小测：想喊 5 次加油，改哪里？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">cheer.py</div>
+<pre class="code"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">3</span>):</span><span class="ln">    <span class="f">print</span>(<span class="s">"加油"</span>)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！range(5) 给出 0 到 4 五个数，缩进的那一行运行 5 遍。"><i>1</i>range(3) 改成 range(5)</button>
+    <button type="button" data-fb="range(4) 是 0、1、2、3，只有 4 个数，喊 4 次。"><i>2</i>range(3) 改成 range(4)</button>
+    <button type="button" data-fb="这样也是 5 次，可是 for 就是为了不再一行一行地写。题目问的是改哪里。"><i>3</i>下面再写两行 print("加油")</button>
+    <button type="button" data-fb="这会把 5 个加油拼成一行，再喊 3 遍，一共 15 个。"><i>4</i>print 改成 print("加油" * 5)</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -852,13 +855,13 @@ print(100)</pre></div>
 </section>
 
 <!-- quiz: how many -->
-<section id="page-10" class="slide lay-ask" aria-label="小测：有几个数">
-  <h2 class="t r">小测：range(2, 5) 里有几个数？</h2>
+<section id="page-10" class="slide lay-ask" aria-label="小测：输出 3 到 6">
+  <h2 class="t r">小测：想输出 3、4、5、6，range 怎么写？</h2>
   <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="再数一遍，起点 2 也算在内。"><i>1</i>2</button>
-    <button type="button" data-fb="答对了！是 2、3、4，一共 3 个。终点减起点，5 - 2 也是 3。"><i>2</i>3</button>
-    <button type="button" data-fb="终点 5 不算在内，只有 2、3、4。"><i>3</i>4</button>
-    <button type="button" data-fb="这里的 5 是终点，不是个数。"><i>4</i>5</button>
+    <button type="button" data-fb="终点不算在内，range(3, 6) 只到 5。"><i>1</i>range(3, 6)</button>
+    <button type="button" data-fb="答对了！起点 3 算在内，终点 7 不算，正好是 3 到 6。"><i>2</i>range(3, 7)</button>
+    <button type="button" data-fb="起点就是第一个数，range(4, 7) 从 4 开始。"><i>3</i>range(4, 7)</button>
+    <button type="button" data-fb="步长 1 和不写一样，还是只到 5。"><i>4</i>range(3, 6, 1)</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -911,13 +914,15 @@ print(100)</pre></div>
 </section>
 
 <!-- quiz: negative step -->
-<section id="page-14" class="slide lay-ask" aria-label="小测：倒着跳">
-  <h2 class="t r">小测：range(10, 0, -2) 最后一个数是几？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="终点不算在内，到不了 0。"><i>1</i>0</button>
-    <button type="button" data-fb="答对了！10、8、6、4、2，再跳就是 0，终点不算在内。"><i>2</i>2</button>
-    <button type="button" data-fb="每次减 2，从 10 开始全是双数，碰不到 1。"><i>3</i>1</button>
-    <button type="button" data-fb="10 是第一个数，不是最后一个。"><i>4</i>10</button>
+<section id="page-14" class="slide lay-ask" aria-label="小测：两个倒着跳">
+  <h2 class="t r">小测：这两个 range 给出的数一样吗？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">两种终点</div>
+<pre class="code"><span class="ln"><span class="f">range</span>(<span class="m">10</span>, <span class="m">0</span>, -<span class="m">2</span>)</span><span class="ln"><span class="f">range</span>(<span class="m">10</span>, <span class="m">1</span>, -<span class="m">2</span>)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！倒着跳到 2 以后，下一个是 0，两个都不取：一个因为终点是 0 不算，一个因为 0 已经过了 1。"><i>1</i>一样，都是 10 8 6 4 2</button>
+    <button type="button" data-fb="每次跳 2，从 10 往下只会碰到双数，碰不到 1。"><i>2</i>不一样，后一个多了 1</button>
+    <button type="button" data-fb="2 比终点 1 大，还没到终点，照样取得到。"><i>3</i>不一样，后一个少了 2</button>
+    <button type="button" data-fb="起点 10 比终点 1 大，步长是负的，能倒着数。"><i>4</i>后一个什么也没有</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -1044,20 +1049,34 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- errors -->
-<section id="page-22" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1"><code>for i in range(3)</code><b>SyntaxError</b><span>末尾要加冒号</span></div>
-    <div class="r d2"><code>for i in 3:</code><b>TypeError</b><span>要写 range(3)</span></div>
-    <div class="r d3"><code class="plain">for 下一行没缩进</code><b style="font-size:42px">IndentationError</b><span>缩进 4 个空格</span></div>
+<section id="page-22" class="slide lay-ask" aria-label="回顾：循环里的 and">
+  <h2 class="t r">回顾第 5 课：这段程序输出哪些数？</h2>
+  <div class="editor r d1" style="--fs:38px"><div class="tab">both.py</div>
+<pre class="code"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, <span class="m">11</span>):</span><span class="ln">    <span class="k">if</span> i % <span class="m">2</span> == <span class="m">0</span> <span class="k">and</span> i &gt; <span class="m">5</span>:</span><span class="ln">        <span class="f">print</span>(i)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！要同时是双数、又大于 5：6、8、10。"><i>1</i>6 8 10</button>
+    <button type="button" data-fb="这是只看双数。and 还要求大于 5。"><i>2</i>2 4 6 8 10</button>
+    <button type="button" data-fb="这是只看大于 5，还要是双数。"><i>3</i>7 8 9 10</button>
+    <button type="button" data-fb="range(1, 11) 能取到 10，10 也满足两个条件。"><i>4</i>6 8</button>
   </div>
-  <p class="say r d3">要小心：倒着数忘了写 -1，比如 range(5, 0)，不报错，只是一遍也不运行。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-23" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:600px;--mid:600px">
+    <div class="r d1"><code style="font-size:44px">for i in range(3)</code><b style="font-size:44px">for i in range(3):</b><span>for 这一行末尾要有冒号</span></div>
+    <div class="r d2"><code style="font-size:44px">for i in 3:</code><b style="font-size:44px">for i in range(3):</b><span>数几遍要交给 range</span></div>
+    <div class="r d3"><code style="font-size:44px">for i in range(3):<br>print(i)</code><b style="font-size:44px">for i in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</b><span>每一遍都做的行，缩进 4 个空格</span></div>
+  </div>
+  <p class="say small r d3">倒着数要写负的步长：range(5, 0) 一个数也没有。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-23" class="slide dark lay-ask" aria-label="找错：少了一个数">
+<section id="page-24" class="slide dark lay-ask" aria-label="找错：少了一个数">
   <h2 class="t r">找错：怎么少了一个数？</h2>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！终点不算在内，range(1, n) 只到 4。要数到 n，就写 range(1, n + 1)。" data-no="这一行没问题。想一想：range 的终点算不算在内？"><span class="ln">n = <span class="m">5</span></span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">1</span>, n):</span><span class="ln">    <span class="f">print</span>(i)</span><span class="ln"><span class="f">print</span>(<span class="s">"数完了"</span>)</span></pre></div>
@@ -1067,7 +1086,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- challenge -->
-<section id="page-24" class="slide clay lay-notes challenge" aria-label="拍七" data-chapter="挑战">
+<section id="page-25" class="slide clay lay-notes challenge" aria-label="拍七" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1">拍七</h2>
   <p class="say r d2">读入一个整数 n，从 1 数到 n，每个数占一行。<br>碰到 7 的倍数，或者<b>个位是 7</b> 的数，不说这个数，改说“过”。</p>
@@ -1078,7 +1097,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- hints -->
-<section id="page-25" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-26" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>每个数要做的事都一样：先判断，再说话。这件事放在哪里重复？</span></p>
@@ -1088,7 +1107,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
   <div class="foot"></div>
 </section>
 
-<section id="page-26" class="slide dark" aria-label="参考答案：拍七" data-answer="09" data-steps="2" data-at="2">
+<section id="page-27" class="slide dark" aria-label="参考答案：拍七" data-answer="09" data-steps="2" data-at="2">
   <h2 class="t">参考答案：拍七</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">pass_seven.py</div>
@@ -1099,19 +1118,19 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- review -->
-<section id="page-27" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-28" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>range(1, 5) 里有 5 吗？<em class="step s2">　没有，终点不算在内。</em></span></p>
-    <p><i>Q2</i><span>怎么知道一行归 for 管？<em class="step s3">　看它有没有缩进。</em></span></p>
-    <p><i>Q3</i><span>怎么让 range 倒着数？<em class="step s4">　步长写负数，比如 -1。</em></span></p>
+    <p><i>Q1</i><span>为什么 print("b") 不缩进，只运行一次？<em class="step s2">　不缩进的行不归 for 管，等循环结束后才运行，只运行一次。</em></span></p>
+    <p><i>Q2</i><span>range(5, 0, -1) 少写了 -1，会怎样？<em class="step s3">　步长变成 1，从 5 往大数，到不了 0，一个数也不输出。</em></span></p>
+    <p><i>Q3</i><span>想输出 10、20、30……100，怎么写？<em class="step s4">　for i in range(10, 101, 10): 下面 print(i)。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-28" class="slide lay-columns" aria-label="速查卡">
+<section id="page-29" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3">
     <div class="r d1"><code>range(3)</code><span>0、1、2</span></div>
@@ -1124,7 +1143,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- later -->
-<section id="page-29" class="slide lay-columns" aria-label="后面再学">
+<section id="page-30" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>while</code><span>不知道要重复几次时的循环</span></div>
@@ -1136,7 +1155,7 @@ print("b")</pre><p class="res step s2" style="font-size:80px">a a b</p></div>
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-30" class="slide dark thanks" aria-label="谢谢">
+<section id="page-31" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>

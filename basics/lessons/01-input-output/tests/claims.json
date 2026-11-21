@@ -56,21 +56,71 @@
     "error": "TypeError"
   },
   {
-    "page": 19,
+    "page": 18,
     "code": "a = int(input())",
     "stdin": "3 4\n",
     "error": "ValueError"
   },
   {
-    "page": 20,
+    "page": 19,
     "code": "a = input()\nb = int(input())\nprint(a + b)",
     "stdin": "3\n4\n",
     "error": "TypeError"
   },
   {
-    "page": 19,
+    "page": 18,
     "code": "print(input())",
     "stdin": "3 4\n",
     "stdout": "3 4\n"
+  },
+  {
+    "page": 8,
+    "code": "print(3 + 4)",
+    "stdout": "7\n"
+  },
+  {
+    "page": 8,
+    "code": "print(\"7\")",
+    "stdout": "7\n"
+  },
+  {
+    "page": 8,
+    "code": "print(7)",
+    "stdout": "7\n"
+  },
+  {
+    "page": 8,
+    "code": "print(\"3 + 4\")",
+    "stdout": "3 + 4\n"
+  },
+  {
+    "page": 16,
+    "code": "age = int(input())\nprint(age + 1)",
+    "stdin": "10\n",
+    "stdout": "11\n"
+  },
+  {
+    "page": 16,
+    "code": "age = input()\nprint(age + \"1\")",
+    "stdin": "10\n",
+    "stdout": "101\n"
+  },
+  {
+    "page": 16,
+    "code": "age = input()\nprint(\"age\" + 1)",
+    "stdin": "10\n",
+    "error": "TypeError"
+  },
+  {
+    "page": 19,
+    "code": "a = int(input())\nb = int(input())\nprint(\"a + b\")",
+    "stdin": "3\n4\n",
+    "stdout": "a + b\n"
+  },
+  {
+    "page": 18,
+    "code": "age = int(input())\nprint(age + 1)",
+    "stdin": "10\n",
+    "stdout": "11\n"
   }
 ]

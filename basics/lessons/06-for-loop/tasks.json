@@ -133,7 +133,7 @@
   {
     "id": "09",
     "role": "独立迁移",
-    "page": 24,
+    "page": 25,
     "starter": "starter/11_pass_seven.py",
     "solution": "solutions/11_pass_seven.py",
     "scope": "n为整数",

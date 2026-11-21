@@ -16,6 +16,7 @@
     <div class="r d3"><b>?</b><code>面积</code></div>
   </div>
   <p class="say r d3">一个房间能心算，一百个房间呢？<br>把算式写进程序，换一组数据，它马上算出来。</p>
+  <p class="say tip r d3">生活里：买地毯、分糖果、算找零都要算。先想一想：7 颗糖分给 2 个人，每人几颗、还剩几颗，程序怎么算？</p>
   <div class="foot"></div>
 </section>
 
@@ -114,13 +115,13 @@
 </section>
 
 <!-- quiz: remainder -->
-<section class="slide lay-ask" aria-label="小测：17 除以 5 的余数">
-  <h2 class="t r">小测：print(17 % 5) 输出几？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="3 是 17 // 5 的结果，也就是商。"><i>1</i>3</button>
-    <button type="button" data-fb="答对了！5 个一组能分 3 组，用掉 15，还剩 2。"><i>2</i>2</button>
-    <button type="button" data-fb="3.4 是 17 / 5 的结果。"><i>3</i>3.4</button>
-    <button type="button" data-fb="% 在这里是求余数，不是百分号。"><i>4</i>17%</button>
+<section class="slide lay-ask" aria-label="小测：装鸡蛋">
+  <h2 class="t r">小测：20 个鸡蛋每盒装 6 个，剩几个？</h2>
+  <div class="quiz r d1" data-right="2">
+    <button type="button" data-fb="/ 算出 3.33……，是能装多少盒，还带着小数。"><i>1</i>print(20 / 6)</button>
+    <button type="button" data-fb="// 算出 3，是装满了几盒，不是剩几个。"><i>2</i>print(20 // 6)</button>
+    <button type="button" data-fb="答对了！装满 3 盒用掉 18 个，余数 2 就是剩下的。"><i>3</i>print(20 % 6)</button>
+    <button type="button" data-fb="20 - 6 只是拿走了一盒，还剩 14 个，没装满的还有很多。"><i>4</i>print(20 - 6)</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -166,13 +167,16 @@
 </section>
 
 <!-- quiz: order -->
-<section class="slide lay-ask" aria-label="小测：先乘后减">
-  <h2 class="t r">小测：print(10 - 2 * 3) 输出几？</h2>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！先算 2 * 3 得 6，再算 10 - 6。"><i>1</i>4</button>
-    <button type="button" data-fb="这是先算 10 - 2 的结果。乘法要先算。"><i>2</i>24</button>
-    <button type="button" data-fb="没有除号，结果不会变成小数。"><i>3</i>4.0</button>
-    <button type="button" data-fb="这一行写得没有问题，可以运行。"><i>4</i>报错</button>
+<section class="slide lay-ask" aria-label="小测：加不加括号">
+  <h2 class="t r">小测：这两行输出一样吗？</h2>
+  <div class="editor r d1"><div class="tab">两种写法</div>
+<pre class="code">print(2 * 3 + 4)
+print(2 * (3 + 4))</pre></div>
+  <div class="quiz r d2" data-right="2">
+    <button type="button" data-fb="第二行有括号，先算 3 + 4。"><i>1</i>一样，都是 10</button>
+    <button type="button" data-fb="第一行没有括号，先算 2 * 3。"><i>2</i>一样，都是 14</button>
+    <button type="button" data-fb="答对了！第一行先乘：6 + 4 是 10；第二行先算括号：2 * 7 是 14。"><i>3</i>不一样：10 和 14</button>
+    <button type="button" data-fb="反过来了。没括号的那行先乘再加。"><i>4</i>不一样：14 和 10</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -208,13 +212,33 @@
 </section>
 
 <!-- quiz: type of result -->
-<section class="slide lay-ask" aria-label="小测：8 除以 4">
-  <h2 class="t r">小测：print(8 / 4) 输出什么？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="想得到整数 2，要用 8 // 4。"><i>1</i>2</button>
-    <button type="button" data-fb="答对了！用 / 除，结果总是小数。"><i>2</i>2.0</button>
-    <button type="button" data-fb="那是余数，要用 % 才能算出来。"><i>3</i>0</button>
-    <button type="button" data-fb="8 能被 4 除尽，也可以运行，不会报错。"><i>4</i>报错</button>
+<section class="slide lay-ask" aria-label="小测：输入什么会报错">
+  <h2 class="t r">小测：输入哪一个，这段程序会报错？</h2>
+  <div class="editor r d1"><div class="tab">double.py</div>
+<pre class="code">a = int(input())
+print(a * 2)</pre></div>
+  <div class="quiz r d2" data-right="2">
+    <button type="button" data-fb="3 是整数，输出 6。"><i>1</i>3</button>
+    <button type="button" data-fb="负整数也是整数，输出 -6。"><i>2</i>-3</button>
+    <button type="button" data-fb="答对了！3.0 带小数点，int() 不认，要用 float()。哪怕小数部分是 0 也一样。"><i>3</i>3.0</button>
+    <button type="button" data-fb="0 是整数，输出 0。"><i>4</i>0</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section class="slide lay-ask" aria-label="回顾：放回 a">
+  <h2 class="t r">回顾第 2 课：这段程序输出什么？</h2>
+  <div class="editor r d1"><div class="tab">again.py</div>
+<pre class="code">a = 7
+b = 2
+a = a // b
+print(a, a % b)</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！第 3 行把 3 放回 a，旧的 7 没了。再算 3 % 2，是 1。"><i>1</i>3 1</button>
+    <button type="button" data-fb="第 3 行已经把 a 换成了 3，后面用的是新的 a。"><i>2</i>7 1</button>
+    <button type="button" data-fb="// 得到整数，不是 3.5。"><i>3</i>3.5 1</button>
+    <button type="button" data-fb="3 除以 2 还剩 1，不是 0。"><i>4</i>3 0</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -234,13 +258,13 @@
 <!-- errors -->
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger">
-    <div class="r d1"><code>print(3 x 4)</code><b>SyntaxError</b><span>乘号要写成 *</span></div>
-    <div class="r d2"><code>print(5 / 0)</code><b style="font-size:42px">ZeroDivisionError</b><span>除数不能是 0</span></div>
-    <div class="r d3"><code>int("2.5")</code><b>ValueError</b><span>小数要用 float()</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:520px;--mid:560px">
+    <div class="r d1"><code>print(3 x 4)</code><b>print(3 * 4)</b><span>乘号写 *，不是 x</span></div>
+    <div class="r d2"><code>每人 = 7 / 2</code><b>每人 = 7 // 2</b><span>/ 总得到小数，要整数用 //</span></div>
+    <div class="r d3"><code>int("2.5")</code><b>float("2.5")</b><span>带小数点的用 float()</span></div>
   </div>
-  <p class="say r d3">// 和 % 除以 0 也一样会报错。</p>
+  <p class="say r d3">除数不能是 0：7 / 0、7 // 0、7 % 0 都会出错。</p>
   <div class="foot"></div>
 </section>
 
@@ -293,9 +317,9 @@
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>/、// 和 % 有什么不同？<em class="step s2">　小数除法、整除、求余数。</em></span></p>
-    <p><i>Q2</i><span>2 + 3 * 4 先算哪一步？<em class="step s3">　先算乘法，结果是 14。</em></span></p>
-    <p><i>Q3</i><span>什么时候用 float(input())？<em class="step s4">　读入的数可能有小数时。</em></span></p>
+    <p><i>Q1</i><span>为什么 6 / 2 输出 3.0，而不是 3？<em class="step s2">　/ 的结果总是小数，哪怕刚好除得尽。</em></span></p>
+    <p><i>Q2</i><span>分糖程序把 // 写成 /，会怎样？<em class="step s3">　每人 3.5 颗，糖不能掰开，结果不合理。</em></span></p>
+    <p><i>Q3</i><span>100 小时是几天零几小时，怎么算？<em class="step s4">　100 // 24 是 4 天，100 % 24 是 4 小时。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

@@ -104,7 +104,7 @@
   {
     "id": "06",
     "role": "独立迁移",
-    "page": 17,
+    "page": 18,
     "starter": "starter/08_shipping.py",
     "solution": "solutions/08_shipping.py",
     "scope": "重量为整数",
