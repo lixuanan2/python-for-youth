@@ -82,7 +82,7 @@
   {
     "id": "03",
     "role": "独立迁移",
-    "page": 16,
+    "page": 17,
     "starter": "starter/07_hollow.py",
     "solution": "solutions/07_hollow.py",
     "scope": "一行边长n为整数",

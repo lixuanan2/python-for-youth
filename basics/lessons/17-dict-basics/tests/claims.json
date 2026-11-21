@@ -5,19 +5,9 @@
     "stdout": "5\n2\n"
   },
   {
-    "page": 4,
-    "code": "price = {\"苹果\": 5, \"香蕉\": 3}\nprint(price[\"西瓜\"])",
-    "error": "KeyError: '西瓜'"
-  },
-  {
     "page": 5,
     "code": "price = {\"苹果\": 5, \"香蕉\": 3}\nprice[\"苹果\"] = 6\nprice[\"西瓜\"] = 20\nprint(price)\n",
     "stdout": "{'苹果': 6, '香蕉': 3, '西瓜': 20}\n"
-  },
-  {
-    "page": 6,
-    "code": "d = {\"a\": 1}\nd[\"a\"] = 2\nd[\"b\"] = 3\nprint(len(d))",
-    "stdout": "2\n"
   },
   {
     "page": 7,
@@ -47,23 +37,58 @@
     "stdout": "小明 11\n小红 12\n"
   },
   {
+    "page": 4,
+    "code": "price = {\"苹果\": 5, \"香蕉\": 3}\nprint(price[\"西瓜\"])",
+    "error": "KeyError"
+  },
+  {
+    "page": 6,
+    "code": "d = {\"a\": 1}\nd[\"A\"] = 2\nd[\"b\"] = 3\nprint(len(d))",
+    "stdout": "3\n"
+  },
+  {
+    "page": 6,
+    "code": "d = {\"a\": 1}\nd[\"a\"] = 2\nd[\"b\"] = 3\nprint(len(d))",
+    "stdout": "2\n"
+  },
+  {
     "page": 12,
-    "code": "d = {\"a\": 1}\nprint(d.get(\"x\", 0))\nprint(len(d))",
-    "stdout": "0\n1\n"
+    "code": "d = {\"a\": 1}\nd.get(\"x\", 0)\n\"x\" in d\nprint(d.get(\"a\", 5))\nprint(len(d))\nd[\"x\"] = d.get(\"x\", 0) + 1\nprint(d)",
+    "stdout": "1\n1\n{'a': 1, 'x': 1}\n"
   },
   {
     "page": 13,
-    "code": "price = {\"苹果\": 5, \"香蕉\": 3}\nprint(price[0])",
-    "error": "KeyError: 0"
-  },
-  {
-    "page": 13,
-    "code": "price = {\"apple\": 5}\nprint(\"Apple\" in price)",
-    "stdout": "False\n"
+    "code": "import math\nprint(math.ceil(10 / 4) * 4)",
+    "stdout": "12\n"
   },
   {
     "page": 14,
-    "code": "counts = {}\nfor f in [\"苹果\", \"香蕉\", \"苹果\"]:\n    counts[f] += 1\nprint(counts)",
-    "error": "KeyError: '苹果'"
+    "code": "price = {\"苹果\": 5}\nprint(price[\"西瓜\"])",
+    "error": "KeyError"
+  },
+  {
+    "page": 14,
+    "code": "price = {\"苹果\": 5}\nprint(price[0])",
+    "error": "KeyError"
+  },
+  {
+    "page": 14,
+    "code": "price = {\"apple\": 5}\nprint(price.get(\"西瓜\", 0), \"Apple\" in price, \"apple\" in price)",
+    "stdout": "0 False True\n"
+  },
+  {
+    "page": 15,
+    "code": "counts = {}\nfor f in [\"苹果\", \"香蕉\", \"苹果\"]:\n    counts[f] = counts.get(\"f\", 0) + 1\nprint(counts)",
+    "stdout": "{'苹果': 1, '香蕉': 1}\n"
+  },
+  {
+    "page": 15,
+    "code": "counts = {}\nfor f in [\"苹果\", \"香蕉\", \"苹果\"]:\n    counts[f] = counts.get(f, 0) + 1\nprint(counts)",
+    "stdout": "{'苹果': 2, '香蕉': 1}\n"
+  },
+  {
+    "page": 19,
+    "code": "counts = {}\nfor w in \"a b a\".split():\n    counts[w] = 1\nprint(counts)\nbirthday = {\"小明\": \"3月5日\"}\nprint(birthday[\"小明\"])",
+    "stdout": "{'a': 1, 'b': 1}\n3月5日\n"
   }
 ]

@@ -10,21 +10,6 @@
     "stdout": "7\n-7\n"
   },
   {
-    "page": 5,
-    "code": "def area(w, h):\n    return w * h\ns = area(3, 4)\nprint(s)\nprint(area(2, 5))\n",
-    "stdout": "12\n10\n"
-  },
-  {
-    "page": 6,
-    "code": "def area(w, h):\n    return w * h\nprint(area(3, 4))",
-    "stdout": "12\n"
-  },
-  {
-    "page": 6,
-    "code": "def area(w, h):\n    return w * h\nprint(area(0, 4))",
-    "stdout": "0\n"
-  },
-  {
     "page": 7,
     "code": "def f():\n    print(5)\nx = f()\nprint(x)",
     "stdout": "5\nNone\n"
@@ -40,29 +25,79 @@
     "error": "TypeError: unsupported operand type(s) for +: 'NoneType' and 'int'"
   },
   {
-    "page": 8,
-    "code": "def f():\n    return 1\n    print(\"hi\")\nf()",
-    "stdout": ""
-  },
-  {
-    "page": 9,
-    "code": "def area(w, h):\n    return w * h\nw1 = int(input())\nh1 = int(input())\nw2 = int(input())\nh2 = int(input())\ns1 = area(w1, h1)\ns2 = area(w2, h2)\nprint(s1 + s2)\n",
-    "stdin": "3\n4\n2\n5\n",
-    "stdout": "22\n"
-  },
-  {
-    "page": 11,
-    "code": "def area(w, h):\n    return w * h\nprint(area(3))",
-    "error": "TypeError: area() missing 1 required positional argument: 'h'"
-  },
-  {
     "page": 12,
     "code": "def bigger(a, b):\n    if a > b:\n        return a\n    return b\nprint(bigger(3, 8))\nprint(bigger(9, 2))\n",
     "stdout": "8\n9\n"
   },
   {
+    "page": 6,
+    "code": "def cost(price, count):\n    return price * count\nprint(cost(4, 3))",
+    "stdout": "12\n"
+  },
+  {
+    "page": 6,
+    "code": "def cost(price, count):\n    return price * count\nprint(cost(4, 0))",
+    "stdout": "0\n"
+  },
+  {
+    "page": 8,
+    "code": "def f():\n    print(\"hi\")\n    return 1\nf()",
+    "stdout": "hi\n"
+  },
+  {
+    "page": 8,
+    "code": "def f():\n    return 1\n    print(\"hi\")\nf()",
+    "stdout": ""
+  },
+  {
+    "page": 11,
+    "code": "def cost(price, count):\n    return price * count\nprint(cost(4, 3) + cost(5, 2))\nprint(cost(4 + 5, 3 + 2))",
+    "stdout": "22\n45\n"
+  },
+  {
+    "page": 14,
+    "code": "def a():\n    print(\"1\")\ndef b():\n    a()\n    print(\"2\")\nb()\na()",
+    "stdout": "1\n2\n1\n"
+  },
+  {
     "page": 15,
-    "code": "def total(a, b, c):\n    s = a + b + c\n    print(s)\nx = total(1, 2, 3)\nprint(x * 2)",
-    "error": "TypeError: unsupported operand type(s) for *: 'NoneType' and 'int'"
+    "code": "def cost(p, c):\n    return p * c\nprint(cost(4))",
+    "error": "TypeError"
+  },
+  {
+    "page": 15,
+    "code": "def cost(p, c):\n    print(p * c)\nx = cost(4, 3)\nprint(x)",
+    "stdout": "12\nNone\n"
+  },
+  {
+    "page": 15,
+    "code": "def total(a):\n    s = 0\n    for x in a:\n        s += x\n    return s\n    print(\"算完了\")\nprint(total([1, 2]))",
+    "stdout": "3\n"
+  },
+  {
+    "page": 16,
+    "code": "def total(a):\n    s = 0\n    for x in a:\n        s += x\n        return s\nprint(total([3, 4, 5]))",
+    "stdout": "3\n"
+  },
+  {
+    "page": 16,
+    "code": "def total(a):\n    s = 0\n    for x in a:\n        s += x\n    return s\nprint(total([3, 4, 5]))",
+    "stdout": "12\n"
+  },
+  {
+    "page": 20,
+    "code": "def total(a):\n    s = 0\n    for x in a:\n        s += x\n    print(s)\nx = total([3, 4])\nprint(x)\ndef sale(price):\n    return price * 0.8\nprint(sale(50))",
+    "stdout": "7\nNone\n40.0\n"
+  },
+  {
+    "page": 5,
+    "code": "def cost(price, count):\n    return price * count\ns = cost(4, 3)\nprint(s)\nprint(cost(5, 2))\n",
+    "stdout": "12\n10\n"
+  },
+  {
+    "page": 9,
+    "code": "def cost(price, count):\n    return price * count\np1 = int(input())\nc1 = int(input())\np2 = int(input())\nc2 = int(input())\ns1 = cost(p1, c1)\ns2 = cost(p2, c2)\nprint(s1 + s2)\n",
+    "stdin": "4\n3\n5\n2\n",
+    "stdout": "22\n"
   }
 ]

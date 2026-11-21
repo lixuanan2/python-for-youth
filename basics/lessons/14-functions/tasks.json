@@ -71,7 +71,7 @@
   {
     "id": "03",
     "role": "独立迁移",
-    "page": 15,
+    "page": 16,
     "starter": "starter/06_launch.py",
     "solution": "solutions/06_launch.py",
     "scope": "一行练习次数n为整数",

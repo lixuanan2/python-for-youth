@@ -18,6 +18,7 @@
 橙子 → 4</pre></div>
   </div>
   <p class="say r d3">查字典时，按字找到它的解释，不用记它在第几页。<br>Python 的字典也一样：每个“键”对应一个“值”，报出键，就拿到值。</p>
+  <p class="say tip r d3">生活里：小卖部的价格牌、手机通讯录，都是按名字查。先想一想：只知道商品名，怎样一下子查到它的价格？</p>
   <div class="foot"></div>
 </section>
 
@@ -47,11 +48,12 @@
 print(price["西瓜"])</pre></div>
   <div class="answer turns">
     <p class="qmark only1">?</p>
-    <div class="slip tilt step s2 long" style="width:540px"><small>屏幕上</small><pre>KeyError: '西瓜'</pre></div>
+    <div class="slip tilt step s2"><small>屏幕上</small><pre>红字报错
+程序停下</pre></div>
   </div>
   <div class="turns">
       <p class="say only1">输出 0？什么也不输出？还是报错？</p>
-      <p class="say only2">报 KeyError。Key 就是“键”，意思是：没有这个键。字典不会替你编一个数出来。</p>
+      <p class="say only2">报错停下：字典里没有这个键。字典不会替你编一个数出来。</p>
       <p class="say step s3">后面会学两种办法：先问在不在，或者查不到时给个默认值。</p>
     </div>
   <div class="foot"></div>
@@ -74,18 +76,18 @@ print(price["西瓜"])</pre></div>
 </section>
 
 <!-- quiz -->
-<section class="slide lay-ask" aria-label="小测：几对">
-  <h2 class="t r">小测：最后 d 里有几对？</h2>
+<section class="slide lay-ask" aria-label="小测：改成大写 A">
+  <h2 class="t r">小测：改成 d["A"] = 2，最后有几对？</h2>
   <div class="editor r d1"><div class="tab">几对？</div>
-<pre class="code">d = {"a": 1}
-d["a"] = 2
+<pre class="code" data-mod="2:原来是 d[&quot;a&quot;]">d = {"a": 1}
+d["A"] = 2
 d["b"] = 3
 print(len(d))</pre></div>
-  <div class="quiz r d2" data-right="1">
-    <button type="button" data-fb="a 已经有了，第 2 行是改值，不是再加一对。"><i>1</i>3</button>
-    <button type="button" data-fb="答对了！第 2 行把 a 改成 2，第 3 行新加 b，一共 a 和 b 两对。"><i>2</i>2</button>
-    <button type="button" data-fb="第 3 行加了一个新键 b。"><i>3</i>1</button>
-    <button type="button" data-fb="len 数的是有几对，不是值加起来。"><i>4</i>5</button>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！"A" 和 "a" 是两个键，第 2 行变成新加一对，再加 b，一共 3 对。"><i>1</i>3</button>
+    <button type="button" data-fb="大写 A 和小写 a 不是同一个键，第 2 行不是改值。"><i>2</i>2</button>
+    <button type="button" data-fb="第 2、3 行都加了新键。"><i>3</i>1</button>
+    <button type="button" data-fb="给没有的键赋值是新加一对，不会报错。"><i>4</i>报错</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -100,7 +102,7 @@ print("苹果" in price)
 print("西瓜" in price)</pre></div>
   <div class="turns">
       <p class="say only1">“键 in 字典”问的是：有没有这个键？有就是 True。</p>
-      <p class="say only2">没有就是 False。先用 if 问一问，再去取，就不会报 KeyError。</p>
+      <p class="say only2">没有就是 False。先用 if 问一问，再去取，就不会报错。</p>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
@@ -171,41 +173,54 @@ print("西瓜" in price)</pre></div>
 </section>
 
 <!-- quiz: get does not add -->
-<section class="slide lay-ask" aria-label="小测：get 之后">
-  <h2 class="t r">小测：这段程序输出什么？</h2>
-  <div class="editor r d1"><div class="tab">输出什么？</div>
-<pre class="code">d = {"a": 1}
-print(d.get("x", 0))
-print(len(d))</pre></div>
+<section class="slide lay-ask top" aria-label="小测：哪一句会多出一对">
+  <h2 class="t r">小测：哪一句跑完，d 里会多出一对？</h2>
+  <div class="editor r d1"><div class="tab">d.py</div>
+<pre class="code">d = {"a": 1}</pre></div>
   <div class="quiz r d2" data-right="2">
-    <button type="button" data-fb="get 只是查，不会把 x 加进去，所以还是 1 对。"><i>1</i>0 和 2</button>
-    <button type="button" data-fb="get 查不到不会报错，会给出默认值 0。"><i>2</i>报 KeyError</button>
-    <button type="button" data-fb="答对了！查不到给 0，字典还是只有 a 这 1 对。"><i>3</i>0 和 1</button>
-    <button type="button" data-fb="x 不在字典里，拿到的是默认值 0，不是 a 的值。"><i>4</i>1 和 1</button>
+    <button type="button" data-fb="get 只是查，查不到给 0，不会加进去。"><i>1</i>d.get("x", 0)</button>
+    <button type="button" data-fb="in 只是问一问，不会加。"><i>2</i>"x" in d</button>
+    <button type="button" data-fb="答对了！右边先查到 0 再加 1，左边给没有的键赋值，就新加了一对 x: 1。"><i>3</i>d["x"] = d.get("x", 0) + 1</button>
+    <button type="button" data-fb="a 已经有了，输出 1，字典不变。"><i>4</i>print(d.get("a", 5))</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：向上取整再乘">
+  <h2 class="t r">回顾第 16 课：输出几？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">import math
+print(math.ceil(10 / 4) * 4)</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！10 / 4 是 2.5，往上取得 3，再乘 4 得 12。"><i>1</i>12</button>
+    <button type="button" data-fb="先往上取整成 3，再乘 4。"><i>2</i>10</button>
+    <button type="button" data-fb="ceil 往上取，2.5 变 3，不是 2。"><i>3</i>8</button>
+    <button type="button" data-fb="ceil 的结果是整数 3，3 * 4 是 12。"><i>4</i>10.0</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:620px;--mid:440px">
-    <div class="r d1"><code>price["西瓜"]</code><b>KeyError</b><span>先用 in 问，或者用 get</span></div>
-    <div class="r d2"><code>price[0]</code><b>KeyError</b><span>字典按键找，没有编号</span></div>
-    <div class="r d3"><code>"Apple" in price</code><b>不报错</b><span>大小写不同，算两个键</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:600px">
+    <div class="r d1"><code>price["西瓜"]</code><b>price.get("西瓜", 0)</b><span>没有的键直接取会报错</span></div>
+    <div class="r d2"><code>price[0]</code><b>price["苹果"]</b><span>字典按键找，没有编号</span></div>
+    <div class="r d3"><code>"Apple" in price</code><b>"apple" in price</b><span>大小写不同，算两个键</span></div>
   </div>
-  <p class="say r d3">查不到的时候，先看看键是不是写得一模一样，空格和大小写都算。</p>
+  <p class="say r d3">第三种不报错，只是得到 False。查不到时，先看键是不是写得一模一样。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark lay-ask" aria-label="找错：数水果">
-  <h2 class="t r">找错：数水果，怎么报 KeyError？</h2>
+<section class="slide dark lay-ask" aria-label="找错：每种都只数到 1">
+  <h2 class="t r">找错：苹果明明有两个，怎么只数到 1？</h2>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="3" data-yes="找到了！第一次碰到苹果时，字典里还没有苹果这个键，没法在原来的数上加 1。要先让它有个开始的 0：可以先用 in 问一问，也可以用 get。" data-no="这一行没问题。报错说没有“苹果”这个键，想一想第一次碰到苹果时发生了什么。"><span class="ln">counts = {}</span><span class="ln"><span class="k">for</span> f <span class="k">in</span> [<span class="s">"苹果"</span>, <span class="s">"香蕉"</span>, <span class="s">"苹果"</span>]:</span><span class="ln">    counts[f] += <span class="m">1</span></span><span class="ln"><span class="f">print</span>(counts)</span></pre></div>
-  <p class="say r d2">想数出每种水果有几个，程序却报 KeyError: '苹果'。<br>点你认为有问题的那一行。</p>
+<pre class="code pick" data-bug="3" data-yes="找到了！&quot;f&quot; 加了引号，查的是名叫 f 的键，永远查不到，每次都从 0 加 1。去掉引号写 counts.get(f, 0)，才是查变量 f 里装的水果。" data-no="这一行没问题。想一想：每次查的是哪个键？"><span class="ln">counts = {}</span><span class="ln"><span class="k">for</span> f <span class="k">in</span> [<span class="s">"苹果"</span>, <span class="s">"香蕉"</span>, <span class="s">"苹果"</span>]:</span><span class="ln">    counts[f] = counts.<span class="f">get</span>(<span class="s">"f"</span>, <span class="m">0</span>) + <span class="m">1</span></span><span class="ln"><span class="f">print</span>(counts)</span></pre></div>
+  <p class="say r d2">应该输出 {'苹果': 2, '香蕉': 1}，程序却说苹果只有 1 个。<br>点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
@@ -240,9 +255,9 @@ hat 1</pre></div>
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>字典和列表找东西有什么不同？<em class="step s2">　列表按编号，字典按键。</em></span></p>
-    <p><i>Q2</i><span>给一个没有的键赋值会怎样？<em class="step s3">　新加一对，不报错。</em></span></p>
-    <p><i>Q3</i><span>怎样查才不会报 KeyError？<em class="step s4">　先用 in 问一问，或者用 get 给默认值。</em></span></p>
+    <p><i>Q1</i><span>例题查价格为什么先用 in 问一问？<em class="step s2">　顾客可能要没有的商品，直接取会报错停下。</em></span></p>
+    <p><i>Q2</i><span>数单词时写成 counts[w] = 1，结果有什么不同？<em class="step s3">　每个词都只记 1，出现几次都一样。</em></span></p>
+    <p><i>Q3</i><span>想按名字查同学的生日，怎么存、怎么查？<em class="step s4">　存成字典 birthday = {"小明": "3月5日", …}，查 birthday[name]。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

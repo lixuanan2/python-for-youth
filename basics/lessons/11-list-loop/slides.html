@@ -92,12 +92,12 @@ for x in names:
 </section>
 
 <!-- quiz: which i -->
-<section class="slide lay-ask" aria-label="小测：改成 a[i] - i">
+<section class="slide lay-ask top" aria-label="小测：改成 a[i] - i">
   <h2 class="t r">小测：改成 print(a[i] - i)，输出什么？</h2>
   <div class="editor r d1"><div class="tab">index.py</div>
-<pre class="code" data-mod="3:print(a[i] - i)">a = [5, 6, 7, 8]
+<pre class="code" data-mod="3:原来是 print(i)">a = [5, 6, 7, 8]
 for i in range(len(a)):
-    print(i)</pre></div>
+    print(a[i] - i)</pre></div>
   <div class="quiz r d2" data-right="0">
     <button type="button" data-fb="答对了！i 是 0、1、2、3，a[i] 是 5、6、7、8，每次相减都是 5。"><i>1</i>5 5 5 5</button>
     <button type="button" data-fb="这是 a[i]，还要减去 i。"><i>2</i>5 6 7 8</button>

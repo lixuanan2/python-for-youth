@@ -20,24 +20,9 @@
     "stdout": "-3\n-2\n-2\n"
   },
   {
-    "page": 7,
-    "code": "import math\nprint(math.ceil(7 / 2))",
-    "stdout": "4\n"
-  },
-  {
-    "page": 8,
-    "code": "print(math.sqrt(16))",
-    "error": "NameError: name 'math' is not defined"
-  },
-  {
     "page": 9,
     "code": "import math\nn = int(input())\nk = int(input())\nprint(math.ceil(n / k))\n",
     "stdin": "23\n5\n",
-    "stdout": "5\n"
-  },
-  {
-    "page": 12,
-    "code": "print(abs(3 - 8))",
     "stdout": "5\n"
   },
   {
@@ -46,14 +31,55 @@
     "stdout": "7.0\n7\n"
   },
   {
-    "page": 14,
-    "code": "import math\nprint(math.sqrt(-1))",
-    "error": "ValueError"
-  },
-  {
-    "page": 15,
+    "page": 16,
     "code": "n = int(input())\nk = int(input())\nprint(int(n / k))",
     "stdin": "23\n5\n",
     "stdout": "4\n"
+  },
+  {
+    "page": 7,
+    "code": "import math\nfor n in [7, 8, 0]:\n    print(math.ceil(n / 2), n // 2 + 1)",
+    "stdout": "4 4\n4 5\n0 1\n"
+  },
+  {
+    "page": 8,
+    "code": "print(math.sqrt(16))",
+    "error": "NameError"
+  },
+  {
+    "page": 12,
+    "code": "a = 147\nb = 152\nprint(abs(a - b), a - b, abs(a) - abs(b), abs(a + b))",
+    "stdout": "5 -5 -5 299\n"
+  },
+  {
+    "page": 14,
+    "code": "def double(x):\n    return x * 2\nprint(double(double(3)))",
+    "stdout": "12\n"
+  },
+  {
+    "page": 15,
+    "code": "print(math.sqrt(16))",
+    "error": "NameError"
+  },
+  {
+    "page": 15,
+    "code": "import math\nprint(sqrt(16))",
+    "error": "NameError"
+  },
+  {
+    "page": 15,
+    "code": "import math\nprint(math.sqrt(16))\nprint(math.floor(-2.3), int(-2.3))",
+    "stdout": "4.0\n-3 -2\n"
+  },
+  {
+    "page": 20,
+    "code": "import math\nprint(int(math.sqrt(17)), math.ceil(math.sqrt(17)))\nprint(math.ceil(32 / 7))\nprint(abs(-3))",
+    "stdout": "4 5\n5\n3\n"
+  },
+  {
+    "page": 7,
+    "code": "import math\nn = 8\nprint(math.ceil(n / 2))\nprint(n // 2 + 1)",
+    "ide": true,
+    "stdout": "4\n5\n"
   }
 ]

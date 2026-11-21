@@ -64,7 +64,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 16,
+    "page": 17,
     "starter": "starter/06_big_square.py",
     "solution": "solutions/06_big_square.py",
     "scope": "一行方块数n，不是负数",

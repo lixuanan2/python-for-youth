@@ -793,10 +793,10 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: which i -->
-<section id="page-7" class="slide lay-ask" aria-label="小测：改成 a[i] - i">
+<section id="page-7" class="slide lay-ask top" aria-label="小测：改成 a[i] - i">
   <h2 class="t r">小测：改成 print(a[i] - i)，输出什么？</h2>
-  <div class="editor r d1" style="--fs:46px"><div class="tab">index.py</div>
-<pre class="code"><span class="ln">a = [<span class="m">5</span>, <span class="m">6</span>, <span class="m">7</span>, <span class="m">8</span>]</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="f">len</span>(a)):</span><span class="ln mod">    <span class="f">print</span>(i)<span class="orig">print(a[i] - i)</span></span></pre></div>
+  <div class="editor r d1" style="--fs:36px"><div class="tab">index.py</div>
+<pre class="code"><span class="ln">a = [<span class="m">5</span>, <span class="m">6</span>, <span class="m">7</span>, <span class="m">8</span>]</span><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="f">len</span>(a)):</span><span class="ln mod">    <span class="f">print</span>(a[i] - i)<span class="orig">原来是 print(i)</span></span></pre></div>
   <div class="quiz r d2" data-right="0">
     <button type="button" data-fb="答对了！i 是 0、1、2、3，a[i] 是 5、6、7、8，每次相减都是 5。"><i>1</i>5 5 5 5</button>
     <button type="button" data-fb="这是 a[i]，还要减去 i。"><i>2</i>5 6 7 8</button>

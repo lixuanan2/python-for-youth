@@ -18,6 +18,7 @@
     <div class="slip tilt r d3 short"><small>想再加一步</small><pre>每一处都要改</pre></div>
   </div>
   <p class="say r d3">复制粘贴能做到，可是一要改就得每处都改，漏一处就错。<br>办法是给这几行起个名字，叫“函数”。要用的时候叫它的名字，改也只改一处。</p>
+  <p class="say tip r d3">生活里：出门前、睡觉前都要照同样几步检查一遍。先想一想：同样几行要用好几次，怎样只写一遍？</p>
   <div class="foot"></div>
 </section>
 
@@ -52,7 +53,7 @@ print("结束")</pre></div>
   </div>
   <div class="turns">
       <p class="say only1">先在纸上写下你的答案。</p>
-      <p class="say only2">只输出“结束”。定义函数就像把菜谱写好放进抽屉，没人照着做，就不会有菜。</p>
+      <p class="say only2">只输出“结束”。定义只是把这几行记下来、起好名字，没有调用，一行也不运行。</p>
       <p class="say step s3">函数里的话，只有调用 hello() 的时候才会说。</p>
     </div>
   <a class="ide step s3">▶ 在 IDE 验证</a>
@@ -72,20 +73,20 @@ print("结束")</pre></div>
 </section>
 
 <!-- quiz -->
-<section class="slide lay-ask" aria-label="小测：输出几行">
-  <h2 class="t r">小测：一共输出几行？</h2>
+<section class="slide lay-ask" aria-label="小测：b 不缩进">
+  <h2 class="t r">小测：第 3 行改成不缩进，一共输出几行？</h2>
   <div class="editor r d1"><div class="tab">几行？</div>
-<pre class="code">def f():
+<pre class="code" data-mod="3:原来缩进 4 格">def f():
     print("a")
-    print("b")
+print("b")
 f()
 f()
 f()</pre></div>
-  <div class="quiz r d2" data-right="2">
-    <button type="button" data-fb="定义的时候不输出，要看调用了几次。"><i>1</i>2 行</button>
-    <button type="button" data-fb="调用了 3 次，但每次输出两行。"><i>2</i>3 行</button>
-    <button type="button" data-fb="答对了！调用 3 次，每次输出 a 和 b 两行，一共 6 行。"><i>3</i>6 行</button>
-    <button type="button" data-fb="定义的那几行不会自己输出，不用多算。"><i>4</i>8 行</button>
+  <div class="quiz r d2" data-right="1">
+    <button type="button" data-fb="第 3 行不缩进，就不归 f 管了。"><i>1</i>6 行</button>
+    <button type="button" data-fb="答对了！b 不在函数里，程序一开始就输出一次 b，后面三次调用各输出一个 a。"><i>2</i>4 行</button>
+    <button type="button" data-fb="别忘了不在函数里的 b，它会自己输出一次。"><i>3</i>3 行</button>
+    <button type="button" data-fb="调用了 3 次，每次都输出 a。"><i>4</i>2 行</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -135,11 +136,12 @@ f()</pre></div>
 def hello():
     print("你好！")</pre></div>
   <div class="answer">
-    <div class="slip tilt step s2 longest" style="width:600px"><small>屏幕上</small><pre style="white-space:pre-wrap">NameError: name 'hello' is not defined</pre></div>
+    <div class="slip tilt step s2"><small>屏幕上</small><pre style="white-space:pre-wrap">红字报错
+程序停下</pre></div>
   </div>
   <div class="turns">
       <p class="say only1">程序从上往下一行一行地走。走到第 1 行时，它认识 hello 吗？</p>
-      <p class="say only2">不行。第 1 行时还没读到定义，程序不认识 hello，报 NameError。</p>
+      <p class="say only2">不行。第 1 行时还没读到定义，程序不认识 hello，报错停下。</p>
       <p class="say step s3">先定义，后调用。定义一般都写在程序最上面。</p>
     </div>
   <div class="foot"></div>
@@ -195,24 +197,39 @@ hello</pre></div>
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：切开再拼">
+  <h2 class="t r">回顾第 13 课：输出什么？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">words = "red green blue".split()
+print("+".join(words[1:]))</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！words[1:] 去掉了第一个词，剩下两个用 + 连起来。"><i>1</i>green+blue</button>
+    <button type="button" data-fb="[1:] 从下标 1 开始，red 不在里面。"><i>2</i>red+green+blue</button>
+    <button type="button" data-fb="join 只放在两个词中间，开头不加。"><i>3</i>+green+blue</button>
+    <button type="button" data-fb="连接符是 +，不是空格。"><i>4</i>green blue</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:540px;--mid:600px">
-    <div class="r d1"><code>hello</code><b>不报错</b><span>没有括号，没调用</span></div>
-    <div class="r d2"><code class="plain">先调用后定义</code><b>NameError</b><span>定义写在最上面</span></div>
-    <div class="r d3"><code class="plain">函数体没缩进</code><b>IndentationError</b><span>函数体缩进 4 个空格</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:520px;--mid:620px">
+    <div class="r d1"><code style="font-size:40px">hello</code><b style="font-size:40px">hello()</b><span>名字加括号才是调用</span></div>
+    <div class="r d2"><code style="font-size:40px">hello()<br>def hello():</code><b style="font-size:40px">def hello():<br>&nbsp;&nbsp;&nbsp;&nbsp;……<br>hello()</b><span>从上往下走，调用时要已经读过定义</span></div>
+    <div class="r d3"><code style="font-size:40px">def hello():<br>print("你好")</code><b style="font-size:40px">def hello():<br>&nbsp;&nbsp;&nbsp;&nbsp;print("你好")</b><span>函数体缩进 4 个空格</span></div>
   </div>
-  <p class="say r d3">IndentationError 的意思是“缩进出错”。看到它，先看 def 下面一行有没有缩进。</p>
+  <p class="say r d3">第一种不报错，什么也不发生。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark lay-ask" aria-label="找错：口号只喊了一次">
-  <h2 class="t r">找错：第二句口号怎么跑到最前面了？</h2>
+<section class="slide dark lay-ask" aria-label="找错：开机前出现两次">
+  <h2 class="t r">找错：关机前怎么也说“开机前”？</h2>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="3" data-yes="找到了！这一行没缩进，不归函数管，程序一开始就输出了它，而且只输出一次。缩进 4 个空格，它才是函数的一部分。" data-no="这一行没问题。想一想：哪一句不在函数里？"><span class="ln"><span class="k">def</span> <span class="f">cheer</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"加油！"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"我们是最棒的！"</span>)</span><span class="ln"><span class="f">cheer</span>()</span><span class="ln"><span class="f">cheer</span>()</span></pre></div>
-  <p class="say r d2">想让每次都喊“加油！我们是最棒的！”，结果输出了“我们是最棒的！加油！加油！”。<br>点你认为有问题的那一行。</p>
+<pre class="code pick" data-bug="2" data-yes="找到了！“开机前”只有开机时才说，不该装进函数。把它挪到第一次调用前面，函数里只放两次都一样的步骤。" data-no="这一行没问题。想一想：哪一句不是两次都一样的？"><span class="ln"><span class="k">def</span> <span class="f">check</span>():</span><span class="ln">    <span class="f">print</span>(<span class="s">"开机前："</span>)</span><span class="ln">    <span class="f">print</span>(<span class="s">"1. 检查电源"</span>)</span><span class="ln">    <span class="f">print</span>(<span class="s">"2. 检查屏幕"</span>)</span><span class="ln"><span class="f">check</span>()</span><span class="ln"><span class="f">print</span>(<span class="s">"关机前："</span>)</span><span class="ln"><span class="f">check</span>()</span></pre></div>
+  <p class="say r d2">关机前的检查也输出了“开机前：”。<br>点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
@@ -253,9 +270,9 @@ hello</pre></div>
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>定义了函数，为什么没有输出？<em class="step s2">　没有调用，函数体不会运行。</em></span></p>
-    <p><i>Q2</i><span>调用完函数，程序接着走哪里？<em class="step s3">　回到调用那一行的下一行。</em></span></p>
-    <p><i>Q3</i><span>用函数有什么好处？<em class="step s4">　写一次用多次，要改只改一处。</em></span></p>
+    <p><i>Q1</i><span>为什么定义一般写在程序最上面？<em class="step s2">　程序从上往下走，走到调用时要已经读过定义。</em></span></p>
+    <p><i>Q2</i><span>检查步骤复制两遍，和写成函数调用两次，要再加一步时有什么不同？<em class="step s3">　复制的要改两处，漏一处两次就不一样；函数只改一处。</em></span></p>
+    <p><i>Q3</i><span>想让发射练习每次倒数 5 下，怎么改？<em class="step s4">　只改函数里的 range(3, 0, -1) 成 range(5, 0, -1)，调用的地方不用动。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
