@@ -1,9 +1,9 @@
 def low_high(nums):
     return min(nums), max(nums)
 n = int(input())
-scores = []
+minutes = []
 for i in range(n):
-    scores.append(int(input()))
-low, high = low_high(scores)
-print("最低", low, "最高", high)
+    minutes.append(int(input()))
+low, high = low_high(minutes)
+print("最少", low, "最多", high)
 print("相差", high - low)

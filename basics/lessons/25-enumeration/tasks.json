@@ -45,7 +45,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 13,
+    "page": 14,
     "starter": "starter/04_hundred.py",
     "solution": "solutions/04_hundred.py",
     "scope": "一行，n为整数",

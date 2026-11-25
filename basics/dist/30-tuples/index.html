@@ -706,7 +706,7 @@ dialog p{color:var(--muted);font-size:15px}
   <p class="kicker r"># LESSON 30</p>
   <div class="cover-row"><b class="r">打包</b><div class="wire r d1"><i></i><span>x, y = (3, 5)</span></div><b class="r d2">拆开</b></div>
   <p class="headline r d3">元组：把几个值打成一包</p>
-  <p class="say r d3">学完你能让函数一次交回两个结果，把名字和分数、横坐标和纵坐标成对地放在一起。</p>
+  <p class="say r d3">学完你能让函数一次交回两个结果，把名字和价格、横坐标和纵坐标成对地放在一起。</p>
   <div class="foot"></div>
 </section>
 
@@ -715,9 +715,10 @@ dialog p{color:var(--muted);font-size:15px}
   <h2 class="t r">有些东西总是成对出现</h2>
   <div class="notes">
     <div class="slip r d1 short"><small>地图上的一个点</small><pre>横 3，竖 5</pre></div>
-    <div class="slip tilt r d2 short"><small>想让函数交回</small><pre>最低分和最高分</pre></div>
+    <div class="slip tilt r d2 short"><small>想让函数交回</small><pre>最少和最多</pre></div>
   </div>
-  <p class="say r d3">一个点要两个数才说得清，一个学生有名字也有分数。第 15 课的 return 只交回一个值，可有时想一次交回两个。<br>元组能把几个值打成一包，当成一个东西传来传去，用的时候再拆开。</p>
+  <p class="say r d3">一个点要两个数才说得清，一样东西有名字也有价格。第 15 课的 return 只交回一个值，可有时想一次交回两个。<br>元组能把几个值打成一包，当成一个东西传来传去，用的时候再拆开。</p>
+  <p class="say tip r d3">生活里：地图上的位置要横竖两个数，商品有名字也有价格。先想一想：函数想一次交回最少和最多，怎么办？</p>
   <div class="foot"></div>
 </section>
 
@@ -743,22 +744,23 @@ dialog p{color:var(--muted);font-size:15px}
 <pre class="code"><span class="ln">p = (<span class="m">3</span>, <span class="m">5</span>)</span><span class="ln l2">p[<span class="m">0</span>] = <span class="m">9</span></span><span class="ln"><span class="f">print</span>(p)</span></pre></div>
   <div class="answer turns">
     <p class="say only1">第 10 课的列表这样改是可以的。<br>元组呢？</p>
-    <div class="slip tilt step s2 short" style="width:600px"><small>屏幕上</small><pre style="white-space:pre-wrap">TypeError</pre></div>
+    <div class="slip tilt step s2"><small>屏幕上</small><pre style="white-space:pre-wrap">红字报错
+程序停下</pre></div>
   </div>
-  <p class="say step s2">报 TypeError：元组不支持给某一格重新赋值。元组打好包，就不能给哪一格重新赋值，比列表“牢”。<br>要换一个点，就整个重新写：p = (9, 5)。这样也不容易被别的代码不小心改掉。</p>
+  <p class="say step s2">报错停下。元组打好包，就不能给哪一格重新赋值，比列表“牢”。<br>要换一个点，就整个重新写：p = (9, 5)。这样也不容易被别的代码不小心改掉。</p>
   <div class="foot"></div>
 </section>
 
 <!-- quiz: unpack -->
-<section id="page-5" class="slide lay-ask top" aria-label="小测：拆包">
-  <h2 class="t r">小测：运行这两行，输出什么？</h2>
-  <div class="editor r d1" style="--fs:48px"><div class="tab">代码</div>
-<pre class="code"><span class="ln">a, b = (<span class="m">4</span>, <span class="m">7</span>)</span><span class="ln"><span class="f">print</span>(b, a)</span></pre></div>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="print 里先写的是 b。"><i>1</i>4 7</button>
-    <button type="button" data-fb="答对了！拆包后 a 是 4、b 是 7，先输出 b。"><i>2</i>7 4</button>
-    <button type="button" data-fb="b 和 a 是拆开以后的两个数，print 用逗号隔开输出，没有括号。"><i>3</i>(7, 4)</button>
-    <button type="button" data-fb="左边两个名字，右边两个数，个数一样，不会报错。"><i>4</i>报错</button>
+<section id="page-5" class="slide lay-ask top" aria-label="小测：同时换">
+  <h2 class="t r">小测：最后输出什么？</h2>
+  <div class="editor r d1" style="--fs:36px"><div class="tab">代码</div>
+<pre class="code"><span class="ln">a, b = (<span class="m">4</span>, <span class="m">7</span>)</span><span class="ln">a, b = b, a + b</span><span class="ln"><span class="f">print</span>(a, b)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！右边先用旧的 a、b 算好 (7, 11)，再同时放进左边。"><i>1</i>7 11</button>
+    <button type="button" data-fb="a + b 用的是旧的 a，也就是 4，不是刚换上的 7。"><i>2</i>7 14</button>
+    <button type="button" data-fb="第二行 b 变成了 a + b。"><i>3</i>7 4</button>
+    <button type="button" data-fb="第二行 a 换成了原来的 b。"><i>4</i>4 11</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -784,85 +786,100 @@ dialog p{color:var(--muted);font-size:15px}
 <!-- pairs in a list -->
 <section id="page-7" class="slide lay-walk wide" aria-label="成对的列表" data-steps="2" data-at="2" data-chapter="成对的列表">
   <h2 class="t">列表里装着一对一对</h2>
-  <div class="editor" style="--fs:40px"><div class="tab">pairs.py</div>
-<pre class="code" data-file="solutions/03_pairs.py"><span class="ln l1">students = [(<span class="s">"小明"</span>, <span class="m">90</span>), (<span class="s">"小红"</span>, <span class="m">85</span>)]</span><span class="ln l2"><span class="k">for</span> name, score <span class="k">in</span> students:</span><span class="ln l2">    <span class="f">print</span>(<span class="s">f"{name}：{score} 分"</span>)</span></pre></div>
+  <div class="editor" style="--fs:44px"><div class="tab">pairs.py</div>
+<pre class="code" data-file="solutions/03_pairs.py"><span class="ln l1">prices = [(<span class="s">"苹果"</span>, <span class="m">5</span>), (<span class="s">"香蕉"</span>, <span class="m">3</span>)]</span><span class="ln l2"><span class="k">for</span> name, price <span class="k">in</span> prices:</span><span class="ln l2">    <span class="f">print</span>(<span class="s">f"{name}：{price} 元"</span>)</span></pre></div>
   <div class="turns">
-      <p class="say only1">列表里每一格都是一个元组：名字和分数绑在一起，不会错位。</p>
-      <p class="say only2">for 后面写两个名字，每次拿出一对，顺手就拆开了：第一次 name 是小明，score 是 90。</p>
+      <p class="say only1">列表里每一格都是一个元组：名字和价格绑在一起，不会错位。</p>
+      <p class="say only2">for 后面写两个名字，每次拿出一对，顺手就拆开了：第一次 name 是苹果，price 是 5。</p>
     </div>
   <a class="ide step s2">▶ 在 IDE 打开</a>
   <div class="right">
-    <div class="step s2 out" style="font:400 48px/1.7 var(--text)">小明：90 分<br>小红：85 分</div>
+    <div class="step s2 out" style="font:400 48px/1.7 var(--text)">苹果：5 元<br>香蕉：3 元</div>
   </div>
 </section>
 
 <!-- quiz: for with pairs -->
-<section id="page-8" class="slide lay-ask" aria-label="小测：拿出来的是哪个">
-  <h2 class="t r">小测：这段程序输出什么？</h2>
-  <div class="editor r d1" style="--fs:38px"><div class="tab">quiz.py</div>
-<pre class="code"><span class="ln">pairs = [(<span class="s">"A"</span>, <span class="m">1</span>), (<span class="s">"B"</span>, <span class="m">2</span>)]</span><span class="ln"><span class="k">for</span> name, score <span class="k">in</span> pairs:</span><span class="ln">    <span class="f">print</span>(score)</span></pre></div>
-  <div class="quiz r d2" data-right="1">
-    <button type="button" data-fb="print 的是 score，不是 name。"><i>1</i>A 和 B</button>
-    <button type="button" data-fb="答对了！每次拿出一对，score 是第二个：1、2。"><i>2</i>1 和 2</button>
-    <button type="button" data-fb="拆包后 score 只是一个数，不是整对。"><i>3</i>("A", 1) 和 ("B", 2)</button>
+<section id="page-8" class="slide lay-ask" aria-label="小测：两种写法比一比">
+  <h2 class="t r">小测：两段输出一样吗？</h2>
+  <div class="editor r d1" style="--fs:38px"><div class="tab">two.py</div>
+<pre class="code"><span class="ln">pairs = [(<span class="s">"A"</span>, <span class="m">1</span>), (<span class="s">"B"</span>, <span class="m">2</span>)]</span><span class="ln"><span class="k">for</span> name, score <span class="k">in</span> pairs:</span><span class="ln">    <span class="f">print</span>(score)</span><span class="ln"><span class="k">for</span> pair <span class="k">in</span> pairs:</span><span class="ln">    <span class="f">print</span>(pair[<span class="m">1</span>])</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！pair 是整对，pair[1] 就是第二个，和拆开后的 score 一样。"><i>1</i>一样，都是 1 和 2</button>
+    <button type="button" data-fb="pair[1] 取的是这一对里的第二个。"><i>2</i>第二段输出整对</button>
+    <button type="button" data-fb="元组有下标，pair[1] 能用。"><i>3</i>第二段会报错</button>
+    <button type="button" data-fb="print 的是 score，是第二个。"><i>4</i>第一段输出 A 和 B</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- worked example -->
-<section id="page-9" class="slide lay-walk" aria-label="例题：最低、最高和相差" data-steps="3" data-at="3" data-chapter="例题">
-  <h2 class="t">例题：最低、最高和相差</h2>
-  <div class="editor" style="--fs:43px"><div class="tab">stats.py</div>
-<pre class="code" data-file="solutions/04_stats.py"><span class="ln l3"><span class="k">def</span> <span class="f">low_high</span>(nums):</span><span class="ln l3">    <span class="k">return</span> <span class="f">min</span>(nums), <span class="f">max</span>(nums)</span><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">scores = []</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    scores.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2 l3">low, high = <span class="f">low_high</span>(scores)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"最低"</span>, low, <span class="s">"最高"</span>, high)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"相差"</span>, high - low)</span></pre></div>
+<section id="page-9" class="slide lay-walk" aria-label="例题：最少、最多和相差" data-steps="3" data-at="3" data-chapter="例题">
+  <h2 class="t">例题：最少、最多和相差</h2>
+  <div class="editor" style="--fs:41px"><div class="tab">stats.py</div>
+<pre class="code" data-file="solutions/04_stats.py"><span class="ln l3"><span class="k">def</span> <span class="f">low_high</span>(nums):</span><span class="ln l3">    <span class="k">return</span> <span class="f">min</span>(nums), <span class="f">max</span>(nums)</span><span class="ln l1">n = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln l1">minutes = []</span><span class="ln l1"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln l1">    minutes.<span class="f">append</span>(<span class="f">int</span>(<span class="f">input</span>()))</span><span class="ln l2 l3">low, high = <span class="f">low_high</span>(minutes)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"最少"</span>, low, <span class="s">"最多"</span>, high)</span><span class="ln l3"><span class="f">print</span>(<span class="s">"相差"</span>, high - low)</span></pre></div>
   <div class="right">
     <div class="turns">
-      <p class="say only1 small">先读入 4，再读 90、85、77、96，放进列表。</p>
+      <p class="say only1 small">4 天写作业用的分钟数：90、85、77、96，放进列表。</p>
       <p class="say only2 small">调用 low_high，交回 (77, 96)，拆成 low 和 high。</p>
       <p class="say only3 small">两个值都拿到了，还能接着算：96 - 77 是 19。</p>
     </div>
-    <div class="step s3 out" style="font:400 48px/1.6 var(--text)">最低 77 最高 96<br>相差 19</div>
+    <div class="step s3 out" style="font:400 48px/1.6 var(--text)">最少 77 最多 96<br>相差 19</div>
     <a class="ide step s3">▶ 在 IDE 打开</a>
   </div>
 </section>
 
 <!-- your turn -->
-<section id="page-10" class="slide lay-try" aria-label="再交回平均分">
+<section id="page-10" class="slide lay-try" aria-label="再交回平均">
   <div class="band r"><b>动手<br>改一改</b><span>让函数多交回一个。</span></div>
   <div class="turn">
-    <h2 class="r d1">再交回平均分</h2>
-    <p class="say r d1">在例题上改：函数改成一次交回三个值：最低、最高、平均分，平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。输入和例题一样，n 至少是 1。</p>
+    <h2 class="r d1">再交回平均</h2>
+    <p class="say r d1">在例题上改：函数改成一次交回三个值：最少、最多、平均，平均用 round 保留 1 位小数。最后多输出一行“平均 多少”。输入和例题一样，n 至少是 1。</p>
     <div class="sheet two r d2"><div><small>输入 4、90、85、77、96，第三行</small><pre>平均 87.0</pre></div><div><small>输入 1、60，第三行</small><pre>平均 60.0</pre></div></div>
     <p class="say tip r d3">交回几个，拆的时候左边就写几个名字。</p>
   </div>
-  <a class="ide r d3" data-code="# 【再交回平均分】&#10;# 在例题上改：函数改成一次交回三个值：最低、最高、平均分，&#10;#   平均分用 round 保留 1 位小数。最后多输出一行“平均 多少”。&#10;#   输入和例题一样，n 至少是 1。&#10;# 例如输入（每个一行）：4、90、85、77、96&#10;# 应该输出：&#10;#   最低 77 最高 96&#10;#   相差 19&#10;#   平均 87.0&#10;# 提示：让函数多交回一个。&#10;# ↓ 在下面这段程序上改&#10;&#10;def low_high(nums):&#10;    return min(nums), max(nums)&#10;n = int(input())&#10;scores = []&#10;for i in range(n):&#10;    scores.append(int(input()))&#10;low, high = low_high(scores)&#10;print(&quot;最低&quot;, low, &quot;最高&quot;, high)&#10;print(&quot;相差&quot;, high - low)&#10;">▶ 在 IDE 开始改</a>
+  <a class="ide r d3" data-code="# 【再交回平均】&#10;# 在例题上改：函数改成一次交回三个值：最少、最多、平均，&#10;#   平均用 round 保留 1 位小数。最后多输出一行“平均 多少”。&#10;#   输入和例题一样，n 至少是 1。&#10;# 例如输入（每个一行）：4、90、85、77、96&#10;# 应该输出：&#10;#   最少 77 最多 96&#10;#   相差 19&#10;#   平均 87.0&#10;# 提示：让函数多交回一个。&#10;# ↓ 在下面这段程序上改&#10;&#10;def low_high(nums):&#10;    return min(nums), max(nums)&#10;n = int(input())&#10;minutes = []&#10;for i in range(n):&#10;    minutes.append(int(input()))&#10;low, high = low_high(minutes)&#10;print(&quot;最少&quot;, low, &quot;最多&quot;, high)&#10;print(&quot;相差&quot;, high - low)&#10;">▶ 在 IDE 开始改</a>
 </section>
 
 <!-- errors -->
-<section id="page-11" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:640px;--mid:380px">
-    <div class="r d1"><code>p[0] = 9</code><b>TypeError</b><span>不能给某一格重新赋值，整个重写</span></div>
-    <div class="r d2"><code>x, y = (1, 2, 3)</code><b>ValueError</b><span>左右个数要一样</span></div>
-    <div class="r d3"><code>t = (5)</code><b>不报错</b><span>这只是数 5；要写 (5,)</span></div>
+<section id="page-11" class="slide lay-ask" aria-label="回顾：减去一个">
+  <h2 class="t r">回顾第 29 课：输出几？</h2>
+  <div class="editor r d1" style="--fs:35px"><div class="tab">review.py</div>
+<pre class="code"><span class="ln"><span class="f">print</span>(<span class="f">len</span>({<span class="m">1</span>, <span class="m">2</span>, <span class="m">2</span>, <span class="m">3</span>} - {<span class="m">3</span>}))</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！集合里本来是 1、2、3，减去 3 剩 1 和 2。"><i>1</i>2</button>
+    <button type="button" data-fb="重复的 2 只算一个，再减去 3。"><i>2</i>3</button>
+    <button type="button" data-fb="减掉的只有 3。"><i>3</i>1</button>
+    <button type="button" data-fb="1 和 2 都不在 {3} 里，留下了。"><i>4</i>0</button>
   </div>
-  <p class="say r d3">元组靠逗号打包，不靠括号。只有一个值时，后面也要跟一个逗号。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-12" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:600px">
+    <div class="r d1"><code>p[0] = 9</code><b>p = (9, 5)</b><span>元组不能给某一格重新赋值，整个重写</span></div>
+    <div class="r d2"><code>x, y = (1, 2, 3)</code><b>x, y, z = (1, 2, 3)</b><span>左右个数要一样</span></div>
+    <div class="r d3"><code>t = (5)</code><b>t = (5,)</b><span>只有一个值，后面要带逗号</span></div>
+  </div>
+  <p class="say r d3">第三种不报错，t 只是数 5。元组靠逗号打包，不靠括号。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-12" class="slide dark lay-ask" aria-label="找错：拆出来的个数不对">
-  <h2 class="t r">找错：第 3 行报 ValueError</h2>
-  <div class="editor r d1" style="--fs:35px"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="3" data-yes="找到了！函数交回 3 个值，左边只写了 low、high 两个名字，个数对不上。要写成 low, high, total = ……" data-no="这一行没问题。报错说要拆的值太多了，是在哪一行拆的？"><span class="ln"><span class="k">def</span> <span class="f">low_high_total</span>(nums):</span><span class="ln">    <span class="k">return</span> <span class="f">min</span>(nums), <span class="f">max</span>(nums), <span class="f">sum</span>(nums)</span><span class="ln">low, high = <span class="f">low_high_total</span>([<span class="m">60</span>, <span class="m">80</span>, <span class="m">100</span>])</span><span class="ln"><span class="f">print</span>(low, high)</span></pre></div>
-  <p class="say r d2">报错说要拆的值太多了。函数名说了要交回三样：最低、最高、总和。点出该改的那一行。</p>
+<section id="page-13" class="slide dark lay-ask" aria-label="找错：相差成了负数">
+  <h2 class="t r">找错：相差怎么是 -40？</h2>
+  <div class="editor r d1" style="--fs:42px"><div class="tab">bug.py（只阅读）</div>
+<pre class="code pick" data-bug="3" data-yes="找到了！函数先交回最大的，再交回最小的，左边却先写 low，拆反了。写成 high, low = high_low(……)。" data-no="这一行没问题。想一想 low 拿到的是几。"><span class="ln"><span class="k">def</span> <span class="f">high_low</span>(nums):</span><span class="ln">    <span class="k">return</span> <span class="f">max</span>(nums), <span class="f">min</span>(nums)</span><span class="ln">low, high = <span class="f">high_low</span>([<span class="m">60</span>, <span class="m">80</span>, <span class="m">100</span>])</span><span class="ln"><span class="f">print</span>(<span class="s">"相差"</span>, high - low)</span></pre></div>
+  <p class="say r d2">最多 100、最少 60，应该相差 40，程序却输出 -40。<br>点出该改的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-13" class="slide clay lay-notes challenge" aria-label="最近的宝藏" data-chapter="挑战">
+<section id="page-14" class="slide clay lay-notes challenge" aria-label="最近的宝藏" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:150px">最近的宝藏</h2>
   <p class="say r d2">你站在 (0, 0)，只能横着或竖着走，走到 (x, y) 要 |x| + |y| 步。第一行读入宝藏个数 n，至少 1 个，接下来 n 行每行两个整数 x 和 y，用空格隔开。<br>找出最近的宝藏，<b>一样近时选先出现的</b>。输出两行：它的位置，写成 (1, -2) 的样子；还有“几 步”。</p>
@@ -876,7 +893,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-14" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-15" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>每行用 x, y = input().split() 拆开，再用 int() 变成整数，打包成 (x, y) 放进列表。</span></p>
@@ -886,7 +903,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
-<section id="page-15" class="slide dark" aria-label="参考答案：最近的宝藏" data-answer="02" data-steps="2" data-at="2">
+<section id="page-16" class="slide dark" aria-label="参考答案：最近的宝藏" data-answer="02" data-steps="2" data-at="2">
   <h2 class="t">参考答案：最近的宝藏</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1728px;--fs:31px"><div class="tab">treasure.py</div>
@@ -897,19 +914,19 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-16" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-17" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>元组和列表有什么不同？<em class="step s2">　元组用圆括号，打好包就不能给某一格重新赋值。</em></span></p>
-    <p><i>Q2</i><span>什么是拆包？<em class="step s3">　x, y = p，按顺序拆成几个变量，左右个数要一样。</em></span></p>
-    <p><i>Q3</i><span>函数怎么交回两个值？<em class="step s4">　return a, b 打成一包，调用时 x, y = 函数() 拆开。</em></span></p>
+    <p><i>Q1</i><span>函数为什么能一次交回两个值？<em class="step s2">　return a, b 其实是打成一个元组交回去，还是一个东西。</em></span></p>
+    <p><i>Q2</i><span>最近的宝藏比较时写成 &lt;=，结果有什么不同？<em class="step s3">　一样近时会换成后出现的那个。</em></span></p>
+    <p><i>Q3</i><span>把每个人的名字和身高成对存起来，找出最高的人，怎么写？<em class="step s4">　列表里放 (名字, 身高)，for name, h in people: 打擂台比 h，记下 name。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-17" class="slide lay-columns" aria-label="速查卡">
+<section id="page-18" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3" style="--key:860px">
     <div class="r d1"><code>p = (3, 5)   p[0]</code><span>打包；用下标看</span></div>
@@ -922,7 +939,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-18" class="slide lay-columns" aria-label="后面再学">
+<section id="page-19" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>dict.items()</code><span>字典也能一对一对地拿出键和值</span></div>
@@ -934,7 +951,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-19" class="slide dark thanks" aria-label="谢谢">
+<section id="page-20" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>

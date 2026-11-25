@@ -10,16 +10,6 @@
     "stdout": ""
   },
   {
-    "page": 6,
-    "code": "print(len(range(1, 101)), min(range(1, 101)), max(range(1, 101)))",
-    "stdout": "100 1 100\n"
-  },
-  {
-    "page": 6,
-    "code": "print(len(range(100, 1)))",
-    "stdout": "0\n"
-  },
-  {
     "page": 8,
     "code": "heads = int(input())\nfeet = int(input())\nfor c in range(heads + 1):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)\n",
     "stdin": "35\n94\n",
@@ -29,17 +19,6 @@
     "page": 8,
     "code": "print(0 * 2 + 35 * 4, 1 * 2 + 34 * 4, 23 * 2 + 12 * 4)",
     "stdout": "140 138 94\n"
-  },
-  {
-    "page": 9,
-    "code": "print(len(range(35 + 1)))",
-    "stdout": "36\n"
-  },
-  {
-    "page": 9,
-    "code": "heads = int(input())\nfeet = int(input())\nfor c in range(heads + 1):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)\n",
-    "stdin": "35\n94\n",
-    "stdout": "鸡 23 兔 12\n"
   },
   {
     "page": 10,
@@ -54,27 +33,54 @@
     "stdout": "没有答案\n"
   },
   {
+    "page": 14,
+    "code": "n = int(input())\nfound = False\nfor cock in range(n // 5 + 1):\n    for hen in range(n // 3 + 1):\n        chick = n - cock - hen\n        if chick >= 0 and chick % 3 == 0:\n            if cock * 5 + hen * 3 + chick // 3 == n:\n                print(\"公鸡\", cock, \"母鸡\", hen, \"小鸡\", chick)\n                found = True\nif not found:\n    print(\"没有答案\")\n",
+    "stdin": "100\n",
+    "stdout": "公鸡 0 母鸡 25 小鸡 75\n公鸡 4 母鸡 18 小鸡 78\n公鸡 8 母鸡 11 小鸡 81\n公鸡 12 母鸡 4 小鸡 84\n"
+  },
+  {
+    "page": 6,
+    "code": "a = range(2, 101, 2)\nprint(len(a), a[0], a[-1])\nprint(list(range(2, 100, 2))[-1], list(range(1, 101, 2))[0], list(range(0, 100, 2))[0])",
+    "stdout": "50 2 100\n98 1 0\n"
+  },
+  {
+    "page": 9,
+    "code": "heads = int(input())\nfeet = int(input())\nfor c in range(heads, -1, -1):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)",
+    "stdin": "35\n94\n",
+    "stdout": "鸡 23 兔 12\n"
+  },
+  {
     "page": 11,
-    "code": "heads = int(input())\nfeet = int(input())\nfor c in range(heads):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)\n",
+    "code": "a = [3, 1, 2]\na[0], a[2] = a[2], a[0]\na[1], a[2] = a[2], a[1]\nprint(a)",
+    "stdout": "[2, 3, 1]\n"
+  },
+  {
+    "page": 12,
+    "code": "heads = int(input())\nfeet = int(input())\nfor c in range(heads):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)",
     "stdin": "10\n20\n",
     "stdout": ""
   },
   {
-    "page": 11,
-    "code": "heads = int(input())\nfeet = int(input())\nfor c in range(1, heads + 1):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)\n",
+    "page": 12,
+    "code": "heads = int(input())\nfeet = int(input())\nfor c in range(1, heads + 1):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)",
     "stdin": "10\n40\n",
     "stdout": ""
   },
   {
     "page": 12,
-    "code": "heads = int(input())\nfeet = int(input())\nfor c in range(heads):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)\n",
+    "code": "heads = int(input())\nfeet = int(input())\nfor c in range(heads + 1):\n    r = heads - c\n    if c * 2 + r * 4 == feet:\n        print(\"鸡\", c, \"兔\", r)",
     "stdin": "10\n20\n",
-    "stdout": ""
+    "stdout": "鸡 10 兔 0\n"
   },
   {
     "page": 13,
-    "code": "n = int(input())\nfound = False\nfor cock in range(n // 5 + 1):\n    for hen in range(n // 3 + 1):\n        chick = n - cock - hen\n        if chick >= 0 and chick % 3 == 0:\n            if cock * 5 + hen * 3 + chick // 3 == n:\n                print(\"公鸡\", cock, \"母鸡\", hen, \"小鸡\", chick)\n                found = True\nif not found:\n    print(\"没有答案\")\n",
-    "stdin": "100\n",
-    "stdout": "公鸡 0 母鸡 25 小鸡 75\n公鸡 4 母鸡 18 小鸡 78\n公鸡 8 母鸡 11 小鸡 81\n公鸡 12 母鸡 4 小鸡 84\n"
+    "code": "heads = int(input())\nfeet = int(input())\nfor c in range(heads + 1):\n    r = heads - c\n    if c * 4 + r * 2 == feet:\n        print(\"鸡\", c, \"兔\", r)",
+    "stdin": "35\n94\n",
+    "stdout": "鸡 12 兔 23\n"
+  },
+  {
+    "page": 17,
+    "code": "for x in range(1, 101):\n    if x % 7 == 0 and x % 10 == 3:\n        print(x)",
+    "stdout": "63\n"
   }
 ]

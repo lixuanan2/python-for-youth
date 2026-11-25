@@ -15,6 +15,7 @@
     <div class="slip tilt r d2"><small>print(10 / 3)</small><pre>3.3333333333333335</pre></div>
   </div>
   <p class="say r d3">逗号会多出空格，小数又长得看不完。写成绩单、小票、时钟，都想要整整齐齐的输出。<br>这节课学 f-string：在引号前面加一个 f，就能把变量直接写进句子里，还能管住小数有几位。</p>
+  <p class="say tip r d3">生活里：超市小票、电子钟都要整整齐齐。先想一想：怎样把 5 分 9 秒显示成 05:09？</p>
   <div class="foot"></div>
 </section>
 
@@ -41,16 +42,17 @@ print("{name}今年{age}岁")</pre></div>
 </section>
 
 <!-- quiz: braces -->
-<section class="slide lay-ask top" aria-label="小测：大括号外面的加号">
-  <h2 class="t r">小测：运行这两行，输出什么？</h2>
+<section class="slide lay-ask top" aria-label="小测：两种写法比一比">
+  <h2 class="t r">小测：两行各输出什么？</h2>
   <div class="editor r d1"><div class="tab">代码</div>
 <pre class="code">age = 12
-print(f"{age}+1")</pre></div>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="+1 写在大括号外面，只是普通的文字，不会去算。"><i>1</i>13</button>
-    <button type="button" data-fb="答对了！大括号里的 age 换成 12，后面的 +1 原样跟着。想算就写成 {age + 1}。"><i>2</i>12+1</button>
-    <button type="button" data-fb="有 f，大括号会被换成 age 的值。"><i>3</i>{age}+1</button>
-    <button type="button" data-fb="这样写不会报错。"><i>4</i>报错</button>
+print(f"{age + 1}")
+print(f"{age}" + "1")</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！第一行在大括号里算出 13；第二行是文字 "12" 接上文字 "1"。"><i>1</i>13 和 121</button>
+    <button type="button" data-fb="第二行的 + 在大括号外面，是把两段文字接起来。"><i>2</i>13 和 13</button>
+    <button type="button" data-fb="第一行的加号在大括号里，会先算。"><i>3</i>121 和 121</button>
+    <button type="button" data-fb="第二行没有把 + 写进引号，它会把两段文字接起来。"><i>4</i>13 和 12+1</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -72,16 +74,16 @@ print(f"{age}+1")</pre></div>
 </section>
 
 <!-- quiz: .2f -->
-<section class="slide lay-ask top" aria-label="小测：7 保留两位">
-  <h2 class="t r">小测：运行这两行，输出什么？</h2>
+<section class="slide lay-ask top" aria-label="小测：改成 9.996">
+  <h2 class="t r">小测：price 改成 9.996，输出什么？</h2>
   <div class="editor r d1"><div class="tab">代码</div>
-<pre class="code">price = 7
+<pre class="code" data-mod="1:原来是 7">price = 9.996
 print(f"{price:.2f}")</pre></div>
-  <div class="quiz r d1" data-right="2">
-    <button type="button" data-fb=":.2f 要显示 2 位小数，整数也会补上。"><i>1</i>7</button>
-    <button type="button" data-fb="只有 1 位。.2f 要 2 位。"><i>2</i>7.0</button>
-    <button type="button" data-fb="答对了！不够 2 位就补 0，小票上的钱常这样写。"><i>3</i>7.00</button>
-    <button type="button" data-fb="冒号后面的是格式说明，不会原样输出。"><i>4</i>7.2f</button>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！保留 2 位要四舍五入，9.996 进上去就是 10.00。"><i>1</i>10.00</button>
+    <button type="button" data-fb=":.2f 是四舍五入，不是直接砍掉。"><i>2</i>9.99</button>
+    <button type="button" data-fb="保留 2 位，第 3 位不会显示。"><i>3</i>9.996</button>
+    <button type="button" data-fb=":.2f 一定显示 2 位小数。"><i>4</i>10</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -134,24 +136,43 @@ print(f"{m:02d}:{s:02d}")</pre></div>
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：跳过和停下">
+  <h2 class="t r">回顾第 27 课：输出哪些数？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">for i in range(5):
+    if i == 1:
+        continue
+    if i == 3:
+        break
+    print(i)</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！1 被 continue 跳过，到 3 就 break 停下。"><i>1</i>0 2</button>
+    <button type="button" data-fb="i 是 1 时 continue，print 被跳过。"><i>2</i>0 1 2</button>
+    <button type="button" data-fb="到 3 就 break，4 轮不到。"><i>3</i>0 2 4</button>
+    <button type="button" data-fb="i 是 0 时两个 if 都不进，照常输出。"><i>4</i>2</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:660px;--mid:380px">
-    <div class="r d1"><code>print("{name}")</code><b>不报错</b><span>忘了 f，原样输出大括号</span></div>
-    <div class="r d2"><code class="plain">文字用 :.2f</code><b>ValueError</b><span>先用 float() 变成数</span></div>
-    <div class="r d3"><code>f"{name"</code><b>SyntaxError</b><span>大括号要成对</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:640px">
+    <div class="r d1"><code>print("{name}")</code><b>print(f"{name}")</b><span>忘了 f，大括号原样输出</span></div>
+    <div class="r d2"><code>x = input()<br>f"{x:.2f}"</code><b>x = float(input())<br>f"{x:.2f}"</b><span>文字不能按小数显示，先 float()</span></div>
+    <div class="r d3"><code>f"{name"</code><b>f"{name}"</b><span>大括号要成对</span></div>
   </div>
-  <p class="say r d3">:.2f 和 :02d 只能用在数上。input() 读来的是文字，要先转换。</p>
+  <p class="say r d3">第一种不报错，屏幕上会出现大括号。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark lay-ask" aria-label="找错：格式报错">
-  <h2 class="t r">找错：第 3 行报 ValueError</h2>
+<section class="slide dark lay-ask" aria-label="找错：少收了一元">
+  <h2 class="t r">找错：四舍五入，怎么成了 16 元？</h2>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="1" data-yes="找到了！input() 读来的是文字，文字不能按 :.2f 显示。改成 price = float(input())。" data-no="这一行没问题。报错说这个值不能按小数显示，它是从哪里来的？"><span class="ln">price = <span class="f">input</span>()</span><span class="ln">count = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(<span class="s">f"每件 {price:.2f} 元"</span>)</span></pre></div>
-  <p class="say r d2">输入 3.5 和 4，报错的最后一行是：<br><span style="font-family:var(--code);font-size:30px">ValueError: Unknown format code 'f' for object of type 'str'</span><br>点出该改的那一行。</p>
+<pre class="code pick" data-bug="4" data-yes="找到了！int() 直接砍掉小数，16.67 成了 16。要四舍五入，写 {each:.0f}。" data-no="这一行没问题。16.67 变成 16，是哪一步把小数去掉的？"><span class="ln">total = <span class="f">float</span>(<span class="f">input</span>())</span><span class="ln">people = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">each = total / people</span><span class="ln"><span class="f">print</span>(<span class="s">f"每人 {int(each)} 元"</span>)</span></pre></div>
+  <p class="say r d2">50 元 3 个人分，每人 16.67 元，四舍五入应该是 17 元，程序却说 16 元。<br>点出该改的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
@@ -183,9 +204,9 @@ print(f"{m:02d}:{s:02d}")</pre></div>
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>f-string 怎么写？<em class="step s2">　引号前加 f，变量和算式写进大括号。</em></span></p>
-    <p><i>Q2</i><span>:.2f 是什么意思？<em class="step s3">　按小数显示，保留 2 位，不够补 0。</em></span></p>
-    <p><i>Q3</i><span>怎样把 5 显示成 05？<em class="step s4">　写 {m:02d}：整数，至少 2 位，前面补 0。</em></span></p>
+    <p><i>Q1</i><span>小票上的钱数为什么用 :.2f，不直接输出？<em class="step s2">　3.5、14.0 位数不一样；统一两位小数，看着整齐，也是钱数常用的写法。</em></span></p>
+    <p><i>Q2</i><span>电子钟不补 0，输入 3909 会有什么不同？<em class="step s3">　显示成 1:5:9，不像钟表上的样子。</em></span></p>
+    <p><i>Q3</i><span>想把 0.85 显示成 85.0 分，怎么写？<em class="step s4">　f"{0.85 * 100:.1f} 分"</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

@@ -15,19 +15,9 @@
     "stdout": "{name}今年{age}岁\n"
   },
   {
-    "page": 4,
-    "code": "age = 12\nprint(f\"{age}+1\")\n",
-    "stdout": "12+1\n"
-  },
-  {
     "page": 5,
     "code": "x = 10 / 3\nprint(x)\nprint(f\"{x:.2f}\")\nprint(f\"{x:.1f}\")\n",
     "stdout": "3.3333333333333335\n3.33\n3.3\n"
-  },
-  {
-    "page": 6,
-    "code": "price = 7\nprint(f\"{price:.2f}\")\n",
-    "stdout": "7.00\n"
   },
   {
     "page": 7,
@@ -53,36 +43,62 @@
     "stdout": "5:9\n05:09\n12\n"
   },
   {
-    "page": 10,
-    "code": "name = \"小明\"\nprint(\"{name}\")\n",
-    "stdout": "{name}\n"
-  },
-  {
-    "page": 10,
-    "code": "x = \"3.5\"\nprint(f\"{x:.2f}\")\n",
-    "error": "ValueError"
-  },
-  {
-    "page": 10,
-    "code": "name = \"小明\"\nprint(f\"{name\")\n",
-    "error": "SyntaxError"
-  },
-  {
-    "page": 11,
-    "code": "price = input()\ncount = int(input())\nprint(f\"每件 {price:.2f} 元\")\n",
-    "stdin": "3.5\n4\n",
-    "error": "ValueError: Unknown format code 'f' for object of type 'str'"
-  },
-  {
-    "page": 12,
+    "page": 13,
     "code": "seconds = int(input())\nh = seconds // 3600\nm = seconds % 3600 // 60\ns = seconds % 60\nprint(f\"{h:02d}:{m:02d}:{s:02d}\")\n",
     "stdin": "3909\n",
     "stdout": "01:05:09\n"
   },
   {
-    "page": 12,
+    "page": 13,
     "code": "seconds = int(input())\nh = seconds // 3600\nm = seconds % 3600 // 60\ns = seconds % 60\nprint(f\"{h:02d}:{m:02d}:{s:02d}\")\n",
     "stdin": "86399\n",
     "stdout": "23:59:59\n"
+  },
+  {
+    "page": 4,
+    "code": "age = 12\nprint(f\"{age + 1}\")\nprint(f\"{age}\" + \"1\")",
+    "stdout": "13\n121\n"
+  },
+  {
+    "page": 6,
+    "code": "price = 9.996\nprint(f\"{price:.2f}\")",
+    "stdout": "10.00\n"
+  },
+  {
+    "page": 10,
+    "code": "for i in range(5):\n    if i == 1:\n        continue\n    if i == 3:\n        break\n    print(i)",
+    "stdout": "0\n2\n"
+  },
+  {
+    "page": 11,
+    "code": "name = \"小明\"\nprint(\"{name}\")\nprint(f\"{name}\")",
+    "stdout": "{name}\n小明\n"
+  },
+  {
+    "page": 11,
+    "code": "x = \"3.5\"\nprint(f\"{x:.2f}\")",
+    "error": "ValueError"
+  },
+  {
+    "page": 11,
+    "code": "name = \"小明\"\nprint(f\"{name\")",
+    "error": "SyntaxError"
+  },
+  {
+    "page": 12,
+    "code": "total = float(input())\npeople = int(input())\neach = total / people\nprint(f\"每人 {int(each)} 元\")",
+    "stdin": "50\n3\n",
+    "stdout": "每人 16 元\n"
+  },
+  {
+    "page": 12,
+    "code": "total = float(input())\npeople = int(input())\neach = total / people\nprint(f\"每人 {each:.0f} 元\")",
+    "stdin": "50\n3\n",
+    "stdout": "每人 17 元\n"
+  },
+  {
+    "page": 16,
+    "code": "seconds = 3909\nh = seconds // 3600\nm = seconds % 3600 // 60\ns = seconds % 60\nprint(f\"{h}:{m}:{s}\")\nprint(f\"{0.85 * 100:.1f} 分\")",
+    "stdout": "1:5:9\n85.0 分\n"
   }
 ]

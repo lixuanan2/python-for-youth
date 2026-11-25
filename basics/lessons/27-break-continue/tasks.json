@@ -64,18 +64,18 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 12,
-    "starter": "starter/06_scores.py",
-    "solution": "solutions/06_scores.py",
+    "page": 13,
+    "starter": "starter/06_reading.py",
+    "solution": "solutions/06_reading.py",
     "scope": "每行一个整数，以-1结束",
-    "sample_input": "90\n80\n120\n85\n-1\n",
-    "sample_output": "有效 3 个\n平均 85.0\n",
-    "description": "跳过无效分数，读到 -1 结束，输出个数和平均分。",
+    "sample_input": "30\n45\n500\n15\n-1\n",
+    "sample_output": "有效 3 天\n平均 30.0\n",
+    "description": "跳过记错的分钟数，读到 -1 结束，输出天数和平均。",
     "brief": {
-      "title": "整理成绩单",
+      "title": "阅读记录",
       "goal": [
-        "不停读入分数，每行一个整数，读到 -1 就结束。不在 0 到 100 之间的是写错了，跳过不算。",
-        "输出两行：“有效 几 个”和“平均 多少”，平均分用 round 保留 1 位小数。一个有效分数也没有，就输出“没有有效分数”。"
+        "不停读入每天读书的分钟数，每行一个整数，读到 -1 就结束。不在 0 到 300 之间的是记错了，跳过不算。",
+        "输出两行：“有效 几 天”和“平均 多少”，平均用 round 保留 1 位小数。一天有效的也没有，就输出“没有有效记录”。"
       ]
     }
   }

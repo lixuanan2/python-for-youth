@@ -15,6 +15,7 @@
     <div class="slip tilt r d2 short"><small>先猜中间的 50</small><pre>一下去掉一半</pre></div>
   </div>
   <p class="say r d3">猜 50，对方说“大了”，51 到 100 就都不用想了。每次都猜剩下的正中间，每次都去掉一半。<br>这叫二分查找。它有个前提：数要排好顺序，才能从“大了、小了”知道往哪边找。</p>
+  <p class="say tip r d3">生活里：查字典、翻书找某一页，都是先翻中间，再往一边找。先想一想：猜 1 到 100，第一次猜几最划算？</p>
   <div class="foot"></div>
 </section>
 
@@ -64,13 +65,13 @@
 </section>
 
 <!-- quiz: mid -->
-<section class="slide lay-ask" aria-label="小测：中间是几">
-  <h2 class="t r">小测：lo = 51，hi = 100，mid 是几？</h2>
+<section class="slide lay-ask" aria-label="小测：下一次猜几">
+  <h2 class="t r">小测：50 小了，75 大了，下一次猜几？</h2>
   <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！51 + 100 是 151，151 // 2 是 75。"><i>1</i>75</button>
-    <button type="button" data-fb="// 是整除，不留小数。"><i>2</i>75.5</button>
-    <button type="button" data-fb="// 往下取整，不会往上进到 76。"><i>3</i>76</button>
-    <button type="button" data-fb="这是 100 // 2。别忘了 lo 也要加进去。"><i>4</i>50</button>
+    <button type="button" data-fb="答对了！范围缩到 51 到 74，(51 + 74) // 2 是 62。"><i>1</i>62</button>
+    <button type="button" data-fb="// 往下取整，125 // 2 是 62。"><i>2</i>63</button>
+    <button type="button" data-fb="75 已经大了，要往小的那边找。"><i>3</i>87</button>
+    <button type="button" data-fb="50 已经小了，答案比 50 大。"><i>4</i>25</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -87,9 +88,9 @@
 </section>
 
 <!-- quiz: best case -->
-<section class="slide lay-ask" aria-label="小测：秘密数是 50">
-  <h2 class="t r">小测：秘密数是 50，电脑猜几次？</h2>
-  <div class="editor r d2" style="width:1000px;--fs:36px"><div class="tab">输入 50</div>
+<section class="slide lay-ask" aria-label="小测：秘密数是 1">
+  <h2 class="t r">小测：秘密数是 1，电脑猜几次？</h2>
+  <div class="editor r d1" style="width:1000px;--fs:36px"><div class="tab">输入 1</div>
 <pre class="code">secret = int(input())
 lo = 1
 hi = 100
@@ -101,11 +102,11 @@ while guess != secret:
         lo = guess + 1
     elif guess &gt; secret:
         hi = guess - 1</pre></div>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！第一次就猜中间 50，正好中了。"><i>1</i>1 次</button>
-    <button type="button" data-fb="7 次是最多的时候。50 正好是第一次猜的数。"><i>2</i>7 次</button>
-    <button type="button" data-fb="二分不会从 1 一个个猜到 50。"><i>3</i>50 次</button>
-    <button type="button" data-fb="guess 从 0 开始，不等于 50，至少会进循环猜一次。"><i>4</i>0 次</button>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！50、25、12、6、3、1，每次都大了，往左缩一半，第 6 次中。"><i>1</i>6 次</button>
+    <button type="button" data-fb="7 次是最多的时候，这里少一次。"><i>2</i>7 次</button>
+    <button type="button" data-fb="第一次猜的是中间的 50。"><i>3</i>1 次</button>
+    <button type="button" data-fb="二分不会一个个猜。"><i>4</i>100 次</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -124,15 +125,33 @@ while guess != secret:
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：两个条件">
+  <h2 class="t r">回顾第 25 课：输出几？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">count = 0
+for x in range(1, 31):
+    if x % 4 == 0 and x % 6 == 0:
+        count += 1
+print(count)</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！又是 4 的倍数又是 6 的倍数，1 到 30 里只有 12 和 24。"><i>1</i>2</button>
+    <button type="button" data-fb="24 也在 1 到 30 里。"><i>2</i>1</button>
+    <button type="button" data-fb="12 是第一个对上的数，count 数的是个数。"><i>3</i>12</button>
+    <button type="button" data-fb="要两个条件都成立，不是只要一个。"><i>4</i>12 个</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:560px;--mid:300px">
-    <div class="r d1"><code>lo = guess</code><b>不报错</b><span>可能一直猜同一个，停不下来</span></div>
-    <div class="r d2"><code>(lo + hi) / 2</code><b>不对劲</b><span>/ 得到小数，猜 50.5 这样的数</span></div>
-    <div class="r d3"><code class="plain">数没排好就二分</code><b>不报错</b><span>可能找不到明明有的数</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:600px;--mid:640px">
+    <div class="r d1"><code style="font-size:40px">(lo + hi) / 2</code><b style="font-size:40px">(lo + hi) // 2</b><span>/ 得到小数，会猜 50.5 这样的数</span></div>
+    <div class="r d2"><code style="font-size:40px">hi = guess + 1</code><b style="font-size:40px">hi = guess - 1</b><span>大了要往小的那边找</span></div>
+    <div class="r d3"><code style="font-size:40px">a = [30, 8, 21, 3]</code><b style="font-size:40px">a = sorted([30, 8, 21, 3])</b><span>数没排好，可能找不到明明有的数</span></div>
   </div>
-  <p class="say r d3">猜过的数已经不可能了，所以写 guess + 1 和 guess - 1。用 1 和 100 两头试一试。</p>
+  <p class="say r d3">三种都不报错。用 1 和 100 两头试一试。</p>
   <div class="foot"></div>
 </section>
 
@@ -182,9 +201,9 @@ while guess != secret:
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>二分查找为什么快？<em class="step s2">　每次去掉一半，1 到 100 最多 7 次。</em></span></p>
-    <p><i>Q2</i><span>用二分有什么前提？<em class="step s3">　数要排好顺序。</em></span></p>
-    <p><i>Q3</i><span>为什么是 guess + 1，不是 guess？<em class="step s4">　猜过的已经不对，不用再留着，不然可能停不下来。</em></span></p>
+    <p><i>Q1</i><span>为什么二分之前，数要先排好？<em class="step s2">　比完中间才知道该扔哪一半；没排好就不知道。</em></span></p>
+    <p><i>Q2</i><span>1 到 1000，二分和挨个猜，最多各要几次？<em class="step s3">　二分最多 10 次，挨个最多 1000 次。</em></span></p>
+    <p><i>Q3</i><span>300 页的书翻中间找第 200 页，lo 和 hi 写几？<em class="step s4">　lo = 1，hi = 300，第一次翻第 150 页。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

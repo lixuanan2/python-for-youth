@@ -15,6 +15,7 @@
     <div class="slip tilt r d2 short"><small>第 22 课一直问到输对</small><pre>要记着 done</pre></div>
   </div>
   <p class="say r d3">循环原来只会从头转到尾。有时我们想在中间就停下：找到了就别再找，输对了就别再问。<br>这节课学两个词：break 是“跳出”，整个循环马上结束；continue 是“继续”，跳过这一次，直接进下一圈。</p>
+  <p class="say tip r d3">生活里：聊天说了“再见”才结束，售货机投够钱就出货。先想一想：不知道要读几次，怎样读到“再见”就停？</p>
   <div class="foot"></div>
 </section>
 
@@ -139,15 +140,32 @@ print(n)</pre></div>
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：第二次猜几">
+  <h2 class="t r">回顾第 26 课：第二次猜几？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">lo = 1
+hi = 10
+secret = 10
+# 每次猜 (lo + hi) // 2</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！先猜 (1 + 10) // 2 = 5，小了，范围变成 6 到 10，再猜 (6 + 10) // 2 = 8。"><i>1</i>8</button>
+    <button type="button" data-fb="5 已经猜过，lo 变成 6，不是 5。"><i>2</i>7</button>
+    <button type="button" data-fb="二分每次猜中间，不会直接跳到最大的。"><i>3</i>10</button>
+    <button type="button" data-fb="5 是小了，要往大的那边找。"><i>4</i>3</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:700px;--mid:400px">
-    <div class="r d1"><code class="plain">break 写在循环外</code><b>SyntaxError</b><span>break 只能用在循环里</span></div>
-    <div class="r d2"><code class="plain">while True 没写 break</code><b>停不下来</b><span>要有一个能走到的出口</span></div>
-    <div class="r d3"><code class="plain">该停处写成 continue</code><b>停不下来</b><span>continue 只跳过这一次</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:600px;--mid:640px">
+    <div class="r d1"><code style="font-size:40px">print("拜拜")<br>break</code><b style="font-size:40px">while True:<br>&nbsp;&nbsp;&nbsp;&nbsp;……<br>&nbsp;&nbsp;&nbsp;&nbsp;break</b><span>break 只能写在循环里</span></div>
+    <div class="r d2"><code style="font-size:40px">while True:<br>&nbsp;&nbsp;&nbsp;&nbsp;n = int(input())</code><b style="font-size:40px">while True:<br>&nbsp;&nbsp;&nbsp;&nbsp;n = int(input())<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0: break</b><span>要有一个走得到的 break</span></div>
+    <div class="r d3"><code style="font-size:40px">Break</code><b style="font-size:40px">break</b><span>要写小写</span></div>
   </div>
-  <p class="say r d3">写 while True 时先问自己：哪一句 break 能让它停下？那句真的走得到吗？</p>
+  <p class="say r d3">第二种不报错，只是程序停不下来。</p>
   <div class="foot"></div>
 </section>
 
@@ -162,17 +180,17 @@ print(n)</pre></div>
 </section>
 
 <!-- challenge -->
-<section class="slide clay lay-notes challenge" aria-label="整理成绩单" data-chapter="挑战">
+<section class="slide clay lay-notes challenge" aria-label="阅读记录" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
-  <h2 class="big r d1" style="font-size:160px">整理成绩单</h2>
-  <p class="say r d2">不停读入分数，每行一个整数，读到 -1 就结束。不在 0 到 100 之间的是写错了，<b>跳过不算</b>。<br>输出两行：“有效 几 个”和“平均 多少”，平均分用 round 保留 1 位小数。一个有效分数也没有，就输出“没有有效分数”。</p>
-  <div class="slip tilt2 r d3" style="width:480px"><small>依次输入</small><pre>90
-80
-120
-85
--1</pre><small>输出</small><pre style="white-space:pre">有效 3 个
-平均 85.0</pre></div>
-  <div class="go r d3"><a class="ide" data-code-file="starter/06_scores.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
+  <h2 class="big r d1" style="font-size:160px">阅读记录</h2>
+  <p class="say r d2">不停读入每天读书的分钟数，每行一个整数，读到 -1 就结束。不在 0 到 300 之间的是记错了，<b>跳过不算</b>。<br>输出两行：“有效 几 天”和“平均 多少”，平均用 round 保留 1 位小数。一天有效的也没有，就输出“没有有效记录”。</p>
+  <div class="slip tilt2 r d3" style="width:480px"><small>依次输入</small><pre>30
+45
+500
+15
+-1</pre><small>输出</small><pre style="white-space:pre">有效 3 天
+平均 30.0</pre></div>
+  <div class="go r d3"><a class="ide" data-code-file="starter/06_reading.py">▶ 在 IDE 开始写</a><p class="say">先自己写，卡住了再翻下一页。</p></div>
   <div class="foot"></div>
 </section>
 
@@ -181,8 +199,8 @@ print(n)</pre></div>
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>用 while True 一直读。读到 -1 用 break 停下，和动手题读到 0 一样。</span></p>
-    <p class="step s2"><i>提示 2</i><span>小于 0 或者大于 100 的，用 continue 跳过：不加进总和，也不数。</span></p>
-    <p class="step s3"><i>提示 3</i><span>循环结束后再算平均。个数是 0 时不能除，先判断，说“没有有效分数”。</span></p>
+    <p class="step s2"><i>提示 2</i><span>小于 0 或者大于 300 的，用 continue 跳过：不加进总和，也不数。</span></p>
+    <p class="step s3"><i>提示 3</i><span>循环结束后再算平均。天数是 0 时不能除，先判断，说“没有有效记录”。</span></p>
   </div>
   <div class="foot"></div>
 </section>
@@ -193,9 +211,9 @@ print(n)</pre></div>
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>break 做什么？<em class="step s2">　马上跳出整个循环，去运行循环后面的。</em></span></p>
-    <p><i>Q2</i><span>continue 做什么？<em class="step s3">　跳过这一圈剩下的，直接进下一圈。</em></span></p>
-    <p><i>Q3</i><span>while True 什么时候停？<em class="step s4">　这节课靠里面的 break 停，所以要保证 break 一定走得到。</em></span></p>
+    <p><i>Q1</i><span>聊天的例题为什么用 while True，不用 for？<em class="step s2">　不知道要聊几句，只知道说了“再见”才停。</em></span></p>
+    <p><i>Q2</i><span>例题把 print("你说", word) 挪到 if 前面，输入再见时有什么不同？<em class="step s3">　先输出“你说 再见”，再跳出循环说拜拜。</em></span></p>
+    <p><i>Q3</i><span>读数时跳过负数，只加正数，读到 0 就停，怎么写？<em class="step s4">　while True: 里读 n；n == 0 就 break，n &lt; 0 就 continue，其余 total += n。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
