@@ -41,6 +41,7 @@ h2.t::before{content:"# ";color:var(--clay)}
 .text-mid{font-size:72px!important}.text-num{font-size:56px!important}
 .dark .aside{color:#74716a}
 .clay .aside{color:#f6d3c4}
+.clay .say.tip{color:#f6d3c4}.olive .say.tip{color:#e3e9da}
 .olive .aside{color:#c5cfb8}
 .kbd{display:inline-block;padding:0 14px 2px;border:3px solid currentColor;border-bottom-width:7px;border-radius:10px;font:700 .8em var(--code)}
 
