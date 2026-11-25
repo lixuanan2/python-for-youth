@@ -42,7 +42,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 13,
+    "page": 14,
     "starter": "starter/04_rps.py",
     "solution": "solutions/04_rps.py",
     "scope": "第一行种子为整数；第二行是石头、剪刀或布",

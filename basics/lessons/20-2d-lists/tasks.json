@@ -27,10 +27,10 @@
     "page": 8,
     "starter": "starter/03_row_totals.py",
     "solution": "solutions/03_row_totals.py",
-    "scope": "第一行人数n；接下来n行，每行三个整数，用空格隔开",
+    "scope": "第一行天数n；接下来n行，每行三个整数，用空格隔开",
     "sample_input": "2\n90 80 70\n60 85 95\n",
     "sample_output": "1 240\n2 240\n",
-    "description": "读入成绩表，算每个人的总分。"
+    "description": "读入销量表，算每天一共卖了几件。"
   },
   {
     "id": "01",
@@ -38,16 +38,16 @@
     "page": 9,
     "starter": "starter/04_subject_totals.py",
     "solution": "solutions/04_subject_totals.py",
-    "scope": "第一行人数n；接下来n行，每行三个整数，用空格隔开",
+    "scope": "第一行天数n；接下来n行，每行三个整数，用空格隔开",
     "sample_input": "2\n90 80 70\n60 85 95\n",
     "sample_output": "150\n165\n165\n",
-    "description": "改成算每一科的总分。",
+    "description": "改成算每样东西一共卖了几件。",
     "brief": {
-      "title": "每一科的总分",
+      "title": "每样东西一共卖了几件",
       "goal": [
-        "输入和例题一样：第一行人数 n，接下来 n 行，每行三个整数，用空格隔开。依次输出三科各自的总分，一行一个。"
+        "输入和例题一样：第一行天数 n，接下来 n 行，每行三个整数，用空格隔开。依次输出三样东西各自的总数，一行一个。"
       ],
-      "hint": "一行是一个人，一列是一科。这次要竖着加。"
+      "hint": "一行是一天，一列是一样东西。这次要竖着加。"
     }
   },
   {
@@ -64,7 +64,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 14,
+    "page": 15,
     "starter": "starter/06_treasure.py",
     "solution": "solutions/06_treasure.py",
     "scope": "第一行行数n；接下来n行等长的地图，只有.和#",

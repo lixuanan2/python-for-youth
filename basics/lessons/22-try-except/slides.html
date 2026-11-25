@@ -15,6 +15,7 @@
     <div class="slip tilt r d2 short"><small>屏幕上</small><pre>ValueError</pre></div>
   </div>
   <p class="say r d3">用汉字写的“十二”，int() 转换不了，程序报错，后面的话一句也不说了。<br>用的人难免输错。这节课学 try 和 except：先接住报错，提醒一句，程序接着运行。</p>
+  <p class="say tip r d3">生活里：网上填表填错了，会提示你重填，不会整个关掉。先想一想：输入“十二”时，怎样让程序提醒一句、接着运行？</p>
   <div class="foot"></div>
 </section>
 
@@ -197,15 +198,30 @@ print("明年你", age + 1, "岁")</pre></div>
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：两头一样">
+  <h2 class="t r">回顾第 21 课：会输出几？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">import random
+print(random.randint(5, 5))</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！两头都算，从 5 到 5 只有一个数可挑。"><i>1</i>一定是 5</button>
+    <button type="button" data-fb="能挑的只有 5 一个。"><i>2</i>说不准</button>
+    <button type="button" data-fb="两个数一样也可以，不会报错。"><i>3</i>报错</button>
+    <button type="button" data-fb="randint 一定交回一个数。"><i>4</i>什么也不输出</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:580px;--mid:360px">
-    <div class="r d1"><code class="plain">try 缺了 except</code><b>SyntaxError</b><span>try 要和 except 配对</span></div>
-    <div class="r d2"><code class="plain">名字写成别的错</code><b>没接住</b><span>int() 的错要写 ValueError</span></div>
-    <div class="r d3"><code>except:</code><b>不报错</b><span>什么错都接住，打错字也看不出</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:600px;--mid:640px">
+    <div class="r d1"><code style="font-size:40px">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;age = int(s)</code><b style="font-size:40px">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;age = int(s)<br>except ValueError:</b><span>try 后面要跟 except</span></div>
+    <div class="r d2"><code style="font-size:40px">except ZeroDivisionError:</code><b style="font-size:40px">except ValueError:</b><span>int() 转换不了报 ValueError，名字要对上</span></div>
+    <div class="r d3"><code style="font-size:40px">except ValueError</code><b style="font-size:40px">except ValueError:</b><span>这一行末尾要冒号</span></div>
   </div>
-  <p class="say r d3">except 后面写上名字，只接你想到的那种错。别的错照样红字，你才知道哪里写错了。</p>
+  <p class="say small r d3">第二种接不住，照样红字停下。</p>
   <div class="foot"></div>
 </section>
 
@@ -252,9 +268,9 @@ print("明年你", age + 1, "岁")</pre></div>
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>try 里出错以后，剩下的行还运行吗？<em class="step s2">　不运行，直接跳到 except。</em></span></p>
-    <p><i>Q2</i><span>except 后面为什么要写 ValueError？<em class="step s3">　只接这一种错，别的错照样看得见。</em></span></p>
-    <p><i>Q3</i><span>怎么一直问到输对为止？<em class="step s4">　用 while 和 done，输对了才把 done 变成 True。</em></span></p>
+    <p><i>Q1</i><span>except 后面为什么要写上 ValueError？<em class="step s2">　只接想到的这种错，打错字这类错照样看得见。</em></span></p>
+    <p><i>Q2</i><span>例题把 done = True 挪到第一句，有什么不同？<em class="step s3">　输错也只问一次就停，age 没拿到数，最后一行报错。</em></span></p>
+    <p><i>Q3</i><span>年龄要在 0 到 120 之间，不对就再问，怎么改？<em class="step s4">　转换成功后再用 if 判断，在范围里才 done = True。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

@@ -7,7 +7,7 @@
     "solution": "solutions/01_tools.py",
     "scope": "无输入",
     "sample_input": "",
-    "sample_output": "245\n95\n70\n81.66666666666667\n",
+    "sample_output": "545\n215\n150\n181.66666666666666\n",
     "description": "sum、max、min和平均数。"
   },
   {
@@ -18,7 +18,7 @@
     "solution": "solutions/02_sorted.py",
     "scope": "无输入",
     "sample_input": "",
-    "sample_output": "[70, 80, 95]\n[95, 80, 70]\n[80, 95, 70]\n",
+    "sample_output": "[150, 180, 215]\n[215, 180, 150]\n[180, 215, 150]\n",
     "description": "sorted排序，原来的列表不变。"
   },
   {
@@ -39,9 +39,9 @@
     "starter": "starter/04_report.py",
     "solution": "solutions/04_report.py",
     "scope": "第一行人数n至少为1；接下来n行每行一个整数",
-    "sample_input": "3\n80\n95\n70\n",
-    "sample_output": "总分 245\n最高 95\n最低 70\n",
-    "description": "一句一个工具，做成绩小报告。"
+    "sample_input": "3\n180\n215\n150\n",
+    "sample_output": "一共 545\n最远 215\n最近 150\n",
+    "description": "一句一个工具，做跳远小报告。"
   },
   {
     "id": "01",
@@ -50,13 +50,13 @@
     "starter": "starter/05_ranking.py",
     "solution": "solutions/05_ranking.py",
     "scope": "第一行人数n；接下来n行每行一个整数",
-    "sample_input": "3\n80\n95\n70\n",
-    "sample_output": "1 95\n2 80\n3 70\n",
-    "description": "从高到低输出名次表。",
+    "sample_input": "3\n180\n215\n150\n",
+    "sample_output": "1 215\n2 180\n3 150\n",
+    "description": "从远到近输出名次表。",
     "brief": {
       "title": "排一张名次表",
       "goal": [
-        "第一行读入人数 n，接下来 n 行，每行一个整数分数。从高到低输出名次和分数，一行一个，分数一样也各占一个名次。"
+        "第一行读入人数 n，接下来 n 行，每行一个整数，是跳远的厘米数。从远到近输出名次和厘米数，一行一个，一样远也各占一个名次。"
       ],
       "hint": "先从大到小排好，再用下标编名次。"
     }
@@ -64,7 +64,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 15,
+    "page": 16,
     "starter": "starter/06_judge.py",
     "solution": "solutions/06_judge.py",
     "scope": "第一行评委人数n至少为3；接下来n行每行一个整数",

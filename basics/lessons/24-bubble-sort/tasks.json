@@ -53,7 +53,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 12,
+    "page": 13,
     "starter": "starter/05_count_swaps.py",
     "solution": "solutions/05_count_swaps.py",
     "scope": "第一行n为整数；接下来n行，每行一个整数身高",

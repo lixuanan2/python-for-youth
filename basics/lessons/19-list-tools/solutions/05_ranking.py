@@ -1,7 +1,7 @@
 n = int(input())
-scores = []
+dist = []
 for i in range(n):
-    scores.append(int(input()))
-ranked = sorted(scores, reverse=True)
+    dist.append(int(input()))
+ranked = sorted(dist, reverse=True)
 for i in range(len(ranked)):
     print(i + 1, ranked[i])

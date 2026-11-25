@@ -15,6 +15,7 @@
     <div class="slip tilt r d2 short"><small>体育课按身高排队</small><pre>挨着的两人比一比</pre></div>
   </div>
   <p class="say r d3">排队时，老师常让挨着的两个人比一比：前面的高，就换个位置。一遍遍比下去，队伍就整齐了。<br>这节课用同样的办法写一个排序程序。高的数会像水里的泡泡一样往后冒，所以叫冒泡排序。</p>
+  <p class="say tip r d3">生活里：按身高排队、按得分排名都要排序。先想一想：只许挨着的两人换位置，怎样把队排好？</p>
   <div class="foot"></div>
 </section>
 
@@ -39,23 +40,23 @@ print(a, b)</pre>
     </div>
   </div>
   <div class="turns">
-      <p class="say only2">第 3 行 a 变成 5，原来的 3 就被盖掉了。第 4 行 b = a，拿到的也是 5。<br>就像两杯饮料互换，直接倒过去会混在一起，得先找个空杯子。</p>
-      <p class="say step s3">Python 一行就能交换。a, b = b, a：先把右边的 b 和 a 都看好，<br>再同时放进左边，谁也不会被盖掉，不用找空杯子。</p>
+      <p class="say only2">第 3 行 a 变成 5，原来的 3 就被盖掉了。<br>第 4 行 b = a，拿到的也是 5。</p>
+      <p class="say step s3">Python 一行就能交换。a, b = b, a：先把右边的 b 和 a 都看好，<br>再同时放进左边，谁也不会被盖掉。</p>
     </div>
   <div class="foot"></div>
 </section>
 
 <!-- quiz: swap in a list -->
-<section class="slide lay-ask top" aria-label="小测：列表里换位置">
-  <h2 class="t r">小测：运行这两行以后，a 是什么？</h2>
+<section class="slide lay-ask top" aria-label="小测：换 0 和 2">
+  <h2 class="t r">小测：改成换下标 0 和 2，a 是什么？</h2>
   <div class="editor r d1"><div class="tab">a 是什么？</div>
-<pre class="code">a = [4, 1, 3]
-a[0], a[1] = a[1], a[0]</pre></div>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！下标 0 和 1 的两个数换了位置，3 没动。"><i>1</i>[1, 4, 3]</button>
-    <button type="button" data-fb="交换真的发生了，列表变了。"><i>2</i>[4, 1, 3]</button>
-    <button type="button" data-fb="这是分两行写才会出的事。一行交换不会把数盖掉。"><i>3</i>[1, 1, 3]</button>
-    <button type="button" data-fb="下标 2 的 3 没参加交换，还在最后。"><i>4</i>[3, 1, 4]</button>
+<pre class="code" data-mod="2:原来换 0 和 1">a = [4, 1, 3]
+a[0], a[2] = a[2], a[0]</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！第一个和最后一个换了位置，中间的 1 没动。"><i>1</i>[3, 1, 4]</button>
+    <button type="button" data-fb="这是换下标 0 和 1，现在换的是 0 和 2。"><i>2</i>[1, 4, 3]</button>
+    <button type="button" data-fb="下标 0 的 4 也参加了交换，不会留在原地。"><i>3</i>[4, 3, 1]</button>
+    <button type="button" data-fb="一行交换不会把数盖掉。"><i>4</i>[3, 1, 3]</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -73,13 +74,13 @@ a[0], a[1] = a[1], a[0]</pre></div>
 </section>
 
 <!-- quiz: after one pass -->
-<section class="slide lay-ask" aria-label="小测：一轮之后">
-  <h2 class="t r">小测：比完一轮，哪一个一定站对了位置？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="最小的 1 只往前挪了一格，还没到最前面。"><i>1</i>最小的在最前</button>
-    <button type="button" data-fb="答对了！最大的一路都比别人大，每次都被换到后面，一轮就到了最后。"><i>2</i>最大的在最后</button>
-    <button type="button" data-fb="[2, 4, 1, 5] 还没排好，1 还在后面。"><i>3</i>全部排好了</button>
-    <button type="button" data-fb="有一个是一定站对了的。想想 5 是怎么走的。"><i>4</i>一个也说不准</button>
+<section class="slide lay-ask" aria-label="小测：一轮就排好">
+  <h2 class="t r">小测：哪一组比完一轮就全部排好了？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！只有 2 和 1 要换，换完就是 [1, 2, 3, 4]。"><i>1</i>[2, 1, 3, 4]</button>
+    <button type="button" data-fb="一轮只把 4 送到最后，变成 [3, 2, 1, 4]。"><i>2</i>[4, 3, 2, 1]</button>
+    <button type="button" data-fb="1 一轮只往前挪一格，变成 [2, 3, 1, 4]。"><i>3</i>[2, 3, 4, 1]</button>
+    <button type="button" data-fb="一轮后是 [1, 3, 2, 4]，3 和 2 还反着。"><i>4</i>[1, 4, 3, 2]</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -134,24 +135,42 @@ for r in range(n - 1):
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：每层加 2">
+  <h2 class="t r">回顾第 23 课：输出几？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">def f(n):
+    if n == 0:
+        return 0
+    return 2 + f(n - 1)
+print(f(3))</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！f(3) 是 2 + f(2)，一共往下三层，每层加 2，到 f(0) 交回 0：2 + 2 + 2 + 0。"><i>1</i>6</button>
+    <button type="button" data-fb="每层加的是 2，不是 1。"><i>2</i>3</button>
+    <button type="button" data-fb="f(0) 交回 0，只有三层各加 2。"><i>3</i>8</button>
+    <button type="button" data-fb="n 每次减 1，一定到得了出口 n == 0。"><i>4</i>报错</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:720px;--mid:360px">
-    <div class="r d1"><code class="plain">先 a = b，再 b = a</code><b>不报错</b><span>两个都变成一样的数</span></div>
-    <div class="r d2"><code>for j in range(n):</code><b>IndexError</b><span>a[j + 1] 超出了列表</span></div>
-    <div class="r d3"><code>if a[j] &lt; a[j + 1]:</code><b>不报错</b><span>排成了从大到小</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:640px">
+    <div class="r d1"><code>a = b<br>b = a</code><b>a, b = b, a</b><span>分两行，原来的数先被盖掉</span></div>
+    <div class="r d2"><code>for j in range(n):</code><b>for j in range(n - 1 - r):</b><span>j 走到最后，a[j + 1] 超出列表</span></div>
+    <div class="r d3"><code>if a[j] &lt; a[j + 1]:</code><b>if a[j] &gt; a[j + 1]:</b><span>想从小到大，前面大才换</span></div>
   </div>
-  <p class="say r d3">排序写错，常常不报错，只是结果不对。写完用几组数试一试：本来就排好的、倒着的、有一样的。</p>
+  <p class="say r d3">第一、三种不报错，只是结果不对。写完用几组数试：排好的、倒着的、有一样的。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark lay-ask" aria-label="找错：超出了列表">
-  <h2 class="t r">找错：报 IndexError，j + 1 超出了列表</h2>
+<section class="slide dark lay-ask" aria-label="找错：少了一轮">
+  <h2 class="t r">找错：怎么没排好？</h2>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="4" data-yes="找到了！j 能走到 3，a[j + 1] 就是 a[4]，4 个数的列表没有下标 4。改成 range(n - 1 - r)。" data-no="这一行没问题。报错说下标超出了范围，看看 j 最大会走到几。"><span class="ln">a = [<span class="m">5</span>, <span class="m">2</span>, <span class="m">4</span>, <span class="m">1</span>]</span><span class="ln">n = <span class="f">len</span>(a)</span><span class="ln"><span class="k">for</span> r <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(n):</span><span class="ln">        <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln">            a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln"><span class="f">print</span>(a)</span></pre></div>
-  <p class="say r d2">点出该改的那一行。</p>
+<pre class="code pick" data-bug="3" data-yes="找到了！4 个数要比 3 轮，range(n - 2) 只比了 2 轮，1 还没挪到最前面。改成 range(n - 1)。" data-no="这一行没问题。1 还差一格，想一想一共比了几轮。"><span class="ln">a = [<span class="m">5</span>, <span class="m">2</span>, <span class="m">4</span>, <span class="m">1</span>]</span><span class="ln">n = <span class="f">len</span>(a)</span><span class="ln"><span class="k">for</span> r <span class="k">in</span> <span class="f">range</span>(n - <span class="m">2</span>):</span><span class="ln">    <span class="k">for</span> j <span class="k">in</span> <span class="f">range</span>(n - <span class="m">1</span> - r):</span><span class="ln">        <span class="k">if</span> a[j] &gt; a[j + <span class="m">1</span>]:</span><span class="ln">            a[j], a[j + <span class="m">1</span>] = a[j + <span class="m">1</span>], a[j]</span><span class="ln"><span class="f">print</span>(a)</span></pre></div>
+  <p class="say r d2">想排成 [1, 2, 4, 5]，程序却输出 [2, 1, 4, 5]，也没有报错。<br>点你认为有问题的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
@@ -188,9 +207,9 @@ for r in range(n - 1):
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>怎样交换两个变量？<em class="step s2">　a, b = b, a，一行同时换。</em></span></p>
-    <p><i>Q2</i><span>比完一轮，哪个站对了位置？<em class="step s3">　最大的到了最后。</em></span></p>
-    <p><i>Q3</i><span>为什么内层是 range(n - 1 - r)？<em class="step s4">　后面 r 个已经排好，不用再比；再减 1 是因为要比 a[j + 1]。</em></span></p>
+    <p><i>Q1</i><span>为什么内层是 range(n - 1 - r)？<em class="step s2">　后面 r 个已经站好，不用再比；再减 1 是因为要比 a[j + 1]。</em></span></p>
+    <p><i>Q2</i><span>比较写成 &gt;=，排出来的结果和换的次数有什么不同？<em class="step s3">　结果一样，但一样大的也换，换的次数变多。</em></span></p>
+    <p><i>Q3</i><span>只想把最大的数放到最后，要写几轮？<em class="step s4">　一轮就够：for j in range(n - 1) 比一遍，最大的就到了最后。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

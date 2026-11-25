@@ -1,5 +1,5 @@
-scores = [80, 95, 70]
-print(sum(scores))
-print(max(scores))
-print(min(scores))
-print(sum(scores) / len(scores))
+dist = [180, 215, 150]
+print(sum(dist))
+print(max(dist))
+print(min(dist))
+print(sum(dist) / len(dist))

@@ -1,4 +1,4 @@
-scores = [80, 95, 70]
-print(sorted(scores))
-print(sorted(scores, reverse=True))
-print(scores)
+dist = [180, 215, 150]
+print(sorted(dist))
+print(sorted(dist, reverse=True))
+print(dist)

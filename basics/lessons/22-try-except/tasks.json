@@ -53,7 +53,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 15,
+    "page": 16,
     "starter": "starter/05_ledger.py",
     "solution": "solutions/05_ledger.py",
     "scope": "第一行行数n为整数；接下来n行，每行可能是整数，也可能是别的字",
