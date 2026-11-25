@@ -51,15 +51,16 @@ const record = readRecord();
 const needs = id => record[id]?.hash !== fingerprint(id);
 const sharedNeeds = () => record[SHARED_KEY]?.hash !== sharedPrint();
 
-// The sample: the lesson with the fewest pages, the one with the longest title (the status bar's longest label) and the one
-// with the most widgets (quizzes, bug hunts, logic switches, yellow boxes, code changes, algorithm demos). Worked out from
-// the built pages each time, so it follows the course as lessons are added.
+// The sample: the lesson with the fewest pages, the one with the longest title (the status bar's longest label; an extra
+// lesson's 附加课程 1 is one character more than 第 12 课) and the one with the most widgets (quizzes, bug hunts, logic
+// switches, yellow boxes, code changes, algorithm demos). Worked out from the built pages each time, so it follows the
+// course as lessons are added.
 const sample = (() => {
   const built = id => fs.readFileSync(path.join('dist', id, 'index.html'), 'utf8');
   const pages = id => built(id).match(/<section id="page-/g).length;
   const widgets = id => (built(id).match(/class="(?:quiz|pick|gate|slot|algo)\b|class="code was\b/g) || []).length;
   const picked = [];
-  for (const score of [l => -pages(l.id), l => [...l.title].length, l => widgets(l.id)]) {
+  for (const score of [l => -pages(l.id), l => [...l.title].length + (l.extra ? 1 : 0), l => widgets(l.id)]) {
     const left = allLessons.filter(l => !picked.includes(l));
     picked.push(left.reduce((best, l) => score(l) > score(best) ? l : best));
   }

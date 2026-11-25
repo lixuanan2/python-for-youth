@@ -7,7 +7,8 @@ Run in basics/. A repository without home/content.json is skipped. The page arou
 editor, the script) is home/page.html; it has {{name}} slots for what content.json gives.
 
 Text in content.json is written once for both: **bold**, `code`, [text](link), {slot:7} (a yellow box on the page, `7` in
-the README), {kbd:F} (a key) and {lessons} (how many lessons basics/course.json has made). A link to a file in the
+the README), {kbd:F} (a key), {lessons} (how many main lessons basics/course.json has made) and {extras} (how many
+extra lessons, 附加课程, it has made; write it only in a course that has some). A link to a file in the
 repository (CONTRIBUTING.md, basics/README.md) stays relative in the README and points to GitHub on the page; a link
 starting with site: (site:basics/) is a page of the website, relative on the page and full in the README.
 """
@@ -122,14 +123,17 @@ def home(c):
     return re.sub(r'\{\{(\w+)\}\}', lambda m: slots[m.group(1)], page)
 
 
-def lessons_done():
-    """How many lessons basics/course.json has made (an entry with an id)."""
-    return sum(1 for item in json.loads((ROOT / 'basics' / 'course.json').read_text(encoding='utf-8')) if item.get('id'))
+def lessons_done(extra=False):
+    """How many lessons basics/course.json has made (an entry with an id): the main ones, or with extra=True the extra ones."""
+    items = json.loads((ROOT / 'basics' / 'course.json').read_text(encoding='utf-8'))
+    return sum(1 for item in items if item.get('id') and bool(item.get('extra')) == extra)
 
 
 def made():
-    # {lessons} in the text is how many lessons are made, from basics/course.json, so the count is never written by hand.
-    c = json.loads(CONTENT.read_text(encoding='utf-8').replace('{lessons}', str(lessons_done())))
+    # {lessons} and {extras} in the text are how many main and extra lessons are made, from basics/course.json, so the
+    # counts are never written by hand.
+    text = CONTENT.read_text(encoding='utf-8').replace('{lessons}', str(lessons_done())).replace('{extras}', str(lessons_done(True)))
+    c = json.loads(text)
     return {README: readme(c), HOME: home(c)}
 
 
