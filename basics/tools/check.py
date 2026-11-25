@@ -575,9 +575,27 @@ def check_layouts(lesson, folder):
     return moved
 
 
+def check_course():
+    """Extra lessons (附加课程) in course.json: "extra": 1, 2 ... in order, all after the main route, in a stage of their
+    own, with an id that does not start with digits (the main lessons' number comes from the digits in front of the id)."""
+    items = builder.course()
+    extras = [item for item in items if 'extra' in item]
+    for n, item in enumerate(extras, 1):
+        where = f'course.json: extra lesson "{item.get("title")}"'
+        assert item['extra'] == n and type(item['extra']) is int, f'{where}: number the extra lessons 1, 2 ... in order ("extra": {n})'
+        assert not re.match(r'\d', item.get('id', '')), f'{where}: an extra lesson\'s id does not start with digits, e.g. x{n}-printf-scanf'
+    if extras:
+        first = items.index(extras[0])
+        assert all('extra' in item for item in items[first:]), 'course.json: extra lessons come after every main lesson'
+        shared = {item['stage'] for item in extras} & {item['stage'] for item in items[:first]}
+        assert not shared, f'course.json: extra lessons have a stage of their own, not {", ".join(sorted(shared))}'
+    return sum('id' in item for item in extras)
+
+
 def main():
     scripts = cases = claims = pages = changes = algos = boxes = moved = 0
     lessons = builder.lessons()
+    extras = check_course()
     for lesson in lessons:
         folder = ROOT / 'lessons' / lesson['id']
         s, c = check_programs(folder)
@@ -598,7 +616,7 @@ def main():
     if '--traces' in sys.argv:
         for name, n, note in untraced:
             print(f'not traced: {name} page {n}: {note}')
-    print(f'PASS: {len(lessons)} lesson(s), {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {algos} algorithm demos, {boxes} error-box lines, {traced} trace pages ({len(untraced)} not checkable, see --traces), {moved} pages on layouts, {links} index and starter links, {docs} document links.')
+    print(f'PASS: {len(lessons)} lesson(s){f" ({extras} extra)" if extras else ""}, {pages} pages, {scripts} scripts, {cases} output cases, {claims} slide claims, {changes} code changes, {algos} algorithm demos, {boxes} error-box lines, {traced} trace pages ({len(untraced)} not checkable, see --traces), {moved} pages on layouts, {links} index and starter links, {docs} document links.')
 
 
 if __name__ == '__main__':

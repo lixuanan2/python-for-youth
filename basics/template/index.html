@@ -56,6 +56,14 @@ h2::before{content:"# ";color:var(--clay)}
 .ready a:first-child{background:var(--ink);color:var(--paper)}
 .ready a:hover{background:var(--clay);border-color:var(--clay);color:#fff}
 
+/* === EXTRA LESSONS: after the whole route, a block of their own in olive. build.py drops this part when course.json has none === */
+.stage.extra{margin-top:40px;border-top:4px solid var(--olive)}
+.stage.extra h3{color:var(--olive)}
+.ready.extra{background:#e9ecdf;border-left-color:var(--olive)}
+.ready.extra a:first-child{background:var(--olive);border-color:var(--olive)}
+.ready.extra a:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.stop.extra::before{border-color:var(--olive);color:var(--olive)}
+/* === END EXTRA LESSONS === */
 footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);font-size:15px}
 @media(max-width:860px){
   .hero-in{grid-template-columns:minmax(0,1fr);gap:40px;padding:48px 20px 56px}
@@ -85,7 +93,7 @@ footer{max-width:1180px;margin:0 auto;padding:30px 32px 56px;color:var(--muted);
 
 <main>
   <h2>学习路线</h2>
-  <p class="intro">一共 {{total}} 节课，新版已完成 {{ready}} 节，其余还在规划中。</p>
+  <p class="intro">一共 {{total}} 节课，新版已完成 {{ready}} 节，其余还在规划中。{{extras}}</p>
 {{route}}
 </main>
 

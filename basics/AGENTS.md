@@ -21,6 +21,17 @@
 - `pdf.json`：每份 `dist/<课>/slides.pdf` 照哪一版页面打印、PDF 本身的哈希，由 `build.py --pdf` 写，不要手改。`check.py` 比对它，PDF 跟不上页面就报错。
 - `dist/`：生成结果，提交进仓库，不要手改。每节课的 `starter/index.html` 由 `template/starter.html` 生成，列出这节课的起始程序。GitHub Pages 不列出文件夹内容，所以页面上的链接都要指向具体文件，`tools/check.py` 会查。
 
+## 附加课程
+
+工具支持“附加课程”：不算主线、放在全部主线课之后的课，比如 C++ 课的 printf 和 scanf。Python 课目前没有附加课程，`course.json` 里不写，首页和 `dist/` 都和以前一样。
+
+- 写法：在 `course.json` 的最后加，比如 `{"id": "x1-printf-scanf", "tag": "EXTRA 01", "title": "printf 和 scanf", "stage": "附加课程", "extra": 1, "structured": true}`。还没做的附加课只写 `title`、`stage` 和 `extra`。
+- `extra` 按 1、2……排；`id` 不以数字开头（主线课的编号取自 `id` 开头的数字）；`stage` 只给附加课用，不和主线的阶段同名。`check.py` 查这几条，也查附加课都在主线课后面。
+- 附加课单独编号，不改第 1–30 课的编号。页脚写“附加课程 1 printf 和 scanf”。首页把它们放在路线最后单独一栏，用橄榄绿和主线区分，路线上面那句话的课数只算主线，后面加一句“另有 N 节附加课程”。
+- 主线最后一课的谢谢页写“下一课：附加课程 1 …”；最后一节附加课的谢谢页回到首页。
+- `home/content.json` 里的 `{lessons}` 只数主线课；要写附加课的数目用 `{extras}`。
+- 其余和主线课一样：`lessons/<id>/` 里的文件、`pdf.json`、浏览器检查和 CI 按改动挑课都按 `id` 认。
+
 ## 命令
 
 都在 `basics/` 里运行（从仓库最外层先 `cd basics`）：

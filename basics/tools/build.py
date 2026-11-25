@@ -43,6 +43,17 @@ def lessons():
     return [item for item in course() if 'id' in item]
 
 
+# Extra lessons (附加课程) come after the whole route, numbered on their own: "extra": 1, 2 ... in course.json, an id that
+# does not start with digits (x1-printf-scanf), a stage of their own. They do not move the numbers of the main lessons.
+def extra_name(item):
+    return f'附加课程 {item["extra"]}'
+
+
+def next_name(item):
+    """How the previous deck's thank-you names this lesson: a main lesson by its title, an extra one with its number."""
+    return f'{extra_name(item)} {item["title"]}' if item.get('extra') else item['title']
+
+
 def read(path):
     return (ROOT / path).read_text(encoding='utf-8')
 
@@ -82,9 +93,9 @@ def thanks_slide(lesson):
     if following is None:
         onward = HOME_LINK + '<p class="abs say r d3 next-note">这门课的路线走完了，了不起！</p>'
     elif 'id' in following:
-        onward = f'<a class="go-next r d3" href="../{following["id"]}/index.html">下一课：{html.escape(following["title"])}</a>'
+        onward = f'<a class="go-next r d3" href="../{following["id"]}/index.html">下一课：{html.escape(next_name(following))}</a>'
     else:
-        onward = HOME_LINK + f'<p class="abs say r d3 next-note">下一课“{html.escape(following["title"])}”还在准备中</p>'
+        onward = HOME_LINK + f'<p class="abs say r d3 next-note">下一课“{html.escape(next_name(following))}”还在准备中</p>'
     thanks = site()['thanks']
     links = ''.join(thanks_link(link) for link in thanks['links'])
     return f'''
@@ -206,7 +217,10 @@ def lesson_number(item, previous):
 
 
 def lesson_label(lesson):
-    """The left of the status bar on every page: 第 7 课 while 循环. A split lesson's title already says 上集 or 下集."""
+    """The left of the status bar on every page: 第 7 课 while 循环, or 附加课程 1 printf 和 scanf. A split lesson's title
+    already says 上集 or 下集."""
+    if lesson.get('extra'):
+        return f'{extra_name(lesson)} {lesson["title"]}'
     return f'第 {lesson_number(lesson, 0)} 课 {lesson["title"]}'
 
 
@@ -501,27 +515,40 @@ def render(lesson):
     return page
 
 
+# The home page's styles for extra lessons, between these two lines in template/index.html.
+EXTRA_CSS = re.compile(r'\n/\* === EXTRA LESSONS.*?/\* === END EXTRA LESSONS === \*/', re.S)
+
+
 def stop(number, item):
+    extra = item.get('extra')
     if 'id' not in item:
-        return f'<li class="stop" data-n="{number}">{html.escape(item["title"])}</li>'
+        return f'<li class="stop{" extra" if extra else ""}" data-n="{f"附{extra}" if extra else number}">{html.escape(item["title"])}</li>'
     target = item['id']
-    return f'''<li class="ready"><div><h4>{html.escape(item["title"])}</h4><p>{item.get("note") or f'第 {number} 课'}，{read(f"lessons/{target}/slides.html").count("<section") + 1} 页，含小测、动手题和挑战</p></div>
+    return f'''<li class="ready{" extra" if extra else ""}"><div><h4>{html.escape(item["title"])}</h4><p>{item.get("note") or (extra_name(item) if extra else f'第 {number} 课')}，{read(f"lessons/{target}/slides.html").count("<section") + 1} 页，含小测、动手题和挑战</p></div>
 <nav aria-label="{html.escape(item["title"])}"><a href="{target}/index.html">放映课件</a><a href="{target}/slides.pdf" target="_blank" rel="noopener noreferrer">PDF</a><a href="{target}/starter/index.html">起始程序</a></nav></li>'''
 
 
 def render_index(items):
-    stages = {}
-    counted = [item for item in items if not item.get('sample')]
+    stages, extra = {}, set()
+    counted = [item for item in items if not item.get('sample') and not item.get('extra')]
+    extras = [item for item in items if item.get('extra')]
     number = 0
     for item in items:
-        number = number if item.get('sample') else lesson_number(item, number)
+        number = number if item.get('sample') or item.get('extra') else lesson_number(item, number)
         stages.setdefault(item['stage'], []).append(stop(number, item))
-    route = '\n'.join(f'  <section class="stage"><h3>{html.escape(name)}</h3><ol class="stops">{"".join(rows)}</ol></section>' for name, rows in stages.items())
+        if item.get('extra'):
+            extra.add(item['stage'])
+    route = '\n'.join(f'  <section class="stage{" extra" if name in extra else ""}"><h3>{html.escape(name)}</h3><ol class="stops">{"".join(rows)}</ol></section>'
+                      for name, rows in stages.items())
+    # Extra lessons are not on the route's count; the line under the heading names them only when there are some.
+    more = f'另有 {len(extras)} 节附加课程，放在路线最后。' if extras else ''
     info, hero = site(), site()['hero']
     code = '\n'.join(f'<span class="g">{n}</span>{line}' for n, line in enumerate(hero['lines'], 1))
     page = read('template/index.html')
+    if not extras:  # the olive block for extra lessons stays out of a course that has none, so its page is as before
+        page = EXTRA_CSS.sub('', page)
     fields = dict(fonts='\n'.join(font_face(w) for w in (400, 700, 800)), first=next(i['id'] for i in items if 'id' in i),
-                  total=str(len(counted)), ready=str(sum('id' in i for i in counted)), route=route, site=html.escape(info['title']),
+                  total=str(len(counted)), ready=str(sum('id' in i for i in counted)), extras=more, route=route, site=html.escape(info['title']),
                   heading='<br>'.join(html.escape(part) for part in info['title'].split(' ', 1)), lead=html.escape(info['lead']), start=html.escape(info['start']),
                   hero_file=hero['file'], hero_code=code, hero_prompt=html.escape(hero['prompt']), hero_sample=html.escape(hero['sample']),
                   hero_reply=html.escape(hero['reply']), footer=html.escape(info['footer']))
