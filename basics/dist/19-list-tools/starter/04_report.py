@@ -1,7 +1,7 @@
 n = int(input())
-scores = []
+dist = []
 for i in range(n):
-    scores.append(int(input()))
-print("总分", sum(scores))
-print("最高", max(scores))
-print("最低", min(scores))
+    dist.append(int(input()))
+print("一共", sum(dist))
+print("最远", max(dist))
+print("最近", min(dist))

@@ -718,6 +718,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="slip tilt r d2 short"><small>玩过一次就知道答案</small><pre>一猜就中</pre></div>
   </div>
   <p class="say r d3">游戏要有意外：骰子掷出几点、抽到哪张签、电脑出什么，事先谁也不知道。<br>Python 有一盒叫 random 的工具，能帮程序“随便挑一个”。</p>
+  <p class="say tip r d3">生活里：掷骰子、抽签、随机点名，事先谁也不知道结果。先想一想：猜数字的秘密数，怎样每次都不一样？</p>
   <div class="foot"></div>
 </section>
 
@@ -763,13 +764,13 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz -->
-<section id="page-6" class="slide lay-ask" aria-label="小测：可能是几">
-  <h2 class="t r">小测：random.randint(1, 3) 可能是哪些数？</h2>
-  <div class="quiz r d1" data-right="2">
-    <button type="button" data-fb="randint 不会出 0，它从第一个数开始。"><i>1</i>0、1、2</button>
-    <button type="button" data-fb="randint 含终点，3 也可能出现。"><i>2</i>1、2</button>
-    <button type="button" data-fb="答对了！两头都算，1、2、3 都可能。"><i>3</i>1、2、3</button>
-    <button type="button" data-fb="随机的意思就是不一定，不会每次都是同一个数。"><i>4</i>只会是 2</button>
+<section id="page-6" class="slide lay-ask" aria-label="小测：随机一个偶数">
+  <h2 class="t r">小测：想随机出 2 到 10 里的偶数，哪个对？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！先从 1 到 5 挑一个，乘 2 就是 2、4、6、8、10。"><i>1</i>random.randint(1, 5) * 2</button>
+    <button type="button" data-fb="3、5、7 这些奇数也会出现。"><i>2</i>random.randint(2, 10)</button>
+    <button type="button" data-fb="会出 12、20，超出了 10。"><i>3</i>random.randint(1, 10) * 2</button>
+    <button type="button" data-fb="这样出的是 1 到 5，还有奇数。"><i>4</i>random.randint(2, 10) // 2</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -820,35 +821,49 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: same seed -->
-<section id="page-10" class="slide lay-ask" aria-label="小测：同一个种子">
-  <h2 class="t r">小测：种子都是 7，运行两次，结果呢？</h2>
-  <div class="editor r d2" style="--fs:37px"><div class="tab">运行两次</div>
-<pre class="code"><span class="ln"><span class="k">import</span> random</span><span class="ln">random.<span class="f">seed</span>(<span class="m">7</span>)</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span></pre></div>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！种子一样，挑出的数就一样。"><i>1</i>一定一样</button>
-    <button type="button" data-fb="设了一样的种子，就不会不一样。"><i>2</i>一定不一样</button>
-    <button type="button" data-fb="种子一样，结果是定好的，不用碰运气。"><i>3</i>说不准</button>
-    <button type="button" data-fb="seed 设种子不会报错。"><i>4</i>报错</button>
+<section id="page-10" class="slide lay-ask" aria-label="小测：再设一次种子">
+  <h2 class="t r">小测：第 4 行前面再设一次种子，输出什么？</h2>
+  <div class="editor r d1" style="--fs:37px"><div class="tab">seed.py</div>
+<pre class="code"><span class="ln"><span class="k">import</span> random</span><span class="ln">random.<span class="f">seed</span>(<span class="m">7</span>)</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span><span class="ln mod">random.<span class="f">seed</span>(<span class="m">7</span>)<span class="orig">新加的一行</span></span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">1</span>, <span class="m">100</span>))</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！种子重新设成 7，就从头再来，又挑出 42。"><i>1</i>42 和 42</button>
+    <button type="button" data-fb="不再设种子时第二个是 20；重新设了种子，就回到开头。"><i>2</i>42 和 20</button>
+    <button type="button" data-fb="第一个数还是种子 7 挑出的 42。"><i>3</i>20 和 42</button>
+    <button type="button" data-fb="种子定了，结果就定了。"><i>4</i>说不准</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
 </section>
 
 <!-- errors -->
-<section id="page-11" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:680px;--mid:400px">
-    <div class="r d1"><code class="plain">忘了 import random</code><b>NameError</b><span>写在第一行</span></div>
-    <div class="r d2"><code>random.randint(6)</code><b>TypeError</b><span>要给两个数：从几到几</span></div>
-    <div class="r d3"><code>randint(0, 6)</code><b>不报错</b><span>会掷出 0，骰子没有 0</span></div>
+<section id="page-11" class="slide lay-ask" aria-label="回顾：每行第一个">
+  <h2 class="t r">回顾第 20 课：输出几？</h2>
+  <div class="editor r d1" style="--fs:46px"><div class="tab">review.py</div>
+<pre class="code"><span class="ln">grid = [[<span class="m">1</span>, <span class="m">2</span>], [<span class="m">3</span>, <span class="m">4</span>]]</span><span class="ln">total = <span class="m">0</span></span><span class="ln"><span class="k">for</span> row <span class="k">in</span> grid:</span><span class="ln">    total += row[<span class="m">0</span>]</span><span class="ln"><span class="f">print</span>(total)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！每一行的第一个：1 和 3，加起来 4。"><i>1</i>4</button>
+    <button type="button" data-fb="row[0] 是每一行的第一个，两行都要加。"><i>2</i>3</button>
+    <button type="button" data-fb="只加每行的第一个，不是全部。"><i>3</i>10</button>
+    <button type="button" data-fb="这是第二列 2 + 4，row[0] 是第一列。"><i>4</i>6</button>
   </div>
-  <p class="say r d3">随机的错最难查：可能运行十次都没事，第十一次才露馅。写完先想清楚两头。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-12" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:600px;--mid:640px">
+    <div class="r d1"><code style="font-size:40px">random.randint(1, 6)</code><b style="font-size:40px">import random<br>random.randint(1, 6)</b><span>先导入，程序才认识 random</span></div>
+    <div class="r d2"><code style="font-size:40px">random.randint(6)</code><b style="font-size:40px">random.randint(1, 6)</b><span>要给两个数：从几到几</span></div>
+    <div class="r d3"><code style="font-size:40px">random.choice("石头", "布")</code><b style="font-size:40px">random.choice(["石头", "布"])</b><span>choice 要的是一个列表</span></div>
+  </div>
+  <p class="say r d3">三种都会报错。还有一种不报错、偶尔才露馅的，在下一页找。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-12" class="slide dark lay-ask" aria-label="找错：骰子掷出 0">
+<section id="page-13" class="slide dark lay-ask" aria-label="找错：骰子掷出 0">
   <h2 class="t r">找错：骰子怎么掷出了 0 点？</h2>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！randint 两头都算，从 0 开始就可能掷出 0。骰子是 1 到 6，写 randint(1, 6)。" data-no="这一行没问题。0 点是从哪里来的？看看随机的范围。"><span class="ln"><span class="k">import</span> random</span><span class="ln">point = random.<span class="f">randint</span>(<span class="m">0</span>, <span class="m">6</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">"掷出了"</span>, point, <span class="s">"点"</span>)</span></pre></div>
@@ -858,7 +873,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- challenge -->
-<section id="page-13" class="slide clay lay-notes challenge" aria-label="石头剪刀布" data-chapter="挑战">
+<section id="page-14" class="slide clay lay-notes challenge" aria-label="石头剪刀布" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:160px">石头剪刀布</h2>
   <p class="say r d2">第一行读入种子，第二行读入你出的：石头、剪刀或布。电脑用 random.choice(["石头", "剪刀", "布"]) 出一个，<b>列表照这个顺序写</b>，结果才和样例一样。<br>先输出“电脑出 ……”，再输出你的结果：赢、输或平。石头赢剪刀，剪刀赢布，布赢石头。</p>
@@ -870,7 +885,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-14" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-15" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>先设好种子，再读入你出的。电脑出的用 random.choice 从三个里挑。</span></p>
@@ -880,7 +895,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
-<section id="page-15" class="slide dark" aria-label="参考答案：石头剪刀布" data-answer="02" data-steps="2" data-at="2">
+<section id="page-16" class="slide dark" aria-label="参考答案：石头剪刀布" data-answer="02" data-steps="2" data-at="2">
   <h2 class="t">参考答案：石头剪刀布</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">rps.py</div>
@@ -891,19 +906,19 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-16" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-17" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>randint(1, 6) 能出 6 吗？<em class="step s2">　能，两头都算。</em></span></p>
-    <p><i>Q2</i><span>choice 从哪里挑？<em class="step s3">　从括号里的列表里随机挑一个。</em></span></p>
-    <p><i>Q3</i><span>seed 有什么用？<em class="step s4">　种子一样，结果就一样，方便检查和对答案。</em></span></p>
+    <p><i>Q1</i><span>例题为什么先设种子，再出秘密数？<em class="step s2">　种子要在挑数之前定好，同一个种子出的秘密数才一样，方便对答案。</em></span></p>
+    <p><i>Q2</i><span>掷骰子写成 randint(1, 7)，结果有什么不同？<em class="step s3">　会掷出 7 点，骰子没有 7。</em></span></p>
+    <p><i>Q3</i><span>想随机点一位同学回答问题，怎么写？<em class="step s4">　名字存进列表 names，random.choice(names)。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-17" class="slide lay-columns" aria-label="速查卡">
+<section id="page-18" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3" style="--key:860px">
     <div class="r d1"><code>import random</code><span>先借来随机工具盒</span></div>
@@ -916,7 +931,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-18" class="slide lay-columns" aria-label="后面再学">
+<section id="page-19" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>random.shuffle()</code><span>把列表打乱，像洗牌</span></div>
@@ -928,7 +943,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-19" class="slide dark thanks" aria-label="谢谢">
+<section id="page-20" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>

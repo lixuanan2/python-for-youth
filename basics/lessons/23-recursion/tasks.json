@@ -42,7 +42,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 12,
+    "page": 13,
     "starter": "starter/04_digit_sum.py",
     "solution": "solutions/04_digit_sum.py",
     "scope": "一行，n为正整数",

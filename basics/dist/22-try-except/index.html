@@ -718,6 +718,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="slip tilt r d2 short"><small>屏幕上</small><pre>ValueError</pre></div>
   </div>
   <p class="say r d3">用汉字写的“十二”，int() 转换不了，程序报错，后面的话一句也不说了。<br>用的人难免输错。这节课学 try 和 except：先接住报错，提醒一句，程序接着运行。</p>
+  <p class="say tip r d3">生活里：网上填表填错了，会提示你重填，不会整个关掉。先想一想：输入“十二”时，怎样让程序提醒一句、接着运行？</p>
   <div class="foot"></div>
 </section>
 
@@ -878,20 +879,34 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- errors -->
-<section id="page-13" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:580px;--mid:360px">
-    <div class="r d1"><code class="plain">try 缺了 except</code><b>SyntaxError</b><span>try 要和 except 配对</span></div>
-    <div class="r d2"><code class="plain">名字写成别的错</code><b>没接住</b><span>int() 的错要写 ValueError</span></div>
-    <div class="r d3"><code>except:</code><b>不报错</b><span>什么错都接住，打错字也看不出</span></div>
+<section id="page-13" class="slide lay-ask" aria-label="回顾：两头一样">
+  <h2 class="t r">回顾第 21 课：会输出几？</h2>
+  <div class="editor r d1" style="--fs:39px"><div class="tab">review.py</div>
+<pre class="code"><span class="ln"><span class="k">import</span> random</span><span class="ln"><span class="f">print</span>(random.<span class="f">randint</span>(<span class="m">5</span>, <span class="m">5</span>))</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！两头都算，从 5 到 5 只有一个数可挑。"><i>1</i>一定是 5</button>
+    <button type="button" data-fb="能挑的只有 5 一个。"><i>2</i>说不准</button>
+    <button type="button" data-fb="两个数一样也可以，不会报错。"><i>3</i>报错</button>
+    <button type="button" data-fb="randint 一定交回一个数。"><i>4</i>什么也不输出</button>
   </div>
-  <p class="say r d3">except 后面写上名字，只接你想到的那种错。别的错照样红字，你才知道哪里写错了。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-14" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:600px;--mid:640px">
+    <div class="r d1"><code style="font-size:40px">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;age = int(s)</code><b style="font-size:40px">try:<br>&nbsp;&nbsp;&nbsp;&nbsp;age = int(s)<br>except ValueError:</b><span>try 后面要跟 except</span></div>
+    <div class="r d2"><code style="font-size:40px">except ZeroDivisionError:</code><b style="font-size:40px">except ValueError:</b><span>int() 转换不了报 ValueError，名字要对上</span></div>
+    <div class="r d3"><code style="font-size:40px">except ValueError</code><b style="font-size:40px">except ValueError:</b><span>这一行末尾要冒号</span></div>
+  </div>
+  <p class="say small r d3">第二种接不住，照样红字停下。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-14" class="slide dark lay-ask" aria-label="找错：输对了也说请输入整数">
+<section id="page-15" class="slide dark lay-ask" aria-label="找错：输对了也说请输入整数">
   <h2 class="t r">找错：明明输入 12，怎么也说“请输入整数”？</h2>
   <div class="editor r d1" style="--fs:45px"><div class="tab">bug.py（只阅读）</div>
 <pre class="code pick" data-bug="2" data-yes="找到了！inptu 是 input 打错了字，本来报 NameError，却被不写名字的 except 接住了。改成 input，再把 except 写成 except ValueError。" data-no="这一行没有写错字。输入 12 本来没问题，是哪一行先出了错？"><span class="ln"><span class="k">try</span>:</span><span class="ln">    age = <span class="f">int</span>(inptu())</span><span class="ln">    <span class="f">print</span>(<span class="s">"明年你"</span>, age + <span class="m">1</span>, <span class="s">"岁"</span>)</span><span class="ln"><span class="k">except</span>:</span><span class="ln">    <span class="f">print</span>(<span class="s">"请输入整数"</span>)</span></pre></div>
@@ -901,7 +916,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- challenge -->
-<section id="page-15" class="slide clay lay-notes challenge" aria-label="乱糟糟的账本" data-chapter="挑战">
+<section id="page-16" class="slide clay lay-notes challenge" aria-label="乱糟糟的账本" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:150px">乱糟糟的账本</h2>
   <p class="say r d2">零花钱账本里，有人把钱数写成了“五元”。第一行读入行数 n，接下来 n 行，每行可能是整数，也可能是别的字。<br>把整数加起来，再数一数有几行不是整数。输出两行：“和是 ……”和“不是整数的有 …… 行”。</p>
@@ -917,7 +932,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-16" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-17" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>先读入 n，准备两个计数器：总和与不是整数的行数，都从 0 开始。用 for 循环读 n 行。</span></p>
@@ -927,7 +942,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
-<section id="page-17" class="slide dark" aria-label="参考答案：乱糟糟的账本" data-answer="02" data-steps="2" data-at="2">
+<section id="page-18" class="slide dark" aria-label="参考答案：乱糟糟的账本" data-answer="02" data-steps="2" data-at="2">
   <h2 class="t">参考答案：乱糟糟的账本</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:38px"><div class="tab">ledger.py</div>
@@ -938,19 +953,19 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-18" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-19" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>try 里出错以后，剩下的行还运行吗？<em class="step s2">　不运行，直接跳到 except。</em></span></p>
-    <p><i>Q2</i><span>except 后面为什么要写 ValueError？<em class="step s3">　只接这一种错，别的错照样看得见。</em></span></p>
-    <p><i>Q3</i><span>怎么一直问到输对为止？<em class="step s4">　用 while 和 done，输对了才把 done 变成 True。</em></span></p>
+    <p><i>Q1</i><span>except 后面为什么要写上 ValueError？<em class="step s2">　只接想到的这种错，打错字这类错照样看得见。</em></span></p>
+    <p><i>Q2</i><span>例题把 done = True 挪到第一句，有什么不同？<em class="step s3">　输错也只问一次就停，age 没拿到数，最后一行报错。</em></span></p>
+    <p><i>Q3</i><span>年龄要在 0 到 120 之间，不对就再问，怎么改？<em class="step s4">　转换成功后再用 if 判断，在范围里才 done = True。</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-19" class="slide lay-columns" aria-label="速查卡">
+<section id="page-20" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3" style="--key:860px">
     <div class="r d1"><code>try:</code><span>下面缩进的几行先试着运行</span></div>
@@ -963,7 +978,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-20" class="slide lay-columns" aria-label="后面再学">
+<section id="page-21" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>else 和 finally</code><span>没出错时做什么、不管出没出错最后都做什么</span></div>
@@ -975,7 +990,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-21" class="slide dark thanks" aria-label="谢谢">
+<section id="page-22" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>

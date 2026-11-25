@@ -36,17 +36,6 @@
     "stdout": "10\n"
   },
   {
-    "page": 8,
-    "code": "def total(n):\n    if n == 1:\n        return 1\n    return n + total(n - 1)\nprint(total(int(input())))\n",
-    "stdin": "5\n",
-    "stdout": "15\n"
-  },
-  {
-    "page": 8,
-    "code": "n = 1\nfor i in range(2, 6):\n    n = n * i\nprint(n)\n",
-    "stdout": "120\n"
-  },
-  {
     "page": 9,
     "code": "def fact(n):\n    if n == 1:\n        return 1\n    return n * fact(n - 1)\nprint(fact(int(input())))\n",
     "stdin": "4\n",
@@ -59,13 +48,50 @@
     "stdout": "3628800\n"
   },
   {
+    "page": 8,
+    "code": "def total(n):\n    if n == 1:\n        return 1\n    return n + total(n - 2)\nprint(total(int(input())))",
+    "stdin": "5\n",
+    "stdout": "9\n"
+  },
+  {
+    "page": 8,
+    "code": "def total(n):\n    if n == 1:\n        return 1\n    return n + total(n - 2)\nprint(total(int(input())))",
+    "stdin": "4\n",
+    "error": "RecursionError"
+  },
+  {
     "page": 10,
+    "code": "try:\n    x = int(\"7\")\n    y = int(\"七\")\n    print(x + y)\nexcept ValueError:\n    print(\"出错\")\nprint(\"完\")",
+    "stdout": "出错\n完\n"
+  },
+  {
+    "page": 11,
+    "code": "def countdown(n):\n    if n == 0:\n        print(\"发射！\")\n    else:\n        countdown(n)\ncountdown(3)\n",
+    "error": "RecursionError"
+  },
+  {
+    "page": 11,
     "code": "def total(n):\n    if n == 1:\n        return 1\n    n + total(n - 1)\nprint(total(4))\n",
     "error": "TypeError"
   },
   {
     "page": 11,
-    "code": "def total(n):\n    if n == 1:\n        return 1\n    return n + total(n)\nprint(total(4))\n",
+    "code": "def total(n):\n    return n + total(n - 1)\nprint(total(4))\n",
     "error": "RecursionError"
+  },
+  {
+    "page": 11,
+    "code": "def total(n):\n    if n == 1: return 1\n    return n + total(n - 1)\nprint(total(4))\n",
+    "stdout": "10\n"
+  },
+  {
+    "page": 12,
+    "code": "def total(n):\n    if n == 1:\n        return 0\n    return n + total(n - 1)\nprint(total(4))",
+    "stdout": "9\n"
+  },
+  {
+    "page": 16,
+    "code": "def total(n):\n    if n == 0:\n        return 0\n    return n + total(n - 1)\nprint(total(4))\ndef power(n):\n    if n == 0:\n        return 1\n    return 2 * power(n - 1)\nprint(power(5))",
+    "stdout": "10\n32\n"
   }
 ]
