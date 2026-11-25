@@ -15,6 +15,7 @@
     <div class="slip tilt r d2 short"><small>一个个拨过去</small><pre>总能打开</pre></div>
   </div>
   <p class="say r d3">不知道答案，就把所有可能都试一遍。最多拨 1000 次，一定能找到。<br>人拨很累，计算机试起来飞快。这种办法叫枚举，也叫“穷举”：挨个列出来，一个个检查。</p>
+  <p class="say tip r d3">生活里：忘了密码一个个试，排值日表把排法都试一遍。先想一想：35 个头、94 只脚，鸡兔各几只，能不能挨个试？</p>
   <div class="foot"></div>
 </section>
 
@@ -67,13 +68,13 @@
 </section>
 
 <!-- quiz: the range -->
-<section class="slide lay-ask" aria-label="小测：1 到 100 怎么写">
-  <h2 class="t r">小测：1 到 100 都要试，range 怎么写？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="range 不含终点，这样只试到 99，漏了 100。"><i>1</i>range(1, 100)</button>
-    <button type="button" data-fb="答对了！从 1 开始，终点写 101，正好试到 100。"><i>2</i>range(1, 101)</button>
-    <button type="button" data-fb="这是 0 到 99：多了 0，又漏了 100。"><i>3</i>range(0, 100)</button>
-    <button type="button" data-fb="起点比终点大，一个数也没有。"><i>4</i>range(100, 1)</button>
+<section class="slide lay-ask" aria-label="小测：2 到 100 的偶数">
+  <h2 class="t r">小测：2 到 100 的偶数，range 怎么写？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！从 2 开始，每次加 2，终点写 101，正好试到 100。"><i>1</i>range(2, 101, 2)</button>
+    <button type="button" data-fb="终点 100 不算，漏了 100。"><i>2</i>range(2, 100, 2)</button>
+    <button type="button" data-fb="从 1 开始每次加 2，试的全是奇数。"><i>3</i>range(1, 101, 2)</button>
+    <button type="button" data-fb="多了 0，又漏了 100。"><i>4</i>range(0, 100, 2)</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -103,20 +104,20 @@
 </section>
 
 <!-- quiz: how many tries -->
-<section class="slide lay-ask" aria-label="小测：试了几次">
-  <h2 class="t r">小测：35 个头、94 只脚，循环一共试了几次？</h2>
-  <div class="editor r d2" style="width:1000px;--fs:42px"><div class="tab">输入 35 和 94</div>
+<section class="slide lay-ask" aria-label="小测：倒着试">
+  <h2 class="t r">小测：鸡从 35 只倒着试到 0，输出什么？</h2>
+  <div class="editor r d1" style="width:1000px;--fs:40px"><div class="tab">输入 35 和 94</div>
 <pre class="code">heads = int(input())
 feet = int(input())
-for c in range(heads + 1):
+for c in range(heads, -1, -1):
     r = heads - c
     if c * 2 + r * 4 == feet:
         print("鸡", c, "兔", r)</pre></div>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="鸡可以是 0 只，也可以是 35 只。从 0 数到 35，比 35 多一个。"><i>1</i>35 次</button>
-    <button type="button" data-fb="答对了！range(heads + 1) 是 0 到 35，一共 36 个。"><i>2</i>36 次</button>
-    <button type="button" data-fb="试的是鸡的只数，跟脚数 94 没关系。"><i>3</i>94 次</button>
-    <button type="button" data-fb="找到答案后循环没有停，会一直试到最后。"><i>4</i>24 次</button>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！还是把 0 到 35 都试一遍，只是顺序反了，对得上的还是那一种。"><i>1</i>鸡 23 兔 12</button>
+    <button type="button" data-fb="判断的式子没变，鸡还是 23 只。"><i>2</i>鸡 12 兔 23</button>
+    <button type="button" data-fb="range(35, -1, -1) 是 35 到 0，23 也在里面。"><i>3</i>什么也不输出</button>
+    <button type="button" data-fb="只有一种分法能凑出 94 只脚。"><i>4</i>输出两行</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -135,24 +136,41 @@ for c in range(heads + 1):
 </section>
 
 <!-- errors -->
+<section class="slide lay-ask" aria-label="回顾：换两次">
+  <h2 class="t r">回顾第 24 课：最后 a 是什么？</h2>
+  <div class="editor r d1"><div class="tab">review.py</div>
+<pre class="code">a = [3, 1, 2]
+a[0], a[2] = a[2], a[0]
+a[1], a[2] = a[2], a[1]
+print(a)</pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！第一次换完是 [2, 1, 3]，第二次再换后两个，得 [2, 3, 1]。"><i>1</i>[2, 3, 1]</button>
+    <button type="button" data-fb="这里不是排序，只是照着下标换了两次。"><i>2</i>[1, 2, 3]</button>
+    <button type="button" data-fb="这是只换了第一次，第二次还要换下标 1 和 2。"><i>3</i>[2, 1, 3]</button>
+    <button type="button" data-fb="第一次就把 3 换到了最后。"><i>4</i>[3, 2, 1]</button>
+  </div>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
 <section class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
   <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:780px;--mid:280px">
-    <div class="r d1"><code>range(heads)</code><b>不报错</b><span>漏了“全是鸡”这一种</span></div>
-    <div class="r d2"><code>range(1, heads + 1)</code><b>不报错</b><span>漏了“一只鸡也没有”</span></div>
-    <div class="r d3"><code class="plain">循环里写“没有答案”</code><b>不报错</b><span>每试错一次就说一遍</span></div>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:640px;--mid:560px">
+    <div class="r d1"><code style="font-size:40px">range(heads)</code><b style="font-size:40px">range(heads + 1)</b><span>漏了“全是鸡”这一种</span></div>
+    <div class="r d2"><code style="font-size:40px">range(1, heads + 1)</code><b style="font-size:40px">range(heads + 1)</b><span>漏了“一只鸡也没有”</span></div>
+    <div class="r d3"><code style="font-size:40px">循环里 else: print("没有答案")</code><b style="font-size:40px">循环后 if not found:</b><span>写在循环里，每试错一次就说一遍</span></div>
   </div>
-  <p class="say r d3">枚举的错大多不报错，只是少了答案或多了废话。用两头的数据试一试：全是鸡、全是兔。</p>
+  <p class="say r d3">三种都不报错。用两头的数据试一试：全是鸡、全是兔。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section class="slide dark lay-ask" aria-label="找错：全是鸡却没输出">
-  <h2 class="t r">找错：10 个头 20 只脚，全是鸡，却没输出</h2>
+<section class="slide dark lay-ask" aria-label="找错：鸡兔反了">
+  <h2 class="t r">找错：怎么成了鸡 12 兔 23？</h2>
   <div class="editor r d1"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="3" data-yes="找到了！range(heads) 是 0 到 9，鸡最多试到 9 只，“10 只鸡”这种可能被漏掉了。改成 range(heads + 1)。" data-no="这一行没问题。答案是鸡 10 只，循环试到过 10 吗？"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">2</span> + r * <span class="m">4</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
-  <p class="say r d2">点出该改的那一行。</p>
+<pre class="code pick" data-bug="5" data-yes="找到了！鸡 2 只脚、兔 4 只脚，这里把鸡算成了 4 只脚。写成 c * 2 + r * 4。" data-no="这一行没问题。答案正好反了，想一想脚数是怎么算的。"><span class="ln">heads = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">feet = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="k">for</span> c <span class="k">in</span> <span class="f">range</span>(heads + <span class="m">1</span>):</span><span class="ln">    r = heads - c</span><span class="ln">    <span class="k">if</span> c * <span class="m">4</span> + r * <span class="m">2</span> == feet:</span><span class="ln">        <span class="f">print</span>(<span class="s">"鸡"</span>, c, <span class="s">"兔"</span>, r)</span></pre></div>
+  <p class="say r d2">应该是鸡 23 兔 12，程序却输出鸡 12 兔 23。<br>点出该改的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
@@ -187,9 +205,9 @@ for c in range(heads + 1):
 <section class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>枚举分哪三步？<em class="step s2">　定范围，一个个试，判断对不对。</em></span></p>
-    <p><i>Q2</i><span>范围漏了会怎样？<em class="step s3">　不报错，只是找不到漏掉的答案。</em></span></p>
-    <p><i>Q3</i><span>怎样在没答案时说一声？<em class="step s4">　用 found 记着找到过没有，循环结束后再判断。</em></span></p>
+    <p><i>Q1</i><span>鸡兔同笼为什么只试鸡，不再套一层试兔？<em class="step s2">　头数定了，兔就是 heads - c，一层就够。</em></span></p>
+    <p><i>Q2</i><span>找到答案以后不停下，接着试完，结果有什么不同？<em class="step s3">　输出一样，只有一种答案；只是多试了几次。</em></span></p>
+    <p><i>Q3</i><span>找出 1 到 100 里是 7 的倍数、个位又是 3 的数，怎么写？<em class="step s4">　for x in range(1, 101): 里面 if x % 7 == 0 and x % 10 == 3: print(x)</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>

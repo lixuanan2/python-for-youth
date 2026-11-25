@@ -64,7 +64,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 12,
+    "page": 13,
     "starter": "starter/06_attendance.py",
     "solution": "solutions/06_attendance.py",
     "scope": "第一行全班名单；第二行签到记录，可能为空；用空格隔开",

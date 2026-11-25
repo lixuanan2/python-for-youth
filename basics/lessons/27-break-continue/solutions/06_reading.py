@@ -1,15 +1,15 @@
 total = 0
 count = 0
 while True:
-    s = int(input())
-    if s == -1:
+    m = int(input())
+    if m == -1:
         break
-    if s < 0 or s > 100:
+    if m < 0 or m > 300:
         continue
-    total += s
+    total += m
     count += 1
 if count == 0:
-    print("没有有效分数")
+    print("没有有效记录")
 else:
-    print("有效", count, "个")
+    print("有效", count, "天")
     print("平均", round(total / count, 1))

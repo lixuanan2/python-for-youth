@@ -10,19 +10,9 @@
     "stdout": "4\n2\n"
   },
   {
-    "page": 5,
-    "code": "x = {}\nprint(type(x).__name__)\nprint(type(set()).__name__)\n",
-    "stdout": "dict\nset\n"
-  },
-  {
     "page": 6,
     "code": "a = {1, 2, 3, 4}\nb = {3, 4, 5}\nprint(sorted(a & b))\nprint(sorted(a | b))\nprint(sorted(a - b))\n",
     "stdout": "[3, 4]\n[1, 2, 3, 4, 5]\n[1, 2]\n"
-  },
-  {
-    "page": 7,
-    "code": "a = {1, 2, 3}\nb = {2, 3, 4}\nprint(sorted(a - b))\nprint(sorted(b - a))\nprint(sorted(a & b))\n",
-    "stdout": "[1]\n[4]\n[2, 3]\n"
   },
   {
     "page": 8,
@@ -43,29 +33,56 @@
     "stdout": "3 个词\n2 个不同的词\na b\n"
   },
   {
-    "page": 10,
-    "code": "s = {}\ns.add(3)\n",
-    "error": "AttributeError"
-  },
-  {
-    "page": 10,
-    "code": "s = {1, 2}\nprint(s[0])\n",
-    "error": "TypeError"
-  },
-  {
-    "page": 10,
-    "code": "s = set()\ns.add(3)\nprint(s)\n",
-    "stdout": "{3}\n"
-  },
-  {
-    "page": 11,
-    "code": "seen = {}\nseen.add(\"小明\")\nseen.add(\"小红\")\nprint(len(seen))\n",
-    "error": "AttributeError: 'dict' object has no attribute 'add'"
-  },
-  {
-    "page": 12,
+    "page": 13,
     "code": "everyone = set(input().split())\nsigned = set(input().split())\nprint(\"到了\", len(everyone & signed), \"人\")\nmissing = everyone - signed\nif len(missing) == 0:\n    print(\"全到了\")\nelse:\n    print(\"没到：\" + \" \".join(sorted(missing)))\n",
     "stdin": "Amy Bob Cat Dan\nBob Amy Bob\n",
     "stdout": "到了 2 人\n没到：Cat Dan\n"
+  },
+  {
+    "page": 5,
+    "code": "print(len(set(\"banana\")), len({\"banana\"}), len(set(\"banana\".split())), len(\"banana\"))",
+    "stdout": "3 1 1 6\n"
+  },
+  {
+    "page": 7,
+    "code": "a = {1, 2, 3}\nb = {2, 3, 4}\nprint(sorted((a | b) - (a & b)))",
+    "stdout": "[1, 4]\n"
+  },
+  {
+    "page": 10,
+    "code": "m = 3\ns = 7\nprint(f\"{m:02d}:{s * 10:02d}\")",
+    "stdout": "03:70\n"
+  },
+  {
+    "page": 11,
+    "code": "s = {}\ns.add(3)",
+    "error": "AttributeError"
+  },
+  {
+    "page": 11,
+    "code": "s = {1, 2}\nprint(s[0])",
+    "error": "TypeError"
+  },
+  {
+    "page": 11,
+    "code": "s = set()\ns.add(3)\ns.add(1)\nprint(sorted(s)[0], sorted(s))",
+    "stdout": "1 [1, 3]\n"
+  },
+  {
+    "page": 12,
+    "code": "words = input().split()\nunique = set(words)\nprint(len(words), \"个不同的词\")",
+    "stdin": "a b a\n",
+    "stdout": "3 个不同的词\n"
+  },
+  {
+    "page": 12,
+    "code": "words = input().split()\nunique = set(words)\nprint(len(unique), \"个不同的词\")",
+    "stdin": "a b a\n",
+    "stdout": "2 个不同的词\n"
+  },
+  {
+    "page": 16,
+    "code": "everyone = set(\"Amy Bob Cat\".split())\nsigned = set(\"Bob Amy\".split())\nprint(sorted(signed - everyone), sorted(everyone - signed))\na = \"画画 跑步 下棋\"\nb = \"下棋 游泳 画画\"\nprint(sorted(set(a.split()) & set(b.split())))",
+    "stdout": "[] ['Cat']\n['下棋', '画画']\n"
   }
 ]

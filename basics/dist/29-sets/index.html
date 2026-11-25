@@ -718,6 +718,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="slip tilt r d2 short"><small>到底来了几个人？</small><pre>2 个，不是 4 个</pre></div>
   </div>
   <p class="say r d3">列表会把每一次都记下来，重复的也算。想知道“有哪些人”，就要把重复的去掉。<br>Python 的集合（set）专门干这个：同样的东西只留一个。它还能找出两份名单里都有的人。</p>
+  <p class="say tip r d3">生活里：签到表去掉重复、找两人共同的爱好。先想一想：有人签了三次，怎样数出到底来了几个人？</p>
   <div class="foot"></div>
 </section>
 
@@ -752,13 +753,13 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: empty braces -->
-<section id="page-5" class="slide lay-ask" aria-label="小测：空的大括号">
-  <h2 class="t r">小测：x = {}，x 是什么？</h2>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="空的大括号先被字典占用了。空集合要写 set()。"><i>1</i>空集合</button>
-    <button type="button" data-fb="答对了！第 17 课的字典也用大括号，空的 {} 是空字典。空集合要写 set()。"><i>2</i>空字典</button>
-    <button type="button" data-fb="空列表是 []，方括号。"><i>3</i>空列表</button>
-    <button type="button" data-fb="这样写不会报错。"><i>4</i>报错</button>
+<section id="page-5" class="slide lay-ask" aria-label="小测：哪个是 3">
+  <h2 class="t r">小测：哪一个算出来是 3？</h2>
+  <div class="quiz r d1" data-right="0">
+    <button type="button" data-fb="答对了！文字变集合，一个字一个字放进去，重复的只留一个：b、a、n。"><i>1</i>len(set("banana"))</button>
+    <button type="button" data-fb="大括号里只放了一个词，集合里只有 1 个。"><i>2</i>len({"banana"})</button>
+    <button type="button" data-fb="split() 切出来只有一个词，集合里只有 1 个。"><i>3</i>len(set("banana".split()))</button>
+    <button type="button" data-fb="这是数字母，一共 6 个，重复的也算。"><i>4</i>len("banana")</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -781,15 +782,15 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: difference -->
-<section id="page-7" class="slide lay-ask top" aria-label="小测：a 减 b">
-  <h2 class="t r">小测：sorted(a - b) 是什么？</h2>
-  <div class="editor r d1" style="--fs:48px"><div class="tab">代码</div>
-<pre class="code"><span class="ln">a = {<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>}</span><span class="ln">b = {<span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>}</span></pre></div>
-  <div class="quiz r d1" data-right="0">
-    <button type="button" data-fb="答对了！a 里有、b 里没有的，只剩 1。"><i>1</i>[1]</button>
-    <button type="button" data-fb="4 是 b 里才有的，那是 b - a。"><i>2</i>[4]</button>
-    <button type="button" data-fb="这是两边各自独有的合在一起。a - b 只看 a 这边。"><i>3</i>[1, 4]</button>
-    <button type="button" data-fb="这是两边都有的，要用 &amp;。"><i>4</i>[2, 3]</button>
+<section id="page-7" class="slide lay-ask top" aria-label="小测：只有一边有的">
+  <h2 class="t r">小测：最后输出什么？</h2>
+  <div class="editor r d1" style="--fs:36px"><div class="tab">代码</div>
+<pre class="code"><span class="ln">a = {<span class="m">1</span>, <span class="m">2</span>, <span class="m">3</span>}</span><span class="ln">b = {<span class="m">2</span>, <span class="m">3</span>, <span class="m">4</span>}</span><span class="ln"><span class="f">print</span>(<span class="f">sorted</span>((a | b) - (a &amp; b)))</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！合起来是 1 到 4，再去掉两边都有的 2 和 3，剩下只有一边有的。"><i>1</i>[1, 4]</button>
+    <button type="button" data-fb="这是两边都有的，被减掉了。"><i>2</i>[2, 3]</button>
+    <button type="button" data-fb="还要减去 a &amp; b。"><i>3</i>[1, 2, 3, 4]</button>
+    <button type="button" data-fb="1 和 4 只在一边，减不掉。"><i>4</i>[]</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -823,30 +824,44 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- errors -->
-<section id="page-10" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:520px;--mid:500px">
-    <div class="r d1"><code>s = {}</code><b>AttributeError</b><span>那是空字典，没有 add</span></div>
-    <div class="r d2"><code>s[0]</code><b>TypeError</b><span>集合没有下标</span></div>
-    <div class="r d3"><code>print(s)</code><b>不报错</b><span>顺序说不准，用 sorted</span></div>
+<section id="page-10" class="slide lay-ask" aria-label="回顾：补 0">
+  <h2 class="t r">回顾第 28 课：输出什么？</h2>
+  <div class="editor r d1" style="--fs:35px"><div class="tab">review.py</div>
+<pre class="code"><span class="ln">m = <span class="m">3</span></span><span class="ln">s = <span class="m">7</span></span><span class="ln"><span class="f">print</span>(<span class="s">f"{m:02d}:{s * 10:02d}"</span>)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！3 补成 03；s * 10 是 70，已经两位，不用补。"><i>1</i>03:70</button>
+    <button type="button" data-fb=":02d 不够两位要在前面补 0。"><i>2</i>3:70</button>
+    <button type="button" data-fb="大括号里先算 s * 10，是 70。"><i>3</i>03:07</button>
+    <button type="button" data-fb="乘的是 10，不是 100。"><i>4</i>03:700</button>
   </div>
-  <p class="say r d3">空集合写 set()。往集合里放东西用 add，比如 s.add(3)。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-11" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:520px;--mid:560px">
+    <div class="r d1"><code>s = {}<br>s.add(3)</code><b>s = set()<br>s.add(3)</b><span>空的 {} 是字典，没有 add</span></div>
+    <div class="r d2"><code>s[0]</code><b>sorted(s)[0]</b><span>集合没有下标，排好成列表再拿</span></div>
+    <div class="r d3"><code>print(s)</code><b>print(sorted(s))</b><span>集合的顺序说不准，排好再看</span></div>
+  </div>
+  <p class="say r d3">第三种不报错，只是每次顺序可能不一样。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-11" class="slide dark lay-ask" aria-label="找错：dict 没有 add">
-  <h2 class="t r">找错：第 2 行报 AttributeError</h2>
+<section id="page-12" class="slide dark lay-ask" aria-label="找错：数成了 3 个">
+  <h2 class="t r">找错：a b a 怎么有 3 个不同的词？</h2>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="1" data-yes="找到了！空的 {} 是字典，字典没有 add。空集合要写 seen = set()。" data-no="这一行没问题。报错说它是 dict，seen 是从哪里来的？"><span class="ln">seen = {}</span><span class="ln">seen.<span class="f">add</span>(<span class="s">"小明"</span>)</span><span class="ln">seen.<span class="f">add</span>(<span class="s">"小红"</span>)</span><span class="ln"><span class="f">print</span>(<span class="f">len</span>(seen))</span></pre></div>
-  <p class="say r d2">想做一个空集合，再一个个放进去。报错说：<br><span style="font-family:var(--code);font-size:30px">'dict' object has no attribute 'add'</span><br>点出该改的那一行。</p>
+<pre class="code pick" data-bug="3" data-yes="找到了！数的是 words，重复的也算进去了。要数 unique：len(unique)。" data-no="这一行没问题。重复的 a 去掉了没有？最后数的是哪一个？"><span class="ln">words = <span class="f">input</span>().<span class="f">split</span>()</span><span class="ln">unique = <span class="f">set</span>(words)</span><span class="ln"><span class="f">print</span>(<span class="f">len</span>(words), <span class="s">"个不同的词"</span>)</span></pre></div>
+  <p class="say r d2">输入 a b a，应该是 2 个不同的词，程序却说 3 个。<br>点出该改的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-12" class="slide clay lay-notes challenge" aria-label="谁没来" data-chapter="挑战">
+<section id="page-13" class="slide clay lay-notes challenge" aria-label="谁没来" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:160px">谁没来？</h2>
   <p class="say r d2">第一行是全班名单，第二行是签到记录，名字都用空格隔开。<b>有人签了好几次</b>，也可能没人签。<br>输出两行：第一行“到了 几 人”；第二行把没到的人从小到大排好（和 sorted 排的一样），写成“没到：A B”，都到了就写“全到了”。</p>
@@ -858,7 +873,7 @@ Bob Amy Bob</pre><small>输出</small><pre style="white-space:pre">到了 2 人
 </section>
 
 <!-- hints -->
-<section id="page-13" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-14" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>两行都先 split()，再 set()：签了好几次的，只留一个。</span></p>
@@ -868,7 +883,7 @@ Bob Amy Bob</pre><small>输出</small><pre style="white-space:pre">到了 2 人
   <div class="foot"></div>
 </section>
 
-<section id="page-14" class="slide dark" aria-label="参考答案：谁没来？" data-answer="02" data-steps="2" data-at="2">
+<section id="page-15" class="slide dark" aria-label="参考答案：谁没来？" data-answer="02" data-steps="2" data-at="2">
   <h2 class="t">参考答案：谁没来？</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:37px"><div class="tab">attendance.py</div>
@@ -879,19 +894,19 @@ Bob Amy Bob</pre><small>输出</small><pre style="white-space:pre">到了 2 人
 </section>
 
 <!-- review -->
-<section id="page-15" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-16" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>集合和列表最大的不同？<em class="step s2">　集合里同样的只留一个，也没有先后和下标。</em></span></p>
-    <p><i>Q2</i><span>&amp;、|、- 分别是什么？<em class="step s3">　两边都有、合起来、只在前面那个里有。</em></span></p>
-    <p><i>Q3</i><span>空集合怎么写？<em class="step s4">　set()。空的 {} 是字典。</em></span></p>
+    <p><i>Q1</i><span>签到表为什么要变成集合再数？<em class="step s2">　列表里重复的也算；集合同一个名字只留一个。</em></span></p>
+    <p><i>Q2</i><span>谁没来写成 signed - everyone，结果有什么不同？<em class="step s3">　算出的是签到里有、名单里没有的人，通常是空的，就成了“全到了”。</em></span></p>
+    <p><i>Q3</i><span>两个人的爱好各写一行，找出两人都喜欢的，怎么写？<em class="step s4">　set(a.split()) &amp; set(b.split())</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-16" class="slide lay-columns" aria-label="速查卡">
+<section id="page-17" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3" style="--key:860px">
     <div class="r d1"><code>set(names)</code><span>列表变集合，去掉重复</span></div>
@@ -904,7 +919,7 @@ Bob Amy Bob</pre><small>输出</small><pre style="white-space:pre">到了 2 人
 </section>
 
 <!-- later -->
-<section id="page-17" class="slide lay-columns" aria-label="后面再学">
+<section id="page-18" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>元组</code><span>用圆括号，像不能改的列表</span></div>
@@ -916,7 +931,7 @@ Bob Amy Bob</pre><small>输出</small><pre style="white-space:pre">到了 2 人
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-18" class="slide dark thanks" aria-label="谢谢">
+<section id="page-19" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>

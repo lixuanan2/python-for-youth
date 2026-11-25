@@ -1,3 +1,3 @@
-students = [("小明", 90), ("小红", 85)]
-for name, score in students:
-    print(f"{name}：{score} 分")
+prices = [("苹果", 5), ("香蕉", 3)]
+for name, price in prices:
+    print(f"{name}：{price} 元")

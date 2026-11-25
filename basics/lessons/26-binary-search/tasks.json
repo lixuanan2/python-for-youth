@@ -42,7 +42,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 12,
+    "page": 13,
     "starter": "starter/04_find.py",
     "solution": "solutions/04_find.py",
     "scope": "第一行n为整数；接下来n行是从小到大排好的整数；最后一行是要找的整数",

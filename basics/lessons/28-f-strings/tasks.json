@@ -53,7 +53,7 @@
   {
     "id": "02",
     "role": "独立迁移",
-    "page": 12,
+    "page": 13,
     "starter": "starter/05_clock.py",
     "solution": "solutions/05_clock.py",
     "scope": "一行，秒数为整数",

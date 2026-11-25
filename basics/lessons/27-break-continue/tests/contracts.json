@@ -45,32 +45,32 @@
     "expected": "tests/case-09.out"
   },
   {
-    "source": "solutions/06_scores.py",
+    "source": "solutions/06_reading.py",
     "input": "tests/case-10.in",
     "expected": "tests/case-10.out"
   },
   {
-    "source": "solutions/06_scores.py",
+    "source": "solutions/06_reading.py",
     "input": "tests/case-11.in",
     "expected": "tests/case-11.out"
   },
   {
-    "source": "solutions/06_scores.py",
+    "source": "solutions/06_reading.py",
     "input": "tests/case-12.in",
     "expected": "tests/case-12.out"
   },
   {
-    "source": "solutions/06_scores.py",
+    "source": "solutions/06_reading.py",
     "input": "tests/case-13.in",
     "expected": "tests/case-13.out"
   },
   {
-    "source": "solutions/06_scores.py",
+    "source": "solutions/06_reading.py",
     "input": "tests/case-14.in",
     "expected": "tests/case-14.out"
   },
   {
-    "source": "solutions/06_scores.py",
+    "source": "solutions/06_reading.py",
     "input": "tests/case-15.in",
     "expected": "tests/case-15.out"
   }

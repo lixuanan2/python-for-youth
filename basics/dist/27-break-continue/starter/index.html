@@ -109,16 +109,16 @@ while True:
         break
     print(&quot;你说&quot;, word)
 print(&quot;拜拜&quot;)</pre></details></li>
-    <li class="file"><div><h2><a href="06_scores.py" download="06_scores.py">06_scores.py</a></h2><p>课件第 12 页：跳过无效分数，读到 -1 结束，输出个数和平均分。</p></div>
-      <nav aria-label="06_scores.py"><a href="06_scores.py" download="06_scores.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E6%95%B4%E7%90%86%E6%88%90%E7%BB%A9%E5%8D%95%E3%80%91%0A%23%20%E4%B8%8D%E5%81%9C%E8%AF%BB%E5%85%A5%E5%88%86%E6%95%B0%EF%BC%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E6%95%B4%E6%95%B0%EF%BC%8C%E8%AF%BB%E5%88%B0%20-1%20%E5%B0%B1%E7%BB%93%E6%9D%9F%E3%80%82%0A%23%20%20%20%E4%B8%8D%E5%9C%A8%200%20%E5%88%B0%20100%20%E4%B9%8B%E9%97%B4%E7%9A%84%E6%98%AF%E5%86%99%E9%94%99%E4%BA%86%EF%BC%8C%E8%B7%B3%E8%BF%87%E4%B8%8D%E7%AE%97%E3%80%82%0A%23%20%E8%BE%93%E5%87%BA%E4%B8%A4%E8%A1%8C%EF%BC%9A%E2%80%9C%E6%9C%89%E6%95%88%20%E5%87%A0%20%E4%B8%AA%E2%80%9D%E5%92%8C%E2%80%9C%E5%B9%B3%E5%9D%87%20%E5%A4%9A%E5%B0%91%E2%80%9D%EF%BC%8C%0A%23%20%20%20%E5%B9%B3%E5%9D%87%E5%88%86%E7%94%A8%20round%20%E4%BF%9D%E7%95%99%201%20%E4%BD%8D%E5%B0%8F%E6%95%B0%E3%80%82%E4%B8%80%E4%B8%AA%E6%9C%89%E6%95%88%E5%88%86%E6%95%B0%E4%B9%9F%E6%B2%A1%E6%9C%89%EF%BC%8C%0A%23%20%20%20%E5%B0%B1%E8%BE%93%E5%87%BA%E2%80%9C%E6%B2%A1%E6%9C%89%E6%9C%89%E6%95%88%E5%88%86%E6%95%B0%E2%80%9D%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A90%E3%80%8180%E3%80%81120%E3%80%8185%E3%80%81-1%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A%E6%9C%89%E6%95%88%203%20%E4%B8%AA%E3%80%81%E5%B9%B3%E5%9D%87%2085.0%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E5%86%99%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-12">看第 12 页</a></nav>
-      <details><summary>看代码</summary><pre># 【整理成绩单】
-# 不停读入分数，每行一个整数，读到 -1 就结束。
-#   不在 0 到 100 之间的是写错了，跳过不算。
-# 输出两行：“有效 几 个”和“平均 多少”，
-#   平均分用 round 保留 1 位小数。一个有效分数也没有，
-#   就输出“没有有效分数”。
-# 例如输入（每个一行）：90、80、120、85、-1
-# 应该输出（每个一行）：有效 3 个、平均 85.0
+    <li class="file"><div><h2><a href="06_reading.py" download="06_reading.py">06_reading.py</a></h2><p>课件第 13 页：跳过记错的分钟数，读到 -1 结束，输出天数和平均。</p></div>
+      <nav aria-label="06_reading.py"><a href="06_reading.py" download="06_reading.py">下载</a><a href="https://lixuanan2.github.io/python-for-youth/ide/repl/index.html?kernel=python&amp;toolbar=1&amp;showBanner=0&amp;clearCellsOnExecute=1&amp;hideCodeInput=1&amp;clearCodeContentOnExecute=0&amp;theme=JupyterLab%20Dark&amp;promptCellPosition=left&amp;execute=0&amp;code=%23%20%E3%80%90%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95%E3%80%91%0A%23%20%E4%B8%8D%E5%81%9C%E8%AF%BB%E5%85%A5%E6%AF%8F%E5%A4%A9%E8%AF%BB%E4%B9%A6%E7%9A%84%E5%88%86%E9%92%9F%E6%95%B0%EF%BC%8C%E6%AF%8F%E8%A1%8C%E4%B8%80%E4%B8%AA%E6%95%B4%E6%95%B0%EF%BC%8C%E8%AF%BB%E5%88%B0%20-1%20%E5%B0%B1%E7%BB%93%E6%9D%9F%E3%80%82%0A%23%20%20%20%E4%B8%8D%E5%9C%A8%200%20%E5%88%B0%20300%20%E4%B9%8B%E9%97%B4%E7%9A%84%E6%98%AF%E8%AE%B0%E9%94%99%E4%BA%86%EF%BC%8C%E8%B7%B3%E8%BF%87%E4%B8%8D%E7%AE%97%E3%80%82%0A%23%20%E8%BE%93%E5%87%BA%E4%B8%A4%E8%A1%8C%EF%BC%9A%E2%80%9C%E6%9C%89%E6%95%88%20%E5%87%A0%20%E5%A4%A9%E2%80%9D%E5%92%8C%E2%80%9C%E5%B9%B3%E5%9D%87%20%E5%A4%9A%E5%B0%91%E2%80%9D%EF%BC%8C%0A%23%20%20%20%E5%B9%B3%E5%9D%87%E7%94%A8%20round%20%E4%BF%9D%E7%95%99%201%20%E4%BD%8D%E5%B0%8F%E6%95%B0%E3%80%82%E4%B8%80%E5%A4%A9%E6%9C%89%E6%95%88%E7%9A%84%E4%B9%9F%E6%B2%A1%E6%9C%89%EF%BC%8C%0A%23%20%20%20%E5%B0%B1%E8%BE%93%E5%87%BA%E2%80%9C%E6%B2%A1%E6%9C%89%E6%9C%89%E6%95%88%E8%AE%B0%E5%BD%95%E2%80%9D%E3%80%82%0A%23%20%E4%BE%8B%E5%A6%82%E8%BE%93%E5%85%A5%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A30%E3%80%8145%E3%80%81500%E3%80%8115%E3%80%81-1%0A%23%20%E5%BA%94%E8%AF%A5%E8%BE%93%E5%87%BA%EF%BC%88%E6%AF%8F%E4%B8%AA%E4%B8%80%E8%A1%8C%EF%BC%89%EF%BC%9A%E6%9C%89%E6%95%88%203%20%E5%A4%A9%E3%80%81%E5%B9%B3%E5%9D%87%2030.0%0A%23%20%E2%86%93%20%E4%BB%8E%E8%BF%99%E9%87%8C%E5%BC%80%E5%A7%8B%E5%86%99%0A" target="_blank" rel="noopener noreferrer">在 JupyterLite 打开</a><a href="../index.html#page-13">看第 13 页</a></nav>
+      <details><summary>看代码</summary><pre># 【阅读记录】
+# 不停读入每天读书的分钟数，每行一个整数，读到 -1 就结束。
+#   不在 0 到 300 之间的是记错了，跳过不算。
+# 输出两行：“有效 几 天”和“平均 多少”，
+#   平均用 round 保留 1 位小数。一天有效的也没有，
+#   就输出“没有有效记录”。
+# 例如输入（每个一行）：30、45、500、15、-1
+# 应该输出（每个一行）：有效 3 天、平均 30.0
 # ↓ 从这里开始写</pre></details></li>
   </ol>
 </main>

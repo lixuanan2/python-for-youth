@@ -718,6 +718,7 @@ dialog p{color:var(--muted);font-size:15px}
     <div class="slip tilt r d2"><small>print(10 / 3)</small><pre>3.3333333333333335</pre></div>
   </div>
   <p class="say r d3">逗号会多出空格，小数又长得看不完。写成绩单、小票、时钟，都想要整整齐齐的输出。<br>这节课学 f-string：在引号前面加一个 f，就能把变量直接写进句子里，还能管住小数有几位。</p>
+  <p class="say tip r d3">生活里：超市小票、电子钟都要整整齐齐。先想一想：怎样把 5 分 9 秒显示成 05:09？</p>
   <div class="foot"></div>
 </section>
 
@@ -742,15 +743,15 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: braces -->
-<section id="page-4" class="slide lay-ask top" aria-label="小测：大括号外面的加号">
-  <h2 class="t r">小测：运行这两行，输出什么？</h2>
-  <div class="editor r d1" style="--fs:48px"><div class="tab">代码</div>
-<pre class="code"><span class="ln">age = <span class="m">12</span></span><span class="ln"><span class="f">print</span>(<span class="s">f"{age}+1"</span>)</span></pre></div>
-  <div class="quiz r d1" data-right="1">
-    <button type="button" data-fb="+1 写在大括号外面，只是普通的文字，不会去算。"><i>1</i>13</button>
-    <button type="button" data-fb="答对了！大括号里的 age 换成 12，后面的 +1 原样跟着。想算就写成 {age + 1}。"><i>2</i>12+1</button>
-    <button type="button" data-fb="有 f，大括号会被换成 age 的值。"><i>3</i>{age}+1</button>
-    <button type="button" data-fb="这样写不会报错。"><i>4</i>报错</button>
+<section id="page-4" class="slide lay-ask top" aria-label="小测：两种写法比一比">
+  <h2 class="t r">小测：两行各输出什么？</h2>
+  <div class="editor r d1" style="--fs:36px"><div class="tab">代码</div>
+<pre class="code"><span class="ln">age = <span class="m">12</span></span><span class="ln"><span class="f">print</span>(<span class="s">f"{age + 1}"</span>)</span><span class="ln"><span class="f">print</span>(<span class="s">f"{age}"</span> + <span class="s">"1"</span>)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！第一行在大括号里算出 13；第二行是文字 "12" 接上文字 "1"。"><i>1</i>13 和 121</button>
+    <button type="button" data-fb="第二行的 + 在大括号外面，是把两段文字接起来。"><i>2</i>13 和 13</button>
+    <button type="button" data-fb="第一行的加号在大括号里，会先算。"><i>3</i>121 和 121</button>
+    <button type="button" data-fb="第二行没有把 + 写进引号，它会把两段文字接起来。"><i>4</i>13 和 12+1</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -772,15 +773,15 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- quiz: .2f -->
-<section id="page-6" class="slide lay-ask top" aria-label="小测：7 保留两位">
-  <h2 class="t r">小测：运行这两行，输出什么？</h2>
+<section id="page-6" class="slide lay-ask top" aria-label="小测：改成 9.996">
+  <h2 class="t r">小测：price 改成 9.996，输出什么？</h2>
   <div class="editor r d1" style="--fs:48px"><div class="tab">代码</div>
-<pre class="code"><span class="ln">price = <span class="m">7</span></span><span class="ln"><span class="f">print</span>(<span class="s">f"{price:.2f}"</span>)</span></pre></div>
-  <div class="quiz r d1" data-right="2">
-    <button type="button" data-fb=":.2f 要显示 2 位小数，整数也会补上。"><i>1</i>7</button>
-    <button type="button" data-fb="只有 1 位。.2f 要 2 位。"><i>2</i>7.0</button>
-    <button type="button" data-fb="答对了！不够 2 位就补 0，小票上的钱常这样写。"><i>3</i>7.00</button>
-    <button type="button" data-fb="冒号后面的是格式说明，不会原样输出。"><i>4</i>7.2f</button>
+<pre class="code"><span class="ln mod">price = <span class="m">9.996</span><span class="orig">原来是 7</span></span><span class="ln"><span class="f">print</span>(<span class="s">f"{price:.2f}"</span>)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！保留 2 位要四舍五入，9.996 进上去就是 10.00。"><i>1</i>10.00</button>
+    <button type="button" data-fb=":.2f 是四舍五入，不是直接砍掉。"><i>2</i>9.99</button>
+    <button type="button" data-fb="保留 2 位，第 3 位不会显示。"><i>3</i>9.996</button>
+    <button type="button" data-fb=":.2f 一定显示 2 位小数。"><i>4</i>10</button>
   </div>
   <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
   <div class="foot"></div>
@@ -830,30 +831,44 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- errors -->
-<section id="page-10" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
-  <h2 class="t r">这节课常见的三种错误</h2>
-  <p class="note r">划线的写法只阅读，不要照抄</p>
-  <div class="ledger" style="--key:660px;--mid:380px">
-    <div class="r d1"><code>print("{name}")</code><b>不报错</b><span>忘了 f，原样输出大括号</span></div>
-    <div class="r d2"><code class="plain">文字用 :.2f</code><b>ValueError</b><span>先用 float() 变成数</span></div>
-    <div class="r d3"><code>f"{name"</code><b>SyntaxError</b><span>大括号要成对</span></div>
+<section id="page-10" class="slide lay-ask" aria-label="回顾：跳过和停下">
+  <h2 class="t r">回顾第 27 课：输出哪些数？</h2>
+  <div class="editor r d1" style="--fs:48px"><div class="tab">review.py</div>
+<pre class="code"><span class="ln"><span class="k">for</span> i <span class="k">in</span> <span class="f">range</span>(<span class="m">5</span>):</span><span class="ln">    <span class="k">if</span> i == <span class="m">1</span>:</span><span class="ln">        <span class="k">continue</span></span><span class="ln">    <span class="k">if</span> i == <span class="m">3</span>:</span><span class="ln">        <span class="k">break</span></span><span class="ln">    <span class="f">print</span>(i)</span></pre></div>
+  <div class="quiz r d2" data-right="0">
+    <button type="button" data-fb="答对了！1 被 continue 跳过，到 3 就 break 停下。"><i>1</i>0 2</button>
+    <button type="button" data-fb="i 是 1 时 continue，print 被跳过。"><i>2</i>0 1 2</button>
+    <button type="button" data-fb="到 3 就 break，4 轮不到。"><i>3</i>0 2 4</button>
+    <button type="button" data-fb="i 是 0 时两个 if 都不进，照常输出。"><i>4</i>2</button>
   </div>
-  <p class="say r d3">:.2f 和 :02d 只能用在数上。input() 读来的是文字，要先转换。</p>
+  <p class="fb" data-empty="点一个答案，或按键盘数字键"></p>
+  <div class="foot"></div>
+</section>
+
+<section id="page-11" class="slide lay-columns" aria-label="三种常见错误" data-chapter="找错">
+  <h2 class="t r">这节课常见的三种错误</h2>
+  <p class="note r">划线的是错的写法，只阅读，不要照抄</p>
+  <div class="ledger" style="--key:560px;--mid:640px">
+    <div class="r d1"><code>print("{name}")</code><b>print(f"{name}")</b><span>忘了 f，大括号原样输出</span></div>
+    <div class="r d2"><code>x = input()<br>f"{x:.2f}"</code><b>x = float(input())<br>f"{x:.2f}"</b><span>文字不能按小数显示，先 float()</span></div>
+    <div class="r d3"><code>f"{name"</code><b>f"{name}"</b><span>大括号要成对</span></div>
+  </div>
+  <p class="say r d3">第一种不报错，屏幕上会出现大括号。</p>
   <div class="foot"></div>
 </section>
 
 <!-- bug hunt -->
-<section id="page-11" class="slide dark lay-ask" aria-label="找错：格式报错">
-  <h2 class="t r">找错：第 3 行报 ValueError</h2>
+<section id="page-12" class="slide dark lay-ask" aria-label="找错：少收了一元">
+  <h2 class="t r">找错：四舍五入，怎么成了 16 元？</h2>
   <div class="editor r d1" style="--fs:50px"><div class="tab">bug.py（只阅读）</div>
-<pre class="code pick" data-bug="1" data-yes="找到了！input() 读来的是文字，文字不能按 :.2f 显示。改成 price = float(input())。" data-no="这一行没问题。报错说这个值不能按小数显示，它是从哪里来的？"><span class="ln">price = <span class="f">input</span>()</span><span class="ln">count = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln"><span class="f">print</span>(<span class="s">f"每件 {price:.2f} 元"</span>)</span></pre></div>
-  <p class="say r d2">输入 3.5 和 4，报错的最后一行是：<br><span style="font-family:var(--code);font-size:30px">ValueError: Unknown format code 'f' for object of type 'str'</span><br>点出该改的那一行。</p>
+<pre class="code pick" data-bug="4" data-yes="找到了！int() 直接砍掉小数，16.67 成了 16。要四舍五入，写 {each:.0f}。" data-no="这一行没问题。16.67 变成 16，是哪一步把小数去掉的？"><span class="ln">total = <span class="f">float</span>(<span class="f">input</span>())</span><span class="ln">people = <span class="f">int</span>(<span class="f">input</span>())</span><span class="ln">each = total / people</span><span class="ln"><span class="f">print</span>(<span class="s">f"每人 {int(each)} 元"</span>)</span></pre></div>
+  <p class="say r d2">50 元 3 个人分，每人 16.67 元，四舍五入应该是 17 元，程序却说 16 元。<br>点出该改的那一行。</p>
   <p class="fb" data-empty="点代码里的一行"></p>
   <div class="foot"></div>
 </section>
 
 <!-- challenge -->
-<section id="page-12" class="slide clay lay-notes challenge" aria-label="电子钟" data-chapter="挑战">
+<section id="page-13" class="slide clay lay-notes challenge" aria-label="电子钟" data-chapter="挑战">
   <p class="kicker r"># 自己挑战</p>
   <h2 class="big r d1" style="font-size:160px">电子钟</h2>
   <p class="say r d2">读入从零点开始过了多少秒，像电子钟那样显示成 时:分:秒。<br>每一段都显示两位，<b>不够两位前面补 0</b>。</p>
@@ -863,7 +878,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- hints -->
-<section id="page-13" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
+<section id="page-14" class="slide clay lay-hints" aria-label="提示" data-steps="3" data-at="3">
   <h2 class="t">卡住了？一次看一条提示</h2>
   <div class="hints">
     <p class="step"><i>提示 1</i><span>一小时是 3600 秒。秒数 // 3600 就是几点。</span></p>
@@ -873,7 +888,7 @@ dialog p{color:var(--muted);font-size:15px}
   <div class="foot"></div>
 </section>
 
-<section id="page-14" class="slide dark" aria-label="参考答案：电子钟" data-answer="02" data-steps="2" data-at="2">
+<section id="page-15" class="slide dark" aria-label="参考答案：电子钟" data-answer="02" data-steps="2" data-at="2">
   <h2 class="t">参考答案：电子钟</h2>
   <div class="abs only1" style="left:96px;top:330px;width:1728px;text-align:center"><p class="say" style="font-size:64px;font-weight:800">先自己做完，再翻开对一对</p><p class="say" style="color:var(--ghost);margin-top:24px">讲的时候按 → 翻开</p></div>
   <div class="editor step s2" style="left:96px;top:200px;width:1180px;--fs:44px"><div class="tab">clock.py</div>
@@ -884,19 +899,19 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- review -->
-<section id="page-15" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
+<section id="page-16" class="slide olive lay-hints" aria-label="说得清吗" data-chapter="复盘" data-steps="4" data-at="4">
   <h2 class="big">说得清吗？</h2>
   <div class="hints qa">
-    <p><i>Q1</i><span>f-string 怎么写？<em class="step s2">　引号前加 f，变量和算式写进大括号。</em></span></p>
-    <p><i>Q2</i><span>:.2f 是什么意思？<em class="step s3">　按小数显示，保留 2 位，不够补 0。</em></span></p>
-    <p><i>Q3</i><span>怎样把 5 显示成 05？<em class="step s4">　写 {m:02d}：整数，至少 2 位，前面补 0。</em></span></p>
+    <p><i>Q1</i><span>小票上的钱数为什么用 :.2f，不直接输出？<em class="step s2">　3.5、14.0 位数不一样；统一两位小数，看着整齐，也是钱数常用的写法。</em></span></p>
+    <p><i>Q2</i><span>电子钟不补 0，输入 3909 会有什么不同？<em class="step s3">　显示成 1:5:9，不像钟表上的样子。</em></span></p>
+    <p><i>Q3</i><span>想把 0.85 显示成 85.0 分，怎么写？<em class="step s4">　f"{0.85 * 100:.1f} 分"</em></span></p>
   </div>
   <p class="say only1">先自己说一说，再翻下一步看答案。</p>
   <div class="foot"></div>
 </section>
 
 <!-- cheat sheet -->
-<section id="page-16" class="slide lay-columns" aria-label="速查卡">
+<section id="page-17" class="slide lay-columns" aria-label="速查卡">
   <h2 class="t r">速查卡</h2>
   <div class="sheet3" style="--key:860px">
     <div class="r d1"><code>f"{name}今年{age}岁"</code><span>变量直接写进句子</span></div>
@@ -909,7 +924,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- later -->
-<section id="page-17" class="slide lay-columns" aria-label="后面再学">
+<section id="page-18" class="slide lay-columns" aria-label="后面再学">
   <h2 class="t r">这些后面再学</h2>
   <div class="later">
     <div class="r d1"><code>对齐</code><span>让一列数靠右排整齐，做成表格</span></div>
@@ -921,7 +936,7 @@ dialog p{color:var(--muted);font-size:15px}
 </section>
 
 <!-- generated for every lesson by tools/build.py -->
-<section id="page-18" class="slide dark thanks" aria-label="谢谢">
+<section id="page-19" class="slide dark thanks" aria-label="谢谢">
   <h2 class="abs r" style="left:96px;top:130px;font:800 240px/1.2 var(--text)">谢谢！</h2>
   <p class="abs say r d1" style="left:96px;top:470px;font-size:52px">喜欢这节课？欢迎来 GitHub 和我交流。</p>
   <div class="links r d2"><a class="gh-link" href="https://github.com/lixuanan2/python-for-youth" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>python-for-youth</a></div>
