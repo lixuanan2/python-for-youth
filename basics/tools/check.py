@@ -264,12 +264,34 @@ def check_briefs(lesson, folder, tasks, sections):
         assert built.read_bytes() == builder.starter_text(lesson, name).encode(builder.file_encoding(built)), f'Rebuild dist: {lesson["id"]}/{name}'
 
 
+# Programs that a careless copy changes: an escape inside a string (\n, \t, \\), a group reference (\1, \g<0>), and what
+# HTML escapes (&, <, quotes). check_tools puts them on a page the way build.py does and reads them back.
+TRICKY = {
+    'python': 'print("a\\nb\\t\\\\")\nprint(r"\\1 \\g<0>", \'&amp; < >\')\n',
+    'cpp': '#include <cstdio>\nint main() {\n    int x = 3;\n    printf("%d\\n\\1 & <\\\\>\\n", x);\n    return 0;\n}\n',
+}
+
+
+def check_tools():
+    """The way build.py puts an "ide": true program on its page keeps the program as it is."""
+    code = TRICKY[LANGUAGE]
+    slides = '<section id="page-1" class="slide"><p>one</p></section>\n<section id="page-2" class="slide"><p>two</p></section>'
+    pages = Pages(builder.mark_ide(slides, [{'page': 2, 'code': code}], 'check_tools'))
+    assert pages.pages[0]['ide'] is None and pages.pages[1]['ide'] == code, \
+        f'build.py changes an IDE program on its way to the page: {pages.pages[1]["ide"]!r} is not {code!r}'
+    assert compiles(code), f'check_tools: the sample program does not compile: {code!r}'
+
+
 def check_ide(text, folder):
     """What a page sends to the IDE must be a whole program, so the student can press Run."""
     claims = json.loads((folder / 'tests/claims.json').read_text(encoding='utf-8'))
     pages = Pages(text)
     hint = 'mark the whole program in tests/claims.json with "ide": true'
+    marked = {c['page']: c['code'] for c in claims if c.get('ide')}
     for number, page in enumerate(pages.pages, 1):
+        # The deck carries the marked program letter for letter: a \n inside a string stays \n, not a line break.
+        assert page['ide'] == marked.get(number), \
+            f'{folder.name} page {number}: the IDE program on the page is not the one tests/claims.json marks "ide": true; rebuild'
         code = pages.ide_code(page).strip()
         assert not (page['ide'] and page['slots']), f'{folder.name} page {number} has yellow boxes, so its IDE code must follow them, not "ide"'
         if not code or any(c['page'] == number and c['code'].strip() == code for c in claims):
@@ -596,6 +618,7 @@ def main():
     scripts = cases = claims = pages = changes = algos = boxes = moved = 0
     lessons = builder.lessons()
     extras = check_course()
+    check_tools()
     for lesson in lessons:
         folder = ROOT / 'lessons' / lesson['id']
         s, c = check_programs(folder)

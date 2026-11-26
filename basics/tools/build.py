@@ -192,6 +192,19 @@ def starter_text(lesson, name):
     return header + ('\n' + body.lstrip('\n') if header and body.strip() else body)
 
 
+def mark_ide(slides, marked, where):
+    """Put each "ide": true program from claims.json on its page as data-ide. The program goes in through a function, not
+    a replacement string: re would read the \\n in printf("%d\\n", x) or print("a\\nb") as a line break and \\1 as a group."""
+    pages = [claim['page'] for claim in marked]
+    assert len(pages) == len(set(pages)), f'Two IDE programs for one page in {where}'
+    for claim in marked:
+        full = html.escape(claim['code'], quote=True).replace('\n', '&#10;')
+        start = f'<section id="page-{claim["page"]}" '
+        slides, found = re.subn(re.escape(start), lambda m: f'{start}data-ide="{full}" ', slides)
+        assert found == 1, f'No page {claim["page"]} for the IDE program in {where}'
+    return slides
+
+
 def attach_code(slides, lesson):
     """Fill IDE data from files: data-code-file for buttons, data-lines for excerpts of a longer program."""
     def source(file):
@@ -201,12 +214,7 @@ def attach_code(slides, lesson):
     slides = re.sub(r'data-code-file="([^"]+)"', lambda m: f'data-code="{source(m.group(1))}"', slides)
     # A page that shows only part of a program marks the whole, tested program in claims.json with "ide": true.
     marked = [claim for claim in json.loads(read(f'lessons/{lesson["id"]}/tests/claims.json')) if claim.get('ide')]
-    pages = [claim['page'] for claim in marked]
-    assert len(pages) == len(set(pages)), f'Two IDE programs for one page in {lesson["id"]}'
-    for claim in marked:
-        full = html.escape(claim['code'], quote=True).replace('\n', '&#10;')
-        slides, found = re.subn(f'<section id="page-{claim["page"]}" ', f'<section id="page-{claim["page"]}" data-ide="{full}" ', slides)
-        assert found == 1, f'No page {claim["page"]} for the IDE program in {lesson["id"]}'
+    slides = mark_ide(slides, marked, lesson['id'])
     return re.sub(r'data-file="([^"]+)"( data-lines="[^"]+")', lambda m: f'data-file="{m.group(1)}"{m.group(2)} data-full="{source(m.group(1))}"', slides)
 
 
