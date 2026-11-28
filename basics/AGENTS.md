@@ -15,7 +15,7 @@
 - `lessons/<编号-英文名>/slides.html`：一节课的页面，只写 `<section>`。这是页面正文的唯一来源。题目的条件（输入、范围、输出格式、样例）改了，要同时核对这节课的 `tasks.json`（包括 IDE 里题目注释用的 `brief`）、`solutions/`、`starter/` 和 `tests/`，让它们和页面说的一致。
 - `lessons/<…>/tasks.json`、`starter/`、`solutions/`、`tests/`：题目、起始程序、答案和测试。`tests/claims.json` 记录页面说过的输出和报错。
 - `template/`：所有课共用的外壳、样式和脚本。缩略图、时间轴、章节跳转都在这里。
-- `template/pen.js`、`pen.css`、`pen.html`、`pen-help.html`：画笔和白板，构建时拼进每节课和项目课的页面。老师交给 Codex 改，说明在 [template/PEN.md](template/PEN.md)。Claude 的子对话不改这四个文件，除非老师在总控对话里说；改别的文件时也不要动它们和 `deck.js` 之间的接口（列在 `pen.js` 开头）。
+- `template/tool/`：画笔和白板（`pen.js`、`pen.css`、`pen.html`、`pen-help.html`），构建时拼进每节课和项目课的页面。老师交给 Codex 改，说明在 [template/tool/PEN.md](template/tool/PEN.md)。这个文件夹和放构建工具的 `tools/` 不是一回事。Claude 的子对话不改这个文件夹，除非老师在总控对话里说；改别的文件时也不要动它们和 `deck.js` 之间的接口（列在 `pen.js` 开头）。
 - `template/layouts.css`：8 种版式（封面、便签、代码走一遍、猜一猜、分栏、动手、提问、提示）。每节课构建时都内联它。版式怎么写见 [PROMPT.md](PROMPT.md) 的“版式和格子”。
 - `course.json`：课程路线。有 `id` 的已做好，其余是首页显示的规划中课程。上下集各占一行。每节课都写 `"structured": true`（每页都要有版式），新课也一样。
 - `site.json`：网站名称、首页文字、语言、IDE 平台和谢谢页的文案、链接。换语言或换 IDE 只改这里。代码比较长的课可以写 `code_room`，放大猜一猜和小测的代码栏，比如 `"code_room": {"predict": [1160, 740, 58], "ask": [1000, 760, 48]}`（宽、高、最大字号，键是 `build.py` 里 `CODE_ROOM` 的名字）；不写就用 `CODE_ROOM` 的值。谢谢页加链接就在 `thanks.links` 加一项，图标放 `template/icons/`。

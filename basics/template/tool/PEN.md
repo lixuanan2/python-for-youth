@@ -4,7 +4,9 @@
 
 ## 能改的文件
 
-只有这四个文件，都在 `basics/template/` 里：
+只改 `basics/template/tool/` 里的文件，也就是这份说明所在的文件夹。注意别和 `basics/tools/` 搞混：`tools/` 放的是构建和检查工具，不能改。
+
+构建只读下面这四个文件：
 
 | 文件 | 内容 |
 | --- | --- |
@@ -13,17 +15,28 @@
 | [pen.html](pen.html) | 小球和它打开的工具栏（颜色、白板、收笔）的 HTML |
 | [pen-help.html](pen-help.html) | 快捷键帮助（按 ? 打开）里画笔那几行：D、1 2 3、C、W、Esc |
 
+在 `tool/` 里另建的文件不会自动拼进页面。确实需要多一个文件时，先告诉老师，由 Claude 的子对话改构建。
+
 改完要重新构建，构建出来的 `basics/dist/`、`basics/pdf.json` 和 `project/dist/` 也一起提交（见下面“构建和检查”）。
 
 ## 不能动的文件
 
-- `basics/template/` 里的其他文件：`deck.js`、`page.html`、`theme.css`、`layouts.css`、`index.html`、`starter.html`、`icons/`。
-- `basics/tools/`、`basics/vendor/`、`basics/lessons/`、`basics/course.json`、`basics/site.json`。
+- `basics/template/` 里 `tool/` 以外的文件：`deck.js`、`page.html`、`theme.css`、`layouts.css`、`index.html`、`starter.html`、`icons/`。
+- `basics/tools/`（构建和检查工具）、`basics/vendor/`、`basics/lessons/`、`basics/course.json`、`basics/site.json`。
 - `project/` 里除了构建生成的 `project/dist/` 以外的文件。
 - `.github/`、各处的 `AGENTS.md`、`README.md`、`home/`。
 - `dist/` 不手改，只提交构建的结果。
 
 这些文件 Python 课和 C++ 课共用，或者是课件内容。需要改它们时，先告诉老师，由 Claude 的子对话来改。
+
+## 课件是离线的单个文件
+
+每节课构建出来是一个 HTML 文件，老师把 `dist/` 复制到教室电脑上双击打开，不联网也要能用。所以：
+
+- 画笔用到的图片、纹理、图标、字体，都不能引外部链接（CDN、网上的图片、在线字体），也不能另放成文件。
+- 只能写在 `pen.css` 和 `pen.js` 里：用 CSS 渐变、内联 SVG（写在 CSS 的 `url("data:image/svg+xml,…")` 或 JS 生成的元素里），或者用 canvas 画出来。字体只用页面已经有的（`var(--code)`、`var(--text)`）。
+- 新加的动画和过渡要照顾 `prefers-reduced-motion`：系统设了“减少动态效果”时，用 `@media (prefers-reduced-motion: reduce)` 关掉或缩短动画。
+- 新加的画笔元素在打印 PDF 时要藏起来（见下面“另外两处”）。
 
 ## 画笔怎么接到放映外壳上
 

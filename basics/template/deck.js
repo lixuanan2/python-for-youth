@@ -790,8 +790,8 @@ class SlidePresentation {
     });
   }
 }
-// The pen and whiteboard live in template/pen.js, which the build puts before this file. Their methods join the deck here, as
-// they are, so inside them `this` is the deck. What each side may use of the other is listed at the top of pen.js.
+// The pen and whiteboard live in template/tool/pen.js, which the build puts before this file. Their methods join the deck
+// here, as they are, so inside them `this` is the deck. What each side may use of the other is listed at the top of pen.js.
 for (const name of Object.getOwnPropertyNames(PenAndBoard.prototype)) {
   if (name !== 'constructor') Object.defineProperty(SlidePresentation.prototype, name, Object.getOwnPropertyDescriptor(PenAndBoard.prototype, name));
 }
