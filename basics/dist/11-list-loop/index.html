@@ -530,39 +530,134 @@ dialog p{color:var(--muted);font-size:15px}
 }
 
 /* Pen and whiteboard: one layer over the stage at its own 1920 x 1080, cleared when the page turns or the pen goes away.
-   The highlighter draws solid on its own canvas and the canvas is see-through, so crossing strokes never get darker. */
-.ink-layer{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:900;pointer-events:none}
-.ink-layer canvas{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none}
-.ink-layer .hl{opacity:.4}
-.pen .ink-layer{pointer-events:auto;cursor:crosshair;touch-action:none}
-/* Whiteboard: a sand board with a faint 48px grid, floating over the dimmed page, which takes clicks but does nothing. */
-.board-shade{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:950;background:#141413a6;display:none}
-.board{position:absolute;z-index:960;display:none;flex-direction:column;border-radius:14px;overflow:hidden;background:#e9e6db;box-shadow:0 24px 60px #000a;user-select:none;-webkit-user-select:none}
-.board-open .board-shade{display:block}.board-open .board{display:flex}
-.board-bar{flex:none;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 24px;background:#1f1e1d;color:#f0eee6;font:700 22px/1 var(--text);cursor:move;touch-action:none}
-.board-x{width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:#f0eee6;font:400 32px/1 var(--text);cursor:pointer}
-.board-x:hover{background:#45413b}
-.board-paper{position:relative;flex:1;overflow:hidden;cursor:crosshair;touch-action:none;background-color:#e9e6db;
-  background-image:linear-gradient(#1f1e1d12 1px,transparent 1px),linear-gradient(90deg,#1f1e1d12 1px,transparent 1px);background-size:48px 48px}
+   The layer makes no stacking context of its own, so its canvases blend with the page under them: the highlighter is drawn
+   solid and shown twice, multiplied (yellow on light paper, the words stay dark) and screened (a glow on a dark code box),
+   and crossing strokes never get darker. Pen ink has a thin paper-coloured halo under it, invisible on paper, an outline on
+   dark and coloured pages, so red and blue read on every page from the back of the room. */
+.ink-layer{position:absolute;left:0;top:0;width:1920px;height:1080px;pointer-events:none}
+.ink-layer canvas{position:absolute;left:0;top:0;z-index:900;width:1920px;height:1080px;max-width:none;max-height:none}
+.ink-layer .halo{opacity:.92}
+.ink-layer .hl{mix-blend-mode:multiply;opacity:.62}
+.ink-layer .hl.glow{mix-blend-mode:screen;opacity:.5}
+.pen .ink-layer{pointer-events:auto;touch-action:none}
+/* The pointer while the pen is out: a dot of the ink in hand, ringed so it shows on light and dark pages. */
+.pen .ink-layer,.board-paper{cursor:crosshair}
+:is(.pen .ink-layer,.board-paper)[data-color="0"]{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='14' cy='14' r='9' fill='none' stroke='%231f1e1d' stroke-opacity='.45'/%3E%3Ccircle cx='14' cy='14' r='5.5' fill='%23c6613f' stroke='%23faf9f5' stroke-width='2.5'/%3E%3C/svg%3E") 14 14,crosshair}
+:is(.pen .ink-layer,.board-paper)[data-color="1"]{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='14' cy='14' r='9' fill='none' stroke='%231f1e1d' stroke-opacity='.45'/%3E%3Ccircle cx='14' cy='14' r='5.5' fill='%231f4fbf' stroke='%23faf9f5' stroke-width='2.5'/%3E%3C/svg%3E") 14 14,crosshair}
+:is(.pen .ink-layer,.board-paper)[data-color="2"]{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect x='7' y='3' width='14' height='22' rx='3' fill='%23ffe100' fill-opacity='.75' stroke='%231f1e1d' stroke-opacity='.55' transform='rotate(35 14 14)'/%3E%3Ccircle cx='14' cy='14' r='1.6' fill='%231f1e1d'/%3E%3C/svg%3E") 14 14,crosshair}
+
+/* === Whiteboard: a sheet of warm graph paper taped over the dimmed page, a second sheet showing under it. The top strip
+   (its title, tape and hint) moves it; the folded corner at the bottom right is the handle that resizes it. === */
+.board-shade{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:950;display:none;
+  background:radial-gradient(ellipse 75% 70% at 50% 46%,#141413a0,#141413d8)}
+.board{position:absolute;z-index:960;display:none;flex-direction:column;user-select:none;-webkit-user-select:none;
+  --sheet:#f6f3ea;--fold:40px;border-radius:5px 7px 4px 6px}
+.board-open .board-shade{display:block;animation:shade-in .28s ease-out}
+.board-open .board{display:flex;animation:board-in .42s cubic-bezier(.2,.85,.25,1.08)}
+@keyframes shade-in{from{opacity:0}}
+@keyframes board-in{from{opacity:0;transform:translateY(34px) rotate(-1.6deg) scale(.965)}55%{opacity:1}to{opacity:1;transform:none}}
+/* The sheet's shadow is drawn behind it (a shadow never falls inside its own box, so the cut corner shows the page); the
+   sheet's colour and grain are on the strip and the paper, the paper cut at the fold. Under it a sand sheet sits askew. */
+.board::before,.board::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+.board::before{z-index:-1;box-shadow:0 2px 3px #0003,0 22px 48px -8px #000b,0 48px 90px -30px #000a}
+.board-bar,.board-paper{background-color:var(--sheet);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .3 0 0 0 0 .2 0 0 0 -.9 .56'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E")}
+.board::after{z-index:-2;background:linear-gradient(#e7e3d6,#ddd7c6);box-shadow:0 14px 34px -6px #0009;transform:translate(-8px,12px) rotate(-.9deg)}
+/* The top strip: "# 白板" like a page title, a quiet hint, the close button; two strips of amber tape hold the sheet. */
+.board-bar{position:relative;flex:none;height:68px;display:flex;align-items:center;gap:18px;padding:6px 10px 0 30px;color:var(--ink);cursor:move;touch-action:none;border-radius:inherit;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.board-bar>b::after{content:"";position:absolute;left:22px;right:22px;bottom:0;height:6px;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='6' preserveAspectRatio='none'%3E%3Cpath d='M0 3.4C40 2.2 70 4.2 110 3.1S190 2.4 230 3.6 280 2.8 300 3.2' fill='none' stroke='%23c6613f' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") 0 0/100% 6px no-repeat}
+.board-bar b{font:800 30px/1 var(--text);letter-spacing:-.5px}
+.board-bar b::before{content:"# ";color:var(--clay)}
+.board-bar small{flex:1;font:400 17px/1 var(--text);color:var(--ghost);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.board-bar::before,.board-bar::after{content:"";position:absolute;top:-15px;width:128px;height:36px;
+  background:repeating-linear-gradient(90deg,#fff2 0 2px,transparent 2px 7px),linear-gradient(#efc56fcc,#e8b04bb8);
+  box-shadow:0 1px 2px #5a3e0a33;
+  clip-path:polygon(0 8%,4% 0,8% 9%,12% 1%,16% 8%,84% 2%,88% 9%,92% 0,96% 8%,100% 2%,100% 94%,96% 100%,92% 91%,88% 99%,84% 92%,16% 98%,12% 91%,8% 100%,4% 92%,0 99%)}
+.board-bar::before{left:54px;transform:rotate(-3.5deg)}
+.board-bar::after{right:72px;transform:rotate(4deg)}
+.board-x{flex:none;position:relative;width:52px;height:52px;border:0;border-radius:50%;background:transparent;cursor:pointer;transition:background-color .18s,transform .18s}
+.board-x svg{width:26px;height:26px;fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;transition:stroke .18s}
+.board-x:hover{background:var(--clay);transform:rotate(90deg)}
+.board-x:hover svg{stroke:#fffaf5}
+.board-x:focus-visible{outline:3px solid var(--clay);outline-offset:2px}
+/* The paper: olive graph lines every 48px on the grain, cut at the fold like the sheet. */
+.board-paper{position:relative;flex:1;overflow:hidden;touch-action:none;
+  background-image:linear-gradient(#5b6f4524 1px,transparent 1px),linear-gradient(90deg,#5b6f4524 1px,transparent 1px),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .3 0 0 0 0 .2 0 0 0 -.9 .56'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:48px 48px,48px 48px,220px 220px;background-position:23px 23px,23px 23px,0 0;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - var(--fold)),calc(100% - var(--fold)) 100%,0 100%);border-radius:0 0 4px 6px}
 .board-paper canvas{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none}
-.board-paper .hl{opacity:.4}
-.board-size{position:absolute;right:0;bottom:0;width:36px;height:36px;cursor:nwse-resize;touch-action:none;
-  background:linear-gradient(135deg,transparent 55%,#1f1e1d55 55%,#1f1e1d55 62%,transparent 62%,transparent 72%,#1f1e1d55 72%,#1f1e1d55 79%,transparent 79%)}
-/* The ball fades out like the control bar but stays clickable, so a first tap on a touch screen opens it instead of turning the page. */
-.pen-ball{position:fixed;right:14px;top:50%;transform:translateY(calc(32px - 100%));z-index:1050;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transition:opacity .25s}
+.board-paper .hl{mix-blend-mode:multiply;opacity:.55}
+/* The resize handle is the folded corner: the flap shows the back of the sheet and casts a little shadow on the paper. */
+.board-size{position:absolute;right:0;bottom:0;width:64px;height:64px;cursor:nwse-resize;touch-action:none}
+.board-size::before,.board-size::after{content:"";position:absolute;right:0;bottom:0;width:var(--fold);height:var(--fold);transform-origin:100% 100%;transition:transform .2s}
+.board-size::before{background:linear-gradient(to bottom right,transparent 46%,#3b2f1a2e 50%,transparent 51%);transform:translate(-3px,-3px)}
+.board-size::after{background:linear-gradient(to bottom right,#fbf8f0 0%,#e2dccb 42%,#c9c1ab 49.6%,transparent 50%);border-radius:0 0 0 2px}
+.board-size:hover::after,.board-size:hover::before{transform:scale(1.25)}
+.board-size:hover::before{transform:translate(-4px,-4px) scale(1.25)}
+/* A board that was just closed lifts off the page while the real one is already shut (pen.js makes the copy). */
+.board-leave{position:absolute;left:0;top:0;width:1920px;height:1080px;z-index:955;pointer-events:none}
+.board-leave>i{position:absolute;inset:0;background:radial-gradient(ellipse 75% 70% at 50% 46%,#141413a0,#141413d8);animation:shade-out .3s ease-in forwards}
+.board-leave .board{display:flex;animation:board-out .3s cubic-bezier(.5,0,.75,.4) forwards}
+@keyframes shade-out{to{opacity:0}}
+@keyframes board-out{to{opacity:0;transform:translateY(-26px) rotate(1.4deg) scale(.97)}}
+
+/* === The ball: a glazed ink pot with a nib. Out of the pen it is dark; with the pen in hand it takes the colour of the ink.
+   It fades out like the control bar but stays clickable, so a first tap on a touch screen opens it instead of turning the
+   page. The holder's top is the ball's centre (see placeBall), so the ball stays 64px. === */
+.pen-ball{position:fixed;right:14px;top:50%;transform:translateY(calc(32px - 100%));z-index:1050;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;transition:opacity .25s}
 .pen-ball.show,.pen-ball.open,.pen .pen-ball,.pen-ball:hover,.pen-ball:focus-within{opacity:1}
 .pen-ball button{border:0;cursor:pointer;font:400 15px/1 var(--text);touch-action:manipulation}
-.pen-ball .ball{width:64px;height:64px;border-radius:50%;background:#1f1e1de6;color:#f0eee6;font-size:28px;box-shadow:0 6px 18px #0006;touch-action:none;cursor:grab}
-.pen-ball.dragging{opacity:1;transition:none}.pen-ball.dragging .ball{cursor:grabbing}
-.pen .pen-ball .ball{background:var(--clay)}
-.pen-tools{display:none;flex-direction:column;align-items:center;gap:10px;padding:12px 8px;border-radius:34px;background:#1f1e1de6;box-shadow:0 6px 18px #0006}
-.pen-ball.open .pen-tools,.pen .pen-tools{display:flex}
-.pen-tools .swatch{width:38px;height:38px;border-radius:50%;box-shadow:0 0 0 2px #f0eee666}
-.pen-tools .swatch[data-color="0"]{background:#c6613f}.pen-tools .swatch[data-color="1"]{background:#1f4fbf}.pen-tools .swatch[data-color="2"]{background:#ffe100}
-.pen .pen-tools .swatch.on{box-shadow:0 0 0 3px #1f1e1d,0 0 0 6px #fff}
-.pen-tools .word{width:52px;padding:9px 0;border-radius:12px;background:#30302e;color:#f0eee6}
-.pen-tools .word:hover{background:#45413b}
+.pen-ball .ball{--pot:#1f1e1d;--mark:#f0eee6;position:relative;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;color:var(--mark);touch-action:none;cursor:grab;
+  background:radial-gradient(circle at 34% 28%,#ffffff38 0 9%,#ffffff12 22%,transparent 46%),radial-gradient(circle at 60% 80%,#0000 40%,#00000040),var(--pot);
+  box-shadow:0 0 0 2px #f0eee626,0 8px 20px #0007,inset 0 -3px 6px #0005;transition:background-color .2s,transform .2s cubic-bezier(.3,1.6,.5,1)}
+.pen-ball .ball:hover{transform:scale(1.06) rotate(-6deg)}
+.pen-ball .ball svg{width:34px;height:34px;overflow:visible}
+.pen-ball .ball .nib{fill:var(--mark)}
+.pen-ball .ball .slit{fill:var(--pot);stroke:var(--pot);stroke-width:1.6;stroke-linecap:round}
+.pen-ball.dragging{opacity:1;transition:none}.pen-ball.dragging .ball{cursor:grabbing;transform:scale(1.1)}
+.pen .pen-ball .ball{--pot:var(--clay);--mark:#fffaf5}
+.pen .pen-ball[data-color="1"] .ball{--pot:#1f4fbf}
+.pen .pen-ball[data-color="2"] .ball{--pot:#f2cf1d;--mark:#1f1e1d}
+/* The tools above it: a dark palette with three drops of ink (the highlighter a chisel tip), each with its key. */
+.pen-tools{display:none;flex-direction:column;align-items:center;gap:12px;padding:14px 8px 10px;border-radius:36px;
+  background:linear-gradient(#2c2b28,#1f1e1d);box-shadow:inset 0 1px 0 #ffffff17,0 0 0 1px #00000040,0 10px 26px #0007}
+.pen-ball.open .pen-tools,.pen .pen-tools{display:flex;animation:tools-in .26s cubic-bezier(.2,.9,.3,1.2)}
+.pen-tools>*{animation:tool-in .3s cubic-bezier(.2,.9,.3,1.3) backwards}
+.pen-tools>:nth-child(1){animation-delay:.1s}.pen-tools>:nth-child(2){animation-delay:.07s}.pen-tools>:nth-child(3){animation-delay:.04s}
+@keyframes tools-in{from{opacity:0;transform:translateY(18px) scaleY(.85);transform-origin:50% 100%}}
+@keyframes tool-in{from{opacity:0;translate:0 10px;scale:.6}}
+.pen-tools .swatch{position:relative;width:40px;height:40px;border-radius:52% 48% 50% 50%/56% 52% 48% 44%;
+  box-shadow:inset 0 -3px 5px #0004,0 0 0 2px #f0eee633;transition:transform .18s cubic-bezier(.3,1.6,.5,1),box-shadow .18s}
+.pen-tools .swatch::before{content:"";position:absolute;left:24%;top:18%;width:30%;height:22%;border-radius:50%;background:#ffffff70;transform:rotate(-30deg)}
+.pen-tools .swatch::after{position:absolute;right:-7px;bottom:-6px;font:700 13px/1 var(--code);color:#a8a59b}
+.pen-tools .swatch[data-color="0"]{background:#c6613f}.pen-tools .swatch[data-color="0"]::after{content:"1"}
+.pen-tools .swatch[data-color="1"]{background:#1f4fbf}.pen-tools .swatch[data-color="1"]::after{content:"2"}
+.pen-tools .swatch[data-color="2"]{width:28px;height:42px;border-radius:5px 5px 9px 9px;transform:rotate(-24deg);
+  background:linear-gradient(160deg,#fff36a 0 26%,#ffe100 27%)}
+.pen-tools .swatch[data-color="2"]::before{left:16%;top:8%;width:22%;height:40%;border-radius:4px;background:#ffffff66;transform:none}
+.pen-tools .swatch[data-color="2"]::after{content:"3";right:-12px;bottom:-4px;transform:rotate(24deg)}
+.pen-tools .swatch:hover{transform:scale(1.1)}
+.pen-tools .swatch[data-color="2"]:hover{transform:rotate(-24deg) scale(1.1)}
+.pen .pen-tools .swatch.on{box-shadow:inset 0 -3px 5px #0004,0 0 0 3px #1f1e1d,0 0 0 6px #faf9f5;transform:scale(1.08)}
+.pen .pen-tools .swatch.on[data-color="2"]{transform:rotate(-24deg) scale(1.08)}
+.pen-tools .pen-rule{display:block;width:34px;height:2px;margin:2px 0;border-radius:2px;background:#f0eee626}
+.pen-tools .word{width:54px;padding:7px 0 8px;display:flex;flex-direction:column;align-items:center;gap:4px;border-radius:14px;background:transparent;color:#d8d5cb;transition:background-color .18s,color .18s}
+.pen-tools .word svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
+.pen-tools .word .grid{stroke-opacity:.45}
+.pen-tools .word .tape{stroke:var(--amber);stroke-width:2.4}
+.pen-tools .word .cut{stroke:var(--clay-soft);stroke-width:2}
+.pen-tools .word:hover{background:#3a3834;color:#fff}
 .pen-tools .word.on{background:var(--clay);color:#fff}
+.pen-tools .word.on .tape{stroke:#ffe7b0}
+
+@media (prefers-reduced-motion:reduce){
+  .board-open .board,.board-open .board-shade,.pen-ball.open .pen-tools,.pen .pen-tools,.pen-tools>*{animation:none}
+  .board-leave{display:none}
+  .pen-ball .ball,.pen-tools .swatch,.board-x,.board-size::before,.board-size::after{transition:none}
+  .pen-ball .ball:hover,.board-x:hover{transform:none}
+}
+@media print{.board-leave,.ink-layer canvas{display:none!important}}
 
 /* === LAYOUTS: eight page shapes. A page names one (class="slide lay-walk") and puts its parts in named cells; the layout
    places them, so the page carries no left/top. A lesson uses this file once it is marked "structured" in course.json.
@@ -1030,10 +1125,11 @@ print(jumps)</pre><p class="res step s2" style="font-size:66px">[85, 100, 75]</p
     <button type="button" class="swatch" data-color="0" title="红笔（拿着笔时按 1）" aria-label="红笔"></button>
     <button type="button" class="swatch" data-color="1" title="蓝笔（拿着笔时按 2）" aria-label="蓝笔"></button>
     <button type="button" class="swatch" data-color="2" title="荧光笔：划代码行（拿着笔时按 3）" aria-label="荧光笔"></button>
-    <button type="button" class="word" id="whiteboard" title="白板：在课件上面打开一块板写字（W），再按 W 或 Esc 关掉">白板</button>
-    <button type="button" class="word" id="pen-off" title="收笔，笔迹清掉（Esc）">收笔</button>
+    <i class="pen-rule" aria-hidden="true"></i>
+    <button type="button" class="word" id="whiteboard" title="白板：在课件上面打开一块板写字（W），再按 W 或 Esc 关掉"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16v13H4z"/><path d="M4 11h16M4 15.5h16M9.3 6.5v13M14.7 6.5v13" class="grid"/><path d="M8 4.2l3.6 1.1M16 4.2l-3.6 1.1" class="tape"/></svg>白板</button>
+    <button type="button" class="word" id="pen-off" title="收笔，笔迹清掉（Esc）"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L16.5 7.5l2.2 2.2L9.2 19.2 6 20z"/><path d="M15 5.5l3.5 3.5" class="grid"/><path d="M4 4l16 16" class="cut"/></svg>收笔</button>
   </div>
-  <button type="button" class="ball" id="pen" title="画笔和白板（D 拿笔，W 白板）；拖动可以换位置" aria-label="画笔和白板" aria-expanded="false">✎</button>
+  <button type="button" class="ball" id="pen" title="画笔和白板（D 拿笔，W 白板）；拖动可以换位置" aria-label="画笔和白板" aria-expanded="false"><svg viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(42 16 16)"><path class="nib" d="M16 29.5L9.4 16.2C9.4 10.4 12 6.2 16 3c4 3.2 6.6 7.4 6.6 13.2z"/><path class="slit" d="M16 28.6V17.4"/><circle class="slit" cx="16" cy="15.2" r="2.1"/></g></svg></button>
 </div>
 
 <dialog id="ide-settings" aria-labelledby="ide-title">
@@ -1054,10 +1150,10 @@ print(jumps)</pre><p class="res step s2" style="font-size:66px">[85, 100, 75]</p
     <dt>I</dt><dd>IDE 设置</dd>
     <dt>F</dt><dd>全屏，全屏时动一下鼠标显示控制条</dd>
     <dt>B</dt><dd>黑屏，让学生看你，按任意键回来</dd>
-    <dt>D</dt><dd>画笔：拿起或收起（也可以点圆球；圆球拖到哪边就贴在哪边，这台电脑记住）。拿着笔时点击不翻页，方向键照常；收笔或翻页，笔迹就清掉</dd>
+    <dt>D</dt><dd>画笔：拿起或收起（也可以点圆球；圆球拖到哪边就贴在哪边，这台电脑记住；拿着笔时圆球是笔的颜色）。拿着笔时点击不翻页，方向键照常；收笔或翻页，笔迹就清掉</dd>
     <dt>1 2 3</dt><dd>拿着笔时换颜色：红、蓝、荧光笔（划代码行）</dd>
     <dt>C</dt><dd>擦掉笔迹，笔还拿着；白板开着时擦白板</dd>
-    <dt>W</dt><dd>白板：在课件上面打开一块带方格的板，自动拿起笔，只在板上写；拖顶上的横栏移动，拖右下角改大小，这台电脑记住。后面的课件变暗、点不动，翻页键照常翻页，白板和写的东西都留着。再按 W、Esc 或 × 关掉，白板清掉</dd>
+    <dt>W</dt><dd>白板：在课件上面打开一张方格纸，自动拿起笔，只在纸上写；拖顶上的标题栏移动，拖右下角的折角改大小，这台电脑记住。后面的课件变暗、点不动，翻页键照常翻页，白板和写的东西都留着。再按 W、Esc 或 × 关掉，白板清掉</dd>
     <dt>Esc</dt><dd>关白板；没开白板就收笔</dd>
     <dt>1–4</dt><dd>小测选答案（没拿笔时）</dd>
     <dt>P</dt><dd>算法演示：播放或暂停</dd>
@@ -1096,22 +1192,27 @@ class PenAndBoard {
     this.pen = false;
     this.board = false;
     this.color = 0;
-    this.colors = [{stroke: '#c6613f', width: 6}, {stroke: '#1f4fbf', width: 6}, {stroke: '#ffe100', width: 28, hl: true}];
-    const canvases = '<canvas class="hl" width="1920" height="1080"></canvas><canvas class="ink" width="1920" height="1080"></canvas>';
+    // Widths are in stage pixels. Pen ink swells a little where the hand slows and thins where it hurries (or follows the
+    // pressure of a drawing pen); the highlighter is a chisel tip of one width.
+    this.colors = [{stroke: '#c6613f', width: 7}, {stroke: '#1f4fbf', width: 7}, {stroke: '#ffe100', width: 30, hl: true}];
+    const canvas = name => `<canvas class="${name}" width="1920" height="1080"></canvas>`;
     const layer = document.createElement('div');
     layer.className = 'ink-layer';
     layer.setAttribute('aria-hidden', 'true');
-    layer.innerHTML = canvases;
+    layer.innerHTML = canvas('halo') + canvas('hl') + canvas('hl glow') + canvas('ink');
     const shade = document.createElement('div');
     shade.className = 'board-shade';
     const board = document.createElement('div');
     board.className = 'board';
     board.setAttribute('role', 'dialog');
     board.setAttribute('aria-label', '白板');
-    board.innerHTML = '<div class="board-bar"><span>白板</span><button type="button" class="board-x" title="关掉白板，写的清掉（W 或 Esc）" aria-label="关掉白板">×</button></div>'
-      + '<div class="board-paper">' + canvases + '</div><div class="board-size" title="拖这里改大小"></div>';
+    board.innerHTML = '<div class="board-bar"><b>白板</b><small>拖这条移动 · 拖右下角的折角改大小</small>'
+      + '<button type="button" class="board-x" title="关掉白板，写的清掉（W 或 Esc）" aria-label="关掉白板">'
+      + '<svg viewBox="0 0 26 26" aria-hidden="true"><path d="M5.5 5.2C10 9.6 15.6 15.8 20.8 20.6M20.4 5.6C15.4 10.4 10.2 15.6 5.4 20.8"/></svg></button></div>'
+      + '<div class="board-paper">' + canvas('hl') + canvas('ink') + '</div><div class="board-size" title="拖这里改大小"></div>';
     this.stage.append(layer, shade, board);
     this.layer = layer;
+    this.shade = shade;
     this.boardEl = board;
     this.paper = board.querySelector('.board-paper');
     // The dimmed page takes every click: no answers, no selecting, no IDE, no page turn.
@@ -1135,31 +1236,67 @@ class PenAndBoard {
   }
   draws(surface, allowed) {
     // Pointer position in the canvas's own pixels: the surface is drawn at stage size, then scaled with the stage.
+    // Each move draws at once, in the same event (no waiting for a frame): a curve from the middle of the last step to the
+    // middle of this one, bent through the point between, so the line is smooth and never more than half a step behind.
     let line = null;
+    const segment = (ends, to, width) => {
+      for (const {pen, grow} of ends) {
+        pen.lineWidth = width + grow;
+        pen.beginPath();
+        pen.moveTo(...line.mid);
+        pen.quadraticCurveTo(...line.last, ...to);
+        pen.stroke();
+      }
+    };
+    const add = (point, time, force) => {
+      const [x, y] = point, [lx, ly] = line.last, d = Math.hypot(x - lx, y - ly);
+      if (d < 1.5) return;
+      const look = line.look;
+      if (!look.hl) {
+        // Fast is thin, slow is full; a drawing pen's pressure wins when there is one.
+        const speed = d / Math.max(4, time - line.time);
+        const want = force ? look.width * (0.55 + force * 0.9) : look.width * Math.min(1.2, Math.max(0.68, 1.22 - speed * 0.28));
+        line.width += (want - line.width) * 0.3;
+      }
+      const mid = [(lx + x) / 2, (ly + y) / 2];
+      segment(line.ends, mid, line.width);
+      Object.assign(line, {mid, last: point, time});
+    };
+    const at = (ev, box, f) => [(ev.clientX - box.left) / f, (ev.clientY - box.top) / f];
     surface.addEventListener('pointerdown', e => {
       if (!allowed() || e.button > 0) return;
       e.preventDefault();
-      const look = this.colors[this.color], canvas = surface.querySelector(look.hl ? 'canvas.hl' : 'canvas.ink');
-      const box = surface.getBoundingClientRect(), f = box.width / surface.offsetWidth;
-      const at = ev => [(ev.clientX - box.left) / f, (ev.clientY - box.top) / f];
-      const pen = canvas.getContext('2d');
-      Object.assign(pen, {strokeStyle: look.stroke, fillStyle: look.stroke, lineWidth: look.width, lineCap: 'round', lineJoin: 'round'});
+      const look = this.colors[this.color], box = surface.getBoundingClientRect(), f = box.width / surface.offsetWidth;
+      // Pen ink goes on its canvas, with a paper halo under it on the page; the highlighter on both of its canvases.
+      const names = look.hl ? ['canvas.hl'] : surface === this.layer ? ['canvas.ink', 'canvas.halo'] : ['canvas.ink'];
+      const ends = names.flatMap(n => [...surface.querySelectorAll(n)]).map(c => {
+        const pen = c.getContext('2d'), halo = c.classList.contains('halo');
+        Object.assign(pen, {strokeStyle: halo ? '#faf9f5' : look.stroke, fillStyle: halo ? '#faf9f5' : look.stroke, lineCap: 'round', lineJoin: 'round'});
+        return {pen, grow: halo ? 6 : 0};
+      });
+      ends.sort((a, b) => b.grow - a.grow);
       try { surface.setPointerCapture(e.pointerId); } catch {}  // keep drawing when the pointer leaves the surface
-      line = {pen, at, last: at(e), id: e.pointerId};
-      pen.beginPath();
-      pen.arc(...line.last, look.width / 2, 0, 2 * Math.PI);
-      pen.fill();
+      const p = at(e, box, f);
+      line = {look, ends, id: e.pointerId, box, f, last: p, mid: p, time: e.timeStamp, width: look.hl ? look.width : look.width * 0.8};
+      for (const {pen, grow} of ends) {
+        pen.beginPath();
+        pen.arc(...p, (line.width + grow) / 2, 0, 2 * Math.PI);
+        pen.fill();
+      }
     });
     surface.addEventListener('pointermove', e => {
       if (!line || e.pointerId !== line.id) return;
-      const next = line.at(e);
-      line.pen.beginPath();
-      line.pen.moveTo(...line.last);
-      line.pen.lineTo(...next);
-      line.pen.stroke();
-      line.last = next;
+      // A fast hand sends several points per frame; take them all, so a quick circle stays round.
+      const all = e.getCoalescedEvents?.() || [];
+      for (const ev of all.length ? all : [e]) add(at(ev, line.box, line.f), ev.timeStamp, ev.pointerType === 'pen' ? ev.pressure : 0);
     });
-    const stop = e => { if (line && e.pointerId === line.id) line = null; };
+    const stop = e => {
+      if (!line || e.pointerId !== line.id) return;
+      add(at(e, line.box, line.f), e.timeStamp, 0);
+      // Finish at the last point, tapering a little, as a pen lifts.
+      if (line.mid !== line.last) segment(line.ends, line.last, line.look.hl ? line.width : line.width * 0.85);
+      line = null;
+    };
     surface.addEventListener('pointerup', stop);
     surface.addEventListener('pointercancel', stop);
   }
@@ -1245,6 +1382,8 @@ class PenAndBoard {
     Object.assign(this.ball.style, side, {top: y + 'px'});
   }
   markTools() {
+    // The ball and the pointer show the ink in hand.
+    this.ball.dataset.color = this.layer.dataset.color = this.paper.dataset.color = this.color;
     this.ball.querySelectorAll('.swatch').forEach(b => b.classList.toggle('on', Number(b.dataset.color) === this.color));
     document.getElementById('whiteboard').classList.toggle('on', this.board);
     document.getElementById('pen').setAttribute('aria-expanded', String(this.ball.classList.contains('open') || this.pen));
@@ -1272,6 +1411,7 @@ class PenAndBoard {
   toggleBoard(on = !this.board) {
     if (on === this.board) return;
     this.board = on;
+    if (on) this.leaving?.remove();
     document.body.classList.toggle('board-open', on);
     if (on) {
       if (document.activeElement.matches('.slot')) document.activeElement.blur();
@@ -1279,10 +1419,27 @@ class PenAndBoard {
       this.penBefore = this.pen;
       if (!this.pen) this.togglePen(true);
     } else {
+      this.liftBoard();
       this.clearBoard();
       if (!this.penBefore) this.togglePen(false);
     }
     this.markTools();
+  }
+  /* Closing shuts the board at once (its state, its ink); a copy with the ink on it lifts off the page and goes. */
+  liftBoard() {
+    this.leaving?.remove();
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const copy = this.boardEl.cloneNode(true), from = this.boardEl.querySelectorAll('canvas');
+    copy.removeAttribute('role');
+    copy.querySelectorAll('canvas').forEach((c, i) => c.getContext('2d').drawImage(from[i], 0, 0));
+    const leave = document.createElement('div');
+    leave.className = 'board-leave';
+    leave.setAttribute('aria-hidden', 'true');
+    leave.append(document.createElement('i'), copy);
+    this.stage.append(leave);
+    this.leaving = leave;
+    copy.addEventListener('animationend', () => { leave.remove(); if (this.leaving === leave) this.leaving = null; }, {once: true});
+    setTimeout(() => leave.remove(), 800);  // in case the animation never runs (a hidden tab)
   }
   clearInk() {
     this.layer?.querySelectorAll('canvas').forEach(c => c.getContext('2d').clearRect(0, 0, c.width, c.height));

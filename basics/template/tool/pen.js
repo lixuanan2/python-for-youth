@@ -26,22 +26,27 @@ class PenAndBoard {
     this.pen = false;
     this.board = false;
     this.color = 0;
-    this.colors = [{stroke: '#c6613f', width: 6}, {stroke: '#1f4fbf', width: 6}, {stroke: '#ffe100', width: 28, hl: true}];
-    const canvases = '<canvas class="hl" width="1920" height="1080"></canvas><canvas class="ink" width="1920" height="1080"></canvas>';
+    // Widths are in stage pixels. Pen ink swells a little where the hand slows and thins where it hurries (or follows the
+    // pressure of a drawing pen); the highlighter is a chisel tip of one width.
+    this.colors = [{stroke: '#c6613f', width: 7}, {stroke: '#1f4fbf', width: 7}, {stroke: '#ffe100', width: 30, hl: true}];
+    const canvas = name => `<canvas class="${name}" width="1920" height="1080"></canvas>`;
     const layer = document.createElement('div');
     layer.className = 'ink-layer';
     layer.setAttribute('aria-hidden', 'true');
-    layer.innerHTML = canvases;
+    layer.innerHTML = canvas('halo') + canvas('hl') + canvas('hl glow') + canvas('ink');
     const shade = document.createElement('div');
     shade.className = 'board-shade';
     const board = document.createElement('div');
     board.className = 'board';
     board.setAttribute('role', 'dialog');
     board.setAttribute('aria-label', '白板');
-    board.innerHTML = '<div class="board-bar"><span>白板</span><button type="button" class="board-x" title="关掉白板，写的清掉（W 或 Esc）" aria-label="关掉白板">×</button></div>'
-      + '<div class="board-paper">' + canvases + '</div><div class="board-size" title="拖这里改大小"></div>';
+    board.innerHTML = '<div class="board-bar"><b>白板</b><small>拖这条移动 · 拖右下角的折角改大小</small>'
+      + '<button type="button" class="board-x" title="关掉白板，写的清掉（W 或 Esc）" aria-label="关掉白板">'
+      + '<svg viewBox="0 0 26 26" aria-hidden="true"><path d="M5.5 5.2C10 9.6 15.6 15.8 20.8 20.6M20.4 5.6C15.4 10.4 10.2 15.6 5.4 20.8"/></svg></button></div>'
+      + '<div class="board-paper">' + canvas('hl') + canvas('ink') + '</div><div class="board-size" title="拖这里改大小"></div>';
     this.stage.append(layer, shade, board);
     this.layer = layer;
+    this.shade = shade;
     this.boardEl = board;
     this.paper = board.querySelector('.board-paper');
     // The dimmed page takes every click: no answers, no selecting, no IDE, no page turn.
@@ -65,31 +70,67 @@ class PenAndBoard {
   }
   draws(surface, allowed) {
     // Pointer position in the canvas's own pixels: the surface is drawn at stage size, then scaled with the stage.
+    // Each move draws at once, in the same event (no waiting for a frame): a curve from the middle of the last step to the
+    // middle of this one, bent through the point between, so the line is smooth and never more than half a step behind.
     let line = null;
+    const segment = (ends, to, width) => {
+      for (const {pen, grow} of ends) {
+        pen.lineWidth = width + grow;
+        pen.beginPath();
+        pen.moveTo(...line.mid);
+        pen.quadraticCurveTo(...line.last, ...to);
+        pen.stroke();
+      }
+    };
+    const add = (point, time, force) => {
+      const [x, y] = point, [lx, ly] = line.last, d = Math.hypot(x - lx, y - ly);
+      if (d < 1.5) return;
+      const look = line.look;
+      if (!look.hl) {
+        // Fast is thin, slow is full; a drawing pen's pressure wins when there is one.
+        const speed = d / Math.max(4, time - line.time);
+        const want = force ? look.width * (0.55 + force * 0.9) : look.width * Math.min(1.2, Math.max(0.68, 1.22 - speed * 0.28));
+        line.width += (want - line.width) * 0.3;
+      }
+      const mid = [(lx + x) / 2, (ly + y) / 2];
+      segment(line.ends, mid, line.width);
+      Object.assign(line, {mid, last: point, time});
+    };
+    const at = (ev, box, f) => [(ev.clientX - box.left) / f, (ev.clientY - box.top) / f];
     surface.addEventListener('pointerdown', e => {
       if (!allowed() || e.button > 0) return;
       e.preventDefault();
-      const look = this.colors[this.color], canvas = surface.querySelector(look.hl ? 'canvas.hl' : 'canvas.ink');
-      const box = surface.getBoundingClientRect(), f = box.width / surface.offsetWidth;
-      const at = ev => [(ev.clientX - box.left) / f, (ev.clientY - box.top) / f];
-      const pen = canvas.getContext('2d');
-      Object.assign(pen, {strokeStyle: look.stroke, fillStyle: look.stroke, lineWidth: look.width, lineCap: 'round', lineJoin: 'round'});
+      const look = this.colors[this.color], box = surface.getBoundingClientRect(), f = box.width / surface.offsetWidth;
+      // Pen ink goes on its canvas, with a paper halo under it on the page; the highlighter on both of its canvases.
+      const names = look.hl ? ['canvas.hl'] : surface === this.layer ? ['canvas.ink', 'canvas.halo'] : ['canvas.ink'];
+      const ends = names.flatMap(n => [...surface.querySelectorAll(n)]).map(c => {
+        const pen = c.getContext('2d'), halo = c.classList.contains('halo');
+        Object.assign(pen, {strokeStyle: halo ? '#faf9f5' : look.stroke, fillStyle: halo ? '#faf9f5' : look.stroke, lineCap: 'round', lineJoin: 'round'});
+        return {pen, grow: halo ? 6 : 0};
+      });
+      ends.sort((a, b) => b.grow - a.grow);
       try { surface.setPointerCapture(e.pointerId); } catch {}  // keep drawing when the pointer leaves the surface
-      line = {pen, at, last: at(e), id: e.pointerId};
-      pen.beginPath();
-      pen.arc(...line.last, look.width / 2, 0, 2 * Math.PI);
-      pen.fill();
+      const p = at(e, box, f);
+      line = {look, ends, id: e.pointerId, box, f, last: p, mid: p, time: e.timeStamp, width: look.hl ? look.width : look.width * 0.8};
+      for (const {pen, grow} of ends) {
+        pen.beginPath();
+        pen.arc(...p, (line.width + grow) / 2, 0, 2 * Math.PI);
+        pen.fill();
+      }
     });
     surface.addEventListener('pointermove', e => {
       if (!line || e.pointerId !== line.id) return;
-      const next = line.at(e);
-      line.pen.beginPath();
-      line.pen.moveTo(...line.last);
-      line.pen.lineTo(...next);
-      line.pen.stroke();
-      line.last = next;
+      // A fast hand sends several points per frame; take them all, so a quick circle stays round.
+      const all = e.getCoalescedEvents?.() || [];
+      for (const ev of all.length ? all : [e]) add(at(ev, line.box, line.f), ev.timeStamp, ev.pointerType === 'pen' ? ev.pressure : 0);
     });
-    const stop = e => { if (line && e.pointerId === line.id) line = null; };
+    const stop = e => {
+      if (!line || e.pointerId !== line.id) return;
+      add(at(e, line.box, line.f), e.timeStamp, 0);
+      // Finish at the last point, tapering a little, as a pen lifts.
+      if (line.mid !== line.last) segment(line.ends, line.last, line.look.hl ? line.width : line.width * 0.85);
+      line = null;
+    };
     surface.addEventListener('pointerup', stop);
     surface.addEventListener('pointercancel', stop);
   }
@@ -175,6 +216,8 @@ class PenAndBoard {
     Object.assign(this.ball.style, side, {top: y + 'px'});
   }
   markTools() {
+    // The ball and the pointer show the ink in hand.
+    this.ball.dataset.color = this.layer.dataset.color = this.paper.dataset.color = this.color;
     this.ball.querySelectorAll('.swatch').forEach(b => b.classList.toggle('on', Number(b.dataset.color) === this.color));
     document.getElementById('whiteboard').classList.toggle('on', this.board);
     document.getElementById('pen').setAttribute('aria-expanded', String(this.ball.classList.contains('open') || this.pen));
@@ -202,6 +245,7 @@ class PenAndBoard {
   toggleBoard(on = !this.board) {
     if (on === this.board) return;
     this.board = on;
+    if (on) this.leaving?.remove();
     document.body.classList.toggle('board-open', on);
     if (on) {
       if (document.activeElement.matches('.slot')) document.activeElement.blur();
@@ -209,10 +253,27 @@ class PenAndBoard {
       this.penBefore = this.pen;
       if (!this.pen) this.togglePen(true);
     } else {
+      this.liftBoard();
       this.clearBoard();
       if (!this.penBefore) this.togglePen(false);
     }
     this.markTools();
+  }
+  /* Closing shuts the board at once (its state, its ink); a copy with the ink on it lifts off the page and goes. */
+  liftBoard() {
+    this.leaving?.remove();
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const copy = this.boardEl.cloneNode(true), from = this.boardEl.querySelectorAll('canvas');
+    copy.removeAttribute('role');
+    copy.querySelectorAll('canvas').forEach((c, i) => c.getContext('2d').drawImage(from[i], 0, 0));
+    const leave = document.createElement('div');
+    leave.className = 'board-leave';
+    leave.setAttribute('aria-hidden', 'true');
+    leave.append(document.createElement('i'), copy);
+    this.stage.append(leave);
+    this.leaving = leave;
+    copy.addEventListener('animationend', () => { leave.remove(); if (this.leaving === leave) this.leaving = null; }, {once: true});
+    setTimeout(() => leave.remove(), 800);  // in case the animation never runs (a hidden tab)
   }
   clearInk() {
     this.layer?.querySelectorAll('canvas').forEach(c => c.getContext('2d').clearRect(0, 0, c.width, c.height));
