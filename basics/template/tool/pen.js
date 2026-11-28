@@ -17,10 +17,12 @@
      clearBoard()         key C while the board is open (else clearInk)
      togglePen(on)        key D, and Esc when the board is shut
      toggleBoard(on)      key W, and Esc
-     pickColor(i)         keys 1 2 3 while the pen is out (0 red, 1 blue, 2 highlighter)
+     pickColor(i)         keys 1 2 3 while the pen is out: the slot in hand (0 and 1 pens, red and blue at first; 2 the
+                          highlighter, yellow at first); each slot's colour is picked on the tools
      placeBall()          the deck calls it when the stage is resized
    The keys themselves are read in deck.js (key()), except Ctrl+Z and Ctrl+Shift+Z (deck.js reads no keys held with Ctrl),
-   which setupPen reads; their help lines are pen-help.html. localStorage: deck-pen-ball, deck-board, deck-board-ink. */
+   E (the eraser, a key deck.js does not use) and Shift held while drawing (a straight line), which setupPen reads; their
+   help lines are pen-help.html. localStorage: deck-pen-ball, deck-board, deck-board-ink, deck-pen-colors. */
 class PenAndBoard {
   /* --- pen and whiteboard: the teacher circles code, marks a line or works something out on a board. Ink on the page is
      put away when the page turns and comes back with the page (for this visit); C or putting the pen away wipes it. The
@@ -29,16 +31,29 @@ class PenAndBoard {
   setupPen() {
     this.pen = false;
     this.board = false;
-    this.color = 0;
+    this.color = 0;  // the slot in hand: 0 and 1 are pens, 2 the highlighter (keys 1 2 3)
+    this.erasing = false;
     // Widths are in stage pixels. Pen ink swells a little where the hand slows and thins where it hurries (or follows the
-    // pressure of a drawing pen); the highlighter is a chisel tip of one width.
-    this.colors = [{stroke: '#c6613f', width: 7}, {stroke: '#1f4fbf', width: 7}, {stroke: '#ffe100', width: 30, hl: true}];
+    // pressure of a drawing pen); the highlighter is a chisel tip of one width. Strokes keep the index of their colour, so
+    // 0 1 2 keep meaning red pen, blue pen, yellow highlighter. Every pen colour reads on paper, on a dark code box and on
+    // the clay and olive pages (the paper halo does the rest); the highlighters are the three that stay light under text.
+    this.colors = [
+      {name: '红', stroke: '#d03a2e', width: 7}, {name: '蓝', stroke: '#1f4fbf', width: 7},
+      {name: '黄', stroke: '#ffe100', width: 30, hl: true}, {name: '黑', stroke: '#1f1e1d', width: 7},
+      {name: '绿', stroke: '#2e7d3c', width: 7}, {name: '绿', stroke: '#86e05c', width: 30, hl: true},
+      {name: '粉', stroke: '#ff8fd0', width: 30, hl: true}];
+    this.choices = [[0, 1, 3, 4], [0, 1, 3, 4], [2, 5, 6]];  // the colours each slot can take
+    this.slots = [0, 1, 2];  // each slot's colour now; kept on this computer
+    try {
+      const saved = JSON.parse(localStorage.getItem('deck-pen-colors') || 'null');
+      if (Array.isArray(saved) && saved.length === 3 && saved.every((c, i) => this.choices[i].includes(c))) this.slots = saved;
+    } catch {}
     const canvas = name => `<canvas class="${name}" width="1920" height="1080"></canvas>`;
     const icon = d => `<svg viewBox="0 0 26 26" aria-hidden="true"><path d="${d}"/></svg>`;
     const layer = document.createElement('div');
     layer.className = 'ink-layer';
     layer.setAttribute('aria-hidden', 'true');
-    layer.innerHTML = canvas('halo') + canvas('hl') + canvas('hl glow') + canvas('ink');
+    layer.innerHTML = canvas('halo') + canvas('hl') + canvas('hl glow') + canvas('ink') + canvas('draft');
     const shade = document.createElement('div');
     shade.className = 'board-shade';
     const board = document.createElement('div');
@@ -52,7 +67,7 @@ class PenAndBoard {
       + '<button type="button" class="board-act" data-act="wipe" title="擦掉白板（C），擦错了按 Ctrl+Z 找回" aria-label="擦掉白板">' + icon('M14.6 5.2l6.3 6.3-8.6 8.6H7.9l-3-3a1.6 1.6 0 010-2.3zM10 9.8l6.3 6.3M12.3 20.1h8.4') + '</button>'
       + '<button type="button" class="board-x" title="关掉白板（W 或 Esc），写的留着，下次打开还在" aria-label="关掉白板">'
       + icon('M5.5 5.2C10 9.6 15.6 15.8 20.8 20.6M20.4 5.6C15.4 10.4 10.2 15.6 5.4 20.8') + '</button></div>'
-      + '<div class="board-paper">' + canvas('hl') + canvas('ink') + '</div><div class="board-size" title="拖这里改大小"></div>';
+      + '<div class="board-paper">' + canvas('hl') + canvas('ink') + canvas('draft') + '</div><div class="board-size" title="拖这里改大小"></div>';
     this.stage.append(layer, shade, board);
     this.layer = layer;
     this.shade = shade;
@@ -76,7 +91,17 @@ class PenAndBoard {
     // Keep focus off the ball, so space and a clicker still turn the page instead of pressing it again.
     this.ball.querySelectorAll('button').forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
     board.querySelectorAll('button').forEach(b => b.addEventListener('mousedown', e => e.preventDefault()));
-    this.ball.querySelectorAll('.swatch').forEach(b => { b.onclick = () => this.pickColor(Number(b.dataset.color)); });
+    // A slot already in hand, clicked again, opens its colours beside the tools; a colour picked closes them.
+    this.palette = document.getElementById('pen-colors');
+    this.ball.querySelectorAll('.swatch').forEach(b => {
+      b.onclick = () => {
+        const i = Number(b.dataset.color);
+        if (this.pen && !this.erasing && this.color === i) this.showColors(this.palette.dataset.slot === String(i) ? -1 : i);
+        else { this.showColors(-1); this.pickColor(i); }
+      };
+    });
+    document.addEventListener('pointerdown', e => { if (!e.target.closest?.('.pen-tools')) this.showColors(-1); });
+    document.getElementById('pen-eraser').onclick = () => this.toggleEraser();
     document.getElementById('whiteboard').onclick = () => this.toggleBoard();
     document.getElementById('pen-off').onclick = () => this.togglePen(false);
     document.getElementById('pen-undo').onclick = () => this.undoInk(true);
@@ -86,6 +111,9 @@ class PenAndBoard {
     // with Ctrl or ⌘, so these are the pen's own; a yellow box or a dialog keeps its own undo.
     document.addEventListener('keydown', e => {
       const k = e.key.toLowerCase();
+      // E picks up or puts down the eraser while the pen is out (deck.js reads no E).
+      if (k === 'e' && this.pen && !(e.ctrlKey || e.metaKey || e.altKey) && !e.defaultPrevented && document.getElementById('blank')?.hidden !== false
+        && !e.target.closest?.('input,textarea,select,[contenteditable],.slot') && !document.querySelector('dialog[open]')) { this.toggleEraser(); return; }
       if (!(e.ctrlKey || e.metaKey) || e.altKey || !(k === 'z' || (k === 'y' && e.ctrlKey))) return;
       if (e.target.closest?.('input,textarea,select,[contenteditable],.slot') || document.querySelector('dialog[open]')) return;
       if (this.undoInk(!(e.shiftKey || k === 'y'))) e.preventDefault();
@@ -99,7 +127,8 @@ class PenAndBoard {
   }
   /* A surface to write on: its canvases, and where its strokes are kept (the page's, or the board's). */
   sheet(el, record) {
-    return {el, record, all: [...el.querySelectorAll('canvas')], ink: el.querySelector('canvas.ink'), halo: el.querySelector('canvas.halo'), hl: [...el.querySelectorAll('canvas.hl')]};
+    return {el, record, all: [...el.querySelectorAll('canvas')], ink: el.querySelector('canvas.ink'), halo: el.querySelector('canvas.halo'),
+      hl: [...el.querySelectorAll('canvas.hl')], draft: el.querySelector('canvas.draft')};
   }
   pageInk() {
     let r = this.inks.get(this.inkPage);
@@ -194,11 +223,23 @@ class PenAndBoard {
     surface.addEventListener('pointerdown', e => {
       if (!allowed() || e.button > 0) return;
       e.preventDefault();
-      const look = this.colors[this.color], box = surface.getBoundingClientRect(), f = box.width / surface.offsetWidth;
-      const ends = this.ends(sheet, look).sort((a, b) => b.grow - a.grow);
+      const box = surface.getBoundingClientRect(), f = box.width / surface.offsetWidth, p = at(e, box, f), record = sheet.record();
       try { surface.setPointerCapture(e.pointerId); } catch {}  // keep drawing when the pointer leaves the surface
-      const p = at(e, box, f), width = look.hl ? look.width : look.width * 0.8;
-      line = {look, ends, id: e.pointerId, box, f, last: p, mid: p, time: e.timeStamp, width, record: sheet.record(), s: {c: this.color, p: [...p, width], e: 0}};
+      if (this.erasing) {
+        line = {erase: true, id: e.pointerId, box, f, last: p, record, before: record.strokes};
+        this.rub(sheet, record, p, p);
+        return;
+      }
+      const c = this.slots[this.color], look = this.colors[c], width = look.hl ? look.width : look.width * 0.8;
+      // With Shift held the stroke is a straight line, shown as a draft until the button is let go.
+      if (e.shiftKey) {
+        line = {straight: true, id: e.pointerId, box, f, look, c, from: p, to: p, width: quarter(look.hl ? width : look.width), record};
+        sheet.draft.classList.add('used');
+        this.draftLine(sheet, line);
+        return;
+      }
+      const ends = this.ends(sheet, look).sort((a, b) => b.grow - a.grow);
+      line = {look, ends, id: e.pointerId, box, f, last: p, mid: p, time: e.timeStamp, width, record, s: {c, p: [...p, width], e: 0}};
       for (const {pen, grow} of ends) {
         pen.beginPath();
         pen.arc(...p, (width + grow) / 2, 0, 2 * Math.PI);
@@ -209,17 +250,42 @@ class PenAndBoard {
       if (!line || e.pointerId !== line.id) return;
       // A fast hand sends several points per frame; take them all, so a quick circle stays round.
       const all = e.getCoalescedEvents?.() || [];
-      for (const ev of all.length ? all : [e]) add(at(ev, line.box, line.f), ev.timeStamp, ev.pointerType === 'pen' ? ev.pressure : 0);
+      if (line.straight) { line.to = this.snap(line.from, at(e, line.box, line.f)); this.draftLine(sheet, line); return; }
+      for (const ev of all.length ? all : [e]) {
+        const p = at(ev, line.box, line.f);
+        if (line.erase) { this.rub(sheet, line.record, line.last, p); line.last = p; }
+        else add(p, ev.timeStamp, ev.pointerType === 'pen' ? ev.pressure : 0);
+      }
     });
     const stop = e => {
       if (!line || e.pointerId !== line.id) return;
+      const r = line.record;
+      if (line.erase) {
+        // One drag of the eraser is one step to undo.
+        if (r.strokes !== line.before) { r.undo.push({from: line.before, to: r.strokes}); r.redo = []; }
+      } else if (line.straight) {
+        this.draftLine(sheet, null);
+        const {from, to, width} = line;
+        if (Math.hypot(to[0] - from[0], to[1] - from[1]) >= 3) {
+          const s = {c: line.c, p: [...from, width, ...to, width], e: width};
+          this.paint(sheet, s);
+          r.strokes.push(s);
+          r.undo.push({add: s});
+          r.redo = [];
+        }
+      }
+      if (line.erase || line.straight) {
+        line = null;
+        if (sheet === this.paperSheet) this.saveBoardInk();
+        this.markUndo();
+        return;
+      }
       add(at(e, line.box, line.f), e.timeStamp, 0);
       // Finish at the last point, tapering a little, as a pen lifts.
       if (line.mid !== line.last) {
         line.s.e = quarter(line.look.hl ? line.width : line.width * 0.85);
         segment(line.last, line.s.e);
       }
-      const r = line.record;
       r.strokes.push(line.s);
       r.undo.push({add: line.s});
       r.redo = [];
@@ -238,8 +304,7 @@ class PenAndBoard {
     (back ? r.redo : r.undo).push(step);
     if (step.add && back) { r.strokes.pop(); this.redraw(sheet); }
     else if (step.add) { r.strokes.push(step.add); this.paint(sheet, step.add); }
-    else if (back) { r.strokes = step.wipe; this.redraw(sheet); }
-    else { r.strokes = []; this.wipe(sheet); }
+    else { r.strokes = back ? step.from : step.to; this.redraw(sheet); }
     if (sheet === this.paperSheet) this.saveBoardInk();
     this.markUndo();
     return true;
@@ -248,12 +313,101 @@ class PenAndBoard {
   wipeInk(sheet) {
     const r = sheet.record();
     if (r.strokes.length) {
-      r.undo.push({wipe: r.strokes});
+      r.undo.push({from: r.strokes, to: []});
       r.strokes = [];
       r.redo = [];
     }
     this.wipe(sheet);
     this.markUndo();
+  }
+  /* The eraser takes away every stroke it touches (within 16 stage pixels of its path), and the sheet is drawn again. */
+  rub(sheet, r, a, b) {
+    const near = (p, q, z) => {  // distance from point p to the segment q-z
+      const dx = z[0] - q[0], dy = z[1] - q[1], l = dx * dx + dy * dy;
+      const t = l ? Math.max(0, Math.min(1, ((p[0] - q[0]) * dx + (p[1] - q[1]) * dy) / l)) : 0;
+      return Math.hypot(p[0] - q[0] - t * dx, p[1] - q[1] - t * dy);
+    };
+    const touched = s => {
+      const reach = 16 + this.colors[s.c].width / 2, p = s.p;
+      if (!s.box) {
+        s.box = [p[0], p[1], p[0], p[1]];
+        for (let i = 3; i < p.length; i += 3) s.box = [Math.min(s.box[0], p[i]), Math.min(s.box[1], p[i + 1]), Math.max(s.box[2], p[i]), Math.max(s.box[3], p[i + 1])];
+      }
+      if (Math.max(a[0], b[0]) < s.box[0] - reach || Math.min(a[0], b[0]) > s.box[2] + reach
+        || Math.max(a[1], b[1]) < s.box[1] - reach || Math.min(a[1], b[1]) > s.box[3] + reach) return false;
+      for (let i = 0; i < p.length; i += 3) {
+        const q = [p[i], p[i + 1]], z = i + 3 < p.length ? [p[i + 3], p[i + 4]] : q;
+        if (near(q, a, b) < reach || near(a, q, z) < reach || near(b, q, z) < reach) return true;
+      }
+      return false;
+    };
+    const keep = r.strokes.filter(s => !touched(s));
+    if (keep.length === r.strokes.length) return;
+    r.strokes = keep;
+    this.redraw(sheet);
+  }
+  /* A straight line keeps to level, upright or a diagonal when it is within 5 degrees of one. */
+  snap(from, to) {
+    const dx = to[0] - from[0], dy = to[1] - from[1], len = Math.hypot(dx, dy), angle = Math.atan2(dy, dx), step = Math.PI / 4;
+    const near = Math.round(angle / step) * step;
+    return Math.abs(angle - near) < Math.PI / 36 ? [from[0] + len * Math.cos(near), from[1] + len * Math.sin(near)] : to;
+  }
+  /* The draft canvas shows the straight line while it is being pulled: only the box it was in is cleared each move. */
+  draftLine(sheet, line) {
+    const pen = sheet.draft.getContext('2d');
+    if (sheet.drafted) pen.clearRect(...sheet.drafted);
+    sheet.drafted = null;
+    if (!line) { sheet.draft.classList.remove('used'); return; }
+    const {from, to, look, width} = line, m = width / 2 + 4;
+    Object.assign(pen, {strokeStyle: look.stroke, lineWidth: width, lineCap: 'round', globalAlpha: look.hl ? 0.55 : 1});
+    pen.beginPath();
+    pen.moveTo(...from);
+    pen.lineTo(...to);
+    pen.stroke();
+    sheet.drafted = [Math.min(from[0], to[0]) - m, Math.min(from[1], to[1]) - m, Math.abs(to[0] - from[0]) + 2 * m, Math.abs(to[1] - from[1]) + 2 * m];
+  }
+  toggleEraser(on = !this.erasing) {
+    this.erasing = on;
+    if (on && !this.pen) this.togglePen(true);
+    this.showColors(-1);
+    this.markTools();
+  }
+  /* The colours of one slot, in a row beside the tools (on the stage's side of them); -1 closes the row. */
+  showColors(slot) {
+    const row = this.palette;
+    if (!row) return;
+    if (slot < 0) { row.hidden = true; delete row.dataset.slot; return; }
+    const swatch = this.ball.querySelector(`.swatch[data-color="${slot}"]`);
+    row.innerHTML = '';
+    for (const c of this.choices[slot]) {
+      const look = this.colors[c], b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pen-color' + (look.hl ? ' hl' : '') + (this.slots[slot] === c ? ' on' : '');
+      b.style.setProperty('--c', look.stroke);
+      b.title = b.ariaLabel = (look.hl ? '荧光笔' : '笔') + '：' + look.name;
+      b.addEventListener('mousedown', e => e.preventDefault());
+      b.onclick = () => {
+        this.slots[slot] = c;
+        try { localStorage.setItem('deck-pen-colors', JSON.stringify(this.slots)); } catch {}
+        this.showColors(-1);
+        this.markTools();
+      };
+      row.append(b);
+    }
+    row.dataset.slot = slot;
+    row.classList.toggle('to-right', this.ballAt?.side === 'left');
+    row.hidden = false;
+    row.style.top = swatch.offsetTop + swatch.offsetHeight / 2 - row.offsetHeight / 2 + 'px';
+  }
+  /* The pointer while the pen is out: a dot of the ink in hand, ringed so it shows on light and dark pages; a chisel tip for
+     the highlighter; a ring for the eraser. */
+  cursor() {
+    const svg = body => `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'>${body}</svg>`)}") 16 16,crosshair`;
+    if (this.erasing) return svg(`<circle cx='16' cy='16' r='13' fill='#faf9f5' fill-opacity='.35' stroke='#1f1e1d' stroke-opacity='.7' stroke-width='1.5'/><circle cx='16' cy='16' r='13' fill='none' stroke='#faf9f5' stroke-dasharray='3 3'/>`);
+    const look = this.colors[this.slots[this.color]], c = look.stroke;
+    return svg(look.hl
+      ? `<rect x='9' y='5' width='14' height='22' rx='3' fill='${c}' fill-opacity='.8' stroke='#1f1e1d' stroke-opacity='.55' transform='rotate(35 16 16)'/><circle cx='16' cy='16' r='1.6' fill='#1f1e1d'/>`
+      : `<circle cx='16' cy='16' r='9' fill='none' stroke='#1f1e1d' stroke-opacity='.45'/><circle cx='16' cy='16' r='5.5' fill='${c}' stroke='#faf9f5' stroke-width='2.5'/>`);
   }
   markUndo() {
     const page = this.board ? this.boardInk : this.pageInk(), board = this.boardInk;
@@ -376,9 +530,19 @@ class PenAndBoard {
   }
   markTools() {
     this.markUndo();
-    // The ball and the pointer show the ink in hand.
+    // The ball, the slots and the pointer show the ink in hand.
+    const look = this.colors[this.slots[this.color]];
     this.ball.dataset.color = this.layer.dataset.color = this.paper.dataset.color = this.color;
-    this.ball.querySelectorAll('.swatch').forEach(b => b.classList.toggle('on', Number(b.dataset.color) === this.color));
+    this.ball.style.setProperty('--now', this.erasing ? '#8c8579' : look.stroke);
+    this.ball.classList.toggle('light', !this.erasing && Boolean(look.hl));
+    this.ball.classList.toggle('erasing', this.erasing);
+    this.ball.querySelectorAll('.swatch').forEach(b => {
+      b.style.setProperty('--c', this.colors[this.slots[Number(b.dataset.color)]].stroke);
+      b.classList.toggle('on', !this.erasing && Number(b.dataset.color) === this.color);
+    });
+    document.getElementById('pen-eraser').classList.toggle('on', this.erasing);
+    this.layer.style.cursor = this.paper.style.cursor = this.pen ? this.cursor() : '';
+    if (!this.pen) this.showColors(-1);
     document.getElementById('whiteboard').classList.toggle('on', this.board);
     document.getElementById('pen').setAttribute('aria-expanded', String(this.ball.classList.contains('open') || this.pen));
     this.placeBall();
@@ -389,6 +553,7 @@ class PenAndBoard {
   }
   pickColor(i) {
     this.color = i;
+    this.erasing = false;
     if (!this.pen) this.togglePen(true);
     this.markTools();
   }
@@ -396,6 +561,7 @@ class PenAndBoard {
     this.pen = on;
     document.body.classList.toggle('pen', on);
     if (!on) {
+      this.erasing = false;
       if (this.board) this.toggleBoard(false);
       if (wipe) this.clearInk();
       this.ball.classList.remove('open');
