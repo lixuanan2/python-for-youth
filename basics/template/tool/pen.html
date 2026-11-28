@@ -1,9 +1,11 @@
 <!-- Pen and whiteboard: a small ball against a side of the stage (drag it to move it), shown when the mouse moves, like the control bar. -->
 <div class="pen-ball" id="pen-ball">
   <div class="pen-tools" id="pen-tools" role="group" aria-label="画笔和白板">
-    <button type="button" class="swatch" data-color="0" title="红笔（拿着笔时按 1）" aria-label="红笔"></button>
-    <button type="button" class="swatch" data-color="1" title="蓝笔（拿着笔时按 2）" aria-label="蓝笔"></button>
-    <button type="button" class="swatch" data-color="2" title="荧光笔：划代码行（拿着笔时按 3）" aria-label="荧光笔"></button>
+    <button type="button" class="swatch" data-color="0" title="签字笔，开始是红色（拿着笔时按 1）；拿着它再点一下换颜色；按住 Shift 拖是直线" aria-label="签字笔"></button>
+    <button type="button" class="swatch" data-color="1" title="荧光笔：划代码行，开始是黄色（按 2）；拿着它再点一下换颜色；按住 Shift 拖是直线" aria-label="荧光笔"></button>
+    <button type="button" class="swatch tool" data-color="2" title="橡皮：碰到哪一笔、哪段字就擦掉哪个（按 3），Ctrl+Z 找回" aria-label="橡皮"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 4.6l6 6-8.4 8.4H6.4l-2.8-2.8a1.6 1.6 0 010-2.2z"/><path d="M9.2 9l6 6" class="grid"/><path d="M11.4 19h8.8" class="cut"/></svg></button>
+    <button type="button" class="swatch tool" data-color="3" title="文字：在页面或白板上点一下，打字（按 4）；Enter 换行，Esc 或点别处放下；点已有的字可以改" aria-label="文字"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6.5V5h14v1.5M12 5v14M9 19h6"/></svg></button>
+    <div class="pen-colors" id="pen-colors" role="group" aria-label="换颜色" hidden></div>
     <i class="pen-rule" aria-hidden="true"></i>
     <div class="pen-undo" role="group" aria-label="撤销和重做"><button type="button" id="pen-undo" title="撤销上一笔（Ctrl+Z）" aria-label="撤销"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M9.5 6.8L4.6 11.4l4.9 4.5M5 11.4c4.6-.3 9.4-.5 12.2 1.4 2.9 2 2.8 5.7.4 7.6"/></svg></button><button type="button" id="pen-redo" title="重做（Ctrl+Shift+Z）" aria-label="重做"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M16.5 6.8l4.9 4.6-4.9 4.5M21 11.4c-4.6-.3-9.4-.5-12.2 1.4-2.9 2-2.8 5.7-.4 7.6"/></svg></button></div>
     <button type="button" class="word" id="whiteboard" title="白板：在课件上面打开一张纸写字（W），再按 W 或 Esc 关掉，写的留着"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16v13H4z"/><path d="M4 11h16M4 15.5h16M9.3 6.5v13M14.7 6.5v13" class="grid"/><path d="M8 4.2l3.6 1.1M16 4.2l-3.6 1.1" class="tape"/></svg>白板</button>

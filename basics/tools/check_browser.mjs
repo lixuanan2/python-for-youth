@@ -358,9 +358,9 @@ const INTERACT = `(async () => {
   shell.penDraws = inked(ink) > 50 && at() === first;
   fire(ink, 'pointerdown', ...mid); fire(ink, 'pointerup', ...mid); fire(ink, 'click', ...mid);
   shell.penClickKeepsPage = at() === first;
-  press('3');
+  press('2');
   stroke();
-  shell.penHighlights = swatch() === '2' && inked(hl) > 500;
+  shell.penHighlights = swatch() === '1' && inked(hl) > 500;
   press('c');
   shell.penClears = inked(ink) === 0 && inked(hl) === 0 && body.classList.contains('pen');
   press('1'); stroke();
@@ -372,8 +372,8 @@ const INTERACT = `(async () => {
   shell.penOff = !body.classList.contains('pen') && getComputedStyle(layer).pointerEvents === 'none' && inked(ink) === 0 && getComputedStyle(document.getElementById('pen-tools')).display === 'none';
   document.getElementById('pen').click();
   shell.ballOpens = ball.classList.contains('open') && getComputedStyle(document.getElementById('pen-tools')).display !== 'none' && !body.classList.contains('pen');
-  ball.querySelector('.swatch[data-color="1"]').click();
-  shell.ballPicksColor = body.classList.contains('pen') && swatch() === '1';
+  ball.querySelector('.swatch[data-color="0"]').click();
+  shell.ballPicksColor = body.classList.contains('pen') && swatch() === '0';
   // The whiteboard floats over the dimmed page: it moves by its bar, grows from its corner (600×400 at least, never past the
   // stage), takes the pen, stays with its ink while pages turn, and loses the ink when it closes. The dimmed page takes clicks
   // and does nothing with them.
