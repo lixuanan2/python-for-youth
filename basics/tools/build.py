@@ -509,13 +509,13 @@ def answer_pages(slides, lesson):
 
 def pen_parts():
     """The pen and whiteboard's HTML for page.html: the ball ({{pen}}) and its lines in the key help ({{pen_help}}). Its CSS
-    (template/pen.css) follows theme.css and its script (template/pen.js) comes before deck.js; see template/PEN.md."""
-    return dict(pen=read('template/pen.html').rstrip('\n'), pen_help=read('template/pen-help.html').rstrip('\n'))
+    (template/tool/pen.css) follows theme.css and its script (template/tool/pen.js) comes before deck.js; see template/tool/PEN.md."""
+    return dict(pen=read('template/tool/pen.html').rstrip('\n'), pen_help=read('template/tool/pen-help.html').rstrip('\n'))
 
 
 def render(lesson):
     slides = read(f'lessons/{lesson["id"]}/slides.html').rstrip()
-    sheets = [read('vendor/viewport.css'), read('template/theme.css'), read('template/pen.css')] + ([read('template/layouts.css'), code_width_css()] if uses_layouts(slides) else [])
+    sheets = [read('vendor/viewport.css'), read('template/theme.css'), read('template/tool/pen.css')] + ([read('template/layouts.css'), code_width_css()] if uses_layouts(slides) else [])
     css = '\n'.join([font_face(w) for w in (400, 700, 800)] + sheets)
     page = read('template/page.html')
     if uses_layouts(slides):
@@ -523,7 +523,7 @@ def render(lesson):
     fields = dict(title=html.escape(lesson['title']), lesson=css_string(lesson_label(lesson)), css=css,
                   site=html.escape(site()['title']), **pen_parts(),
                   slides=algo.embed(attach_code(number_slides(answer_pages(slides, lesson) + '\n' + thanks_slide(lesson)), lesson), site()['language']).rstrip(),
-                  script=read('template/pen.js') + read('template/deck.js').replace('{{ide}}', json.dumps(site()['ide'], ensure_ascii=False)).replace('{{language}}', site()['language']).rstrip())
+                  script=read('template/tool/pen.js') + read('template/deck.js').replace('{{ide}}', json.dumps(site()['ide'], ensure_ascii=False)).replace('{{language}}', site()['language']).rstrip())
     for key, value in fields.items():
         page = page.replace('{{' + key + '}}', value)
     return page

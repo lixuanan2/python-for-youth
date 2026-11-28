@@ -1,4 +1,4 @@
-/* === PEN AND WHITEBOARD (template/pen.js, with pen.css, pen.html and pen-help.html) ===
+/* === PEN AND WHITEBOARD (template/tool/pen.js, with pen.css, pen.html and pen-help.html beside it) ===
    The build puts this file before deck.js in the page's one <script>. deck.js copies every method of PenAndBoard onto the
    deck (SlidePresentation) before it starts, so inside these methods `this` is the deck. See PEN.md before changing them.
 

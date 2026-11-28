@@ -1101,7 +1101,7 @@ dialog p{color:var(--muted);font-size:15px}
 </dialog>
 
 <script>
-/* === PEN AND WHITEBOARD (template/pen.js, with pen.css, pen.html and pen-help.html) ===
+/* === PEN AND WHITEBOARD (template/tool/pen.js, with pen.css, pen.html and pen-help.html beside it) ===
    The build puts this file before deck.js in the page's one <script>. deck.js copies every method of PenAndBoard onto the
    deck (SlidePresentation) before it starts, so inside these methods `this` is the deck. See PEN.md before changing them.
 
@@ -2116,8 +2116,8 @@ class SlidePresentation {
     });
   }
 }
-// The pen and whiteboard live in template/pen.js, which the build puts before this file. Their methods join the deck here, as
-// they are, so inside them `this` is the deck. What each side may use of the other is listed at the top of pen.js.
+// The pen and whiteboard live in template/tool/pen.js, which the build puts before this file. Their methods join the deck
+// here, as they are, so inside them `this` is the deck. What each side may use of the other is listed at the top of pen.js.
 for (const name of Object.getOwnPropertyNames(PenAndBoard.prototype)) {
   if (name !== 'constructor') Object.defineProperty(SlidePresentation.prototype, name, Object.getOwnPropertyDescriptor(PenAndBoard.prototype, name));
 }
