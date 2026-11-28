@@ -5,10 +5,14 @@
    dark and coloured pages, so red and blue read on every page from the back of the room. */
 .ink-layer{position:absolute;left:0;top:0;width:1920px;height:1080px;pointer-events:none}
 .ink-layer canvas{position:absolute;left:0;top:0;z-index:900;width:1920px;height:1080px;max-width:none;max-height:none}
+.ink-layer canvas:not(.used),.board-paper canvas:not(.used){display:none}
 .ink-layer .halo{opacity:.92}
 .ink-layer .hl{mix-blend-mode:multiply;opacity:.62}
 .ink-layer .hl.glow{mix-blend-mode:screen;opacity:.5}
 .pen .ink-layer{pointer-events:auto;touch-action:none}
+/* Empty canvases are not shown (pen.js marks the ones with ink as used), so the pen takes the page through this: it paints
+   nothing and sits where the canvases do, above the page. */
+.pen .ink-layer::after{content:"";position:absolute;inset:0;z-index:900}
 /* The pointer while the pen is out: a dot of the ink in hand, ringed so it shows on light and dark pages. */
 .pen .ink-layer,.board-paper{cursor:crosshair}
 :is(.pen .ink-layer,.board-paper)[data-color="0"]{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='14' cy='14' r='9' fill='none' stroke='%231f1e1d' stroke-opacity='.45'/%3E%3Ccircle cx='14' cy='14' r='5.5' fill='%23c6613f' stroke='%23faf9f5' stroke-width='2.5'/%3E%3C/svg%3E") 14 14,crosshair}
@@ -45,6 +49,15 @@
   clip-path:polygon(0 8%,4% 0,8% 9%,12% 1%,16% 8%,84% 2%,88% 9%,92% 0,96% 8%,100% 2%,100% 94%,96% 100%,92% 91%,88% 99%,84% 92%,16% 98%,12% 91%,8% 100%,4% 92%,0 99%)}
 .board-bar::before{left:54px;transform:rotate(-3.5deg)}
 .board-bar::after{right:72px;transform:rotate(4deg)}
+.board-bar small{min-width:0}
+.board-date{flex:none;font:700 15px/1 var(--code);color:var(--clay);padding:5px 9px 4px;border:1.5px solid #c6613f99;border-radius:5px;transform:rotate(-2.5deg);opacity:.85;letter-spacing:.5px}
+.board-act{flex:none;width:44px;height:44px;margin-right:-10px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;transition:background-color .18s}
+.board-act svg{width:24px;height:24px;fill:none;stroke:var(--ink);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.board-act[data-act="wipe"]{margin:0 4px 0 6px}
+.board-act[data-act="wipe"] svg{stroke:var(--clay)}
+.board-act:hover{background:#1f1e1d14}
+.board-act:disabled{cursor:default;background:transparent;opacity:.28}
+.board-act:focus-visible{outline:3px solid var(--clay);outline-offset:1px}
 .board-x{flex:none;position:relative;width:52px;height:52px;border:0;border-radius:50%;background:transparent;cursor:pointer;transition:background-color .18s,transform .18s}
 .board-x svg{width:26px;height:26px;fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;transition:stroke .18s}
 .board-x:hover{background:var(--clay);transform:rotate(90deg)}
@@ -52,8 +65,8 @@
 .board-x:focus-visible{outline:3px solid var(--clay);outline-offset:2px}
 /* The paper: olive graph lines every 48px on the grain, cut at the fold like the sheet. */
 .board-paper{position:relative;flex:1;overflow:hidden;touch-action:none;
-  background-image:linear-gradient(#5b6f4524 1px,transparent 1px),linear-gradient(90deg,#5b6f4524 1px,transparent 1px),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .3 0 0 0 0 .2 0 0 0 -.9 .56'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
-  background-size:48px 48px,48px 48px,220px 220px;background-position:23px 23px,23px 23px,0 0;
+  background-image:linear-gradient(#1f1e1d10,transparent 10px),linear-gradient(#5b6f4530 1.5px,transparent 1.5px),linear-gradient(90deg,#5b6f4530 1.5px,transparent 1.5px),linear-gradient(#5b6f4522 1px,transparent 1px),linear-gradient(90deg,#5b6f4522 1px,transparent 1px),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .3 0 0 0 0 .2 0 0 0 -.9 .56'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:100% 10px,240px 240px,240px 240px,48px 48px,48px 48px,220px 220px;background-position:0 0,23px 23px,23px 23px,23px 23px,23px 23px,0 0;background-repeat:no-repeat,repeat,repeat,repeat,repeat,repeat;
   clip-path:polygon(0 0,100% 0,100% calc(100% - var(--fold)),calc(100% - var(--fold)) 100%,0 100%);border-radius:0 0 4px 6px}
 .board-paper canvas{position:absolute;left:0;top:0;width:1920px;height:1080px;max-width:none;max-height:none}
 .board-paper .hl{mix-blend-mode:multiply;opacity:.55}
@@ -111,6 +124,11 @@
 .pen .pen-tools .swatch.on{box-shadow:inset 0 -3px 5px #0004,0 0 0 3px #1f1e1d,0 0 0 6px #faf9f5;transform:scale(1.08)}
 .pen .pen-tools .swatch.on[data-color="2"]{transform:rotate(-24deg) scale(1.08)}
 .pen-tools .pen-rule{display:block;width:34px;height:2px;margin:2px 0;border-radius:2px;background:#f0eee626}
+.pen-tools .pen-undo{display:flex;gap:2px;padding:2px;border-radius:14px;background:#ffffff0d}
+.pen-undo button{width:27px;height:34px;display:grid;place-items:center;border-radius:12px;background:transparent;color:#d8d5cb;transition:background-color .18s,color .18s}
+.pen-undo svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+.pen-undo button:hover{background:#3a3834;color:#fff}
+.pen-undo button:disabled{cursor:default;background:transparent;color:#d8d5cb;opacity:.3}
 .pen-tools .word{width:54px;padding:7px 0 8px;display:flex;flex-direction:column;align-items:center;gap:4px;border-radius:14px;background:transparent;color:#d8d5cb;transition:background-color .18s,color .18s}
 .pen-tools .word svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
 .pen-tools .word .grid{stroke-opacity:.45}
@@ -123,7 +141,7 @@
 @media (prefers-reduced-motion:reduce){
   .board-open .board,.board-open .board-shade,.pen-ball.open .pen-tools,.pen .pen-tools,.pen-tools>*{animation:none}
   .board-leave{display:none}
-  .pen-ball .ball,.pen-tools .swatch,.board-x,.board-size::before,.board-size::after{transition:none}
+  .pen-ball .ball,.pen-tools .swatch,.board-x,.board-act,.pen-undo button,.board-size::before,.board-size::after{transition:none}
   .pen-ball .ball:hover,.board-x:hover{transform:none}
 }
 @media print{.board-leave,.ink-layer canvas{display:none!important}}

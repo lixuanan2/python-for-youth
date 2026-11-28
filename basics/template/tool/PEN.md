@@ -12,8 +12,8 @@
 | --- | --- |
 | [pen.js](pen.js) | 画笔和白板的全部脚本：`class PenAndBoard` 里的方法 |
 | [pen.css](pen.css) | 画笔、荧光笔、白板、小球的样式 |
-| [pen.html](pen.html) | 小球和它打开的工具栏（颜色、白板、收笔）的 HTML |
-| [pen-help.html](pen-help.html) | 快捷键帮助（按 ? 打开）里画笔那几行：D、1 2 3、C、W、Esc |
+| [pen.html](pen.html) | 小球和它打开的工具栏（颜色、撤销和重做、白板、收笔）的 HTML |
+| [pen-help.html](pen-help.html) | 快捷键帮助（按 ? 打开）里画笔那几行：D、1 2 3、C、Ctrl+Z、W、Esc |
 
 在 `tool/` 里另建的文件不会自动拼进页面。确实需要多一个文件，就要连构建（`tools/build.py`）一起改，先和老师商量。
 
@@ -50,21 +50,22 @@
 
 **接口不能改坏。** `pen.js` 开头的注释列了双方互相用到的东西，名字和作用都要保留：
 
-- 画笔用放映外壳的 `this.stage`（1920 × 1080 的舞台）和 `this.reveal()`（显示控制条和小球）。
+- 画笔用放映外壳的 `this.stage`（1920 × 1080 的舞台）、`this.reveal()`（显示控制条和小球），只读 `this.index`（现在是第几页，页面笔迹按页记住）。
 - 放映外壳在 `deck.js` 里用画笔的这些：
   - 构造时调 `setupPen()`；
-  - 每次翻页调 `clearInk()`；窗口大小变了调 `placeBall()`；
+  - 每次翻页调 `clearInk()`（画笔据此收起这一页的笔迹、拿出新一页的）；窗口大小变了调 `placeBall()`；
   - 鼠标一动，给 `this.ball` 加上 `show`，两秒后去掉；
   - `this.pen` 为真时，点击不翻页，1 2 3 换颜色，4 什么也不做；
   - `this.board` 为真时，算法演示的按键不起作用，Esc 先关白板；
   - 按键：D 调 `togglePen()`，W 调 `toggleBoard()`，C 调 `clearBoard()` 或 `clearInk()`，Esc 调 `toggleBoard(false)` 或 `togglePen(false)`，1 2 3 调 `pickColor()`。
 
-按键是在 `deck.js` 的 `key()` 里读的。想换按键，或者要放映外壳多给画笔一样东西，要连 `deck.js` 一起改，先和老师商量，不要在改画笔时顺手改。在 `pen.js` 里新增方法、改方法内部的写法都可以，但不要和 `deck.js` 里已有的方法同名，否则会把它盖掉。
+按键是在 `deck.js` 的 `key()` 里读的；只有 Ctrl+Z、Ctrl+Shift+Z、Ctrl+Y（Mac 上是 ⌘）由 `pen.js` 自己读，因为 `deck.js` 不管按着 Ctrl 或 ⌘ 的键。想换按键，或者要放映外壳多给画笔一样东西，要连 `deck.js` 一起改，先和老师商量，不要在改画笔时顺手改。在 `pen.js` 里新增方法、改方法内部的写法都可以，但不要和 `deck.js` 里已有的方法同名，否则会把它盖掉。
 
 另外两处：
 
 - 打印 PDF 时，`theme.css` 的 `@media print` 把 `.ink-layer`、`.pen-ball`、`.board`、`.board-shade` 藏起来。新加的画笔元素在打印时也要藏，就在 `pen.css` 里自己写一条 `@media print`。
-- 小球和白板的位置存在浏览器的 `localStorage` 里，键名是 `deck-pen-ball` 和 `deck-board`。改了键名，老师电脑上存过的位置就失效了。
+- 小球和白板的位置存在浏览器的 `localStorage` 里，键名是 `deck-pen-ball` 和 `deck-board`；白板上写的字存在 `deck-board-ink`，按课的网址分开存，总共超过约 1 MB 时先丢最久没用的课。改了键名，老师电脑上存过的东西就失效了。
+- 性能：教室和学生的电脑可能很差。空闲时不能有每帧都跑的循环；写字在事件里当场画；没有笔迹的画布不显示；不用大面积的 `filter`、`backdrop-filter`、一直播放的动画。改了画法，在 Chrome 开发者工具里把 CPU 降 6 倍，试写字、开白板、撤销卡不卡。
 
 ## 构建和检查
 
@@ -87,8 +88,9 @@ node tools/check_browser.mjs
 都只打一行 `PASS` 才算通过。检查不会替你点画笔，改完要在 Chrome 里打开一节课（比如 `basics/dist/15-params-return/index.html`）亲手试一遍：
 
 - D 拿笔，画一笔；1、2、3 换红、蓝、荧光笔；点小球上的颜色也能换；
-- 拿着笔点页面不翻页，按 → 翻页后笔迹清掉；C 擦掉；Esc 收笔；
-- W 打开白板写字，拖顶上的横栏移动，拖右下角改大小；翻页时白板留着；W 或 Esc 关掉，写的清掉；
+- 拿着笔点页面不翻页，按 → 翻页后页面干净，翻回来笔迹还在；C 擦掉；Esc 收笔并擦掉这一页的；
+- 画两笔，Ctrl+Z 撤掉一笔，Ctrl+Shift+Z 重做；C 擦掉后 Ctrl+Z 能找回；小球上的撤销、重做按钮也能用；
+- W 打开白板写字，拖顶上的横栏移动，拖右下角改大小；翻页时白板留着；W 或 Esc 关掉，再打开时写的还在，刷新页面后也还在；标题栏上的撤销、重做、橡皮能用；
 - 把小球拖到另一边，刷新页面后还在那边，白板的位置和大小也还在；
 - 按 ? 看快捷键帮助里画笔那几行对不对。
 
