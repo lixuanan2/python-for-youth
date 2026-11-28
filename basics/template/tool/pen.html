@@ -4,8 +4,10 @@
     <button type="button" class="swatch" data-color="0" title="红笔（拿着笔时按 1）" aria-label="红笔"></button>
     <button type="button" class="swatch" data-color="1" title="蓝笔（拿着笔时按 2）" aria-label="蓝笔"></button>
     <button type="button" class="swatch" data-color="2" title="荧光笔：划代码行（拿着笔时按 3）" aria-label="荧光笔"></button>
-    <button type="button" class="word" id="whiteboard" title="白板：在课件上面打开一块板写字（W），再按 W 或 Esc 关掉">白板</button>
-    <button type="button" class="word" id="pen-off" title="收笔，笔迹清掉（Esc）">收笔</button>
+    <i class="pen-rule" aria-hidden="true"></i>
+    <div class="pen-undo" role="group" aria-label="撤销和重做"><button type="button" id="pen-undo" title="撤销上一笔（Ctrl+Z）" aria-label="撤销"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M9.5 6.8L4.6 11.4l4.9 4.5M5 11.4c4.6-.3 9.4-.5 12.2 1.4 2.9 2 2.8 5.7.4 7.6"/></svg></button><button type="button" id="pen-redo" title="重做（Ctrl+Shift+Z）" aria-label="重做"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M16.5 6.8l4.9 4.6-4.9 4.5M21 11.4c-4.6-.3-9.4-.5-12.2 1.4-2.9 2-2.8 5.7-.4 7.6"/></svg></button></div>
+    <button type="button" class="word" id="whiteboard" title="白板：在课件上面打开一张纸写字（W），再按 W 或 Esc 关掉，写的留着"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16v13H4z"/><path d="M4 11h16M4 15.5h16M9.3 6.5v13M14.7 6.5v13" class="grid"/><path d="M8 4.2l3.6 1.1M16 4.2l-3.6 1.1" class="tape"/></svg>白板</button>
+    <button type="button" class="word" id="pen-off" title="收笔，这页的笔迹擦掉（Esc），Ctrl+Z 找回"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L16.5 7.5l2.2 2.2L9.2 19.2 6 20z"/><path d="M15 5.5l3.5 3.5" class="grid"/><path d="M4 4l16 16" class="cut"/></svg>收笔</button>
   </div>
-  <button type="button" class="ball" id="pen" title="画笔和白板（D 拿笔，W 白板）；拖动可以换位置" aria-label="画笔和白板" aria-expanded="false">✎</button>
+  <button type="button" class="ball" id="pen" title="画笔和白板（D 拿笔，W 白板）；拖动可以换位置" aria-label="画笔和白板" aria-expanded="false"><svg viewBox="0 0 32 32" aria-hidden="true"><g transform="rotate(42 16 16)"><path class="nib" d="M16 29.5L9.4 16.2C9.4 10.4 12 6.2 16 3c4 3.2 6.6 7.4 6.6 13.2z"/><path class="slit" d="M16 28.6V17.4"/><circle class="slit" cx="16" cy="15.2" r="2.1"/></g></svg></button>
 </div>
