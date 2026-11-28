@@ -37,17 +37,7 @@
 
 <div id="blank" hidden></div>
 
-<!-- Pen and whiteboard: a small ball against a side of the stage (drag it to move it), shown when the mouse moves, like the control bar. -->
-<div class="pen-ball" id="pen-ball">
-  <div class="pen-tools" id="pen-tools" role="group" aria-label="画笔和白板">
-    <button type="button" class="swatch" data-color="0" title="红笔（拿着笔时按 1）" aria-label="红笔"></button>
-    <button type="button" class="swatch" data-color="1" title="蓝笔（拿着笔时按 2）" aria-label="蓝笔"></button>
-    <button type="button" class="swatch" data-color="2" title="荧光笔：划代码行（拿着笔时按 3）" aria-label="荧光笔"></button>
-    <button type="button" class="word" id="whiteboard" title="白板：在课件上面打开一块板写字（W），再按 W 或 Esc 关掉">白板</button>
-    <button type="button" class="word" id="pen-off" title="收笔，笔迹清掉（Esc）">收笔</button>
-  </div>
-  <button type="button" class="ball" id="pen" title="画笔和白板（D 拿笔，W 白板）；拖动可以换位置" aria-label="画笔和白板" aria-expanded="false">✎</button>
-</div>
+{{pen}}
 
 <dialog id="ide-settings" aria-labelledby="ide-title">
   <h2 id="ide-title">IDE 设置</h2>
@@ -67,11 +57,7 @@
     <dt>I</dt><dd>IDE 设置</dd>
     <dt>F</dt><dd>全屏，全屏时动一下鼠标显示控制条</dd>
     <dt>B</dt><dd>黑屏，让学生看你，按任意键回来</dd>
-    <dt>D</dt><dd>画笔：拿起或收起（也可以点圆球；圆球拖到哪边就贴在哪边，这台电脑记住）。拿着笔时点击不翻页，方向键照常；收笔或翻页，笔迹就清掉</dd>
-    <dt>1 2 3</dt><dd>拿着笔时换颜色：红、蓝、荧光笔（划代码行）</dd>
-    <dt>C</dt><dd>擦掉笔迹，笔还拿着；白板开着时擦白板</dd>
-    <dt>W</dt><dd>白板：在课件上面打开一块带方格的板，自动拿起笔，只在板上写；拖顶上的横栏移动，拖右下角改大小，这台电脑记住。后面的课件变暗、点不动，翻页键照常翻页，白板和写的东西都留着。再按 W、Esc 或 × 关掉，白板清掉</dd>
-    <dt>Esc</dt><dd>关白板；没开白板就收笔</dd>
+{{pen_help}}
     <dt>1–4</dt><dd>小测选答案（没拿笔时）</dd>
     <dt>P</dt><dd>算法演示：播放或暂停</dd>
     <dt>, 和 .</dt><dd>算法演示：上一步、下一步（键上印着 &lt; &gt;）</dd>
