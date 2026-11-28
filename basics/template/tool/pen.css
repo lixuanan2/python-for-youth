@@ -49,9 +49,16 @@
 .board-bar::after{right:72px;transform:rotate(4deg)}
 .board-bar small{min-width:0}
 .board-date{flex:none;font:700 15px/1 var(--code);color:var(--clay);padding:5px 9px 4px;border:1.5px solid #c6613f99;border-radius:5px;transform:rotate(-2.5deg);opacity:.85;letter-spacing:.5px}
-.board-act{flex:none;width:44px;height:44px;margin-right:-10px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;transition:background-color .18s}
+.board-act{position:relative;flex:none;width:44px;height:44px;margin-right:-10px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;transition:background-color .18s}
 .board-act svg{width:24px;height:24px;fill:none;stroke:var(--ink);stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
 .board-act[data-act="wipe"]{margin:0 4px 0 6px}
+/* The board's pages: back and on; on from the last page starts a new one (a small + by the arrow). */
+.board-turn{flex:none;display:flex;gap:2px;margin-left:8px;padding:0 4px;border-left:1.5px solid #1f1e1d1f;border-right:1.5px solid #1f1e1d1f}
+.board-turn .board-act{margin:0}
+.board-act.new::after{content:"+";position:absolute;right:1px;top:3px;font:800 17px/1 var(--code);color:var(--clay)}
+.board-act.new:disabled::after{color:inherit}
+/* The page number, printed faintly in the paper's corner like a folio; the ink goes over it. */
+.board-folio{position:absolute;right:58px;bottom:14px;font:700 26px/1 var(--code);letter-spacing:2px;color:#5b6f4566;pointer-events:none;font-style:normal;user-select:none}
 .board-act[data-act="wipe"] svg{stroke:var(--clay)}
 .board-act:hover{background:#1f1e1d14}
 .board-act:disabled{cursor:default;background:transparent;opacity:.28}
@@ -113,15 +120,22 @@
 .pen-tools .swatch::after{position:absolute;right:-7px;bottom:-6px;font:700 13px/1 var(--code);color:#a8a59b}
 .pen-tools .swatch{background:var(--c)}
 .pen-tools .swatch[data-color="0"]::after{content:"1"}
-.pen-tools .swatch[data-color="1"]::after{content:"2"}
-.pen-tools .swatch[data-color="2"]{width:28px;height:42px;border-radius:5px 5px 9px 9px;transform:rotate(-24deg);
+.pen-tools .swatch[data-color="1"]{width:28px;height:42px;border-radius:5px 5px 9px 9px;transform:rotate(-24deg);
   background:linear-gradient(160deg,#ffffff55 0 26%,transparent 27%),var(--c)}
-.pen-tools .swatch[data-color="2"]::before{left:16%;top:8%;width:22%;height:40%;border-radius:4px;background:#ffffff66;transform:none}
-.pen-tools .swatch[data-color="2"]::after{content:"3";right:-12px;bottom:-4px;transform:rotate(24deg)}
+.pen-tools .swatch[data-color="1"]::before{left:16%;top:8%;width:22%;height:40%;border-radius:4px;background:#ffffff66;transform:none}
+.pen-tools .swatch[data-color="1"]::after{content:"2";right:-12px;bottom:-4px;transform:rotate(24deg)}
 .pen-tools .swatch:hover{transform:scale(1.1)}
-.pen-tools .swatch[data-color="2"]:hover{transform:rotate(-24deg) scale(1.1)}
+.pen-tools .swatch[data-color="1"]:hover{transform:rotate(-24deg) scale(1.1)}
+/* The eraser and text are keys of the palette, not drops of ink; text shows the pen's colour in its T. */
+.pen-tools .swatch.tool{width:42px;height:38px;border-radius:12px;background:#3a3834;color:#e9e5da;display:grid;place-items:center;box-shadow:inset 0 1px 0 #ffffff14,0 0 0 1px #00000040}
+.pen-tools .swatch.tool::before{content:none}
+.pen-tools .swatch.tool svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pen-tools .swatch.tool .grid{stroke-opacity:.45}.pen-tools .swatch.tool .cut{stroke:var(--clay-soft);stroke-width:2}
+.pen-tools .swatch[data-color="3"] svg{stroke:var(--c);stroke-width:2.6}
+.pen-tools .swatch[data-color="2"]::after{content:"3"}.pen-tools .swatch[data-color="3"]::after{content:"4"}
+.pen .pen-tools .swatch.tool.on{background:#f0eee6;color:#1f1e1d;box-shadow:0 0 0 3px #1f1e1d,0 0 0 5px #faf9f5;transform:none}
 .pen .pen-tools .swatch.on{box-shadow:inset 0 -3px 5px #0004,0 0 0 3px #1f1e1d,0 0 0 6px #faf9f5;transform:scale(1.08)}
-.pen .pen-tools .swatch.on[data-color="2"]{transform:rotate(-24deg) scale(1.08)}
+.pen .pen-tools .swatch.on[data-color="1"]{transform:rotate(-24deg) scale(1.08)}
 /* A slot in hand, clicked again: its colours in a row beside the tools, toward the middle of the stage. */
 .pen-colors{position:absolute;right:calc(100% + 12px);display:flex;gap:10px;padding:9px 12px;border-radius:30px;
   background:linear-gradient(#2c2b28,#1f1e1d);box-shadow:inset 0 1px 0 #ffffff17,0 0 0 1px #00000040,0 8px 20px #0007;animation:colors-in .2s cubic-bezier(.2,.9,.3,1.2)}
@@ -154,4 +168,9 @@
   .pen-ball .ball,.pen-tools .swatch,.pen-color,.board-x,.board-act,.pen-undo button,.board-size::before,.board-size::after{transition:none}
   .pen-ball .ball:hover,.board-x:hover{transform:none}
 }
-@media print{.board-leave,.ink-layer canvas{display:none!important}}
+/* A text being typed: in the ink's colour and size, with the paper halo the finished text will have. */
+.ink-text{position:absolute;z-index:905;margin:0;padding:0;min-width:1ch;font-weight:700;font-family:var(--text);line-height:1.25;white-space:pre;
+  outline:2px dashed #8c857999;outline-offset:6px;border-radius:2px;caret-color:currentColor;cursor:text;
+  text-shadow:0 0 2px #faf9f5,0 0 2px #faf9f5,0 0 3px #faf9f5}
+.board-paper .ink-text{text-shadow:none}
+@media print{.board-leave,.ink-layer canvas,.ink-text{display:none!important}}
